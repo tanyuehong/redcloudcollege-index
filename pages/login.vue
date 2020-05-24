@@ -75,7 +75,7 @@
                   this.loginInfo = response.data.data.userInfo
                   //获取返回用户信息，放到cookie里面
                   cookie.set('redskt_ucenter',this.loginInfo,{domain: 'localhost'})
-
+                  console.log(this.loginInfo);
                   //跳转页面
                   window.location.href = "/";
                 })

@@ -12,7 +12,7 @@ export default {
   //注册的方法
   registerMember(formItem) {
     return request({
-      url: `http://localhost:8008/ucenter/member/register`,
+      url: `/ucenter/user/register`,
       method: 'post',
       data: formItem
     })

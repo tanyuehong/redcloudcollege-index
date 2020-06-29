@@ -20,9 +20,9 @@
               <a>名师</a>
             </router-link>
             <router-link to="/article" tag="li" active-class="current">
-              <a>文章</a>
+              <a>技术专题</a>
             </router-link>
-            <router-link to="/qa" tag="li" active-class="current">
+            <router-link to="/faquestion" tag="li" active-class="current">
               <a>问答</a>
             </router-link>
           </ul>
@@ -90,7 +90,7 @@
           </h4>
           <ul class="of flink-list">
             <li>
-              <a href="http://www.atguigu.com/" title="尚硅谷" target="_blank">尚硅谷</a>
+              <a href="http://www.atguigu.com/" title="腾讯课堂" target="_blank">腾讯课堂</a>
             </li>
           </ul>
           <div class="clear"></div>
@@ -103,11 +103,11 @@
                 <a href="#" title="联系我们" target="_blank">联系我们</a>|
                 <a href="#" title="帮助中心" target="_blank">帮助中心</a>|
                 <a href="#" title="资源下载" target="_blank">资源下载</a>|
-                <span>服务热线：010-56253825(北京) 0755-85293825(深圳)</span>
-                <span>Email：info@atguigu.com</span>
+                <span>服务热线：16623170187</span>
+                <span>Email：redskt@163.com</span>
               </section>
               <section class="b-f-link mt10">
-                <span>©2018课程版权均归谷粒学院所有 京ICP备17055252号</span>
+                <span>©2020课程版权均归红云学院所有 京ICP备16006909号-1</span>
               </section>
             </section>
           </section>

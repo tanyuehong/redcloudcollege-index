@@ -11,7 +11,7 @@
 .dis{display:block}.disIb{display:inline-block}.undis{display:none}
 .of{overflow:hidden}.ov{overflow:visible}
 .vam{vertical-align:middle}
-.tal{text-align:left}.tac{text-align:center}.tar{text-align:right}
+.tal{text-align:left}.tac{text-align:center; }.tar{text-align:right}
 .hand{cursor:pointer}
 .fsize12{font-size:12px}.fsize14{font-size:14px}.fsize16{font-size:16px}
 .fsize18{font-size:18px}.fsize20{font-size:20px}.fsize24{font-size:24px}.fsize34{font-size:34px}
@@ -109,7 +109,7 @@ a.current-2 .lh-p-icon{background-position:0 -254px}
 .blue-btn,.comm-btn,.goBack-btn,.order-submit{border:1px solid;border-radius:16px;display:inline-block;text-align:center;height:32px;line-height:32px;padding:0 12px}
 .comm-btn{padding: 0 8px;}
 .c-btn-1{border-color:#fff;color:#fff;width:120px;font-size:18px}
-.c-btn-2,.c-btn-3,.c-btn-4,.c-btn-5,.c-btn-7{border-radius:20px;width:160px;font-size:20px;height:36px;line-height:36px}
+.c-btn-2,.c-btn-3,.c-btn-4,.c-btn-5,.c-btn-7{border-radius:20px;width:160px;font-size:20px;height:36px;line-height:36px;margin-bottom: 30px;}
 .c-btn-4,.c-btn-5{border-radius:0;color:#fff;width:220px;height:42px;line-height:42px}
 .c-btn-5{background:#264863;width:auto;display:block}
 .c-btn-6{border-color:#14BA4C;color:#14BA4C;width:auto;font-size:12px;height:18px;line-height:18px}
@@ -118,7 +118,7 @@ a.current-2 .lh-p-icon{background-position:0 -254px}
 .e-login-btn,.e-register-btn,.order-submit{background:#985054;border-radius:3px;color:#fff;width:180px;font-size:16px}
 .goBack-btn{background:#e2e2e2;border:none;border-radius:3px;color:#666;font-size:14px}
 .blue-btn:hover,.comm-btn:hover,.e-login-btn:hover,.e-register-btn:hover,.goBack-btn:hover,.order-submit:hover{text-decoration:none;opacity:.92;-moz-opacity:.92;filter:alpha(opacity=92)}
-.comm-title{overflow:hidden;clear:both;margin:40px 0 30px}
+.comm-title{overflow:hidden;clear:both;margin:0px 0 30px}
 .comm-title h2 span{font-size:26px;font-family:simhei}
 .comm-course-list ul{margin-left:-30px}
 .comm-course-list li{float:left;width:25%}

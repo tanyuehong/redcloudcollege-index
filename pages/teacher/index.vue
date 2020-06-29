@@ -109,9 +109,6 @@ export default {
     //分页切换的方法
     //参数是页码数
     gotoPage(page) {
-        if(page==0|| page>this.data.pages) {
-        return ;
-      }
       teacherApi.getTeacherList(page,8)
         .then(response => {
           this.data = response.data.data

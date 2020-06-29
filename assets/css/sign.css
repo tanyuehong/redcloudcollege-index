@@ -47,7 +47,6 @@ a{
 }
 
 .sign .logo{
-    position: absolute;
     top: 56px;
     left: 50px;
 }
@@ -118,10 +117,13 @@ a{
 }
 .sign form .input-prepend i {
     position: absolute;
-    top: 4px;
+    top: 10px;
     left: 10px;
     font-size: 18px;
     color: #969696;
+}
+.sign .logo img {
+    height: 100px;
 }
 .sign .sign-up-button{
     margin-top: 20px;

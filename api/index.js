@@ -4,14 +4,14 @@ export default {
     //查询前两条banner数据
   getListBanner() {
     return request({
-      url: '/collegeservice/banner/getAllBanner',
+      url: '/home/banner/getAllBanner',
       method: 'get'
     })
   },
      //查询热门课程和名师
    getIndexData() {
         return request({
-          url: '/eduservice/indexfront/index',
+          url: '/home/index',
           method: 'get'
         })
     }

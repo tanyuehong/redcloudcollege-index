@@ -12,8 +12,8 @@ export default {
   //查询所有分类的方法
   getAllSubject() {
     return request({
-      url: '/home/subject/getAllSubject',
-      method: 'get'
+      url: '/home/course/getAllSubject',
+      method: 'post'
     })
   },
   //课程详情的方法

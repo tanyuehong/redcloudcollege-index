@@ -2,8 +2,9 @@
   <div id="aCoursesList" class="bg-fa of">
     <!-- /课程列表 开始 -->
     <section class="container">
+      <div class="course_content">
       <header class="comm-title">
-        <h2 class="fl tac">
+        <h2 class="fl tac mt20">
           <span class="c-333">全部课程</span>
         </h2>
       </header>
@@ -139,8 +140,10 @@
       </div>
     </div>
       </section>
+      </div>
     </section>
     <!-- /课程列表 结束 -->
+    
   </div>
 </template>
 <script>
@@ -292,5 +295,8 @@ export default {
   }
   .show {
     display: block;
+  }
+  .course_content {
+    background-color: white;
   }
 </style>

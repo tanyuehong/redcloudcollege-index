@@ -2,10 +2,12 @@
   <div id="aCoursesList" class="bg-fa of">
     <!-- 讲师列表 开始 -->
     <section class="container">
+      <div class="teacher_content">
       <header class="comm-title all-teacher-title">
-        <h2 class="fl tac">
+        <h2 class="fl tac mt20">
           <span class="c-333">全部讲师</span>
         </h2>
+        <div class="clear"></div>
         <section class="c-tab-title">
           <a id="subjectAll" title="全部" href="#">全部</a>
           <!-- <c:forEach var="subject" items="${subjectList }">
@@ -89,6 +91,7 @@
       <!-- 公共分页 结束 -->
         <!-- 公共分页 结束 -->
       </section>
+      </div>
     </section>
     <!-- /讲师列表 结束 -->
   </div>
@@ -115,6 +118,12 @@ export default {
         })
     }
   }
-
 };
 </script>
+
+<style>
+.teacher_content {
+  background-color: white;
+}
+
+</style>>

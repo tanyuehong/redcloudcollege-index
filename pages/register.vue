@@ -23,25 +23,29 @@
           </div>
         </el-form-item>
 
-        <el-form-item class="input-prepend restyle no-radius" prop="code" :rules="[{ required: true, message: '请输入验证码', trigger: 'blur' }]">
+        <el-form-item class="input-prepend restyle no-radius" prop="code" :rules="[{ required: true, message: '请输入密码', trigger: 'blur' }]">
           <div style="width: 100%;display: block;float: left;position: relative">
-            <el-input type="text" placeholder="验证码" v-model="params.code"/>
-            <i class="iconfont icon-phone"/>
+            <el-input type="password" placeholder="设置密码" v-model="params.code"/>
+            <i class="iconfont icon-password"/>
           </div>
+           <!--
           <div class="btn" style="position:absolute;right: 0;top: 6px;width: 40%;">
             <a href="javascript:" type="button" @click="getCodeFun()" :value="codeTest" style="border: none;background-color: none">{{codeTest}}</a>
           </div>
+           -->
         </el-form-item>
 
-        <el-form-item class="input-prepend" prop="password" :rules="[{ required: true, message: '请输入密码', trigger: 'blur' }]">
+        <el-form-item class="input-prepend" prop="password" :rules="[{ required: true, message: '请确认密码', trigger: 'blur' }]">
           <div>
-            <el-input type="password" placeholder="设置密码" v-model="params.password"/>
+            <el-input type="password" placeholder="确认密码" v-on:focus="formfocuse" v-model="params.password"/>
             <i class="iconfont icon-password"/>
           </div>
         </el-form-item>
 
-        <div class="btn">
-          <input type="button" class="sign-up-button" value="注册" @click="submitRegister()">
+        <div class="btn pr">
+        <p class="tips_error_show" v-show="this.errtips.length>0">{{errtips}} </p>
+       <input type="button" class="sign-up-button " value="注册" @click="submitRegister()">
+         
         </div>
         <p class="sign-up-msg">
           点击 “注册” 即表示您同意并愿意遵守简书
@@ -80,15 +84,37 @@
           nickname: '',
           password: ''
         },
+        isShowTips: false,
         sending: true,      //是否发送验证码
         second: 60,        //倒计时间
-        codeTest: '获取验证码'
+        codeTest:        '获取验证码',
+        errtips: ''
       }
     },
     methods: {
-     
        //注册提交的方法
        submitRegister() {
+         if(this.params.nickname.length==0) {
+           this.errtips = "请输入用户名！";
+           return;
+         }
+          if(this.params.mobile.length==0) {
+           this.errtips = "请输入手机号！";
+           return;
+         }
+          if(this.params.code.length==0) {
+           this.errtips = "请输入密码！";
+           return;
+         }
+        if(this.params.password.length==0) {
+           this.errtips = "请输入确认密码！";
+           return;
+         }
+         if(!(this.params.code === this.params.password)) {
+           this.errtips = "您输入的密码不一致！";
+           return;
+         }
+
          registerApi.registerMember(this.params)
           .then(response => {
             //提示注册成功
@@ -98,7 +124,6 @@
               })
             //跳转登录页面
             this.$router.push({path:'/login'})
-              
           })
        },
        timeDown() {
@@ -126,12 +151,28 @@
        },
 
       checkPhone (rule, value, callback) {
-        //debugger
-        if (!(/^1[34578]\d{9}$/.test(value))) {
+       if(!(/^1[3456789]\d{9}$/.test(value))) { 
           return callback(new Error('手机号码格式不正确'))
-        }
+        } 
         return callback()
+      },
+      formfocuse() {
+        console.log = 'hhhhhh';
+        this.errtips = '';
       }
     }
   }
 </script>
+
+<style scoped>
+
+.btn .tips_error_show {
+  position:absolute;
+  top: -2.5px;
+  left: 0px;
+  color:red;
+  font-size: 12px;
+  width: 100%;
+}
+
+</style>>

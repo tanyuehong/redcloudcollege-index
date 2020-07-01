@@ -22,7 +22,6 @@
                 <li v-for="(item,index) in subjectNestedList" :key="index" :class="{active:oneIndex==index}">
                   <a :title="item.title" href="#" @click="searchOne(item.id,index)">{{item.title}}</a>
                 </li>
-               
               </ul>
             </dd>
           </dl>

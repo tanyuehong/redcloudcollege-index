@@ -33,8 +33,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui',
-    { src: '@/plugins/nuxt-swiper-plugin', ssr: false }
+    '@/plugins/element-ui'
   ],
     
   /*

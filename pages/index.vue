@@ -141,14 +141,14 @@ export default {
     //查询banner数据
     getBannerList() {
       index.getListBanner().then(response => {
-        this.bannerList = response.data.data.list;
+        this.bannerList = response.data.list;
       });
     },
     //查询热门课程和名师
     getHotCourseTeacher() {
       index.getIndexData().then(response => {
-        this.eduList = response.data.data.eduList;
-        this.teacherList = response.data.data.teacherList;
+        this.eduList = response.data.eduList;
+        this.teacherList = response.data.teacherList;
       });
     }
   }

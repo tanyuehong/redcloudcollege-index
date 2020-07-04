@@ -38,7 +38,7 @@ export default {
          return ordersApi.createNatvie(params.pid)
             .then(response => {
                 return {
-                      payObj: response.data.data
+                      payObj: response.data
                     }
             })
      },

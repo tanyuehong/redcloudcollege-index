@@ -75,7 +75,7 @@ export default {
         return ordersApi.getOrdersInfo(params.oid)
             .then(response => {
                 return {
-                    order: response.data.data.item
+                    order: response.data.item
                 }
             })
     },

@@ -80,8 +80,8 @@ export default {
     return teacherApi.getTeacherInfo(params.id)
       .then(response => {
         return {
-          teacher: response.data.data.teacher,
-          courseList: response.data.data.courseList
+          teacher: response.data.teacher,
+          courseList: response.data.courseList
         }
       })
   }

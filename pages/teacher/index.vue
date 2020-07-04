@@ -104,8 +104,7 @@ export default {
   //params: 相当于之前 this.$route.params.id  等价  params.id
   asyncData({ params, error }) {
     return teacherApi.getTeacherList(1,8).then(response => {
-          //this.data = response.data.data
-          return { data: response.data.data }
+          return { data: response.data }
        })
   },
   methods:{
@@ -114,7 +113,7 @@ export default {
     gotoPage(page) {
       teacherApi.getTeacherList(page,8)
         .then(response => {
-          this.data = response.data.data
+          this.data = response.data
         })
     }
   }

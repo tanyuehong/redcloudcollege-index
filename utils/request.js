@@ -1,6 +1,6 @@
 import axios from 'axios'
 import cookie from 'js-cookie'
-import {Message} from 'element-ui'
+import { MessageBox, Message } from 'element-ui'
 
 // 创建axios实例
 const service = axios.create({
@@ -21,22 +21,26 @@ service.interceptors.request.use(
   },
   err => {
     Message.error({message: '网络请求超时，请重新尝试！'});
+    console.log(error) // for debug
     return Promise.reject(err);
 })
 
-service.interceptors.response.use ( data=> { 
-  if(data.status != 20000) {
-    if(data.data.message.length>0) {
-      Message.error({message: data.data.message});
-    } else if (data.data.message.length>0) {
-      Message.error({message: data.message});
+service.interceptors.response.use ( 
+  response => {
+    const res = response.data
+    if(res.code !== 20000) {
+      var errorMsg = '未知错误，请联系管理员';
+      if(res.data.message.length>0) {
+        errorMsg = res.data.message;
+      } else if (res.message.length>0) {
+        errorMsg = res.message;
+      }  
+      Message({ message: errorMsg,type: 'error',duration: 5 * 1000})
+      return Promise.reject(new Error(errorMsg))
     } else {
-      Message.error({message: '未知错误，请联系管理员'});
+      return res;
     }
-    return 
-  }
-  return data
-},err=> {
+  },err=> {
      if (err && err.response) {
           switch (err.response.status) {
               case 400: err.message = '请求错误(400)'; break;

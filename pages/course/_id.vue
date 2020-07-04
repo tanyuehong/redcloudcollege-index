@@ -168,8 +168,8 @@ export default {
      return courseApi.getCourseInfo(params.id)
         .then(response => {
           return {
-            courseWebVo: response.data.data.courseWebVo,
-            chapterVideoList: response.data.data.chapterVideoList,
+            courseWebVo: response.data.courseWebVo,
+            chapterVideoList: response.data.chapterVideoList,
             courseId:params.id
           }
         })
@@ -182,7 +182,7 @@ export default {
           //获取返回订单号
           //生成订单之后，跳转订单显示页面
           console.log(response.data);
-          this.$router.push({path:'/orders/'+response.data.data.orderId})
+          this.$router.push({path:'/orders/'+response.data.orderId})
         })
      }
    }

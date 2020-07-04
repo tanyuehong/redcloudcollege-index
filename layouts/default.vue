@@ -179,8 +179,8 @@ export default {
       //调用接口，根据token值获取用户信息
       loginApi.getLoginUserInfo()
         .then(response => {
-          // console.log('################'+response.data.data.userInfo)
-           this.loginInfo = response.data.data.userInfo
+          // console.log('################'+response.data.userInfo)
+           this.loginInfo = response.data.userInfo
            cookie.set('redskt_ucenter',this.loginInfo,{domain: 'localhost'})
         })
     },

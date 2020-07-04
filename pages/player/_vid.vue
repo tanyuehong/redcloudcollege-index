@@ -19,7 +19,7 @@ export default {
        return vod.getPlayAuth(params.vid)
         .then(response => {
             return { 
-                playAuth: response.data.data.playAuth,
+                playAuth: response.data.playAuth,
                 vid: params.vid
             }
         })

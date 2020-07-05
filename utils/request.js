@@ -13,9 +13,9 @@ service.interceptors.request.use(
   config => {
   //debugger
   //判断cookie里面是否有名称是guli_token数据
-  if (cookie.get('redskt_token')) {
+  if (window.localStorage.getItem('redclass_token')) {
     //把获取cookie值放到header里面
-    config.headers['token'] = cookie.get('redskt_token');
+    config.headers['token'] = window.localStorage.getItem('redclass_token');
   }
     return config
   },
@@ -30,12 +30,14 @@ service.interceptors.response.use (
     const res = response.data
     if(res.code !== 20000) {
       var errorMsg = '未知错误，请联系管理员';
-      if(res.data.message.length>0) {
+      var coustMessage = res.data.message; 
+      if(coustMessage != undefined && coustMessage.length>0) {
         errorMsg = res.data.message;
       } else if (res.message.length>0) {
         errorMsg = res.message;
       }  
       Message({ message: errorMsg,type: 'error',duration: 5 * 1000})
+      console.log("=================")
       return Promise.reject(new Error(errorMsg))
     } else {
       return res;
@@ -59,8 +61,8 @@ service.interceptors.response.use (
       } else {
           err.message = '连接服务器失败!'
       }
-    Message.err( {message: err.message } )
-    return Promise.resolve(err);
+      Message({ message: err.message,type: 'error',duration: 5 * 1000})
+      return Promise.reject(err)
   })
 
 export default service

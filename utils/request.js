@@ -14,7 +14,6 @@ service.interceptors.request.use(
   //debugger
   //判断cookie里面是否有名称是guli_token数据
   if (window.localStorage.getItem('redclass_token')) {
-    //把获取cookie值放到header里面
     config.headers['token'] = window.localStorage.getItem('redclass_token');
   }
     return config

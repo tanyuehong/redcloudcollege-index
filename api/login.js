@@ -13,7 +13,7 @@ export default {
   //根据token获取用户信息
   getLoginUserInfo() {
     return request({
-      url: `/home/ucenter/getUserInfo`,
+      url: `/ucenter/getUserInfo`,
       method: 'get'
     })
   }

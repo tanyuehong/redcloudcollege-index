@@ -1,7 +1,7 @@
 import axios from 'axios'
-import cookie from 'js-cookie'
 import { MessageBox, Message } from 'element-ui'
 
+var tipsShowTime = 3000;
 // 创建axios实例
 const service = axios.create({
   baseURL: 'http://www.redskt.com/api', // api的base_url
@@ -19,7 +19,7 @@ service.interceptors.request.use(
     return config
   },
   err => {
-    Message.error({message: '网络请求超时，请重新尝试！'});
+    Message({ message: '网络请求超时，请重新尝试！',type: 'error',duration: tipsShowTime})
     console.log(error) // for debug
     return Promise.reject(err);
 })
@@ -35,7 +35,7 @@ service.interceptors.response.use (
       } else if (res.message.length>0) {
         errorMsg = res.message;
       }  
-      Message({ message: errorMsg,type: 'error',duration: 5 * 1000})
+      Message({ message: errorMsg,type: 'error',duration: tipsShowTime})
       console.log("=================")
       return Promise.reject(new Error(errorMsg))
     } else {
@@ -60,7 +60,7 @@ service.interceptors.response.use (
       } else {
           err.message = '连接服务器失败!'
       }
-      Message({ message: err.message,type: 'error',duration: 5 * 1000})
+      Message({ message: err.message,type: 'error',tipsShowTime})
       return Promise.reject(err)
   })
 

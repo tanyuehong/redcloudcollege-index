@@ -26,14 +26,11 @@ export default {
   css: [
     'element-ui/lib/theme-chalk/index.css'
   ],
-  css: [
-        'swiper/css/swiper.css'
-  ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui'
+    { src: '@/plugins/element-ui', ssr: true }
   ],
     
   /*

@@ -105,15 +105,13 @@ export default {
           }
           loginApi.submitLoginUser(this.user).then(response => {
             window.localStorage.setItem("redclass_token",response.data.token)
-            window.console.log('====settoken='+ response.data.token)
-            window.console.log('====gettoken='+ window.localStorage.getItem('redclass_token'))
             //第四步 调用接口 根据token获取用户信息，为了首页面显示
             loginApi.getLoginUserInfo().then(response => {
               this.loginInfo = response.data.userInfo;
-              window.localStorage.setItem("redclass_user",this.loginInfo)
+              window.localStorage.setItem("redclass_user",JSON.stringify(this.loginInfo))
               console.log(this.loginInfo);
               //跳转页面
-              //window.location.href = "/";
+              window.location.href = "/";
             });
           });
         } else {

@@ -108,7 +108,7 @@
 import "~/assets/css/sign.css";
 import "~/assets/css/iconfont.css";
 
-import registerApi from "@/api/register";
+import registerApi from "@/api/login";
 
 export default {
   layout: "sign",

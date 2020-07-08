@@ -113,6 +113,12 @@
 import index from "@/api/index";
 
 export default {
+
+  // asyncData({ params, error }) {
+  //   return index.getIndexData().then(response => {
+  //         return { data: response.data }
+  //      })
+  // },
   data() {
     return {
       swiperOption: {

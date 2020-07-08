@@ -58,7 +58,7 @@ service.interceptors.response.use (
               default: err.message = `连接出错(${err.response.status})!`;
           }
       } else {
-          err.message = '连接服务器失败!'
+          err.message = '连接服务失败!'
       }
       Message({ message: err.message,type: 'error',tipsShowTime})
       return Promise.reject(err)

@@ -1,17 +1,43 @@
 <template>
   <section class="my_gogal">
-    <section class="header_xuanchuan">
-      <div class="col-md-4 g-mb-30">
+    <div class="header_xuanchuan">
+      <div class="container">
+        <div class="header_annation">
+          <h1 class="answer_title">红云问答，更专业的技术问答社区</h1>
+          <p class="desc">您的每一个问题，我们都会为您选择最优的答案。并且通过人工智能和技术专家维护问题列表，方便查找，为大家在学习路上解疑答惑。</p>
+        </div>
+       
         <img
           src="https://image.boxueio.com/swift-wtf-to-omg-avatar@2x.jpg"
           alt="Image Description"
-          class="img-fluid rounded-circle g-brd-around g-brd-5 g-brd-color-blue-trans"
+          class="rounded-circle"
         />
+        <div class="clear"></div>
       </div>
-    </section>
-    <div class="main_goloble">
+    </div>
+    <div class="main_global_bg">
       <section class="container">
         <div class="main_content">
+            <div class="question_right_con">
+            <el-button type="danger" class="startqustionbtn" @click="jumpStartQuestion">我要提问</el-button>
+
+            <div class="mod_about_teacher">
+      <h3>最新公告</h3>
+      <div class="answer_list">
+        <ul>
+              <li><span></span>
+                <a href="https://blog.csdn.net/askdevteam/article/details/84139790" target="_blank">问答WAP版改版上线</a>
+              </li>
+              <li><span></span>
+                <a href="https://blog.csdn.net/askdevteam/article/details/82625033" target="_blank">【新手提问导读】提问的艺术</a>
+              </li>
+              <li><span></span>
+                <a href="https://blog.csdn.net/csdn_bbs/article/details/94432624" target="_blank">欢迎加入CSDN问答用户群</a>
+              </li>
+        </ul>
+      </div>
+    </div>
+          </div>
           <div class="content_left">
             <div class="questions_tab_con">
 
@@ -92,26 +118,7 @@
             </div>
           </div>
 
-          <div class="question_right_con">
-            <el-button type="danger" class="startqustionbtn">我要提问</el-button>
-
-            <div class="mod_about_teacher">
-      <h3>最新公告</h3>
-      <div class="answer_list">
-        <ul>
-              <li><span></span>
-                <a href="https://blog.csdn.net/askdevteam/article/details/84139790" target="_blank">问答WAP版改版上线</a>
-              </li>
-              <li><span></span>
-                <a href="https://blog.csdn.net/askdevteam/article/details/82625033" target="_blank">【新手提问导读】提问的艺术</a>
-              </li>
-              <li><span></span>
-                <a href="https://blog.csdn.net/csdn_bbs/article/details/94432624" target="_blank">欢迎加入CSDN问答用户群</a>
-              </li>
-        </ul>
-      </div>
-    </div>
-          </div>
+        
           <div class="clearnfloat"></div>
         </div>
       </section>
@@ -128,50 +135,32 @@
   background-image: linear-gradient(225deg, #3ec2e3, #5b85df);
 }
 
+.header_annation .answer_title {
+  color: white;
+}
+.header_annation   .desc {
+  color: white;
+  font-size: 16px;
+  margin-top: 15px;
+}
+.header_annation  {
+  width: 600px;
+  float: left;
+  margin-top: 80px;
+  margin-left: 80px;
+}
+
 .main_content {
   position: relative;
 }
 
-.g-brd-color-blue-trans {
-  border-color: hsla(0, 0%, 100%, 0.2) !important;
-}
-
-.g-brd-5 {
-  border-width: 5px !important;
-}
-.g-brd-around {
-  border: solid 1px transparent !important;
-}
-.g-brd-5 {
-  border-width: 5px !important;
-}
-.g-brd-around {
-  border: solid 1px transparent !important;
-}
-.g-brd-5 {
-  border-width: 5px !important;
-}
-.g-brd-around {
-  border: solid 1px transparent !important;
-}
-.rounded-circle {
-  border-radius: 50% !important;
-}
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
 .header_xuanchuan img {
   vertical-align: middle;
   border-style: none;
   width: 200px;
   height: 200px;
-  margin-left: 70%;
+  margin-left: 120px;
   margin-top: 50px;
-}
-
-.main_goloble {
-  background: #f7f7f7;
 }
 
 .questions_tab_con {
@@ -208,7 +197,7 @@
 .main_content .content_left {
   background: white;
   margin-right: 8px;
-  width: 862px;
+  width: 842px;
   border: none;
   float: left;
 }
@@ -358,7 +347,7 @@ a.ui.basic.label:hover {
 
 
 .question_right_con {
-  width: 285px;
+  width: 280px;
   float: right;
   background: white;
 }
@@ -427,6 +416,12 @@ a.ui.basic.label:hover {
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
+      },
+      jumpStartQuestion() {
+        this.$router.push({
+          name: 'faquestion-howtoask',
+          query: {} 
+        })
       }
     }
   }

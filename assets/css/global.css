@@ -1,6 +1,14 @@
 @charset "utf-8";
 /* #custom
 ================================================== */
+
+.rounded-circle  {	border-radius: 50% !important; }
+.main_global_bg  {  background: #f7f7f7;  }
+.main_content_bg {  background: white; }
+.purclearfix { clear: both; }
+.nav>li>a:focus { background-color: white; }
+
+
 .clearfix:after,.clearfix:before{content:"";display:table;font-size:0!important;line-height:0!important;height:0!important}
 .clearfix:after{clear:both}
 .clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0}
@@ -15,6 +23,7 @@
 .hand{cursor:pointer}
 .fsize12{font-size:12px}.fsize14{font-size:14px}.fsize16{font-size:16px}
 .fsize18{font-size:18px}.fsize20{font-size:20px}.fsize24{font-size:24px}.fsize34{font-size:34px}
+.mb5, .mb-5 {  margin-bottom: 5px !important; }
 .mt5{margin-top:5px}.mr5{margin-right:5px}.ml5{margin-left:5px}
 .mt10{margin-top:10px}.mr10{margin-right:10px}.mb10{margin-bottom:10px}.ml10{margin-left:10px}
 .mt15{margin-top:15px}.mr15{margin-right:15px}.mb15{margin-bottom:15px}.ml15{margin-left:15px}

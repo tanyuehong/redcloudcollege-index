@@ -5,6 +5,7 @@
 .rounded-circle  {	border-radius: 50% !important; }
 .main_global_bg  {  background: #f7f7f7;  }
 .main_content_bg {  background: white; }
+.color_white { background: white; }
 .purclearfix { clear: both; }
 .nav>li>a:focus { background-color: white; }
 

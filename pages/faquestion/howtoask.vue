@@ -60,7 +60,7 @@
                     <p>或许最后得到的答案并不是你最想要的，但深思熟虑过的问题依旧可能会让你有其他方面的收获。每个人的成长都是一步步来的，所以，Keep an open mind。</p>
                     <div class="mt40 border-top">
                         <div class="text-center mt40 mb40">
-                                                            <a href="/ask?freshman=1" class="btn btn-primary btn-lg">我已知晓，继续提问</a>
+                                                            <a href="/faquestion/ask?freshman=1" class="btn btn-primary btn-lg">我已知晓，继续提问</a>
                                                     </div>
                     </div>
                 </div>

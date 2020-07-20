@@ -116,6 +116,7 @@ export default {
       const _this = this
       window.tinymce.init({
         selector: `#${this.tinymceId}`,
+        resize: false,
         language: this.languageTypeList['zh'],
         height: this.height,
         body_class: 'panel-body ',

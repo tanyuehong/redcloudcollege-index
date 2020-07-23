@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-md-8">
             <div class="ui breadcrumb red_breadcrumb">
-              <a class="section" href="https://www.oschina.net/question">开源问答</a>
+              <a class="section" href="/faquestion">红云问答</a>
               <span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
               <div class="active section">我要提问</div>
             </div>
@@ -79,7 +79,7 @@
                 <a
                   href="https://www.oschina.net/question/12_21851"
                   target="_blank"
-                >什么样的问题在OSC算是一个好问题？</a>
+                >什么样的问题算是一个好问题？</a>
               </div>
               <div class="field">
                 <label>软件</label>
@@ -114,7 +114,7 @@
                 </div>
               </div>
               <div class="publish_ask">
-                  <el-button type="primary">发布问题</el-button>
+                  <el-button type="primary" @click="publishAsk">发布问题</el-button>
               </div>
             </form>
           </div>
@@ -157,6 +157,11 @@ import Tinymce from '@/components/Tinymce' //引入组件
         nocomment:true,
         askcontent: ''
       };
+    },
+     methods: {
+      publishAsk() {
+        window.console.log('=========='+this.askcontent)
+      }
     }
   };
 </script>

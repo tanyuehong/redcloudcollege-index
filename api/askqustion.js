@@ -4,7 +4,7 @@ export default {
     //分页讲师查询的方法
   submitQuestion(qesData) {
     return request({
-      url: `/home/qustion/submitQuestion`,
+      url: `/eduask/submit`,
       method: 'post',
       data: qesData
     })

@@ -72,7 +72,7 @@
               <div class="required field">
                 <label>标题</label>
                 <div class="ui input focus">
-                  <input type="text" name="subject" placeholder="您有什么技术问题，请在此输入" value />
+                  <el-input v-model="asktitle" placeholder="您有什么技术问题，请在此输入" v-on:focus="inputfocuse"></el-input>
                 </div>
               </div>
               <div class="field">
@@ -82,20 +82,16 @@
                 >什么样的问题算是一个好问题？</a>
               </div>
               <div class="field">
-                <label>软件</label>
+                <label>语言 平台 标签</label>
                 <div class="search_input">
-                  <input type="text" class="qustion_tag_search" tabindex="0" />
-                  <span class="sizer"></span>
-                  <div class="placeholder_text c-666">准确的关联开源软件，可让更多专家看到这个问题 (最多5个)</div>
-                  <div class="menu" tabindex="-1"></div>
+                  <el-input v-model="asktag" placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多5个)"></el-input>
                 </div>
               </div>
 
               <div class="required field">
                 <label>描述（请对问题进行详细描述：如软件运行环境、详细错误、异常信息等）</label>
-
           <client-only>
-         <tinymce :height="300" v-model="askcontent"/>
+         <tinymce :height="300" v-model="askcontent" v-on:input="inputfocuse" />
        </client-only>
                
               </div>
@@ -110,15 +106,16 @@
               </div>
               <div class="field">
                 <div class="ui checkbox">
-                  <el-checkbox v-model="nocomment"> 此帖不允许评论</el-checkbox>
+                  <el-checkbox v-model="nocomment" > 此帖不允许评论</el-checkbox>
                 </div>
               </div>
               <div class="publish_ask">
                   <el-button type="primary" @click="publishAsk">发布问题</el-button>
+                  <p class="tips_error_show" v-show="this.errtips.length>0">{{errtips}}</p>
               </div>
             </form>
           </div>
-          <div class="col-md-4"> <div class="ui warning small message">
+          <div class="col-md-4"><div class="ui warning small message">
             <h4 class="header">提问和发帖必读</h4>
             <ol class="list">
               <li>技术无关问题请勿在此发布</li>
@@ -148,19 +145,37 @@
 
 <script>
 import Tinymce from '@/components/Tinymce' //引入组件
-
+import askApi from '@/api/askqustion'
   export default {
     components: { Tinymce },
     data() {
       return {
         tipsme: true,
         nocomment:true,
-        askcontent: ''
+        askcontent:'',
+        asktitle:'',
+        asktag:'',
+        errtips:''
       };
     },
      methods: {
       publishAsk() {
-        window.console.log('=========='+this.askcontent)
+        if(this.asktitle.length<6) {
+          this.errtips = '问题标题必须六个字符以上哈！'
+          return 
+        }
+        if(this.askcontent.length<12) {
+          this.errtips = '问题内如必须12字符以上哈！'
+          return 
+        }
+        var userInfo =  JSON.parse(window.localStorage.getItem("redclass_user"));
+        askApi.submitQuestion({'uid':userInfo.id,'title':this.asktitle,'content':this.askcontent}).then(response => {
+          window.console.log('=============='+response);
+        
+         })
+      },
+      inputfocuse() {
+        this.errtips = '';
       }
     }
   };
@@ -178,6 +193,7 @@ import Tinymce from '@/components/Tinymce' //引入组件
 }
 
 .publish_ask {
+  position: relative;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -357,6 +373,15 @@ import Tinymce from '@/components/Tinymce' //引入组件
 
 .ui.message .list {
   margin-left: 16px;
+}
+
+.tips_error_show {
+  position: absolute;
+  top: 10px;
+  left: 110px;
+  color: red;
+  font-size: 12px;
+  width: 100%;
 }
 
 </style>

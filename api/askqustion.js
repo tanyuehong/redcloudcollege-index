@@ -10,9 +10,9 @@ export default {
     })
   },
   //讲师详情的方法
-  getTeacherInfo(id) {
+  getQustionList(id) {
     return request({
-      url: `/home/teacher/getTeacherInfo/${id}`,
+      url: `/eduask/home/getQustionList`,
       method: 'get'
     })
   }

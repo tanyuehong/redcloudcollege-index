@@ -9,6 +9,11 @@
 .purclearfix { clear: both; }
 .nav>li>a:focus { background-color: white; }
 
+/* 面包屑的样式  */
+.breadcrumb .section { display: inline-block; margin: 0; padding: 0; }
+.red_breadcrumb { font-size: 14px; padding: 0px; background-color: transparent;}
+.breadcrumb .active.section { font-weight: 700; color: rgba(0, 0, 0, 0.87); }
+
 
 .clearfix:after,.clearfix:before{content:"";display:table;font-size:0!important;line-height:0!important;height:0!important}
 .clearfix:after{clear:both}

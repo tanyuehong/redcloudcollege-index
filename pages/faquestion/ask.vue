@@ -4,7 +4,7 @@
       <div class="ask_content" id="newQuestion">
         <div class="row">
           <div class="col-md-8">
-            <div class="ui breadcrumb red_breadcrumb">
+            <div class="breadcrumb red_breadcrumb">
               <a class="section" href="/faquestion">红云问答</a>
               <span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
               <div class="active section">我要提问</div>
@@ -198,18 +198,6 @@ import askApi from '@/api/askqustion'
   margin-bottom: 20px;
 }
 
-.ui.breadcrumb .section {
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-}
-
-.ask_content .red_breadcrumb {
-  font-size: 14px;
-  padding: 0px;
-  background-color: transparent;
-}
-
 .ui.form .field {
   clear: both;
   margin: 0 0 1em;
@@ -223,11 +211,6 @@ import askApi from '@/api/askqustion'
   font-weight: 700;
   text-transform: none;
   margin-bottom: 10px;
-}
-
-.ui.breadcrumb .active.section {
-  font-weight: 700;
-  color: rgba(0, 0, 0, 0.87);
 }
 
 .ui.item.menu,

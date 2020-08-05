@@ -28,7 +28,7 @@
                   <li>
                     <span></span>
                     <a
-                      href="https://blog.csdn.net/askdevteam/article/details/84139790"
+                      href="https://blog.redskt.com/mytest.html"
                       target="_blank"
                     >问答WAP版改版上线</a>
                   </li>

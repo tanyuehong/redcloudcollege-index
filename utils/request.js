@@ -20,7 +20,6 @@ service.interceptors.request.use(
   },
   err => {
     Message({ message: '网络请求超时，请重新尝试！',type: 'error',duration: tipsShowTime})
-    console.log(error) // for debug
     return Promise.reject(err);
 })
 
@@ -36,7 +35,6 @@ service.interceptors.response.use (
         errorMsg = res.message;
       }  
       Message({ message: errorMsg,type: 'error',duration: tipsShowTime})
-      console.log("=================")
       return Promise.reject(new Error(errorMsg))
     } else {
       return res;

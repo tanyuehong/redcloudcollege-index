@@ -269,47 +269,6 @@
   color: white;
 }
 
-.ui.red.label,
-.ui.red.labels .label {
-  background-color: #db2828 !important;
-  border-color: #db2828 !important;
-  color: #fff !important;
-}
-
-.ui.label {
-  display: inline-block;
-  line-height: 1;
-  vertical-align: baseline;
-  margin: 0 0.14285714em;
-  background-color: #f2711c;
-  background-image: none;
-  padding: 0.5833em 0.833em;
-  color: rgba(0, 0, 0, 0.6);
-  text-transform: none;
-  font-weight: 400;
-  border: 0 solid transparent;
-  border-radius: 0.14285714rem;
-  -webkit-transition: background 0.1s ease;
-  transition: background 0.1s ease;
-}
-
-.ui.basic.label {
-  background: none #fff;
-  border: 1px solid rgba(34, 36, 38, 0.15);
-  color: rgba(0, 0, 0, 0.87);
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-a.ui.basic.label:hover {
-  text-decoration: none;
-  background: none #fff;
-  color: #1e70bf;
-  -webkit-box-shadow: 1px solid rgba(34, 36, 38, 0.15);
-  box-shadow: 1px solid rgba(34, 36, 38, 0.15);
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
 
 .questions_detail_con .answer_num {
   width: 50px;
@@ -442,6 +401,17 @@ export default {
   created() {
     this.getHomeQuestionList();
   },
+
+  // 监听器
+  watch: {
+    $route(to, from) {
+      console.log('路由变化......')
+      console.log(to)
+      console.log(from)
+      this.init()
+    }
+  },
+
   methods: {
     getHomeQuestionList() {
       askApi.getHomeAskQuestionList().then((response) => {

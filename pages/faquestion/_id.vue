@@ -20,8 +20,24 @@
                <span>阅读 5K+</span>
                <span class="glyphicon glyphicon-star-empty" aria-hidden="true">收藏 30 </span>
                <span class="glyphicon glyphicon-comment" aria-hidden="true">答案 3</span>
-               
              </div>
+              <div class="extra question-tags">
+                  <a
+                    class="ui horizontal basic label popup-tag"
+                    href="https://www.oschina.net/question/tag/ruby"
+                    target="_blank"
+                  >
+                    <img src="https://static.oschina.net/img/logo/ruby.gif" />Ruby
+                  </a>
+
+                  <a
+                    class="ui horizontal basic label popup-tag"
+                    href="https://www.oschina.net/question/tag/java"
+                    target="_blank"
+                  >
+                    <img src="https://static.oschina.net/img/logo/java.png" />Java
+                  </a>
+                </div>
           </div>
           </div>
         </div>
@@ -46,4 +62,13 @@
 .question_info {
    margin-top: 10px;
 }
-</style>>
+
+.extra .question-tags img {
+    display: inline-block;
+    vertical-align: baseline;
+    height: 22px !important;
+    border-radius: 0.14285714rem;
+    padding: 2px 0;
+    margin: -0.5833em 0.5em -0.5833em 0;
+}
+</style>

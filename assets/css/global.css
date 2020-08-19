@@ -36,6 +36,7 @@
 	border-radius: 0.14285714rem;
 	-webkit-transition: background 0.1s ease;
 	transition: background 0.1s ease;
+	color: #fff;
   }
 
   .ui.basic.label {

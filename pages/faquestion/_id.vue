@@ -21,7 +21,7 @@
                <span class="glyphicon glyphicon-star-empty" aria-hidden="true">收藏 30 </span>
                <span class="glyphicon glyphicon-comment" aria-hidden="true">答案 3</span>
              </div>
-              <div class="extra question-tags">
+              <div class="extra question-tags mt10">
                   <a
                     class="ui horizontal basic label popup-tag"
                     href="https://www.oschina.net/question/tag/ruby"
@@ -37,7 +37,10 @@
                   >
                     <img src="https://static.oschina.net/img/logo/java.png" />Java
                   </a>
-                </div>
+              </div>
+
+              <div> 
+              </div>
           </div>
           </div>
         </div>
@@ -63,7 +66,7 @@
    margin-top: 10px;
 }
 
-.extra .question-tags img {
+.extra .question-tags a, img {
     display: inline-block;
     vertical-align: baseline;
     height: 22px !important;

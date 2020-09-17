@@ -15,5 +15,12 @@ export default {
       url: `/home/eduask/questionlist`,
       method: 'get'
     })
+  },
+   // 获取问答详情网页
+  getQuestionDetails(id) {
+    return request({
+      url: '/eduask/getquestiondetail/'+id,
+      method: 'get'
+    })
   }
 }

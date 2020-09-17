@@ -27,10 +27,7 @@
                 <ul>
                   <li>
                     <span></span>
-                    <a
-                      href="https://blog.redskt.com/mytest.html"
-                      target="_blank"
-                    >问答WAP版改版上线</a>
+                    <a href="https://blog.redskt.com/mytest.html" target="_blank">问答WAP版改版上线</a>
                   </li>
                   <li>
                     <span></span>
@@ -76,14 +73,13 @@
               </el-menu>
             </div>
             <div class="questions_detail_con">
-              <div v-for="item in list" :key="item.qId" class="question_list">
+              <div v-for="item in list" :key="item.qid" class="question_list">
                 <div class="answer_title">
-                  
-                  <a class="header" :href="'/faquestion/'+item.id" target="_blank">
+                  <router-link :to="'/faquestion/'+item.qid" class="header">
                     {{item.title}}
                     <div class="ui red label horizontal" data-tooltip="置顶">顶</div>
                     <div class="ui orange label horizontal" data-tooltip="热门">热</div>
-                  </a>
+                  </router-link>
                 </div>
 
                 <div class="description">
@@ -269,7 +265,6 @@
   color: white;
 }
 
-
 .questions_detail_con .answer_num {
   width: 50px;
   height: 50px;
@@ -402,24 +397,11 @@ export default {
     this.getHomeQuestionList();
   },
 
-  // 监听器
-  watch: {
-    $route(to, from) {
-      console.log('路由变化......')
-      console.log(to)
-      console.log(from)
-      this.init()
-    }
-  },
-
   methods: {
     getHomeQuestionList() {
       askApi.getHomeAskQuestionList().then((response) => {
         this.list = response.data.list;
       });
-    },
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
     },
     jumpStartQuestion() {
       this.$router.push({

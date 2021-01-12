@@ -28,21 +28,21 @@
                   <li>
                     <span></span>
                     <a
-                      href="https://blog.redskt.com/mytest.html"
+                      href="https://zhibo.zuoyebang.com/static/hy/yike-sell-pc-vue/teacher-page.html"
                       target="_blank"
                     >问答WAP版改版上线</a>
                   </li>
                   <li>
                     <span></span>
                     <a
-                      href="https://blog.csdn.net/askdevteam/article/details/82625033"
+                      href="airclass://airclass/tab/index"
                       target="_blank"
                     >【新手提问导读】提问的艺术</a>
                   </li>
                   <li>
                     <span></span>
                     <a
-                      href="https://blog.csdn.net/csdn_bbs/article/details/94432624"
+                      href="airclass://www.zuoyebang.com/live/native/mvp/video?courseId=560460&lessonId=516822"
                       target="_blank"
                     >欢迎加入CSDN问答用户群</a>
                   </li>

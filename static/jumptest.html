@@ -1,0 +1,71 @@
+
+ <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>测试</title>
+  </head>
+  <body>
+    <wx-open-launch-app
+      id="launch-btn"
+      appid="wx7d02bbfdc96bf728"
+      extinfo="https://qqq-docker.suanshubang.com/static/hy/examination_vue/homework-b84a521e-hycache.html?examId=200239738&landscapeType=1&hideStatus=1&hideNav=1&loadingType=1&tempBack=1&type=7&courseId=297483&lessonId=313103#/"
+    >
+      <template>
+        <style>.btn { padding: 12px }</style>
+        <button class="btn">App内查看</button>
+      </template>
+    </wx-open-launch-app>
+    <div id="app"></div>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script no-zyb-transfer src=https://yy-s.zuoyebang.cc/static/realia/vconsole-3.3.0.min.js></script>
+    <script>
+      var vConsole = new VConsole();
+      console.log('VConsole Enabled');
+    </script>
+    <script type="text/javascript">
+      $.ajax({
+        url: '/wxserver/wechat/getjssdkconfig',
+        data: {
+          app_id: 'wx7a241fe9bb272274',
+          url: window.location.href
+        }
+      })
+        .then(res => {
+          console.log(res);
+          wx.config({
+            debug: true,
+            // 必填，公众号的唯一标识
+            appId: res.data.app_id,
+            // 必填，生成签名的时间戳
+            timestamp: res.data.timestamp,
+            // 必填，生成签名的随机串
+            nonceStr: res.data.nonce_str,
+            // 必填，签名
+            signature: res.data.signature,
+            // 必填，需要使用的JS接口列表
+            jsApiList: ['previewImage'],
+            // 可选，需要使用的开放标签列表
+            openTagList: ['wx-open-launch-app']
+          });
+          wx.ready(function (res) {
+            alert(res);
+          });
+          wx.error(err => {
+            alert(JSON.stringify(err))
+          });
+        })
+    </script>
+    <script>
+      var btn = document.getElementById('launch-btn');
+      btn.addEventListener('launch', function (e) {
+        console.log('success');
+      });
+      btn.addEventListener('error', function (e) {
+        console.log('fail', e.detail);
+      });
+    </script>
+  </body>
+</html>

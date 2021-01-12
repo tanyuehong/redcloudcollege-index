@@ -72,14 +72,15 @@
               <div class="required field">
                 <label>标题</label>
                 <div class="ui input focus">
-                  <el-input v-model="asktitle" placeholder="您有什么技术问题，请在此输入" v-on:focus="inputfocuse"></el-input>
+                  <el-input
+                    v-model="asktitle"
+                    placeholder="您有什么技术问题，请在此输入"
+                    v-on:focus="inputfocuse"
+                  ></el-input>
                 </div>
               </div>
               <div class="field">
-                <a
-                  href="https://www.oschina.net/question/12_21851"
-                  target="_blank"
-                >什么样的问题算是一个好问题？</a>
+                <a href="https://www.oschina.net/question/12_21851" target="_blank">什么样的问题算是一个好问题？</a>
               </div>
               <div class="field">
                 <label>语言 平台 标签</label>
@@ -90,53 +91,54 @@
 
               <div class="required field">
                 <label>描述（请对问题进行详细描述：如软件运行环境、详细错误、异常信息等）</label>
-          <client-only>
-         <tinymce :height="300" v-model="askcontent" v-on:input="inputfocuse" />
-       </client-only>
-               
+                <client-only>
+                  <tinymce :height="300" v-model="askcontent" v-on:input="inputfocuse" />
+                </client-only>
               </div>
               <div class="field">
                 <div class="ui checkbox">
-                   <el-checkbox v-model="tipsme"> 有人回答时邮件通知我 (957963898@qq.com)</el-checkbox>
-                    <a
-                      href="https://my.oschina.net/redskt/admin/mail-settings"
-                      target="_blank"
-                    >更改提醒邮箱？</a>
+                  <el-checkbox v-model="tipsme">有人回答时邮件通知我 (957963898@qq.com)</el-checkbox>
+                  <a
+                    href="https://my.oschina.net/redskt/admin/mail-settings"
+                    target="_blank"
+                  >更改提醒邮箱？</a>
                 </div>
               </div>
               <div class="field">
                 <div class="ui checkbox">
-                  <el-checkbox v-model="nocomment" > 此帖不允许评论</el-checkbox>
+                  <el-checkbox v-model="nocomment">此帖不允许评论</el-checkbox>
                 </div>
               </div>
               <div class="publish_ask">
-                  <el-button type="primary" @click="publishAsk">发布问题</el-button>
-                  <p class="tips_error_show" v-show="this.errtips.length>0">{{errtips}}</p>
+                <el-button type="primary" @click="publishAsk">发布问题</el-button>
+                <p class="tips_error_show" v-show="this.errtips.length>0">{{errtips}}</p>
               </div>
             </form>
           </div>
-          <div class="col-md-4"><div class="ui warning small message">
-            <h4 class="header">提问和发帖必读</h4>
-            <ol class="list">
-              <li>技术无关问题请勿在此发布</li>
-              <li>提问有人回答后不允许修改和删除</li>
-              <li>
-                请勿在此发布招聘信息，
-                <a href="https://www.oschina.net/job">我要招聘</a>
-              </li>
-              <li>
-                请勿在此发布活动信息，
-                <a href="https://www.oschina.net/event">我要发布活动</a>
-              </li>
-              <li>
-                更多信息请查阅 &nbsp;
-                <a
-                  href="https://www.oschina.net/question/2918182_2262855"
-                  target="_blank"
-                >新版社区规范</a>
-              </li>
-            </ol>
-          </div></div>
+          <div class="col-md-4">
+            <div class="ui warning small message">
+              <h4 class="header">提问和发帖必读</h4>
+              <ol class="list">
+                <li>技术无关问题请勿在此发布</li>
+                <li>提问有人回答后不允许修改和删除</li>
+                <li>
+                  请勿在此发布招聘信息，
+                  <a href="https://www.oschina.net/job">我要招聘</a>
+                </li>
+                <li>
+                  请勿在此发布活动信息，
+                  <a href="https://www.oschina.net/event">我要发布活动</a>
+                </li>
+                <li>
+                  更多信息请查阅 &nbsp;
+                  <a
+                    href="https://www.oschina.net/question/2918182_2262855"
+                    target="_blank"
+                  >新版社区规范</a>
+                </li>
+              </ol>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -144,41 +146,61 @@
 </template>
 
 <script>
-import Tinymce from '@/components/Tinymce' //引入组件
-import askApi from '@/api/askqustion'
-  export default {
-    components: { Tinymce },
-    data() {
-      return {
-        tipsme: true,
-        nocomment:true,
-        askcontent:'',
-        asktitle:'',
-        asktag:'',
-        errtips:''
-      };
-    },
-     methods: {
-      publishAsk() {
-        if(this.asktitle.length<6) {
-          this.errtips = '问题标题必须六个字符以上哈！'
-          return 
-        }
-        if(this.askcontent.length<12) {
-          this.errtips = '问题内如必须12字符以上哈！'
-          return 
-        }
-        var userInfo =  JSON.parse(window.localStorage.getItem("redclass_user"));
-        askApi.submitQuestion({'uid':userInfo.id,'title':this.asktitle,'content':this.askcontent}).then(response => {
-          window.console.log('=============='+response);
-        
-         })
-      },
-      inputfocuse() {
-        this.errtips = '';
+import Tinymce from "@/components/Tinymce"; //引入组件
+import askApi from "@/api/askqustion";
+export default {
+  components: { Tinymce },
+  data() {
+    return {
+      tipsme: true,
+      nocomment: true,
+      askcontent: "",
+      asktitle: "",
+      asktag: "",
+      errtips: "",
+    };
+  },
+  methods: {
+    publishAsk() {
+      if (this.asktitle.length < 6) {
+        this.errtips = "问题标题必须六个字符以上哈！";
+        return;
       }
-    }
-  };
+      if (this.askcontent.length < 12) {
+        this.errtips = "问题内如必须12字符以上哈！";
+        return;
+      }
+      var userInfo = JSON.parse(window.localStorage.getItem("redclass_user"));
+      if (userInfo) {
+        askApi
+          .submitQuestion({
+            uid: userInfo.id,
+            title: this.asktitle,
+            content: this.askcontent,
+          })
+          .then((response) => {
+            this.$message({
+              type: "success",
+              message: "问题提交成功！"
+            });
+             this.$router.push({
+             name: "faquestion",
+             query: {},
+              });
+          
+          });
+      } else {
+        this.$router.push({
+          name: "login",
+          query: {},
+        });
+      }
+    },
+    inputfocuse() {
+      this.errtips = "";
+    },
+  },
+};
 </script>
 
 
@@ -286,7 +308,6 @@ import askApi from '@/api/askqustion'
   outline: 0;
   width: 100%;
   -webkit-appearance: none;
-  tap-highlight-color: rgba(255, 255, 255, 0);
   line-height: 1.21428571em;
   padding: 0.67857143em 1em;
   font-size: 1em;
@@ -301,57 +322,62 @@ import askApi from '@/api/askqustion'
 }
 
 .search_input {
-    position: relative;
+  position: relative;
 }
 
 .qustion_tag_search {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .placeholder_text {
-    position:absolute;
-    top: 6px;
-    left: 10px;
+  position: absolute;
+  top: 6px;
+  left: 10px;
 }
 
 .ui.warning.message {
-    -webkit-box-shadow: 0 0 0 1px #c9ba9b inset, 0 0 0 0 transparent;
-    box-shadow: 0 0 0 1px #c9ba9b inset, 0 0 0 0 transparent;
+  -webkit-box-shadow: 0 0 0 1px #c9ba9b inset, 0 0 0 0 transparent;
+  box-shadow: 0 0 0 1px #c9ba9b inset, 0 0 0 0 transparent;
 }
 
 .ui.warning.message {
-    background-color: #fffaf3;
-    color: #573a08;
-    width: 280px;
+  background-color: #fffaf3;
+  color: #573a08;
+  width: 280px;
 }
 
 .ui.message {
-    position: relative;
-    min-height: 1em;
-    margin: 1em 0;
-    background: #f8f8f9;
-    padding: 1em 1.5em;
-    line-height: 1.4285em;
-    color: rgba(0,0,0,.87);
-    -webkit-transition: opacity .1s ease,color .1s ease,background .1s ease,-webkit-box-shadow .1s ease;
-    transition: opacity .1s ease,color .1s ease,background .1s ease,-webkit-box-shadow .1s ease;
-    transition: opacity .1s ease,color .1s ease,background .1s ease,box-shadow .1s ease;
-    transition: opacity .1s ease,color .1s ease,background .1s ease,box-shadow .1s ease,-webkit-box-shadow .1s ease;
-    border-radius: .14285714rem;
-    -webkit-box-shadow: 0 0 0 1px rgba(34,36,38,.22) inset, 0 0 0 0 transparent;
-    box-shadow: 0 0 0 1px rgba(34,36,38,.22) inset, 0 0 0 0 transparent;
+  position: relative;
+  min-height: 1em;
+  margin: 1em 0;
+  background: #f8f8f9;
+  padding: 1em 1.5em;
+  line-height: 1.4285em;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: opacity 0.1s ease, color 0.1s ease, background 0.1s ease,
+    -webkit-box-shadow 0.1s ease;
+  transition: opacity 0.1s ease, color 0.1s ease, background 0.1s ease,
+    -webkit-box-shadow 0.1s ease;
+  transition: opacity 0.1s ease, color 0.1s ease, background 0.1s ease,
+    box-shadow 0.1s ease;
+  transition: opacity 0.1s ease, color 0.1s ease, background 0.1s ease,
+    box-shadow 0.1s ease, -webkit-box-shadow 0.1s ease;
+  border-radius: 0.14285714rem;
+  -webkit-box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.22) inset,
+    0 0 0 0 transparent;
+  box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.22) inset, 0 0 0 0 transparent;
 }
 
 .ui.warning.message .header {
-    color: #794b02;
+  color: #794b02;
 }
 
 .ui.message .list:not(.ui) li:before {
-    position: absolute;
-    content: '•';
-    left: 16px;
-    height: 100%;
-    vertical-align: baseline;
+  position: absolute;
+  content: "•";
+  left: 16px;
+  height: 100%;
+  vertical-align: baseline;
 }
 
 .ui.message .list {
@@ -366,5 +392,4 @@ import askApi from '@/api/askqustion'
   font-size: 12px;
   width: 100%;
 }
-
 </style>

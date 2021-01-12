@@ -103,7 +103,7 @@
                 <span>Email：redskt@163.com</span>
               </section>
               <section class="b-f-link mt10">
-                <span>©2020课程版权均归红云学院所有 京ICP备16006909号-1</span>
+                <span>©2020课程版权均归红云学院所有 <a href="https://beian.miit.gov.cn">京ICP备16006909号-1</a></span>
               </section>
             </section>
           </section>

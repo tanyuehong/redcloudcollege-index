@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+  <div class="sing_main">
     <div class="title">
       <a href="/login">登录</a>
       <span>·</span>
@@ -62,7 +63,7 @@
           </div>
         </el-form-item>
 
-        <div class="btn pr">
+        <div class="sign_btn">
           <p class="tips_error_show" v-show="this.errtips.length>0">{{errtips}}</p>
           <input
             type="button"
@@ -72,7 +73,7 @@
           />
         </div>
         <p class="sign-up-msg">
-          点击 “注册” 即表示您同意并愿意遵守简书
+          点击 “注册” 即表示您同意并愿意遵守红云学院
           <br />
           <a target="_blank" href="http://www.jianshu.com/p/c44d171298ce">用户协议</a>
           和
@@ -99,6 +100,7 @@
             </a>
           </li>
         </ul>
+      </div>
       </div>
     </div>
   </div>

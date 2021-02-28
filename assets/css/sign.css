@@ -19,6 +19,10 @@ a{
     text-decoration: none;
 }
 
+a:hover{
+    text-decoration: none;
+}
+
 /*后代选择器*/
 .sign-up-msg a{
     color: #3194d0;
@@ -39,7 +43,7 @@ a{
 /*表单样式*/
 .sign .main{
     background-color: #FFFFFF;
-    width: 400px;
+    width: 500px;
     padding: 50px;
     margin: 60px auto 0 auto;
     box-shadow: 0 0 8px rgba(0,0,0,0.1);
@@ -49,6 +53,18 @@ a{
 .sign .logo{
     top: 56px;
     left: 50px;
+    margin-top: 20px;
+}
+
+.sign .sing_main {
+    width: 300px;
+    margin: 0 auto 0 auto;
+}
+
+.sign .sign_btn {
+    width: 200px;
+    margin: 0 auto 0 auto;
+    margin-bottom: 20px;
 }
 
 

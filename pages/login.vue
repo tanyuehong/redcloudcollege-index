@@ -1,9 +1,10 @@
 <template>
   <div class="main">
+    <div class="sing_main">
     <div class="title">
       <a class="active" href="/login">登录</a>
       <span>·</span>
-      <a href="/register">注册</a>
+      <a href="/register" class>注册</a>
     </div>
 
     <div class="sign-up-container">
@@ -40,7 +41,7 @@
           </div>
         </el-form-item>
 
-        <div class="btn pr">
+        <div class="sign_btn">
           <p class="tips_error_show" v-show="this.errtips.length>0">{{errtips}}</p>
           <input type="button" class="sign-in-button" value="登录" @click="submitLogin('userForm')" />
         </div>
@@ -65,6 +66,7 @@
             </a>
           </li>
         </ul>
+      </div>
       </div>
     </div>
   </div>

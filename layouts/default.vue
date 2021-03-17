@@ -4,8 +4,8 @@
     <header id="header">
       <section class="container">
         <h1 id="logo">
-          <a href="#" title="谷粒学院">
-            <img src="~/assets/img/logo.png" width="100%" alt="谷粒学院" />
+          <a href="#" title="开源实践网">
+            <img src="~/assets/img/logo.png" width="100%" alt="开源实践网" />
           </a>
         </h1>
         <div class="h-r-nsl">
@@ -103,7 +103,7 @@
                 <span>Email：redskt@163.com</span>
               </section>
               <section class="b-f-link mt10">
-                <span>©2020课程版权均归红云学院所有 <a href="https://beian.miit.gov.cn">京ICP备16006909号-1</a></span>
+                <span>©2020课程版权均归开源实践网所有 <a href="https://beian.miit.gov.cn">京ICP备16006909号-1</a></span>
               </section>
             </section>
           </section>

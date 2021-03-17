@@ -5,12 +5,12 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: '红云技术直播课',
+    title: '开源实践网',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'keywords', name: 'keywords', content: '红云技术学院，红云技术直播课,IT在线视频教程,Java视频,HTML5视频,前端视频,Python视频,大数据视频' },
-      { hid: 'description', name: 'description', content: '红云技术学院，红云技术直播课是国内领先的IT在线视频学习平台、职业教育平台。截止目前,红云及时直播客线上、线下学习人次数以万计！会同上百个知名开发团队联合制定的Java、HTML5前端、大数据、Python等视频课程，被广大学习者及IT工程师誉为：业界最适合自学、代码量最大、案例最多、实战性最强、技术最前沿的IT系列视频课程！' }
+      { hid: 'keywords', name: 'keywords', content: '开源项目网，一起来做有点意思的事，开源项目学习网,开源项目实践网,开源项目创业网,加入开源项目,代码创业' },
+      { hid: 'description', name: 'description', content: '开源项目网，是国内第一家以开源项目作为学习实践的网站，在开源项目网，可以下载网站内所有的开源项目，每个开源项目都有完整专业的学习文档，并且用户还可以提交代码，通过以后代码的所有权和收益归用户所有。' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -49,6 +49,10 @@ export default {
   */
   modules: [
   ],
+
+  server: {
+    port: 9528, // default: 3000
+  },
   /*
   ** Build configuration
   */

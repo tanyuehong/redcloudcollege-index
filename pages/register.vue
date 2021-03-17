@@ -73,7 +73,7 @@
           />
         </div>
         <p class="sign-up-msg">
-          点击 “注册” 即表示您同意并愿意遵守红云学院
+          点击 “注册” 即表示您同意并愿意遵守开源实践网
           <br />
           <a target="_blank" href="http://www.jianshu.com/p/c44d171298ce">用户协议</a>
           和

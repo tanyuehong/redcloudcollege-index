@@ -50,25 +50,20 @@
         <div class="row">
           <div class="col-md-8 left_con">
           <ul class>
-            <li class="cleartopicfix">
+           <li class="cleartopicfix" v-for="item in bookList" :key="item.id">
               <a href="/read/80" target="_blank">
-                <div
-                  class="img l"
-                  style="
-                    background-image: url(//img3.sycdn.imooc.com/5ed8c19b000108e602940333.jpg);
-                  "
-                ></div>
+                <img :src="item.bookImg" class="img l" :alt="item.title">
               </a>
               <div class="text_con r">
                 <a href="/read/80" target="_blank">
-                  <p class="title">零基础学透网络编程</p>
+                  <p class="title">{{item.title}}</p>
                 </a>
-                <p class="desc">学好通用知识，提升技术竞争力</p>
+                <p class="desc">{{item.describ}}</p>
                 <div class="info">
-                  <i class="imv2-dot_samll"></i>
+                  <img src="~/assets/img/article_point.png" class="img_point"></i>
                   <span>共32节</span>
-                  <i class="imv2-dot_samll"></i>
-                  <span>55人已购买</span>
+                  <img src="~/assets/img/article_point.png" class="img_point"></i>
+                  <span>{{ item.buyCount }}人已购买</span>
                 </div>
                 <div class="try-read-box">
                   <a
@@ -92,9 +87,9 @@
                       background-image: url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');
                     "
                   ></div>
-                  <span class="author-name">陈子兴</span>
+                  <span class="author-name">{{item.author}}</span>
                   <span>/</span>
-                  <span class="author-title">资深软件架构师</span>
+                  <span class="author-title">{{item.authorPositon}}</span>
                 </a>
                 <div class="price_con cleartopicfix r">
                   <!-- 没有订阅购买 -->
@@ -103,8 +98,8 @@
                     href="/read/80"
                     target="_blank"
                   >
-                    <p class="ori r">原价 ¥ 58.00</p>
-                    <p class="sale r">¥ 42.00</p>
+                    <p class="ori r">原价 ¥ {{ item.oldPrice }}</p>
+                    <p class="sale r">¥ {{ item.price }}</p>
                     <div
                       class="countdown r"
                       data-remain="1617854"
@@ -333,7 +328,7 @@
               <div class="ma-con">
                 <div class="ma"></div>
                 <div class="desc">
-                  <div class="title">扫码关注慕课网服务号</div>
+                  <div class="title">扫码关注开源实践网服务号</div>
                   <div class="item-con">
                     <div class="item">干货分享</div>
                     <div class="item">定期活动</div>
@@ -343,7 +338,7 @@
                 </div>
               </div>
               <div class="text-con">
-                官方优惠福利活动一手掌握，关注慕课网（ID：imooc-com），和30万+程序员一起成长！
+                官方优惠福利活动一手掌握，关注开源实践官网（ID：www.redskt.com），和1万+客户端程序员一起成长！
               </div>
             </div>
             <div class="download-app js-show-download clearfix">
@@ -353,8 +348,8 @@
                 class="logo-icon l"
               />
               <div class="text l">
-                <h4>下载慕课网APP</h4>
-                <p>更好的体验 阅读随处可享</p>
+                <h4>下载开源实践APP</h4>
+                <p>更好的体验 学习随处可享</p>
               </div>
             </div>
           </div>
@@ -365,7 +360,7 @@
 </template>
 
 <script>
-import courseApi from "@/api/course";
+import articleApi from "@/api/article";
 export default {
   data() {
     return {
@@ -402,6 +397,7 @@ export default {
         },
       ],
       page: 1, //当前页
+      bookList:[],
       data: {}, //课程列表
       subjectNestedList: [], // 一级分类列表
       subSubjectList: [], // 二级分类列表
@@ -415,8 +411,24 @@ export default {
       priceSort: "",
     };
   },
-  created() {},
-  methods: {},
+   created() {
+    this.getHomeBooks();
+  },
+
+  methods: {
+    getHomeBooks() {
+      articleApi.getHomeBookList().then((response) => {
+        this.bookList = response.data.bookList;
+        // debugger;
+      });
+    },
+    jumpStartQuestion() {
+      this.$router.push({
+        name: "faquestion-howtoask",
+        query: {},
+      });
+    },
+  },
 };
 </script>
 
@@ -541,6 +553,9 @@ export default {
   margin-bottom: 14px;
   vertical-align: top;
 }
+.left_con li .text_con .info .img_point{
+  margin-left:5px;
+} 
 .left_con li .text_con .desc {
   font-size: 14px;
   color: #545c63;
@@ -589,9 +604,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.imv2-dot_samll:before {
-  content: "\e94c";
-}
 .left_con li .text_con .try-read-box {
   margin-bottom: 12px;
 }

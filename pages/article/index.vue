@@ -51,13 +51,14 @@
           <div class="col-md-8 left_con">
           <ul class>
            <li class="cleartopicfix" v-for="item in bookList" :key="item.id">
-              <a href="/read/80" target="_blank">
+              <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
                 <img :src="item.bookImg" class="img l" :alt="item.title">
-              </a>
+              </nuxt-link>
               <div class="text_con r">
-                <a href="/read/80" target="_blank">
-                  <p class="title">{{item.title}}</p>
-                </a>
+              <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
+               <p class="title">{{item.title}}</p>
+                  {{item.title}}
+              </nuxt-link>
                 <p class="desc">{{item.describ}}</p>
                 <div class="info">
                   <img src="~/assets/img/article_point.png" class="img_point"></i>

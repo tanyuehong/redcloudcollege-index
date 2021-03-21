@@ -12,17 +12,15 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "element-ui": "^2.13.2",
+    "element-ui": "^2.15.1",
     "js-cookie": "^2.2.1",
     "node-sass": "^4.14.1",
-    "nuxt": "^2.0.0",
-    "swiper": "^5.3.8",
+    "nuxt": "^2.15.3",
+    "swiper": "^5.4.5",
     "vue-qriously": "^1.1.1"
   },
   "devDependencies": {
-    "eslint-plugin-prettier": "^3.3.1",
-    "prettier": "^2.2.1",
     "sass-loader": "^7.3.1",
-    "sass-resources-loader": "^2.0.3"
+    "sass-resources-loader": "^2.1.1"
   }
 }

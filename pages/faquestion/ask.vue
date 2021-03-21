@@ -6,7 +6,10 @@
           <div class="col-md-8">
             <div class="breadcrumb red_breadcrumb">
               <a class="section" href="/faquestion">红云问答</a>
-              <span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+              <span
+                class="glyphicon glyphicon glyphicon-menu-right"
+                aria-hidden="true"
+              ></span>
               <div class="active section">我要提问</div>
             </div>
 
@@ -28,7 +31,9 @@
                   <a
                     href="https://www.oschina.net/question/2918182_2262855"
                     target="_blank"
-                  >新版社区规范</a>
+                  >
+                    新版社区规范
+                  </a>
                 </li>
               </ol>
             </div>
@@ -48,23 +53,38 @@
                 <input type="hidden" name="catalog" value="1" />
                 <div class="ui five item pointing menu catalog">
                   <a class="item active" data-value="1" title="技术问答">
-                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    <span
+                      class="glyphicon glyphicon-question-sign"
+                      aria-hidden="true"
+                    ></span>
                     <span>技术问答</span>
                   </a>
                   <a class="item" data-value="100" title="职业生涯">
-                    <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+                    <span
+                      class="glyphicon glyphicon-briefcase"
+                      aria-hidden="true"
+                    ></span>
                     <span>职业生涯</span>
                   </a>
                   <a class="item" data-value="2" title="技术分享">
-                    <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+                    <span
+                      class="glyphicon glyphicon-share"
+                      aria-hidden="true"
+                    ></span>
                     <span>技术分享</span>
                   </a>
                   <a class="item" data-value="3" title="IT大杂烩">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    <span
+                      class="glyphicon glyphicon-user"
+                      aria-hidden="true"
+                    ></span>
                     <span>IT大杂烩</span>
                   </a>
                   <a class="item" data-value="4" title="站务/建议">
-                    <span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+                    <span
+                      class="glyphicon glyphicon-hand-up"
+                      aria-hidden="true"
+                    ></span>
                     <span>站务/建议</span>
                   </a>
                 </div>
@@ -80,28 +100,46 @@
                 </div>
               </div>
               <div class="field">
-                <a href="https://www.oschina.net/question/12_21851" target="_blank">什么样的问题算是一个好问题？</a>
+                <a
+                  href="https://www.oschina.net/question/12_21851"
+                  target="_blank"
+                >
+                  什么样的问题算是一个好问题？
+                </a>
               </div>
               <div class="field">
                 <label>语言 平台 标签</label>
                 <div class="search_input">
-                  <el-input v-model="asktag" placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多5个)"></el-input>
+                  <el-input
+                    v-model="asktag"
+                    placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多5个)"
+                  ></el-input>
                 </div>
               </div>
 
               <div class="required field">
-                <label>描述（请对问题进行详细描述：如软件运行环境、详细错误、异常信息等）</label>
+                <label>
+                  描述（请对问题进行详细描述：如软件运行环境、详细错误、异常信息等）
+                </label>
                 <client-only>
-                  <tinymce :height="300" v-model="askcontent" v-on:input="inputfocuse" />
+                  <tinymce
+                    :height="300"
+                    v-model="askcontent"
+                    v-on:input="inputfocuse"
+                  />
                 </client-only>
               </div>
               <div class="field">
                 <div class="ui checkbox">
-                  <el-checkbox v-model="tipsme">有人回答时邮件通知我 (957963898@qq.com)</el-checkbox>
+                  <el-checkbox v-model="tipsme">
+                    有人回答时邮件通知我 (957963898@qq.com)
+                  </el-checkbox>
                   <a
                     href="https://my.oschina.net/redskt/admin/mail-settings"
                     target="_blank"
-                  >更改提醒邮箱？</a>
+                  >
+                    更改提醒邮箱？
+                  </a>
                 </div>
               </div>
               <div class="field">
@@ -110,8 +148,12 @@
                 </div>
               </div>
               <div class="publish_ask">
-                <el-button type="primary" @click="publishAsk">发布问题</el-button>
-                <p class="tips_error_show" v-show="this.errtips.length>0">{{errtips}}</p>
+                <el-button type="primary" @click="publishAsk">
+                  发布问题
+                </el-button>
+                <p class="tips_error_show" v-show="this.errtips.length > 0">
+                  {{ errtips }}
+                </p>
               </div>
             </form>
           </div>
@@ -134,7 +176,9 @@
                   <a
                     href="https://www.oschina.net/question/2918182_2262855"
                     target="_blank"
-                  >新版社区规范</a>
+                  >
+                    新版社区规范
+                  </a>
                 </li>
               </ol>
             </div>
@@ -146,31 +190,31 @@
 </template>
 
 <script>
-import Tinymce from "@/components/Tinymce"; //引入组件
-import askApi from "@/api/askqustion";
+import Tinymce from '@/components/Tinymce' //引入组件
+import askApi from '@/api/askqustion'
 export default {
   components: { Tinymce },
   data() {
     return {
       tipsme: true,
       nocomment: true,
-      askcontent: "",
-      asktitle: "",
-      asktag: "",
-      errtips: "",
-    };
+      askcontent: '',
+      asktitle: '',
+      asktag: '',
+      errtips: '',
+    }
   },
   methods: {
     publishAsk() {
       if (this.asktitle.length < 6) {
-        this.errtips = "问题标题必须六个字符以上哈！";
-        return;
+        this.errtips = '问题标题必须六个字符以上哈！'
+        return
       }
       if (this.askcontent.length < 12) {
-        this.errtips = "问题内如必须12字符以上哈！";
-        return;
+        this.errtips = '问题内如必须12字符以上哈！'
+        return
       }
-      var userInfo = JSON.parse(window.localStorage.getItem("redclass_user"));
+      var userInfo = JSON.parse(window.localStorage.getItem('redclass_user'))
       if (userInfo) {
         askApi
           .submitQuestion({
@@ -180,29 +224,27 @@ export default {
           })
           .then((response) => {
             this.$message({
-              type: "success",
-              message: "问题提交成功！"
-            });
-             this.$router.push({
-             name: "faquestion",
-             query: {},
-              });
-          
-          });
+              type: 'success',
+              message: '问题提交成功！',
+            })
+            this.$router.push({
+              name: 'faquestion',
+              query: {},
+            })
+          })
       } else {
         this.$router.push({
-          name: "login",
+          name: 'login',
           query: {},
-        });
+        })
       }
     },
     inputfocuse() {
-      this.errtips = "";
+      this.errtips = ''
     },
   },
-};
+}
 </script>
-
 
 <style>
 .ask_content {
@@ -258,8 +300,8 @@ export default {
   display: -ms-flexbox;
   display: flex;
   margin: 1rem 0;
-  font-family: "PingFang SC", "Helvetica Neue", "Microsoft YaHei UI",
-    "Microsoft YaHei", "Noto Sans CJK SC", Sathu, EucrosiaUPC, Arial, Helvetica,
+  font-family: 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei UI',
+    'Microsoft YaHei', 'Noto Sans CJK SC', Sathu, EucrosiaUPC, Arial, Helvetica,
     sans-serif;
   background: #fff;
   font-weight: 400;
@@ -293,7 +335,7 @@ export default {
 
 .required.field > label:after {
   margin: -0.2em 0 0 0.2em;
-  content: "*";
+  content: '*';
   color: #db2828;
 }
 .ui .input {
@@ -301,8 +343,8 @@ export default {
 }
 
 .ui.form input {
-  font-family: "PingFang SC", "Helvetica Neue", "Microsoft YaHei UI",
-    "Microsoft YaHei", "Noto Sans CJK SC", Sathu, EucrosiaUPC, Arial, Helvetica,
+  font-family: 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei UI',
+    'Microsoft YaHei', 'Noto Sans CJK SC', Sathu, EucrosiaUPC, Arial, Helvetica,
     sans-serif;
   margin: 0;
   outline: 0;
@@ -374,7 +416,7 @@ export default {
 
 .ui.message .list:not(.ui) li:before {
   position: absolute;
-  content: "•";
+  content: '•';
   left: 16px;
   height: 100%;
   vertical-align: baseline;

@@ -27,26 +27,26 @@
 </style>
 
 <script>
-import { Message } from 'element-ui';
-import articleApi from '@/api/article';
+import { Message } from 'element-ui'
+import articleApi from '@/api/article'
 
 export default {
   data() {
     return {
       bookItem: {}, //当前页
       bookContents: [],
-    };
+    }
   },
   created() {
-    var bookId = this.$route.query.id;
+    var bookId = this.$route.query.id
     if (bookId && bookId.length > 0) {
-      this.getHomeBookDetail(bookId);
+      this.getHomeBookDetail(bookId)
     } else {
       Message({
         message: '参数异常，请重新尝试！',
         type: 'error',
         duration: 2000,
-      });
+      })
     }
   },
   methods: {
@@ -54,10 +54,10 @@ export default {
     //参数是页码数
     getHomeBookDetail(bookId) {
       articleApi.getBookDetails(bookId).then((response) => {
-        this.bookItem = response.data.book;
-        this.bookContents = response.data.content_list;
-      });
+        this.bookItem = response.data.book
+        this.bookContents = response.data.content_list
+      })
     },
   },
-};
+}
 </script>

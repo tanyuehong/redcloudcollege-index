@@ -5,15 +5,15 @@ export default {
   getHomeBookList() {
     return request({
       url: `/home/book/getBooks`,
-      method: 'get'
+      method: 'get',
     })
   },
-   // 获取书籍详情页
+  // 获取书籍详情页
   getBookDetails(id) {
     //debugger;
     return request({
-      url: '/home/book/getBookDetail/'+id,
-      method: 'get'
+      url: '/home/book/getBookDetail/' + id,
+      method: 'get',
     })
-  }
+  },
 }

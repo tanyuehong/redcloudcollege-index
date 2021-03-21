@@ -1,18 +1,18 @@
 import request from '@/utils/serverRq'
 
 export default {
-    //分页讲师查询的方法
-  getTeacherList(page,limit) {
+  //分页讲师查询的方法
+  getTeacherList(page, limit) {
     return request({
       url: `/home/teacher/getTeacherList/${page}/${limit}`,
-      method: 'post'
+      method: 'post',
     })
   },
   //讲师详情的方法
   getTeacherInfo(id) {
     return request({
       url: `/home/teacher/getTeacherInfo/${id}`,
-      method: 'get'
+      method: 'get',
     })
-  }
+  },
 }

@@ -1,25 +1,25 @@
 import request from '@/utils/request'
 
 export default {
-    //生成订单
+  //生成订单
   createOrders(courseId) {
     return request({
-      url: '/collegeservice/order/createOrder/'+courseId,
-      method: 'post'
+      url: '/collegeservice/order/createOrder/' + courseId,
+      method: 'post',
     })
   },
   //根据订单id查询订单信息
   getOrdersInfo(id) {
     return request({
-      url: '/collegeservice/order/getOrderInfo/'+id,
-      method: 'get'
+      url: '/collegeservice/order/getOrderInfo/' + id,
+      method: 'get',
     })
   },
   //生成二维码的方法
   createNatvie(orderNo) {
     return request({
-      url: '/collegeservice/paylog/createNative/'+orderNo,
-      method: 'get'
+      url: '/collegeservice/paylog/createNative/' + orderNo,
+      method: 'get',
     })
   },
 
@@ -27,8 +27,8 @@ export default {
   //生成二维码的方法
   queryPayStatus(orderNo) {
     return request({
-      url: '/collegeservice/paylog/queryPayStatus/'+orderNo,
-      method: 'get'
+      url: '/collegeservice/paylog/queryPayStatus/' + orderNo,
+      method: 'get',
     })
-  }
+  },
 }

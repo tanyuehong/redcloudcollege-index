@@ -47,12 +47,31 @@
           </div>
         </div>
       </div>
+
+      <div class="row book_mid_content">
+        <div class="col-md-12">
+          <div class="book_select">
+          <el-tabs :tab-position="tabPosition" style="height: 200px;">
+            <el-tab-pane label="课程介绍">课程介绍</el-tab-pane>
+            <el-tab-pane label="课程目录">课程目录</el-tab-pane>
+            <el-tab-pane label="课程评论">课程评论</el-tab-pane>
+          </el-tabs>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style>
 .book_top_content {
+  padding-top: 30px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  background: white;
+}
+
+.book_mid_content {
   padding-top: 30px;
   padding-left: 20px;
   padding-bottom: 20px;
@@ -89,6 +108,7 @@ export default {
     return {
       bookItem: {}, //当前页
       bookContents: [],
+       tabPosition: 'left',
     }
   },
   created() {

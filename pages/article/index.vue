@@ -61,9 +61,9 @@
               </nuxt-link>
                 <p class="desc">{{item.describ}}</p>
                 <div class="info">
-                  <img src="~/assets/img/article_point.png" class="img_point"></i>
+                  <img src="~/assets/img/article_point.png" class="img_point">
                   <span>共32节</span>
-                  <img src="~/assets/img/article_point.png" class="img_point"></i>
+                  <img src="~/assets/img/article_point.png" class="img_point">
                   <span>{{ item.buyCount }}人已购买</span>
                 </div>
                 <div class="try-read-box">

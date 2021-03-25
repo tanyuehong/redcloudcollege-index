@@ -52,9 +52,9 @@
         <div class="col-md-12">
           <div class="book_select">
           <el-tabs :tab-position="tabPosition" style="height: 200px;">
-            <el-tab-pane label="课程介绍">课程介绍</el-tab-pane>
-            <el-tab-pane label="课程目录">课程目录</el-tab-pane>
-            <el-tab-pane label="课程评论">课程评论</el-tab-pane>
+            <el-tab-pane @tab-click="tabClickDscrib" label="课程介绍">课程介绍</el-tab-pane>
+            <el-tab-pane @tab-click="tabClickContents" label="课程目录">课程目录</el-tab-pane>
+            <el-tab-pane @tab-click="tabClickComment" label="课程评论">课程评论</el-tab-pane>
           </el-tabs>
           </div>
         </div>
@@ -128,9 +128,11 @@ export default {
     //参数是页码数
     getHomeBookDetail(bookId) {
       articleApi.getBookDetails(bookId).then((response) => {
-        this.bookItem = response.data.book
-        this.bookContents = response.data.content_list
+        this.bookItem = response.data.book;
+        this.bookContents = response.data.content_list;
       })
+    },
+    tabClickContents(item) {
     },
   },
 }

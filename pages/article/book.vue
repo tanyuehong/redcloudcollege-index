@@ -63,13 +63,21 @@
                   </div>
                   <el-timeline>
                     <el-timeline-item v-for="item in chapterList" v-bind:key="item.id"
-                      :timestamp="item.title"
+                      :timestamp="item.title" class="mytest"
                       color="#f56c6c"
                       placement="top"
                     >
                       <el-card>
-                        <h4>更新 Github 模板</h4>
-                        <p>王小虎 提交于 2018/4/12 20:46</p>
+                        <div v-if="item.chapterContents" class="book_contents_detail" > 
+                          <div v-for="content in item.chapterContents" v-bind:key="content.id" class="book_contens_item">
+                                <nuxt-link :to="{name:'article-detail',query:{id:content.id}}">
+                                    <span>{{content.title}}</span>
+                                    <span class="book-contens_time">2021-01</span>
+                                    <div class="taste-btn">试读</div>
+                               </nuxt-link>
+                          </div>
+                        </div>
+                        <div v-else class="book_no_contents"> 正在努力更新中，敬请期待 </div>
                       </el-card>
                     </el-timeline-item>
                   </el-timeline>
@@ -378,13 +386,72 @@
 .comment_content .summary a {
   color: inherit;
 }
+
+.el-timeline-item__timestamp {
+  color: #333;
+  font-weight: 550;
+  font-size: 16px;
+}
+
+.book_contens_item {
+   padding-bottom:15px;
+   padding-top:15px;
+   font-weight: 450;
+   position:relative;
+   border-bottom: 1px solid rgba(28,31,33,.1);
+}
+.book_contens_item  a {
+  display:block;
+  text-decoration:none;
+}
+
+.book_contents_detail div:last-child {
+   padding-bottom:8px;
+   border:none;
+}
+.book_contents_detail div:first-child {
+ padding-top:8px;
+}
+
+ .book_contents_detail .book-contens_time {
+   font-size:12px;
+   margin-left:20px;
+   color: #9199a1;
+ }
+
+.book_contents_detail .taste-btn {
+    width: 76px;
+    height: 30px;
+    position: absolute;
+    top: 12px;
+    right: 0;
+    text-align: center;
+    font-size: 12px;
+    color: #37f;
+    line-height: 30px;
+    font-weight: 700;
+    background: rgba(51,119,255,.1);
+    border-radius: 18px;
+    transition: all .3s;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+}
+
+.book_contents_detail .taste-btn:hover {
+    background-color: rgba(0,136,204,.2);
+}
+
+.book_contents_detail div:first-child div {
+    top: 1px;
+}
+
 </style>
 
 <script>
 import articleApi from '@/api/article'
 import marked from 'marked'
 import { Message } from 'element-ui'
-import { commonLog } from '@/utils/commonUtils'
 
 export default {
   data() {

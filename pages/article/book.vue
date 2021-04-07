@@ -489,7 +489,6 @@ export default {
     },
 
     tabClickBookInfo(tab, event) {
-      commonLog(tab)
       if (this.isFirstComment == 1 && tab.name == 'bookComment') {
         this.comentClick(null, null)
         this.isFirstComment = 2

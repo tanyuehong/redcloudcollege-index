@@ -1,6 +1,5 @@
-
 <template>
-
+<div> hhhdajhdsja</div>
 </template>
 
 <style>
@@ -48,7 +47,6 @@ export default {
     },
 
     tabClickBookInfo(tab, event) {
-      commonLog(tab)
       if (this.isFirstComment == 1 && tab.name == 'bookComment') {
         this.comentClick(null, null)
         this.isFirstComment = 2
@@ -104,5 +102,6 @@ export default {
       return count;
     },
   },
+   layout: 'content',
 }
 </script>

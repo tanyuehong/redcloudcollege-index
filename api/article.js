@@ -35,4 +35,13 @@ export default {
       data: commentParam,
     })
   },
+
+   // 获取书籍具体目录内容页
+   getBookDetails(id) {
+    //debugger;
+    return request({
+      url: '/home/book/getBookDetail/' + id,
+      method: 'get',
+    })
+  },
 }

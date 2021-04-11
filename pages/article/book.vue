@@ -70,7 +70,7 @@
                       <el-card>
                         <div v-if="item.chapterContents" class="book_contents_detail" > 
                           <div v-for="content in item.chapterContents" v-bind:key="content.id" class="book_contens_item">
-                                <nuxt-link :to="{name:'article-detail',query:{id:content.id}}">
+                                <nuxt-link :to="{name:'article-detail',query:{id:content.articleId}}">
                                     <span>{{content.title}}</span>
                                     <span class="book-contens_time">2021-01</span>
                                     <div class="taste-btn">试读</div>
@@ -450,7 +450,6 @@
 
 <script>
 import articleApi from '@/api/article'
-import marked from 'marked'
 import { Message } from 'element-ui'
 
 export default {
@@ -527,7 +526,6 @@ export default {
     },
 
     changMarkToHtml(markstring) {
-      this.bookDesc = marked(markstring)
     },
   },
 

@@ -36,11 +36,11 @@ export default {
     })
   },
 
-   // 获取书籍具体目录内容页
-   getBookDetails(id) {
+   // 获取数据目录内容页
+   getBookArticleDetail(id) {
     //debugger;
     return request({
-      url: '/home/book/getBookDetail/' + id,
+      url: '/home/book/getBookArticleDetail/' + id,
       method: 'get',
     })
   },

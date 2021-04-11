@@ -18,7 +18,8 @@ export default {
     ],
     script:[
       {src:'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js'},
-      {src:'https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js'}
+      { src: 'https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js' },
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js'}
     ]
   },
   /*

@@ -38,7 +38,7 @@
               <span>67人已购买</span>
             </div>
             <div class="book_price">
-              <span style="line-height: 24px;">
+              <span style="line-height: 42px;">
                 <b class="ui text orange">售价：79.00 元</b>
               </span>
             </div>
@@ -51,7 +51,7 @@
       <div class="row book_mid_content">
         <div class="col-md-12">
           <div class="book_select">
-            <el-tabs @tab-click="tabClickBookInfo" :tab-position="tabPosition">
+            <el-tabs v-model="activeName" @tab-click="tabClickBookInfo" :tab-position="tabPosition">
               <el-tab-pane label="课程介绍" name="bookDescrb">
                 <div class="book_info_right" v-html="bookDesc"></div>
               </el-tab-pane>
@@ -274,6 +274,13 @@
 </template>
 
 <style>
+
+body {
+    font-family: -apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
 .book_top_content {
   padding-top: 30px;
   padding-left: 20px;
@@ -306,8 +313,21 @@
   font-weight: 700px;
   font-family: Lato, Helvetica Neue, Arial, Helvetica, sans-serif;
 }
+.book_top_title h2 {
+  margin-top: 5px;
+  line-height: 25px;
+  font-size: 26px;
+  font-weight: 550;
+  margin-bottom: 10px;
+}
+
 .book_info_right {
   padding-left: 30px;
+}
+
+.book_top_description .book_des {
+  margin-bottom: 0px;
+
 }
 
 .book_info_right .catalog-title {
@@ -462,6 +482,7 @@ export default {
       tabPosition: 'left',
       commentList: [],
       isFirstComment: 1,
+      activeName: 'bookDescrb'
     }
   },
   created() {
@@ -488,15 +509,11 @@ export default {
     },
 
     tabClickBookInfo(tab, event) {
-      if (this.isFirstComment == 1 && tab.name == 'bookComment') {
+      if (tab.name == 'bookComment') {
         this.comentClick(null, null)
-        this.isFirstComment = 2
-      }
-
-      if (tab.name == 'bookContents') {
+      } else if (tab.name == 'bookContents') {
         this.getBookContents()
-        this.isFirstComment = 2
-      }
+      } 
     },
 
     comentClick(tab, event) {

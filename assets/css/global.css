@@ -198,7 +198,7 @@ a.current-2 .lh-p-icon{background-position:0 -254px}
 .course-r-list li .course-r-pic{width:110px;position:absolute;left:0;top:10px;overflow:hidden}
 .course-r-pic img{display:block;max-width:100%;transition:.8s;-webkit-transition:.8s}
 .course-r-list li:hover .course-r-pic img{transform:scale(1.1);-webkit-transform:scale(1.1)}
-#header{background-color:#fff;box-shadow:0 2px 3px rgba(7,0,2,.04);padding:30px 0px 10px 0px;position:relative}
+#header{background-color:#fff;box-shadow:0 2px 3px rgba(7,0,2,.04);padding:0px 0px 10px 0px;position:relative}
 .lt-ie9 #header,.lt-ie9.lt-ie8 #header{border-bottom:1px solid #f2f2f2}
 
 /* 这里是首页 样式
@@ -222,7 +222,7 @@ a.current-2 .lh-p-icon{background-position:0 -254px}
 .red-point{position:absolute;right:-4px;top:8px;display:block;width:8px;height:8px;border-radius:50%;background:#cb2020;text-indent:-9999px}
 .h-r-search{margin:10px 20px 0 0}
 .h-r-s-box{display:block;position:relative}
-.h-r-s-box input{border:1px solid #e8e8e8;border-radius:20px;color:#aaa;padding:0 15px;font-family:'Microsoft YaHei';width:140px;height:30px;line-height:30px;transition:.3s;-webkit-transition:.3s}
+.h-r-s-box input{border:1px solid #e8e8e8;border-radius:20px;color:#aaa;padding:0 15px;font-family:'Microsoft YaHei';width:145px;height:30px;font-size: 12px;line-height:30px;transition:.3s;-webkit-transition:.3s}
 .h-r-s-box .s-btn{background:0 0;border:none;position:absolute;right:3px;top:0;width:30px;height:30px;cursor:pointer}
 .h-r-s-box input:focus{border-color:#ddd;color:#666;width:150px}
 .h-mobile-mask,.head-mobile,.mw-nav,.mw-nav-btn{display:none}

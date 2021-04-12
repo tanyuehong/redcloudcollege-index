@@ -17,13 +17,10 @@
 </template>
 
 <style>
-html {
-    font-size: 14px;
-}
-
 body {
     font-family: -apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial;
     line-height: 1.8;
+    font-size: 14px;
 }
 
 b, strong {

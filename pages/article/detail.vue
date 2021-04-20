@@ -3,8 +3,11 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="headTitle">
+           <a href="javascript:void(0);" v-on:click="contentsBtnClick">
+          <span class="glyphicon glyphicon-list content_btn_size" aria-hidden="true"></span>
+          </a>
           <span class="book_title">{{ bookItem.title }}</span>
-          /
+          <span>/</span>
           <span>{{ contentsItem.title }}</span>
         </div>
       </div>
@@ -29,14 +32,25 @@ b, strong {
 .navbar {
     min-height: 40px;
 }
+
+.headTitle a {
+  color: #9199a1;
+}
 .headTitle span {
     font-size:14px;
     line-height:40px;
+    vertical-align: middle
+}
+.headTitle .content_btn_size {
+  font-size:20px;
+  top:-1px;
+  vertical-align: middle
 }
 
 .headTitle .book_title {
    font-size:16px;
    font-weight: 500;
+   padding-left: 5px;
 }
 .book_tecAritcle {
     padding-top:50px;
@@ -141,6 +155,7 @@ pre {
 
 <script>
 import articleApi from '@/api/article'
+import showdown from "showdown";
 import { Message } from 'element-ui'
 
 export default {
@@ -221,8 +236,11 @@ export default {
 
     changMarkToHtml(markstring) {
     var converter = new showdown.Converter();
-    this.bookDesc      = converter.makeHtml(markstring);
+    this.bookDesc = converter.makeHtml(markstring);
     },
+    contentsBtnClick() {
+       console.log("ddddd");
+    }
   },
 
   computed: {

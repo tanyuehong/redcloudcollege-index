@@ -471,6 +471,7 @@ body {
 <script>
 import articleApi from '@/api/article'
 import { Message } from 'element-ui'
+import showdown from "showdown";
 
 export default {
   data() {
@@ -543,6 +544,8 @@ export default {
     },
 
     changMarkToHtml(markstring) {
+      var converter = new showdown.Converter();
+      this.bookDesc = converter.makeHtml(markstring);
     },
   },
 

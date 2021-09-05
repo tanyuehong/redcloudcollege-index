@@ -2,7 +2,7 @@
   <div class="container-fluid full_backgroud">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-1">
           <div class="left-back">
            <i class="el-icon-back back_item"></i>
             <span>返回</span>
@@ -106,9 +106,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-8 col-md-offset-3">
+    
+   <div  v-bind:class="bookContentShow">
         <div class="book_tecAritcle" v-html="bookDesc"></div>
-      </div>
+    </div>
+      
     </div>
   </div>
 </template>
@@ -380,6 +382,7 @@ export default {
       tabPosition: 'left',
       commentList: [],
       isFirstComment: 1,
+      isShowContent:false
     }
   },
   created() {
@@ -454,9 +457,7 @@ export default {
     },
 
     contentsBtnClick() {
-      if (window) {
-        console.log('ddddd')
-      }
+     this.isShowContent = true;
     },
     windowFrameChange() {
       if (window) {
@@ -476,6 +477,15 @@ export default {
       }
       return count
     },
+
+    bookContentShow: function () {
+    return {
+      'col-md-8': this.isShowContent == false,
+      'col-md-offset-3': this.isShowContent == false,
+      'col-md-10':this.isShowContent,
+      'col-md-offset-1':this.isShowContent
+    }
+  }
   },
   layout: 'content',
 }

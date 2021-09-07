@@ -122,23 +122,11 @@
                         :alt="item.title"
                       />
                       <div class="cc-mask">
-                        <a
-                          :href="'/course/' + item.id"
-                          title="开始学习"
-                          class="comm-btn c-btn-1"
-                        >
-                          开始学习
-                        </a>
+                      <nuxt-link title="开始学习" class="comm-btn c-btn-1" :to="{name:'course-id',params:{id:item.id}}">开始学习</nuxt-link>
                       </div>
                     </section>
                     <h3 class="hLh30 txtOf mt10">
-                      <a
-                        :href="'/course/' + item.id"
-                        :title="item.title"
-                        class="course-title fsize18 c-333"
-                      >
-                        {{ item.title }}
-                      </a>
+                      <nuxt-link :title="item.title" class="course-title fsize18 c-333" :to="{name:'course-id',query:{id:item.id}}">{{ item.title }}</nuxt-link>
                     </h3>
                     <section class="mt10 hLh20 of">
                       <span

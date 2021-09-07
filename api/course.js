@@ -19,7 +19,7 @@ export default {
   //课程详情的方法
   getCourseInfo(id) {
     return request({
-      url: '/home/getFrontCourseInfo/' + id,
+      url: '/home/course/getFrontCourseInfo/' + id,
       method: 'get',
     })
   },

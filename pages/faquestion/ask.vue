@@ -122,11 +122,6 @@
                   描述（请对问题进行详细描述：如软件运行环境、详细错误、异常信息等）
                 </label>
                 <client-only>
-                  <tinymce
-                    :height="300"
-                    v-model="askcontent"
-                    v-on:input="inputfocuse"
-                  />
                 </client-only>
               </div>
               <div class="field">
@@ -190,10 +185,8 @@
 </template>
 
 <script>
-import Tinymce from '@/components/Tinymce' //引入组件
 import askApi from '@/api/askqustion'
 export default {
-  components: { Tinymce },
   data() {
     return {
       tipsme: true,

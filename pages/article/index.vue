@@ -2,15 +2,12 @@
   <el-main>
     <div class="toppic_back_setting">
       <div class="container">
-      <el-carousel :interval="4000" type="card" height="250px">
+      <el-carousel :interval="4000" type="card" height="260px" style="position: relative">
         <el-carousel-item v-for="item in topic_list_item" :key="item.vue">
           <div class="grid-content">
             <el-col :md="12">
               <div class="topic_carousel">
-                <img :src="item.src" />
-                <p class="italictext">{{ item.title }}</p>
-                <span class="service">{{ item.txt1 }}</span>
-                <p class="last">{{ item.txt3 }}</p>
+                <img :src="item.src"/>
               </div>
             </el-col>
           </div>
@@ -344,7 +341,7 @@
             </div>
             <div class="download-app js-show-download clearfix">
               <img
-                src="https://www.imooc.com/static/img/column/icon.png"
+                src="~/assets/img/appLogo.png"
                 alt=""
                 class="logo-icon l"
               />
@@ -449,15 +446,14 @@ export default {
 }
 
 .el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
 }
 
 .el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
 }
 
 .topic_carousel img {
-  width: 750px;
+  width:auto;height: auto;max-width: 100%;max-height: 100%;left: 50%;
+    top: 50%;position: absolute;transform: translate3d(-50%,-50%,0); -webkit-transform: translate3d(-50%,-50%,0);
 }
 
 .c-s-dl dl {

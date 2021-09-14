@@ -364,34 +364,13 @@ export default {
     return {
       topic_list_item: [
         {
-          title: "哈哈",
-          txt1: "第二标题",
-          txt3: "第三描述",
           src: "/pic/banner-1.jpg",
         },
         {
-          title: "哈哈",
-          txt1: "第二标题",
-          txt3: "第三描述",
           src: "/pic/banner-2.jpg",
         },
         {
-          title: "哈哈",
-          txt1: "第二标题",
-          txt3: "第三描述",
           src: "/pic/banner-3.jpg",
-        },
-        {
-          title: "哈哈",
-          txt1: "第二标题",
-          txt3: "第三描述",
-          src: "/pic/banner-4.jpg",
-        },
-        {
-          title: "哈哈",
-          txt1: "第二标题",
-          txt3: "第三描述",
-          src: "/pic/banner-5.jpg",
         },
       ],
       page: 1, //当前页

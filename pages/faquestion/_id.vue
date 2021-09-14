@@ -6,7 +6,7 @@
           <div class="col-md-8">
             <div class="ask_detail_content">
               <div class="ui breadcrumb red_breadcrumb">
-                <a class="section" href="/faquestion">红云问答</a>
+                <a class="section" href="/faquestion">开源实践问答</a>
                 <span
                   class="glyphicon glyphicon glyphicon-menu-right"
                   aria-hidden="true"

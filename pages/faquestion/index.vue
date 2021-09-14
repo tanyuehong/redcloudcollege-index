@@ -3,7 +3,7 @@
     <div class="header_xuanchuan">
       <div class="container">
         <div class="header_annation">
-          <h1 class="answer_title">红云问答，更专业的技术问答社区</h1>
+          <h1 class="answer_title">开源实践问答，更专业的技术问答社区</h1>
           <p class="desc">您的每一个问题，我们都会为您选择最优的答案。并且通过人工智能和技术专家维护问题列表，方便查找，为大家在学习路上解疑答惑。</p>
         </div>
 

@@ -454,6 +454,7 @@ export default {
   box-shadow: 0 2px 4px 0 rgba(28, 31, 33, 0.06);
   box-sizing: border-box;
   padding: 50px 40px 10px 50px;
+  width: 773px;
 }
 
 .left_con ul {
@@ -693,6 +694,7 @@ export default {
 .left_con li .text_con .price_con {
   display: inline-block;
   min-height: 56px;
+  margin-right: 10px;
 }
 
 

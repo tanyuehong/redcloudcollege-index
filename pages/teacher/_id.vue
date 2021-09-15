@@ -1,5 +1,6 @@
 <template>
-  <div id="aCoursesList" class="bg-fa of">
+  <div class="bg-fa of">
+    <div class="top_backgroud_box">
     <!-- 讲师介绍 开始 -->
     <section class="container">
       <header class="comm-title">
@@ -86,7 +87,18 @@
     </section>
     <!-- /讲师介绍 结束 -->
   </div>
+   </div>
 </template>
+<style>
+.top_backgroud_box {
+  width:100%;
+  height:682px;
+  background:transparent url(/pic/teacher_detail_bg.jpg) center center no-repeat;
+  filter:blur(5px);
+  background-size:cover;
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%,0%,38%);
+}
+</style>
 <script>
 import teacherApi from '@/api/teacher'
 export default {

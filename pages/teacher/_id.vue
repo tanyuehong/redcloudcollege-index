@@ -1,6 +1,96 @@
 <template>
   <div class="bg-fa of">
     <div class="top_backgroud_box">
+      <div class="top-bg-mask">
+        <div class="top-content-wrap">
+          <div class="clearfix">
+            <div class="share-box r">
+              <div
+                class="bdsharebuttonbox bdshare-button-style0-16"
+                data-tag=""
+                data-bd-bind="1631770229675"
+              >
+                <a
+                  href="javascript:;"
+                  class="share wx icon-share-weichat"
+                  data-cmd="weixin"
+                  title="分享到微信"
+                ></a>
+                <a
+                  href="javascript:;"
+                  class="share qq icon-share-qq"
+                  data-cmd="qzone"
+                  title="分享到QQ空间"
+                ></a>
+                <a
+                  href="javascript:;"
+                  class="share sina icon-share-weibo"
+                  data-cmd="tsina"
+                  title="分享到新浪微博"
+                ></a>
+              </div>
+            </div>
+          </div>
+          <div class="teacher-box">
+            <!-- <img class="tea-header" src="//img1.sycdn.imooc.com/5afe3d350001596a02430243-200-200.jpg" alt=""> -->
+            <img
+              class="tea-header"
+              src="//img4.sycdn.imooc.com/5afe3d350001596a02430243-160-160.jpg"
+              alt=""
+            />
+            <div class="tea-title">
+              <p>慕课网官方认证</p>
+              <h3>精英讲师</h3>
+            </div>
+            <p class="tea-nickname">神思者</p>
+            <p class="tea-professional">全栈工程师</p>
+            <a
+              href="javascript:void(0);"
+              class="
+                moco-btn
+                payattention-btn
+                js-payattention-btn js-add-attention
+              "
+              data-id="2134188"
+            >
+              <i class="icon-group_add"></i>
+              关注Ta
+            </a>
+            <p class="tea-desc">
+              曾就职于IBM，中软国际等大型互联网公司，参与主持了Nebula云平台，Peony分布式前端渲染平台，Taims医疗云，Jobseeker人才库等大型系统的开发，多次担任教育部大学生互联网创新创业大赛导师与评委。
+            </p>
+            <div class="tea-detail-box">
+              <ul class="clearfix">
+                <li>
+                  <a href="#Shizhan">
+                    <p class="num">7</p>
+                    <p class="text">实战</p>
+                  </a>
+                </li>
+                <li>
+                  <a href="#Course">
+                    <p class="num">1</p>
+                    <p class="text">课程</p>
+                  </a>
+                </li>
+                <li>
+                  <a href="#Article">
+                    <p class="num">3</p>
+                    <p class="text">手记</p>
+                  </a>
+                </li>
+                <li>
+                  <p class="num" id="js-tea-fan-num">8468</p>
+                  <p class="text">粉丝</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+          <div class="bottom-trangle"></div>
+      </div>
+     
+    </div>
     <!-- 讲师介绍 开始 -->
     <section class="container">
       <header class="comm-title">
@@ -18,7 +108,7 @@
             <h3 class="hLh30">
               <span class="fsize24 c-333">
                 {{ teacher.name }}&nbsp;
-                {{ teacher.level === 1 ? '高级讲师' : '首席讲师' }}
+                {{ teacher.level === 1 ? "高级讲师" : "首席讲师" }}
               </span>
             </h3>
             <section class="mt10">
@@ -87,20 +177,45 @@
     </section>
     <!-- /讲师介绍 结束 -->
   </div>
-   </div>
 </template>
 <style>
 .top_backgroud_box {
-  width:100%;
-  height:682px;
-  background:transparent url(/pic/teacher_detail_bg.jpg) center center no-repeat;
-  filter:blur(5px);
-  background-size:cover;
-  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%,0%,38%);
+  position: relative;
+  width: 100%;
+  background: transparent url(/pic/teacher_detail_bg.jpg) center center
+    no-repeat;
+  background-size: cover;
+}
+.top_backgroud_box .top-bg-mask {
+    width: 100%;
+    height: 619px;
+    background: rgba(0,0,0,.2);
+}
+
+.top_backgroud_box .top-content-wrap {
+    margin: 0 auto;
+    width: 980px;
+}
+
+.top_backgroud_box  .top-content-wrap .teacher-box {
+    position: relative;
+    margin: 0 auto;
+    padding-top: 10px;
+    text-align: center;
+    z-index: 2;
+}
+.top_backgroud_box .bottom-trangle {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 137px;
+    background: url(/pic/arrow-angle.png);
+    background-position: center;
+    z-index: 1;
 }
 </style>
 <script>
-import teacherApi from '@/api/teacher'
+import teacherApi from "@/api/teacher";
 export default {
   //params.id获取路径id值
   asyncData({ params, error }) {
@@ -108,8 +223,8 @@ export default {
       return {
         teacher: response.data.teacher,
         courseList: response.data.courseList,
-      }
-    })
+      };
+    });
   },
-}
+};
 </script>

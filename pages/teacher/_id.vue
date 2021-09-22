@@ -39,10 +39,10 @@
               alt=""
             />
             <div class="tea-title">
-              <p>慕课网官方认证</p>
+              <p>开源实践网官方</p>
               <h3>精英讲师</h3>
             </div>
-            <p class="tea-nickname">神思者</p>
+            <p class="tea-nickname">谭月红</p>
             <p class="tea-professional">全栈工程师</p>
             <a
               href="javascript:void(0);"
@@ -188,7 +188,7 @@
 }
 .top_backgroud_box .top-bg-mask {
     width: 100%;
-    height: 619px;
+    height: 519px;
     background: rgba(0,0,0,.2);
 }
 
@@ -204,6 +204,7 @@
     text-align: center;
     z-index: 2;
 }
+
 .top_backgroud_box .bottom-trangle {
     position: absolute;
     bottom: 0;
@@ -213,6 +214,112 @@
     background-position: center;
     z-index: 1;
 }
+
+.top_backgroud_box  .top-content-wrap .teacher-box .tea-header {
+    width: 114px;
+    height: 114px;
+    border-radius: 50%;
+    margin-top:35px;
+    border: 3px solid #fff;
+}
+
+.top_backgroud_box .top-content-wrap .teacher-box .tea-title {
+    position: relative;
+    margin: -24px auto 0;
+    width: 149px;
+    height: 56px;
+    text-align: center;
+    color: #fff;
+    background: url(~/assets/img/flag-bg.png);
+    z-index: 2;
+}
+
+.top_backgroud_box .top-content-wrap .teacher-box .tea-nickname {
+    margin-top: 12px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 24px;
+}
+
+.top_backgroud_box .top-content-wrap .teacher-box .tea-professional {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #fff;
+    line-height: 14px;
+}
+
+.top_backgroud_box .top-content-wrap .teacher-box .payattention-btn:hover {
+    background: rgba(255,255,255,.1);
+    border: 1px solid #fff;
+}
+
+.top_backgroud_box .top-content-wrap .teacher-box .payattention-btn {
+    margin: 24px 0 36px;
+    padding: 0;
+    height: 36px;
+    width: 96px;
+    background: 0 0;
+    font-size: 12px;
+    line-height: 36px;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.6);
+}
+
+.top_backgroud_box .top-content-wrap .teacher-box a {
+  text-decoration:none;
+}
+
+.top_backgroud_box .top-content-wrap .teacher-box .tea-desc {
+    margin: 0 auto 24px;
+    width: 740px;
+    height: 48px;
+    font-size: 14px;
+    color: rgba(255,255,255,.6);
+    line-height: 24px;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: -o-ellipsis-lastline;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.moco-btn {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    text-decoration: none;
+    box-sizing: border-box;
+    background-image: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    white-space: nowrap;
+    outline: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    -weibkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    color: #545c63;
+    background-color: transparent;
+    border-color: #9199a1;
+    opacity: 1;
+    padding: 7px 16px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 18px;
+}
+
 </style>
 <script>
 import teacherApi from "@/api/teacher";

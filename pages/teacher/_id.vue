@@ -46,11 +46,7 @@
             <p class="tea-professional">全栈工程师</p>
             <a
               href="javascript:void(0);"
-              class="
-                moco-btn
-                payattention-btn
-                js-payattention-btn js-add-attention
-              "
+              class="moco-btn payattention-btn js-payattention-btn js-add-attention"
               data-id="2134188"
             >
               <i class="icon-group_add"></i>
@@ -63,33 +59,313 @@
               <ul class="clearfix">
                 <li>
                   <a href="#Shizhan">
-                    <p class="num">7</p>
+                    <p class="num">1</p>
                     <p class="text">实战</p>
                   </a>
                 </li>
                 <li>
                   <a href="#Course">
-                    <p class="num">1</p>
+                    <p class="num">2</p>
                     <p class="text">课程</p>
                   </a>
                 </li>
                 <li>
                   <a href="#Article">
-                    <p class="num">3</p>
-                    <p class="text">手记</p>
+                    <p class="num">6</p>
+                    <p class="text">博文</p>
                   </a>
                 </li>
                 <li>
-                  <p class="num" id="js-tea-fan-num">8468</p>
+                  <p class="num" id="js-tea-fan-num">468</p>
                   <p class="text">粉丝</p>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-          <div class="bottom-trangle"></div>
+        <div class="bottom-trangle"></div>
       </div>
-     
+    </div>
+
+    <div class="bottom-box">
+      <div class="shizhan-box">
+        <h2 id="Shizhan">实战</h2>
+        <p class="cato-desc">上进唯实战可得，突破绝技成长瓶颈</p>
+        <div class="shizhan-del-box">
+          <ul>
+            <li
+              style="
+                background-image: url('//img1.sycdn.imooc.com/szimg/5aff82e90001d29e05400300-500-284.jpg');
+              "
+            >
+              <div class="shizhan-mask">
+                <a href="//coding.imooc.com/class/219.html" target="_blank">
+                  <p
+                    class="shizhan-title"
+                    title="Docker环境下的企业级前后端分离项目部署与运维"
+                  >
+                    Docker环境下的企业级前后端分离项目部署与运维
+                  </p>
+                  <p class="shizhan-desc">
+                    手把手带你学会项目分布式集群部署，让你的系统不再惧怕宕机
+                  </p>
+                  <div class="bottom-box clearfix">
+                    <p class="shizhan-price l">￥148.00</p>
+                    <p class="icon icon-right r"></p>
+                  </div>
+                </a>
+              </div>
+            </li>
+            <li
+              style="
+                background-image: url('//img1.sycdn.imooc.com/szimg/5b8e74ac00019f7d05400300-500-284.jpg');
+              "
+            >
+              <div class="shizhan-mask">
+                <a href="//coding.imooc.com/class/274.html" target="_blank">
+                  <p
+                    class="shizhan-title"
+                    title="MySQL数据库集群-PXC方案，解决数据库领域的常见疑难杂症"
+                  >
+                    MySQL数据库集群-PXC方案，解决数据库领域的常见疑难杂症
+                  </p>
+                  <p class="shizhan-desc">学习PXC，打造高价值的MySQL集群</p>
+                  <div class="bottom-box clearfix">
+                    <p class="shizhan-price l">￥299.00</p>
+                    <p class="icon icon-right r"></p>
+                  </div>
+                </a>
+              </div>
+            </li>
+            <li
+              style="
+                background-image: url('//img1.sycdn.imooc.com/szimg/5d08d0b308c9749706000338-500-284.jpg');
+              "
+            >
+              <div class="shizhan-mask">
+                <a href="//coding.imooc.com/class/353.html" target="_blank">
+                  <p
+                    class="shizhan-title"
+                    title="阿里新零售数据库设计与实战 （升级版） 提升数据库综合能力"
+                  >
+                    阿里新零售数据库设计与实战 （升级版） 提升数据库综合能力
+                  </p>
+                  <p class="shizhan-desc">
+                    数据库是开发人员的必修课，解锁&amp;ldquo;新零售&amp;rdquo;业务让数据库实战能力再上一层楼
+                  </p>
+                  <div class="bottom-box clearfix">
+                    <p class="shizhan-price l">￥288.00</p>
+                    <p class="icon icon-right r"></p>
+                  </div>
+                </a>
+              </div>
+            </li>
+            <li
+              style="
+                background-image: url('//img1.sycdn.imooc.com/szimg/5e14312409cb30fd12000676-500-284.jpg');
+              "
+            >
+              <div class="shizhan-mask">
+                <a href="//coding.imooc.com/class/413.html" target="_blank">
+                  <p
+                    class="shizhan-title"
+                    title="解决大厂项目面 轻松打动面试官"
+                  >
+                    解决大厂项目面 轻松打动面试官
+                  </p>
+                  <p class="shizhan-desc">
+                    如何在项目面试中让面试官&amp;ldquo;眼前一亮&amp;rdquo;，&amp;ldquo;面试真经&amp;rdquo;为你双手奉上！
+                  </p>
+                  <div class="bottom-box clearfix">
+                    <p class="shizhan-price l">￥399.00</p>
+                    <p class="icon icon-right r"></p>
+                  </div>
+                </a>
+              </div>
+            </li>
+            <li
+              style="
+                background-image: url('//img1.sycdn.imooc.com/szimg/5ecc7cb709a1053112000676-500-284.jpg');
+              "
+            >
+              <div class="shizhan-mask">
+                <a href="//coding.imooc.com/class/441.html" target="_blank">
+                  <p
+                    class="shizhan-title"
+                    title="Java支付全家桶 企业级各类支付手段一站式解决方案"
+                  >
+                    Java支付全家桶 企业级各类支付手段一站式解决方案
+                  </p>
+                  <p class="shizhan-desc">
+                    微信/支付宝/银联/混合支付，App/PC/H5/小程序，一课搞定全类型各行业企业级通用支付方式，值！
+                  </p>
+                  <div class="bottom-box clearfix">
+                    <p class="shizhan-price l">￥388.00</p>
+                    <p class="icon icon-right r"></p>
+                  </div>
+                </a>
+              </div>
+            </li>
+            <li
+              style="
+                background-image: url('//img1.sycdn.imooc.com/szimg/5fed3a7d09ac11c112000676-500-284.jpg');
+              "
+            >
+              <div class="shizhan-mask">
+                <a href="//coding.imooc.com/class/485.html" target="_blank">
+                  <p
+                    class="shizhan-title"
+                    title="SpringBoot 在线协同办公小程序开发 全栈式项目实战"
+                  >
+                    SpringBoot 在线协同办公小程序开发 全栈式项目实战
+                  </p>
+                  <p class="shizhan-desc">
+                    未来趋势型业务 + 前后端综合技术栈 + 惊艳的细节打磨
+                  </p>
+                  <div class="bottom-box clearfix">
+                    <p class="shizhan-price l">￥388.00</p>
+                    <p class="icon icon-right r"></p>
+                  </div>
+                </a>
+              </div>
+            </li>
+            <li
+              style="
+                background-image: url('//img1.sycdn.imooc.com/szimg/6124bf9209c0e3b712000676-500-284.jpg');
+              "
+            >
+              <div class="shizhan-mask">
+                <a href="//coding.imooc.com/class/530.html" target="_blank">
+                  <p
+                    class="shizhan-title"
+                    title="SpringBoot+Vue3 项目实战，打造企业级在线办公系统"
+                  >
+                    SpringBoot+Vue3 项目实战，打造企业级在线办公系统
+                  </p>
+                  <p class="shizhan-desc">
+                    以业务为基础，贯穿前后端技术栈，获得企业级项目开发经验
+                  </p>
+                  <div class="bottom-box clearfix">
+                    <p class="shizhan-price l">￥399.00</p>
+                    <p class="icon icon-right r"></p>
+                  </div>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="course-box">
+        <h2 id="Course">课程</h2>
+        <p class="cato-desc">精品课程应有尽有，快速入门助力成长</p>
+        <div class="course-del-box">
+          <ul>
+            <li class="moco-course-wrap">
+              <a href="/learn/993" target="_target">
+                <div class="moco-course-box">
+                  <img
+                    alt="测试克隆慕课网"
+                    src="//img1.sycdn.imooc.com/5afd3bee0001afdc06000338-240-135.jpg"
+                    height="124"
+                    width="100%"
+                  />
+                  <div class="moco-course-intro">
+                    <h3>
+                      <i>中级</i>
+                      MySQL集群（PXC）入门
+                    </h3>
+                    <p>
+                      本课程以项目演示为例，讲解PXC集群原理、PXC数据同步与Replication同步的区别、PXC的多节点并发写入、Docker虚拟机部署MySQL集群，并以案例验证Replication方案的数据不一致性、PXC方案数据一致性
+                    </p>
+                  </div>
+                  <div class="moco-course-bottom">
+                    <span class="l">26683人在学</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="article-box">
+        <h2 id="Article">手记</h2>
+        <p class="cato-desc">分享经验交流心得，学习前沿流行技术</p>
+        <div class="article-del-box">
+          <ul>
+            <li>
+              <a href="/article/316559" target="_blank">
+                <p
+                  class="article-title"
+                  title="如何在SpringBoot中快速整合Swagger？"
+                >
+                  如何在SpringBoot中快速整合Swagger？
+                </p>
+                <p class="article-desc">
+                  一、传统的Swagger配置方式
+                  开发前后端分离或者微服务项目，调试后端Web接口必然会用到Swagger，特别是给Swagger添加上JWT的时候，配置代码写起来较为复杂和啰嗦。例如下面的这个配置类，就是给SpringBoot设置Swagger，并且附带上JWT，一堆集合，看着就让人头晕。
+                  @Configuration @EnableSwagger2 public class SwaggerConfig {
+                  @Bean public Docket createRestApi() { Docket docket = new
+                  Docket(DocumentationType.SWAGGER_2); ApiInfoBuilder builder =
+                  new ApiInfoBu
+                </p>
+                <div class="bottom-box clearfix">
+                  <p class="item l">2977浏览</p>
+                  <em class="l"></em>
+                  <p class="item l">4推荐</p>
+                  <em class="l"></em>
+                  <p class="item l">1评论</p>
+                  <p class="icon icon-right r"></p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="/article/292009" target="_blank">
+                <p
+                  class="article-title"
+                  title="面试的时候被问“擅长前端还是后台”应该怎么回答？"
+                >
+                  面试的时候被问“擅长前端还是后台”应该怎么回答？
+                </p>
+                <p class="article-desc">
+                  昨天在实战课的QQ群里面，有一个同学来问我，说他自己参加了一个技术面试，面试官问他擅长前端还是后台，他觉得前端比后台简单，就说自己擅长前端。于是面试官问了很多前端底层的技术问题，搞的他这次面试的情况不太乐观。他觉得自己学的是全栈方向，前端后台都懂一些，但是掌握的都不如专业人员那么精深。所以他就打退堂鼓了，全栈方向这条技术路线到底有没有必要坚持下去？我相信很多学习全栈的同学，在面试的时候都会遇到这样的经历。下面我就来解答一下这个疑问。首先在面试的时候，再被问到“擅长前端还是后台”，你应该这样回答“开发项目的时候，前端很后台我都要写，我们的项目组，没有明确的责任划分。我负责的模块，前端跟后台都是我写的，所以前端跟后台项目我都懂一些。甚至维护数据库的工作也是我负责的。”你这样回答，其实就是在前端跟后台两个选项中，硬生生插入了第三个选项。你这么回答的好处是让面试官觉得你在项目组里面是个万金油的角色，哪里需要人，都可以把你派过去，所以你在同等面试人员里面优势就凸显出来了。再有，各种技术多少都会一些的人，面试官心里也清
+                </p>
+                <div class="bottom-box clearfix">
+                  <p class="item l">5659浏览</p>
+                  <em class="l"></em>
+                  <p class="item l">10推荐</p>
+                  <em class="l"></em>
+                  <p class="item l">5评论</p>
+                  <p class="icon icon-right r"></p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="/article/30432" target="_blank">
+                <p
+                  class="article-title"
+                  title="Percona向左，MariaDB向右，MySQL衍生版如何取舍？"
+                >
+                  Percona向左，MariaDB向右，MySQL衍生版如何取舍？
+                </p>
+                <p class="article-desc">
+                  缘起
+                  自从甲骨文公司收购了MySQL后，有将MySQL闭源的潜在风险。而且Oracle对培养MySQL这个免费的儿子并不太用心，漏洞修补和版本升级的速度一段时间非常缓慢，所以业界对MySQL的未来普遍不抱有乐观态度。因此社区采用分支的方式来避开这个风险，例如谷歌、Facebook、RedHat都将MySQL替换成了衍生版，国内也有企业纷纷放弃了MySQL官方版,像阿里和腾讯还做起了自己的MySQL衍生版。
+                  目前MySQL领域存在着众多的衍生版数据库，主流的有官方MySQL、MariaDB以及Percona
+                  Server，小众一些的还有阿里的
+                </p>
+                <div class="bottom-box clearfix">
+                  <p class="item l">10331浏览</p>
+                  <em class="l"></em>
+                  <p class="item l">25推荐</p>
+                  <em class="l"></em>
+                  <p class="item l">4评论</p>
+                  <p class="icon icon-right r"></p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <!-- 讲师介绍 开始 -->
     <section class="container">
@@ -108,7 +384,7 @@
             <h3 class="hLh30">
               <span class="fsize24 c-333">
                 {{ teacher.name }}&nbsp;
-                {{ teacher.level === 1 ? "高级讲师" : "首席讲师" }}
+                {{ teacher.level === 1 ? '高级讲师' : '首席讲师' }}
               </span>
             </h3>
             <section class="mt10">
@@ -187,96 +463,226 @@
   background-size: cover;
 }
 .top_backgroud_box .top-bg-mask {
-    width: 100%;
-    height: 519px;
-    background: rgba(0,0,0,.2);
+  width: 100%;
+  height: 600px;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .top_backgroud_box .top-content-wrap {
-    margin: 0 auto;
-    width: 980px;
+  margin: 0 auto;
+  width: 980px;
 }
 
-.top_backgroud_box  .top-content-wrap .teacher-box {
-    position: relative;
-    margin: 0 auto;
-    padding-top: 10px;
-    text-align: center;
-    z-index: 2;
+.top_backgroud_box .top-content-wrap .teacher-box {
+  position: relative;
+  margin: 0 auto;
+  padding-top: 10px;
+  text-align: center;
+  z-index: 2;
 }
 
 .top_backgroud_box .bottom-trangle {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 137px;
-    background: url(/pic/arrow-angle.png);
-    background-position: center;
-    z-index: 1;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 137px;
+  background: url(/pic/arrow-angle.png);
+  background-position: center;
+  z-index: 1;
 }
 
-.top_backgroud_box  .top-content-wrap .teacher-box .tea-header {
-    width: 114px;
-    height: 114px;
-    border-radius: 50%;
-    margin-top:35px;
-    border: 3px solid #fff;
+.top_backgroud_box .top-content-wrap .teacher-box .tea-header {
+  width: 114px;
+  height: 114px;
+  border-radius: 50%;
+  margin-top: 35px;
+  border: 3px solid #fff;
 }
 
 .top_backgroud_box .top-content-wrap .teacher-box .tea-title {
-    position: relative;
-    margin: -24px auto 0;
-    width: 149px;
-    height: 56px;
-    text-align: center;
-    color: #fff;
-    background: url(~/assets/img/flag-bg.png);
-    z-index: 2;
+  position: relative;
+  margin: -24px auto 0;
+  width: 149px;
+  height: 56px;
+  text-align: center;
+  color: #fff;
+  background: url(~/assets/img/flag-bg.png);
+  z-index: 2;
 }
 
 .top_backgroud_box .top-content-wrap .teacher-box .tea-nickname {
-    margin-top: 12px;
-    font-size: 24px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 24px;
+  margin-top: 12px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 24px;
 }
 
 .top_backgroud_box .top-content-wrap .teacher-box .tea-professional {
-    margin-top: 12px;
-    font-size: 14px;
-    color: #fff;
-    line-height: 14px;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #fff;
+  line-height: 14px;
 }
 
 .top_backgroud_box .top-content-wrap .teacher-box .payattention-btn:hover {
-    background: rgba(255,255,255,.1);
-    border: 1px solid #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #fff;
 }
 
 .top_backgroud_box .top-content-wrap .teacher-box .payattention-btn {
-    margin: 24px 0 36px;
-    padding: 0;
-    height: 36px;
-    width: 96px;
-    background: 0 0;
-    font-size: 12px;
-    line-height: 36px;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,.6);
+  margin: 24px 0 36px;
+  padding: 0;
+  height: 36px;
+  width: 96px;
+  background: 0 0;
+  font-size: 12px;
+  line-height: 36px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .top_backgroud_box .top-content-wrap .teacher-box a {
-  text-decoration:none;
+  text-decoration: none;
 }
 
 .top_backgroud_box .top-content-wrap .teacher-box .tea-desc {
-    margin: 0 auto 24px;
-    width: 740px;
-    height: 48px;
-    font-size: 14px;
-    color: rgba(255,255,255,.6);
-    line-height: 24px;
+  margin: 0 auto 24px;
+  width: 740px;
+  height: 48px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 24px;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: -o-ellipsis-lastline;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.moco-btn {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  text-decoration: none;
+  box-sizing: border-box;
+  background-image: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  white-space: nowrap;
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+  -weibkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  color: #545c63;
+  background-color: transparent;
+  border-color: #9199a1;
+  opacity: 1;
+  padding: 7px 16px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 18px;
+}
+
+.top-content-wrap .teacher-box .tea-detail-box {
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.top-content-wrap .teacher-box .tea-detail-box ul li {
+  margin-right: 100px;
+  display: inline-block;
+  text-align: center;
+}
+
+.top-content-wrap .teacher-box .tea-detail-box ul li .num {
+  margin-bottom: 8px;
+  font-size: 24px;
+  line-height: 24px;
+  color: #fff;
+}
+
+.top-content-wrap .teacher-box .tea-detail-box ul li .text {
+  font-size: 14px;
+  line-height: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bottom-box {
+  margin: 0 auto;
+  width: 980px;
+  padding-bottom: 35px;
+}
+.bottom-box .article-box,
+.bottom-box .course-box,
+.bottom-box .shizhan-box {
+  padding-top: 48px;
+}
+.bottom-box .article-box h2,
+.bottom-box .course-box h2,
+.bottom-box .shizhan-box h2 {
+  margin-bottom: 16px;
+  font-size: 24px;
+  line-height: 24px;
+  color: #07111b;
+  font-weight: 700;
+  text-align: center;
+}
+.bottom-box .article-box .cato-desc,
+.bottom-box .course-box .cato-desc,
+.bottom-box .shizhan-box .cato-desc {
+  margin-bottom: 36px;
+  color: #93999f;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+}
+
+.shizhan-del-box ul {
+  width: 100%;
+}
+
+.shizhan-del-box {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+.shizhan-del-box ul {
+    width: 100%;
+}
+.shizhan-del-box ul li {
+    display: inline-block;
+    word-break: break-all;
+    vertical-align: top;
+}
+ .shizhan-del-box ul li .shizhan-mask {
+    width: 476px;
+    height: 246px;
+    box-sizing: border-box;
+    padding: 38px 48px 32px;
+    background: url(/static/img/t/shizhan-mask.png);
+}
+
+.shizhan-del-box ul li .shizhan-title {
+    margin-bottom: 12px;
+    height: 56px;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+    color: #fff;
     word-break: break-word;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -286,43 +692,30 @@
     -webkit-box-orient: vertical;
 }
 
-.moco-btn {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 0;
-    text-align: center;
-    vertical-align: middle;
-    touch-action: manipulation;
-    text-decoration: none;
-    box-sizing: border-box;
-    background-image: none;
-    border-radius: 0;
-    -webkit-appearance: none;
-    white-space: nowrap;
-    outline: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border-style: solid;
-    border-width: 1px;
-    cursor: pointer;
-    -weibkit-transition: all .3s;
-    -moz-transition: all .3s;
-    transition: all .3s;
-    color: #545c63;
-    background-color: transparent;
-    border-color: #9199a1;
-    opacity: 1;
-    padding: 7px 16px;
+.shizhan-del-box ul li .shizhan-desc {
+    margin-bottom: 24px;
+    height: 44px;
     font-size: 14px;
-    line-height: 1.42857143;
-    border-radius: 18px;
+    line-height: 22px;
+    color: rgba(255,255,255,.6);
+    word-break: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: -o-ellipsis-lastline;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
+.shizhan-del-box ul li .bottom-box {
+    width: 380px;
+    position: absolute;
+    bottom: 30px;
+    padding-bottom: 0;
+}
 </style>
 <script>
-import teacherApi from "@/api/teacher";
+import teacherApi from '@/api/teacher'
 export default {
   //params.id获取路径id值
   asyncData({ params, error }) {
@@ -330,8 +723,8 @@ export default {
       return {
         teacher: response.data.teacher,
         courseList: response.data.courseList,
-      };
-    });
+      }
+    })
   },
-};
+}
 </script>

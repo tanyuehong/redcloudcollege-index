@@ -89,37 +89,12 @@
 
     <div class="bottom-box">
       <div class="shizhan-box">
-        <h2 id="Shizhan">实战</h2>
-        <p class="cato-desc">上进唯实战可得，突破绝技成长瓶颈</p>
+        <h2 id="Shizhan">实践</h2>
+        <p class="cato-desc">纸上得来终觉浅，绝知此事要躬行</p>
         <div class="shizhan-del-box">
           <ul>
             <li
-              style="
-                background-image: url('//img1.sycdn.imooc.com/szimg/5aff82e90001d29e05400300-500-284.jpg');
-              "
-            >
-              <div class="shizhan-mask">
-                <a href="//coding.imooc.com/class/219.html" target="_blank">
-                  <p
-                    class="shizhan-title"
-                    title="Docker环境下的企业级前后端分离项目部署与运维"
-                  >
-                    Docker环境下的企业级前后端分离项目部署与运维
-                  </p>
-                  <p class="shizhan-desc">
-                    手把手带你学会项目分布式集群部署，让你的系统不再惧怕宕机
-                  </p>
-                  <div class="bottom-box clearfix">
-                    <p class="shizhan-price l">￥148.00</p>
-                    <p class="icon icon-right r"></p>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li
-              style="
-                background-image: url('//img1.sycdn.imooc.com/szimg/5b8e74ac00019f7d05400300-500-284.jpg');
-              "
+              style="background-image: url('//img1.sycdn.imooc.com/szimg/5b8e74ac00019f7d05400300-500-284.jpg');"
             >
               <div class="shizhan-mask">
                 <a href="//coding.imooc.com/class/274.html" target="_blank">
@@ -131,8 +106,10 @@
                   </p>
                   <p class="shizhan-desc">学习PXC，打造高价值的MySQL集群</p>
                   <div class="bottom-box clearfix">
-                    <p class="shizhan-price l">￥299.00</p>
-                    <p class="icon icon-right r"></p>
+                    <p class="shizhan-price fl">￥299.00</p>
+                    <p class="icon icon-right fr">
+                        <i class="el-icon-arrow-right icon-font fw900"></i>
+                    </p>
                   </div>
                 </a>
               </div>
@@ -154,39 +131,16 @@
                     数据库是开发人员的必修课，解锁&amp;ldquo;新零售&amp;rdquo;业务让数据库实战能力再上一层楼
                   </p>
                   <div class="bottom-box clearfix">
-                    <p class="shizhan-price l">￥288.00</p>
-                    <p class="icon icon-right r"></p>
+                    <p class="shizhan-price fl">￥288.00</p>
+                    <p class="icon icon-right fr">
+                        <i class="el-icon-arrow-right icon-font fw900"></i>
+                    </p>
                   </div>
                 </a>
               </div>
             </li>
             <li
-              style="
-                background-image: url('//img1.sycdn.imooc.com/szimg/5e14312409cb30fd12000676-500-284.jpg');
-              "
-            >
-              <div class="shizhan-mask">
-                <a href="//coding.imooc.com/class/413.html" target="_blank">
-                  <p
-                    class="shizhan-title"
-                    title="解决大厂项目面 轻松打动面试官"
-                  >
-                    解决大厂项目面 轻松打动面试官
-                  </p>
-                  <p class="shizhan-desc">
-                    如何在项目面试中让面试官&amp;ldquo;眼前一亮&amp;rdquo;，&amp;ldquo;面试真经&amp;rdquo;为你双手奉上！
-                  </p>
-                  <div class="bottom-box clearfix">
-                    <p class="shizhan-price l">￥399.00</p>
-                    <p class="icon icon-right r"></p>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li
-              style="
-                background-image: url('//img1.sycdn.imooc.com/szimg/5ecc7cb709a1053112000676-500-284.jpg');
-              "
+              style="background-image: url('//img1.sycdn.imooc.com/szimg/5ecc7cb709a1053112000676-500-284.jpg');"
             >
               <div class="shizhan-mask">
                 <a href="//coding.imooc.com/class/441.html" target="_blank">
@@ -200,16 +154,16 @@
                     微信/支付宝/银联/混合支付，App/PC/H5/小程序，一课搞定全类型各行业企业级通用支付方式，值！
                   </p>
                   <div class="bottom-box clearfix">
-                    <p class="shizhan-price l">￥388.00</p>
-                    <p class="icon icon-right r"></p>
+                    <p class="shizhan-price fl">￥388.00</p>
+                    <p class="icon icon-right fr">
+                        <i class="el-icon-arrow-right icon-font fw900"></i>
+                    </p>
                   </div>
                 </a>
               </div>
             </li>
             <li
-              style="
-                background-image: url('//img1.sycdn.imooc.com/szimg/5fed3a7d09ac11c112000676-500-284.jpg');
-              "
+              style="background-image: url('//img1.sycdn.imooc.com/szimg/5fed3a7d09ac11c112000676-500-284.jpg');"
             >
               <div class="shizhan-mask">
                 <a href="//coding.imooc.com/class/485.html" target="_blank">
@@ -223,16 +177,16 @@
                     未来趋势型业务 + 前后端综合技术栈 + 惊艳的细节打磨
                   </p>
                   <div class="bottom-box clearfix">
-                    <p class="shizhan-price l">￥388.00</p>
-                    <p class="icon icon-right r"></p>
+                    <p class="shizhan-price fl">￥388.00</p>
+                    <p class="icon icon-right fr">
+                        <i class="el-icon-arrow-right icon-font fw900"></i>
+                    </p>
                   </div>
                 </a>
               </div>
             </li>
             <li
-              style="
-                background-image: url('//img1.sycdn.imooc.com/szimg/6124bf9209c0e3b712000676-500-284.jpg');
-              "
+              style="background-image: url('//img1.sycdn.imooc.com/szimg/6124bf9209c0e3b712000676-500-284.jpg');"
             >
               <div class="shizhan-mask">
                 <a href="//coding.imooc.com/class/530.html" target="_blank">
@@ -246,8 +200,10 @@
                     以业务为基础，贯穿前后端技术栈，获得企业级项目开发经验
                   </p>
                   <div class="bottom-box clearfix">
-                    <p class="shizhan-price l">￥399.00</p>
-                    <p class="icon icon-right r"></p>
+                    <p class="shizhan-price fl">￥399.00</p>
+                    <p class="icon icon-right fr">
+                        <i class="el-icon-arrow-right icon-font fw900"></i>
+                    </p>
                   </div>
                 </a>
               </div>
@@ -257,7 +213,7 @@
       </div>
       <div class="course-box">
         <h2 id="Course">课程</h2>
-        <p class="cato-desc">精品课程应有尽有，快速入门助力成长</p>
+        <p class="cato-desc">精品体系课程应有尽有，快速帮你查漏补缺</p>
         <div class="course-del-box">
           <ul>
             <li class="moco-course-wrap">
@@ -288,7 +244,7 @@
         </div>
       </div>
       <div class="article-box">
-        <h2 id="Article">手记</h2>
+        <h2 id="Article">专题</h2>
         <p class="cato-desc">分享经验交流心得，学习前沿流行技术</p>
         <div class="article-del-box">
           <ul>
@@ -359,7 +315,8 @@
                   <p class="item l">25推荐</p>
                   <em class="l"></em>
                   <p class="item l">4评论</p>
-                  <p class="icon icon-right r"></p>
+                  <p class="icon icon-right r">
+                  </p>
                 </div>
               </a>
             </li>
@@ -673,7 +630,7 @@
     height: 246px;
     box-sizing: border-box;
     padding: 38px 48px 32px;
-    background: url(/static/img/t/shizhan-mask.png);
+    background: url(/pic/shizhan-mask.png);
 }
 
 .shizhan-del-box ul li .shizhan-title {
@@ -713,6 +670,80 @@
     bottom: 30px;
     padding-bottom: 0;
 }
+
+.bottom-box .shizhan-del-box ul li {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 476px;
+    height: 246px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%);
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.bottom-box .shizhan-del-box ul li .shizhan-title {
+    margin-bottom: 12px;
+    height: 56px;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+    color: #fff;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: -o-ellipsis-lastline;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.bottom-box .shizhan-del-box ul li .shizhan-desc {
+    margin-bottom: 24px;
+    height: 44px;
+    font-size: 14px;
+    line-height: 22px;
+    color: rgba(255,255,255,.6);
+    word-break: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: -o-ellipsis-lastline;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.bottom-box .shizhan-del-box ul li .bottom-box .shizhan-price {
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 200;
+    color: #fff;
+}
+
+.bottom-box .shizhan-del-box ul li .bottom-box .icon {
+    margin-top: -16px;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    background: rgba(7,17,27,.2);
+    border: 2px solid rgba(255,255,255,.6);
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+
+.bottom-box .shizhan-del-box ul li:nth-child(2n) {
+    margin-left: 23px;
+}
+
+.bottom-box .course-del-box ul .moco-course-wrap {
+    margin: 8px!important;
+}
+
 </style>
 <script>
 import teacherApi from '@/api/teacher'

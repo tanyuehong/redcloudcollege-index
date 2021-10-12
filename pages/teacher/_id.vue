@@ -222,7 +222,7 @@
                   <img
                     alt="测试克隆慕课网"
                     src="//img1.sycdn.imooc.com/5afd3bee0001afdc06000338-240-135.jpg"
-                    height="124"
+                    height="135"
                     width="100%"
                   />
                   <div class="moco-course-intro">
@@ -265,12 +265,12 @@
                   new ApiInfoBu
                 </p>
                 <div class="bottom-box clearfix">
-                  <p class="item l">2977浏览</p>
-                  <em class="l"></em>
-                  <p class="item l">4推荐</p>
-                  <em class="l"></em>
-                  <p class="item l">1评论</p>
-                  <p class="icon icon-right r"></p>
+                  <p class="item fl">2977浏览</p>
+                  <em class="fl"></em>
+                  <p class="item fl">4推荐</p>
+                  <em class="fl"></em>
+                  <p class="item fl">1评论</p>
+                  <p class="icon icon-right fr"></p>
                 </div>
               </a>
             </li>
@@ -286,12 +286,12 @@
                   昨天在实战课的QQ群里面，有一个同学来问我，说他自己参加了一个技术面试，面试官问他擅长前端还是后台，他觉得前端比后台简单，就说自己擅长前端。于是面试官问了很多前端底层的技术问题，搞的他这次面试的情况不太乐观。他觉得自己学的是全栈方向，前端后台都懂一些，但是掌握的都不如专业人员那么精深。所以他就打退堂鼓了，全栈方向这条技术路线到底有没有必要坚持下去？我相信很多学习全栈的同学，在面试的时候都会遇到这样的经历。下面我就来解答一下这个疑问。首先在面试的时候，再被问到“擅长前端还是后台”，你应该这样回答“开发项目的时候，前端很后台我都要写，我们的项目组，没有明确的责任划分。我负责的模块，前端跟后台都是我写的，所以前端跟后台项目我都懂一些。甚至维护数据库的工作也是我负责的。”你这样回答，其实就是在前端跟后台两个选项中，硬生生插入了第三个选项。你这么回答的好处是让面试官觉得你在项目组里面是个万金油的角色，哪里需要人，都可以把你派过去，所以你在同等面试人员里面优势就凸显出来了。再有，各种技术多少都会一些的人，面试官心里也清
                 </p>
                 <div class="bottom-box clearfix">
-                  <p class="item l">5659浏览</p>
-                  <em class="l"></em>
-                  <p class="item l">10推荐</p>
-                  <em class="l"></em>
-                  <p class="item l">5评论</p>
-                  <p class="icon icon-right r"></p>
+                  <p class="item fl">5659浏览</p>
+                  <em class="fl"></em>
+                  <p class="item fl">10推荐</p>
+                  <em class="fl"></em>
+                  <p class="item fl">5评论</p>
+                  <p class="icon icon-right fr"></p>
                 </div>
               </a>
             </li>
@@ -310,12 +310,12 @@
                   Server，小众一些的还有阿里的
                 </p>
                 <div class="bottom-box clearfix">
-                  <p class="item l">10331浏览</p>
-                  <em class="l"></em>
-                  <p class="item l">25推荐</p>
-                  <em class="l"></em>
-                  <p class="item l">4评论</p>
-                  <p class="icon icon-right r">
+                  <p class="item fl">10331浏览</p>
+                  <em class="fl"></em>
+                  <p class="item fl">25推荐</p>
+                  <em class="fl"></em>
+                  <p class="item fl">4评论</p>
+                  <p class="icon icon-right fr">
                   </p>
                 </div>
               </a>
@@ -324,91 +324,6 @@
         </div>
       </div>
     </div>
-    <!-- 讲师介绍 开始 -->
-    <section class="container">
-      <header class="comm-title">
-        <h2 class="fl tac">
-          <span class="c-333">讲师介绍</span>
-        </h2>
-      </header>
-      <div class="t-infor-wrap">
-        <!-- 讲师基本信息 -->
-        <section class="fl t-infor-box c-desc-content">
-          <div class="mt20 ml20">
-            <section class="t-infor-pic">
-              <img :src="teacher.avatar" />
-            </section>
-            <h3 class="hLh30">
-              <span class="fsize24 c-333">
-                {{ teacher.name }}&nbsp;
-                {{ teacher.level === 1 ? '高级讲师' : '首席讲师' }}
-              </span>
-            </h3>
-            <section class="mt10">
-              <span class="t-tag-bg">{{ teacher.intro }}</span>
-            </section>
-            <section class="t-infor-txt">
-              <p class="mt20">{{ teacher.career }}</p>
-            </section>
-            <div class="clear"></div>
-          </div>
-        </section>
-        <div class="clear"></div>
-      </div>
-      <section class="mt30">
-        <div>
-          <header class="comm-title all-teacher-title c-course-content">
-            <h2 class="fl tac">
-              <span class="c-333">主讲课程</span>
-            </h2>
-            <section class="c-tab-title">
-              <a href="javascript: void(0)">&nbsp;</a>
-            </section>
-          </header>
-          <!-- /无数据提示 开始-->
-          <section class="no-data-wrap" v-if="courseList.length == 0">
-            <em class="icon30 no-data-ico">&nbsp;</em>
-            <span class="c-666 fsize14 ml10 vam">
-              没有相关数据，小编正在努力整理中...
-            </span>
-          </section>
-          <!-- /无数据提示 结束-->
-          <article class="comm-course-list">
-            <ul class="of">
-              <li v-for="course in courseList" :key="course.id">
-                <div class="cc-l-wrap">
-                  <section class="course-img">
-                    <img :src="course.cover" class="img-responsive" />
-                    <div class="cc-mask">
-                      <a
-                        href="#"
-                        title="开始学习"
-                        target="_blank"
-                        class="comm-btn c-btn-1"
-                      >
-                        开始学习
-                      </a>
-                    </div>
-                  </section>
-                  <h3 class="hLh30 txtOf mt10">
-                    <a
-                      href="#"
-                      :title="course.title"
-                      target="_blank"
-                      class="course-title fsize18 c-333"
-                    >
-                      {{ course.title }}
-                    </a>
-                  </h3>
-                </div>
-              </li>
-            </ul>
-            <div class="clear"></div>
-          </article>
-        </div>
-      </section>
-    </section>
-    <!-- /讲师介绍 结束 -->
   </div>
 </template>
 <style>
@@ -553,7 +468,7 @@
   border-radius: 18px;
 }
 
-.top-content-wrap .teacher-box .tea-detail-box {
+.top-content-wrap .teacher-box .tea-detail-box, .bottom-box .course-box .course-del-box {
   text-align: center;
   margin: 0 auto;
   width: 100%;
@@ -612,7 +527,7 @@
   width: 100%;
 }
 
-.shizhan-del-box {
+.shizhan-del-box,.article-del-box {
     margin: 0 auto;
     width: 100%;
     text-align: center;
@@ -620,7 +535,7 @@
 .shizhan-del-box ul {
     width: 100%;
 }
-.shizhan-del-box ul li {
+.shizhan-del-box ul li, .course-del-box ul li,.bottom-box .article-box .article-del-box ul li {
     display: inline-block;
     word-break: break-all;
     vertical-align: top;
@@ -742,6 +657,140 @@
 
 .bottom-box .course-del-box ul .moco-course-wrap {
     margin: 8px!important;
+}
+
+.moco-course-wrap .moco-course-box {
+    width: 334px;
+    height: 262px;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+}
+
+.moco-course-wrap .moco-course-box .moco-course-intro {
+    box-sizing: border-box;
+    position: absolute;
+    padding: 10px 20px;
+    transition: top .5s;
+    top: 135px;
+    height: 144px;
+    width: 100%;
+    background: #eee;
+}
+
+.moco-course-wrap .moco-course-box .moco-course-intro p {
+    color: #93999f;
+    font-size: 12px;
+    height: 40px;
+    overflow: hidden;
+    line-height: 20px;
+}
+
+.moco-course-wrap .moco-course-box .moco-course-bottom {
+    position: absolute;
+    padding: 0 20px;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 42px;
+    background: #eee;
+    color:  #409eff;
+    font-size: 16px;
+    line-height: 36px;
+}
+
+.bottom-box .article-del-box ul li {
+    position: relative;
+    padding: 40px;
+    margin-bottom: 24px;
+    width: 476px;
+    height: 246px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%);
+    text-align: left;
+    background: #fff;
+}
+
+.bottom-box .article-del-box ul li .article-title {
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    color: #07111b;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.bottom-box .article-del-box ul li .article-desc {
+    margin-bottom: 32px;
+    height: 72px;
+    font-size: 14px;
+    line-height: 24px;
+    color: #4d555d;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: -o-ellipsis-lastline;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.bottom-box .article-del-box ul li .bottom-box {
+    width: 396px;
+    position: absolute;
+    bottom: 40px;
+    padding-bottom: 0;
+}
+
+.bottom-box .article-del-box ul li .bottom-box .item:nth-child(1) {
+    margin-right: 20px;
+}
+
+.bottom-box .article-del-box ul li a {
+    display: block;
+}
+
+.bottom-box .article-del-box ul li:nth-child(2n) {
+    margin-left: 23px;
+}
+
+.bottom-box .article-del-box ul li .bottom-box .item:nth-child(1) {
+    margin-right: 20px;
+}
+
+.bottom-box .article-del-box ul li .bottom-box .item {
+    font-size: 12px;
+    line-height: 20px;
+    color: #93999f;
+}
+
+.bottom-box .article-del-box ul li .bottom-box em {
+    margin-top: 5px;
+    display: block;
+    font-style: normal;
+    width: 1px;
+    height: 12px;
+    background: #d9dde1;
+}
+
+.bottom-box .article-del-box ul li .bottom-box .item:nth-child(3) {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.bottom-box .article-del-box ul li .bottom-box .item:nth-child(5) {
+    margin-left: 20px;
+}
+
+a:link, :visited, ins {
+    text-decoration: none;
+}
+
+a:link, a:visited {
+    color: #5e5e5e;
 }
 
 </style>

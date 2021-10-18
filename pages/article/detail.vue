@@ -2,13 +2,13 @@
   <div class="container-fluid full_backgroud">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="row">
-        <div class="col-md-1">
+        <div class="col-md-3">
           <div class="left-back">
-           <i class="el-icon-back back_item"></i>
+            <i class="el-icon-back back_item"></i>
             <span>返回</span>
           </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
           <div class="headTitle">
             <a
               href="javascript:void(0);"
@@ -27,90 +27,91 @@
         </div>
       </div>
     </nav>
-    <div class="catalog-con">
-      <p class="title">目录</p>
-      <div class="book_lefte_descrb">
-        <div class="item">
-          <div class="section clearfix">
-            <p class="sec_name l">第 1 章：微服务的规划与设计</p>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="catalog-con">
+          <p class="title">目录</p>
+          <div class="book_lefte_descrb">
+            <div class="item">
+              <div class="section clearfix">
+                <p class="sec_name l">第 1 章：微服务的规划与设计</p>
+              </div>
+              <ul>
+                <li>
+                  <!-- 开放 -->
+                  <a href="/read/91/article/2551" class="js-read">
+                    <div class="articleName">
+                      01 开篇词-什么是微服务，是否要实施微服务？
+                    </div>
+                    <div class="info">
+                      <!-- 开放 -->
+                      <!-- <span>4658 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>1565 次阅读</span>-->
+                    </div>
+                    <!-- 未购买 -->
+                    <div class="taste-btn">试读</div>
+                  </a>
+                </li>
+                <li>
+                  <!-- 开放 -->
+                  <a href="/read/91/article/2552" class="js-read">
+                    <div class="articleName">
+                      02 单体服务转为微服务体系需要注意什么问题？
+                    </div>
+                    <div class="info">
+                      <!-- 开放 -->
+                      <!-- <span>4485 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>966 次阅读</span>-->
+                    </div>
+                    <!-- 未购买 -->
+                    <div class="taste-btn">试读</div>
+                  </a>
+                </li>
+                <li>
+                  <!-- 开放 -->
+                  <a href="javascript:;" class="js-lock">
+                    <div class="articleName">
+                      03 如何确立微服务的技术架构体系与服务分层？
+                    </div>
+                    <div class="info">
+                      <!-- 开放 -->
+                      <!-- <span>4105 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>123 次阅读</span>-->
+                    </div>
+                    <!-- 未购买 -->
+                    <div class="lock-btn"><i class="imv2-lock"></i></div>
+                  </a>
+                </li>
+                <li>
+                  <!-- 开放 -->
+                  <a href="/read/91/article/2554" class="js-read">
+                    <div class="articleName">04 如何进行微服务的技术选型？</div>
+                    <div class="info">
+                      <!-- 开放 -->
+                      <!-- <span>5419 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>824 次阅读</span>-->
+                    </div>
+                    <!-- 未购买 -->
+                    <div class="taste-btn">试读</div>
+                  </a>
+                </li>
+                <li>
+                  <!-- 开放 -->
+                  <a href="javascript:;" class="js-lock">
+                    <div class="articleName">05 怎样进行微服务的拆分？</div>
+                    <div class="info">
+                      <!-- 开放 -->
+                      <!-- <span>3462 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>103 次阅读</span>-->
+                    </div>
+                    <!-- 未购买 -->
+                    <div class="lock-btn"><i class="imv2-lock"></i></div>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
-          <ul>
-            <li>
-              <!-- 开放 -->
-              <a href="/read/91/article/2551" class="js-read">
-                <div class="articleName">
-                  01 开篇词-什么是微服务，是否要实施微服务？
-                </div>
-                <div class="info">
-                  <!-- 开放 -->
-                  <!-- <span>4658 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>1565 次阅读</span>-->
-                </div>
-                <!-- 未购买 -->
-                <div class="taste-btn">试读</div>
-              </a>
-            </li>
-            <li>
-              <!-- 开放 -->
-              <a href="/read/91/article/2552" class="js-read">
-                <div class="articleName">
-                  02 单体服务转为微服务体系需要注意什么问题？
-                </div>
-                <div class="info">
-                  <!-- 开放 -->
-                  <!-- <span>4485 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>966 次阅读</span>-->
-                </div>
-                <!-- 未购买 -->
-                <div class="taste-btn">试读</div>
-              </a>
-            </li>
-            <li>
-              <!-- 开放 -->
-              <a href="javascript:;" class="js-lock">
-                <div class="articleName">
-                  03 如何确立微服务的技术架构体系与服务分层？
-                </div>
-                <div class="info">
-                  <!-- 开放 -->
-                  <!-- <span>4105 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>123 次阅读</span>-->
-                </div>
-                <!-- 未购买 -->
-                <div class="lock-btn"><i class="imv2-lock"></i></div>
-              </a>
-            </li>
-            <li>
-              <!-- 开放 -->
-              <a href="/read/91/article/2554" class="js-read">
-                <div class="articleName">04 如何进行微服务的技术选型？</div>
-                <div class="info">
-                  <!-- 开放 -->
-                  <!-- <span>5419 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>824 次阅读</span>-->
-                </div>
-                <!-- 未购买 -->
-                <div class="taste-btn">试读</div>
-              </a>
-            </li>
-            <li>
-              <!-- 开放 -->
-              <a href="javascript:;" class="js-lock">
-                <div class="articleName">05 怎样进行微服务的拆分？</div>
-                <div class="info">
-                  <!-- 开放 -->
-                  <!-- <span>3462 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>103 次阅读</span>-->
-                </div>
-                <!-- 未购买 -->
-                <div class="lock-btn"><i class="imv2-lock"></i></div>
-              </a>
-            </li>
-          </ul>
         </div>
       </div>
-    </div>
-    <div class="row">
-    
-   <div  v-bind:class="bookContentShow">
+
+      <div v-bind:class="bookContentShow">
         <div class="book_tecAritcle" v-html="bookDesc"></div>
-    </div>
-      
+      </div>
     </div>
   </div>
 </template>
@@ -133,22 +134,22 @@ strong {
 }
 
 .navbar .left-back {
-    font-size: 16px;
-    color: #1c1f21;
-    font-weight: 500;
-    display: inline-block;
-    height: 28px;
-    line-height: 28px;
-    vertical-align: middle;
-    padding-left:20px;
-    padding-top:5px;
+  font-size: 16px;
+  color: #1c1f21;
+  font-weight: 500;
+  display: inline-block;
+  height: 28px;
+  line-height: 28px;
+  vertical-align: middle;
+  padding-left: 20px;
+  padding-top: 5px;
 }
 .navbar .left-back span {
   vertical-align: middle;
 }
 .navbar .back_item {
-font-size: 26px;
-vertical-align: middle;
+  font-size: 26px;
+  vertical-align: middle;
 }
 
 .full_backgroud {
@@ -156,14 +157,8 @@ vertical-align: middle;
 }
 
 .catalog-con {
-  position: absolute;
-  width: 296px;
-  top: 0;
-  left: 0;
-  bottom: 0;
   background: #fff;
   padding-top: 58px;
-  box-sizing: border-box;
 }
 
 .catalog-con p {
@@ -234,6 +229,7 @@ vertical-align: middle;
 
 .headTitle a {
   color: #9199a1;
+  margin-left: 8px;
 }
 .headTitle span {
   font-size: 14px;
@@ -254,7 +250,7 @@ vertical-align: middle;
 .book_tecAritcle {
   background: #fff;
   padding: 20px 20px;
-  margin-top:50px;
+  margin-top: 40px;
 }
 .book_lefte_contents {
   padding-top: 50px;
@@ -382,7 +378,7 @@ export default {
       tabPosition: 'left',
       commentList: [],
       isFirstComment: 1,
-      isShowContent:false
+      isShowContent: false,
     }
   },
   created() {
@@ -457,7 +453,7 @@ export default {
     },
 
     contentsBtnClick() {
-     this.isShowContent = true;
+      this.isShowContent = true
     },
     windowFrameChange() {
       if (window) {
@@ -479,13 +475,12 @@ export default {
     },
 
     bookContentShow: function () {
-    return {
-      'col-md-8': this.isShowContent == false,
-      'col-md-offset-3': this.isShowContent == false,
-      'col-md-10':this.isShowContent,
-      'col-md-offset-1':this.isShowContent
-    }
-  }
+      return {
+        'col-md-9': this.isShowContent == false,
+        'col-md-10': this.isShowContent,
+        'col-md-offset-1': this.isShowContent,
+      }
+    },
   },
   layout: 'content',
 }

@@ -2,17 +2,11 @@
   <div class="container-fluid full_backgroud">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="row">
-        <div class="col-md-3">
-          <div class="left-back">
-            <i class="el-icon-back back_item"></i>
-            <span>返回</span>
-          </div>
-        </div>
-        <div class="col-md-9">
+        <div class="col-md-9 col-md-offset-3">
           <div class="headTitle">
             <a
               href="javascript:void(0);"
-              class="hidden-xs"
+              class="hidden-xs hidden-sm"
               v-on:click="contentsBtnClick"
             >
               <span
@@ -24,11 +18,15 @@
             <span>/</span>
             <span>{{ contentsItem.title }}</span>
           </div>
+           <div class="left-back">
+            <span>返回</span>
+            <i class="el-icon-arrow-right back_item"></i>
+          </div>
         </div>
       </div>
     </nav>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3 hidden-xs hidden-sm">
         <div class="catalog-con">
           <p class="title">目录</p>
           <div class="book_lefte_descrb">
@@ -143,12 +141,14 @@ strong {
   vertical-align: middle;
   padding-left: 20px;
   padding-top: 5px;
+  margin-right: 20px;
+  float:right;
 }
 .navbar .left-back span {
   vertical-align: middle;
 }
 .navbar .back_item {
-  font-size: 26px;
+  font-size: 20px;
   vertical-align: middle;
 }
 
@@ -226,10 +226,18 @@ strong {
 .book_lefte_descrb .item a {
   color: #1c1f21;
 }
+.headTitle {
+float: left;
+width:300px;
+margin-left:10px;
+}
+
+.headTitle .icon_open {
+width:20px;
+}
 
 .headTitle a {
   color: #9199a1;
-  margin-left: 8px;
 }
 .headTitle span {
   font-size: 14px;
@@ -477,8 +485,7 @@ export default {
     bookContentShow: function () {
       return {
         'col-md-9': this.isShowContent == false,
-        'col-md-10': this.isShowContent,
-        'col-md-offset-1': this.isShowContent,
+        'col-md-12': this.isShowContent,
       }
     },
   },

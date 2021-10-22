@@ -2,7 +2,7 @@
   <div class="container-fluid full_backgroud">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="row">
-        <div class="col-md-9 col-md-offset-3">
+        <div v-bind:class="bookNavMenuShow">
           <div class="headTitle">
             <a
               href="javascript:void(0);"
@@ -29,7 +29,7 @@
       </div>
     </nav>
     <div class="row">
-      <div class="col-md-3 hidden-xs hidden-sm">
+      <div v-bind:class="bookMuluShow">
         <div class="catalog-con">
           <p class="title">目录</p>
           <div class="book_lefte_descrb">
@@ -464,7 +464,7 @@ export default {
     },
 
     contentsBtnClick() {
-      this.isShowContent = true
+      this.isShowContent = ! this.isShowContent;
     },
     windowFrameChange() {
       if (window) {
@@ -487,8 +487,22 @@ export default {
 
     bookContentShow: function () {
       return {
-        'col-md-9': this.isShowContent == false,
+        'col-md-9': !this.isShowContent,
         'col-md-12': this.isShowContent,
+      }
+    },
+
+    bookMuluShow: function () {
+      return {
+        'hidenP': this.isShowContent,
+        'col-md-3 hidden-xs hidden-sm': !this.isShowContent,
+      }
+    },
+    
+    bookNavMenuShow: function () {
+      return {
+        'col-md-12': this.isShowContent,
+        'col-md-9 col-md-offset-3': !this.isShowContent,
       }
     },
   },

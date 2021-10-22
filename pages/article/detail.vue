@@ -19,8 +19,11 @@
             <span>{{ contentsItem.title }}</span>
           </div>
            <div class="left-back">
-            <span>返回</span>
-            <i class="el-icon-arrow-right back_item"></i>
+            <nuxt-link :to="{name:'article-book',query:{id:1086387099776598019}}">
+                 <span>返回</span>
+                 <i class="el-icon-arrow-right back_item"></i>
+            </nuxt-link>
+           
           </div>
         </div>
       </div>

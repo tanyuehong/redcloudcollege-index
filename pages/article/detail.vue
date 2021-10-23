@@ -19,11 +19,12 @@
             <span>{{ contentsItem.title }}</span>
           </div>
            <div class="left-back">
-            <nuxt-link :to="{name:'article-book',query:{id:1086387099776598019}}">
-                 <span>返回</span>
+             <a href="javascript:void(0);"
+                v-on:click="backBtnClick"
+             >
+              <span>返回</span>
                  <i class="el-icon-arrow-right back_item"></i>
-            </nuxt-link>
-           
+             </a>
           </div>
         </div>
       </div>
@@ -150,6 +151,11 @@ strong {
 .navbar .left-back span {
   vertical-align: middle;
 }
+
+.left-back a {
+ color: #333;
+}
+
 .navbar .back_item {
   font-size: 20px;
   vertical-align: middle;
@@ -465,6 +471,12 @@ export default {
 
     contentsBtnClick() {
       this.isShowContent = ! this.isShowContent;
+    },
+
+    backBtnClick() {
+       if (window) {
+        window.location.href="javascript:history.go(-1)";
+       }
     },
     windowFrameChange() {
       if (window) {

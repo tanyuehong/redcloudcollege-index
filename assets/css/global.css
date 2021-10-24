@@ -202,16 +202,16 @@ a.current-2 .lh-p-icon{background-position:0 -254px}
 .course-r-list li .course-r-pic{width:110px;position:absolute;left:0;top:10px;overflow:hidden}
 .course-r-pic img{display:block;max-width:100%;transition:.8s;-webkit-transition:.8s}
 .course-r-list li:hover .course-r-pic img{transform:scale(1.1);-webkit-transform:scale(1.1)}
-#header{background-color:#fff;box-shadow:0 2px 3px rgba(7,0,2,.04);padding:0px 0px 10px 0px;position:relative}
 .lt-ie9 #header,.lt-ie9.lt-ie8 #header{border-bottom:1px solid #f2f2f2}
 
 /* 这里是首页 样式
 ================================================== */
-#logo{float:left;width:230px;height:90px;overflow:hidden;margin:0 auto;}
+#logo{float:left;width:230px;height:90px;overflow:hidden;margin:0 auto; }
 #logo a{display:table-cell;vertical-align:middle;height:72px}
-#logo a img{display:block;max-width:100%;height:auto;vertical-align:middle}
+#logo a img{display:block;max-width:100%;height:auto;margin-top: -2px;}
 .logo_decrb {margin-left: 55px; width: 180px;}
 .logo_index {width: 200px;}
+#header{background-color:#fff;box-shadow:0 2px 3px rgba(7,0,2,.04);padding:0px 0px 0px 0px;position:relative;margin-bottom: 1px;}
 
 
 .nav{padding:15px 0 0 50px}

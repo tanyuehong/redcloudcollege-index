@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-carousel indicator-position="outside" height="480px" class="golobal">
+    <el-carousel indicator-position="outside" height="480px">
       <el-carousel-item v-for="item in bannerList" :key="item.id">
         <a target="_blank" :href="item.linkUrl">
           <img :src="item.imageUrl" :alt="item.title" />
@@ -13,6 +13,17 @@
     <div class="golobal">
       <!-- 网校课程 开始 -->
       <section class="container">
+        <div class="every_qustion">
+          <div class="left_title fl">
+          <img
+                src="~/assets/img/erery_qustion.png"
+                alt=""
+              />
+          </div>
+          <div class="right_content fl">
+            面向对象设计的准则？
+          </div>
+        </div>
         <div class="couselist">
           <div class="comm-title">
             <h2 class="tac mt20">
@@ -177,8 +188,25 @@ export default {
 </script>
 
 <style>
-.golobal {
+.in-wrap {
   background: #f7f7f7;
+}
+.every_qustion {
+  margin-bottom: 20px;
+  height: 80px;
+  background: white;
+  border-radius: 20px;
+}
+
+.every_qustion .left_title img {
+   margin-left:10px;
+}
+
+.every_qustion .right_content {
+    line-height:80px;
+    font-size:20px;
+    font-weight:600;
+    margin-left:20px;
 }
 .couselist {
   background: white;

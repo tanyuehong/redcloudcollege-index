@@ -24,6 +24,23 @@
             面向对象设计的准则？
           </div>
         </div>
+
+        <div class="home_function">
+          <a href="/teacher/1" class="function_btn ml180 mt20 fl">
+          <img
+                src="~/assets/img/home_study_progress.png"
+                alt=""
+              />
+              <div class="btn_title">学习进度</div>
+          </a>
+          <a class="function_btn mr180 mt20 fr">
+          <img
+                src="~/assets/img/home_my_faveriter.png"
+                alt=""
+              />
+               <div class="btn_title">我的收藏</div>
+          </a>
+        </div>
         <div class="couselist">
           <div class="comm-title">
             <h2 class="tac mt20">
@@ -196,6 +213,30 @@ export default {
   height: 80px;
   background: white;
   border-radius: 20px;
+}
+
+.home_function {
+  margin-bottom: 10px;
+  height: 155px;
+  background: white;
+  border-radius: 20px;
+}
+
+.home_function  a {
+  display:block;
+}
+
+.home_function a:hover{text-decoration:none}
+
+.function_btn  img {
+   height: 80px;
+}
+
+.function_btn  .btn_title {
+  font-size:20px;
+  color: #333;
+  font-weight:600;
+  padding-top:5px;
 }
 
 .every_qustion .left_title img {

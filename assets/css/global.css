@@ -183,9 +183,6 @@ a.current-2 .lh-p-icon{background-position:0 -254px}
 .e-login-btn,.e-register-btn,.order-submit{background:#985054;border-radius:3px;color:#fff;width:180px;font-size:16px}
 .goBack-btn{background:#e2e2e2;border:none;border-radius:3px;color:#666;font-size:14px}
 .blue-btn:hover,.comm-btn:hover,.e-login-btn:hover,.e-register-btn:hover,.goBack-btn:hover,.order-submit:hover{text-decoration:none;opacity:.92;-moz-opacity:.92;filter:alpha(opacity=92)}
-.comm-title{overflow:hidden;clear:both;margin:0px 0 30px}
-.comm-title h2 span{font-size:26px;font-family:simhei}
-.comm-course-list ul{margin-left:-30px}
 .comm-course-list li{float:left;width:25%}
 .lt-ie9.lt-ie8 .comm-course-list li{width:24.98%}
 .lt-ie9 .u-course-list .comm-course-list li,.lt-ie9.lt-ie8 .u-course-list .comm-course-list li{width:33.33%}

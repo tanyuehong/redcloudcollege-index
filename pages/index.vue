@@ -43,7 +43,7 @@
         </div>
         <div class="couselist">
           <div class="comm-title">
-            <h2 class="tac mt20">
+            <h2 class="mt20">
               <span class="c-333">热门课程</span>
             </h2>
           </div>
@@ -92,8 +92,8 @@
               <div class="clear"></div>
             </article>
             <section class="tac">
-              <a href="/course" title="全部课程" class="comm-btn c-btn-2">
-                全部课程
+              <a href="/course" title="更多课程" class="comm-btn c-btn-2">
+                更多课程
               </a>
             </section>
           </div>
@@ -103,10 +103,10 @@
       <!-- 网校名师 开始 -->
       <div>
         <section class="container">
-          <div class="teacher_page">
+          <div class="gusslike_page">
             <header class="comm-title">
               <h2 class="tac mt20">
-                <span class="c-333">名师大咖</span>
+                <span class="c-333">猜你喜欢</span>
               </h2>
             </header>
             <div>
@@ -140,10 +140,40 @@
                 <div class="clear"></div>
               </article>
               <section class="tac">
-                <a href="/teacher" title="全部讲师" class="comm-btn c-btn-2">
-                  全部讲师
+                <a href="/teacher" title="更多" class="comm-btn c-btn-2">
+                  更多
                 </a>
               </section>
+            </div>
+          </div>
+          <div class="op_app_decrb fr mt20">
+            <div class="wechatma-con js-wechatma-con">
+              <div class="ma-con">
+                <div class="ma"></div>
+                <div class="desc">
+                  <div class="title">扫码关注开源实践网服务号</div>
+                  <div class="item-con">
+                    <div class="item">干货分享</div>
+                    <div class="item">定期活动</div>
+                    <div class="item">课程优惠</div>
+                    <div class="item">专栏福利</div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-con">
+                官方优惠福利活动一手掌握，关注开源实践官网（ID：www.redskt.com），和1万+客户端程序员一起成长！
+              </div>
+            </div>
+            <div class="download-app js-show-download clearfix">
+              <img
+                src="~/assets/img/appLogo.png"
+                alt=""
+                class="logo-icon l"
+              />
+              <div class="text l">
+                <h4>下载开源实践APP</h4>
+                <p>更好的体验 学习随处可享</p>
+              </div>
             </div>
           </div>
         </section>
@@ -249,11 +279,33 @@ export default {
     font-weight:600;
     margin-left:20px;
 }
+
+.comm-course-list ul {
+    margin-left: -10px;
+    margin-right: 10px;
+}
+
+.comm-title{overflow:hidden;clear:both;margin:0px 0 30px}
+.comm-title h2  {
+  font-size:20px;
+  text-align:center;
+  padding-left:20px;
+  font-weight:600;
+}
 .couselist {
   background: white;
 }
-.teacher_page {
+.gusslike_page {
   background: white;
   margin-top: 20px;
+  width: 790px;
+  float: left;
+  margin-bottom:20px;
 }
+
+.op_app_decrb {
+  width: 326px;
+  height: 393px;
+}
+
 </style>

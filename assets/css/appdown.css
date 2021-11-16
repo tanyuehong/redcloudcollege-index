@@ -1,0 +1,83 @@
+.wechatma-con {
+    background: #fff;
+    padding: 22px;
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 4px 0 rgba(28, 31, 33, 0.06);
+  }
+  .wechatma-con .ma-con {
+    display: flex;
+    padding-bottom: 15.5px;
+    border-bottom: 1px solid rgba(28, 31, 33, 0.06);
+  }
+  .wechatma-con .ma-con .ma {
+    width: 80px;
+    height: 80px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(https://static3.sycdn.imooc.com/static/img/column/qiqi_wechat_qr2.png);
+  }
+  .wechatma-con .ma-con .desc {
+    width: 140px;
+    margin-left: 25px;
+  }
+  .wechatma-con .ma-con .desc .title {
+    font-size: 14px;
+    color: #07111b;
+    line-height: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .wechatma-con .ma-con .desc .item-con .item {
+    width: 58px;
+    height: 22px;
+    text-align: center;
+    line-height: 22px;
+    background: #f6f6f6;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #545c63;
+    margin-right: 12px;
+    margin-bottom: 11px;
+  }
+  .download-app .text h4 {
+    font-size: 14px;
+    color: #1c1f21;
+    font-weight: 600;
+    line-height: 16px;
+    margin-bottom: 5px;
+  }
+  .download-app .text p {
+    font-size: 12px;
+    color: #240000;
+    line-height: 14px;
+  }
+  .wechatma-con .ma-con .desc .item-con {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .wechatma-con .text-con {
+    padding-top: 7.5px;
+    font-size: 14px;
+    color: #545c63;
+    line-height: 23px;
+  }
+  .download-app {
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0 2px 4px 0 rgba(28, 31, 33, 0.06);
+    padding: 24px;
+    margin-top: 24px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  .download-app .logo-icon {
+    width: 56px;
+    height: 56px;
+  }
+  .download-app .text {
+    margin-top: 10px;
+    margin-left: 16px;
+  }

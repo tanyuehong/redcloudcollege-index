@@ -184,6 +184,7 @@
 </template>
 
 <script>
+import '~/assets/css/appdown.css'
 import index from '@/api/index'
 
 export default {

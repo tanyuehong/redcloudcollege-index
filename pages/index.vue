@@ -168,9 +168,9 @@
               <img
                 src="~/assets/img/appLogo.png"
                 alt=""
-                class="logo-icon l"
+                class="logo-icon fl"
               />
-              <div class="text l">
+              <div class="text fl">
                 <h4>下载开源实践APP</h4>
                 <p>更好的体验 学习随处可享</p>
               </div>

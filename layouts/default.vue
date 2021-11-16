@@ -23,7 +23,7 @@
               <a>课程</a>
             </router-link>
             <router-link to="/teacher" tag="li" active-class="current">
-              <a>名师</a>
+              <a>实践</a>
             </router-link>
             <router-link to="/article" tag="li" active-class="current">
               <a>技术专题</a>

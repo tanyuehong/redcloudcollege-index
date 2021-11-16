@@ -10,7 +10,7 @@
 
     <!-- 幻灯片 结束 -->
 
-    <div class="golobal">
+    <div class="golobal_content">
       <!-- 网校课程 开始 -->
       <section class="container">
         <div class="every_qustion">
@@ -139,11 +139,6 @@
                 </ul>
                 <div class="clear"></div>
               </article>
-              <section class="tac">
-                <a href="/teacher" title="更多" class="comm-btn c-btn-2">
-                  更多
-                </a>
-              </section>
             </div>
           </div>
           <div class="op_app_decrb fr mt20">

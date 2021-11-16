@@ -49,9 +49,9 @@
           <ul class>
            <li class="cleartopicfix" v-for="item in bookList" :key="item.id">
               <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
-                <img :src="item.bookImg" class="img l" :alt="item.title">
+                <img :src="item.bookImg" class="img fl" :alt="item.title">
               </nuxt-link>
-              <div class="text_con r">
+              <div class="text_con fr">
               <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
                <p class="title">{{item.title}}</p>
                   {{item.title}}
@@ -89,23 +89,23 @@
                   <span>/</span>
                   <span class="author-title">{{item.authorPositon}}</span>
                 </a>
-                <div class="price_con cleartopicfix r">
+                <div class="price_con cleartopicfix fr">
                   <!-- 没有订阅购买 -->
                   <a
                     class="sale-price cleartopicfix"
                     href="/read/80"
                     target="_blank"
                   >
-                    <p class="ori r">原价 ¥ {{ item.oldPrice }}</p>
-                    <p class="sale r">¥ {{ item.price }}</p>
+                    <p class="ori fr">原价 ¥ {{ item.oldPrice }}</p>
+                    <p class="sale fr">¥ {{ item.price }}</p>
                     <div
-                      class="countdown r"
+                      class="countdown fr"
                       data-remain="1617854"
                       style="clear: both"
                     >
-                      <span class="name l">限时优惠</span>
+                      <span class="name fl">限时优惠</span>
 
-                      <p class="clock l" style="display: none">
+                      <p class="clock fl" style="display: none">
                         <span>倒计时:</span>
                         <span class="js-day">18天</span>
                         <span class="js-hour timer">17</span>:
@@ -121,13 +121,13 @@
             <li class="cleartopicfix">
               <a href="/read/78" target="_blank">
                 <div
-                  class="img l"
+                  class="img fl"
                   style="
                     background-image: url(//img3.sycdn.imooc.com/5ecf52150001770102940333.jpg);
                   "
                 ></div>
               </a>
-              <div class="text_con r">
+              <div class="text_con fr">
                 <a href="/read/78" target="_blank">
                   <p class="title">再学经典：《Effective Java》独家解析</p>
                 </a>
@@ -194,7 +194,7 @@
                   <span>/</span>
                   <span class="author-title">高级JAVA开发工程师</span>
                 </a>
-                <div class="price_con cleartopicfix r">
+                <div class="price_con cleartopicfix fr">
                   <!-- 没有订阅购买 -->
 
                   <a
@@ -202,16 +202,16 @@
                     href="/read/78"
                     target="_blank"
                   >
-                    <p class="ori r">原价 ¥ 68.00</p>
-                    <p class="sale r">¥ 49.00</p>
+                    <p class="ori fr">原价 ¥ 68.00</p>
+                    <p class="sale fr">¥ 49.00</p>
                     <div
-                      class="countdown r"
+                      class="countdown fr"
                       data-remain="1013054"
                       style="clear: both"
                     >
-                      <span class="name l">限时优惠</span>
+                      <span class="name fl">限时优惠</span>
 
-                      <p class="clock l" style="display: none">
+                      <p class="clock fl" style="display: none">
                         <span>倒计时:</span>
                         <span class="js-day">11天</span>
                         <span class="js-hour timer">17</span>:
@@ -228,13 +228,13 @@
             <li class="cleartopicfix">
               <a href="/read/38" target="_blank">
                 <div
-                  class="img l"
+                  class="img fl"
                   style="
                     background-image: url(//img1.mukewang.com/5d5bd45b0001765b02940333.jpg);
                   "
                 ></div>
               </a>
-              <div class="text_con r">
+              <div class="text_con fr">
                 <a href="/read/38" target="_blank">
                   <p class="title">JavaScript 设计模式精讲</p>
                 </a>
@@ -307,7 +307,7 @@
                   <span>/</span>
                   <span class="author-title">开源社区活跃贡献者</span>
                 </a>
-                <div class="price_con cleartopicfix r">
+                <div class="price_con cleartopicfix fr">
                   <!-- 没有订阅购买 -->
                   <a class="sale-price" href="/read/38" target="_blank">
                     <p class="sale">¥ 48.00</p>
@@ -343,9 +343,9 @@
               <img
                 src="~/assets/img/appLogo.png"
                 alt=""
-                class="logo-icon l"
+                class="logo-icon fl"
               />
-              <div class="text l">
+              <div class="text fl">
                 <h4>下载开源实践APP</h4>
                 <p>更好的体验 学习随处可享</p>
               </div>
@@ -358,6 +358,7 @@
 </template>
 
 <script>
+import '~/assets/css/appdown.css'
 import articleApi from "@/api/article";
 export default {
   data() {
@@ -438,14 +439,6 @@ export default {
 .c-s-dl dl {
   border-bottom: none;
   line-height: 30px;
-}
-
-.l {
-  float: left;
-}
-
-.r {
-  float: right;
 }
 
 .left_con {

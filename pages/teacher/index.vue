@@ -39,10 +39,10 @@ export default {
 
 .op_top_back {
 background-color: white;
-height:60px;
+height:80px;
 }
 .el-tabs--top {
-  margin-top:-40px;
+  margin-top:-50px;
 }
 .el-tabs__header {
  background-color: white;
@@ -53,6 +53,10 @@ height:60px;
 
 .el-tabs__nav-wrap::after {
   background-color: white;
+}
+
+.el-tabs__nav {
+    height:50px
 }
 </style>
 >

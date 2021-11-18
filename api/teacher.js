@@ -2,10 +2,10 @@ import request from '@/utils/serverRq'
 
 export default {
   //分页讲师查询的方法
-  getHomeRealPratice() {
+  getTeacherList(page, limit) {
     return request({
-      url: `/home/pratice/index`,
-      method: 'get',
+      url: `/home/teacher/getTeacherList/${page}/${limit}`,
+      method: 'post',
     })
   },
   //讲师详情的方法

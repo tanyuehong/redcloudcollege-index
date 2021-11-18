@@ -13,13 +13,13 @@
   </div>
 </template>
 <script>
-import teacherApi from '@/api/teacher'
+import realPractice from '@/api/realpractice'
 
 export default {
   //异步调用，调用一次
   //params: 相当于之前 this.$route.params.id  等价  params.id
   asyncData({ params, error }) {
-    return teacherApi.getTeacherList(1, 8).then((response) => {
+    return realPractice.getHomeRealPratice(1, 8).then((response) => {
       return { data: response.data }
     })
   },
@@ -27,7 +27,7 @@ export default {
     //分页切换的方法
     //参数是页码数
     gotoPage(page) {
-      teacherApi.getTeacherList(page, 8).then((response) => {
+      realPractice.getTeacherList(page, 8).then((response) => {
         this.data = response.data
       })
     },

@@ -4,10 +4,10 @@
     </div>
     <section class="container">
     <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+
+    <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">
+    测试内容
+    </el-tab-pane>
     </el-tabs>
     </section>
   </div>
@@ -18,14 +18,20 @@ import realPractice from '@/api/realpractice'
 export default {
   //异步调用，调用一次
   //params: 相当于之前 this.$route.params.id  等价  params.id
+   data () {
+    return { activeName: 'first' }
+  },
   asyncData({ params, error }) {
     return realPractice.getHomeRealPratice(1, 8).then((response) => {
-      return { data: response.data }
+      return { typeList: response.data.typeList,activeName:response.data.typeList[0].id }
     })
   },
   methods: {
     //分页切换的方法
     //参数是页码数
+     handleClick(tab, event) {
+        console.log(tab, event);
+      },
     gotoPage(page) {
       realPractice.getTeacherList(page, 8).then((response) => {
         this.data = response.data

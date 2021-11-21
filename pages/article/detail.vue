@@ -276,6 +276,7 @@ width:20px;
 </style>
 
 <script>
+import '~/assets/css/markdown.css'
 import articleApi from '@/api/article'
 import showdown from 'showdown'
 import { Message } from 'element-ui'

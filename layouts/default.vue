@@ -22,7 +22,7 @@
             <router-link to="/course" tag="li" active-class="current">
               <a>课程</a>
             </router-link>
-            <router-link to="/teacher" tag="li" active-class="current">
+            <router-link to="/practice" tag="li" active-class="current">
               <a>实践</a>
             </router-link>
             <router-link to="/article" tag="li" active-class="current">

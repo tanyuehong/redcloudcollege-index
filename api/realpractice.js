@@ -9,10 +9,11 @@ export default {
     })
   },
   //讲师详情的方法
-  getTeacherInfo(id) {
+  getRealPraticeDetail(id) {
     return request({
-      url: `/home/teacher/getTeacherInfo/${id}`,
-      method: 'get',
+      url: `/home/pratice/getDetail`,
+      method: 'post',
+      data:{"practiceId":id},
     })
   },
 }

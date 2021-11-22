@@ -102,11 +102,6 @@ export default {
     handleClick(tab, event) {
       console.log(tab, event)
     },
-    gotoPage(page) {
-      realPractice.getTeacherList(page, 8).then((response) => {
-        this.data = response.data
-      })
-    },
     changModelMarkToHtml(content) {
       var converter = new showdown.Converter()
       return converter.makeHtml(content)

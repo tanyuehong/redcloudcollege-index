@@ -11,9 +11,8 @@ export default {
   //讲师详情的方法
   getRealPraticeDetail(id) {
     return request({
-      url: `/home/pratice/getDetail`,
-      method: 'post',
-      data:{"practiceId":id},
+      url: `/home/pratice/getDetail/${id}`,
+      method: 'get',
     })
   },
 }

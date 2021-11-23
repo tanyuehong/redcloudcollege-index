@@ -114,7 +114,7 @@ export default {
 <style>
 .op_top_back {
   background-color: white;
-  height: 80px;
+  height: 70px;
 }
 .el-tabs--top {
   margin-top: -50px;

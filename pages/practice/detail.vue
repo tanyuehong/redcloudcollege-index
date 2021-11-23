@@ -1,33 +1,46 @@
 <template>
-<div class="golobal_content">
-<section class="container">
+  <div class="golobal_content">
+    <section class="container">
+      <div class="practice_detail">
+        <div class="practice_header"></div>
 
-<div class="practice_detail">
+        <div
+          class="practice_content"
+          v-html="changeMarkToHtml(pitem.content)"
+        ></div>
 
-<div class="practice_header">
-</div>
-
-<div class="practice_content" v-html="changeMarkToHtml(pitem.content)">
-</div>
-
-</div>
-
-</section>
-</div>
+        <div class="practice_left_show"></div>
+      </div>
+    </section>
+  </div>
 </template>
+
 <style>
 .practice_content {
-  background:white;
-  padding-left:15px;
-  padding-top:20px;
-  padding-bottom:15px;
-  margin-bottom:20px;
-  margin-top:20px;
-  padding-right:15px;
+  background: white;
+  padding-left: 15px;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding-right: 15px;
+}
+.practice_left_show {
+  position: fixed;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  height:600px;
+  width:60px;
+  background:red;
+  margin-left: -75px;
+  top: 111px;
+  z-index: 2;
 }
 </style>
-<script>
 
+<script>
 import showdown from 'showdown'
 import '~/assets/css/markdown.css'
 import realPractice from '@/api/realpractice'
@@ -56,5 +69,4 @@ export default {
   },
   computed: {},
 }
-
 </script>

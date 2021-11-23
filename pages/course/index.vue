@@ -356,4 +356,5 @@ export default {
 .course_content {
   background-color: white;
 }
+.c-sort-box{margin-top:0px}
 </style>

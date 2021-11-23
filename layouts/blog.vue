@@ -102,67 +102,6 @@
     <!-- /公共头引入 -->
 
     <nuxt />
-
-    <!-- 公共底引入 -->
-    <footer id="footer">
-      <section class="container">
-        <div class>
-          <h4 class="hLh30">
-            <span class="fsize18 f-fM c-999">友情链接</span>
-          </h4>
-          <ul class="of flink-list">
-            <li>
-              <a
-                href="http://www.atguigu.com/"
-                title="腾讯课堂"
-                target="_blank"
-              >
-                腾讯课堂
-              </a>
-            </li>
-          </ul>
-          <div class="clear"></div>
-        </div>
-        <div class="b-foot">
-          <section class="fl col-7">
-            <section class="mr20">
-              <section class="b-f-link">
-                <a href="#" title="关于我们" target="_blank">关于我们</a>
-                |
-                <a href="#" title="联系我们" target="_blank">联系我们</a>
-                |
-                <a href="#" title="帮助中心" target="_blank">帮助中心</a>
-                |
-                <a href="#" title="资源下载" target="_blank">资源下载</a>
-                |
-                <span>服务热线：16623170187</span>
-                <span>Email：redskt@163.com</span>
-              </section>
-              <section class="b-f-link mt10">
-                <span>
-                  ©2020课程版权均归开源实践网所有
-                  <a href="https://beian.miit.gov.cn">京ICP备16006909号-1</a>
-                </span>
-              </section>
-            </section>
-          </section>
-          <aside class="fl col-3 tac mt15">
-            <section class="gf-tx">
-              <span>
-                <img src="~/assets/img/wx-icon.png" alt />
-              </span>
-            </section>
-            <section class="gf-tx">
-              <span>
-                <img src="~/assets/img/wb-icon.png" alt />
-              </span>
-            </section>
-          </aside>
-          <div class="clear"></div>
-        </div>
-      </section>
-    </footer>
-    <!-- /公共底引入 -->
   </div>
 </template>
 <script>

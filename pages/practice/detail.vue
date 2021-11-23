@@ -22,7 +22,7 @@
   padding-top: 20px;
   padding-bottom: 15px;
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 15px;
   padding-right: 15px;
 }
 .practice_left_show {
@@ -35,7 +35,7 @@
   width:60px;
   background:red;
   margin-left: -75px;
-  top: 111px;
+  top: 86px;
   z-index: 2;
 }
 </style>
@@ -46,9 +46,8 @@ import '~/assets/css/markdown.css'
 import realPractice from '@/api/realpractice'
 
 export default {
-  //异步调用，调用一次
-  //params: 相当于之前 this.$route.params.id  等价  params.id
-  // this.$route.query.id
+  layout:'blog',
+
   asyncData({ query, error }) {
     return realPractice.getRealPraticeDetail(query.id).then((response) => {
       return {

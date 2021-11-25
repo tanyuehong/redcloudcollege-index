@@ -1,82 +1,72 @@
-h1,
-h2,
-h3,
-h4,
-h5 {
+.mark_content h1,h2,h3,h4,h5 {
   margin-top: 16px;
   margin-bottom: 16px;
   font-weight: 550;
   color: #404040;
   font-weight: bold;
 }
-p,
-dl {
+.mark_content p,dl {
   margin-top: 16px;
   margin-bottom: 16px;
   padding: 0;
 }
-h1 {
+.mark_content h1 {
   font-size: 42px;
   line-height: 54px;
 }
-h2 {
+.mark_content h2 {
   font-size: 32px;
   line-height: 42px;
 }
-h3 {
+.mark_content h3 {
   font-size: 26px;
   line-height: 30px;
 }
-h4 {
+.mark_content h4 {
   font-size: 21px;
   line-height: 26px;
 }
-h5 {
+.mark_content h5 {
   font-size: 16px;
   line-height: 23px;
 }
-a {
+.mark_content a {
   color: #0099ff;
   margin: 0;
   padding: 0;
   vertical-align: baseline;
 }
-a:hover {
+.mark_content a:hover {
   text-decoration: none;
   color: #ff6600;
 }
-a:visited {
+.mark_content a:visited {
   /*color: purple;*/
 }
-ul,
-ol {
+.mark_content ul,ol {
   padding: 0;
   padding-left: 24px;
   margin: 0;
 }
-li {
+.mark_content li {
   line-height: 24px;
 }
-p,
-ul,
-ol {
+.mark_content p,ul,ol {
   font-size: 16px;
   line-height: 24px;
 }
 
-ol ol,
-ul ol {
+.mark_content ol ol,ul ol {
   list-style-type: lower-roman;
 }
 
-code,
-pre {
+.mark_content code,pre {
   border-radius: 3px;
   background-color: #f7f7f7;
   color: inherit;
 }
 
-code {
+.mark_content code {
   margin: 0 2px;
   font-family: 'Courier New', sans-serif !important;
   font-size: 12px !important;
@@ -92,7 +82,7 @@ code {
   color: #333;
 }
 
-pre {
+.mark_content pre {
   margin-top: 10px;
   margin-bottom: 10px;
   white-space: pre-wrap;
@@ -100,4 +90,10 @@ pre {
   overflow: auto;
   padding: 6px 10px;
   border-left: 3px solid #f56c6c;
+}
+
+.mark_content img {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }

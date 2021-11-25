@@ -4,7 +4,10 @@
       <div class="practice_detail">
         <div class="practice_header"></div>
 
-        <div class="practice_content" v-html="changeMarkToHtml(pitem.content)"></div>
+        <div class="practice_content">
+           <div class="mark_content" v-html="changeMarkToHtml(pitem.content)">
+           </div>
+        </div>
 
         <div class="practice_left_show">
         <div class="tool_item">

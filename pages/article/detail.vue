@@ -112,7 +112,10 @@
       </div>
 
       <div v-bind:class="bookContentShow">
-        <div class="book_tecAritcle" v-html="bookDesc"></div>
+        <div class="book_tecAritcle">
+        <div class="mark_content" v-html="bookDesc">
+        </div>
+        </div>
       </div>
     </div>
   </div>

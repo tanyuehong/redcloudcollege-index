@@ -4,7 +4,7 @@ import { Message } from 'element-ui'
 var tipsShowTime = 3000
 // 创建axios实例
 const service = axios.create({
-  baseURL: 'https://wwww.redskt.com/api', // api的base_url
+  baseURL: 'https://www.redskt.com/api', // api的base_url
   timeout: 20000, // 请求超时时间
 })
 

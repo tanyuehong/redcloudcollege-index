@@ -2,8 +2,11 @@
   <div class="golobal_content">
     <el-carousel indicator-position="outside" height="480px">
       <el-carousel-item v-for="item in bannerList" :key="item.id">
-        <a target="_blank" :href="item.linkUrl" v-bind:style="{backgroundImage:'url(' + item.imageUrl + ')'}">
-        </a>
+        <a
+          target="_blank"
+          :href="item.linkUrl"
+          v-bind:style="{ backgroundImage: 'url(' + item.imageUrl + ')' }"
+        ></a>
       </el-carousel-item>
     </el-carousel>
 
@@ -14,10 +17,7 @@
       <section class="container">
         <div class="every_qustion">
           <div class="left_title fl">
-          <img
-                src="~/assets/img/erery_qustion.png"
-                alt=""
-              />
+            <img src="~/assets/img/erery_qustion.png" alt="" />
           </div>
           <div class="right_content fl">
             面向对象设计的准则？
@@ -26,18 +26,12 @@
 
         <div class="home_function">
           <a href="/teacher/1" class="function_btn ml180 mt20 fl">
-          <img
-                src="~/assets/img/home_study_progress.png"
-                alt=""
-              />
-              <div class="btn_title">学习进度</div>
+            <img src="~/assets/img/home_study_progress.png" alt="" />
+            <div class="btn_title">学习进度</div>
           </a>
           <a class="function_btn mr180 mt20 fr">
-          <img
-                src="~/assets/img/home_my_faveriter.png"
-                alt=""
-              />
-               <div class="btn_title">我的收藏</div>
+            <img src="~/assets/img/home_my_faveriter.png" alt="" />
+            <div class="btn_title">我的收藏</div>
           </a>
         </div>
         <div class="couselist">
@@ -159,11 +153,7 @@
               </div>
             </div>
             <div class="download-app js-show-download clearfix">
-              <img
-                src="~/assets/img/appLogo.png"
-                alt=""
-                class="logo-icon fl"
-              />
+              <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
               <div class="text fl">
                 <h4>下载开源实践APP</h4>
                 <p>更好的体验 学习随处可享</p>
@@ -230,14 +220,13 @@ export default {
 </script>
 
 <style>
-
 .el-carousel__item a {
-   display:block;
-   width:100%;
-   background-position:center;
-   object-fit:none;
-   height:480px;
-   background-image:url(https://static.redskt.com/banner/redskt_banner_1.png);
+  display: block;
+  width: 100%;
+  background-position: center;
+  object-fit: none;
+  height: 480px;
+  background-image: url(https://static.redskt.com/banner/redskt_banner_1.png);
 }
 
 .every_qustion {
@@ -254,45 +243,51 @@ export default {
   border-radius: 20px;
 }
 
-.home_function  a {
-  display:block;
+.home_function a {
+  display: block;
 }
 
-.home_function a:hover{text-decoration:none}
-
-.function_btn  img {
-   height: 80px;
+.home_function a:hover {
+  text-decoration: none;
 }
 
-.function_btn  .btn_title {
-  font-size:20px;
+.function_btn img {
+  height: 80px;
+}
+
+.function_btn .btn_title {
+  font-size: 20px;
   color: #333;
-  font-weight:600;
-  padding-top:5px;
+  font-weight: 600;
+  padding-top: 5px;
 }
 
 .every_qustion .left_title img {
-   margin-left:10px;
+  margin-left: 10px;
 }
 
 .every_qustion .right_content {
-    line-height:80px;
-    font-size:20px;
-    font-weight:600;
-    margin-left:20px;
+  line-height: 80px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 20px;
 }
 
 .comm-course-list ul {
-    margin-left: -10px;
-    margin-right: 10px;
+  margin-left: -10px;
+  margin-right: 10px;
 }
 
-.comm-title{overflow:hidden;clear:both;margin:0px 0 30px}
-.comm-title h2  {
-  font-size:20px;
-  text-align:center;
-  padding-left:20px;
-  font-weight:600;
+.comm-title {
+  overflow: hidden;
+  clear: both;
+  margin: 0px 0 30px;
+}
+.comm-title h2 {
+  font-size: 20px;
+  text-align: center;
+  padding-left: 20px;
+  font-weight: 600;
 }
 .couselist {
   background: white;
@@ -302,12 +297,11 @@ export default {
   margin-top: 20px;
   width: 790px;
   float: left;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 
 .op_app_decrb {
   width: 326px;
   height: 393px;
 }
-
 </style>

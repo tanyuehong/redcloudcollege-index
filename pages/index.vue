@@ -1,9 +1,8 @@
 <template>
-  <div>
+  <div class="golobal_content">
     <el-carousel indicator-position="outside" height="480px">
       <el-carousel-item v-for="item in bannerList" :key="item.id">
-        <a target="_blank" :href="item.linkUrl">
-          <img :src="item.imageUrl" :alt="item.title" />
+        <a target="_blank" :href="item.linkUrl" v-bind:style="{backgroundImage:'url(' + item.imageUrl + ')'}">
         </a>
       </el-carousel-item>
     </el-carousel>
@@ -231,9 +230,16 @@ export default {
 </script>
 
 <style>
-.in-wrap {
-  background: #f7f7f7;
+
+.el-carousel__item a {
+   display:block;
+   width:100%;
+   background-position:center;
+   object-fit:none;
+   height:480px;
+   background-image:url(https://static.redskt.com/banner/redskt_banner_1.png);
 }
+
 .every_qustion {
   margin-bottom: 20px;
   height: 80px;

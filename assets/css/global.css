@@ -215,6 +215,19 @@ a.current-2 .lh-p-icon{background-position:0 -254px}
 .logo_index {width: 200px; margin-left: -5px;}
 #header{background-color:#fff;box-shadow:0 2px 3px rgba(7,0,2,.04);padding:0px 0px 0px 0px;position:relative;margin-bottom: 1px;}
 
+@media (width<=1160px) {
+	.in-wrap {
+		width: 1160px;
+	}
+}
+
+@media (width>1160px) {
+	.in-wrap {
+		width: 100%;
+	}
+}
+
+.in-wrap { background: #f7f7f7;}
 
 .nav{padding:15px 0 0 50px}
 .nav,.nav li,.nav li a{float:left}

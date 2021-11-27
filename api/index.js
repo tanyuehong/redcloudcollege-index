@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import request from '@/utils/serverRq'
 
 export default {
   //查询前两条banner数据

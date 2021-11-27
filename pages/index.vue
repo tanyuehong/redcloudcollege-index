@@ -169,14 +169,9 @@
 
 <script>
 import '~/assets/css/appdown.css'
-import index from '@/api/index'
+import indexApi from '@/api/index'
 
 export default {
-  // asyncData({ params, error }) {
-  //   return index.getIndexData().then(response => {
-  //         return { data: response.data }
-  //      })
-  // },
   data() {
     return {
       swiperOption: {
@@ -190,31 +185,21 @@ export default {
           prevEl: '.swiper-button-prev', //前一页dom节点
         },
       },
-      //banner数组
-      bannerList: [],
-      eduList: [],
-      teacherList: [],
     }
   },
+  asyncData({ params, error }) {
+    return indexApi.getIndexData().then((response) => {
+      return {
+        bannerList: response.data.banerList,
+        eduList : response.data.eduList,
+        teacherList : response.data.teacherList
+      }
+    })
+  },
   created() {
-    //调用查询banner的方法
-    this.getBannerList()
-    this.getHotCourseTeacher()
+
   },
   methods: {
-    //查询banner数据
-    getBannerList() {
-      index.getListBanner().then((response) => {
-        this.bannerList = response.data.list
-      })
-    },
-    //查询热门课程和名师
-    getHotCourseTeacher() {
-      index.getIndexData().then((response) => {
-        this.eduList = response.data.eduList
-        this.teacherList = response.data.teacherList
-      })
-    },
   },
 }
 </script>

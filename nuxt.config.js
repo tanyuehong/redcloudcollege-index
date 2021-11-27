@@ -8,8 +8,8 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'keywords', name: 'keywords', content: '开源项目网，一起来做有点意思的事，开源项目学习网,开源项目实践网,开源项目创业网,加入开源项目,代码创业' },
-      { hid: 'description', name: 'description', content: '开源项目网，是国内第一家以开源项目作为学习实践的网站，在开源项目网，可以下载网站内所有的开源项目，每个开源项目都有完整专业的学习文档，并且用户还可以提交代码，通过以后代码的所有权和收益归用户所有。' }
+      { hid: 'keywords', name: 'keywords', content: '开源实践，面试经验，JAVA，前端，Python，技术分享,互联网创业,个人博客,全栈开发,个人创业，独立开发,代码创业' },
+      { hid: 'description', name: 'description', content: '开源实践网，是国内第一家以开源项目作为学习实践的网站，在开源实践网，所有的项目都是商业级开源，每个开源项目都有完整专业的学习文档，并且用户还可以提交代码，通过审核并合入以后代码的所有权和收益均归用户所有。' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

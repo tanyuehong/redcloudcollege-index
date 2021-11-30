@@ -37,7 +37,7 @@
         <div class="couselist">
           <div class="comm-title">
             <h2 class="mt20">
-              <span class="c-333">热门课程</span>
+              <span class="c-333">热门课程 / 专题</span>
             </h2>
           </div>
           <div>
@@ -47,7 +47,7 @@
                   <div class="cc-l-wrap">
                     <section class="course-img">
                       <img
-                        :src="course.cover"
+                        :src="course.imgUrl"
                         class="img-responsive"
                         :alt="course.title"
                       />
@@ -57,7 +57,7 @@
                         </a>
                       </div>
                     </section>
-                    <h3 class="hLh30 txtOf mt10">
+                    <h3 class="hLh30 mt10">
                       <a
                         href="#"
                         :title="course.title"
@@ -74,9 +74,9 @@
                         <i class="c-fff fsize12 f-fA">免费</i>
                       </span>
                       <span class="fl jgAttr c-ccc f-fA">
-                        <i class="c-999 f-fA">9634人学习</i>
+                        <i class="c-666">{{course.buyCount}}人学习</i>
                         |
-                        <i class="c-999 f-fA">9634评论</i>
+                        <i class="c-666">9634评论</i>
                       </span>
                     </section>
                   </div>
@@ -104,9 +104,78 @@
             </header>
             <div class="home_guesslike_list book_item">
               <ul class="content_list">
-                <li class="li-list_item" v-for="item in gusslikeList" :key="item.id">
+                <li v-for="item in gusslikeList" :key="item.id">
                   <div v-if="item.type === 0">
-                       <p>{{item.title}} </p>
+                  <div class="course_list">
+                     <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
+                <img :src="item.imgUrl" class="img fl" :alt="item.title">
+              </nuxt-link>
+                  </div>
+                   <div class="text_con fr">
+              <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
+               <p class="title">{{item.title}}</p>
+                  {{item.title}}
+              </nuxt-link>
+                <p class="desc">{{item.content}}</p>
+                <div class="info">
+                  <img src="~/assets/img/article_point.png" class="img_point">
+                  <span>共32节</span>
+                  <img src="~/assets/img/article_point.png" class="img_point">
+                  <span>{{ item.buyCount }}人已学习</span>
+                </div>
+                <div class="try-read-box">
+                  <a
+                    class="try-read-item"
+                    href="/read/80/article/2090"
+                    target="_blank"
+                  >
+                    <div class="try-read-img"></div>
+                    <p
+                      class="try-read-title"
+                      title="01 开篇词：带你走进网络编程的世界"
+                    >
+                      01 开篇词：带你走进网络编程的世界
+                    </p>
+                  </a>
+                </div>
+                <a class="author-box" href="/u/6773399" target="_blank">
+                  <div class="author-img" style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
+                  </div>
+                  <span class="author-name">{{item.author}}</span>
+                  <span>/</span>
+                  <span class="author-title">{{item.authorPositon}}</span>
+                </a>
+                <div class="price_con cleartopicfix fr">
+                  <!-- 没有订阅购买 -->
+                  <a
+                    class="sale-price cleartopicfix"
+                    href="/read/80"
+                    target="_blank"
+                  >
+                    <p class="ori fr">原价 ¥ {{ item.oldPrice }}</p>
+                    <p class="sale fr">¥ {{ item.price }}</p>
+                    <div
+                      class="countdown fr"
+                      data-remain="1617854"
+                      style="clear: both"
+                    >
+                      <span class="name fl">限时优惠</span>
+
+                      <p class="clock fl" style="display: none">
+                        <span>倒计时:</span>
+                        <span class="js-day">18天</span>
+                        <span class="js-hour timer">17</span>:
+                        <span class="js-minute timer">24</span>:
+                        <span class="js-second timer">14</span>:
+                        <span class="js-msec timer">0</span>
+                      </p>
+                    </div>
+                  </a>
+                   </div>
+              </div>
+                   <div class="clearfloat"></div>
+                  
+                      
                   </div>
                   <div v-else-if="item.type === 1">
                     <div class="op_artie_content">
@@ -116,7 +185,7 @@
                   <p class="op_pratice_describ">
                     {{ item.content }}
                   </p>
-                  <ul class="pratice_bottom_icon">
+                  <ul>
                     <i class="pratice_icon_view"></i>
                     <span class="icon_des">{{item.viewCount}}</span>
                     <i class="pratice_icon_zhan"></span></i>
@@ -158,12 +227,8 @@
                   </a>
                 </div>
                 <a class="author-box" href="/u/6773399" target="_blank">
-                  <div
-                    class="author-img"
-                    style="
-                      background-image: url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');
-                    "
-                  ></div>
+                  <div class="author-img" style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
+                  </div>
                   <span class="author-name">{{item.author}}</span>
                   <span>/</span>
                   <span class="author-title">{{item.authorPositon}}</span>
@@ -332,12 +397,13 @@ export default {
 .comm-title {
   overflow: hidden;
   clear: both;
-  margin: 0px 0 15px;
+  margin: 0px 0px 30px 0px;
+  border-bottom: 1px solid rgba(28, 31, 33, 0.1);
+  padding-bottom:10px;
 }
 .comm-title h2 {
   font-size: 20px;
   text-align: center;
-  padding-left: 20px;
   font-weight: 600;
 }
 .couselist {

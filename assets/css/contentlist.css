@@ -2,29 +2,44 @@
   padding-left: 15px;
 }
 
-.li-list_item {
-  border-bottom: 1px solid #e5e6eb;
-  margin-bottom: 20px;
+.book_item li {
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(28, 31, 33, 0.1);
+  margin-bottom: 26px;
 }
 
 /* 这里是blog list的样式*/
+
+.home_guesslike_list {
+  margin: 0px !important; 
+  width: 100% !important;
+  padding: 0px !important;
+  box-shadow:none !important;
+}
 .op_artie_content {
     margin-right: 20px;
 }
+
+.op_artie_content ul {
+  padding-left: 0px !important;
+  display: flex !important;
+  align-items: center !important;
+  margin-bottom:15px !important;
+  margin-top:10px !important;
+}
+
  .op_artie_content .article_title {
   color: #333;
   font-weight: 600;
 }
+
 .op_pratice_describ {
-    font-size: 14px;
-    color: #666666;
-  }
-  .pratice_bottom_icon {
-    padding-left: 0px;
-    display: flex;
-    align-items: center;
-    margin-bottom:20px;
-  }
+  font-size: 14px;
+  color: #666666;
+  margin-top: 5px;
+}
+ 
   .pratice_icon_view {
     background-image: url('~/assets/img/pratice_icon_view.png');
     height: 26px;

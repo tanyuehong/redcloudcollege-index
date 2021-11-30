@@ -2,7 +2,7 @@
   <div id="aCoursesList" class="bg-fa of">
     <!-- /课程详情 开始 -->
     <section class="container">
-      <section class="path-wrap txtOf hLh30">
+      <section class="path-wrap hLh30">
         <a href="#" title class="c-999 fsize14">首页</a>
         \
         <a href="#" title class="c-999 fsize14">
@@ -24,7 +24,7 @@
         </article>
         <aside class="c-attr-wrap">
           <section class="ml20 mr15">
-            <h2 class="hLh30 txtOf mt15">
+            <h2 class="hLh30 mt15">
               <span class="c-fff fsize24">{{ courseWebVo.title }}</span>
             </h2>
             <section class="c-attr-jg">
@@ -181,12 +181,12 @@
                         />
                       </a>
                     </div>
-                    <section class="hLh30 txtOf">
+                    <section class="hLh30">
                       <a class="c-333 fsize16 fl" href="#">
                         {{ courseWebVo.teacherName }}
                       </a>
                     </section>
-                    <section class="hLh20 txtOf">
+                    <section class="hLh20">
                       <span class="c-999">{{ courseWebVo.intro }}</span>
                     </section>
                   </li>

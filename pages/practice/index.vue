@@ -16,7 +16,7 @@
           </ul>
           <div class="op_pratice_content fl">
             <ul class="article_list">
-              <li class="li-list_item" v-for="bitem in blogList" :key="bitem.id">
+              <li v-for="bitem in blogList" :key="bitem.id">
                 <div class="op_artie_content">
                 <nuxt-link class="article_title" :to="{name:'practice-detail',query:{id:bitem.id}}">
                       {{ bitem.title }}
@@ -24,7 +24,7 @@
                   <p class="op_pratice_describ">
                     {{ bitem.descrb }}
                   </p>
-                  <ul class="pratice_bottom_icon">
+                  <ul>
                     <i class="pratice_icon_view"></i>
                     <span class="icon_des">{{bitem.viewCount}}</span>
                     <i class="pratice_icon_zhan"></span></i>

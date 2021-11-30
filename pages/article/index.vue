@@ -79,12 +79,8 @@
                   </a>
                 </div>
                 <a class="author-box" href="/u/6773399" target="_blank">
-                  <div
-                    class="author-img"
-                    style="
-                      background-image: url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');
-                    "
-                  ></div>
+                  <div class="author-img" style="background-image: url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
+                  </div>
                   <span class="author-name">{{item.author}}</span>
                   <span>/</span>
                   <span class="author-title">{{item.authorPositon}}</span>
@@ -459,13 +455,6 @@ export default {
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   padding-inline-start: 40px;
-}
-
-.book_item li {
-  width: 100%;
-  box-sizing: border-box;
-  border-bottom: 1px solid rgba(28, 31, 33, 0.1);
-  margin-bottom: 38px;
 }
 
 </style>

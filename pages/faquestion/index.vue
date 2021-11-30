@@ -159,8 +159,8 @@
 .header_annation {
   width: 600px;
   float: left;
-  margin-top: 80px;
-  margin-left: 80px;
+  margin-top: 60px;
+  margin-left: 40px;
 }
 
 .main_content {

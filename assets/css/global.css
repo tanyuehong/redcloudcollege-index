@@ -75,7 +75,7 @@
 .hidenP{display: none}
 .pr{position:relative}
 .pa{position:absolute}
-.f-fH{font-family:SimHei}.f-fM{font-family:'Microsoft YaHei'}.f-fA{font-family:SimSun}.f-fG{font-family:Georgia}
+.f-fH{font-family:SimHei}.f-fM{font-family:'Microsoft YaHei'}.f-fG{font-family:Georgia}
 .unBg{background:0 0!important}.unBr{border:none!important}.unFw{font-weight:400}
 .dis{display:block}.disIb{display:inline-block}.undis{display:none}
 .of{overflow:hidden}.ov{overflow:visible}
@@ -105,7 +105,8 @@
 .icon20{display:inline-block;height:20px;width:20px;vertical-align:middle}
 .icon24{display:inline-block;height:24px;width:24px;vertical-align:middle}
 .icon30{display:inline-block;height:30px;width:30px;vertical-align:middle}
-.txtOf{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+
 .hLh20{height:20px;line-height:20px}.hLh30{height:30px;line-height:30px}
 .col-7{width:70%}.col-3{width:30%}
 .lt-ie9 .col-7,.lt-ie9.lt-ie8 .col-7{width:75%}

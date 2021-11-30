@@ -117,7 +117,7 @@
                   <div class="cc-l-wrap">
                     <section class="course-img">
                       <img
-                        :src="item.cover"
+                        :src="item.imgUrl"
                         class="img-responsive"
                         :alt="item.title"
                       />
@@ -125,7 +125,7 @@
                       <nuxt-link title="开始学习" class="comm-btn c-btn-1" :to="{name:'course-id',params:{id:item.id}}">开始学习</nuxt-link>
                       </div>
                     </section>
-                    <h3 class="hLh30 txtOf mt10">
+                    <h3 class="hLh30 mt10">
                       <nuxt-link :title="item.title" class="course-title fsize18 c-333" :to="{name:'course-id',query:{id:item.id}}">{{ item.title }}</nuxt-link>
                     </h3>
                     <section class="mt10 hLh20 of">
@@ -136,9 +136,9 @@
                         <i class="c-fff fsize12 f-fA">免费</i>
                       </span>
                       <span class="fl jgAttr c-ccc f-fA">
-                        <i class="c-999 f-fA">9634人学习</i>
+                        <i class="c-666">266人学习</i>
                         |
-                        <i class="c-999 f-fA">9634评论</i>
+                        <i class="c-666">9634评论</i>
                       </span>
                     </section>
                   </div>

@@ -16,7 +16,7 @@
           </ul>
           <div class="op_pratice_content fl">
             <ul class="article_list">
-              <li class="li-item" v-for="bitem in blogList" :key="bitem.id">
+              <li class="li-list_item" v-for="bitem in blogList" :key="bitem.id">
                 <div class="op_artie_content">
                 <nuxt-link class="article_title" :to="{name:'practice-detail',query:{id:bitem.id}}">
                       {{ bitem.title }}

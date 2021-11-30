@@ -45,7 +45,7 @@
           </section>
         </section>
         <div class="row">
-          <div class="col-md-8 left_con">
+          <div class="col-md-8 book_item">
           <ul class="">
            <li class="cleartopicfix" v-for="item in bookList" :key="item.id">
               <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
@@ -359,6 +359,7 @@
 
 <script>
 import '~/assets/css/appdown.css'
+import '~/assets/css/contentlist.css'
 import articleApi from "@/api/article";
 export default {
   data() {
@@ -441,7 +442,7 @@ export default {
   line-height: 30px;
 }
 
-.left_con {
+.book_item {
   margin-bottom: 48px;
   background: #fff;
   box-shadow: 0 2px 4px 0 rgba(28, 31, 33, 0.06);
@@ -450,7 +451,7 @@ export default {
   width: 773px;
 }
 
-.left_con ul {
+.book_item ul {
   display: block;
   list-style-type: disc;
   margin-block-start: 1em;
@@ -460,234 +461,11 @@ export default {
   padding-inline-start: 40px;
 }
 
-.left_con li {
+.book_item li {
   width: 100%;
   box-sizing: border-box;
   border-bottom: 1px solid rgba(28, 31, 33, 0.1);
   margin-bottom: 38px;
-}
-.left_con .cleartopicfix {
-  display: block;
-  height: 1%;
-  zoom: 1;
-}
-
-.left_con .cleartopicfix:after {
-  content: "\0020";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-.left_con li .img {
-  width: 138px;
-  height: 157px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  box-sizing: border-box;
-  transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-}
-.left_con li:hover .img {
-  transition: all 0.5s 0.2s;
-  -moz-transition: all 0.5s 0.2s;
-  -webkit-transition: all 0.5s 0.2s;
-  -o-transition: all 0.5s 0.2s;
-  transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  -o-transform: scale(1.2);
-}
-.left_con li .text_con {
-  width: 75%;
-  padding: 0 0 16px 0;
-  font-size: 0;
-}
-
-.left_con li .text_con .title {
-  font-weight: 700;
-  font-size: 20px;
-  color: #1c1f21;
-  line-height: 24px;
-  text-align: left;
-  margin-bottom: 12px;
-  margin-top: 4px;
-}
-.left_con li .text_con .info {
-  display: inline-block;
-  margin-bottom: 14px;
-  vertical-align: top;
-}
-.left_con li .text_con .info .img_point{
-  margin-left:5px;
-} 
-.left_con li .text_con .desc {
-  font-size: 14px;
-  color: #545c63;
-  font-weight: 600;
-  line-height: 14px;
-  text-align: left;
-  margin-bottom: 18px;
-  display: inline-block;
-  max-width: 350px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.left_con li .text_con .info {
-  display: inline-block;
-  margin-bottom: 14px;
-  vertical-align: top;
-}
-
-.left_con li .text_con .info i {
-  padding: 0 8px;
-  font-size: 12px;
-  color: #9199a1;
-  text-align: left;
-  line-height: 14px;
-}
-
-[class^="imv2-"],
-[class*=" imv2-"] {
-  font-family: "imv2" !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  letter-spacing: 0;
-  -webkit-font-feature-settings: "liga";
-  -moz-font-feature-settings: "liga=1";
-  -moz-font-feature-settings: "liga";
-  -ms-font-feature-settings: "liga" 1;
-  font-feature-settings: "liga";
-  -webkit-font-variant-ligatures: discretionary-ligatures;
-  font-variant-ligatures: discretionary-ligatures;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.left_con li .text_con .try-read-box {
-  margin-bottom: 12px;
-}
-.left_con li .text_con .try-read-box .try-read-item {
-  width: 290px;
-  height: 20px;
-  margin-right: 10px;
-  font-size: 0;
-  display: inline-block;
-  margin-bottom: 8px;
-}
-.left_con li .text_con .try-read-box .try-read-item .try-read-img {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 6px;
-  background: url(https://www.imooc.com/static/img/column/try-read-img_new_2x.png);
-  background-repeat: no-repeat;
-  background-size: 34px auto;
-  background-position: center;
-  width: 30px;
-  height: 20px;
-}
-.left_con li .text_con .try-read-box .try-read-item .try-read-title {
-  display: inline-block;
-  font-size: 12px;
-  color: #545c63;
-  text-align: left;
-  line-height: 16px;
-  width: 250px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  vertical-align: middle;
-}
-
-.left_con li .text_con .author-box {
-  display: inline-block;
-  font-size: 0;
-}
-.left_con li .text_con .author-box .author-img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: top center;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.left_con li .text_con .author-box .author-name {
-  margin: 0 8px 0 12px;
-  font-size: 14px;
-  text-align: left;
-  line-height: 36px;
-  font-weight: 700;
-}
-.left_con li .text_con .author-box span {
-  font-size: 12px;
-  color: #1c1f21;
-  vertical-align: middle;
-}
-.left_con li .text_con .author-box .author-title {
-  font-size: 12px;
-  text-align: left;
-  line-height: 36px;
-  margin-left: 8px;
-}
-
-.left_con li .text_con .price_con .sale-price .ori {
-  font-size: 12px;
-  color: #9199a1;
-  text-align: left;
-  line-height: 36px;
-  text-decoration: line-through;
-}
-.left_con li .text_con .price_con .sale-price .sale {
-  font-weight: 700;
-  font-size: 18px;
-  color: #37f;
-  text-align: left;
-  line-height: 36px;
-  margin-right: 8px;
-}
-.countdown .name {
-  color: #fff;
-  line-height: 16px;
-  height: 20px;
-  background-image: linear-gradient(90deg, #37f 0, #74ccff 99%);
-  padding: 2px 6px;
-  font-size: 12px;
-}
-.countdown .clock {
-  color: #545c63;
-  display: inline-block;
-  margin-left: 6px;
-  font-size: 12px;
-  line-height: 20px;
-  font-weight: 700;
-}
-.left_con li .text_con .info span {
-  font-size: 12px;
-  color: #9199a1;
-  text-align: left;
-  line-height: 14px;
-}
-.left_con li .text_con .author-box {
-  display: inline-block;
-  font-size: 0;
-}
-.left_con li .text_con .price_con {
-  display: inline-block;
-  min-height: 56px;
-  margin-right: 10px;
 }
 
 </style>

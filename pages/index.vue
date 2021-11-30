@@ -102,10 +102,11 @@
                 <span class="c-333">猜你喜欢</span>
               </h2>
             </header>
-            <div class="home_guesslike_list">
+            <div class="home_guesslike_list book_item">
               <ul class="content_list">
-                <li class="list" v-for="item in gusslikeList" :key="item.id">
+                <li class="li-list_item" v-for="item in gusslikeList" :key="item.id">
                   <div v-if="item.type === 0">
+                       <p>{{item.title}} </p>
                   </div>
                   <div v-else-if="item.type === 1">
                     <div class="op_artie_content">
@@ -125,7 +126,7 @@
                   </ul>
                 </div>
                   </div>
-                  <div v-else>
+                  <div  v-else>
                     <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
                 <img :src="item.imgUrl" class="img fl" :alt="item.title">
               </nuxt-link>
@@ -134,7 +135,7 @@
                <p class="title">{{item.title}}</p>
                   {{item.title}}
               </nuxt-link>
-                <p class="desc">{{item.describ}}</p>
+                <p class="desc">{{item.content}}</p>
                 <div class="info">
                   <img src="~/assets/img/article_point.png" class="img_point">
                   <span>共32节</span>
@@ -193,8 +194,9 @@
                       </p>
                     </div>
                   </a>
-                </div>
+                   </div>
               </div>
+                   <div class="clearfloat"></div>
                   </div>
                 </li>
               </ul>
@@ -330,7 +332,7 @@ export default {
 .comm-title {
   overflow: hidden;
   clear: both;
-  margin: 0px 0 30px;
+  margin: 0px 0 15px;
 }
 .comm-title h2 {
   font-size: 20px;

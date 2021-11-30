@@ -46,10 +46,10 @@
         </section>
         <div class="row">
           <div class="col-md-8 left_con">
-          <ul class>
+          <ul class="">
            <li class="cleartopicfix" v-for="item in bookList" :key="item.id">
               <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
-                <img :src="item.bookImg" class="img fl" :alt="item.title">
+                <img :src="item.imgUrl" class="img fl" :alt="item.title">
               </nuxt-link>
               <div class="text_con fr">
               <nuxt-link :to="{name:'article-book',query:{id:item.id}}">

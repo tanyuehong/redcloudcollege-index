@@ -102,36 +102,102 @@
                 <span class="c-333">猜你喜欢</span>
               </h2>
             </header>
-            <div>
-              <article class="i-teacher-list">
-                <ul class="of">
-                  <li v-for="teacher in teacherList" :key="teacher.id">
-                    <section class="i-teach-wrap">
-                      <div class="i-teach-pic">
-                        <a href="/teacher/1" :title="teacher.name">
-                          <img :alt="teacher.name" :src="teacher.avatar" />
-                        </a>
-                      </div>
-                      <div class="mt10 hLh30 txtOf tac">
-                        <a
-                          href="/teacher/1"
-                          :title="teacher.name"
-                          class="fsize18 c-666"
-                        >
-                          {{ teacher.name }}
-                        </a>
-                      </div>
-                      <div class="hLh30 txtOf tac">
-                        <span class="fsize14 c-999">{{ teacher.career }}</span>
-                      </div>
-                      <div class="mt15 i-q-txt">
-                        <p class="c-999 f-fA">{{ teacher.intro }}</p>
-                      </div>
-                    </section>
-                  </li>
-                </ul>
-                <div class="clear"></div>
-              </article>
+            <div class="home_guesslike_list">
+              <ul class="content_list">
+                <li class="list" v-for="item in gusslikeList" :key="item.id">
+                  <div v-if="item.type === 0">
+                  </div>
+                  <div v-else-if="item.type === 1">
+                    <div class="op_artie_content">
+                <nuxt-link class="article_title" :to="{name:'practice-detail',query:{id:item.id}}">
+                      {{ item.title }}
+                </nuxt-link>
+                  <p class="op_pratice_describ">
+                    {{ item.content }}
+                  </p>
+                  <ul class="pratice_bottom_icon">
+                    <i class="pratice_icon_view"></i>
+                    <span class="icon_des">{{item.viewCount}}</span>
+                    <i class="pratice_icon_zhan"></span></i>
+                    <span class="icon_des">{{item.good}}</span>
+                    <i class="pratice_icon_comment"></i>
+                    <span class="icon_des">11</span>
+                  </ul>
+                </div>
+                  </div>
+                  <div v-else>
+                    <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
+                <img :src="item.imgUrl" class="img fl" :alt="item.title">
+              </nuxt-link>
+              <div class="text_con fr">
+              <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
+               <p class="title">{{item.title}}</p>
+                  {{item.title}}
+              </nuxt-link>
+                <p class="desc">{{item.describ}}</p>
+                <div class="info">
+                  <img src="~/assets/img/article_point.png" class="img_point">
+                  <span>共32节</span>
+                  <img src="~/assets/img/article_point.png" class="img_point">
+                  <span>{{ item.buyCount }}人已购买</span>
+                </div>
+                <div class="try-read-box">
+                  <a
+                    class="try-read-item"
+                    href="/read/80/article/2090"
+                    target="_blank"
+                  >
+                    <div class="try-read-img"></div>
+                    <p
+                      class="try-read-title"
+                      title="01 开篇词：带你走进网络编程的世界"
+                    >
+                      01 开篇词：带你走进网络编程的世界
+                    </p>
+                  </a>
+                </div>
+                <a class="author-box" href="/u/6773399" target="_blank">
+                  <div
+                    class="author-img"
+                    style="
+                      background-image: url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');
+                    "
+                  ></div>
+                  <span class="author-name">{{item.author}}</span>
+                  <span>/</span>
+                  <span class="author-title">{{item.authorPositon}}</span>
+                </a>
+                <div class="price_con cleartopicfix fr">
+                  <!-- 没有订阅购买 -->
+                  <a
+                    class="sale-price cleartopicfix"
+                    href="/read/80"
+                    target="_blank"
+                  >
+                    <p class="ori fr">原价 ¥ {{ item.oldPrice }}</p>
+                    <p class="sale fr">¥ {{ item.price }}</p>
+                    <div
+                      class="countdown fr"
+                      data-remain="1617854"
+                      style="clear: both"
+                    >
+                      <span class="name fl">限时优惠</span>
+
+                      <p class="clock fl" style="display: none">
+                        <span>倒计时:</span>
+                        <span class="js-day">18天</span>
+                        <span class="js-hour timer">17</span>:
+                        <span class="js-minute timer">24</span>:
+                        <span class="js-second timer">14</span>:
+                        <span class="js-msec timer">0</span>
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
           <div class="op_app_decrb fr mt20">
@@ -169,6 +235,7 @@
 
 <script>
 import '~/assets/css/appdown.css'
+import '~/assets/css/contentlist.css'
 import indexApi from '@/api/index'
 
 export default {
@@ -191,16 +258,13 @@ export default {
     return indexApi.getIndexData().then((response) => {
       return {
         bannerList: response.data.banerList,
-        eduList : response.data.eduList,
-        teacherList : response.data.teacherList
+        eduList: response.data.eduList,
+        gusslikeList: response.data.gusslikeList,
       }
     })
   },
-  created() {
-
-  },
-  methods: {
-  },
+  created() {},
+  methods: {},
 }
 </script>
 

@@ -26,7 +26,7 @@
                   </p>
                   <ul class="pratice_bottom_icon">
                     <i class="pratice_icon_view"></i>
-                    <span class="icon_des">{{bitem.readcount}}</span>
+                    <span class="icon_des">{{bitem.viewCount}}</span>
                     <i class="pratice_icon_zhan"></span></i>
                     <span class="icon_des">{{bitem.good}}</span>
                     <i class="pratice_icon_comment"></i>
@@ -76,7 +76,7 @@
 </template>
 <script>
 import '~/assets/css/appdown.css'
-import '~/assets/css/markdown.css'
+import '~/assets/css/contentlist.css'
 import showdown from 'showdown'
 import realPractice from '@/api/realpractice'
 
@@ -173,52 +173,6 @@ export default {
 .article_list {
   padding-top: 20px;
   padding-left:18px;
-}
-
-.op_artie_content {
-     border-bottom: 1px solid #e5e6eb;
-     margin-right: 20px;
-    margin-bottom: 20px;
-}
- .op_pratice_content .article_title {
-  color: #333;
-  font-weight: 600;
-}
-
-.op_pratice_describ {
-  font-size: 14px;
-  color: #666666;
-}
-.pratice_bottom_icon {
-  padding-left: 0px;
-  display: flex;
-  align-items: center;
-  margin-bottom:20px;
-}
-.pratice_icon_view {
-  background-image: url('~/assets/img/pratice_icon_view.png');
-  height: 26px;
-  width: 26px;
-  display: block;
-}
-
-.pratice_icon_comment {
-  background-image: url('~/assets/img/pratice_icon_comment.png');
-  height: 26px;
-  width: 26px;
-  display: block;
-  margin-left: 50px;
-}
-.icon_des {
-   padding-left:10px;
-}
-
-.pratice_icon_zhan {
-  background-image: url('~/assets/img/pratice_icon_zhan.png');
-  height: 26px;
-  width: 26px;
-  display: block;
-  margin-left: 50px;
 }
 
 .op_pratice_aside {

@@ -1,0 +1,46 @@
+
+/* 这里是blog list的样式*/
+.op_artie_content {
+    border-bottom: 1px solid #e5e6eb;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+ .op_artie_content .article_title {
+  color: #333;
+  font-weight: 600;
+}
+.op_pratice_describ {
+    font-size: 14px;
+    color: #666666;
+  }
+  .pratice_bottom_icon {
+    padding-left: 0px;
+    display: flex;
+    align-items: center;
+    margin-bottom:20px;
+  }
+  .pratice_icon_view {
+    background-image: url('~/assets/img/pratice_icon_view.png');
+    height: 26px;
+    width: 26px;
+    display: block;
+  }
+  
+  .pratice_icon_comment {
+    background-image: url('~/assets/img/pratice_icon_comment.png');
+    height: 26px;
+    width: 26px;
+    display: block;
+    margin-left: 50px;
+  }
+  .icon_des {
+     padding-left:10px;
+  }
+  
+  .pratice_icon_zhan {
+    background-image: url('~/assets/img/pratice_icon_zhan.png');
+    height: 26px;
+    width: 26px;
+    display: block;
+    margin-left: 50px;
+  }

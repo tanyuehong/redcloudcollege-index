@@ -14,7 +14,7 @@
               <a>{{ sutem.name }}</a>
             </li>
           </ul>
-          <div class="op_pratice_content fl">
+          <div class="op_pratice_content book_item fl">
             <ul class="article_list">
               <li v-for="bitem in blogList" :key="bitem.id">
                 <div class="op_artie_content">

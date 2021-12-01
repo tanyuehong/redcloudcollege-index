@@ -119,24 +119,11 @@
                 <p class="desc">{{item.content}}</p>
                 <div class="info">
                   <img src="~/assets/img/article_point.png" class="img_point">
-                  <span>共32节</span>
+                  <span>共{{item.contentCount}}节</span>
                   <img src="~/assets/img/article_point.png" class="img_point">
                   <span>{{ item.buyCount }}人已学习</span>
                 </div>
                 <div class="try-read-box">
-                  <a
-                    class="try-read-item"
-                    href="/read/80/article/2090"
-                    target="_blank"
-                  >
-                    <div class="try-read-img"></div>
-                    <p
-                      class="try-read-title"
-                      title="01 开篇词：带你走进网络编程的世界"
-                    >
-                      01 开篇词：带你走进网络编程的世界
-                    </p>
-                  </a>
                 </div>
                 <a class="author-box" href="/u/6773399" target="_blank">
                   <div class="author-img" style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
@@ -205,12 +192,7 @@
                   {{item.title}}
               </nuxt-link>
                 <p class="desc">{{item.content}}</p>
-                <div class="info">
-                  <img src="~/assets/img/article_point.png" class="img_point">
-                  <span>共32节</span>
-                  <img src="~/assets/img/article_point.png" class="img_point">
-                  <span>{{ item.buyCount }}人已购买</span>
-                </div>
+               
                 <div class="try-read-box">
                   <a
                     class="try-read-item"
@@ -226,6 +208,13 @@
                     </p>
                   </a>
                 </div>
+                 <div class="info">
+                  <img src="~/assets/img/article_point.png" class="img_point">
+                  <span>共{{item.contentCount}}节</span>
+                  <img src="~/assets/img/article_point.png" class="img_point">
+                  <span>{{ item.buyCount }}人已购买</span>
+                </div>
+                <div class="clearfix"> </div>
                 <a class="author-box" href="/u/6773399" target="_blank">
                   <div class="author-img" style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
                   </div>

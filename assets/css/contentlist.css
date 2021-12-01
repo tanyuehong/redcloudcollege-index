@@ -1,5 +1,5 @@
 .content_list {
-  padding-left: 15px;
+  padding-left: 20px;
 }
 
 .book_item li {
@@ -93,40 +93,37 @@
     -o-transform: scale(1.2);
   }
   .book_item li .text_con {
-    width: 75%;
+    width: 590px;
     padding: 0 0 16px 0;
     font-size: 0;
   }
   
   .book_item li .text_con .title {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 20px;
     color: #1c1f21;
     line-height: 24px;
     text-align: left;
-    margin-bottom: 12px;
-    margin-top: 4px;
+    margin-bottom: 9px;
+    margin-top: 0px;
   }
   .book_item li .text_con .info {
-    display: inline-block;
     margin-bottom: 14px;
     vertical-align: top;
+    float: right;
   }
   .book_item li .text_con .info .img_point{
     margin-left:5px;
   } 
   .book_item li .text_con .desc {
-    font-size: 14px;
+    font-size: 13px;
     color: #545c63;
     font-weight: 600;
-    line-height: 14px;
+    line-height: 22px;
     text-align: left;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
     display: inline-block;
-    max-width: 350px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    max-width: 580px;
   }
   .book_item li .text_con .info {
     display: inline-block;
@@ -179,6 +176,8 @@
 
 .book_item li .text_con .try-read-box {
   margin-bottom: 12px;
+  width: 150px;
+  float: left;
 }
 .book_item li .text_con .try-read-box .try-read-item {
   width: 290px;

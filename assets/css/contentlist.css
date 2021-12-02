@@ -1,5 +1,5 @@
 .content_list {
-  padding-left: 20px;
+  padding-left: 20px !important;
 }
 
 .book_item li {
@@ -69,7 +69,7 @@
 /* 这里是专题的样式 */
   .book_item li .img {
     width: 138px;
-    height: 157px;
+    height: 177px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -79,6 +79,11 @@
     -moz-transition: all 0.5s;
     -webkit-transition: all 0.5s;
     -o-transition: all 0.5s;
+  }
+
+  .course_list .img  {
+    width: 138px !important;
+    height: 157px !important;
   }
 
   .book_item li:hover .img {
@@ -96,6 +101,7 @@
     width: 590px;
     padding: 0 0 6px 0;
     font-size: 0;
+    margin-right: 6px;
   }
   
   .book_item li .text_con .title {

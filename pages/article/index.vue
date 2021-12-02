@@ -247,7 +247,7 @@ export default {
   background: #fff;
   box-shadow: 0 2px 4px 0 rgba(28, 31, 33, 0.06);
   box-sizing: border-box;
-  padding: 20px 10px 10px 15px;
+  padding: 20px 0px 10px 15px;
   width: 773px;
 }
 

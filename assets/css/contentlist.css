@@ -94,7 +94,7 @@
   }
   .book_item li .text_con {
     width: 590px;
-    padding: 0 0 16px 0;
+    padding: 0 0 6px 0;
     font-size: 0;
   }
   
@@ -108,8 +108,9 @@
     margin-top: 0px;
   }
   .book_item li .text_con .info {
-    margin-bottom: 14px;
-    vertical-align: top;
+    margin-bottom: 0px;
+    margin-right: 10px;
+    margin-top:6px;
     float: right;
   }
   .book_item li .text_con .info .img_point{
@@ -118,19 +119,14 @@
   .book_item li .text_con .desc {
     font-size: 13px;
     color: #545c63;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 22px;
     text-align: left;
     margin-bottom: 12px;
     display: inline-block;
     max-width: 580px;
   }
-  .book_item li .text_con .info {
-    display: inline-block;
-    margin-bottom: 14px;
-    vertical-align: top;
-  }
-  
+ 
   .book_item li .text_con .info i {
     padding: 0 8px;
     font-size: 12px;
@@ -176,7 +172,7 @@
 
 .book_item li .text_con .try-read-box {
   margin-bottom: 12px;
-  width: 150px;
+  width: 430px;
   float: left;
 }
 .book_item li .text_con .try-read-box .try-read-item {
@@ -201,7 +197,7 @@
 .book_item li .text_con .try-read-box .try-read-item .try-read-title {
   display: inline-block;
   font-size: 12px;
-  color: #545c63;
+  color: #666;
   text-align: left;
   line-height: 16px;
   width: 250px;
@@ -249,7 +245,7 @@
   font-size: 12px;
   color: #9199a1;
   text-align: left;
-  line-height: 36px;
+  line-height: 26px;
   text-decoration: line-through;
 }
 .book_item li .text_con .price_con .sale-price .sale {
@@ -257,7 +253,7 @@
   font-size: 18px;
   color: #37f;
   text-align: left;
-  line-height: 36px;
+  line-height: 26px;
   margin-right: 8px;
 }
 .countdown .name {

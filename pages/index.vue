@@ -125,6 +125,7 @@
                 </div>
                 <div class="try-read-box">
                 </div>
+                  <div class="clearfloat"></div>
                 <a class="author-box" href="/u/6773399" target="_blank">
                   <div class="author-img" style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
                   </div>
@@ -161,7 +162,6 @@
                    </div>
               </div>
                    <div class="clearfloat"></div>
-                  
                       
                   </div>
                   <div v-else-if="item.type === 1">

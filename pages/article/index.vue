@@ -46,7 +46,7 @@
         </section>
         <div class="row">
           <div class="col-md-8 book_item">
-          <ul class="">
+          <ul>
            <li class="cleartopicfix" v-for="item in bookList" :key="item.id">
               <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
                 <img :src="item.imgUrl" class="img fl" :alt="item.title">
@@ -57,12 +57,6 @@
                   {{item.title}}
               </nuxt-link>
                 <p class="desc">{{item.describ}}</p>
-                <div class="info">
-                  <img src="~/assets/img/article_point.png" class="img_point">
-                  <span>共32节</span>
-                  <img src="~/assets/img/article_point.png" class="img_point">
-                  <span>{{ item.buyCount }}人已购买</span>
-                </div>
                 <div class="try-read-box">
                   <a
                     class="try-read-item"
@@ -78,6 +72,13 @@
                     </p>
                   </a>
                 </div>
+                  <div class="info">
+                  <img src="~/assets/img/article_point.png" class="img_point">
+                  <span>共32节</span>
+                  <img src="~/assets/img/article_point.png" class="img_point">
+                  <span>{{ item.buyCount }}人已购买</span>
+                </div>
+                <div class="clearfloat"></div>
                 <a class="author-box" href="/u/6773399" target="_blank">
                   <div class="author-img" style="background-image: url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
                   </div>
@@ -110,203 +111,6 @@
                         <span class="js-msec timer">0</span>
                       </p>
                     </div>
-                  </a>
-                </div>
-              </div>
-            </li>
-            <li class="cleartopicfix">
-              <a href="/read/78" target="_blank">
-                <div
-                  class="img fl"
-                  style="
-                    background-image: url(//img3.sycdn.imooc.com/5ecf52150001770102940333.jpg);
-                  "
-                ></div>
-              </a>
-              <div class="text_con fr">
-                <a href="/read/78" target="_blank">
-                  <p class="title">再学经典：《Effective Java》独家解析</p>
-                </a>
-                <p class="desc">学习Java很重要，学会怎么学习Java更重要</p>
-                <div class="info">
-                  <i class="imv2-dot_samll"></i>
-                  <span>共32节</span>
-                  <i class="imv2-dot_samll"></i>
-                  <span>118人已购买</span>
-                </div>
-                <div class="try-read-box">
-                  <a
-                    class="try-read-item"
-                    href="/read/78/article/1975"
-                    target="_blank"
-                  >
-                    <div class="try-read-img"></div>
-                    <p
-                      class="try-read-title"
-                      title="01 开篇词：为什么要学习本专栏"
-                    >
-                      01 开篇词：为什么要学习本专栏
-                    </p>
-                  </a>
-                  <a
-                    class="try-read-item"
-                    href="/read/78/article/1976"
-                    target="_blank"
-                  >
-                    <div class="try-read-img"></div>
-                    <p class="try-read-title" title="02 Java 源码学习指南">
-                      02 Java 源码学习指南
-                    </p>
-                  </a>
-                  <a
-                    class="try-read-item"
-                    href="/read/78/article/1977"
-                    target="_blank"
-                  >
-                    <div class="try-read-img"></div>
-                    <p class="try-read-title" title="03 Java 反编译指南">
-                      03 Java 反编译指南
-                    </p>
-                  </a>
-                  <a
-                    class="try-read-item"
-                    href="/read/78/article/1978"
-                    target="_blank"
-                  >
-                    <div class="try-read-img"></div>
-                    <p class="try-read-title" title="04 Java 反汇编指南">
-                      04 Java 反汇编指南
-                    </p>
-                  </a>
-                </div>
-                <a class="author-box" href="/u/1246063" target="_blank">
-                  <div
-                    class="author-img"
-                    style="
-                      background-image: url('//img4.sycdn.imooc.com/54dc328d0001b75e04630463-100-100.jpg');
-                    "
-                  ></div>
-                  <span class="author-name">明明如月</span>
-                  <span>/</span>
-                  <span class="author-title">高级JAVA开发工程师</span>
-                </a>
-                <div class="price_con cleartopicfix fr">
-                  <!-- 没有订阅购买 -->
-
-                  <a
-                    class="sale-price cleartopicfix"
-                    href="/read/78"
-                    target="_blank"
-                  >
-                    <p class="ori fr">原价 ¥ 68.00</p>
-                    <p class="sale fr">¥ 49.00</p>
-                    <div
-                      class="countdown fr"
-                      data-remain="1013054"
-                      style="clear: both"
-                    >
-                      <span class="name fl">限时优惠</span>
-
-                      <p class="clock fl" style="display: none">
-                        <span>倒计时:</span>
-                        <span class="js-day">11天</span>
-                        <span class="js-hour timer">17</span>:
-                        <span class="js-minute timer">24</span>:
-                        <span class="js-second timer">14</span>:
-                        <span class="js-msec timer">0</span>
-                      </p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </li>
-
-            <li class="cleartopicfix">
-              <a href="/read/38" target="_blank">
-                <div
-                  class="img fl"
-                  style="
-                    background-image: url(//img1.mukewang.com/5d5bd45b0001765b02940333.jpg);
-                  "
-                ></div>
-              </a>
-              <div class="text_con fr">
-                <a href="/read/38" target="_blank">
-                  <p class="title">JavaScript 设计模式精讲</p>
-                </a>
-                <p class="desc">以不变的设计应对常变框架</p>
-                <div class="info">
-                  <i class="imv2-dot_samll"></i>
-                  <span>共29节</span>
-                  <i class="imv2-dot_samll"></i>
-                  <span>1386人已购买</span>
-                </div>
-                <div class="try-read-box">
-                  <a
-                    class="try-read-item"
-                    href="/read/38/article/476"
-                    target="_blank"
-                  >
-                    <div class="try-read-img"></div>
-                    <p
-                      class="try-read-title"
-                      title="01  开篇 ： 为什么学习本专栏？"
-                    >
-                      01 开篇 ： 为什么学习本专栏？
-                    </p>
-                  </a>
-                  <a
-                    class="try-read-item"
-                    href="/read/38/article/477"
-                    target="_blank"
-                  >
-                    <div class="try-read-img"></div>
-                    <p
-                      class="try-read-title"
-                      title="02 this、new、bind、call、apply"
-                    >
-                      02 this、new、bind、call、apply
-                    </p>
-                  </a>
-                  <a
-                    class="try-read-item"
-                    href="/read/38/article/478"
-                    target="_blank"
-                  >
-                    <div class="try-read-img"></div>
-                    <p class="try-read-title" title="03 闭包与高阶函数">
-                      03 闭包与高阶函数
-                    </p>
-                  </a>
-                  <a
-                    class="try-read-item"
-                    href="/read/38/article/487"
-                    target="_blank"
-                  >
-                    <div class="try-read-img"></div>
-                    <p
-                      class="try-read-title"
-                      title="12 享元模式：驾考现场的考试车"
-                    >
-                      12 享元模式：驾考现场的考试车
-                    </p>
-                  </a>
-                </div>
-                <a class="author-box" href="/u/4546248" target="_blank">
-                  <div
-                    class="author-img"
-                    style="
-                      background-image: url('//img3.mukewang.com/599d28bc0001134304400440-100-100.jpg');
-                    "
-                  ></div>
-                  <span class="author-name">SHERlocked93</span>
-                  <span>/</span>
-                  <span class="author-title">开源社区活跃贡献者</span>
-                </a>
-                <div class="price_con cleartopicfix fr">
-                  <!-- 没有订阅购买 -->
-                  <a class="sale-price" href="/read/38" target="_blank">
-                    <p class="sale">¥ 48.00</p>
                   </a>
                 </div>
               </div>
@@ -443,18 +247,14 @@ export default {
   background: #fff;
   box-shadow: 0 2px 4px 0 rgba(28, 31, 33, 0.06);
   box-sizing: border-box;
-  padding: 50px 40px 10px 50px;
+  padding: 20px 10px 10px 15px;
   width: 773px;
 }
 
 .book_item ul {
   display: block;
-  list-style-type: disc;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-inline-start: 40px;
+  margin:0px;
+  padding:0px;
 }
 
 </style>

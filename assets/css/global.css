@@ -210,11 +210,10 @@ a.current-2 .lh-p-icon{background-position:0 -254px}
 
 /* 这里是首页 样式
 ================================================== */
-#logo{float:left;width:230px;height:70px;overflow:hidden;margin:0 auto; }
-#logo a{display:table-cell;vertical-align:middle;height:70px}
-#logo a img{display:block;width:120px;height:auto;margin-top: 0px;}
-.logo_decrb {margin-left: 55px;}
-.logo_index {width: 200px; margin-left: -5px;}
+#logo{float:left;width:330px;height:60px;overflow:hidden;margin:0 auto; }
+#logo a{display:table-cell;vertical-align:middle;height:60px}
+.logo_decrb {display:block;width:160px;height:auto;margin-top: 20px; margin-left: -8px; float: right;}
+.logo_index {display:block;width:160px;height:auto;margin-top: -15px; float: left;}
 #header{background-color:#fff;box-shadow:0 2px 3px rgba(7,0,2,.04);padding:0px 0px 0px 0px;position:relative;margin-bottom: 1px;}
 
 @media (width<=1160px) {
@@ -231,22 +230,22 @@ a.current-2 .lh-p-icon{background-position:0 -254px}
 
 .in-wrap { background: #f7f7f7;}
 
-.nav{padding:15px 0 0 50px}
+.nav{padding:10px 0 0 50px}
 .nav,.nav li,.nav li a{float:left}
 .nav li a{border-bottom:2px solid transparent;color:#666;display:block;font-size:18px;line-height:46px;padding:0 5px;margin:0 15px;transition:.3s;-webkit-transition:.3s}
 .h-r-login li a:hover,.nav li a:hover,.nav li.current a{text-decoration:none}
 .gf-tx img {width: 50px;}
-.h-r-login,.h-r-search{float:right;padding-top:15px}
+.h-r-login,.h-r-search{float:right;padding-top:5px}
 .h-r-login li{float:left;margin-left:10px;position:relative}
 .h-r-login li a{cursor:pointer;line-height:50px;color:#666;font-size:16px;transition:.3s;-webkit-transition:.3s}
 .h-r-login li.h-r-user a img{border-radius:50%;width:30px;height:30px}
 .h-r-login li.h-r-user span{max-width:60px;height:17px;font-size:16px;line-height:16px;overflow:hidden}
 .red-point{position:absolute;right:-4px;top:8px;display:block;width:8px;height:8px;border-radius:50%;background:#cb2020;text-indent:-9999px}
-.h-r-search{margin:10px 20px 0 0}
+.h-r-search{margin:12px 20px 0 0}
 .h-r-s-box{display:block;position:relative}
-.h-r-s-box input{border:1px solid #e8e8e8;border-radius:20px;color:#aaa;padding:0 15px;font-family:'Microsoft YaHei';width:145px;height:30px;font-size: 12px;line-height:30px;transition:.3s;-webkit-transition:.3s}
+.h-r-s-box input{border:1px solid #e8e8e8;border-radius:20px;color:#aaa;padding:0 15px;font-family:'Microsoft YaHei';width:175px;height:30px;font-size: 12px;line-height:30px;transition:.3s;-webkit-transition:.3s}
 .h-r-s-box .s-btn{background:0 0;border:none;position:absolute;right:3px;top:0;width:30px;height:30px;cursor:pointer}
-.h-r-s-box input:focus{border-color:#ddd;color:#666;width:150px}
+.h-r-s-box input:focus{border-color:#ddd;color:#666;width:180px}
 .h-mobile-mask,.head-mobile,.mw-nav,.mw-nav-btn{display:none}
 .lh-menu{margin:0 10px;padding:0}
 .lh-menu ul li.lh-menu-stair{padding-bottom:5px;margin-bottom:10px}

@@ -82,7 +82,7 @@
               <label class="h-r-s-box">
                 <input
                   type="text"
-                  placeholder="输入你想学的课程"
+                  placeholder="输入你感兴趣的内容"
                   name="queryCourse.courseName"
                   value
                 />

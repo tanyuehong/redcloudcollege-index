@@ -310,6 +310,20 @@ export default {
       },
     }
   },
+
+   head() {
+      return {
+        title: this.title,
+        meta: [
+          {
+            hid: 'keywords',
+            name: 'keywords',
+            content: "开源实践，面试经验，JAVA，前端，Python，技术分享,互联网创业,个人博客,全栈开发,个人创业，独立开发,代码创业",
+          }
+        ]
+      }
+    },
+    
   asyncData({ params, error }) {
     return indexApi.getIndexData().then((response) => {
       return {

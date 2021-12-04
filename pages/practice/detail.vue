@@ -149,12 +149,36 @@ import '~/assets/css/markdown.css'
 import realPractice from '@/api/realpractice'
 
 export default {
-  layout: 'blog',
 
+ data() {
+      return {
+        title: '开源实践网'
+      }
+    },
+    head() {
+      return {
+        title: this.title,
+        meta: [
+          {
+            hid: 'description',
+            name: 'description',
+            content: this.pitem.descrb,
+          },
+          {
+            hid: 'og:description',
+            content: this.pitem.descrb,
+          }
+        ]
+      }
+    },
+
+  layout: 'blog',
+  
   asyncData({ query, error }) {
     return realPractice.getRealPraticeDetail(query.id).then((response) => {
       return {
         pitem: response.data.pitem,
+        title: response.data.pitem.title,
       }
     })
   },

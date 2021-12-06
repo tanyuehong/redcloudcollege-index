@@ -1,89 +1,41 @@
 <template>
-  <div id="aCoursesList" class="bg-fa of">
+  <div class="course_detail">
     <!-- /课程详情 开始 -->
     <section class="container">
+    <div class="course_header">
       <section class="path-wrap hLh30">
         <a href="#" title class="c-999 fsize14">首页</a>
-        \
         <a href="#" title class="c-999 fsize14">
-          {{ courseWebVo.subjectLevelOne }}
+          / {{ courseWebVo.subjectLevelOne }} /
         </a>
-        \
-        <span class="c-333 fsize14">{{ courseWebVo.subjectLevelTwo }}</span>
+        <span class="path_courent fsize14">{{ courseWebVo.subjectLevelTwo }}</span>
       </section>
-      <div>
-        <article class="c-v-pic-wrap" style="height: 357px;">
-          <section class="p-h-video-box" id="videoPlay">
-            <img
-              height="357px"
+
+      <div class="course_top_content">
+        <div class="course_lefte_cover fl">
+          <img
+              width="457px"
               :src="courseWebVo.imgUrl"
               :alt="courseWebVo.title"
               class="dis c-v-pic"
             />
+        </div>
+
+        <div class="course_right_info fr">
+            <div class="course_title">
+                <span>{{courseWebVo.title}}</span> 
+            </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+    </div>
+      <div>
+        <article class="c-v-pic-wrap" style="height: 357px;">
+          <section class="p-h-video-box" id="videoPlay">
+           
           </section>
         </article>
-        <aside class="c-attr-wrap">
-          <section class="ml20 mr15">
-            <h2 class="hLh30 mt15">
-              <span class="c-fff fsize24">{{ courseWebVo.title }}</span>
-            </h2>
-            <section class="c-attr-jg">
-              <span class="c-fff">价格：</span>
-              <b class="c-yellow" style="font-size: 24px;">
-                ￥{{ courseWebVo.price }}
-              </b>
-            </section>
-            <section class="c-attr-mt c-attr-undis">
-              <span class="c-fff fsize14">
-                主讲： {{ courseWebVo.teacherName }}&nbsp;&nbsp;&nbsp;
-              </span>
-            </section>
-            <section class="c-attr-mt of">
-              <span class="ml10 vam">
-                <em class="icon18 scIcon"></em>
-                <a class="c-fff vam" title="收藏" href="#">收藏</a>
-              </span>
-            </section>
-            <section class="c-attr-mt">
-              <a
-                @click="createOrders()"
-                href="#"
-                title="立即购买"
-                class="comm-btn c-btn-3"
-              >
-                立即购买
-              </a>
-            </section>
-          </section>
-        </aside>
-        <aside class="thr-attr-box">
-          <ol class="thr-attr-ol">
-            <li>
-              <p>&nbsp;</p>
-              <aside>
-                <span class="c-fff f-fM">购买数</span>
-                <br />
-                <h6 class="c-fff f-fM mt10">{{ courseWebVo.buyCount }}</h6>
-              </aside>
-            </li>
-            <li>
-              <p>&nbsp;</p>
-              <aside>
-                <span class="c-fff f-fM">课时数</span>
-                <br />
-                <h6 class="c-fff f-fM mt10">20</h6>
-              </aside>
-            </li>
-            <li>
-              <p>&nbsp;</p>
-              <aside>
-                <span class="c-fff f-fM">浏览数</span>
-                <br />
-                <h6 class="c-fff f-fM mt10">501</h6>
-              </aside>
-            </li>
-          </ol>
-        </aside>
         <div class="clear"></div>
       </div>
       <!-- /课程封面介绍 -->
@@ -201,6 +153,39 @@
     <!-- /课程详情 结束 -->
   </div>
 </template>
+
+<style class="course_header">
+
+.course_header {
+  background:#ffffff;
+  padding-top:10px;
+  padding-left:15px;
+}
+
+.path-wrap {
+  margin:0px;
+  line-height:30px;
+} 
+
+.path_courent {
+   color :#f56c6c;
+}
+
+.course_top_content {
+  background:#ffffff;
+  margin-top:5px;
+}
+
+.course_right_info {
+  width:630px;
+  background:green;
+  margin-right:10px;
+}
+.course_right_info .course_title {
+  text-align:left;
+}
+
+</style>
 
 <script>
 import courseApi from '@/api/course'

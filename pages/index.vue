@@ -52,9 +52,7 @@
                         :alt="course.title"
                       />
                       <div class="cc-mask">
-                        <a href="#" title="开始学习" class="comm-btn c-btn-1">
-                          开始学习
-                        </a>
+                      <nuxt-link title="开始学习" class="comm-btn c-btn-1" :to="{name:'course-id',params:{id:course.id}}">开始学习</nuxt-link>
                       </div>
                     </section>
                     <h3 class="hLh30 mt10">

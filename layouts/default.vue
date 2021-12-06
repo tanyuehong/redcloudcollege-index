@@ -4,14 +4,14 @@
     <header id="header">
       <section class="container">
         <h1 id="logo">
-          <a href="#" title="开源实践网">
-            <img
+        <router-link to="/" title="开源实践网">
+              <img
               src="~/assets/img/logo.png"
               class="logo_index"
               alt="开源实践网"
             />
             <img src="~/assets/img/logo_descrb.png" class="logo_decrb" alt="" />
-          </a>
+            </router-link>
         </h1>
 
         <div class="h-r-nsl">

@@ -4,7 +4,7 @@
       <div class="row book_top_content">
         <div class="col-md-3">
           <div class="book_top_img">
-            <img :src="bookItem.bookImg" class="book_top_lefte_img" />
+            <img :src="bookItem.imgUrl" class="book_top_lefte_img" />
           </div>
         </div>
         <div class="col-md-9">

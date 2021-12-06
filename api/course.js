@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import request from '@/utils/serverRq'
 
 export default {
   //条件分页课程查询的方法

@@ -16,7 +16,7 @@
           <section class="p-h-video-box" id="videoPlay">
             <img
               height="357px"
-              :src="courseWebVo.cover"
+              :src="courseWebVo.imgUrl"
               :alt="courseWebVo.title"
               class="dis c-v-pic"
             />

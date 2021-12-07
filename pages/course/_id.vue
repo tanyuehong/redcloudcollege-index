@@ -42,8 +42,10 @@
                 </span>
               </span>
               <i class="icon-sep"></i>
-              <span class="course_info_text">
-                <i class="icon-font i-heart"></i>
+              <img src="~/assets/img/course-faver.png"
+                class="fl"
+              />
+              <span class="course_info_faver">
                 收藏
               </span>
             </div>
@@ -62,10 +64,10 @@
                     <span class="count-down-txt-pad">53</span>
                   </span>
                 </p>
-                <p class="inst-bar-layout-bd inst-seckill-bar-bd">
+                <p class="course-info-price">
                   <span class="basic-price">
                     <span class="basic-price-discount">
-                      <span class="basic-price-unit">￥</span>
+                      <span class="basic-price-current">￥</span>
                       <span class="basic-price-num">1.00</span>
                     </span>
                     <span class="basic-price-origin">
@@ -75,16 +77,13 @@
                   </span>
                 </p>
               </div>
-              <ul class="inst-bar-layout-mores inst-seckill-bar-mores"></ul>
+              <div class="course-goumai">
+               <el-button type="primary">立即购买</el-button>
+               <el-button type="success" icon="el-icon-chat-dot-round">咨询</el-button>
+              </div>
           </div>
           <div class="clearfix"></div>
         </div>
-      </div>
-      <div>
-        <article class="c-v-pic-wrap" style="height: 357px;">
-          <section class="p-h-video-box" id="videoPlay"></section>
-        </article>
-        <div class="clear"></div>
       </div>
       <!-- /课程封面介绍 -->
       <div class="mt20 c-infor-box">
@@ -255,19 +254,26 @@
   float: left;
 }
 
+.course_buy_describ  .course_info_faver {
+   color: #666;
+  float: left;
+  margin-left:3px;
+}
+
 .inst-bar-layout-main {
   border: 1px solid #ff0042;
+  margin-top:10px;
 }
 .inst-bar-layout-main .inst-bar-layout-hd {
   background:red;
   height:40px;
+  padding-top: 10px;
 }
 
 .inst-bar-layout-main .inst-bar-layout {
   color:#ffffff;
   font-size:16px;
   margin-left:15px;
-
 }
 
 .inst-bar-layout-main .count-down-txt {
@@ -281,10 +287,35 @@
     color: #ff4f23;
 }
 
-.basic-price-unit {
-   font-size:14px;
-   color:666;
+.inst-bar-layout-main .course-info-price {
+  height:36px;
+  padding-top:8px;
+  padding-left:10px;
 }
+
+.inst-bar-layout-main .course-info-price .basic-price-num {
+  margin-left:-8px;
+}
+.inst-bar-layout-main .course-info-price .basic-price-origin {
+  margin-left:5px;
+}
+
+.course_buy_describ img {
+  width:22px;
+  margin-top:-1px;
+}
+
+
+
+.basic-price-unit {
+  font-size:14px;
+  color:666666  !important;; 
+}
+
+.course_right_info .course-goumai {
+  margin-top:20px;
+}
+
 
 </style>
 

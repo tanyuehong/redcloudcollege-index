@@ -2,39 +2,87 @@
   <div class="course_detail">
     <!-- /课程详情 开始 -->
     <section class="container">
-    <div class="course_header">
-      <section class="path-wrap hLh30">
-        <a href="#" title class="c-999 fsize14">首页</a>
-        <a href="#" title class="c-999 fsize14">
-          / {{ courseWebVo.subjectLevelOne }} /
-        </a>
-        <span class="path_courent fsize14">{{ courseWebVo.subjectLevelTwo }}</span>
-      </section>
+      <div class="course_header">
+        <section class="path-wrap hLh30">
+          <a href="#" title class="c-999 fsize14">首页</a>
 
-      <div class="course_top_content">
-        <div class="course_lefte_cover fl">
-          <img
-              width="457px"
-              :src="courseWebVo.imgUrl"
+          <a href="#" title class="c-999 fsize14">
+            <!-- {{ courseWebVo.subjectLevelOne }} -->
+            / /
+          </a>
+          <span class="path_courent fsize14">
+            {{ courseWebVo.subjectLevelTwo }}
+          </span>
+        </section>
+
+        <div class="course_top_content">
+          <div class="course_lefte_cover fl">
+            <img
+              width="600px"
+              :src="courseWebVo.adimage"
               :alt="courseWebVo.title"
               class="dis c-v-pic"
             />
-        </div>
+          </div>
 
-        <div class="course_right_info fr">
+          <div class="course_right_info fr">
             <div class="course_title">
-                <span>{{courseWebVo.title}}</span> 
+              <span>{{ courseWebVo.title }}</span>
             </div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
+            <div class="course_buy_describ">
+              <span class="course_info_text">
+                {{ courseWebVo.buyCount }} 购买
+              </span>
 
-    </div>
+              <i class="icon-sep"></i>
+              <span class="course_info_text">
+                好评度
+                <span class="rate-num">
+                  100%
+                </span>
+              </span>
+              <i class="icon-sep"></i>
+              <span class="course_info_text">
+                <i class="icon-font i-heart"></i>
+                收藏
+              </span>
+            </div>
+            <div class="clearfix"></div>
+              <div class="inst-bar-layout-main">
+                <p class="inst-bar-layout-hd">
+                  <span class="inst-bar-layout">
+                    限时抢购
+                  </span>
+                  <span class="count-down-txt">
+                    距离结束30天
+                    <span class="count-down-txt-pad">02</span>
+                    <span class="count-down-txt-colon">:</span>
+                    <span class="count-down-txt-pad">26</span>
+                    <span class="count-down-txt-colon">:</span>
+                    <span class="count-down-txt-pad">53</span>
+                  </span>
+                </p>
+                <p class="inst-bar-layout-bd inst-seckill-bar-bd">
+                  <span class="basic-price">
+                    <span class="basic-price-discount">
+                      <span class="basic-price-unit">￥</span>
+                      <span class="basic-price-num">1.00</span>
+                    </span>
+                    <span class="basic-price-origin">
+                      <span class="basic-price-unit">￥</span>
+                      <span class="basic-price-unit">299.00</span>
+                    </span>
+                  </span>
+                </p>
+              </div>
+              <ul class="inst-bar-layout-mores inst-seckill-bar-mores"></ul>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
       <div>
         <article class="c-v-pic-wrap" style="height: 357px;">
-          <section class="p-h-video-box" id="videoPlay">
-           
-          </section>
+          <section class="p-h-video-box" id="videoPlay"></section>
         </article>
         <div class="clear"></div>
       </div>
@@ -155,34 +203,87 @@
 </template>
 
 <style class="course_header">
-
 .course_header {
-  background:#ffffff;
-  padding-top:10px;
-  padding-left:15px;
+  background: #ffffff;
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .path-wrap {
-  margin:0px;
-  line-height:30px;
-} 
+  margin: 0px;
+  line-height: 30px;
+}
 
 .path_courent {
-   color :#f56c6c;
+  color: #f56c6c;
 }
 
 .course_top_content {
-  background:#ffffff;
-  margin-top:5px;
+  background: #ffffff;
+  margin-top: 10px;
 }
 
+.course_lefte_cover {
+}
 .course_right_info {
-  width:630px;
-  background:green;
-  margin-right:10px;
+  width: 450px;
 }
 .course_right_info .course_title {
-  text-align:left;
+  text-align: left;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.icon-sep {
+  float: left;
+  margin: 2px 20px 0;
+  display: inline-block;
+  vertical-align: middle;
+  width: 1px;
+  height: 14px;
+  background: #ddd;
+}
+
+.course_buy_describ {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.course_buy_describ .course_info_text {
+  color: #666;
+  float: left;
+}
+
+.inst-bar-layout-main {
+  border: 1px solid #ff0042;
+}
+.inst-bar-layout-main .inst-bar-layout-hd {
+  background:red;
+  height:40px;
+}
+
+.inst-bar-layout-main .inst-bar-layout {
+  color:#ffffff;
+  font-size:16px;
+  margin-left:15px;
+
+}
+
+.inst-bar-layout-main .count-down-txt {
+  color:#ffffff;
+  font-size:16px;
+  margin-left: 160px;
+}
+
+.inst-bar-layout-main .basic-price-discount {
+    font-size: 24px;
+    color: #ff4f23;
+}
+
+.basic-price-unit {
+   font-size:14px;
+   color:666;
 }
 
 </style>

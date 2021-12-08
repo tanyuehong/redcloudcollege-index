@@ -86,115 +86,42 @@
         </div>
       </div>
       <!-- /课程封面介绍 -->
-      <div class="mt20 c-infor-box">
-        <article class="fl col-7">
-          <section class="mr30">
-            <div class="i-box">
-              <div>
-                <section id="c-i-tabTitle" class="c-infor-tabTitle c-tab-title">
-                  <a name="c-i" class="current" title="课程详情">课程详情</a>
-                </section>
-              </div>
-              <article class="ml10 mr10 pt20">
-                <div>
-                  <h6 class="c-i-content c-infor-title">
-                    <span>课程介绍</span>
-                  </h6>
-                  <div class="course-txt-body-wrap">
-                    <section class="course-txt-body">
-                      <p v-html="courseWebVo.description">
-                        {{ courseWebVo.description }}
-                      </p>
-                    </section>
+      <div class="course-detail_content">
+         <div class="detail_content_group">
+
+       <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tab-pane label="课程介绍" name="first">课程介绍</el-tab-pane>
+    <el-tab-pane label="课程表" name="second">课程表</el-tab-pane>
+    <el-tab-pane label="评价" name="third">评价</el-tab-pane>
+    <el-tab-pane label="课程问答" name="fourth">课程问答</el-tab-pane>
+  </el-tabs>
+         </div>
+            <div class="op_course_app_decrb fr">
+            <div class="wechatma-con js-wechatma-con">
+              <div class="ma-con">
+                <div class="ma"></div>
+                <div class="desc">
+                  <div class="title">扫码关注开源实践网服务号</div>
+                  <div class="item-con">
+                    <div class="item">干货分享</div>
+                    <div class="item">定期活动</div>
+                    <div class="item">课程优惠</div>
+                    <div class="item">专栏福利</div>
                   </div>
                 </div>
-                <!-- /课程介绍 -->
-                <div class="mt50">
-                  <h6 class="c-g-content c-infor-title">
-                    <span>课程大纲</span>
-                  </h6>
-                  <section class="mt20">
-                    <div class="lh-menu-wrap">
-                      <menu id="lh-menu" class="lh-menu mt10 mr10">
-                        <ul>
-                          <!-- 文件目录 -->
-                          <li
-                            class="lh-menu-stair"
-                            v-for="chapter in chapterVideoList"
-                            :key="chapter.id"
-                          >
-                            <a
-                              href="javascript: void(0)"
-                              :title="chapter.title"
-                              class="current-1"
-                            >
-                              <em class="lh-menu-i-1 icon18 mr10"></em>
-                              {{ chapter.title }}
-                            </a>
-
-                            <ol class="lh-menu-ol" style="display: block;">
-                              <li
-                                class="lh-menu-second ml30"
-                                v-for="video in chapter.children"
-                                :key="video.id"
-                              >
-                                <a
-                                  :href="'/player/' + video.videoSourceId"
-                                  target="_blank"
-                                >
-                                  <span class="fr">
-                                    <i class="free-icon vam mr10">免费试听</i>
-                                  </span>
-                                  <em class="lh-menu-i-2 icon16 mr5">&nbsp;</em>
-                                  {{ video.title }}
-                                </a>
-                              </li>
-                            </ol>
-                          </li>
-                        </ul>
-                      </menu>
-                    </div>
-                  </section>
-                </div>
-                <!-- /课程大纲 -->
-              </article>
+              </div>
+              <div class="text-con">
+                官方优惠福利活动一手掌握，关注开源实践官网（ID：www.redskt.com），和1万+客户端程序员一起成长！
+              </div>
             </div>
-          </section>
-        </article>
-        <aside class="fl col-3">
-          <div class="i-box">
-            <div>
-              <section class="c-infor-tabTitle c-tab-title">
-                <a title href="javascript:void(0)">主讲讲师</a>
-              </section>
-              <section class="stud-act-list">
-                <ul style="height: auto;">
-                  <li>
-                    <div class="u-face">
-                      <a href="#">
-                        <img
-                          :src="courseWebVo.avatar"
-                          width="50"
-                          height="50"
-                          alt
-                        />
-                      </a>
-                    </div>
-                    <section class="hLh30">
-                      <a class="c-333 fsize16 fl" href="#">
-                        {{ courseWebVo.teacherName }}
-                      </a>
-                    </section>
-                    <section class="hLh20">
-                      <span class="c-999">{{ courseWebVo.intro }}</span>
-                    </section>
-                  </li>
-                </ul>
-              </section>
+            <div class="download-app js-show-download clearfix">
+              <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
+              <div class="text fl">
+                <h4>下载开源实践APP</h4>
+                <p>更好的体验 学习随处可享</p>
+              </div>
             </div>
           </div>
-        </aside>
-        <div class="clear"></div>
       </div>
     </section>
     <!-- /课程详情 结束 -->
@@ -221,6 +148,7 @@
 .course_top_content {
   background: #ffffff;
   margin-top: 10px;
+  padding-bottom:20px;
 }
 
 .course_lefte_cover {
@@ -316,12 +244,35 @@
   margin-top:20px;
 }
 
+.course-detail_content {
+  
+   
+    margin-top: 20px;
+   
+}
+
+.course-detail_content .detail_content_group {
+   background: #ffffff;
+   width:790px;
+   padding-left:20px;
+   padding-top: 10px;
+   float:left;
+}
+
+.op_course_app_decrb {
+   width:326px;
+
+}
+
 
 </style>
 
 <script>
+
+import '~/assets/css/appdown.css'
 import courseApi from '@/api/course'
 import ordersApi from '@/api/orders'
+
 export default {
   asyncData({ params, error }) {
     return courseApi.getCourseInfo(params.id).then((response) => {

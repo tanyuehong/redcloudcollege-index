@@ -5,10 +5,8 @@
       <div class="course_header">
         <section class="path-wrap hLh30">
           <a href="#" title class="c-999 fsize14">首页</a>
-
           <a href="#" title class="c-999 fsize14">
-            <!-- {{ courseWebVo.subjectLevelOne }} -->
-            / /
+            / {{ courseWebVo.subjectLevelOne }} /
           </a>
           <span class="path_courent fsize14">
             {{ courseWebVo.subjectLevelTwo }}
@@ -91,6 +89,11 @@
 
        <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane label="课程介绍" name="first">
+      <div class="course-video-descrb">
+            <div class="course-video-descrb-content">
+                  这里是课程介绍
+            </div>
+      </div>
     </el-tab-pane>
     <el-tab-pane label="课程表" name="second">
 
@@ -110,6 +113,7 @@
           </div>
        </div>
        </div>
+       <div class="clearfix"></div>
        </div>
     </div>
 
@@ -239,7 +243,7 @@
 
 .inst-bar-layout-main .course-info-price {
   height:36px;
-  padding-top:8px;
+  margin-top:8px;
   padding-left:10px;
 }
 
@@ -255,8 +259,6 @@
   margin-top:-1px;
 }
 
-
-
 .basic-price-unit {
   font-size:14px;
   color:666666  !important;; 
@@ -267,10 +269,7 @@
 }
 
 .course-detail_content {
-  
-   
     margin-top: 20px;
-   
 }
 
 .course-detail_content .detail_content_group {
@@ -278,6 +277,7 @@
    width:790px;
    padding-left:20px;
    padding-top: 10px;
+   padding-left:20px;
    float:left;
 }
 
@@ -285,7 +285,6 @@
    width:326px;
 
 }
-
 
 </style>
 

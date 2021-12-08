@@ -2,6 +2,7 @@
   <div class="golobal_content">
     <div class="op_top_back"></div>
     <section class="container">
+      <div class="practice-content">
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane
           :label="item.name"
@@ -71,6 +72,7 @@
           </div>
         </el-tab-pane>
       </el-tabs>
+      </div>
     </section>
   </div>
 </template>
@@ -116,9 +118,11 @@ export default {
   background-color: white;
   height: 70px;
 }
-.el-tabs--top {
-  margin-top: -50px;
+
+.practice-content {
+  margin-top:-50px;
 }
+
 .el-tabs__header {
   background-color: white;
 }

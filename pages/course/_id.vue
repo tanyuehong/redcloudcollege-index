@@ -90,8 +90,30 @@
          <div class="detail_content_group">
 
        <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="课程介绍" name="first">课程介绍</el-tab-pane>
-    <el-tab-pane label="课程表" name="second">课程表</el-tab-pane>
+    <el-tab-pane label="课程介绍" name="first">
+    </el-tab-pane>
+    <el-tab-pane label="课程表" name="second">
+
+    <div class="course-chapter-detail">
+       <div class="course-chapter-one">
+          <div class="course-chaper-title">
+            课程导读
+          <div>
+          <div class="course-chaper-list">
+               <li>  
+            <nuxt-link :to="{name:'course-classroom'}">
+         
+                 第一节  本课程讲什么？适合谁？
+               
+            </nuxt-link>
+            </li>
+          </div>
+       </div>
+       </div>
+       </div>
+    </div>
+
+    </el-tab-pane>
     <el-tab-pane label="评价" name="third">评价</el-tab-pane>
     <el-tab-pane label="课程问答" name="fourth">课程问答</el-tab-pane>
   </el-tabs>

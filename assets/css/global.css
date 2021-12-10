@@ -212,7 +212,7 @@ a.current-2 .lh-p-icon{background-position:0 -254px}
 ================================================== */
 #logo{float:left;width:330px;height:60px;overflow:hidden;margin:0 auto; }
 #logo a{display:table-cell;vertical-align:middle;height:60px}
-.logo_decrb {display:block;width:160px;height:auto;margin-top: 20px; margin-left: -8px; float: right;}
+.logo_decrb {display:block;width:160px;height:auto;margin-top: 20px; margin-left: -8px; margin-bottom: 0px; margin-right: 0px; float: right;}
 .logo_index {display:block;width:160px;height:auto;margin-top: -15px; float: left;}
 #header{background-color:#fff;box-shadow:0 2px 3px rgba(7,0,2,.04);padding:0px 0px 0px 0px;position:relative;margin-bottom: 1px;}
 

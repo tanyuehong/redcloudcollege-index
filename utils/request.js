@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 
-var tipsShowTime = 3000
+var tipsShowTime = 2000
 // 创建axios实例
 const service = axios.create({
   baseURL: 'http://localhost/api', // api的base_url

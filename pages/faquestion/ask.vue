@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-md-8">
             <div class="breadcrumb red_breadcrumb">
-              <a class="section" href="/faquestion">红云问答</a>
+              <a class="section" href="/faquestion">开源实践问答</a>
               <span
                 class="glyphicon glyphicon glyphicon-menu-right"
                 aria-hidden="true"
@@ -122,6 +122,14 @@
                   描述（请对问题进行详细描述：如软件运行环境、详细错误、异常信息等）
                 </label>
                 <client-only>
+                 <div class="quill-editor" 
+         :content="content"
+         @change="onEditorChange($event)"
+         @blur="onEditorBlur($event)"
+         @focus="onEditorFocus($event)"
+         @ready="onEditorReady($event)"
+         v-quill:myQuillEditor="editorOption">
+    </div>
                 </client-only>
               </div>
               <div class="field">
@@ -186,6 +194,10 @@
 
 <script>
 import askApi from '@/api/askqustion'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import 'quill/dist/quill.core.css'
+
 export default {
   data() {
     return {
@@ -195,9 +207,32 @@ export default {
       asktitle: '',
       asktag: '',
       errtips: '',
+       content: '<p>I am Example</p>',
+        editorOption: {
+          placeholder: "请输入您的问题",
+          modules: {
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],
+              ['blockquote', 'code-block']
+            ]
+          }
+        },
     }
   },
   methods: {
+     onEditorBlur(editor) {
+        console.log('editor blur!', editor)
+      },
+      onEditorFocus(editor) {
+        console.log('editor focus!', editor)
+      },
+      onEditorReady(editor) {
+        console.log('editor ready!', editor)
+      },
+      onEditorChange({ editor, html, text }) {
+        console.log('editor change!', editor, html, text)
+        this.content = html
+      },
     publishAsk() {
       if (this.asktitle.length < 6) {
         this.errtips = '问题标题必须六个字符以上哈！'
@@ -419,6 +454,11 @@ export default {
   margin-left: 16px;
 }
 
+.ui.message .list li {
+  padding-top:5px;
+  margin-left:5px;
+}
+
 .tips_error_show {
   position: absolute;
   top: 10px;
@@ -426,5 +466,9 @@ export default {
   color: red;
   font-size: 12px;
   width: 100%;
+}
+
+.quill-editor {
+   height:200px;
 }
 </style>

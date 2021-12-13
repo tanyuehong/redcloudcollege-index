@@ -136,7 +136,7 @@ export default {
   margin-top: 10px;
 }
 
-.extra .question-tags  a,
+.extra .question-tags > a,
 img {
   display: inline-block;
   vertical-align: baseline;

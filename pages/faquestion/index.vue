@@ -3,7 +3,7 @@
     <div class="header_xuanchuan">
       <div class="container">
         <div class="header_annation">
-          <h1 class="answer_title">开源实践问答，更专业的技术问答社区</h1>
+          <h1 class="answer_title">开源实践问答，有问必答社区</h1>
           <p class="desc">您的每一个问题，我们都会为您选择最优的答案。并且通过人工智能和技术专家维护问题列表，方便查找，为大家在学习路上解疑答惑。</p>
         </div>
 
@@ -157,9 +157,9 @@
   margin-top: 15px;
 }
 .header_annation {
-  width: 600px;
+  width: 620px;
   float: left;
-  margin-top: 60px;
+  margin-top: 50px;
   margin-left: 40px;
 }
 

@@ -3,20 +3,16 @@
     <!-- /课程列表 开始 -->
     <section class="container">
       <div class="course_content">
-        <header class="comm-title">
-          <h2 class="fl tac mt20">
-            <span class="c-333">全部课程</span>
-          </h2>
+        <header class="course-title">
+          <h2>全部课程</h2>
         </header>
-        <section class="c-sort-box">
-          <section class="c-s-dl">
-            <dl>
-              <dt>
-                <span class="c-999 fsize14">课程类别</span>
-              </dt>
-              <dd class="c-s-dl-li">
-                <ul class="clearfix">
-                  <li>
+        <div class="course-class-group">
+          <section class="course-top-group">
+           <div class="course-group-wrap">
+            <span>课程类别</span>
+           </div>
+            <ul class="op_couse_subtag">
+                <li>
                     <a title="全部" href="#">全部</a>
                   </li>
                   <li
@@ -32,54 +28,20 @@
                       {{ item.title }}
                     </a>
                   </li>
-                </ul>
-              </dd>
-            </dl>
-            <dl>
-              <dt>
-                <span class="c-999 fsize14"></span>
-              </dt>
-              <dd class="c-s-dl-li">
-                <ul class="clearfix">
-                  <li
-                    v-for="(item, index) in subSubjectList"
-                    :key="index"
-                    :class="{ active: twoIndex == index }"
-                  >
-                    <a
-                      :title="item.title"
-                      href="#"
-                      @click="searchTwo(item.id, index)"
-                    >
-                      {{ item.title }}
-                    </a>
-                  </li>
-                </ul>
-              </dd>
-            </dl>
-            <div class="clear"></div>
+            </ul>
           </section>
-          <div class="js-wrap">
-            <section class="fr">
-              <span class="c-ccc">
-                <i class="c-master f-fM">1</i>
-                /
-                <i class="c-666 f-fM">1</i>
-              </span>
-            </section>
-            <section class="fl">
-              <ol class="js-tap clearfix">
-                <li :class="{ 'current bg-orange': buyCountSort != '' }">
-                  <a
-                    title="销量"
-                    href="javascript:void(0);"
-                    @click="searchBuyCount()"
-                  >
+          </div>
+          </div>
+          <div class="clear"></div>
+          <section class="fl">    
+              <ul class="op_course_subtag clearfix">
+                <li class="li-course-item">
+                  <a title="销量" href="javascript:void(0);" @click="searchBuyCount()">
                     销量
                     <span :class="{ hide: buyCountSort == '' }">↓</span>
                   </a>
                 </li>
-                <li :class="{ 'current bg-orange': gmtCreateSort != '' }">
+                <li class="li-course-item">
                   <a
                     title="最新"
                     href="javascript:void(0);"
@@ -89,7 +51,7 @@
                     <span :class="{ hide: gmtCreateSort == '' }">↓</span>
                   </a>
                 </li>
-                <li :class="{ 'current bg-orange': priceSort != '' }">
+                <li class="li-course-item">
                   <a
                     title="价格"
                     href="javascript:void(0);"
@@ -99,10 +61,10 @@
                     <span :class="{ hide: priceSort == '' }">↓</span>
                   </a>
                 </li>
-              </ol>
+              </ul>
             </section>
-          </div>
-          <div class="mt40">
+            <div class="clearfix"></div>
+          <div class="course-list-content">
             <!-- /无数据提示 开始-->
             <section class="no-data-wrap" v-if="data.total == 0">
               <em class="icon30 no-data-ico">&nbsp;</em>
@@ -111,7 +73,7 @@
               </span>
             </section>
             <!-- /无数据提示 结束-->
-            <article v-if="data.total > 0" class="comm-course-list">
+            <div v-if="data.total > 0" class="comm-course-list">
               <ul class="of" id="bna">
                 <li v-for="item in data.items" :key="item.id">
                   <div class="cc-l-wrap">
@@ -126,7 +88,7 @@
                       </div>
                     </section>
                     <h3 class="hLh30 mt10">
-                      <nuxt-link :title="item.title" class="course-title fsize18 c-333" :to="{name:'course-id',query:{id:item.id}}">{{ item.title }}</nuxt-link>
+                      <nuxt-link :title="item.title" class="course-detail-title fsize18 c-333" :to="{name:'course-id',query:{id:item.id}}">{{ item.title }}</nuxt-link>
                     </h3>
                     <section class="mt10 hLh20 of">
                       <span
@@ -145,7 +107,7 @@
                 </li>
               </ul>
               <div class="clear"></div>
-            </article>
+            </div>
           </div>
           <!-- 公共分页 开始 -->
           <div>
@@ -202,6 +164,7 @@
         </section>
       </div>
     </section>
+     </section>
     <!-- /课程列表 结束 -->
   </div>
 </template>
@@ -344,6 +307,16 @@ export default {
 }
 </script>
 <style scoped>
+
+.course-title {
+    overflow: hidden;
+    clear: both;
+    margin: 0px 0px 20px 0px;
+    border-bottom: 1px solid rgba(28, 31, 33, 0.1);
+    padding-bottom: 15px;
+    padding-left: 15px;
+}
+
 .active {
   background: #bdbdbd;
 }
@@ -355,6 +328,82 @@ export default {
 }
 .course_content {
   background-color: white;
+  padding-top:15px;
 }
-.c-sort-box{margin-top:0px}
+
+.course_content h2 {
+  font-size:20px;
+}
+
+.course_content .course_header_title {
+  text-align:left;
+  padding-left:15px;
+  color:#333;
+  margin-bottom:10px;
+  line-height: 40px;
+  border-bottom: 1px dotted #ddd;
+}
+
+.course-top-group .op_couse_subtag {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  line-height:19px;
+  padding-left: 0px;
+  padding-bottom:20px;
+  padding-left:10px;
+  font-size:14px;
+  color:#666;
+}
+
+.course-top-group .op_couse_subtag li {
+  margin-right:15px;
+}
+
+.course-top-group .course-group-wrap {
+  float:left;
+  padding-left:15px;
+  font-size:14px;
+  color:#666;
+  line-height:auto;
+}
+.c-sort-box {
+  margin-top:0px;
+}
+
+.op_course_subtag {
+  display: flex;
+  flex-wrap: wrap;
+   height: auto;
+   margin-top: 10px;
+}
+
+.op_course_subtag .li-course-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 1rem;
+    font-size: 1.2rem;
+    color: #8a9aa9;
+    padding: 0 0.83rem;
+    margin-bottom: 1rem;
+    margin-right: 20px;
+    height: 32px;
+    width: 70px;
+}
+
+.course-list-content {
+  background:#ffffff;
+  padding-top: 20px;
+}
+
+.course-detail-title {
+    overflow: hidden;
+    clear: both;
+    margin: 0px 0px 20px 0px;
+    padding-bottom: 15px;
+    padding-left: 0px;
+}
+
 </style>

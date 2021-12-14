@@ -207,7 +207,7 @@ export default {
       asktitle: '',
       asktag: '',
       errtips: '',
-       content: '<p>I am Example</p>',
+       content: '',
         editorOption: {
           placeholder: "请输入您的问题",
           modules: {

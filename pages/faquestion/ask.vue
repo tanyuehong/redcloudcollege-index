@@ -121,7 +121,6 @@
                 <label>
                   描述（请对问题进行详细描述：如软件运行环境、详细错误、异常信息等）
                 </label>
-                <client-only>
                  <div class="quill-editor" 
          :content="content"
          @change="onEditorChange($event)"
@@ -130,7 +129,6 @@
          @ready="onEditorReady($event)"
          v-quill:myQuillEditor="editorOption">
     </div>
-                </client-only>
               </div>
               <div class="field">
                 <div class="ui checkbox">

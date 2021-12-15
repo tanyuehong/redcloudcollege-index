@@ -309,12 +309,15 @@ export default {
 <style scoped>
 
 .course-title {
-    overflow: hidden;
-    clear: both;
-    margin: 0px 0px 20px 0px;
-    border-bottom: 1px solid rgba(28, 31, 33, 0.1);
-    padding-bottom: 15px;
-    padding-left: 15px;
+  overflow: hidden;
+  clear: both;
+  margin: 0px 0px 20px 0px;
+  border-bottom: 1px solid rgba(28, 31, 33, 0.1);
+  padding-bottom: 15px;
+  padding-left: 15px;
+}
+.course-class-group {
+   margin-top:10px;
 }
 
 .active {
@@ -328,11 +331,15 @@ export default {
 }
 .course_content {
   background-color: white;
-  padding-top:15px;
+  padding-top:20px;
 }
 
 .course_content h2 {
   font-size:20px;
+  font-weight: 600;
+   margin-top: 0px;
+  margin-bottom: 0px;
+  color: #333;
 }
 
 .course_content .course_header_title {
@@ -347,8 +354,6 @@ export default {
 .course-top-group .op_couse_subtag {
   display: flex;
   flex-wrap: wrap;
-  height: auto;
-  line-height:19px;
   padding-left: 0px;
   padding-bottom:20px;
   padding-left:10px;
@@ -366,9 +371,6 @@ export default {
   font-size:14px;
   color:#666;
   line-height:auto;
-}
-.c-sort-box {
-  margin-top:0px;
 }
 
 .op_course_subtag {

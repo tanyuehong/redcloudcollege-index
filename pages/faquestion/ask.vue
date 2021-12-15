@@ -195,6 +195,7 @@ import askApi from '@/api/askqustion'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import 'quill/dist/quill.core.css'
+import '~/assets/css/quilleditor.css'
 
 export default {
   data() {
@@ -273,6 +274,7 @@ export default {
 </script>
 
 <style>
+
 .ask_content {
   background: #fff;
   padding-top: 15px;
@@ -456,7 +458,6 @@ export default {
   padding-top:5px;
   margin-left:5px;
 }
-
 .tips_error_show {
   position: absolute;
   top: 10px;
@@ -466,7 +467,4 @@ export default {
   width: 100%;
 }
 
-.quill-editor {
-   height:200px;
-}
 </style>

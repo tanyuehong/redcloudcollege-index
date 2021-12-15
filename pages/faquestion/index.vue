@@ -3,8 +3,8 @@
     <div class="header_xuanchuan">
       <div class="container">
         <div class="header_annation">
-          <h1 class="answer_title">开源实践问答，有问必答社区</h1>
-          <p class="desc">您的每一个问题，我们都会为您选择最优的答案。并且通过人工智能和技术专家维护问题列表，方便查找，为大家在学习路上解疑答惑。</p>
+          <h1 class="answer_title">开源实践问答，有问必答的社区</h1>
+          <p class="desc">每一个问题，我们都会选择一个最优的答案。并且通过人工分类和技术专家维护问题列表，方便查找，为大家在学习路上解疑答惑。</p>
         </div>
 
         <img
@@ -34,17 +34,16 @@
                   </li>
                   <li>
                     <span></span>
-                    <a
-                      href="airclass://airclass/tab/index"
-                      target="_blank"
-                    >【新手提问导读】提问的艺术</a>
+                      <nuxt-link :to="{name:'faquestion-howtoask'}">
+                      【新手提问导读】提问的艺术
+                       </nuxt-link>
                   </li>
                   <li>
                     <span></span>
                     <a
                       href="airclass://www.zuoyebang.com/live/native/mvp/video?courseId=560460&lessonId=516822"
                       target="_blank"
-                    >欢迎加入CSDN问答用户群</a>
+                    >欢迎加入开源问答用户群</a>
                   </li>
                 </ul>
               </div>
@@ -153,8 +152,8 @@
 }
 .header_annation .desc {
   color: white;
-  font-size: 16px;
-  margin-top: 15px;
+  font-size:16px;
+  margin-top:25px;
 }
 .header_annation {
   width: 620px;
@@ -407,10 +406,19 @@ export default {
       });
     },
     jumpStartQuestion() {
+    var item = window.localStorage.getItem('show_howto-ask');
+    if (item) {
       this.$router.push({
+        name: "faquestion-ask",
+        query: {},
+      });
+    } else {
+       window.localStorage.setItem('show_howto-ask', '1')
+       this.$router.push({
         name: "faquestion-howtoask",
         query: {},
       });
+    }
     },
   },
 };

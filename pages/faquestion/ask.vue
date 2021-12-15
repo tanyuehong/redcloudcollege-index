@@ -277,6 +277,10 @@ export default {
 
 <style>
 
+.checkbox {
+  margin-left:-15px;
+}
+
 .ask_content {
   background: #fff;
   padding-top: 15px;

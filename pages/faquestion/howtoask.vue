@@ -54,15 +54,13 @@
                 编程技术、软件算法、开发工具相关
               </li>
               <li class="mb5 hook hook-primary purclearfix">
-                <div
-                  class="pull-left"
-                  style="margin-left: 28px; margin-top: -22px;"
-                >
+                <div class="pull-left">
                   <strong>标题</strong>
                   清晰明了，
                   <strong>内容</strong>
                   包含必要的操作环境、截图和代码、期望结果与实际结果
                 </div>
+                <div class="clearfix"></div>
               </li>
               <li class="mb5 hook hook-primary">
                 善用
@@ -96,9 +94,9 @@
         </p>
         <div class="mt40 border-top">
           <div class="text-center mt40 mb40">
-            <a href="/faquestion/ask?freshman=1" class="btn btn-primary btn-lg">
-              我已知晓，继续提问
-            </a>
+           <nuxt-link class="btn btn-primary btn-lg" :to="{name:'faquestion-ask',query:{freshman:1}}">
+                我已知晓，继续提问
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -107,6 +105,10 @@
 </template>
 
 <style scoped>
+
+.pull-left {
+  width:408px;
+}
 .wrap {
   padding-bottom: 30px;
   padding-left: 60px;

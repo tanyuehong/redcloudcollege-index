@@ -15,14 +15,13 @@
       </el-carousel>
       </div>
       <section class="container">
-        <section class="c-sort-box">
-          <section class="c-s-dl">
-            <dl>
-              <dt>
-                <span class="c-999 fsize14">专题类别</span>
-              </dt>
-              <dd class="c-s-dl-li">
-                <ul class="cleartopicfix">
+        <div class="row">
+          <div class="col-md-8 book_item">
+           <section class="zhuanti-top-group">
+                <div class="zhuanti-group-title">
+                <span class="c-666 fsize14">专题类别</span>
+                </div>
+                <ul class="zhuanti-group-detail">
                   <li>
                     <a title="全部" href="#">iOS</a>
                   </li>
@@ -39,13 +38,8 @@
                     >
                   </li>
                 </ul>
-              </dd>
-            </dl>
             <div class="clear"></div>
           </section>
-        </section>
-        <div class="row">
-          <div class="col-md-8 book_item">
           <ul>
            <li class="cleartopicfix" v-for="item in bookList" :key="item.id">
               <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
@@ -212,6 +206,26 @@ export default {
 </script>
 
 <style>
+
+.zhuanti-top-group {
+   border-bottom: 1px solid rgba(28, 31, 33, 0.1);
+   margin-bottom: 20px;
+}
+
+.zhuanti-group-title {
+  float:left;
+  margin-right:16px;
+  
+}
+
+.zhuanti-group-detail {
+  float:left;
+}
+
+.zhuanti-group-detail li {
+  border: none;
+  margin-bottom:16px;
+}
 .el-main {
   padding: 0px;
 }

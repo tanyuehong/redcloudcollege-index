@@ -124,13 +124,14 @@
                 <div class="try-read-box">
                 </div>
                   <div class="clearfloat"></div>
-                <a class="author-box" href="/u/6773399" target="_blank">
+
+                    <nuxt-link class="author-box" :to="{name:'teacher-id',query:{id:item.id}}">
                   <div class="author-img" style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
                   </div>
                   <span class="author-name">{{item.author}}</span>
                   <span>/</span>
                   <span class="author-title">{{item.authorPositon}}</span>
-                </a>
+              </nuxt-link>
                 <div class="price_con cleartopicfix fr">
                   <!-- 没有订阅购买 -->
                   <a
@@ -213,13 +214,14 @@
                   <span>{{ item.buyCount }}人已购买</span>
                 </div>
                 <div class="clearfix"> </div>
-                <a class="author-box" href="/u/6773399" target="_blank">
-                  <div class="author-img" style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
+                   <nuxt-link class="author-box" :to="{name:'teacher-id',query:{id:item.id}}">
+                <div class="author-img" style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
                   </div>
                   <span class="author-name">{{item.author}}</span>
                   <span>/</span>
                   <span class="author-title">{{item.authorPositon}}</span>
-                </a>
+              </nuxt-link>
+
                 <div class="price_con cleartopicfix fr">
                   <!-- 没有订阅购买 -->
                   <a

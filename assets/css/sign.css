@@ -2,6 +2,10 @@ body{
     background-color: #F1F1F1;
 }
 
+.sign_downapp {
+    width: 260px;
+}
+
 *, :after, :before {
     box-sizing: border-box;
 }
@@ -37,7 +41,7 @@ a:hover{
     min-height: 750px;
     text-align: center;
     font-size: 14px;
-    background-color: #f1f1f1;
+    background-color: white;
 }
 
 /*表单样式*/
@@ -45,15 +49,15 @@ a:hover{
     background-color: #FFFFFF;
     width: 500px;
     padding: 50px;
-    margin: 60px auto 0 auto;
+    margin: 160px auto 0 auto;
     box-shadow: 0 0 8px rgba(0,0,0,0.1);
     border-radius: 5px;
+    margin-right: 80px;
 }
 
 .sign .logo{
-    top: 56px;
-    left: 50px;
-    margin-top: 20px;
+  top: 56px;
+  left: 50px;
 }
 
 .sign .sing_main {
@@ -138,9 +142,7 @@ a:hover{
     font-size: 18px;
     color: #969696;
 }
-.sign .logo img {
-    height: 100px;
-}
+
 .sign .sign-up-button{
     margin-top: 20px;
     width: 100%;

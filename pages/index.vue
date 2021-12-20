@@ -55,7 +55,7 @@
                       <nuxt-link title="开始学习" class="comm-btn c-btn-1" :to="{name:'course-id',params:{id:course.id}}">开始学习</nuxt-link>
                       </div>
                     </section>
-                    <h3 class="hLh30 mt10">
+                    <h3 class="hLh30 mt10 mb5">
                       <a
                         href="#"
                         :title="course.title"
@@ -64,7 +64,7 @@
                         {{ course.title }}
                       </a>
                     </h3>
-                    <section class="mt10 hLh20 of">
+                    <section class="hLh20 of">
                       <span
                         class="fr jgTag bg-green"
                         v-if="Number(course.price) === 0"
@@ -339,6 +339,15 @@ export default {
 </script>
 
 <style>
+
+.jgAttr  {
+  font-size:16px;
+}
+
+.cc-l-wrap h3 {
+  color: #404040;
+  font-weight: bold;
+}
 .el-carousel__item a {
   display: block;
   width: 100%;

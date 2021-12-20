@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main fr">
     <div class="sing_main">
     <div class="title">
       <a class="active" href="/login">登录</a>
@@ -67,12 +67,13 @@
           </li>
         </ul>
       </div>
-      </div>
-    </div>
+  </div>
+  </div>
   </div>
 </template>
 
 <script>
+import '~/assets/css/appdown.css'
 import "~/assets/css/sign.css";
 import "~/assets/css/iconfont.css";
 import cookie from "js-cookie";

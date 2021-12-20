@@ -61,9 +61,6 @@
                     class="vam picImg"
                     alt
                   />
-                  <span id="userName" class="vam disIb">
-                    {{ loginInfo.nickname }}
-                  </span>
                 </a>
                 <a
                   href="javascript:void(0);"

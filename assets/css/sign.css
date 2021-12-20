@@ -2,6 +2,14 @@ body{
     background-color: #F1F1F1;
 }
 
+.app-xuan-down {
+    margin-top: 115px;
+    margin-left: 30px;
+}
+
+.app-xuan-down  .el-button {
+    font-weight: 400;
+}
 .sign_downapp {
     width: 260px;
 }
@@ -49,7 +57,7 @@ a:hover{
     background-color: #FFFFFF;
     width: 500px;
     padding: 50px;
-    margin: 160px auto 0 auto;
+    margin: 120px auto 0 auto;
     box-shadow: 0 0 8px rgba(0,0,0,0.1);
     border-radius: 5px;
     margin-right: 80px;

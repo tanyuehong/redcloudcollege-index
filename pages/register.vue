@@ -1,12 +1,15 @@
 <template>
-  <div class="main">
+  <div class="main fr">
   <div class="sing_main">
     <div class="title">
-      <a href="/login">登录</a>
+      <nuxt-link :to="{name:'login'}">
+          登录
+      </nuxt-link>
       <span>·</span>
-      <a class="active" href="/register">注册</a>
+      <nuxt-link class="active" :to="{name:'register'}">
+          注册
+      </nuxt-link>
     </div>
-
     <div class="sign-up-container">
       <el-form ref="userForm" :model="params">
         <el-form-item

@@ -2,9 +2,13 @@
   <div class="main fr">
     <div class="sing_main">
     <div class="title">
-      <a class="active" href="/login">登录</a>
+    <nuxt-link class="active" :to="{name:'login'}">
+          登录
+      </nuxt-link>
       <span>·</span>
-      <a href="/register" class>注册</a>
+      <nuxt-link :to="{name:'register'}">
+          注册
+      </nuxt-link>
     </div>
 
     <div class="sign-up-container">

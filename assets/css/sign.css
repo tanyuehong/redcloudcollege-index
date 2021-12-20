@@ -94,13 +94,13 @@ a:hover{
 }
 
 .sign .title a:hover{
-    border-bottom: 2px solid #3BB149;
+    border-bottom: 2px solid #f56c6c;
 }
 
 .sign .title .active{
     font-weight: 700;
-    color: #3BB149;
-    border-bottom: 2px solid #3BB149;
+    color: #f56c6c;
+    border-bottom: 2px solid #f56c6c;
 }
 
 .sign .title span{

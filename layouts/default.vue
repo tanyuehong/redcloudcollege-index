@@ -54,21 +54,26 @@
               </li>
               <li v-if="loginInfo.id" id="is-login-two" class="h-r-user">
                 <a href="/ucenter" title>
-                  <img
+                 <el-dropdown>
+      <span class="el-dropdown-link">
+         <img
                     :src="loginInfo.avatar"
                     width="30"
                     height="30"
                     class="vam picImg"
                     alt
-                  />
-                </a>
-                <a
-                  href="javascript:void(0);"
-                  title="退出"
-                  @click="logout()"
-                  class="ml5"
-                >
-                  退出
+                  /><i class="el-icon-arrow-down el-icon--right"></i>
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item icon="el-icon-user-solid">我的主页</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-star-off">我的收藏</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-collection">已购内容</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-question">帮助与反馈</el-dropdown-item>
+        <el-dropdown-item icon=" el-icon-setting">设置</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-switch-button">退出</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+                 
                 </a>
               </li>
               <!-- /未登录显示第1 li；登录后显示第2，3 li -->

@@ -16,7 +16,7 @@
         </h1>
         <div class="app-xuan-down">
            <div class="sin-cover">
-             <img height=450px; src="https://static.redskt.com/assets/img/appadimage.png"/>
+             <img height=450px; src="https://static.redskt.com/assets/img/appadimage.jpg"/>
            </div>
            <div class="sign-down-app">
               <el-button type="primary">下载开源实践app</el-button>

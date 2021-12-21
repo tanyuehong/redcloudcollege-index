@@ -40,7 +40,7 @@
             />
             <div class="tea-title">
               <p>开源实践网官方</p>
-              <h3>精英讲师</h3>
+              <span>精英讲师</span>
             </div>
             <p class="tea-nickname">谭月红</p>
             <p class="tea-professional">全栈工程师</p>
@@ -380,6 +380,7 @@
   color: #fff;
   background: url(~/assets/img/flag-bg.png);
   z-index: 2;
+  font-size:14px;
 }
 
 .top_backgroud_box .top-content-wrap .teacher-box .tea-nickname {
@@ -786,11 +787,7 @@
 }
 
 a:link, :visited, ins {
-    text-decoration: none;
-}
-
-a:link, a:visited {
-    color: #5e5e5e;
+  text-decoration: none;
 }
 
 </style>

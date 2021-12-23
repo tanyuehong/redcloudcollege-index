@@ -1,13 +1,10 @@
 <template>
+
 <div class="golobal_content">
-
 <div class="ucenter-home-header">
-
 <div class="header-backgroud">
 </div>
-
 </div>
-
 <div class="container">
 <div class="ucenter-home-content">
   <el-tabs tab-position="left" style="height: 200px;">
@@ -19,7 +16,6 @@
   </el-tabs>
 </div>
 </div>
-
 </div>
 </div>
 

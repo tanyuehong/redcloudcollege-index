@@ -20,7 +20,7 @@
            </div>
            <div class="sign-down-app">
               <el-button type="primary">下载开源实践app</el-button>
-          </div>
+           </div>
         </div>
          </div>
         <!--表单-->

@@ -37,14 +37,14 @@
           <client-only>
             <ul class="h-r-login">
               <li v-if="!loginInfo.id" id="no-login">
-                <a href="/login" title="登录">
+                <nuxt-link :to="{ name: 'user-login' }">
                   <em class="icon18 login-icon">&nbsp;</em>
                   <span class="vam ml5">登录</span>
-                </a>
+                </nuxt-link>
                 |
-                <a href="/register" title="注册">
+                <nuxt-link :to="{ name: 'user-register' }">
                   <span class="vam ml5">注册</span>
-                </a>
+                </nuxt-link>
               </li>
               <li v-if="loginInfo.id" id="is-login-one" class="mr10">
                 <a id="headerMsgCountId" href="#" title="消息">
@@ -53,7 +53,7 @@
                 <q class="red-point" style="display: none;">&nbsp;</q>
               </li>
               <li v-if="loginInfo.id" id="is-login-two" class="h-r-user">
-                <a href="/ucenter" title>
+               <nuxt-link :to="{ name: 'user-ucenter' }">
                   <el-dropdown @command="handleCommand">
                     <span class="el-dropdown-link">
                       <img
@@ -69,7 +69,7 @@
                       <el-dropdown-item icon="el-icon-user-solid">
                         我的主页
                       </el-dropdown-item>
-                         <el-dropdown-item icon="el-icon-star-off">
+                      <el-dropdown-item icon="el-icon-star-off">
                         学习进度
                       </el-dropdown-item>
                       <el-dropdown-item icon="el-icon-star-off">
@@ -84,12 +84,15 @@
                       <el-dropdown-item icon=" el-icon-setting">
                         设置
                       </el-dropdown-item>
-                      <el-dropdown-item command="quit" icon="el-icon-switch-button">
+                      <el-dropdown-item
+                        command="quit"
+                        icon="el-icon-switch-button"
+                      >
                         退出
                       </el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
-                </a>
+                </nuxt-link>
               </li>
               <!-- /未登录显示第1 li；登录后显示第2，3 li -->
             </ul>
@@ -182,6 +185,7 @@
     <!-- /公共底引入 -->
   </div>
 </template>
+
 <script>
 import '~/assets/css/theme.css'
 import '~/assets/css/global.css'
@@ -216,10 +220,9 @@ export default {
   methods: {
     //微信登录显示的方法
     handleCommand(command) {
-      if(command=="quit") {
-         this.logout();
+      if (command == 'quit') {
+        this.logout()
       }
-
     },
     wxLogin() {
       //console.log('************'+this.token)

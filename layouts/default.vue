@@ -4,14 +4,14 @@
     <header id="header">
       <section class="container">
         <h1 id="logo">
-        <router-link to="/" title="开源实践网">
-              <img
+          <router-link to="/" title="开源实践网">
+            <img
               src="~/assets/img/logo.png"
               class="logo_index"
               alt="开源实践网"
             />
             <img src="~/assets/img/logo_descrb.png" class="logo_decrb" alt="" />
-            </router-link>
+          </router-link>
         </h1>
 
         <div class="h-r-nsl">
@@ -54,26 +54,41 @@
               </li>
               <li v-if="loginInfo.id" id="is-login-two" class="h-r-user">
                 <a href="/ucenter" title>
-                 <el-dropdown>
-      <span class="el-dropdown-link">
-         <img
-                    :src="loginInfo.avatar"
-                    width="30"
-                    height="30"
-                    class="vam picImg"
-                    alt
-                  /><i class="el-icon-arrow-down el-icon--right"></i>
-      </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item icon="el-icon-user-solid">我的主页</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-star-off">我的收藏</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-collection">已购内容</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-question">帮助与反馈</el-dropdown-item>
-        <el-dropdown-item icon=" el-icon-setting">设置</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-switch-button">退出</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-                 
+                  <el-dropdown @command="handleCommand">
+                    <span class="el-dropdown-link">
+                      <img
+                        :src="loginInfo.avatar"
+                        width="30"
+                        height="30"
+                        class="vam picImg"
+                        alt
+                      />
+                      <i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item icon="el-icon-user-solid">
+                        我的主页
+                      </el-dropdown-item>
+                         <el-dropdown-item icon="el-icon-star-off">
+                        学习进度
+                      </el-dropdown-item>
+                      <el-dropdown-item icon="el-icon-star-off">
+                        我的收藏
+                      </el-dropdown-item>
+                      <el-dropdown-item icon="el-icon-s-order">
+                        我的订单
+                      </el-dropdown-item>
+                      <el-dropdown-item icon="el-icon-question">
+                        帮助与反馈
+                      </el-dropdown-item>
+                      <el-dropdown-item icon=" el-icon-setting">
+                        设置
+                      </el-dropdown-item>
+                      <el-dropdown-item command="quit" icon="el-icon-switch-button">
+                        退出
+                      </el-dropdown-item>
+                    </el-dropdown-menu>
+                  </el-dropdown>
                 </a>
               </li>
               <!-- /未登录显示第1 li；登录后显示第2，3 li -->
@@ -200,6 +215,12 @@ export default {
   },
   methods: {
     //微信登录显示的方法
+    handleCommand(command) {
+      if(command=="quit") {
+         this.logout();
+      }
+
+    },
     wxLogin() {
       //console.log('************'+this.token)
       //把token值放到cookie里面

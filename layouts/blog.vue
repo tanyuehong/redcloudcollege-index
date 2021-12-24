@@ -108,7 +108,7 @@
 import '~/assets/css/theme.css'
 import '~/assets/css/global.css'
 
-import loginApi from '@/api/login'
+import loginApi from '@/api/user'
 
 export default {
   data() {
@@ -140,14 +140,14 @@ export default {
     wxLogin() {
       //console.log('************'+this.token)
       //把token值放到cookie里面
-      cookie.set('redskt_token', this.token, { domain: 'localhost' })
-      cookie.set('redskt_ucenter', '', { domain: 'localhost' })
+      cookie.set('redskt_token', this.token, { domain: 'redskt' })
+      cookie.set('redskt_ucenter', '', { domain: 'redskt' })
       //console.log('====='+cookie.get('guli_token'))
       //调用接口，根据token值获取用户信息
       loginApi.getLoginUserInfo().then((response) => {
         // console.log('################'+response.data.userInfo)
         this.loginInfo = response.data.userInfo
-        cookie.set('redskt_ucenter', this.loginInfo, { domain: 'localhost' })
+        cookie.set('redskt_ucenter', this.loginInfo, { domain: 'redskt' })
       })
     },
     //创建方法，从cookie获取用户信息

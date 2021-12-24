@@ -113,7 +113,7 @@
 import "~/assets/css/sign.css";
 import "~/assets/css/iconfont.css";
 
-import registerApi from "@/api/login";
+import registerApi from "@/api/user";
 
 export default {
   layout: "sign",

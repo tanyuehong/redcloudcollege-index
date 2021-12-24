@@ -184,7 +184,8 @@ export default {
       priceSort: "",
     };
   },
-   created() {
+  
+  created() {
     this.getHomeBooks();
   },
 

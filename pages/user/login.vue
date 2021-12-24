@@ -81,7 +81,7 @@ import '~/assets/css/appdown.css'
 import "~/assets/css/sign.css";
 import "~/assets/css/iconfont.css";
 import cookie from "js-cookie";
-import loginApi from "@/api/login";
+import loginApi from "@/api/user";
 
 export default {
   layout: "sign",

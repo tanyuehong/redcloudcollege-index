@@ -21,9 +21,35 @@
          <span>{{userInfo.sign}}</span>
          </div>
      </div>
-     <div class="user-info-setting">
+    <div class="user-info-setting">
      <el-button round>个人设置</el-button>
      </div>
+     <ul class="user-about-item">
+      <li class="user-about-item-li">
+      <div class="user-about-count">18h</div>
+      <div class="user-about-name">学习时长</div>
+      </li>
+      <li class="user-about-item-li">
+       <div class="user-about-count">3</div>
+       <div class="user-about-name">关注</div>
+      </li>
+      <li class="user-about-item-li">
+       <div class="user-about-count">7</div>
+       <div class="user-about-name">粉丝</div>
+      </li>
+      <li class="user-about-item-li">
+         <div class="user-about-count">12</div>
+         <div class="user-about-name">文章</div>
+      </li>
+      <li class="user-about-item-li">
+         <div class="user-about-count">18</div>
+         <div class="user-about-name">收获喜欢</div>
+      </li>
+      <li class="user-about-item-li">
+       <div class="user-about-count">6</div>
+         <div class="user-about-name">积分</div>
+      </li>
+     </ul>
      </div>
   </div>
 </div>
@@ -35,7 +61,6 @@
     <el-tab-pane label="我的收藏">我的收藏</el-tab-pane>
     <el-tab-pane label="我的文章">我的文章</el-tab-pane>
     <el-tab-pane label="我的评论">我的评论</el-tab-pane>
-    <el-tab-pane label="个人设置">个人设置</el-tab-pane>
   </el-tabs>
 </div>
 </div>
@@ -90,8 +115,12 @@ export default {
    margin-bottom:20px;
 }
 
+.user-info {
+   float: left;
+   margin-top:74px;
+}
+
 .user-info .user-pic {
-    float: left;
     width: 124px;
     height: 124px;
 }
@@ -100,10 +129,8 @@ export default {
     box-shadow: 0 4px 8px 0 rgb(7 17 27 / 10%);
     width: 120px;
     height: 120px;
-    position: relative;
     border-radius: 50%;
     background: #fff;
-    top: 74px;
 }
 
 .user-info .user-pic .user-pic-bg .user-header-img {
@@ -114,15 +141,65 @@ export default {
 }
 
 .user-info-right {
-   float: right;
+   float: left;
    margin-right: 80px;
    width: 920px;
-   margin-top: 88px;
+   margin-top: 93px;
 }
 
-.user-info-setting {
+.user-info-detail {
+   width:360px;
+   float: left;
+}
+
+.user-info-right .user-info-detail .user-name {
+    font-weight: 600;
+    text-align: left;
+    font-size: 18px;
+    line-height: 28px;
+    margin-top: 6px;
+    color: #333;
+}
+
+.user-info-right .user-info-detail .user-sign {
+   color: #666;
+    text-align: left;
+    ont-size: 12px;
+    margin-top: 6px;
+}
+
+.user-about-item {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  margin-top: 15px;
+  margin-right:20px;
+  float:right;
+}
+.user-about-item .user-about-item-li {
+  display:block;
+  margin-right:16px;
+  height:40px;
+}
+
+.user-about-item .user-about-item-li .user-about-count {
+  width:100%;
+  font-size: 16px;
+  font-weight:600;
+  text-align:center;
+  color: #333;
+}
+
+.user-about-item .user-about-item-li .user-about-name {
+   width:100%;
+   font-size: 14px;
+   color: #666;
+   text-align:center;
+}
+
+.user-info-right .user-info-setting {
     float: right;
-    margin-top:10px;
+    margin-top:15px;
 }
 
 </style>

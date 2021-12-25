@@ -22,7 +22,8 @@
           <div class="fl code">
             <!-- <img id="qrious" src="~/assets/img/erweima.png" alt=""> -->
             <!-- <qriously value="weixin://wxpay/bizpayurl?pr=R7tnDpZ" :size="338"/> -->
-            <qriously :value="payObj.code_url" :size="338" />
+            <qriously :value="payObj.code_url"
+                      :size="338" />
             <div class="saosao">
               <p>请使用微信扫一扫</p>
               <p>扫描二维码支付</p>
@@ -38,27 +39,27 @@
 <script>
 import ordersApi from '@/api/orders'
 export default {
-  asyncData({ params, error }) {
+  asyncData ({ params, error }) {
     return ordersApi.createNatvie(params.pid).then((response) => {
       return {
         payObj: response.data,
       }
     })
   },
-  data() {
+  data () {
     return {
       timer1: '',
     }
   },
   //每隔三秒调用一次查询订单状态的方法
-  mounted() {
+  mounted () {
     //页面渲染之后执行
     this.timer1 = setInterval(() => {
       this.queryOrderStatus(this.payObj.out_trade_no)
     }, 3000)
   },
   methods: {
-    queryOrderStatus(orderNo) {
+    queryOrderStatus (orderNo) {
       ordersApi.queryPayStatus(orderNo).then((response) => {
         if (response.data.success) {
           //支付成功，清除定时器

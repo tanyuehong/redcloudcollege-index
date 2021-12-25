@@ -12,24 +12,24 @@
 /* 这里是blog list的样式*/
 
 .home_guesslike_list {
-  margin: 0px !important; 
+  margin: 0px !important;
   width: 100% !important;
   padding: 0px !important;
-  box-shadow:none !important;
+  box-shadow: none !important;
 }
 .op_artie_content {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .op_artie_content ul {
   padding-left: 0px !important;
   display: flex !important;
   align-items: center !important;
-  margin-bottom:15px !important;
-  margin-top:10px !important;
+  margin-bottom: 15px !important;
+  margin-top: 10px !important;
 }
 
- .op_artie_content .article_title {
+.op_artie_content .article_title {
   color: #333;
   font-weight: 600;
 }
@@ -39,109 +39,113 @@
   color: #666666;
   margin-top: 5px;
 }
- 
-  .pratice_icon_view {
-    background-image: url('~/assets/img/pratice_icon_view.png');
-    height: 26px;
-    width: 26px;
-    display: block;
-  }
-  
-  .pratice_icon_comment {
-    background-image: url('~/assets/img/pratice_icon_comment.png');
-    height: 26px;
-    width: 26px;
-    display: block;
-    margin-left: 50px;
-  }
-  .icon_des {
-     padding-left:10px;
-  }
-  
-  .pratice_icon_zhan {
-    background-image: url('~/assets/img/pratice_icon_zhan.png');
-    height: 26px;
-    width: 26px;
-    display: block;
-    margin-left: 50px;
-  }
+
+.pratice_icon_view {
+  background-image: url("~/assets/img/pratice_icon_view.png");
+  height: 26px;
+  width: 26px;
+  display: block;
+}
+
+.pratice_icon_comment {
+  background-image: url("~/assets/img/pratice_icon_comment.png");
+  height: 26px;
+  width: 26px;
+  display: block;
+  margin-left: 50px;
+}
+.icon_des {
+  padding-left: 10px;
+}
+
+.pratice_icon_zhan {
+  background-image: url("~/assets/img/pratice_icon_zhan.png");
+  height: 26px;
+  width: 26px;
+  display: block;
+  margin-left: 50px;
+}
 
 /* 这里是专题的样式 */
-  .book_item li .img {
-    width: 138px;
-    height: 177px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    box-sizing: border-box;
-    transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-    -o-transition: all 0.5s;
-  }
+.book_item li .img {
+  width: 138px;
+  height: 177px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  box-sizing: border-box;
+  transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+}
 
-  .course_list .img  {
-    width: 138px !important;
-    height: 157px !important;
-  }
+.course_list .img {
+  width: 256px !important;
+  height: 157px !important;
+}
 
-  .book_item li:hover .img {
-    transition: all 0.5s 0.2s;
-    -moz-transition: all 0.5s 0.2s;
-    -webkit-transition: all 0.5s 0.2s;
-    -o-transition: all 0.5s 0.2s;
-    transform: scale(1.2);
-    -ms-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    -webkit-transform: scale(1.2);
-    -o-transform: scale(1.2);
-  }
-  .book_item li .text_con {
-    width: 590px;
-    padding: 0 0 6px 0;
-    font-size: 0;
-    margin-right: 6px;
-  }
-  
-  .book_item li .text_con .title {
-    font-weight: 600;
-    font-size: 20px;
-    color: #1c1f21;
-    line-height: 24px;
-    text-align: left;
-    margin-bottom: 9px;
-    margin-top: 0px;
-  }
-  .book_item li .text_con .info {
-    margin-bottom: 0px;
-    margin-right: 10px;
-    margin-top:6px;
-    float: right;
-  }
-  .book_item li .text_con .info .img_point{
-    margin-left:5px;
-  } 
-  .book_item li .text_con .desc {
-    font-size: 13px;
-    color: #545c63;
-    font-weight: 500;
-    line-height: 22px;
-    text-align: left;
-    margin-bottom: 12px;
-    display: inline-block;
-    max-width: 580px;
-  }
- 
-  .book_item li .text_con .info i {
-    padding: 0 8px;
-    font-size: 12px;
-    color: #9199a1;
-    text-align: left;
-    line-height: 14px;
-  }
+.book_item li:hover .img {
+  transition: all 0.5s 0.2s;
+  -moz-transition: all 0.5s 0.2s;
+  -webkit-transition: all 0.5s 0.2s;
+  -o-transition: all 0.5s 0.2s;
+  transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -o-transform: scale(1.2);
+}
+.book_item li .text_con {
+  width: 590px;
+  padding: 0 0 6px 0;
+  font-size: 0;
+  margin-right: 6px;
+}
 
-  .book_item .cleartopicfix {
+.book_item li .text_con.course {
+  width: 490px;
+}
+
+.book_item li .text_con .title {
+  font-weight: 600;
+  font-size: 20px;
+  color: #1c1f21;
+  line-height: 24px;
+  text-align: left;
+  margin-bottom: 9px;
+  margin-top: 0px;
+}
+.book_item li .text_con .info {
+  margin-bottom: 0px;
+  margin-right: 10px;
+  margin-top: 6px;
+  float: right;
+}
+.book_item li .text_con .info .img_point {
+  margin-left: 5px;
+}
+.book_item li .text_con .desc {
+  font-size: 13px;
+  color: #545c63;
+  font-weight: 500;
+  line-height: 22px;
+  text-align: left;
+  margin-bottom: 12px;
+  display: inline-block;
+  max-width: 580px;
+}
+
+.book_item li .text_con .info i {
+  padding: 0 8px;
+  font-size: 12px;
+  color: #9199a1;
+  text-align: left;
+  line-height: 14px;
+}
+
+.book_item .cleartopicfix {
   display: block;
   height: 1%;
   zoom: 1;

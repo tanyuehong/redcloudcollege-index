@@ -1,12 +1,11 @@
 <template>
   <div class="golobal_content">
-    <el-carousel indicator-position="outside" height="480px">
-      <el-carousel-item v-for="item in bannerList" :key="item.id">
-        <a
-          target="_blank"
-          :href="item.linkUrl"
-          v-bind:style="{ backgroundImage: 'url(' + item.imageUrl + ')' }"
-        ></a>
+    <el-carousel indicator-position="outside"
+                 height="480px">
+      <el-carousel-item v-for="item in bannerList"
+                        :key="item.id">
+        <a :href="item.linkUrl"
+           v-bind:style="{ backgroundImage: 'url(' + item.imageUrl + ')' }"></a>
       </el-carousel-item>
     </el-carousel>
 
@@ -17,7 +16,8 @@
       <section class="container">
         <div class="every_qustion">
           <div class="left_title fl">
-            <img src="~/assets/img/erery_qustion.png" alt="" />
+            <img src="~/assets/img/erery_qustion.png"
+                 alt="" />
           </div>
           <div class="right_content fl">
             面向对象设计的准则？
@@ -25,12 +25,15 @@
         </div>
 
         <div class="home_function">
-          <a href="/teacher/1" class="function_btn ml180 mt20 fl">
-            <img src="~/assets/img/home_study_progress.png" alt="" />
+          <a href="/teacher/1"
+             class="function_btn ml180 mt20 fl">
+            <img src="~/assets/img/home_study_progress.png"
+                 alt="" />
             <div class="btn_title">学习进度</div>
           </a>
           <a class="function_btn mr180 mt20 fr">
-            <img src="~/assets/img/home_my_faveriter.png" alt="" />
+            <img src="~/assets/img/home_my_faveriter.png"
+                 alt="" />
             <div class="btn_title">我的收藏</div>
           </a>
         </div>
@@ -42,33 +45,31 @@
           </div>
           <div>
             <article class="comm-course-list">
-              <ul class="of" id="bna">
-                <li v-for="course in eduList" :key="course.id">
+              <ul class="of"
+                  id="bna">
+                <li v-for="course in eduList"
+                    :key="course.id">
                   <div class="cc-l-wrap">
                     <section class="course-img">
-                      <img
-                        :src="course.imgUrl"
-                        class="img-responsive"
-                        :alt="course.title"
-                      />
+                      <img :src="course.imgUrl"
+                           class="img-responsive"
+                           :alt="course.title" />
                       <div class="cc-mask">
-                      <nuxt-link title="开始学习" class="comm-btn c-btn-1" :to="{name:'course-id',params:{id:course.id}}">开始学习</nuxt-link>
+                        <nuxt-link title="开始学习"
+                                   class="comm-btn c-btn-1"
+                                   :to="{name:'course-id',params:{id:course.id}}">开始学习</nuxt-link>
                       </div>
                     </section>
                     <h3 class="hLh30 mt10 mb5">
-                      <a
-                        href="#"
-                        :title="course.title"
-                        class="course-title fsize18 c-333"
-                      >
+                      <a href="#"
+                         :title="course.title"
+                         class="course-title fsize18 c-333">
                         {{ course.title }}
                       </a>
                     </h3>
                     <section class="hLh20 of">
-                      <span
-                        class="fr jgTag bg-green"
-                        v-if="Number(course.price) === 0"
-                      >
+                      <span class="fr jgTag bg-green"
+                            v-if="Number(course.price) === 0">
                         <i class="c-fff fsize12 f-fA">免费</i>
                       </span>
                       <span class="fl jgAttr c-ccc f-fA">
@@ -83,9 +84,10 @@
               <div class="clear"></div>
             </article>
             <section class="tac">
-              <a href="/course" title="更多课程" class="comm-btn c-btn-2">
+              <nuxt-link class="comm-btn c-btn-2"
+                         :to="{name:'course'}">
                 更多课程
-              </a>
+              </nuxt-link>
             </section>
           </div>
         </div>
@@ -102,155 +104,152 @@
             </header>
             <div class="home_guesslike_list book_item">
               <ul class="content_list">
-                <li v-for="item in gusslikeList" :key="item.id">
+                <li v-for="item in gusslikeList"
+                    :key="item.id">
                   <div v-if="item.type === 0">
-                  <div class="course_list">
-                     <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
-                <img :src="item.imgUrl" class="img fl" :alt="item.title">
-              </nuxt-link>
-                  </div>
-                   <div class="text_con fr">
-              <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
-               <p class="title">{{item.title}}</p>
-                  {{item.title}}
-              </nuxt-link>
-                <p class="desc">{{item.content}}</p>
-                <div class="info">
-                  <img src="~/assets/img/article_point.png" class="img_point">
-                  <span>共{{item.contentCount}}节</span>
-                  <img src="~/assets/img/article_point.png" class="img_point">
-                  <span>{{ item.buyCount }}人已学习</span>
-                </div>
-                <div class="try-read-box">
-                </div>
-                  <div class="clearfloat"></div>
-
-                    <nuxt-link class="author-box" :to="{name:'teacher-id',query:{id:item.id}}">
-                  <div class="author-img" style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
-                  </div>
-                  <span class="author-name">{{item.author}}</span>
-                  <span>/</span>
-                  <span class="author-title">{{item.authorPositon}}</span>
-              </nuxt-link>
-                <div class="price_con cleartopicfix fr">
-                  <!-- 没有订阅购买 -->
-                  <a
-                    class="sale-price cleartopicfix"
-                    href="/read/80"
-                    target="_blank"
-                  >
-                    <p class="ori fr">原价 ¥ {{ item.oldPrice }}</p>
-                    <p class="sale fr">¥ {{ item.price }}</p>
-                    <div
-                      class="countdown fr"
-                      data-remain="1617854"
-                      style="clear: both"
-                    >
-                      <span class="name fl">限时优惠</span>
-
-                      <p class="clock fl" style="display: none">
-                        <span>倒计时:</span>
-                        <span class="js-day">18天</span>
-                        <span class="js-hour timer">17</span>:
-                        <span class="js-minute timer">24</span>:
-                        <span class="js-second timer">14</span>:
-                        <span class="js-msec timer">0</span>
-                      </p>
+                    <div class="course_list">
+                      <nuxt-link :to="{name:'course-id',params:{id:item.id}}">
+                        <img :src="item.imgUrl"
+                             class="img fl"
+                             :alt="item.title">
+                      </nuxt-link>
                     </div>
-                  </a>
-                   </div>
-              </div>
-                   <div class="clearfloat"></div>
-                      
+                    <div class="text_con course fr">
+                      <nuxt-link :to="{name:'course-id',params:{id:item.id}}">
+                        <p class="title">{{item.title}}</p>
+                        {{item.title}}
+                      </nuxt-link>
+                      <p class="desc">{{item.content}}</p>
+                      <div class="info">
+                        <img src="~/assets/img/article_point.png"
+                             class="img_point">
+                        <span>共{{item.contentCount}}节</span>
+                        <img src="~/assets/img/article_point.png"
+                             class="img_point">
+                        <span>{{ item.buyCount }}人已学习</span>
+                      </div>
+                      <div class="clearfloat"></div>
+
+                      <nuxt-link class="author-box"
+                                 :to="{name:'teacher-id',query:{id:item.id}}">
+                        <div class="author-img"
+                             style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
+                        </div>
+                        <span class="author-name">{{item.author}}</span>
+                        <span>/</span>
+                        <span class="author-title">{{item.authorPositon}}</span>
+                      </nuxt-link>
+                      <div class="price_con cleartopicfix fr">
+                        <!-- 没有订阅购买 -->
+                        <a class="sale-price cleartopicfix"
+                           href="/read/80"
+                           target="_blank">
+                          <p class="ori fr">原价 ¥ {{ item.oldPrice }}</p>
+                          <p class="sale fr">¥ {{ item.price }}</p>
+                          <div class="countdown fr"
+                               style="clear: both">
+                            <span class="name fl">限时优惠</span>
+                            <p class="clock fl"
+                               style="display: none">
+                              <span>倒计时:</span>
+                              <span class="js-day">18天</span>
+                              <span class="js-hour timer">17</span>:
+                              <span class="js-minute timer">24</span>:
+                              <span class="js-second timer">14</span>:
+                              <span class="js-msec timer">0</span>
+                            </p>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="clearfloat"></div>
                   </div>
                   <div v-else-if="item.type === 1">
                     <div class="op_artie_content">
-                <nuxt-link class="article_title" :to="{name:'practice-detail',query:{id:item.id}}">
-                      {{ item.title }}
-                </nuxt-link>
-                  <p class="op_pratice_describ">
-                    {{ item.content }}
-                  </p>
-                  <ul>
-                    <i class="pratice_icon_view"></i>
-                    <span class="icon_des">{{item.viewCount}}</span>
-                    <i class="pratice_icon_zhan"></span></i>
-                    <span class="icon_des">{{item.good}}</span>
-                    <i class="pratice_icon_comment"></i>
-                    <span class="icon_des">11</span>
-                  </ul>
-                </div>
-                  </div>
-                  <div  v-else>
-                    <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
-                <img :src="item.imgUrl" class="img fl" :alt="item.title">
-              </nuxt-link>
-              <div class="text_con fr">
-              <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
-               <p class="title">{{item.title}}</p>
-                  {{item.title}}
-              </nuxt-link>
-                <p class="desc">{{item.content}}</p>
-               
-                <div class="try-read-box">
-                  <a
-                    class="try-read-item"
-                    href="/read/80/article/2090"
-                    target="_blank"
-                  >
-                    <div class="try-read-img"></div>
-                    <p
-                      class="try-read-title"
-                      title="01 开篇词：带你走进网络编程的世界"
-                    >
-                      01 开篇词：带你走进网络编程的世界
-                    </p>
-                  </a>
-                </div>
-                 <div class="info">
-                  <img src="~/assets/img/article_point.png" class="img_point">
-                  <span>共{{item.contentCount}}节</span>
-                  <img src="~/assets/img/article_point.png" class="img_point">
-                  <span>{{ item.buyCount }}人已购买</span>
-                </div>
-                <div class="clearfix"> </div>
-                   <nuxt-link class="author-box" :to="{name:'teacher-id',query:{id:item.id}}">
-                <div class="author-img" style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
-                  </div>
-                  <span class="author-name">{{item.author}}</span>
-                  <span>/</span>
-                  <span class="author-title">{{item.authorPositon}}</span>
-              </nuxt-link>
-
-                <div class="price_con cleartopicfix fr">
-                  <!-- 没有订阅购买 -->
-                  <a
-                    class="sale-price cleartopicfix"
-                    href="/read/80"
-                    target="_blank"
-                  >
-                    <p class="ori fr">原价 ¥ {{ item.oldPrice }}</p>
-                    <p class="sale fr">¥ {{ item.price }}</p>
-                    <div
-                      class="countdown fr"
-                      data-remain="1617854"
-                      style="clear: both"
-                    >
-                      <span class="name fl">限时优惠</span>
-
-                      <p class="clock fl" style="display: none">
-                        <span>倒计时:</span>
-                        <span class="js-day">18天</span>
-                        <span class="js-hour timer">17</span>:
-                        <span class="js-minute timer">24</span>:
-                        <span class="js-second timer">14</span>:
-                        <span class="js-msec timer">0</span>
+                      <nuxt-link class="article_title"
+                                 :to="{name:'practice-detail',query:{id:item.id}}">
+                        {{ item.title }}
+                      </nuxt-link>
+                      <p class="op_pratice_describ">
+                        {{ item.content }}
                       </p>
+                      <ul>
+                        <i class="pratice_icon_view"></i>
+                        <span class="icon_des">{{item.viewCount}}</span>
+                        <i class="pratice_icon_zhan"></span></i>
+                        <span class="icon_des">{{item.good}}</span>
+                        <i class="pratice_icon_comment"></i>
+                        <span class="icon_des">11</span>
+                      </ul>
                     </div>
-                  </a>
-                   </div>
-              </div>
-                   <div class="clearfloat"></div>
+                  </div>
+                  <div v-else>
+                    <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
+                      <img :src="item.imgUrl"
+                           class="img fl"
+                           :alt="item.title">
+                    </nuxt-link>
+                    <div class="text_con fr">
+                      <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
+                        <p class="title">{{item.title}}</p>
+                        {{item.title}}
+                      </nuxt-link>
+                      <p class="desc">{{item.content}}</p>
+
+                      <div class="try-read-box">
+                        <a class="try-read-item"
+                           href="/read/80/article/2090"
+                           target="_blank">
+                          <div class="try-read-img"></div>
+                          <p class="try-read-title"
+                             title="01 开篇词：带你走进网络编程的世界">
+                            01 开篇词：带你走进网络编程的世界
+                          </p>
+                        </a>
+                      </div>
+                      <div class="info">
+                        <img src="~/assets/img/article_point.png"
+                             class="img_point">
+                        <span>共{{item.contentCount}}节</span>
+                        <img src="~/assets/img/article_point.png"
+                             class="img_point">
+                        <span>{{ item.buyCount }}人已购买</span>
+                      </div>
+                      <div class="clearfix"> </div>
+                      <nuxt-link class="author-box"
+                                 :to="{name:'teacher-id',query:{id:item.id}}">
+                        <div class="author-img"
+                             style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
+                        </div>
+                        <span class="author-name">{{item.author}}</span>
+                        <span>/</span>
+                        <span class="author-title">{{item.authorPositon}}</span>
+                      </nuxt-link>
+
+                      <div class="price_con cleartopicfix fr">
+                        <!-- 没有订阅购买 -->
+                        <a class="sale-price cleartopicfix"
+                           href="/read/80">
+                          <p class="ori fr">原价 ¥ {{ item.oldPrice }}</p>
+                          <p class="sale fr">¥ {{ item.price }}</p>
+                          <div class="countdown fr"
+                               style="clear: both">
+                            <span class="name fl">限时优惠</span>
+
+                            <p class="clock fl"
+                               style="display: none">
+                              <span>倒计时:</span>
+                              <span class="js-day">18天</span>
+                              <span class="js-hour timer">17</span>:
+                              <span class="js-minute timer">24</span>:
+                              <span class="js-second timer">14</span>:
+                              <span class="js-msec timer">0</span>
+                            </p>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="clearfloat"></div>
                   </div>
                 </li>
               </ul>
@@ -275,7 +274,9 @@
               </div>
             </div>
             <div class="download-app js-show-download clearfix">
-              <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
+              <img src="~/assets/img/appLogo.png"
+                   alt=""
+                   class="logo-icon fl" />
               <div class="text fl">
                 <h4>下载开源实践APP</h4>
                 <p>更好的体验 学习随处可享</p>
@@ -295,7 +296,7 @@ import '~/assets/css/contentlist.css'
 import indexApi from '@/api/index'
 
 export default {
-  data() {
+  data () {
     return {
       swiperOption: {
         //配置分页
@@ -311,20 +312,20 @@ export default {
     }
   },
 
-   head() {
-      return {
-        title: this.title,
-        meta: [
-          {
-            hid: 'keywords',
-            name: 'keywords',
-            content: "开源实践，面试经验，JAVA，前端，Python，技术分享,互联网创业,个人博客,全栈开发,个人创业，独立开发,代码创业",
-          }
-        ]
-      }
-    },
-    
-  asyncData({ params, error }) {
+  head () {
+    return {
+      title: this.title,
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: "开源实践，面试经验，JAVA，前端，Python，技术分享,互联网创业,个人博客,全栈开发,个人创业，独立开发,代码创业",
+        }
+      ]
+    }
+  },
+
+  asyncData ({ params, error }) {
     return indexApi.getIndexData().then((response) => {
       return {
         bannerList: response.data.banerList,
@@ -333,15 +334,14 @@ export default {
       }
     })
   },
-  created() {},
+  created () { },
   methods: {},
 }
 </script>
 
 <style>
-
-.jgAttr  {
-  font-size:16px;
+.jgAttr {
+  font-size: 16px;
 }
 
 .cc-l-wrap h3 {
@@ -411,7 +411,7 @@ export default {
   clear: both;
   margin: 0px 0px 30px 0px;
   border-bottom: 1px solid rgba(28, 31, 33, 0.1);
-  padding-bottom:10px;
+  padding-bottom: 10px;
 }
 .comm-title h2 {
   font-size: 20px;

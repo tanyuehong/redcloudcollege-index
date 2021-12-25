@@ -6,59 +6,53 @@
           <div class="col-md-8">
             <div class="ask_detail_content">
               <div class="ui breadcrumb red_breadcrumb">
-                <a class="section" href="/faquestion">开源实践问答</a>
-                <span
-                  class="glyphicon glyphicon glyphicon-menu-right"
-                  aria-hidden="true"
-                ></span>
+                <a class="section"
+                   href="/faquestion">开源实践问答</a>
+                <span class="glyphicon glyphicon glyphicon-menu-right"
+                      aria-hidden="true"></span>
                 <div class="active section">问题详情</div>
               </div>
               <div>
                 <h2 class="title_header">多线程为什么比单线程快？</h2>
-                <div class="ui red label horizontal" data-tooltip="置顶">
+                <div class="ui red label horizontal"
+                     data-tooltip="置顶">
                   顶
                 </div>
-                <div class="ui orange label horizontal" data-tooltip="热门">
+                <div class="ui orange label horizontal"
+                     data-tooltip="热门">
                   热
                 </div>
                 <div class="question_info">
                   <a href="#">缥缈飞飞</a>
                   <span>发布于 08/04 15:27</span>
                   <span>阅读 5K+</span>
-                  <span
-                    class="glyphicon glyphicon-star-empty"
-                    aria-hidden="true"
-                  >
+                  <span class="glyphicon glyphicon-star-empty"
+                        aria-hidden="true">
                     收藏 30
                   </span>
-                  <span class="glyphicon glyphicon-comment" aria-hidden="true">
+                  <span class="glyphicon glyphicon-comment"
+                        aria-hidden="true">
                     答案 3
                   </span>
                 </div>
                 <div class="extra question-tags mt10">
-                  <a
-                    class="ui horizontal basic label popup-tag"
-                    href="https://www.oschina.net/question/tag/ruby"
-                    target="_blank"
-                  >
+                  <a class="ui horizontal basic label popup-tag"
+                     href="https://www.oschina.net/question/tag/ruby"
+                     target="_blank">
                     <img src="https://static.oschina.net/img/logo/ruby.gif" />
                     Ruby
                   </a>
 
-                  <a
-                    class="ui horizontal basic label popup-tag"
-                    href="https://www.oschina.net/question/tag/java"
-                    target="_blank"
-                  >
+                  <a class="ui horizontal basic label popup-tag"
+                     href="https://www.oschina.net/question/tag/java"
+                     target="_blank">
                     <img src="https://static.oschina.net/img/logo/java.png" />
                     Java
                   </a>
                 </div>
 
-                <div
-                  class="qustion_content mt10 mb10"
-                  v-html="qdetail.content"
-                ></div>
+                <div class="qustion_content mt10 mb10"
+                     v-html="qdetail.content"></div>
                 <div class="qustion_info">
                   <div class="ui_center_button mt10">
                     <div class="ui_group_button">
@@ -100,18 +94,18 @@ import askApi from '@/api/askqustion'
 import { getUrlKey } from '@/utils/commonUtils'
 
 export default {
-  data() {
+  data () {
     return {
       qdetail: {},
     }
   },
-  created() {
+  created () {
     var qId = this.$route.params.id
     this.getQustionDetail(qId)
   },
 
   methods: {
-    getQustionDetail(qId) {
+    getQustionDetail (qId) {
       askApi.getQuestionDetails(qId).then((response) => {
         this.qdetail = response.data.qdetail
       })

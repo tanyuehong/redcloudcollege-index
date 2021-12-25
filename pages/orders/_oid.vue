@@ -2,10 +2,14 @@
   <div class="Page Confirm">
     <div class="Title">
       <h1 class="fl f18">订单确认</h1>
-      <img src="~/assets/img/cart_setp2.png" class="fr" />
+      <img src="~/assets/img/cart_setp2.png"
+           class="fr" />
       <div class="clear"></div>
     </div>
-    <form name="flowForm" id="flowForm" method="post" action="">
+    <form name="flowForm"
+          id="flowForm"
+          method="post"
+          action="">
       <table class="GoodList">
         <tbody>
           <tr>
@@ -19,23 +23,22 @@
           <td colspan="3" class="Title red f18 fb"><p>限时折扣</p></td>
         </tr> -->
           <tr>
-            <td colspan="3" class="teacher">讲师：{{ order.teacherName }}</td>
+            <td colspan="3"
+                class="teacher">讲师：{{ order.teacherName }}</td>
           </tr>
           <tr class="good">
             <td class="name First">
-              <a
-                target="_blank"
-                :href="'https://localhost:3000/course/' + order.courseId"
-              >
+              <a target="_blank"
+                 :href="'https://localhost:3000/course/' + order.courseId">
                 <img :src="order.courseCover" />
               </a>
 
               <div class="goodInfo">
-                <input type="hidden" class="ids ids_14502" value="14502" />
-                <a
-                  target="_blank"
-                  :href="'https://localhost:3000/course/' + order.courseId"
-                >
+                <input type="hidden"
+                       class="ids ids_14502"
+                       value="14502" />
+                <a target="_blank"
+                   :href="'https://localhost:3000/course/' + order.courseId">
                   {{ order.courseTitle }}
                 </a>
               </div>
@@ -53,7 +56,8 @@
             </td>
           </tr>
           <tr>
-            <td class="Billing tr" colspan="3">
+            <td class="Billing tr"
+                colspan="3">
               <div class="tr">
                 <p>
                   共
@@ -70,12 +74,15 @@
         </tbody>
       </table>
       <div class="Finish">
-        <div class="fr" id="AgreeDiv">
+        <div class="fr"
+             id="AgreeDiv">
           <label for="Agree">
             <p class="on">
-              <input type="checkbox" checked="checked" />
+              <input type="checkbox"
+                     checked="checked" />
               我已阅读并同意
-              <a href="javascript:" target="_blank">《开源实践网购买协议》</a>
+              <a href="javascript:"
+                 target="_blank">《开源实践网购买协议》</a>
             </p>
           </label>
         </div>
@@ -96,8 +103,14 @@
             </p>
           </div>
         </div>
-        <input name="score" value="0" type="hidden" id="usedScore" />
-        <button class="fr redb" type="button" id="submitPay" @click="toPay()">
+        <input name="score"
+               value="0"
+               type="hidden"
+               id="usedScore" />
+        <button class="fr redb"
+                type="button"
+                id="submitPay"
+                @click="toPay()">
           去支付
         </button>
         <div class="clear"></div>
@@ -108,7 +121,7 @@
 <script>
 import ordersApi from '@/api/orders'
 export default {
-  asyncData({ params, error }) {
+  asyncData ({ params, error }) {
     return ordersApi.getOrdersInfo(params.oid).then((response) => {
       return {
         order: response.data.item,
@@ -117,7 +130,7 @@ export default {
   },
   methods: {
     //去支付
-    toPay() {
+    toPay () {
       this.$router.push({ path: '/pay/' + this.order.orderNo })
     },
   },

@@ -7,11 +7,9 @@
           <p class="desc">每一个问题，我们都会选择一个最优的答案。并且通过人工分类和技术专家维护问题列表，方便查找，为大家在学习路上解疑答惑。</p>
         </div>
 
-        <img
-          src="https://image.boxueio.com/swift-wtf-to-omg-avatar@2x.jpg"
-          alt="Image Description"
-          class="rounded-circle"
-        />
+        <img src="https://image.boxueio.com/swift-wtf-to-omg-avatar@2x.jpg"
+             alt="Image Description"
+             class="rounded-circle" />
         <div class="clear"></div>
       </div>
     </div>
@@ -19,7 +17,9 @@
       <section class="container">
         <div class="main_content">
           <div class="question_right_con">
-            <el-button type="danger" class="startqustionbtn" @click="jumpStartQuestion">我要提问</el-button>
+            <el-button type="danger"
+                       class="startqustionbtn"
+                       @click="jumpStartQuestion">我要提问</el-button>
 
             <div class="mod_about_teacher">
               <h3>最新公告</h3>
@@ -27,23 +27,19 @@
                 <ul>
                   <li>
                     <span></span>
-                    <a
-                      href="https://zhibo.zuoyebang.com/static/hy/yike-sell-pc-vue/teacher-page.html"
-                      target="_blank"
-                    >问答WAP版改版上线</a>
+                    <a href="https://zhibo.zuoyebang.com/static/hy/yike-sell-pc-vue/teacher-page.html"
+                       target="_blank">问答WAP版改版上线</a>
                   </li>
                   <li>
                     <span></span>
-                      <nuxt-link :to="{name:'faquestion-howtoask'}">
+                    <nuxt-link :to="{name:'faquestion-howtoask'}">
                       【新手提问导读】提问的艺术
-                       </nuxt-link>
+                    </nuxt-link>
                   </li>
                   <li>
                     <span></span>
-                    <a
-                      href="airclass://www.zuoyebang.com/live/native/mvp/video?courseId=560460&lessonId=516822"
-                      target="_blank"
-                    >欢迎加入开源问答用户群</a>
+                    <a href="airclass://www.zuoyebang.com/live/native/mvp/video?courseId=560460&lessonId=516822"
+                       target="_blank">欢迎加入开源问答用户群</a>
                   </li>
                 </ul>
               </div>
@@ -51,12 +47,10 @@
           </div>
           <div class="content_left">
             <div class="questions_tab_con">
-              <el-menu
-                :default-active="activeIndex"
-                class="el-menu-demo"
-                mode="horizontal"
-                @select="handleSelect"
-              >
+              <el-menu :default-active="activeIndex"
+                       class="el-menu-demo"
+                       mode="horizontal"
+                       @select="handleSelect">
                 <el-menu-item index="1">最新回答</el-menu-item>
                 <el-menu-item index="2">最新提问</el-menu-item>
                 <el-menu-item index="3">等待回答</el-menu-item>
@@ -75,54 +69,53 @@
               </el-menu>
             </div>
             <div class="questions_detail_con">
-              <div v-for="item in list" :key="item.qid" class="question_list">
+              <div v-for="item in list"
+                   :key="item.qid"
+                   class="question_list">
                 <div class="answer_title">
-                  <router-link :to="'/faquestion/'+item.qid" class="header">
+                  <router-link :to="'/faquestion/'+item.qid"
+                               class="header">
                     {{item.title}}
-                    <div class="ui red label horizontal" data-tooltip="置顶">顶</div>
-                    <div class="ui orange label horizontal" data-tooltip="热门">热</div>
+                    <div class="ui red label horizontal"
+                         data-tooltip="置顶">顶</div>
+                    <div class="ui orange label horizontal"
+                         data-tooltip="热门">热</div>
                   </router-link>
                 </div>
 
                 <div class="description">
-                  <p class="line-clamp" v-html="item.content"></p>
+                  <p class="line-clamp"
+                     v-html="item.content"></p>
                 </div>
                 <div class="extra question-tags">
-                  <a
-                    class="ui horizontal basic label popup-tag"
-                    href="https://www.oschina.net/question/tag/ruby"
-                    target="_blank"
-                  >
+                  <a class="ui horizontal basic label popup-tag"
+                     href="https://www.oschina.net/question/tag/ruby"
+                     target="_blank">
                     <img src="https://static.oschina.net/img/logo/ruby.gif" />Ruby
                   </a>
 
-                  <a
-                    class="ui horizontal basic label popup-tag"
-                    href="https://www.oschina.net/question/tag/java"
-                    target="_blank"
-                  >
+                  <a class="ui horizontal basic label popup-tag"
+                     href="https://www.oschina.net/question/tag/java"
+                     target="_blank">
                     <img src="https://static.oschina.net/img/logo/java.png" />Java
                   </a>
                 </div>
 
                 <div class="q_time">
                   <span>2018.06.16 04:30来自</span>
-                  <a
-                    class="user_name"
-                    href="https://my.csdn.net/dabocaiqq"
-                    target="_blank"
-                  >{{item.nickname}}</a>
+                  <a class="user_name"
+                     href="https://my.csdn.net/dabocaiqq"
+                     target="_blank">{{item.nickname}}</a>
                   <b>
                     悬赏
-                    <a href="javascript:;" title="个人悬赏">{{item.price}}C</a>
+                    <a href="javascript:;"
+                       title="个人悬赏">{{item.price}}C</a>
                   </b>
 
-                  <a
-                    class="answer_num"
-                    title="暂无满意答案"
-                    target="_blank"
-                    href="/questions/1087364#answer_form"
-                  >
+                  <a class="answer_num"
+                     title="暂无满意答案"
+                     target="_blank"
+                     href="/questions/1087364#answer_form">
                     <span>{{item.reply}}</span>
                     <p>回答</p>
                   </a>
@@ -152,8 +145,8 @@
 }
 .header_annation .desc {
   color: white;
-  font-size:16px;
-  margin-top:25px;
+  font-size: 16px;
+  margin-top: 25px;
 }
 .header_annation {
   width: 620px;
@@ -243,8 +236,8 @@
   display: inline-block;
   text-decoration: none;
   margin: -0.21425em 0 0;
-  font-family: "PingFang SC", "Helvetica Neue", "Microsoft YaHei UI",
-    "Microsoft YaHei", "Noto Sans CJK SC", Sathu, EucrosiaUPC, Arial, Helvetica,
+  font-family: 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei UI',
+    'Microsoft YaHei', 'Noto Sans CJK SC', Sathu, EucrosiaUPC, Arial, Helvetica,
     sans-serif;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.85);
@@ -389,36 +382,36 @@
 import askApi from "@/api/askqustion";
 
 export default {
-  data() {
+  data () {
     return {
       activeIndex: "1",
       list: [],
     };
   },
-  created() {
+  created () {
     this.getHomeQuestionList();
   },
 
   methods: {
-    getHomeQuestionList() {
+    getHomeQuestionList () {
       askApi.getHomeAskQuestionList().then((response) => {
         this.list = response.data.list;
       });
     },
-    jumpStartQuestion() {
-    var item = window.localStorage.getItem('show_howto-ask');
-    if (item) {
-      this.$router.push({
-        name: "faquestion-ask",
-        query: {},
-      });
-    } else {
-       window.localStorage.setItem('show_howto-ask', '1')
-       this.$router.push({
-        name: "faquestion-howtoask",
-        query: {},
-      });
-    }
+    jumpStartQuestion () {
+      var item = window.localStorage.getItem('show_howto-ask');
+      if (item) {
+        this.$router.push({
+          name: "faquestion-ask",
+          query: {},
+        });
+      } else {
+        window.localStorage.setItem('show_howto-ask', '1')
+        this.$router.push({
+          name: "faquestion-howtoask",
+          query: {},
+        });
+      }
     },
   },
 };

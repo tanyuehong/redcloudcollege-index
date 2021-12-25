@@ -5,50 +5,38 @@
         <div class="top-content-wrap">
           <div class="clearfix">
             <div class="share-box r">
-              <div
-                class="bdsharebuttonbox bdshare-button-style0-16"
-                data-tag=""
-                data-bd-bind="1631770229675"
-              >
-                <a
-                  href="javascript:;"
-                  class="share wx icon-share-weichat"
-                  data-cmd="weixin"
-                  title="分享到微信"
-                ></a>
-                <a
-                  href="javascript:;"
-                  class="share qq icon-share-qq"
-                  data-cmd="qzone"
-                  title="分享到QQ空间"
-                ></a>
-                <a
-                  href="javascript:;"
-                  class="share sina icon-share-weibo"
-                  data-cmd="tsina"
-                  title="分享到新浪微博"
-                ></a>
+              <div class="bdsharebuttonbox bdshare-button-style0-16"
+                   data-tag=""
+                   data-bd-bind="1631770229675">
+                <a href="javascript:;"
+                   class="share wx icon-share-weichat"
+                   data-cmd="weixin"
+                   title="分享到微信"></a>
+                <a href="javascript:;"
+                   class="share qq icon-share-qq"
+                   data-cmd="qzone"
+                   title="分享到QQ空间"></a>
+                <a href="javascript:;"
+                   class="share sina icon-share-weibo"
+                   data-cmd="tsina"
+                   title="分享到新浪微博"></a>
               </div>
             </div>
           </div>
           <div class="teacher-box">
             <!-- <img class="tea-header" src="//img1.sycdn.imooc.com/5afe3d350001596a02430243-200-200.jpg" alt=""> -->
-            <img
-              class="tea-header"
-              src="//img4.sycdn.imooc.com/5afe3d350001596a02430243-160-160.jpg"
-              alt=""
-            />
+            <img class="tea-header"
+                 src="//img4.sycdn.imooc.com/5afe3d350001596a02430243-160-160.jpg"
+                 alt="" />
             <div class="tea-title">
               <p>开源实践网官方</p>
               <span>精英讲师</span>
             </div>
             <p class="tea-nickname">谭月红</p>
             <p class="tea-professional">全栈工程师</p>
-            <a
-              href="javascript:void(0);"
-              class="moco-btn payattention-btn js-payattention-btn js-add-attention"
-              data-id="2134188"
-            >
+            <a href="javascript:void(0);"
+               class="moco-btn payattention-btn js-payattention-btn js-add-attention"
+               data-id="2134188">
               <i class="icon-group_add"></i>
               关注Ta
             </a>
@@ -76,7 +64,8 @@
                   </a>
                 </li>
                 <li>
-                  <p class="num" id="js-tea-fan-num">468</p>
+                  <p class="num"
+                     id="js-tea-fan-num">468</p>
                   <p class="text">粉丝</p>
                 </li>
               </ul>
@@ -93,38 +82,32 @@
         <p class="cato-desc">纸上得来终觉浅，绝知此事要躬行</p>
         <div class="shizhan-del-box">
           <ul>
-            <li
-              style="background-image: url('//img1.sycdn.imooc.com/szimg/5b8e74ac00019f7d05400300-500-284.jpg');"
-            >
+            <li style="background-image: url('//img1.sycdn.imooc.com/szimg/5b8e74ac00019f7d05400300-500-284.jpg');">
               <div class="shizhan-mask">
-                <a href="//coding.imooc.com/class/274.html" target="_blank">
-                  <p
-                    class="shizhan-title"
-                    title="MySQL数据库集群-PXC方案，解决数据库领域的常见疑难杂症"
-                  >
+                <a href="//coding.imooc.com/class/274.html"
+                   target="_blank">
+                  <p class="shizhan-title"
+                     title="MySQL数据库集群-PXC方案，解决数据库领域的常见疑难杂症">
                     MySQL数据库集群-PXC方案，解决数据库领域的常见疑难杂症
                   </p>
                   <p class="shizhan-desc">学习PXC，打造高价值的MySQL集群</p>
                   <div class="bottom-box clearfix">
                     <p class="shizhan-price fl">￥299.00</p>
                     <p class="icon icon-right fr">
-                        <i class="el-icon-arrow-right icon-font fw900"></i>
+                      <i class="el-icon-arrow-right icon-font fw900"></i>
                     </p>
                   </div>
                 </a>
               </div>
             </li>
-            <li
-              style="
+            <li style="
                 background-image: url('//img1.sycdn.imooc.com/szimg/5d08d0b308c9749706000338-500-284.jpg');
-              "
-            >
+              ">
               <div class="shizhan-mask">
-                <a href="//coding.imooc.com/class/353.html" target="_blank">
-                  <p
-                    class="shizhan-title"
-                    title="阿里新零售数据库设计与实战 （升级版） 提升数据库综合能力"
-                  >
+                <a href="//coding.imooc.com/class/353.html"
+                   target="_blank">
+                  <p class="shizhan-title"
+                     title="阿里新零售数据库设计与实战 （升级版） 提升数据库综合能力">
                     阿里新零售数据库设计与实战 （升级版） 提升数据库综合能力
                   </p>
                   <p class="shizhan-desc">
@@ -133,21 +116,18 @@
                   <div class="bottom-box clearfix">
                     <p class="shizhan-price fl">￥288.00</p>
                     <p class="icon icon-right fr">
-                        <i class="el-icon-arrow-right icon-font fw900"></i>
+                      <i class="el-icon-arrow-right icon-font fw900"></i>
                     </p>
                   </div>
                 </a>
               </div>
             </li>
-            <li
-              style="background-image: url('//img1.sycdn.imooc.com/szimg/5ecc7cb709a1053112000676-500-284.jpg');"
-            >
+            <li style="background-image: url('//img1.sycdn.imooc.com/szimg/5ecc7cb709a1053112000676-500-284.jpg');">
               <div class="shizhan-mask">
-                <a href="//coding.imooc.com/class/441.html" target="_blank">
-                  <p
-                    class="shizhan-title"
-                    title="Java支付全家桶 企业级各类支付手段一站式解决方案"
-                  >
+                <a href="//coding.imooc.com/class/441.html"
+                   target="_blank">
+                  <p class="shizhan-title"
+                     title="Java支付全家桶 企业级各类支付手段一站式解决方案">
                     Java支付全家桶 企业级各类支付手段一站式解决方案
                   </p>
                   <p class="shizhan-desc">
@@ -156,21 +136,18 @@
                   <div class="bottom-box clearfix">
                     <p class="shizhan-price fl">￥388.00</p>
                     <p class="icon icon-right fr">
-                        <i class="el-icon-arrow-right icon-font fw900"></i>
+                      <i class="el-icon-arrow-right icon-font fw900"></i>
                     </p>
                   </div>
                 </a>
               </div>
             </li>
-            <li
-              style="background-image: url('//img1.sycdn.imooc.com/szimg/5fed3a7d09ac11c112000676-500-284.jpg');"
-            >
+            <li style="background-image: url('//img1.sycdn.imooc.com/szimg/5fed3a7d09ac11c112000676-500-284.jpg');">
               <div class="shizhan-mask">
-                <a href="//coding.imooc.com/class/485.html" target="_blank">
-                  <p
-                    class="shizhan-title"
-                    title="SpringBoot 在线协同办公小程序开发 全栈式项目实战"
-                  >
+                <a href="//coding.imooc.com/class/485.html"
+                   target="_blank">
+                  <p class="shizhan-title"
+                     title="SpringBoot 在线协同办公小程序开发 全栈式项目实战">
                     SpringBoot 在线协同办公小程序开发 全栈式项目实战
                   </p>
                   <p class="shizhan-desc">
@@ -179,21 +156,18 @@
                   <div class="bottom-box clearfix">
                     <p class="shizhan-price fl">￥388.00</p>
                     <p class="icon icon-right fr">
-                        <i class="el-icon-arrow-right icon-font fw900"></i>
+                      <i class="el-icon-arrow-right icon-font fw900"></i>
                     </p>
                   </div>
                 </a>
               </div>
             </li>
-            <li
-              style="background-image: url('//img1.sycdn.imooc.com/szimg/6124bf9209c0e3b712000676-500-284.jpg');"
-            >
+            <li style="background-image: url('//img1.sycdn.imooc.com/szimg/6124bf9209c0e3b712000676-500-284.jpg');">
               <div class="shizhan-mask">
-                <a href="//coding.imooc.com/class/530.html" target="_blank">
-                  <p
-                    class="shizhan-title"
-                    title="SpringBoot+Vue3 项目实战，打造企业级在线办公系统"
-                  >
+                <a href="//coding.imooc.com/class/530.html"
+                   target="_blank">
+                  <p class="shizhan-title"
+                     title="SpringBoot+Vue3 项目实战，打造企业级在线办公系统">
                     SpringBoot+Vue3 项目实战，打造企业级在线办公系统
                   </p>
                   <p class="shizhan-desc">
@@ -202,7 +176,7 @@
                   <div class="bottom-box clearfix">
                     <p class="shizhan-price fl">￥399.00</p>
                     <p class="icon icon-right fr">
-                        <i class="el-icon-arrow-right icon-font fw900"></i>
+                      <i class="el-icon-arrow-right icon-font fw900"></i>
                     </p>
                   </div>
                 </a>
@@ -217,14 +191,13 @@
         <div class="course-del-box">
           <ul>
             <li class="moco-course-wrap">
-              <a href="/learn/993" target="_target">
+              <a href="/learn/993"
+                 target="_target">
                 <div class="moco-course-box">
-                  <img
-                    alt="测试克隆慕课网"
-                    src="//img1.sycdn.imooc.com/5afd3bee0001afdc06000338-240-135.jpg"
-                    height="135"
-                    width="100%"
-                  />
+                  <img alt="测试克隆慕课网"
+                       src="//img1.sycdn.imooc.com/5afd3bee0001afdc06000338-240-135.jpg"
+                       height="135"
+                       width="100%" />
                   <div class="moco-course-intro">
                     <h3>
                       <i>中级</i>
@@ -249,11 +222,10 @@
         <div class="article-del-box">
           <ul>
             <li>
-              <a href="/article/316559" target="_blank">
-                <p
-                  class="article-title"
-                  title="如何在SpringBoot中快速整合Swagger？"
-                >
+              <a href="/article/316559"
+                 target="_blank">
+                <p class="article-title"
+                   title="如何在SpringBoot中快速整合Swagger？">
                   如何在SpringBoot中快速整合Swagger？
                 </p>
                 <p class="article-desc">
@@ -275,11 +247,10 @@
               </a>
             </li>
             <li>
-              <a href="/article/292009" target="_blank">
-                <p
-                  class="article-title"
-                  title="面试的时候被问“擅长前端还是后台”应该怎么回答？"
-                >
+              <a href="/article/292009"
+                 target="_blank">
+                <p class="article-title"
+                   title="面试的时候被问“擅长前端还是后台”应该怎么回答？">
                   面试的时候被问“擅长前端还是后台”应该怎么回答？
                 </p>
                 <p class="article-desc">
@@ -296,11 +267,10 @@
               </a>
             </li>
             <li>
-              <a href="/article/30432" target="_blank">
-                <p
-                  class="article-title"
-                  title="Percona向左，MariaDB向右，MySQL衍生版如何取舍？"
-                >
+              <a href="/article/30432"
+                 target="_blank">
+                <p class="article-title"
+                   title="Percona向左，MariaDB向右，MySQL衍生版如何取舍？">
                   Percona向左，MariaDB向右，MySQL衍生版如何取舍？
                 </p>
                 <p class="article-desc">
@@ -380,7 +350,7 @@
   color: #fff;
   background: url(~/assets/img/flag-bg.png);
   z-index: 2;
-  font-size:14px;
+  font-size: 14px;
 }
 
 .top_backgroud_box .top-content-wrap .teacher-box .tea-nickname {
@@ -469,7 +439,8 @@
   border-radius: 18px;
 }
 
-.top-content-wrap .teacher-box .tea-detail-box, .bottom-box .course-box .course-del-box {
+.top-content-wrap .teacher-box .tea-detail-box,
+.bottom-box .course-box .course-del-box {
   text-align: center;
   margin: 0 auto;
   width: 100%;
@@ -528,274 +499,278 @@
   width: 100%;
 }
 
-.shizhan-del-box,.article-del-box {
-    margin: 0 auto;
-    width: 100%;
-    text-align: center;
+.shizhan-del-box,
+.article-del-box {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
 }
 .shizhan-del-box ul {
-    width: 100%;
+  width: 100%;
 }
-.shizhan-del-box ul li, .course-del-box ul li,.bottom-box .article-box .article-del-box ul li {
-    display: inline-block;
-    word-break: break-all;
-    vertical-align: top;
+.shizhan-del-box ul li,
+.course-del-box ul li,
+.bottom-box .article-box .article-del-box ul li {
+  display: inline-block;
+  word-break: break-all;
+  vertical-align: top;
 }
- .shizhan-del-box ul li .shizhan-mask {
-    width: 476px;
-    height: 246px;
-    box-sizing: border-box;
-    padding: 38px 48px 32px;
-    background: url(/pic/shizhan-mask.png);
+.shizhan-del-box ul li .shizhan-mask {
+  width: 476px;
+  height: 246px;
+  box-sizing: border-box;
+  padding: 38px 48px 32px;
+  background: url(/pic/shizhan-mask.png);
 }
 
 .shizhan-del-box ul li .shizhan-title {
-    margin-bottom: 12px;
-    height: 56px;
-    font-size: 20px;
-    line-height: 28px;
-    font-weight: 700;
-    color: #fff;
-    word-break: break-word;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-overflow: -o-ellipsis-lastline;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  margin-bottom: 12px;
+  height: 56px;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+  color: #fff;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: -o-ellipsis-lastline;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .shizhan-del-box ul li .shizhan-desc {
-    margin-bottom: 24px;
-    height: 44px;
-    font-size: 14px;
-    line-height: 22px;
-    color: rgba(255,255,255,.6);
-    word-break: break-word;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-overflow: -o-ellipsis-lastline;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  margin-bottom: 24px;
+  height: 44px;
+  font-size: 14px;
+  line-height: 22px;
+  color: rgba(255, 255, 255, 0.6);
+  word-break: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: -o-ellipsis-lastline;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .shizhan-del-box ul li .bottom-box {
-    width: 380px;
-    position: absolute;
-    bottom: 30px;
-    padding-bottom: 0;
+  width: 380px;
+  position: absolute;
+  bottom: 30px;
+  padding-bottom: 0;
 }
 
 .bottom-box .shizhan-del-box ul li {
-    position: relative;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    width: 476px;
-    height: 246px;
-    box-sizing: border-box;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%);
-    text-align: left;
-    margin-bottom: 24px;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 476px;
+  height: 246px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%);
+  text-align: left;
+  margin-bottom: 24px;
 }
 
 .bottom-box .shizhan-del-box ul li .shizhan-title {
-    margin-bottom: 12px;
-    height: 56px;
-    font-size: 20px;
-    line-height: 28px;
-    font-weight: 700;
-    color: #fff;
-    word-break: break-word;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-overflow: -o-ellipsis-lastline;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  margin-bottom: 12px;
+  height: 56px;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+  color: #fff;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: -o-ellipsis-lastline;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .bottom-box .shizhan-del-box ul li .shizhan-desc {
-    margin-bottom: 24px;
-    height: 44px;
-    font-size: 14px;
-    line-height: 22px;
-    color: rgba(255,255,255,.6);
-    word-break: break-word;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-overflow: -o-ellipsis-lastline;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  margin-bottom: 24px;
+  height: 44px;
+  font-size: 14px;
+  line-height: 22px;
+  color: rgba(255, 255, 255, 0.6);
+  word-break: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: -o-ellipsis-lastline;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .bottom-box .shizhan-del-box ul li .bottom-box .shizhan-price {
-    font-size: 20px;
-    line-height: 20px;
-    font-weight: 200;
-    color: #fff;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 200;
+  color: #fff;
 }
 
 .bottom-box .shizhan-del-box ul li .bottom-box .icon {
-    margin-top: -16px;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    line-height: 50px;
-    text-align: center;
-    color: #fff;
-    background: rgba(7,17,27,.2);
-    border: 2px solid rgba(255,255,255,.6);
-    box-sizing: border-box;
-    border-radius: 50%;
+  margin-top: -16px;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  line-height: 50px;
+  text-align: center;
+  color: #fff;
+  background: rgba(7, 17, 27, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-sizing: border-box;
+  border-radius: 50%;
 }
 
 .bottom-box .shizhan-del-box ul li:nth-child(2n) {
-    margin-left: 23px;
+  margin-left: 23px;
 }
 
 .bottom-box .course-del-box ul .moco-course-wrap {
-    margin: 8px!important;
+  margin: 8px !important;
 }
 
 .moco-course-wrap .moco-course-box {
-    width: 334px;
-    height: 262px;
-    box-sizing: border-box;
-    overflow: hidden;
-    position: relative;
+  width: 334px;
+  height: 262px;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
 }
 
 .moco-course-wrap .moco-course-box .moco-course-intro {
-    box-sizing: border-box;
-    position: absolute;
-    padding: 10px 20px;
-    transition: top .5s;
-    top: 135px;
-    height: 144px;
-    width: 100%;
-    background: #eee;
+  box-sizing: border-box;
+  position: absolute;
+  padding: 10px 20px;
+  transition: top 0.5s;
+  top: 135px;
+  height: 144px;
+  width: 100%;
+  background: #eee;
 }
 
 .moco-course-wrap .moco-course-box .moco-course-intro p {
-    color: #93999f;
-    font-size: 12px;
-    height: 40px;
-    overflow: hidden;
-    line-height: 20px;
+  color: #93999f;
+  font-size: 12px;
+  height: 40px;
+  overflow: hidden;
+  line-height: 20px;
 }
 
 .moco-course-wrap .moco-course-box .moco-course-bottom {
-    position: absolute;
-    padding: 0 20px;
-    bottom: 0;
-    box-sizing: border-box;
-    width: 100%;
-    height: 42px;
-    background: #eee;
-    color:  #409eff;
-    font-size: 16px;
-    line-height: 36px;
+  position: absolute;
+  padding: 0 20px;
+  bottom: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 42px;
+  background: #eee;
+  color: #409eff;
+  font-size: 16px;
+  line-height: 36px;
 }
 
 .bottom-box .article-del-box ul li {
-    position: relative;
-    padding: 40px;
-    margin-bottom: 24px;
-    width: 476px;
-    height: 246px;
-    box-sizing: border-box;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%);
-    text-align: left;
-    background: #fff;
+  position: relative;
+  padding: 40px;
+  margin-bottom: 24px;
+  width: 476px;
+  height: 246px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%);
+  text-align: left;
+  background: #fff;
 }
 
 .bottom-box .article-del-box ul li .article-title {
-    margin-bottom: 10px;
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 700;
-    color: #07111b;
-    word-break: break-word;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  color: #07111b;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .bottom-box .article-del-box ul li .article-desc {
-    margin-bottom: 32px;
-    height: 72px;
-    font-size: 14px;
-    line-height: 24px;
-    color: #4d555d;
-    word-break: break-word;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-overflow: -o-ellipsis-lastline;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+  margin-bottom: 32px;
+  height: 72px;
+  font-size: 14px;
+  line-height: 24px;
+  color: #4d555d;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: -o-ellipsis-lastline;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .bottom-box .article-del-box ul li .bottom-box {
-    width: 396px;
-    position: absolute;
-    bottom: 40px;
-    padding-bottom: 0;
+  width: 396px;
+  position: absolute;
+  bottom: 40px;
+  padding-bottom: 0;
 }
 
 .bottom-box .article-del-box ul li .bottom-box .item:nth-child(1) {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .bottom-box .article-del-box ul li a {
-    display: block;
+  display: block;
 }
 
 .bottom-box .article-del-box ul li:nth-child(2n) {
-    margin-left: 23px;
+  margin-left: 23px;
 }
 
 .bottom-box .article-del-box ul li .bottom-box .item:nth-child(1) {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .bottom-box .article-del-box ul li .bottom-box .item {
-    font-size: 12px;
-    line-height: 20px;
-    color: #93999f;
+  font-size: 12px;
+  line-height: 20px;
+  color: #93999f;
 }
 
 .bottom-box .article-del-box ul li .bottom-box em {
-    margin-top: 5px;
-    display: block;
-    font-style: normal;
-    width: 1px;
-    height: 12px;
-    background: #d9dde1;
+  margin-top: 5px;
+  display: block;
+  font-style: normal;
+  width: 1px;
+  height: 12px;
+  background: #d9dde1;
 }
 
 .bottom-box .article-del-box ul li .bottom-box .item:nth-child(3) {
-    margin-left: 20px;
-    margin-right: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .bottom-box .article-del-box ul li .bottom-box .item:nth-child(5) {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
-a:link, :visited, ins {
+a:link,
+:visited,
+ins {
   text-decoration: none;
 }
-
 </style>
 <script>
 import teacherApi from '@/api/teacher'
 export default {
   //params.id获取路径id值
-  asyncData({ params, error }) {
+  asyncData ({ params, error }) {
     return teacherApi.getTeacherInfo(params.id).then((response) => {
       return {
         teacher: response.data.teacher,

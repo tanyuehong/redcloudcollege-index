@@ -1,78 +1,77 @@
 <template>
   <div class="main fr">
     <div class="sing_main">
-    <div class="title">
-    <nuxt-link class="active" :to="{name:'login'}">
+      <div class="title">
+        <nuxt-link class="active"
+                   :to="{name:'login'}">
           登录
-      </nuxt-link>
-      <span>·</span>
-      <nuxt-link :to="{name:'register'}">
+        </nuxt-link>
+        <span>·</span>
+        <nuxt-link :to="{name:'register'}">
           注册
-      </nuxt-link>
-    </div>
-
-    <div class="sign-up-container">
-      <el-form ref="userForm" :model="user">
-        <el-form-item
-          class="input-prepend restyle"
-          prop="username"
-          :rules="[{ required: true, message: '请输入手机号码',trigger: 'blur'},{validator: checkPhone, trigger: 'blur'}]"
-        >
-          <div>
-            <el-input
-              type="text"
-              v-on:focus="formfocuse"
-              placeholder="手机号"
-              v-model="user.username"
-            />
-            <i class="iconfont icon-phone" />
-          </div>
-        </el-form-item>
-
-        <el-form-item
-          class="input-prepend"
-          prop="password"
-          :rules="[{ required: true, message: '请输入密码', trigger: 'blur' }]"
-        >
-          <div>
-            <el-input
-              type="password"
-              v-on:focus="formfocuse"
-              placeholder="密码"
-              v-model="user.password"
-            />
-            <i class="iconfont icon-password" />
-          </div>
-        </el-form-item>
-
-        <div class="sign_btn">
-          <p class="tips_error_show" v-show="this.errtips.length>0">{{errtips}}</p>
-          <input type="button" class="sign-in-button" value="登录" @click="submitLogin('userForm')" />
-        </div>
-      </el-form>
-      <!-- 更多登录方式 -->
-      <div class="more-sign">
-        <h6>社交帐号登录</h6>
-        <ul>
-          <li>
-            <a
-              id="weixin"
-              class="weixin"
-              target="_blank"
-              href="http://qy.free.idcfengye.com/api/ucenter/weixinLogin/login"
-            >
-              <i class="iconfont icon-weixin" />
-            </a>
-          </li>
-          <li>
-            <a id="qq" class="qq" target="_blank" href="#">
-              <i class="iconfont icon-qq" />
-            </a>
-          </li>
-        </ul>
+        </nuxt-link>
       </div>
-  </div>
-  </div>
+
+      <div class="sign-up-container">
+        <el-form ref="userForm"
+                 :model="user">
+          <el-form-item class="input-prepend restyle"
+                        prop="username"
+                        :rules="[{ required: true, message: '请输入手机号码',trigger: 'blur'},{validator: checkPhone, trigger: 'blur'}]">
+            <div>
+              <el-input type="text"
+                        v-on:focus="formfocuse"
+                        placeholder="手机号"
+                        v-model="user.username" />
+              <i class="iconfont icon-phone" />
+            </div>
+          </el-form-item>
+
+          <el-form-item class="input-prepend"
+                        prop="password"
+                        :rules="[{ required: true, message: '请输入密码', trigger: 'blur' }]">
+            <div>
+              <el-input type="password"
+                        v-on:focus="formfocuse"
+                        placeholder="密码"
+                        v-model="user.password" />
+              <i class="iconfont icon-password" />
+            </div>
+          </el-form-item>
+
+          <div class="sign_btn">
+            <p class="tips_error_show"
+               v-show="this.errtips.length>0">{{errtips}}</p>
+            <input type="button"
+                   class="sign-in-button"
+                   value="登录"
+                   @click="submitLogin('userForm')" />
+          </div>
+        </el-form>
+        <!-- 更多登录方式 -->
+        <div class="more-sign">
+          <h6>社交帐号登录</h6>
+          <ul>
+            <li>
+              <a id="weixin"
+                 class="weixin"
+                 target="_blank"
+                 href="http://qy.free.idcfengye.com/api/ucenter/weixinLogin/login">
+                <i class="iconfont icon-weixin" />
+              </a>
+            </li>
+            <li>
+              <a id="qq"
+                 class="qq"
+                 target="_blank"
+                 href="#">
+                <i class="iconfont icon-qq" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -86,7 +85,7 @@ import loginApi from "@/api/user";
 export default {
   layout: "sign",
 
-  data() {
+  data () {
     return {
       user: {
         username: "",
@@ -99,7 +98,7 @@ export default {
 
   methods: {
     //登录的方法
-    submitLogin(formName) {
+    submitLogin (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           if (this.user.username.length == 0) {
@@ -111,11 +110,11 @@ export default {
             return;
           }
           loginApi.submitLoginUser(this.user).then(response => {
-            window.localStorage.setItem("redclass_token",response.data.token)
+            window.localStorage.setItem("redclass_token", response.data.token)
             //第四步 调用接口 根据token获取用户信息，为了首页面显示
             loginApi.getLoginUserInfo().then(response => {
               this.loginInfo = response.data.userInfo;
-              window.localStorage.setItem("redclass_user",JSON.stringify(this.loginInfo))
+              window.localStorage.setItem("redclass_user", JSON.stringify(this.loginInfo))
               console.log(this.loginInfo);
               //跳转页面
               window.location.href = "/";
@@ -128,13 +127,13 @@ export default {
       });
     },
 
-    checkPhone(rule, value, callback) {
+    checkPhone (rule, value, callback) {
       if (!/^1[3456789]\d{9}$/.test(value)) {
         return callback(new Error("手机号码格式不正确"));
       }
       return callback();
     },
-    formfocuse() {
+    formfocuse () {
       this.errtips = "";
     }
   }

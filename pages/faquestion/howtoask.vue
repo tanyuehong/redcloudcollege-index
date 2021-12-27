@@ -12,38 +12,34 @@
         <form action="/search">
           <div class="row pb20">
             <div class="col-sm-6 col-xs-8">
-              <input
-                class="form-control h2k-search"
-                type="text"
-                name="q"
-                value=""
-                required=""
-                placeholder="输入关键字搜索"
-                autocomplete="off"
-              />
+              <input class="form-control h2k-search"
+                     type="text"
+                     name="q"
+                     value=""
+                     required=""
+                     placeholder="输入关键字搜索"
+                     autocomplete="off" />
             </div>
             <div class="col-sm-2 col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block">
+              <button type="submit"
+                      class="btn btn-primary btn-block">
                 搜索
               </button>
             </div>
           </div>
         </form>
-        <div
-          id="titleSuggest"
-          class="panel hidden widget-suggest panel-default"
-        >
+        <div id="titleSuggest"
+             class="panel hidden widget-suggest panel-default">
           <div class="panel-body">
             <p>
               <strong>这些问题可能有你需要的答案</strong>
-              <button
-                type="button"
-                class="widget-suggest__close btn btn-default btn-xs"
-              >
+              <button type="button"
+                      class="widget-suggest__close btn btn-default btn-xs">
                 关闭提示
               </button>
             </p>
-            <ul id="qList" class="list-unstyled widget-suggest__list"></ul>
+            <ul id="qList"
+                class="list-unstyled widget-suggest__list"></ul>
           </div>
         </div>
         <div class="row mt40">
@@ -94,8 +90,9 @@
         </p>
         <div class="mt40 border-top">
           <div class="text-center mt40 mb40">
-           <nuxt-link class="btn btn-primary btn-lg" :to="{name:'faquestion-ask',query:{freshman:1}}">
-                我已知晓，继续提问
+            <nuxt-link class="btn btn-primary btn-lg"
+                       :to="{name:'faquestion-ask',query:{freshman:1}}">
+              我已知晓，继续提问
             </nuxt-link>
           </div>
         </div>
@@ -105,9 +102,8 @@
 </template>
 
 <style scoped>
-
 .pull-left {
-  width:408px;
+  width: 408px;
 }
 .wrap {
   padding-bottom: 30px;

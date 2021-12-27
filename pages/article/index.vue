@@ -2,116 +2,119 @@
   <el-main>
     <div class="toppic_back_setting">
       <div class="container">
-      <el-carousel :interval="4000" type="card" height="260px" style="position: relative">
-        <el-carousel-item v-for="item in topic_list_item" :key="item.vue">
-          <div class="grid-content">
-            <el-col :md="12">
-              <div class="topic_carousel">
-                <img :src="item.src"/>
-              </div>
-            </el-col>
-          </div>
-        </el-carousel-item>
-      </el-carousel>
+        <el-carousel :interval="4000"
+                     type="card"
+                     height="260px"
+                     style="position: relative">
+          <el-carousel-item v-for="item in topic_list_item"
+                            :key="item.vue">
+            <div class="grid-content">
+              <el-col :md="12">
+                <div class="topic_carousel">
+                  <img :src="item.src" />
+                </div>
+              </el-col>
+            </div>
+          </el-carousel-item>
+        </el-carousel>
       </div>
       <section class="container">
         <div class="row">
           <div class="col-md-8 book_item">
-           <section class="zhuanti-top-group">
-                <div class="zhuanti-group-title">
+            <section class="zhuanti-top-group">
+              <div class="zhuanti-group-title">
                 <span class="c-666 fsize14">专题类别</span>
-                </div>
-                <ul class="zhuanti-group-detail">
-                  <li>
-                    <a title="全部" href="#">iOS</a>
-                  </li>
-                  <li
-                    v-for="(item, index) in subjectNestedList"
-                    :key="index"
-                    :class="{ active: oneIndex == index }"
-                  >
-                    <a
-                      :title="item.title"
-                      href="#"
-                      @click="searchOne(item.id, index)"
-                      >{{ item.title }}</a
-                    >
-                  </li>
-                </ul>
-            <div class="clear"></div>
-          </section>
-          <ul>
-           <li class="cleartopicfix" v-for="item in bookList" :key="item.id">
-              <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
-                <img :src="item.imgUrl" class="img fl" :alt="item.title">
-              </nuxt-link>
-              <div class="text_con fr">
-              <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
-               <p class="title">{{item.title}}</p>
-                  {{item.title}}
-              </nuxt-link>
-                <p class="desc">{{item.describ}}</p>
-                <div class="try-read-box">
-                  <a
-                    class="try-read-item"
-                    href="/read/80/article/2090"
-                    target="_blank"
-                  >
-                    <div class="try-read-img"></div>
-                    <p
-                      class="try-read-title"
-                      title="01 开篇词：带你走进网络编程的世界"
-                    >
-                      01 开篇词：带你走进网络编程的世界
-                    </p>
-                  </a>
-                </div>
-                  <div class="info">
-                  <img src="~/assets/img/article_point.png" class="img_point">
-                  <span>共32节</span>
-                  <img src="~/assets/img/article_point.png" class="img_point">
-                  <span>{{ item.buyCount }}人已购买</span>
-                </div>
-                <div class="clearfloat"></div>
-                <a class="author-box" href="/u/6773399" target="_blank">
-                  <div class="author-img" style="background-image: url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
-                  </div>
-                  <span class="author-name">{{item.author}}</span>
-                  <span>/</span>
-                  <span class="author-title">{{item.authorPositon}}</span>
-                </a>
-                <div class="price_con cleartopicfix fr">
-                  <!-- 没有订阅购买 -->
-                  <a
-                    class="sale-price cleartopicfix"
-                    href="/read/80"
-                    target="_blank"
-                  >
-                    <p class="ori fr">原价 ¥ {{ item.oldPrice }}</p>
-                    <p class="sale fr">¥ {{ item.price }}</p>
-                    <div
-                      class="countdown fr"
-                      data-remain="1617854"
-                      style="clear: both"
-                    >
-                      <span class="name fl">限时优惠</span>
-
-                      <p class="clock fl" style="display: none">
-                        <span>倒计时:</span>
-                        <span class="js-day">18天</span>
-                        <span class="js-hour timer">17</span>:
-                        <span class="js-minute timer">24</span>:
-                        <span class="js-second timer">14</span>:
-                        <span class="js-msec timer">0</span>
-                      </p>
-                    </div>
-                  </a>
-                </div>
               </div>
-            </li>
-          </ul>
+              <ul class="zhuanti-group-detail">
+                <li>
+                  <a title="全部"
+                     href="#">iOS</a>
+                </li>
+                <li v-for="(item, index) in subjectNestedList"
+                    :key="index"
+                    :class="{ active: oneIndex == index }">
+                  <a :title="item.title"
+                     href="#"
+                     @click="searchOne(item.id, index)">{{ item.title }}</a>
+                </li>
+              </ul>
+              <div class="clear"></div>
+            </section>
+            <ul>
+              <li class="cleartopicfix"
+                  v-for="item in bookList"
+                  :key="item.id">
+                <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
+                  <img :src="item.imgUrl"
+                       class="img fl"
+                       :alt="item.title">
+                </nuxt-link>
+                <div class="text_con fr">
+                  <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
+                    <p class="title">{{item.title}}</p>
+                    {{item.title}}
+                  </nuxt-link>
+                  <p class="desc">{{item.describ}}</p>
+                  <div class="try-read-box">
+                    <a class="try-read-item"
+                       href="/read/80/article/2090"
+                       target="_blank">
+                      <div class="try-read-img"></div>
+                      <p class="try-read-title"
+                         title="01 开篇词：带你走进网络编程的世界">
+                        01 开篇词：带你走进网络编程的世界
+                      </p>
+                    </a>
+                  </div>
+                  <div class="info">
+                    <img src="~/assets/img/article_point.png"
+                         class="img_point">
+                    <span>共32节</span>
+                    <img src="~/assets/img/article_point.png"
+                         class="img_point">
+                    <span>{{ item.buyCount }}人已购买</span>
+                  </div>
+                  <div class="clearfloat"></div>
+                  <a class="author-box"
+                     href="/u/6773399"
+                     target="_blank">
+                    <div class="author-img"
+                         style="background-image: url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
+                    </div>
+                    <span class="author-name">{{item.author}}</span>
+                    <span>/</span>
+                    <span class="author-title">{{item.authorPositon}}</span>
+                  </a>
+                  <div class="price_con cleartopicfix fr">
+                    <!-- 没有订阅购买 -->
+                    <a class="sale-price cleartopicfix"
+                       href="/read/80"
+                       target="_blank">
+                      <p class="ori fr">原价 ¥ {{ item.oldPrice }}</p>
+                      <p class="sale fr">¥ {{ item.price }}</p>
+                      <div class="countdown fr"
+                           data-remain="1617854"
+                           style="clear: both">
+                        <span class="name fl">限时优惠</span>
+
+                        <p class="clock fl"
+                           style="display: none">
+                          <span>倒计时:</span>
+                          <span class="js-day">18天</span>
+                          <span class="js-hour timer">17</span>:
+                          <span class="js-minute timer">24</span>:
+                          <span class="js-second timer">14</span>:
+                          <span class="js-msec timer">0</span>
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
-          <div class="bottom-loading" style="display: none">
+          <div class="bottom-loading"
+               style="display: none">
             <i class="imv2-loading"></i>
             <span>正在加载中...</span>
           </div>
@@ -134,11 +137,9 @@
               </div>
             </div>
             <div class="download-app js-show-download clearfix">
-              <img
-                src="~/assets/img/appLogo.png"
-                alt=""
-                class="logo-icon fl"
-              />
+              <img src="~/assets/img/appLogo.png"
+                   alt=""
+                   class="logo-icon fl" />
               <div class="text fl">
                 <h4>下载开源实践APP</h4>
                 <p>更好的体验 学习随处可享</p>
@@ -156,7 +157,7 @@ import '~/assets/css/appdown.css'
 import '~/assets/css/contentlist.css'
 import articleApi from "@/api/article";
 export default {
-  data() {
+  data () {
     return {
       topic_list_item: [
         {
@@ -170,7 +171,7 @@ export default {
         },
       ],
       page: 1, //当前页
-      bookList:[],
+      bookList: [],
       data: {}, //课程列表
       subjectNestedList: [], // 一级分类列表
       subSubjectList: [], // 二级分类列表
@@ -184,18 +185,19 @@ export default {
       priceSort: "",
     };
   },
-   created() {
+
+  created () {
     this.getHomeBooks();
   },
 
   methods: {
-    getHomeBooks() {
+    getHomeBooks () {
       articleApi.getHomeBookList().then((response) => {
         this.bookList = response.data.bookList;
         // debugger;
       });
     },
-    jumpStartQuestion() {
+    jumpStartQuestion () {
       this.$router.push({
         name: "faquestion-howtoask",
         query: {},
@@ -206,25 +208,23 @@ export default {
 </script>
 
 <style>
-
 .zhuanti-top-group {
-   border-bottom: 1px solid rgba(28, 31, 33, 0.1);
-   margin-bottom: 20px;
+  border-bottom: 1px solid rgba(28, 31, 33, 0.1);
+  margin-bottom: 20px;
 }
 
 .zhuanti-group-title {
-  float:left;
-  margin-right:16px;
-  
+  float: left;
+  margin-right: 16px;
 }
 
 .zhuanti-group-detail {
-  float:left;
+  float: left;
 }
 
 .zhuanti-group-detail li {
   border: none;
-  margin-bottom:16px;
+  margin-bottom: 16px;
 }
 .el-main {
   padding: 0px;
@@ -247,8 +247,15 @@ export default {
 }
 
 .topic_carousel img {
-  width:auto;height: auto;max-width: 100%;max-height: 100%;left: 50%;
-    top: 50%;position: absolute;transform: translate3d(-50%,-50%,0); -webkit-transform: translate3d(-50%,-50%,0);
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate3d(-50%, -50%, 0);
+  -webkit-transform: translate3d(-50%, -50%, 0);
 }
 
 .c-s-dl dl {
@@ -267,8 +274,7 @@ export default {
 
 .book_item ul {
   display: block;
-  margin:0px;
-  padding:0px;
+  margin: 0px;
+  padding: 0px;
 }
-
 </style>

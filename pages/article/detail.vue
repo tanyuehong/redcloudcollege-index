@@ -4,27 +4,22 @@
       <div class="row">
         <div v-bind:class="bookNavMenuShow">
           <div class="headTitle">
-            <a
-              href="javascript:void(0);"
-              class="hidden-xs hidden-sm"
-              v-on:click="contentsBtnClick"
-            >
-              <span
-                class="glyphicon glyphicon-list content_btn_size"
-                aria-hidden="true"
-              ></span>
+            <a href="javascript:void(0);"
+               class="hidden-xs hidden-sm"
+               v-on:click="contentsBtnClick">
+              <span class="glyphicon glyphicon-list content_btn_size"
+                    aria-hidden="true"></span>
             </a>
             <span class="book_title">{{ bookItem.title }}</span>
             <span>/</span>
             <span>{{ contentsItem.title }}</span>
           </div>
-           <div class="left-back">
-             <a href="javascript:void(0);"
-                v-on:click="backBtnClick"
-             >
+          <div class="left-back">
+            <a href="javascript:void(0);"
+               v-on:click="backBtnClick">
               <span>返回</span>
-                 <i class="el-icon-arrow-right back_item"></i>
-             </a>
+              <i class="el-icon-arrow-right back_item"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -41,7 +36,8 @@
               <ul>
                 <li>
                   <!-- 开放 -->
-                  <a href="/read/91/article/2551" class="js-read">
+                  <a href="/read/91/article/2551"
+                     class="js-read">
                     <div class="articleName">
                       01 开篇词-什么是微服务，是否要实施微服务？
                     </div>
@@ -55,7 +51,8 @@
                 </li>
                 <li>
                   <!-- 开放 -->
-                  <a href="/read/91/article/2552" class="js-read">
+                  <a href="/read/91/article/2552"
+                     class="js-read">
                     <div class="articleName">
                       02 单体服务转为微服务体系需要注意什么问题？
                     </div>
@@ -69,7 +66,8 @@
                 </li>
                 <li>
                   <!-- 开放 -->
-                  <a href="javascript:;" class="js-lock">
+                  <a href="javascript:;"
+                     class="js-lock">
                     <div class="articleName">
                       03 如何确立微服务的技术架构体系与服务分层？
                     </div>
@@ -83,7 +81,8 @@
                 </li>
                 <li>
                   <!-- 开放 -->
-                  <a href="/read/91/article/2554" class="js-read">
+                  <a href="/read/91/article/2554"
+                     class="js-read">
                     <div class="articleName">04 如何进行微服务的技术选型？</div>
                     <div class="info">
                       <!-- 开放 -->
@@ -95,7 +94,8 @@
                 </li>
                 <li>
                   <!-- 开放 -->
-                  <a href="javascript:;" class="js-lock">
+                  <a href="javascript:;"
+                     class="js-lock">
                     <div class="articleName">05 怎样进行微服务的拆分？</div>
                     <div class="info">
                       <!-- 开放 -->
@@ -113,8 +113,9 @@
 
       <div v-bind:class="bookContentShow">
         <div class="book_tecAritcle">
-        <div class="mark_content" v-html="bookDesc">
-        </div>
+          <div class="mark_content"
+               v-html="bookDesc">
+          </div>
         </div>
       </div>
     </div>
@@ -149,14 +150,14 @@ strong {
   padding-left: 20px;
   padding-top: 5px;
   margin-right: 20px;
-  float:right;
+  float: right;
 }
 .navbar .left-back span {
   vertical-align: middle;
 }
 
 .left-back a {
- color: #333;
+  color: #333;
 }
 
 .navbar .back_item {
@@ -239,13 +240,13 @@ strong {
   color: #1c1f21;
 }
 .headTitle {
-float: left;
-width:300px;
-margin-left:10px;
+  float: left;
+  width: 300px;
+  margin-left: 10px;
 }
 
 .headTitle .icon_open {
-width:20px;
+  width: 20px;
 }
 
 .headTitle a {
@@ -275,7 +276,6 @@ width:20px;
 .book_lefte_contents {
   padding-top: 50px;
 }
-
 </style>
 
 <script>
@@ -285,7 +285,7 @@ import showdown from 'showdown'
 import { Message } from 'element-ui'
 
 export default {
-  data() {
+  data () {
     return {
       articleItem: {},
       bookItem: {},
@@ -299,7 +299,7 @@ export default {
       isShowContent: false,
     }
   },
-  created() {
+  created () {
     var articleId = this.$route.query.id
     if (articleId && articleId.length > 0) {
       this.getBookArticleDetail(articleId)
@@ -311,14 +311,14 @@ export default {
       })
     }
   },
-  mounted() {
+  mounted () {
     window.addEventListener('resize', this.windowFrameChange)
     this.windowFrameChange()
   },
   methods: {
     //分页切换的方法
     //参数是页码数
-    getBookArticleDetail(articleId) {
+    getBookArticleDetail (articleId) {
       articleApi.getBookArticleDetail(articleId).then((response) => {
         this.articleItem = response.data.item
         this.bookItem = response.data.book
@@ -327,7 +327,7 @@ export default {
       })
     },
 
-    tabClickBookInfo(tab, event) {
+    tabClickBookInfo (tab, event) {
       if (this.isFirstComment == 1 && tab.name == 'bookComment') {
         this.comentClick(null, null)
         this.isFirstComment = 2
@@ -339,7 +339,7 @@ export default {
       }
     },
 
-    comentClick(tab, event) {
+    comentClick (tab, event) {
       var type = 1
       if (tab && tab.name == 'bestComment') {
         type = 2
@@ -357,7 +357,7 @@ export default {
         })
     },
 
-    getBookContents() {
+    getBookContents () {
       articleApi
         .getBookContents({ bookId: this.bookItem.id })
         .then((response) => {
@@ -365,21 +365,21 @@ export default {
         })
     },
 
-    changMarkToHtml(markstring) {
+    changMarkToHtml (markstring) {
       var converter = new showdown.Converter()
       this.bookDesc = converter.makeHtml(markstring)
     },
 
-    contentsBtnClick() {
-      this.isShowContent = ! this.isShowContent;
+    contentsBtnClick () {
+      this.isShowContent = !this.isShowContent;
     },
 
-    backBtnClick() {
-       if (window) {
-        window.location.href="javascript:history.go(-1)";
-       }
+    backBtnClick () {
+      if (window) {
+        window.location.href = "javascript:history.go(-1)";
+      }
     },
-    windowFrameChange() {
+    windowFrameChange () {
       if (window) {
         window.console.log('heigit ===' + window.innerWidth + 'px')
       }
@@ -411,7 +411,7 @@ export default {
         'col-md-3 hidden-xs hidden-sm': !this.isShowContent,
       }
     },
-    
+
     bookNavMenuShow: function () {
       return {
         'col-md-12': this.isShowContent,

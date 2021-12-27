@@ -4,31 +4,43 @@
     <header id="header">
       <section class="container">
         <h1 id="logo">
-          <a href="#" title="开源实践网">
-            <img
-              src="~/assets/img/logo.png"
-              class="logo_index"
-              alt="开源实践网"
-            />
-            <img src="~/assets/img/logo_descrb.png" class="logo_decrb" alt="" />
+          <a href="#"
+             title="开源实践网">
+            <img src="~/assets/img/logo.png"
+                 class="logo_index"
+                 alt="开源实践网" />
+            <img src="~/assets/img/logo_descrb.png"
+                 class="logo_decrb"
+                 alt="" />
           </a>
         </h1>
 
         <div class="h-r-nsl">
           <ul class="nav">
-            <router-link to="/" tag="li" active-class="current" exact>
+            <router-link to="/"
+                         tag="li"
+                         active-class="current"
+                         exact>
               <a>首页</a>
             </router-link>
-            <router-link to="/course" tag="li" active-class="current">
+            <router-link to="/course"
+                         tag="li"
+                         active-class="current">
               <a>课程</a>
             </router-link>
-            <router-link to="/practice" tag="li" active-class="current">
+            <router-link to="/practice"
+                         tag="li"
+                         active-class="current">
               <a>实践</a>
             </router-link>
-            <router-link to="/article" tag="li" active-class="current">
+            <router-link to="/article"
+                         tag="li"
+                         active-class="current">
               <a>技术专题</a>
             </router-link>
-            <router-link to="/faquestion" tag="li" active-class="current">
+            <router-link to="/faquestion"
+                         tag="li"
+                         active-class="current">
               <a>问答</a>
             </router-link>
           </ul>
@@ -36,41 +48,49 @@
           <!-- / nav -->
           <client-only>
             <ul class="h-r-login">
-              <li v-if="!loginInfo.id" id="no-login">
-                <a href="/login" title="登录">
+              <li v-if="!loginInfo.id"
+                  id="no-login">
+                <a href="/login"
+                   title="登录">
                   <em class="icon18 login-icon">&nbsp;</em>
                   <span class="vam ml5">登录</span>
                 </a>
                 |
-                <a href="/register" title="注册">
+                <a href="/register"
+                   title="注册">
                   <span class="vam ml5">注册</span>
                 </a>
               </li>
-              <li v-if="loginInfo.id" id="is-login-one" class="mr10">
-                <a id="headerMsgCountId" href="#" title="消息">
+              <li v-if="loginInfo.id"
+                  id="is-login-one"
+                  class="mr10">
+                <a id="headerMsgCountId"
+                   href="#"
+                   title="消息">
                   <em class="icon18 news-icon">&nbsp;</em>
                 </a>
-                <q class="red-point" style="display: none;">&nbsp;</q>
+                <q class="red-point"
+                   style="display: none;">&nbsp;</q>
               </li>
-              <li v-if="loginInfo.id" id="is-login-two" class="h-r-user">
-                <a href="/ucenter" title>
-                  <img
-                    :src="loginInfo.avatar"
-                    width="30"
-                    height="30"
-                    class="vam picImg"
-                    alt
-                  />
-                  <span id="userName" class="vam disIb">
+              <li v-if="loginInfo.id"
+                  id="is-login-two"
+                  class="h-r-user">
+                <a href="/ucenter"
+                   title>
+                  <img :src="loginInfo.avatar"
+                       width="30"
+                       height="30"
+                       class="vam picImg"
+                       alt />
+                  <span id="userName"
+                        class="vam disIb">
                     {{ loginInfo.nickname }}
                   </span>
                 </a>
-                <a
-                  href="javascript:void(0);"
-                  title="退出"
-                  @click="logout()"
-                  class="ml5"
-                >
+                <a href="javascript:void(0);"
+                   title="退出"
+                   @click="logout()"
+                   class="ml5">
                   退出
                 </a>
               </li>
@@ -78,15 +98,15 @@
             </ul>
           </client-only>
           <aside class="h-r-search">
-            <form action="#" method="post">
+            <form action="#"
+                  method="post">
               <label class="h-r-s-box">
-                <input
-                  type="text"
-                  placeholder="输入你想学的课程"
-                  name="queryCourse.courseName"
-                  value
-                />
-                <button type="submit" class="s-btn">
+                <input type="text"
+                       placeholder="输入你想学的课程"
+                       name="queryCourse.courseName"
+                       value />
+                <button type="submit"
+                        class="s-btn">
                   <em class="icon18">&nbsp;</em>
                 </button>
               </label>
@@ -108,10 +128,10 @@
 import '~/assets/css/theme.css'
 import '~/assets/css/global.css'
 
-import loginApi from '@/api/login'
+import loginApi from '@/api/user'
 
 export default {
-  data() {
+  data () {
     return {
       token: '',
       loginInfo: {
@@ -124,7 +144,7 @@ export default {
       },
     }
   },
-  created() {
+  created () {
     //获取路径里面token值
     this.token = this.$route.query.token
     console.log(this.token)
@@ -137,21 +157,21 @@ export default {
   },
   methods: {
     //微信登录显示的方法
-    wxLogin() {
+    wxLogin () {
       //console.log('************'+this.token)
       //把token值放到cookie里面
-      cookie.set('redskt_token', this.token, { domain: 'localhost' })
-      cookie.set('redskt_ucenter', '', { domain: 'localhost' })
+      cookie.set('redskt_token', this.token, { domain: 'redskt' })
+      cookie.set('redskt_ucenter', '', { domain: 'redskt' })
       //console.log('====='+cookie.get('guli_token'))
       //调用接口，根据token值获取用户信息
       loginApi.getLoginUserInfo().then((response) => {
         // console.log('################'+response.data.userInfo)
         this.loginInfo = response.data.userInfo
-        cookie.set('redskt_ucenter', this.loginInfo, { domain: 'localhost' })
+        cookie.set('redskt_ucenter', this.loginInfo, { domain: 'redskt' })
       })
     },
     //创建方法，从cookie获取用户信息
-    showInfo() {
+    showInfo () {
       //从cookie获取用户信息
       if (process.client) {
         var userStr = localStorage.getItem('redclass_user')
@@ -162,7 +182,7 @@ export default {
     },
 
     //退出
-    logout() {
+    logout () {
       window.localStorage.setItem('redclass_token', '')
       window.localStorage.setItem('redclass_user', '')
       //回到首页面

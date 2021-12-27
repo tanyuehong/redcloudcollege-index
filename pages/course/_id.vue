@@ -4,8 +4,12 @@
     <section class="container">
       <div class="course_header">
         <section class="path-wrap hLh30">
-          <a href="#" title class="c-999 fsize14">首页</a>
-          <a href="#" title class="c-999 fsize14">
+          <a href="#"
+             title
+             class="c-999 fsize14">首页</a>
+          <a href="#"
+             title
+             class="c-999 fsize14">
             / {{ courseWebVo.subjectLevelOne }} /
           </a>
           <span class="path_courent fsize14">
@@ -15,12 +19,10 @@
 
         <div class="course_top_content">
           <div class="course_lefte_cover fl">
-            <img
-              width="600px"
-              :src="courseWebVo.adimage"
-              :alt="courseWebVo.title"
-              class="dis c-v-pic"
-            />
+            <img width="600px"
+                 :src="courseWebVo.adimage"
+                 :alt="courseWebVo.title"
+                 class="dis c-v-pic" />
           </div>
 
           <div class="course_right_info fr">
@@ -40,17 +42,18 @@
                 </span>
               </span>
               <i class="icon-sep"></i>
-              <img src="~/assets/img/course-faver.png" class="fl" />
+              <img src="~/assets/img/course-faver.png"
+                   class="fl" />
               <span class="course_info_faver">
                 收藏
               </span>
             </div>
             <div class="clearfix"></div>
             <div class="course-other-info">
-             <nuxt-link :to="{ name: 'teacher-id' }">
-                           <span>主讲老师:</span> <span>{{courseWebVo.teacherName}}</span>
-                          </nuxt-link>
-              
+              <nuxt-link :to="{ name: 'teacher-id' }">
+                <span>主讲老师:</span> <span>{{courseWebVo.teacherName}}</span>
+              </nuxt-link>
+
             </div>
             <div class="inst-bar-layout-main">
               <p class="inst-bar-layout-hd">
@@ -81,7 +84,8 @@
             </div>
             <div class="course-goumai">
               <el-button type="primary">立即购买</el-button>
-              <el-button type="success" icon="el-icon-chat-dot-round">
+              <el-button type="success"
+                         icon="el-icon-chat-dot-round">
                 咨询
               </el-button>
             </div>
@@ -92,15 +96,18 @@
       <!-- /课程封面介绍 -->
       <div class="course-detail_content">
         <div class="detail_content_group">
-          <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="课程介绍" name="first">
+          <el-tabs v-model="activeName"
+                   @tab-click="handleClick">
+            <el-tab-pane label="课程介绍"
+                         name="first">
               <div class="course-video-descrb">
                 <div class="course-video-descrb-content">
                   这里是课程介绍
                 </div>
               </div>
             </el-tab-pane>
-            <el-tab-pane label="课程表" name="second">
+            <el-tab-pane label="课程表"
+                         name="second">
               <div class="course-chapter-detail">
                 <div class="course-chapter-one">
                   <div class="course-chaper-title">
@@ -119,8 +126,10 @@
                 </div>
               </div>
             </el-tab-pane>
-            <el-tab-pane label="评价" name="third">评价</el-tab-pane>
-            <el-tab-pane label="课程问答" name="fourth">课程问答</el-tab-pane>
+            <el-tab-pane label="评价"
+                         name="third">评价</el-tab-pane>
+            <el-tab-pane label="课程问答"
+                         name="fourth">课程问答</el-tab-pane>
           </el-tabs>
         </div>
         <div class="op_course_app_decrb fr">
@@ -142,7 +151,9 @@
             </div>
           </div>
           <div class="download-app js-show-download clearfix">
-            <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
+            <img src="~/assets/img/appLogo.png"
+                 alt=""
+                 class="logo-icon fl" />
             <div class="text fl">
               <h4>下载开源实践APP</h4>
               <p>更好的体验 学习随处可享</p>
@@ -178,8 +189,8 @@
   padding-bottom: 20px;
 }
 
-.course_lefte_cover  img {
-   height:auto;
+.course_lefte_cover img {
+  height: auto;
 }
 .course_right_info {
   width: 450px;
@@ -294,7 +305,7 @@ import courseApi from '@/api/course'
 import ordersApi from '@/api/orders'
 
 export default {
-  asyncData({ params, error }) {
+  asyncData ({ params, error }) {
     return courseApi.getCourseInfo(params.id).then((response) => {
       return {
         courseWebVo: response.data.courseWebVo,
@@ -305,7 +316,7 @@ export default {
   },
   methods: {
     //生成订单
-    createOrders() {
+    createOrders () {
       ordersApi.createOrders(this.courseId).then((response) => {
         //获取返回订单号
         //生成订单之后，跳转订单显示页面

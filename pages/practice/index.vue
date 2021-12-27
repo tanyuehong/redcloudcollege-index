@@ -3,75 +3,76 @@
     <div class="op_top_back"></div>
     <section class="container">
       <div class="practice-content">
-      <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane
-          :label="item.name"
-          :name="item.id"
-          v-for="item in typeList"
-          :key="item.id"
-        >
-          <ul class="op_pratice_subtag">
-            <li class="li-item" v-for="sutem in subTypeList" :key="sutem.id">
-              <a>{{ sutem.name }}</a>
-            </li>
-          </ul>
-          <div class="op_pratice_content book_item fl">
-            <ul class="article_list">
-              <li v-for="bitem in blogList" :key="bitem.id">
-                <div class="op_artie_content">
-                <nuxt-link class="article_title" :to="{name:'practice-detail',query:{id:bitem.id}}">
-                      {{ bitem.title }}
-                </nuxt-link>
-                  <p class="op_pratice_describ">
-                    {{ bitem.descrb }}
-                  </p>
-                  <ul>
-                    <i class="pratice_icon_view"></i>
-                    <span class="icon_des">{{bitem.viewCount}}</span>
-                    <i class="pratice_icon_zhan"></span></i>
-                    <span class="icon_des">{{bitem.good}}</span>
-                    <i class="pratice_icon_comment"></i>
-                    <span class="icon_des">11</span>
-                  </ul>
-                </div>
+        <el-tabs v-model="activeName"
+                 @tab-click="handleClick">
+          <el-tab-pane :label="item.name"
+                       :name="item.id"
+                       v-for="item in typeList"
+                       :key="item.id">
+            <ul class="op_pratice_subtag">
+              <li class="li-item"
+                  v-for="sutem in subTypeList"
+                  :key="sutem.id">
+                <a>{{ sutem.name }}</a>
               </li>
             </ul>
-          </div>
+            <div class="op_pratice_content book_item fl">
+              <ul class="article_list">
+                <li v-for="bitem in blogList"
+                    :key="bitem.id">
+                  <div class="op_artie_content">
+                    <nuxt-link class="article_title"
+                               :to="{name:'practice-detail',query:{id:bitem.id}}">
+                      {{ bitem.title }}
+                    </nuxt-link>
+                    <p class="op_pratice_describ">
+                      {{ bitem.descrb }}
+                    </p>
+                    <ul>
+                      <i class="pratice_icon_view"></i>
+                      <span class="icon_des">{{bitem.viewCount}}</span>
+                      <i class="pratice_icon_zhan"></span></i>
+                      <span class="icon_des">{{bitem.good}}</span>
+                      <i class="pratice_icon_comment"></i>
+                      <span class="icon_des">11</span>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
 
-          <div class="op_pratice_aside fr">
-            <div class="op_app_decrb fr">
-            <div class="wechatma-con js-wechatma-con">
-              <div class="ma-con">
-                <div class="ma"></div>
-                <div class="desc">
-                  <div class="title">扫码关注开源实践网服务号</div>
-                  <div class="item-con">
-                    <div class="item">干货分享</div>
-                    <div class="item">定期活动</div>
-                    <div class="item">课程优惠</div>
-                    <div class="item">专栏福利</div>
+            <div class="op_pratice_aside fr">
+              <div class="op_app_decrb fr">
+                <div class="wechatma-con js-wechatma-con">
+                  <div class="ma-con">
+                    <div class="ma"></div>
+                    <div class="desc">
+                      <div class="title">扫码关注开源实践网服务号</div>
+                      <div class="item-con">
+                        <div class="item">干货分享</div>
+                        <div class="item">定期活动</div>
+                        <div class="item">课程优惠</div>
+                        <div class="item">专栏福利</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-con">
+                    官方优惠福利活动一手掌握，关注开源实践官网（ID：www.redskt.com），和1万+客户端程序员一起成长！
+                  </div>
+                </div>
+                <div class="download-app js-show-download clearfix">
+                  <img src="~/assets/img/appLogo.png"
+                       alt=""
+                       class="logo-icon fl" />
+                  <div class="text fl">
+                    <h4>下载开源实践APP</h4>
+                    <p>更好的体验 学习随处可享</p>
                   </div>
                 </div>
               </div>
-              <div class="text-con">
-                官方优惠福利活动一手掌握，关注开源实践官网（ID：www.redskt.com），和1万+客户端程序员一起成长！
-              </div>
             </div>
-            <div class="download-app js-show-download clearfix">
-              <img
-                src="~/assets/img/appLogo.png"
-                alt=""
-                class="logo-icon fl"
-              />
-              <div class="text fl">
-                <h4>下载开源实践APP</h4>
-                <p>更好的体验 学习随处可享</p>
-              </div>
-            </div>
-          </div>
-          </div>
-        </el-tab-pane>
-      </el-tabs>
+          </el-tab-pane>
+        </el-tabs>
       </div>
     </section>
   </div>
@@ -85,10 +86,10 @@ import realPractice from '@/api/realpractice'
 export default {
   //异步调用，调用一次
   //params: 相当于之前 this.$route.params.id  等价  params.id
-  data() {
+  data () {
     return { activeName: 'first' }
   },
-  asyncData({ params, error }) {
+  asyncData ({ params, error }) {
     return realPractice.getHomeRealPratice(1, 8).then((response) => {
       return {
         typeList: response.data.typeList,
@@ -101,10 +102,10 @@ export default {
   methods: {
     //分页切换的方法
     //参数是页码数
-    handleClick(tab, event) {
+    handleClick (tab, event) {
       console.log(tab, event)
     },
-    changModelMarkToHtml(content) {
+    changModelMarkToHtml (content) {
       var converter = new showdown.Converter()
       return converter.makeHtml(content)
     },
@@ -120,7 +121,7 @@ export default {
 }
 
 .practice-content {
-  margin-top:-50px;
+  margin-top: -50px;
 }
 
 .el-tabs__header {
@@ -142,7 +143,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   height: auto;
-  padding-left:0px;
+  padding-left: 0px;
 }
 .op_pratice_subtag .li-item {
   display: flex;
@@ -160,11 +161,11 @@ export default {
 }
 
 .op_pratice_subtag a {
-  color:#666666;
+  color: #666666;
 }
 
 .op_pratice_subtag a:hover {
-  color:#f56c6c;;
+  color: #f56c6c;
 }
 
 .op_pratice_content {
@@ -176,19 +177,19 @@ export default {
 
 .article_list {
   padding-top: 20px;
-  padding-left:18px;
+  padding-left: 18px;
 }
 
 .op_pratice_aside {
   width: 326px;
   height: 400px;
 }
-.download-app  .text p {
+.download-app .text p {
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
-.download-app  .text h4 {
-    margin-top: 0px;
+.download-app .text h4 {
+  margin-top: 0px;
 }
 </style>

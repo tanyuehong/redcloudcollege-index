@@ -1,15 +1,15 @@
 <template>
   <div class="main_global_bg">
     <div class="container">
-      <div class="ask_content" id="newQuestion">
+      <div class="ask_content"
+           id="newQuestion">
         <div class="row">
           <div class="col-md-8">
             <div class="breadcrumb red_breadcrumb">
-              <a class="section" href="/faquestion">开源实践问答</a>
-              <span
-                class="glyphicon glyphicon glyphicon-menu-right"
-                aria-hidden="true"
-              ></span>
+              <a class="section"
+                 href="/faquestion">开源实践问答</a>
+              <span class="glyphicon glyphicon glyphicon-menu-right"
+                    aria-hidden="true"></span>
               <div class="active section">我要提问</div>
             </div>
 
@@ -28,63 +28,71 @@
                 </li>
                 <li>
                   更多信息请查阅 &nbsp;
-                  <a
-                    href="https://www.oschina.net/question/2918182_2262855"
-                    target="_blank"
-                  >
+                  <a href="https://www.oschina.net/question/2918182_2262855"
+                     target="_blank">
                     新版社区规范
                   </a>
                 </li>
               </ol>
             </div>
             <form class="ui new-question form">
-              <input
-                type="hidden"
-                name="user_code"
-                value="IMqpO8mgcnPOwUeaVbRFT5zlfSFKllVq4AFnIACu"
-              />
-              <input type="hidden" name="userId" value="2825958" />
-              <input type="hidden" name="id" value />
-              <input type="hidden" name="askUserId" value="0" />
-              <input type="hidden" name="tag" value />
-              <input type="hidden" name="tag_type" value />
+              <input type="hidden"
+                     name="user_code"
+                     value="IMqpO8mgcnPOwUeaVbRFT5zlfSFKllVq4AFnIACu" />
+              <input type="hidden"
+                     name="userId"
+                     value="2825958" />
+              <input type="hidden"
+                     name="id"
+                     value />
+              <input type="hidden"
+                     name="askUserId"
+                     value="0" />
+              <input type="hidden"
+                     name="tag"
+                     value />
+              <input type="hidden"
+                     name="tag_type"
+                     value />
               <div class="field">
                 <label>选择版块</label>
-                <input type="hidden" name="catalog" value="1" />
+                <input type="hidden"
+                       name="catalog"
+                       value="1" />
                 <div class="ui five item pointing menu catalog">
-                  <a class="item active" data-value="1" title="技术问答">
-                    <span
-                      class="glyphicon glyphicon-question-sign"
-                      aria-hidden="true"
-                    ></span>
+                  <a class="item active"
+                     data-value="1"
+                     title="技术问答">
+                    <span class="glyphicon glyphicon-question-sign"
+                          aria-hidden="true"></span>
                     <span>技术问答</span>
                   </a>
-                  <a class="item" data-value="100" title="职业生涯">
-                    <span
-                      class="glyphicon glyphicon-briefcase"
-                      aria-hidden="true"
-                    ></span>
+                  <a class="item"
+                     data-value="100"
+                     title="职业生涯">
+                    <span class="glyphicon glyphicon-briefcase"
+                          aria-hidden="true"></span>
                     <span>职业生涯</span>
                   </a>
-                  <a class="item" data-value="2" title="技术分享">
-                    <span
-                      class="glyphicon glyphicon-share"
-                      aria-hidden="true"
-                    ></span>
+                  <a class="item"
+                     data-value="2"
+                     title="技术分享">
+                    <span class="glyphicon glyphicon-share"
+                          aria-hidden="true"></span>
                     <span>技术分享</span>
                   </a>
-                  <a class="item" data-value="3" title="IT大杂烩">
-                    <span
-                      class="glyphicon glyphicon-user"
-                      aria-hidden="true"
-                    ></span>
+                  <a class="item"
+                     data-value="3"
+                     title="IT大杂烩">
+                    <span class="glyphicon glyphicon-user"
+                          aria-hidden="true"></span>
                     <span>IT大杂烩</span>
                   </a>
-                  <a class="item" data-value="4" title="站务/建议">
-                    <span
-                      class="glyphicon glyphicon-hand-up"
-                      aria-hidden="true"
-                    ></span>
+                  <a class="item"
+                     data-value="4"
+                     title="站务/建议">
+                    <span class="glyphicon glyphicon-hand-up"
+                          aria-hidden="true"></span>
                     <span>站务/建议</span>
                   </a>
                 </div>
@@ -92,28 +100,22 @@
               <div class="required field">
                 <label>标题</label>
                 <div class="ui input focus">
-                  <el-input
-                    v-model="asktitle"
-                    placeholder="您有什么技术问题，请在此输入"
-                    v-on:focus="inputfocuse"
-                  ></el-input>
+                  <el-input v-model="asktitle"
+                            placeholder="您有什么技术问题，请在此输入"
+                            v-on:focus="inputfocuse"></el-input>
                 </div>
               </div>
               <div class="field">
-                <a
-                  href="https://www.oschina.net/question/12_21851"
-                  target="_blank"
-                >
+                <a href="https://www.oschina.net/question/12_21851"
+                   target="_blank">
                   什么样的问题算是一个好问题？
                 </a>
               </div>
               <div class="field">
                 <label>语言 平台 标签</label>
                 <div class="search_input">
-                  <el-input
-                    v-model="asktag"
-                    placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多5个)"
-                  ></el-input>
+                  <el-input v-model="asktag"
+                            placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多5个)"></el-input>
                 </div>
               </div>
 
@@ -121,24 +123,24 @@
                 <label>
                   描述（请对问题进行详细描述：如软件运行环境、详细错误、异常信息等）
                 </label>
-                 <div class="quill-editor" 
-         :content="content"
-         @change="onEditorChange($event)"
-         @blur="onEditorBlur($event)"
-         @focus="onEditorFocus($event)"
-         @ready="onEditorReady($event)"
-         v-quill:myQuillEditor="editorOption">
-    </div>
+                <client-only>
+                  <div class="quill-editor"
+                       :content="content"
+                       @change="onEditorChange($event)"
+                       @blur="onEditorBlur($event)"
+                       @focus="onEditorFocus($event)"
+                       @ready="onEditorReady($event)"
+                       v-quill:myQuillEditor="editorOption">
+                  </div>
+                </client-only>
               </div>
               <div class="field">
                 <div class="ui checkbox">
                   <el-checkbox v-model="tipsme">
                     有人回答时邮件通知我 (957963898@qq.com)
                   </el-checkbox>
-                  <a
-                    href="https://my.oschina.net/redskt/admin/mail-settings"
-                    target="_blank"
-                  >
+                  <a href="https://my.oschina.net/redskt/admin/mail-settings"
+                     target="_blank">
                     更改提醒邮箱？
                   </a>
                 </div>
@@ -149,10 +151,12 @@
                 </div>
               </div>
               <div class="publish_ask">
-                <el-button type="primary" @click="publishAsk">
+                <el-button type="primary"
+                           @click="publishAsk">
                   发布问题
                 </el-button>
-                <p class="tips_error_show" v-show="this.errtips.length > 0">
+                <p class="tips_error_show"
+                   v-show="this.errtips.length > 0">
                   {{ errtips }}
                 </p>
               </div>
@@ -174,10 +178,8 @@
                 </li>
                 <li>
                   更多信息请查阅 &nbsp;
-                  <a
-                    href="https://www.oschina.net/question/2918182_2262855"
-                    target="_blank"
-                  >
+                  <a href="https://www.oschina.net/question/2918182_2262855"
+                     target="_blank">
                     新版社区规范
                   </a>
                 </li>
@@ -198,7 +200,7 @@ import 'quill/dist/quill.core.css'
 import '~/assets/css/quilleditor.css'
 
 export default {
-  data() {
+  data () {
     return {
       tipsme: true,
       nocomment: true,
@@ -206,33 +208,33 @@ export default {
       asktitle: '',
       asktag: '',
       errtips: '',
-       content: '',
-        editorOption: {
-          placeholder: "请输入您的问题",
-          modules: {
-            toolbar: [
-              ['bold', 'italic', 'underline', 'strike'],
-              ['blockquote', 'code-block']
-            ]
-          }
-        },
+      content: '',
+      editorOption: {
+        placeholder: "请输入您的问题",
+        modules: {
+          toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['blockquote', 'code-block']
+          ]
+        }
+      },
     }
   },
   methods: {
-     onEditorBlur(editor) {
-        console.log('editor blur!', editor)
-      },
-      onEditorFocus(editor) {
-        console.log('editor focus!', editor)
-      },
-      onEditorReady(editor) {
-        console.log('editor ready!', editor)
-      },
-      onEditorChange({ editor, html, text }) {
-        console.log('editor change!', editor, html, text)
-        this.content = html
-      },
-    publishAsk() {
+    onEditorBlur (editor) {
+      console.log('editor blur!', editor)
+    },
+    onEditorFocus (editor) {
+      console.log('editor focus!', editor)
+    },
+    onEditorReady (editor) {
+      console.log('editor ready!', editor)
+    },
+    onEditorChange ({ editor, html, text }) {
+      console.log('editor change!', editor, html, text)
+      this.content = html
+    },
+    publishAsk () {
       if (this.asktitle.length < 6) {
         this.errtips = '问题标题必须六个字符以上哈！'
         return
@@ -266,7 +268,7 @@ export default {
         })
       }
     },
-    inputfocuse() {
+    inputfocuse () {
       this.errtips = ''
     },
   },
@@ -274,13 +276,12 @@ export default {
 </script>
 
 <style>
-
-.active { 
+.active {
   border-color: #f56c6c;
   color: #f56c6c !important;
 }
 .checkbox {
-  margin-left:-15px;
+  margin-left: -15px;
 }
 
 .ask_content {
@@ -463,8 +464,8 @@ export default {
 }
 
 .ui.message .list li {
-  padding-top:5px;
-  margin-left:5px;
+  padding-top: 5px;
+  margin-left: 5px;
 }
 .tips_error_show {
   position: absolute;
@@ -474,5 +475,4 @@ export default {
   font-size: 12px;
   width: 100%;
 }
-
 </style>

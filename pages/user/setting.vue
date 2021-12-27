@@ -219,15 +219,12 @@
                     <div 
                          class="click-text">点击修改头像</div>
                     <!---->
-                  </div> <img data-v-2afa39d6=""
-                       data-v-3aafff8a=""
-                      
+                  </div> <img
                        src="https://p3-passport.byteacctimg.com/img/mosaic-legacy/3791/5035712059~300x300.image"
                        alt=""
                        class="lazy avatar avatar"
-                       data-src="https://p3-passport.byteacctimg.com/img/mosaic-legacy/3791/5035712059~300x300.image"> <input 
-                         type="file"
-                         class="input">
+                       data-src="https://p3-passport.byteacctimg.com/img/mosaic-legacy/3791/5035712059~300x300.image"> 
+                       <input type="file" class="input">
                 </div>
                 <div 
                      class="title web-only">

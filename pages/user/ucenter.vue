@@ -23,7 +23,8 @@
               </div>
             </div>
             <div class="user-info-setting">
-              <el-button round>个人设置</el-button>
+              <el-button @click="personSetting"
+                         round>个人设置</el-button>
             </div>
             <ul class="user-about-item">
               <li class="user-about-item-li">
@@ -94,6 +95,12 @@ export default {
         cookie.set('redskt_ucenter', this.loginInfo, { domain: 'redskt' })
       })
     },
+    personSetting () {
+      this.$router.push({
+        name: "user-setting",
+        query: {},
+      });
+    }
   },
   computed: {},
 }
@@ -166,7 +173,7 @@ export default {
 .user-info-right .user-info-detail .user-sign {
   color: #666;
   text-align: left;
-  ont-size: 12px;
+  font-size: 12px;
   margin-top: 6px;
 }
 

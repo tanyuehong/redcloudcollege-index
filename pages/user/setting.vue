@@ -67,6 +67,7 @@
                              aria-label=""
                              spellcheck="false"
                              maxlength="20"
+                             v-model="userInfo.nickname"
                              class="byte-input__input byte-input__input--normal">
                       <!----><span class="byte-input__suffix"><span class="suffix">
                           20/20
@@ -177,11 +178,13 @@
             <div class="avatar-input">
               <div class="avatar-info">
                 <div class="avatar-uploader uploader"
+                     :style="{backgroundImage: 'url(' + userInfo.avatar + ')'}"
                      @mouseover="mouseOver"
                      @mouseleave="mouseLeave">
 
                   <el-upload class="avatar-uploader"
-                             action="https://jsonplaceholder.typicode.com/posts/"
+                             action="http://localhost/api/ucenter/uploadUserImage"
+                             :headers= "{token:loginToken}"
                              :show-file-list="false"
                              :on-success="handleAvatarSuccess"
                              :before-upload="beforeAvatarUpload">
@@ -242,10 +245,13 @@ export default {
       userInfo: {}, // 查询表单对象
       settingtype: 1,
       isUploadHiden: true,
+      loginToken:"dddd"
     };
   },
   created () {
     this.getLoginUserInfo();
+
+    this.loginToken = this.$route.params.loginToken;
   },
   methods: {
     //分页切换的方法
@@ -262,7 +268,10 @@ export default {
     // 移出
     mouseLeave () {
       this.isUploadHiden = true;
-    }
+    },
+    handleAvatarSuccess(res, file) {
+        window.console.log(res);
+    },
   },
   computed: {},
 }
@@ -452,6 +461,10 @@ export default {
   width: 90px;
   height: 90px;
   position: relative;
+    border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  background-size: 100% 100%;
 }
 
 .avatar-info .title {
@@ -606,7 +619,6 @@ input[type='file' i] {
   width: 90px;
   height: 90px;
   background-size: 100% 100%;
-  background-image: url('https://p3-passport.byteacctimg.com/img/mosaic-legacy/3791/5035712059~300x300.image');
 }
 
 .avatar-uploader .click-cover:hover {

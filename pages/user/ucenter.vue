@@ -96,9 +96,10 @@ export default {
       })
     },
     personSetting () {
+      var loginToken =  window.localStorage.getItem('redclass_token');
       this.$router.push({
         name: "user-setting",
-        query: {},
+        params: {"loginToken":loginToken},
       });
     }
   },

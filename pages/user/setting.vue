@@ -53,17 +53,13 @@
           <div class="nav-text">个人资料</div>
           <div class="user-infos">
             <div class="info-input">
-              <form 
-                    class="form byte-form byte-form--label-right">
-                <div 
-                     class="divide"></div>
-                <div 
-                     class="byte-form-item byte-form-item--success"><label for="username"
+              <form class="form byte-form byte-form--label-right">
+                <div class="divide"></div>
+                <div class="byte-form-item byte-form-item--success"><label for="username"
                          class="byte-form-item__label"
                          style="width: 56px;">用户名</label>
                   <div class="byte-form-item__content">
-                    <div 
-                         class="input byte-input byte-input--normal byte-input--suffixed">
+                    <div class="input byte-input byte-input--normal byte-input--suffixed">
                       <!----><input type="text"
                              autocomplete=""
                              placeholder="填写你的用户名"
@@ -72,8 +68,7 @@
                              spellcheck="false"
                              maxlength="20"
                              class="byte-input__input byte-input__input--normal">
-                      <!----><span class="byte-input__suffix"><span 
-                              class="suffix">
+                      <!----><span class="byte-input__suffix"><span class="suffix">
                           20/20
                         </span></span>
                       <!---->
@@ -82,15 +77,12 @@
                     <!---->
                   </div>
                 </div>
-                <div 
-                     class="divide"></div>
-                <div 
-                     class="byte-form-item byte-form-item--success"><label for="job_title"
+                <div class="divide"></div>
+                <div class="byte-form-item byte-form-item--success"><label for="job_title"
                          class="byte-form-item__label"
                          style="width: 56px;">职位</label>
                   <div class="byte-form-item__content">
-                    <div 
-                         class="input byte-input byte-input--normal byte-input--suffixed">
+                    <div class="input byte-input byte-input--normal byte-input--suffixed">
                       <!----><input type="text"
                              autocomplete=""
                              placeholder="填写你的职位"
@@ -99,8 +91,7 @@
                              spellcheck="false"
                              maxlength="100"
                              class="byte-input__input byte-input__input--normal">
-                      <!----><span class="byte-input__suffix"><span 
-                              class="suffix">
+                      <!----><span class="byte-input__suffix"><span class="suffix">
                           0/50
                         </span></span>
                       <!---->
@@ -109,15 +100,12 @@
                     <!---->
                   </div>
                 </div>
-                <div 
-                     class="divide"></div>
-                <div 
-                     class="byte-form-item"><label for="company"
+                <div class="divide"></div>
+                <div class="byte-form-item"><label for="company"
                          class="byte-form-item__label"
                          style="width: 56px;">公司</label>
                   <div class="byte-form-item__content">
-                    <div 
-                         class="input byte-input byte-input--normal byte-input--suffixed">
+                    <div class="input byte-input byte-input--normal byte-input--suffixed">
                       <!----><input type="text"
                              autocomplete=""
                              placeholder="填写你的公司"
@@ -126,8 +114,7 @@
                              spellcheck="false"
                              maxlength="100"
                              class="byte-input__input byte-input__input--normal">
-                      <!----><span class="byte-input__suffix"><span 
-                              class="suffix">
+                      <!----><span class="byte-input__suffix"><span class="suffix">
                           0/50
                         </span></span>
                       <!---->
@@ -136,15 +123,12 @@
                     <!---->
                   </div>
                 </div>
-                <div
-                     class="divide"></div>
-                <div 
-                     class="byte-form-item"><label for="blog_address"
+                <div class="divide"></div>
+                <div class="byte-form-item"><label for="blog_address"
                          class="byte-form-item__label"
                          style="width: 56px;">个人主页</label>
                   <div class="byte-form-item__content">
-                    <div 
-                         class="input byte-input byte-input--normal byte-input--suffixed">
+                    <div class="input byte-input byte-input--normal byte-input--suffixed">
                       <!----><input type="text"
                              autocomplete=""
                              placeholder="填写你的个人主页"
@@ -153,8 +137,7 @@
                              spellcheck="false"
                              maxlength="200"
                              class="byte-input__input byte-input__input--normal">
-                      <!----><span class="byte-input__suffix"><span 
-                              class="suffix">
+                      <!----><span class="byte-input__suffix"><span class="suffix">
                           11/100
                         </span></span>
                       <!---->
@@ -163,25 +146,20 @@
                     <!---->
                   </div>
                 </div>
-                <div 
-                     class="divide"></div>
-                <div 
-                     class="byte-form-item"><label for="description"
+                <div class="divide"></div>
+                <div class="byte-form-item"><label for="description"
                          class="byte-form-item__label"
                          style="width: 56px;">个人介绍</label>
                   <div class="byte-form-item__content">
-                    <div 
-                         class="textarea-input">
-                      <div 
-                           class="input textarea byte-input byte-input--normal"><textarea maxlength="188"
+                    <div class="textarea-input">
+                      <div class="input textarea byte-input byte-input--normal"><textarea maxlength="188"
                                   rows="2"
                                   placeholder="填写职业技能、擅长的事情、喜欢的事情等"
                                   autocomplete=""
                                   name=""
                                   aria-label=""
                                   spellcheck="false"
-                                  class="byte-input__textarea"></textarea></div> <span
-                            class="textarea-suffix">
+                                  class="byte-input__textarea"></textarea></div> <span class="textarea-suffix">
                         14/100
                       </span>
                     </div>
@@ -193,20 +171,29 @@
                 <!---->
                 <!---->
               </form>
-              <div  class="divide"></div> 
+              <div class="divide"></div>
               <el-button type="primary">保存修改</el-button>
             </div>
-            <div
-                 class="avatar-input">
-              <div 
-                   class="avatar-info">
-                <div 
-                     class="title h5-only">我的头像</div>
-                <div 
-                     class="avatar-uploader uploader">
-                  <div 
-                       class="click-cover"><i 
-                       class="add-icon byte-icon byte-icon--plus-circle"><svg t="1561635709826"
+            <div class="avatar-input">
+              <div class="avatar-info">
+                <div class="avatar-uploader uploader"
+                     @mouseover="mouseOver"
+                     @mouseleave="mouseLeave">
+
+                  <el-upload class="avatar-uploader"
+                             action="https://jsonplaceholder.typicode.com/posts/"
+                             :show-file-list="false"
+                             :on-success="handleAvatarSuccess"
+                             :before-upload="beforeAvatarUpload">
+                    <img v-if="imageUrl"
+                         :src="imageUrl"
+                         class="avatar">
+                    <i v-else
+                       class="el-icon-plus avatar-uploader-icon"></i>
+                  </el-upload>
+
+                  <div class="click-cover"
+                       v-bind:class="{ isShow: isUploadHiden }"><i class="add-icon byte-icon byte-icon--plus-circle"><svg t="1561635709826"
                            class="icon"
                            viewBox="0 0 1024 1024"
                            version="1.1"
@@ -216,24 +203,16 @@
                         <path d="M464.883436 464.883436V302.244035A23.732788 23.732788 0 0 1 488.616224 279.209271h46.069529a23.732788 23.732788 0 0 1 23.732788 23.034764v162.639401h162.6394a23.732788 23.732788 0 0 1 23.034765 23.732788v46.069529a23.732788 23.732788 0 0 1-23.034765 23.732788H558.418541v162.6394a23.732788 23.732788 0 0 1-23.732788 23.034765H488.616224a23.732788 23.732788 0 0 1-23.732788-23.034765V558.418541H302.244035A23.732788 23.732788 0 0 1 279.209271 534.685753V488.616224a23.732788 23.732788 0 0 1 23.034764-23.732788z m46.767552 465.581458a418.813906 418.813906 0 1 0-418.813906-418.813906 418.813906 418.813906 0 0 0 418.813906 418.813906z m0 92.837083a511.650988 511.650988 0 1 1 511.650989-511.650989 511.650988 511.650988 0 0 1-511.650989 511.650989z"
                               p-id="375018"></path>
                       </svg></i>
-                    <div 
-                         class="click-text">点击修改头像</div>
+                    <div class="click-text">点击修改头像</div>
                     <!---->
-                  </div> <img
-                       src="https://p3-passport.byteacctimg.com/img/mosaic-legacy/3791/5035712059~300x300.image"
-                       alt=""
-                       class="lazy avatar avatar"
-                       data-src="https://p3-passport.byteacctimg.com/img/mosaic-legacy/3791/5035712059~300x300.image"> 
-                       <input type="file" class="input">
+                  </div>
                 </div>
-                <div 
-                     class="title web-only">
+                <div class="title web-only">
                   我的头像
                 </div>
                 <!---->
                 <!---->
-                <div 
-                     class="description">
+                <div class="description">
                   支持 jpg、png、jpeg 格式大小 5M 以内的图片
                 </div>
               </div>
@@ -262,6 +241,7 @@ export default {
     return {
       userInfo: {}, // 查询表单对象
       settingtype: 1,
+      isUploadHiden: true,
     };
   },
   created () {
@@ -275,6 +255,13 @@ export default {
         this.userInfo = response.data.userInfo
         cookie.set('redskt_ucenter', this.loginInfo, { domain: 'redskt' })
       })
+    },
+    mouseOver () {
+      this.isUploadHiden = false;
+    },
+    // 移出
+    mouseLeave () {
+      this.isUploadHiden = true;
     }
   },
   computed: {},
@@ -367,253 +354,291 @@ export default {
 }
 
 .person-setting .user-infos .info-input .divide {
-    margin-left: 12px;
-    margin-top: 13px;
-    margin-bottom: 13px;
-    width: 100%;
-    border-top: 1px solid #eaeaea;
+  margin-left: 12px;
+  margin-top: 13px;
+  margin-bottom: 13px;
+  width: 100%;
+  border-top: 1px solid #eaeaea;
 }
 
 .person-setting.user-infos .info-input .form .byte-form-item {
-    margin-bottom: 13px;
-    white-space: nowrap;
+  margin-bottom: 13px;
+  white-space: nowrap;
 }
 
 .person-setting .user-infos .info-input .form .byte-form-item__label {
-    font-weight: 500;
-    font-size: 14px;
-    color: #333;
-    margin-left: 20px;
-    margin-right: 30px;
-    display: inline-block;
-    text-align: left;
-    padding-right: 0;
-    float:left;
-    line-height:32px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+  margin-left: 20px;
+  margin-right: 30px;
+  display: inline-block;
+  text-align: left;
+  padding-right: 0;
+  float: left;
+  line-height: 32px;
 }
 
 .person-setting .user-infos .info-input .input .byte-input__suffix {
-    width: 50px;
-    right: 0;
-        display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    font-size: 14px;
-    line-height: 1.5;
+  width: 50px;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .person-setting .user-infos .info-input .input .suffix {
-    font-size: 12px;
-    color: #86909c;
+  font-size: 12px;
+  color: #86909c;
 }
 
 .byte-form-item__content {
-    zoom: 1;
-    position: relative;
-    font-size: 14px;
-    line-height: 32px;
+  zoom: 1;
+  position: relative;
+  font-size: 14px;
+  line-height: 32px;
 }
 
 .person-setting .user-infos .info-input .input {
-    max-width: 380px;
-    min-width: 100px;
+  max-width: 380px;
+  min-width: 100px;
 }
 
-.byte-input, .byte-input__input {
-    position: relative;
-    width: 100%;
-    display: inline-block;
-    font-size: 14px;
-    line-height: 1.5;
+.byte-input,
+.byte-input__input {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .byte-input {
-    vertical-align: middle;
-    border-collapse: separate;
-    border-spacing: 0;
+  vertical-align: middle;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 .setting-profile-view .user-infos .avatar-input {
-    padding-left: 74px;
+  padding-left: 74px;
 }
 
 .setting-profile-view .user-infos .info-input .input {
-    max-width: 440px;
-    min-width: 100px;
+  max-width: 440px;
+  min-width: 100px;
 }
 
 .avatar-info {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    width: 112px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 112px;
 }
 
 .avatar-info .uploader {
-    width: 90px;
-    height: 90px;
-    position: relative;
+  width: 90px;
+  height: 90px;
+  position: relative;
 }
 
 .avatar-info .title {
-    color: #1d2129;
-    font-weight: 500;
-    font-size: 14px;
-    margin-top: 10px;
-    margin-bottom: 8px;
+  color: #1d2129;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 8px;
 }
 
 .avatar-info .description {
-    color: #86909c;
-    font-size: 12px;
-    line-height: 17px;
-    font-weight: 400;
+  color: #86909c;
+  font-size: 12px;
+  line-height: 17px;
+  font-weight: 400;
 }
 
 .avatar-uploader .click-cover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background-color: rgba(29,33,41,.5);
-    z-index: 2;
-    visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: rgba(29, 33, 41, 0.5);
+  z-index: 2;
+  pointer-events: none;
 }
 
 .byte-icon {
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-    vertical-align: middle;
-    line-height: 1;
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
 }
 
-.avatar-uploader .click-cover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background-color: rgba(29,33,41,.5);
-    z-index: 2;
-    visibility: hidden;
-}
-
-.editable, input[type=password], input[type=text], input[type=url], textarea {
-    resize: none;
-    outline: none;
-    width: 100%;
-    display: block;
-    box-shadow: none;
-    border: 1px solid #ddd;
-    border-radius: 2px;
-    transition: border .3s;
-    background-color: #fff;
-    box-sizing: border-box;
+.editable,
+input[type='password'],
+input[type='text'],
+input[type='url'],
+textarea {
+  resize: none;
+  outline: none;
+  width: 100%;
+  display: block;
+  box-shadow: none;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  transition: border 0.3s;
+  background-color: #fff;
+  box-sizing: border-box;
 }
 
 .byte-input__input {
-    border: 1px solid #e6e8eb;
-    border-radius: 2px;
-    color: #282f38;
-    background-color: #fff;
-    -webkit-transition: all .3s;
-    transition: all .3s;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    outline: 0;
-    height: 32px;
-    padding: 0 12px;
-    font-size:12px;
+  border: 1px solid #e6e8eb;
+  border-radius: 2px;
+  color: #282f38;
+  background-color: #fff;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: 0;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 12px;
 }
 
 .byte-input__textarea {
-    border: 1px solid #e6e8eb;
-    border-radius: 2px;
-    position: relative;
-    width: 100%;
-    display: inline-block;
-    color: #282f38;
-    line-height: 1.5;
-    background-color: #fff;
-    -webkit-transition: all .3s;
-    transition: all .3s;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    outline: 0;
-    height: 32px;
-    padding: 0 12px;
-    font-size: 14px;
-    height: auto;
-    padding: 6px 10px;
-    vertical-align: top;
-    -webkit-transition: all .3s,height 0s;
-    transition: all .3s,height 0s;
-    resize: vertical;
+  border: 1px solid #e6e8eb;
+  border-radius: 2px;
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  color: #282f38;
+  line-height: 1.5;
+  background-color: #fff;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: 0;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 14px;
+  height: auto;
+  padding: 6px 10px;
+  vertical-align: top;
+  -webkit-transition: all 0.3s, height 0s;
+  transition: all 0.3s, height 0s;
+  resize: vertical;
 }
 
 .person-setting .user-infos .info-input .byte-input__textarea {
-    height: 140px;
-    min-height: 30px;
-    color: #666;
-    background: #fafafa;
-    font-size:12px;
+  height: 140px;
+  min-height: 30px;
+  color: #666;
+  background: #fafafa;
+  font-size: 12px;
 }
 
 .person-setting .user-infos .info-input .textarea-suffix {
-    position: absolute;
-    right: 15px;
-    bottom: -3px;
-    color: #86909c;
-    font-size: 12px;
-    white-space: nowrap;
+  position: absolute;
+  right: 15px;
+  bottom: -3px;
+  color: #86909c;
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 .avatar-uploader .avatar {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 
-input[type="file" i] {
-    appearance: none;
-    background-color: initial;
-    cursor: default;
-    align-items: baseline;
-    color: inherit;
-    text-overflow: ellipsis;
-    white-space: pre;
-    text-align: start !important;
-    padding: initial;
-    border: initial;
-    overflow: hidden !important;
+input[type='file' i] {
+  appearance: none;
+  background-color: initial;
+  cursor: default;
+  align-items: baseline;
+  color: inherit;
+  text-overflow: ellipsis;
+  white-space: pre;
+  text-align: start !important;
+  padding: initial;
+  border: initial;
+  overflow: hidden !important;
 }
 
 .avatar-uploader .input {
-    display: none;
+  /* display: none; */
+  /* opacity: 0; */
+  height: 90px;
+  background: red;
+  margin-top: -95px;
+  width: 95px;
+}
+
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  background-size: 100% 100%;
+  background-image: url('https://p3-passport.byteacctimg.com/img/mosaic-legacy/3791/5035712059~300x300.image');
+}
+
+.avatar-uploader .click-cover:hover {
+  border-color: #409eff;
+  visibility: visible;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+
+.byte-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.isShow {
+  visibility: hidden !important;
+}
+
+.person-setting .user-infos .avatar-input {
+  padding-left: 74px;
 }
 </style>

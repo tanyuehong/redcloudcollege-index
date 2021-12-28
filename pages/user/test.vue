@@ -3,10 +3,12 @@
 <div class="test">
 <div class="container-fluid p-0">
 	<div class="img-upload">
+		<a>
  		<input type="file" class="img-upload-input" id="img-upload-input">
 		<label class="img-upload-label text-center p-4 position-absolute" id="img-upload-label" for="img-upload-input">
 			<i class="fas fa-cloud-upload-alt fa-2x"></i>
 		</label>
+		</a>
 	</div>
 </div>
 </div>

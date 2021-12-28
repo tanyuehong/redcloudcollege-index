@@ -66,7 +66,7 @@
                       <i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item icon="el-icon-user-solid">
+                      <el-dropdown-item command="userHome" icon="el-icon-user-solid">
                         我的主页
                       </el-dropdown-item>
                       <el-dropdown-item icon="el-icon-star-off">
@@ -222,6 +222,10 @@ export default {
     handleCommand(command) {
       if (command == 'quit') {
         this.logout()
+      } else if(command == 'userHome') {
+        this.$router.push({
+          name: "user-ucenter"
+        });
       }
     },
     wxLogin() {

@@ -183,8 +183,8 @@
                      @mouseleave="mouseLeave">
 
                   <el-upload class="avatar-uploader"
-                             action="http://localhost/api/ucenter/uploadUserImage"
-                             :headers= "{token:loginToken}"
+                             action="https://www.redskt.com/api/ucenter/uploadUserImage"
+                             :headers="{token:loginToken}"
                              :show-file-list="false"
                              :on-success="handleAvatarSuccess"
                              :before-upload="beforeAvatarUpload">
@@ -245,7 +245,7 @@ export default {
       userInfo: {}, // 查询表单对象
       settingtype: 1,
       isUploadHiden: true,
-      loginToken:"dddd"
+      loginToken: "dddd"
     };
   },
   created () {
@@ -269,8 +269,8 @@ export default {
     mouseLeave () {
       this.isUploadHiden = true;
     },
-    handleAvatarSuccess(res, file) {
-        window.console.log(res);
+    handleAvatarSuccess (res, file) {
+      window.console.log(res);
     },
   },
   computed: {},
@@ -461,7 +461,7 @@ export default {
   width: 90px;
   height: 90px;
   position: relative;
-    border-radius: 50%;
+  border-radius: 50%;
   width: 90px;
   height: 90px;
   background-size: 100% 100%;

@@ -270,8 +270,9 @@ export default {
       this.isUploadHiden = true;
     },
     handleAvatarSuccess (res, file) {
+      userInfo.avatar = res.data.imageUrl;
       window.console.log(res);
-    },
+    }
   },
   computed: {},
 }
@@ -611,7 +612,6 @@ input[type='file' i] {
 }
 
 .avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -622,7 +622,6 @@ input[type='file' i] {
 }
 
 .avatar-uploader .click-cover:hover {
-  border-color: #409eff;
   visibility: visible;
 }
 .avatar-uploader-icon {

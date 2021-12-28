@@ -270,8 +270,7 @@ export default {
       this.isUploadHiden = true;
     },
     handleAvatarSuccess (res, file) {
-      userInfo.avatar = res.data.imageUrl;
-      window.console.log(res);
+      this.userInfo.avatar = res.data.imageUrl;
     }
   },
   computed: {},

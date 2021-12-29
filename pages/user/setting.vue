@@ -79,6 +79,23 @@
                   </div>
                 </div>
                 <div class="divide"></div>
+
+                <div class="byte-form-item byte-form-item--success"><label for="username"
+                         class="byte-form-item__label"
+                         style="width: 56px;">性别</label>
+                  <div class="byte-form-item__content">
+                    <div class="input byte-input byte-input--normal byte-input--suffixed">
+                       <el-radio-group v-model="userInfo.sex">
+    <el-radio :label="1">男</el-radio>
+    <el-radio :label="2">女</el-radio>
+    <el-radio :label="0">保密</el-radio>
+  </el-radio-group>
+                    </div>
+                    <!---->
+                    <!---->
+                  </div>
+                </div>
+                <div class="divide"></div>
                 <div class="byte-form-item byte-form-item--success"><label for="job_title"
                          class="byte-form-item__label"
                          style="width: 56px;">职位</label>
@@ -88,6 +105,7 @@
                              autocomplete=""
                              placeholder="填写你的职位"
                              name=""
+                             v-model="userInfo.position"
                              aria-label=""
                              spellcheck="false"
                              maxlength="100"
@@ -111,6 +129,7 @@
                              autocomplete=""
                              placeholder="填写你的公司"
                              name=""
+                             v-model="userInfo.company"
                              aria-label=""
                              spellcheck="false"
                              maxlength="100"
@@ -134,6 +153,31 @@
                              autocomplete=""
                              placeholder="填写你的个人主页"
                              name=""
+                             v-model="userInfo.company"
+                             aria-label=""
+                             spellcheck="false"
+                             maxlength="200"
+                             class="byte-input__input byte-input__input--normal">
+                      <!----><span class="byte-input__suffix"><span class="suffix">
+                          11/100
+                        </span></span>
+                      <!---->
+                    </div>
+                    <!---->
+                    <!---->
+                  </div>
+                </div>
+                <div class="divide"></div>
+                  <div class="byte-form-item"><label for="blog_address"
+                         class="byte-form-item__label"
+                         style="width: 56px;">个人签名</label>
+                  <div class="byte-form-item__content">
+                    <div class="input byte-input byte-input--normal byte-input--suffixed">
+                      <!----><input type="text"
+                             autocomplete=""
+                             placeholder="填写你的个人签名"
+                             name=""
+                             v-model="userInfo.sign"
                              aria-label=""
                              spellcheck="false"
                              maxlength="200"
@@ -158,6 +202,7 @@
                                   placeholder="填写职业技能、擅长的事情、喜欢的事情等"
                                   autocomplete=""
                                   name=""
+                                  v-model="userInfo.perintroduction"
                                   aria-label=""
                                   spellcheck="false"
                                   class="byte-input__textarea"></textarea></div> <span class="textarea-suffix">

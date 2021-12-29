@@ -216,7 +216,7 @@
                 <!---->
                 <!---->
                 <div class="description">
-                  支持 jpg、png、jpeg 格式大小 5M 以内的图片
+                  支持 jpg、png、jpeg 格式大小 3M 以内的图片
                 </div>
               </div>
             </div>

@@ -10,9 +10,9 @@
         </li>
       </div>
       <div class="setting-lefte-menu">
-        <div class="setting-menu-item">
+        <div @click="personSettingClick" class="setting-menu-item">
           <div data-v-55200008=""
-               class="nav-item active"><svg data-v-55200008=""
+               class="nav-item" v-bind:class="{ active: settingtype==1 }"><svg data-v-55200008=""
                  width="16"
                  height="16"
                  viewBox="0 0 16 16"
@@ -28,9 +28,9 @@
             个人资料
           </div>
         </div>
-        <div class="setting-menu-item">
+        <div @click="zhanghuSettingClick" class="setting-menu-item">
           <div class="nav-item"
-               data-v-55200008=""><svg width="16"
+               data-v-55200008="" v-bind:class="{ active: settingtype==2 }"><svg width="16"
                  height="16"
                  viewBox="0 0 16 16"
                  fill="none"
@@ -43,7 +43,6 @@
                     class="close-path"
                     data-v-55200008=""></path>
             </svg>
-
             账号设置
           </div>
         </div>
@@ -268,7 +267,221 @@
       </div>
       <div v-if="settingtype===2">
         <div class="person-setting">
-          这个是个人设置
+             <div class="person-setting shadow">
+          <div class="nav-text">账号设置</div>
+          <div class="user-infos">
+            <div class="info-input">
+              <form class="form byte-form byte-form--label-right">
+                <div class="divide"></div>
+                <div class="byte-form-item byte-form-item--success"><label for="username"
+                         class="byte-form-item__label"
+                         style="width: 56px;">用户名</label>
+                  <div class="byte-form-item__content">
+                    <div class="input byte-input byte-input--normal byte-input--suffixed">
+                      <!----><input type="text"
+                             autocomplete=""
+                             placeholder="填写你的用户名"
+                             name=""
+                             aria-label=""
+                             spellcheck="false"
+                             maxlength="20"
+                             v-model="userInfo.nickname"
+                             class="byte-input__input byte-input__input--normal">
+                      <!----><span class="byte-input__suffix"><span class="suffix">
+                          20/20
+                        </span></span>
+                      <!---->
+                    </div>
+                    <!---->
+                    <!---->
+                  </div>
+                </div>
+                <div class="divide"></div>
+
+                <div class="byte-form-item byte-form-item--success"><label for="username"
+                         class="byte-form-item__label"
+                         style="width: 56px;">性别</label>
+                  <div class="byte-form-item__content">
+                    <div class="input byte-input byte-input--normal byte-input--suffixed">
+                      <el-radio-group v-model="userInfo.sex">
+                        <el-radio :label="1">男</el-radio>
+                        <el-radio :label="2">女</el-radio>
+                        <el-radio :label="0">保密</el-radio>
+                      </el-radio-group>
+                    </div>
+                    <!---->
+                    <!---->
+                  </div>
+                </div>
+                <div class="divide"></div>
+                <div class="byte-form-item byte-form-item--success"><label for="job_title"
+                         class="byte-form-item__label"
+                         style="width: 56px;">职位</label>
+                  <div class="byte-form-item__content">
+                    <div class="input byte-input byte-input--normal byte-input--suffixed">
+                      <!----><input type="text"
+                             autocomplete=""
+                             placeholder="填写你的职位"
+                             name=""
+                             v-model="userInfo.position"
+                             aria-label=""
+                             spellcheck="false"
+                             maxlength="100"
+                             class="byte-input__input byte-input__input--normal">
+                      <!----><span class="byte-input__suffix"><span class="suffix">
+                          0/50
+                        </span></span>
+                      <!---->
+                    </div>
+                    <!---->
+                    <!---->
+                  </div>
+                </div>
+                <div class="divide"></div>
+                <div class="byte-form-item"><label for="company"
+                         class="byte-form-item__label"
+                         style="width: 56px;">公司</label>
+                  <div class="byte-form-item__content">
+                    <div class="input byte-input byte-input--normal byte-input--suffixed">
+                      <!----><input type="text"
+                             autocomplete=""
+                             placeholder="填写你的公司"
+                             name=""
+                             v-model="userInfo.company"
+                             aria-label=""
+                             spellcheck="false"
+                             maxlength="100"
+                             class="byte-input__input byte-input__input--normal">
+                      <!----><span class="byte-input__suffix"><span class="suffix">
+                          0/50
+                        </span></span>
+                      <!---->
+                    </div>
+                    <!---->
+                    <!---->
+                  </div>
+                </div>
+                <div class="divide"></div>
+                <div class="byte-form-item"><label for="blog_address"
+                         class="byte-form-item__label"
+                         style="width: 56px;">个人主页</label>
+                  <div class="byte-form-item__content">
+                    <div class="input byte-input byte-input--normal byte-input--suffixed">
+                      <!----><input type="text"
+                             autocomplete=""
+                             placeholder="填写你的个人主页"
+                             name=""
+                             v-model="userInfo.perpage"
+                             aria-label=""
+                             spellcheck="false"
+                             maxlength="200"
+                             class="byte-input__input byte-input__input--normal">
+                      <!----><span class="byte-input__suffix"><span class="suffix">
+                          11/100
+                        </span></span>
+                      <!---->
+                    </div>
+                    <!---->
+                    <!---->
+                  </div>
+                </div>
+                <div class="divide"></div>
+                <div class="byte-form-item"><label for="blog_address"
+                         class="byte-form-item__label"
+                         style="width: 56px;">个人签名</label>
+                  <div class="byte-form-item__content">
+                    <div class="input byte-input byte-input--normal byte-input--suffixed">
+                      <!----><input type="text"
+                             autocomplete=""
+                             placeholder="填写你的个人签名"
+                             name=""
+                             v-model="userInfo.sign"
+                             aria-label=""
+                             spellcheck="false"
+                             maxlength="200"
+                             class="byte-input__input byte-input__input--normal">
+                      <!----><span class="byte-input__suffix"><span class="suffix">
+                          11/100
+                        </span></span>
+                      <!---->
+                    </div>
+                    <!---->
+                    <!---->
+                  </div>
+                </div>
+                <div class="divide"></div>
+                <div class="byte-form-item"><label for="description"
+                         class="byte-form-item__label"
+                         style="width: 56px;">个人介绍</label>
+                  <div class="byte-form-item__content">
+                    <div class="textarea-input">
+                      <div class="input textarea byte-input byte-input--normal"><textarea maxlength="188"
+                                  rows="2"
+                                  placeholder="填写职业技能、擅长的事情、喜欢的事情等"
+                                  autocomplete=""
+                                  name=""
+                                  v-model="userInfo.perintroduction"
+                                  aria-label=""
+                                  spellcheck="false"
+                                  class="byte-input__textarea"></textarea></div> <span class="textarea-suffix">
+                        14/100
+                      </span>
+                    </div>
+                    <!---->
+                    <!---->
+                  </div>
+                </div>
+                <!---->
+                <!---->
+                <!---->
+              </form>
+              <div class="divide"></div>
+              <el-button type="primary"
+                         @click="saveUserInfo">保存修改</el-button>
+            </div>
+            <div class="avatar-input">
+              <div class="avatar-info">
+                <div class="avatar-uploader uploader"
+                     :style="{backgroundImage: 'url(' + userInfo.avatar + ')'}"
+                     @mouseover="mouseOver"
+                     @mouseleave="mouseLeave">
+
+                  <el-upload class="avatar-uploader"
+                             action="https://www.redskt.com/api/ucenter/uploadUserImage"
+                             :headers="{token:loginToken}"
+                             :show-file-list="false"
+                             :on-success="handleAvatarSuccess"
+                             :before-upload="beforeAvatarUpload">
+                    <i class="el-icon-plus avatar-uploader-icon"></i>
+                  </el-upload>
+
+                  <div class="click-cover"
+                       v-bind:class="{ isShow: isUploadHiden }"><i class="add-icon byte-icon byte-icon--plus-circle"><svg t="1561635709826"
+                           class="icon"
+                           viewBox="0 0 1024 1024"
+                           version="1.1"
+                           xmlns="http://www.w3.org/2000/svg"
+                           p-id="375017"
+                           xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path d="M464.883436 464.883436V302.244035A23.732788 23.732788 0 0 1 488.616224 279.209271h46.069529a23.732788 23.732788 0 0 1 23.732788 23.034764v162.639401h162.6394a23.732788 23.732788 0 0 1 23.034765 23.732788v46.069529a23.732788 23.732788 0 0 1-23.034765 23.732788H558.418541v162.6394a23.732788 23.732788 0 0 1-23.732788 23.034765H488.616224a23.732788 23.732788 0 0 1-23.732788-23.034765V558.418541H302.244035A23.732788 23.732788 0 0 1 279.209271 534.685753V488.616224a23.732788 23.732788 0 0 1 23.034764-23.732788z m46.767552 465.581458a418.813906 418.813906 0 1 0-418.813906-418.813906 418.813906 418.813906 0 0 0 418.813906 418.813906z m0 92.837083a511.650988 511.650988 0 1 1 511.650989-511.650989 511.650988 511.650988 0 0 1-511.650989 511.650989z"
+                              p-id="375018"></path>
+                      </svg></i>
+                    <div class="click-text">点击修改头像</div>
+                    <!---->
+                  </div>
+                </div>
+                <div class="title web-only">
+                  我的头像
+                </div>
+                <!---->
+                <!---->
+                <div class="description">
+                  支持 jpg、png、jpeg 格式大小 5M 以内的图片
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
@@ -291,7 +504,6 @@ export default {
   },
   created () {
     this.getLoginUserInfo();
-
     this.loginToken = this.$route.params.loginToken;
   },
   methods: {
@@ -316,6 +528,14 @@ export default {
       userApi.updateUserInfo(this.userInfo).then((response) => {
 
       })
+    },
+    zhanghuSettingClick() {
+      this.settingtype = 2;
+      window.console.log("ddddddd");
+    },
+    personSettingClick() {
+       this.settingtype = 1;
+      window.console.log("ddddddd");
     }
   }
 }
@@ -351,6 +571,7 @@ export default {
 .setting-menu-item .nav-item.active[data-v-55200008] {
   background: #e8f3ff;
   color: #f56c6c;
+  cursor:pointer;
 }
 
 .setting-menu-item .nav-item[data-v-55200008] {
@@ -361,6 +582,7 @@ export default {
   width: 214px;
   font-size: 16px;
   color: #4e5969;
+  cursor:pointer;
 }
 
 .nav-item .svg[data-v-55200008] {

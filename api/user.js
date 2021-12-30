@@ -34,4 +34,13 @@ export default {
       data: formItem,
     })
   },
+
+   //根据token获取用户信息
+   updateUserInfo(userData) {
+    return request({
+      url: `/ucenter/updateUserInfo`,
+      method: 'post',
+      params: userData,
+    })
+  }
 }

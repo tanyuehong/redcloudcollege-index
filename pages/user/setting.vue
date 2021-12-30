@@ -85,11 +85,11 @@
                          style="width: 56px;">性别</label>
                   <div class="byte-form-item__content">
                     <div class="input byte-input byte-input--normal byte-input--suffixed">
-                       <el-radio-group v-model="userInfo.sex">
-    <el-radio :label="1">男</el-radio>
-    <el-radio :label="2">女</el-radio>
-    <el-radio :label="0">保密</el-radio>
-  </el-radio-group>
+                      <el-radio-group v-model="userInfo.sex">
+                        <el-radio :label="1">男</el-radio>
+                        <el-radio :label="2">女</el-radio>
+                        <el-radio :label="0">保密</el-radio>
+                      </el-radio-group>
                     </div>
                     <!---->
                     <!---->
@@ -153,7 +153,7 @@
                              autocomplete=""
                              placeholder="填写你的个人主页"
                              name=""
-                             v-model="userInfo.company"
+                             v-model="userInfo.perpage"
                              aria-label=""
                              spellcheck="false"
                              maxlength="200"
@@ -168,7 +168,7 @@
                   </div>
                 </div>
                 <div class="divide"></div>
-                  <div class="byte-form-item"><label for="blog_address"
+                <div class="byte-form-item"><label for="blog_address"
                          class="byte-form-item__label"
                          style="width: 56px;">个人签名</label>
                   <div class="byte-form-item__content">
@@ -218,7 +218,8 @@
                 <!---->
               </form>
               <div class="divide"></div>
-              <el-button type="primary">保存修改</el-button>
+              <el-button type="primary"
+                         @click="saveUserInfo">保存修改</el-button>
             </div>
             <div class="avatar-input">
               <div class="avatar-info">
@@ -233,11 +234,7 @@
                              :show-file-list="false"
                              :on-success="handleAvatarSuccess"
                              :before-upload="beforeAvatarUpload">
-                    <img v-if="imageUrl"
-                         :src="imageUrl"
-                         class="avatar">
-                    <i v-else
-                       class="el-icon-plus avatar-uploader-icon"></i>
+                    <i class="el-icon-plus avatar-uploader-icon"></i>
                   </el-upload>
 
                   <div class="click-cover"
@@ -290,7 +287,6 @@ export default {
       userInfo: {}, // 查询表单对象
       settingtype: 1,
       isUploadHiden: true,
-      loginToken: "dddd"
     };
   },
   created () {
@@ -304,7 +300,6 @@ export default {
     getLoginUserInfo () {
       userApi.getLoginUserInfo().then((response) => {
         this.userInfo = response.data.userInfo
-        cookie.set('redskt_ucenter', this.loginInfo, { domain: 'redskt' })
       })
     },
     mouseOver () {
@@ -316,9 +311,13 @@ export default {
     },
     handleAvatarSuccess (res, file) {
       this.userInfo.avatar = res.data.imageUrl;
+    },
+    saveUserInfo () {
+      userApi.updateUserInfo(this.userInfo).then((response) => {
+
+      })
     }
-  },
-  computed: {},
+  }
 }
 </script>
 

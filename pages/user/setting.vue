@@ -221,7 +221,7 @@
                 <!---->
               </form>
               <div class="divide"></div>
-              <el-button type="primary"
+              <el-button type="primary" plain
                          @click="saveUserInfo">保存修改</el-button>
             </div>
             <div class="avatar-input">
@@ -301,23 +301,26 @@
                       <el-form class="pwchang-form">
                         <el-form-item label="旧密码"
                                       :label-width="formLabelWidth">
+                          <span class="pwd-change-errtiops" v-if="newPwdTips.length>0">{{newPwdTips}}</span>
                           <el-input placeholder="请输入密码" v-model="oldPwd" show-password></el-input>
                         </el-form-item>
 
                          <el-form-item label="新密码"
                                       :label-width="formLabelWidth">
-                          <el-input placeholder="请输入密码" v-model="oldPwd" show-password></el-input>
+                           <span class="pwd-change-errtiops" v-if="oldPwdTips.length>0">{{oldPwdTips}}</span>
+                          <el-input placeholder="请输入密码" v-model="newPwd" show-password></el-input>
                         </el-form-item>
                          <el-form-item label="确认密码"
                                       :label-width="formLabelWidth">
-                          <el-input placeholder="请输入密码" v-model="oldPwd" show-password></el-input>
+                          <span class="pwd-change-errtiops" v-if="confirmPwdTips.length>0">{{confirmPwdTips}}</span>
+                          <el-input placeholder="请输入密码" v-model="confirmPwd" show-password></el-input>
                         </el-form-item>
                       </el-form>
                       <span slot="footer"
                             class="dialog-footer">
                         <el-button type="primary" class="chang-pwd-btn"
-                                   @click="pwdChange = false"
-                                   center>确 定</el-button>
+                                   @click="changePwdClick"
+                                   center>修 改</el-button>
                       </span>
                     </el-dialog>
                   </div>
@@ -375,6 +378,12 @@ export default {
       isUploadHiden: true,
       zhuxiaodlog: false,
       pwdChange: false,
+      oldPwd:'',
+      oldPwdTips:'',
+      newPwd:'',
+      newPwdTips:'',
+      confirmPwd:'',
+      confirmPwdTips:'',
     };
   },
   created () {
@@ -418,6 +427,10 @@ export default {
     },
     zhuxiaozhanghu () {
       window.console.log("ddd");
+    },
+    changePwdClick() {
+      self
+
     }
   }
 }
@@ -839,7 +852,8 @@ input[type='file' i] {
 
 .el-form-item .el-form-item__content {
   float: right;
-  margin-right: 95px;
+  margin-right: 105px;
+  position: relative;
 }
 
 .el-form-item__label { 
@@ -847,7 +861,7 @@ input[type='file' i] {
 }
 
 .pwchang-form {
-  margin-left: 55px;
+  margin-left: 45px;
 }
 
 .el-dialog__footer { 
@@ -856,5 +870,13 @@ input[type='file' i] {
 
 .chang-pwd-btn {
   width: 120px;
+}
+
+.pwd-change-errtiops {
+  position:absolute;
+  color: #F56C6C;
+  left: 208px;
+  width: 96px;
+  font-size: 12px;
 }
 </style>

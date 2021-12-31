@@ -180,7 +180,7 @@
 }
 
 .path_courent {
-  color: #f56c6c;
+  color: #409EFF;
 }
 
 .course_top_content {

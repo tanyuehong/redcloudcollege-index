@@ -297,20 +297,25 @@
 
                     <el-dialog title="密码重置"
                                :visible.sync="pwdChange"
-                               width="30%">
-                      <el-form>
-                        <el-form-item label="活动名称"
+                               width="450px">
+                      <el-form class="pwchang-form">
+                        <el-form-item label="旧密码"
                                       :label-width="formLabelWidth">
                           <el-input placeholder="请输入密码" v-model="oldPwd" show-password></el-input>
                         </el-form-item>
-                        <el-form-item label="活动区域"
-                                      :label-width="formLabelWidth">
 
+                         <el-form-item label="新密码"
+                                      :label-width="formLabelWidth">
+                          <el-input placeholder="请输入密码" v-model="oldPwd" show-password></el-input>
+                        </el-form-item>
+                         <el-form-item label="确认密码"
+                                      :label-width="formLabelWidth">
+                          <el-input placeholder="请输入密码" v-model="oldPwd" show-password></el-input>
                         </el-form-item>
                       </el-form>
                       <span slot="footer"
                             class="dialog-footer">
-                        <el-button type="primary"
+                        <el-button type="primary" class="chang-pwd-btn"
                                    @click="pwdChange = false"
                                    center>确 定</el-button>
                       </span>
@@ -447,7 +452,7 @@ export default {
 
 .setting-menu-item .nav-item.active[data-v-55200008] {
   background: #e8f3ff;
-  color: #f56c6c;
+  color: #409EFF;
   cursor: pointer;
 }
 
@@ -468,7 +473,7 @@ export default {
 }
 
 .nav-item.active .svg .close-path[data-v-55200008] {
-  fill: #f56c6c;
+  fill: #409EFF;
 }
 
 .nav-item .svg .close-path[data-v-55200008] {
@@ -830,5 +835,26 @@ input[type='file' i] {
 }
 .el-dialog__title {
   font-weight: 600;
+}
+
+.el-form-item .el-form-item__content {
+  float: right;
+  margin-right: 95px;
+}
+
+.el-form-item__label { 
+  font-size: 12px;
+}
+
+.pwchang-form {
+  margin-left: 55px;
+}
+
+.el-dialog__footer { 
+  padding: 0px 20px 40px;
+}
+
+.chang-pwd-btn {
+  width: 120px;
 }
 </style>

@@ -74,7 +74,7 @@
                                       v-bind:key="item.id"
                                       :timestamp="item.title"
                                       class="mytest"
-                                      color="#f56c6c"
+                                      color="#409EFF"
                                       placement="top">
                       <el-card>
                         <div v-if="item.chapterContents"

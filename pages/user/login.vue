@@ -45,6 +45,7 @@
             <input type="button"
                    class="sign-in-button"
                    value="登录"
+                   @click="submitLogin('userForm')"
                    v-on:keyup.enter="submitLogin('userForm')" />
           </div>
         </el-form>

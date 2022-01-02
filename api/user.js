@@ -40,7 +40,16 @@ export default {
     return request({
       url: `/ucenter/updateUserInfo`,
       method: 'post',
-      params: userData,
+      data: userData,
+    })
+  },
+
+  // 修改用户密码
+  changeUserPwd(pwdData) {
+    return request({
+      url: `/ucenter/changeUserPwd`,
+      method: 'post',
+      data: pwdData,
     })
   }
 }

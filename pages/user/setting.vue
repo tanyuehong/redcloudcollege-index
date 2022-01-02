@@ -63,19 +63,12 @@
                          style="width: 56px;">用户名</label>
                   <div class="byte-form-item__content">
                     <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <!----><input type="text"
-                             autocomplete=""
-                             placeholder="填写你的用户名"
-                             name=""
-                             aria-label=""
-                             spellcheck="false"
-                             maxlength="20"
-                             v-model="userInfo.nickname"
-                             class="byte-input__input byte-input__input--normal">
-                      <!----><span class="byte-input__suffix"><span class="suffix">
-                          20/20
-                        </span></span>
-                      <!---->
+                      <el-input type="text"
+                                placeholder="填写你的用户名"
+                                v-model="userInfo.nickname"
+                                maxlength="20"
+                                show-word-limit>
+                      </el-input>
                     </div>
                     <!---->
                     <!---->
@@ -104,19 +97,12 @@
                          style="width: 56px;">职位</label>
                   <div class="byte-form-item__content">
                     <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <!----><input type="text"
-                             autocomplete=""
-                             placeholder="填写你的职位"
-                             name=""
-                             v-model="userInfo.position"
-                             aria-label=""
-                             spellcheck="false"
-                             maxlength="100"
-                             class="byte-input__input byte-input__input--normal">
-                      <!----><span class="byte-input__suffix"><span class="suffix">
-                          0/50
-                        </span></span>
-                      <!---->
+                      <el-input type="text"
+                                placeholder="填写你的职位"
+                                v-model="userInfo.position"
+                                maxlength="20"
+                                show-word-limit>
+                      </el-input>
                     </div>
                     <!---->
                     <!---->
@@ -128,19 +114,12 @@
                          style="width: 56px;">公司</label>
                   <div class="byte-form-item__content">
                     <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <!----><input type="text"
-                             autocomplete=""
-                             placeholder="填写你的公司"
-                             name=""
-                             v-model="userInfo.company"
-                             aria-label=""
-                             spellcheck="false"
-                             maxlength="100"
-                             class="byte-input__input byte-input__input--normal">
-                      <!----><span class="byte-input__suffix"><span class="suffix">
-                          0/50
-                        </span></span>
-                      <!---->
+                      <el-input type="text"
+                                placeholder="填写你的公司"
+                                v-model="userInfo.company"
+                                maxlength="30"
+                                show-word-limit>
+                      </el-input>
                     </div>
                     <!---->
                     <!---->
@@ -152,19 +131,12 @@
                          style="width: 56px;">个人主页</label>
                   <div class="byte-form-item__content">
                     <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <!----><input type="text"
-                             autocomplete=""
-                             placeholder="填写你的个人主页"
-                             name=""
-                             v-model="userInfo.perpage"
-                             aria-label=""
-                             spellcheck="false"
-                             maxlength="200"
-                             class="byte-input__input byte-input__input--normal">
-                      <!----><span class="byte-input__suffix"><span class="suffix">
-                          11/100
-                        </span></span>
-                      <!---->
+                      <el-input type="text"
+                                placeholder="填写你的个人主页"
+                                v-model="userInfo.perpage"
+                                maxlength="30"
+                                show-word-limit>
+                      </el-input>
                     </div>
                     <!---->
                     <!---->
@@ -176,22 +148,13 @@
                          style="width: 56px;">个人签名</label>
                   <div class="byte-form-item__content">
                     <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <!----><input type="text"
-                             autocomplete=""
-                             placeholder="填写你的个人签名"
-                             name=""
-                             v-model="userInfo.sign"
-                             aria-label=""
-                             spellcheck="false"
-                             maxlength="200"
-                             class="byte-input__input byte-input__input--normal">
-                      <!----><span class="byte-input__suffix"><span class="suffix">
-                          11/100
-                        </span></span>
-                      <!---->
+                      <el-input type="text"
+                                placeholder="填写你的个人签名"
+                                v-model="userInfo.sign"
+                                maxlength="30"
+                                show-word-limit>
+                      </el-input>
                     </div>
-                    <!---->
-                    <!---->
                   </div>
                 </div>
                 <div class="divide"></div>
@@ -200,28 +163,24 @@
                          style="width: 56px;">个人介绍</label>
                   <div class="byte-form-item__content">
                     <div class="textarea-input">
-                      <div class="input textarea byte-input byte-input--normal"><textarea maxlength="188"
-                                  rows="2"
+                      <div class="input textarea byte-input byte-input--normal">
+
+                        <el-input type="textarea"
                                   placeholder="填写职业技能、擅长的事情、喜欢的事情等"
-                                  autocomplete=""
-                                  name=""
                                   v-model="userInfo.perintroduction"
-                                  aria-label=""
-                                  spellcheck="false"
-                                  class="byte-input__textarea"></textarea></div> <span class="textarea-suffix">
-                        14/100
-                      </span>
+                                  maxlength="100"
+                                  :rows="8"
+                                  show-word-limit>
+                        </el-input>
+                      </div>
                     </div>
-                    <!---->
-                    <!---->
                   </div>
                 </div>
-                <!---->
-                <!---->
-                <!---->
               </form>
               <div class="divide"></div>
-              <el-button type="primary" plain
+              <el-button type="primary"
+                         plain
+                         :loading="submitUserInfo"
                          @click="saveUserInfo">保存修改</el-button>
             </div>
             <div class="avatar-input">
@@ -281,8 +240,22 @@
                          class="byte-form-item__label"
                          style="width: 56px;">手机</label>
                   <div class="zhanghu-setting-chang">
-                    <span class="setting-btn"
-                          @click="huanbang">换绑</span>
+                    <el-button type="text"
+                               @click="changephine=true">换绑</el-button>
+                    <el-dialog title="温馨提示"
+                               :visible.sync="changephine"
+                               center>
+                      <span>尊贵的用户您好，目前PC端暂不支持手机换绑功能，如您确实需要修改手机号，建议您扫描二维码前往App端我-设置-账号注销进行注销操作，然后重新注册新手机。给您带来的不便，我们深感抱歉。如果您有任何建议和反馈，可以发送邮箱到 16623170187@163.com 联系我们。</span>
+                      <div class="app-download-wapma">
+                        <div class="app-download-ma"></div>
+                      </div>
+                      <span slot="footer"
+                            class="dialog-footer">
+                        <el-button @click="changephine = false">取 消</el-button>
+                        <el-button type="primary"
+                                   @click="changephine = false">确 定</el-button>
+                      </span>
+                    </el-dialog>
                   </div>
                 </div>
                 <div class="divide"></div>
@@ -297,28 +270,43 @@
 
                     <el-dialog title="密码重置"
                                :visible.sync="pwdChange"
+                               :close-on-click-modal="false"
+                               :before-close="changePwdClose"
                                width="450px">
                       <el-form class="pwchang-form">
-                        <el-form-item label="旧密码"
-                                      :label-width="formLabelWidth">
-                          <span class="pwd-change-errtiops" v-if="newPwdTips.length>0">{{newPwdTips}}</span>
-                          <el-input placeholder="请输入密码" v-model="oldPwd" show-password></el-input>
+                        <el-form-item label="旧密码">
+                          <span class="pwd-change-errtiops"
+                                v-if="oldPwdTips.length>0">{{oldPwdTips}}</span>
+                          <el-input placeholder="请输入密码"
+                                    v-model="oldPwd"
+                                    @input="inputChange('oldPwd')"
+                                    show-password></el-input>
                         </el-form-item>
 
-                         <el-form-item label="新密码"
-                                      :label-width="formLabelWidth">
-                           <span class="pwd-change-errtiops" v-if="oldPwdTips.length>0">{{oldPwdTips}}</span>
-                          <el-input placeholder="请输入密码" v-model="newPwd" show-password></el-input>
+                        <el-form-item label="新密码">
+                          <span class="pwd-change-errtiops"
+                                v-if="newPwd.length>0">{{newPwdTips}}</span>
+                          <el-input placeholder="请输入密码"
+                                    v-model="newPwd"
+                                    @input="inputChange('newPwd')"
+                                    show-password></el-input>
                         </el-form-item>
-                         <el-form-item label="确认密码"
-                                      :label-width="formLabelWidth">
-                          <span class="pwd-change-errtiops" v-if="confirmPwdTips.length>0">{{confirmPwdTips}}</span>
-                          <el-input placeholder="请输入密码" v-model="confirmPwd" show-password></el-input>
+                        <el-form-item label="确认密码">
+                          <span class="pwd-change-errtiops"
+                                v-if="confirmPwd.length>0">{{confirmPwdTips}}</span>
+                          <el-input placeholder="请输入密码"
+                                    v-model="confirmPwd"
+                                    @input="inputChange('confirmPwd')"
+                                    show-password></el-input>
                         </el-form-item>
                       </el-form>
                       <span slot="footer"
                             class="dialog-footer">
-                        <el-button type="primary" class="chang-pwd-btn"
+                        <span class="pwd-confim-errtiops"
+                              v-if="resultTips.length>0">{{resultTips}}</span>
+                        <el-button type="primary"
+                                   :loading="submitChangePwd"
+                                   class="chang-pwd-btn"
                                    @click="changePwdClick"
                                    center>修 改</el-button>
                       </span>
@@ -338,8 +326,6 @@
 
                     <el-dialog title="温馨提示"
                                :visible.sync="zhuxiaodlog"
-                               width="30%"
-                               :before-close="handleClose"
                                center>
                       <span>尊贵的用户您好，目前PC端暂不支持注销功能，如您申请账号注销，需要扫描二维码前往App端我-设置-账号注销进行注销操作，给您带来的不便，我们深感抱歉。如果您有任何建议和反馈，可以发送邮箱到 16623170187@163.com 联系我们。</span>
                       <div class="app-download-wapma">
@@ -375,15 +361,19 @@ export default {
     return {
       userInfo: {}, // 查询表单对象
       settingtype: 1,
+      submitUserInfo: false,
       isUploadHiden: true,
       zhuxiaodlog: false,
       pwdChange: false,
-      oldPwd:'',
-      oldPwdTips:'',
-      newPwd:'',
-      newPwdTips:'',
-      confirmPwd:'',
-      confirmPwdTips:'',
+      oldPwd: '',
+      oldPwdTips: '',
+      newPwd: '',
+      newPwdTips: '',
+      confirmPwd: '',
+      confirmPwdTips: '',
+      resultTips: '',
+      submitChangePwd: false,
+      changephine: false,
     };
   },
   created () {
@@ -408,9 +398,39 @@ export default {
     handleAvatarSuccess (res, file) {
       this.userInfo.avatar = res.data.imageUrl;
     },
-    saveUserInfo () {
-      userApi.updateUserInfo(this.userInfo).then((response) => {
 
+    beforeAvatarUpload (file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isPng = file.type === 'image/png';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!(isJPG || isPng)) {
+        this.$message.error('上传头像图片只能是 JPG 和 PNG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
+    },
+    saveUserInfo () {
+      this.submitUserInfo = true;
+      userApi.updateUserInfo(this.userInfo).then((response) => {
+        this.submitUserInfo = false;
+        if (response.data.resultType == 2) {
+          this.$message({
+            showClose: true,
+            message: response.data.tips,
+            type: 'error'
+          });
+        }
+        if (response.data.resultType == 1) {
+          this.pwdChange = false;
+          this.$message({
+            showClose: true,
+            message: response.data.tips,
+            type: 'success'
+          });
+        }
       })
     },
     zhanghuSettingClick () {
@@ -419,18 +439,65 @@ export default {
     personSettingClick () {
       this.settingtype = 1;
     },
-    huanbang () {
-
+    changePwdClick () {
+      if (this.oldPwd.length < 6) {
+        this.oldPwdTips = "密码长度小于6位";
+      }
+      if (this.newPwd.length < 6) {
+        this.newPwdTips = "密码长度小于6位";
+      }
+      if (this.confirmPwd.length < 6) {
+        this.confirmPwdTips = "密码长度小于6位";
+      }
+      if (this.oldPwd.length >= 6 && this.newPwd.length >= 6 && this.confirmPwd.length >= 6) {
+        if (this.newPwd == this.confirmPwd) {
+          if (this.newPwd == this.oldPwd) {
+            this.resultTips = "新旧密码不能一样哈";
+          } else {
+            self.resultTips = '';
+            this.submitChangePwd = true;
+            userApi.changeUserPwd({ "id": this.userInfo.id, "oldPwd": this.oldPwd, "newPwd": this.newPwd }).then((response) => {
+              this.submitChangePwd = false;
+              if (response.data.resultType == 2) {
+                this.resultTips = response.data.tips;
+              }
+              if (response.data.resultType == 1) {
+                this.changePwdClose();
+                this.$message({
+                  showClose: true,
+                  message: response.data.tips,
+                  type: 'success'
+                });
+              }
+            })
+          }
+        } else {
+          this.resultTips = "输入的密码不一致！";
+        }
+      }
     },
-    chongzhimima () {
-
+    inputChange (type) {
+      this.resultTips = '';
+      if (type == 'oldPwd') {
+        this.oldPwdTips = '';
+      }
+      if (type == 'newPwd') {
+        this.newPwdTips = '';
+      }
+      if (type == 'confirmPwd') {
+        this.confirmPwdTips = '';
+      }
     },
-    zhuxiaozhanghu () {
-      window.console.log("ddd");
-    },
-    changePwdClick() {
-      self
-
+    changePwdClose () {
+      this.submitChangePwd = false;
+      this.pwdChange = false;
+      this.oldPwd = '';
+      this.oldPwdTips = '';
+      this.newPwd = '';
+      this.newPwdTips = '';
+      this.confirmPwd = '';
+      this.confirmPwdTips = '';
+      this.resultTips = '';
     }
   }
 }
@@ -465,7 +532,7 @@ export default {
 
 .setting-menu-item .nav-item.active[data-v-55200008] {
   background: #e8f3ff;
-  color: #409EFF;
+  color: #409eff;
   cursor: pointer;
 }
 
@@ -486,7 +553,7 @@ export default {
 }
 
 .nav-item.active .svg .close-path[data-v-55200008] {
-  fill: #409EFF;
+  fill: #409eff;
 }
 
 .nav-item .svg .close-path[data-v-55200008] {
@@ -856,7 +923,7 @@ input[type='file' i] {
   position: relative;
 }
 
-.el-form-item__label { 
+.el-form-item__label {
   font-size: 12px;
 }
 
@@ -864,7 +931,8 @@ input[type='file' i] {
   margin-left: 45px;
 }
 
-.el-dialog__footer { 
+.el-dialog__footer {
+  position: relative;
   padding: 0px 20px 40px;
 }
 
@@ -873,10 +941,26 @@ input[type='file' i] {
 }
 
 .pwd-change-errtiops {
-  position:absolute;
-  color: #F56C6C;
+  position: absolute;
+  color: #f56c6c;
   left: 208px;
   width: 96px;
   font-size: 12px;
+}
+
+.pwd-confim-errtiops {
+  position: absolute;
+  color: #f56c6c;
+  left: 130px;
+  width: 186px;
+  font-size: 14px;
+  top: -45px;
+}
+
+.el-textarea__inner {
+  resize: none;
+}
+.el-dialog {
+  width: 610px;
 }
 </style>

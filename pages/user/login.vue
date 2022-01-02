@@ -3,11 +3,11 @@
     <div class="sing_main">
       <div class="title">
         <nuxt-link class="active"
-                   :to="{name:'login'}">
+                   :to="{name:'user-login'}">
           登录
         </nuxt-link>
         <span>·</span>
-        <nuxt-link :to="{name:'register'}">
+        <nuxt-link :to="{name:'user-register'}">
           注册
         </nuxt-link>
       </div>
@@ -45,7 +45,7 @@
             <input type="button"
                    class="sign-in-button"
                    value="登录"
-                   @click="submitLogin('userForm')" />
+                   v-on:keyup.enter="submitLogin('userForm')" />
           </div>
         </el-form>
         <!-- 更多登录方式 -->
@@ -53,18 +53,20 @@
           <h6>社交帐号登录</h6>
           <ul>
             <li>
+
+              <!-- href="http://qy.free.idcfengye.com/api/ucenter/weixinLogin/login   target="_blank"" -->
               <a id="weixin"
                  class="weixin"
-                 target="_blank"
-                 href="http://qy.free.idcfengye.com/api/ucenter/weixinLogin/login">
+                 @click="weixinLoginClick"
+                 href="javascript:void(0);">
                 <i class="iconfont icon-weixin" />
               </a>
             </li>
             <li>
               <a id="qq"
                  class="qq"
-                 target="_blank"
-                 href="#">
+                 @click="weixinLoginClick"
+                 href="javascript:void(0);">
                 <i class="iconfont icon-qq" />
               </a>
             </li>
@@ -79,7 +81,6 @@
 import '~/assets/css/appdown.css'
 import "~/assets/css/sign.css";
 import "~/assets/css/iconfont.css";
-import cookie from "js-cookie";
 import loginApi from "@/api/user";
 
 export default {
@@ -92,12 +93,35 @@ export default {
         password: ""
       },
       errtips: "",
-      loginInfo: {}
+      loginInfo: {},
     };
+  },
+
+  created () {
+    if (process.browser) {
+      window.addEventListener("keydown", this.handleKeyDown, true);
+    }
+  },
+
+  destroyed () {
+    window.removeEventListener("keydown", this.handleKeyDown, true);
   },
 
   methods: {
     //登录的方法
+    handleKeyDown (e) {
+      let key = null;
+      if (window.event === undefined) {
+        key = e.keyCode;
+      } else {
+        key = window.event.keyCode;
+      }
+      if (key === 13) {
+        //触发的事件
+        this.submitLogin('userForm');
+      }
+    },
+
     submitLogin (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -135,8 +159,14 @@ export default {
     },
     formfocuse () {
       this.errtips = "";
+    },
+    weixinLoginClick () {
+      this.$message({
+        showClose: true,
+        message: '抱歉，该功能正在紧急开发中哈'
+      });
     }
-  }
+  },
 };
 </script>
 <style>

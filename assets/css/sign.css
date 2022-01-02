@@ -1,106 +1,107 @@
 .app-xuan-down {
-    margin-top: 115px;
-    margin-left: 30px;
+  margin-top: 115px;
+  margin-left: 30px;
 }
 
-.app-xuan-down  .el-button {
-    font-weight: 400;
+.app-xuan-down .el-button {
+  font-weight: 400;
 }
 .sign_downapp {
-    width: 260px;
+  width: 260px;
 }
 
-*, :after, :before {
-    box-sizing: border-box;
+*,
+:after,
+:before {
+  box-sizing: border-box;
 }
 
 /*选择器*/
-.sign-up-msg{
-    text-align: center;
-    font-size: 12px;
-    line-height: 20px;
-    color: #969696;
+.sign-up-msg {
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+  color: #969696;
 }
 
 /*标签选择器*/
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
 
-a:hover{
-    text-decoration: none;
+a:hover {
+  text-decoration: none;
 }
 
 /*后代选择器*/
-.sign-up-msg a{
-    color: #3194d0;
+.sign-up-msg a {
+  color: #3194d0;
 }
 
-.sign-up-msg a:hover{
-    text-decoration: underline;
+.sign-up-msg a:hover {
+  text-decoration: underline;
 }
 
 .sign {
-    text-align: center;
-    font-size: 14px;
-    background-color: white;
+  text-align: center;
+  font-size: 14px;
+  background-color: white;
 }
 
 /*表单样式*/
-.sign .main{
-    background-color: #FFFFFF;
-    width: 500px;
-    padding: 50px;
-    margin: 120px auto 0 auto;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    border-radius: 5px;
-    margin-right: 80px;
+.sign .main {
+  background-color: #ffffff;
+  width: 500px;
+  padding: 50px;
+  margin: 120px auto 0 auto;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-right: 80px;
 }
 
-.sign .logo{
+.sign .logo {
   top: 56px;
   left: 50px;
 }
 
 .sign .sing_main {
-    width: 300px;
-    margin: 0 auto 0 auto;
+  width: 300px;
+  margin: 0 auto 0 auto;
 }
 
 .sign .sign_btn {
-    width: 200px;
-    margin: 0 auto 0 auto;
-    margin-bottom: 20px;
+  width: 200px;
+  margin: 0 auto 0 auto;
+  margin-bottom: 20px;
 }
-
 
 /*登录注册文字*/
-.sign .title{
-    margin: 0 auto 20px;
-    padding: 10px;
-    text-align: center;
+.sign .title {
+  margin: 0 auto 20px;
+  padding: 10px;
+  text-align: center;
 }
 
-.sign .title a{
-    padding: 10px;
-    color: #969696;
-    font-size: 18px;
+.sign .title a {
+  padding: 10px;
+  color: #969696;
+  font-size: 18px;
 }
 
-.sign .title a:hover{
-    border-bottom: 2px solid #409EFF;
+.sign .title a:hover {
+  border-bottom: 2px solid #409eff;
 }
 
-.sign .title .active{
-    font-weight: 700;
-    color: #409EFF;
-    border-bottom: 2px solid #409EFF;
+.sign .title .active {
+  font-weight: 700;
+  color: #409eff;
+  border-bottom: 2px solid #409eff;
 }
 
-.sign .title span{
-    padding: 10px;
-    color: #969696;
-    font-weight: 700;
+.sign .title span {
+  padding: 10px;
+  color: #969696;
+  font-weight: 700;
 }
 
 /*表单文本框
@@ -114,133 +115,135 @@ a:hover{
 }*/
 
 .sign form .restyle {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 .sign form .input-prepend {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 .sign form .input-prepend input {
-    width: 100%;
-    height: 50px;
-    margin-bottom: 0;
-    padding: 4px 12px 4px 35px;
-    border: 1px solid #c8c8c8;
-    border-radius: 0 0 4px 4px;
-    background-color: hsla(0,0%,71%,.1);
-    vertical-align: middle;
-    margin-top: 25px;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 0;
+  padding: 4px 12px 4px 35px;
+  border: 1px solid #c8c8c8;
+  border-radius: 0 0 4px 4px;
+  background-color: hsla(0, 0%, 71%, 0.1);
+  vertical-align: middle;
+  margin-top: 25px;
 }
 .sign form .restyle input {
-    border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 .sign form .no-radius input {
-    border-radius: 0;
+  border-radius: 0;
 }
 .sign form .input-prepend i {
-    position: absolute;
-    top: 30px;
-    left: 10px;
-    font-size: 18px;
-    color: #969696;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  font-size: 18px;
+  color: #969696;
 }
 
-.sign .sign-up-button{
-    margin-top: 20px;
-    width: 100%;
-    padding: 9px 18px;
-    font-size: 18px;
-    border: none;
-    border-radius: 25px;
-    color: #FFFFFF;
-    background-color: #42c02c;
-    cursor: pointer;
+.sign .sign-up-button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 9px 18px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  color: #ffffff;
+  background-color: #42c02c;
+  cursor: pointer;
 }
-.sign .sign-up-button:hover{
-    background-color: #3db922;
+.sign .sign-up-button:hover {
+  background-color: #3db922;
 }
 
-.sign .sign-in-button{
-    margin-top: 20px;
-    width: 100%;
-    padding: 9px 18px;
-    font-size: 18px;
-    border: none;
-    border-radius: 25px;
-    color: #FFFFFF;
-    background-color: #3194d0;
-    cursor: pointer;
+.sign .sign-in-button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 9px 18px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  color: #ffffff;
+  background-color: #3194d0;
+  cursor: pointer;
 }
-.sign .sign-in-button:hover{
-    background-color: #187cb7;
+.sign .sign-in-button:hover {
+  background-color: #187cb7;
 }
 
 .sign .more-sign {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .sign .more-sign h6 {
-    position: relative;
-    margin: 0 0 10px;
-    font-size: 12px;
-    color: #b5b5b5;
+  position: relative;
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: #b5b5b5;
 }
 
-.sign .more-sign h6:after, .sign .more-sign h6:before {
-    content: "";
-    border-top: 1px solid #b5b5b5;
-    display: block;
-    position: absolute;
-    width: 60px;
-    top: 5px;
+.sign .more-sign h6:after,
+.sign .more-sign h6:before {
+  content: "";
+  border-top: 1px solid #b5b5b5;
+  display: block;
+  position: absolute;
+  width: 60px;
+  top: 5px;
 }
 .sign .more-sign h6:before {
-    left: 30px;
+  left: 30px;
 }
 
 .sign .more-sign h6:after {
-    right: 30px;
+  right: 30px;
 }
-.sign .more-sign h6:after, .sign .more-sign h6:before {
-    content: "";
-    border-top: 1px solid #b5b5b5;
-    display: block;
-    position: absolute;
-    width: 60px;
-    top: 5px;
+.sign .more-sign h6:after,
+.sign .more-sign h6:before {
+  content: "";
+  border-top: 1px solid #b5b5b5;
+  display: block;
+  position: absolute;
+  width: 60px;
+  top: 5px;
 }
 
 .sign .more-sign ul {
-    margin-bottom: 10px;
-    list-style: none;
-	padding-left: 0;
+  margin-bottom: 10px;
+  list-style: none;
+  padding-left: 0;
 }
 
 .sign .more-sign ul li {
-    margin: 0 5px;
-    display: inline-block;
+  margin: 0 5px;
+  display: inline-block;
 }
 
 .sign .more-sign ul a {
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    display: block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  display: block;
+  text-decoration: none;
 }
+
 .sign .more-sign .icon-weixin {
-    color: #00bb29;
+  color: #00bb29;
 }
 .sign .more-sign .icon-qq {
-    color: #498ad5;
+  color: #498ad5;
 }
 .sign .more-sign ul i {
-    font-size: 28px;
+  font-size: 28px;
 }
 .ic-wechat:before {
-    content: "\E604";
+  content: "\E604";
 }
 .ic-qq_connect:before {
-    content: "\E603";
+  content: "\E603";
 }
-
-

@@ -165,7 +165,7 @@ export default {
 }
 
 .op_pratice_subtag a:hover {
-  color: #f56c6c;
+  color: #409EFF;
 }
 
 .op_pratice_content {

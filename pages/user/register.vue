@@ -2,12 +2,12 @@
   <div class="main fr">
     <div class="sing_main">
       <div class="title">
-        <nuxt-link :to="{name:'login'}">
+        <nuxt-link :to="{name:'user-login'}">
           登录
         </nuxt-link>
         <span>·</span>
         <nuxt-link class="active"
-                   :to="{name:'register'}">
+                   :to="{name:'user-register'}">
           注册
         </nuxt-link>
       </div>
@@ -75,11 +75,16 @@
           <p class="sign-up-msg">
             点击 “注册” 即表示您同意并愿意遵守开源实践网
             <br />
-            <a target="_blank"
-               href="http://www.jianshu.com/p/c44d171298ce">用户协议</a>
+
+            <nuxt-link :to="{name:'user-userterime'}"
+                       target="_blank">
+              用户协议
+            </nuxt-link>
             和
-            <a target="_blank"
-               href="http://www.jianshu.com/p/2ov8x3">隐私政策</a> 。
+            <nuxt-link :to="{name:'user-privacy'}"
+                       target="_blank">
+              隐私政策
+            </nuxt-link>。
           </p>
         </el-form>
         <!-- 更多注册方式 -->
@@ -87,18 +92,19 @@
           <h6>社交帐号直接注册</h6>
           <ul>
             <li>
+              <!-- href="http://qy.free.idcfengye.com/api/ucenter/weixinLogin/login   target="_blank"" -->
               <a id="weixin"
                  class="weixin"
-                 target="_blank"
-                 href="http://huaan.free.idcfengye.com/api/ucenter/wx/login">
+                 @click="weixinLoginClick"
+                 href="javascript:void(0);">
                 <i class="iconfont icon-weixin" />
               </a>
             </li>
             <li>
               <a id="qq"
                  class="qq"
-                 target="_blank"
-                 href="#">
+                 @click="weixinLoginClick"
+                 href="javascript:void(0);">
                 <i class="iconfont icon-qq" />
               </a>
             </li>
@@ -203,6 +209,12 @@ export default {
     },
     formfocuse () {
       this.errtips = "";
+    },
+    weixinLoginClick () {
+      this.$message({
+        showClose: true,
+        message: '抱歉，该功能正在紧急开发中哈'
+      });
     }
   }
 };

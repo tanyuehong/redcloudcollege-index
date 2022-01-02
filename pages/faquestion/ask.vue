@@ -277,8 +277,8 @@ export default {
 
 <style>
 .active {
-  border-color: #f56c6c;
-  color: #f56c6c !important;
+  border-color: #409EFF;
+  color: #409EFF !important;
 }
 .checkbox {
   margin-left: -15px;

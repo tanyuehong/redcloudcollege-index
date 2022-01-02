@@ -34,4 +34,22 @@ export default {
       data: formItem,
     })
   },
+
+   //根据token获取用户信息
+   updateUserInfo(userData) {
+    return request({
+      url: `/ucenter/updateUserInfo`,
+      method: 'post',
+      data: userData,
+    })
+  },
+
+  // 修改用户密码
+  changeUserPwd(pwdData) {
+    return request({
+      url: `/ucenter/changeUserPwd`,
+      method: 'post',
+      data: pwdData,
+    })
+  }
 }

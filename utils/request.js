@@ -41,6 +41,10 @@ service.interceptors.response.use(
       }
       Message.closeAll()
       if(res.code == 999) {
+        if(window) {
+          window.localStorage.setItem('redclass_token', '')
+          window.localStorage.setItem('redclass_user', '')
+        }
         Message({ message: errorMsg, type: 'error', duration: tipsShowTime, onClose:()=>{
           $nuxt.$router.push({
            name: "user-login"

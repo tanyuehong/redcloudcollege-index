@@ -10,7 +10,7 @@
                  href="/faquestion">开源实践问答</a>
               <span class="glyphicon glyphicon glyphicon-menu-right"
                     aria-hidden="true"></span>
-              <div class="active section">我要提问</div>
+              <div class="askactive section">我要提问</div>
             </div>
 
             <div class="visible-sm">
@@ -60,7 +60,10 @@
                        name="catalog"
                        value="1" />
                 <div class="ui five item pointing menu catalog">
-                  <a class="item active"
+                  <a class="item"
+                     v-bind:class="{ askactive: askType==1 }"
+                    @click="askTypeClick('1')"
+                     href="javascript:void(0);"
                      data-value="1"
                      title="技术问答">
                     <span class="glyphicon glyphicon-question-sign"
@@ -69,6 +72,9 @@
                   </a>
                   <a class="item"
                      data-value="100"
+                     v-bind:class="{ askactive: askType==100 }"
+                     @click="askTypeClick('100')"
+                     href="javascript:void(0);"
                      title="职业生涯">
                     <span class="glyphicon glyphicon-briefcase"
                           aria-hidden="true"></span>
@@ -76,6 +82,9 @@
                   </a>
                   <a class="item"
                      data-value="2"
+                     v-bind:class="{ askactive: askType==2 }"
+                     @click="askTypeClick('2')"
+                     href="javascript:void(0);"
                      title="技术分享">
                     <span class="glyphicon glyphicon-share"
                           aria-hidden="true"></span>
@@ -83,6 +92,9 @@
                   </a>
                   <a class="item"
                      data-value="3"
+                     v-bind:class="{ askactive: askType==3 }"
+                    @click="askTypeClick('3')"
+                     href="javascript:void(0);"
                      title="IT大杂烩">
                     <span class="glyphicon glyphicon-user"
                           aria-hidden="true"></span>
@@ -90,6 +102,9 @@
                   </a>
                   <a class="item"
                      data-value="4"
+                      v-bind:class="{ askactive: askType==4 }"
+                       @click="askTypeClick('4')"
+                     href="javascript:void(0);"
                      title="站务/建议">
                     <span class="glyphicon glyphicon-hand-up"
                           aria-hidden="true"></span>
@@ -208,6 +223,7 @@ export default {
       asktitle: '',
       asktag: '',
       errtips: '',
+      askType: 1,
       content: '',
       editorOption: {
         placeholder: "请输入您的问题",
@@ -233,6 +249,10 @@ export default {
     onEditorChange ({ editor, html, text }) {
       console.log('editor change!', editor, html, text)
       this.content = html
+    },
+
+    askTypeClick(type) {
+      this.askType = type;
     },
     publishAsk () {
       if (this.asktitle.length < 6) {
@@ -276,7 +296,7 @@ export default {
 </script>
 
 <style>
-.active {
+.askactive {
   border-color: #409EFF;
   color: #409EFF !important;
 }

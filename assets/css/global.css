@@ -969,6 +969,7 @@ a.current-2 .lh-p-icon {
 .comm-course-list li {
   float: left;
   width: 25%;
+  margin-top: 2px;
 }
 .lt-ie9.lt-ie8 .comm-course-list li {
   width: 24.98%;
@@ -979,8 +980,13 @@ a.current-2 .lh-p-icon {
 }
 .comm-course-list li .cc-l-wrap {
   display: block;
-  margin: 0 0 40px 30px;
+  margin: 0 0 30px 20px;
   overflow: hidden;
+  border-color: #000;
+  -webkit-box-shadow: 1px 1px 2px 1px #ececec;
+  box-shadow: 1px 1px 2px 1px #ececec;
+  border-radius: 8px;
+  padding: 10px;
 }
 .course-img {
   position: relative;
@@ -992,6 +998,7 @@ a.current-2 .lh-p-icon {
   display: block;
   transition: 0.8s;
   -webkit-transition: 0.8s;
+  border-radius: 3px;
 }
 .jgTag {
   display: inline-block;
@@ -1030,6 +1037,7 @@ a.current-2 .lh-p-icon {
 .comm-course-list li:hover .img-responsive {
   transform: scale(1.1);
   -webkit-transform: scale(1.1);
+  border-radius: 6px;
 }
 .comm-course-list li:hover .cc-mask {
   opacity: 1;

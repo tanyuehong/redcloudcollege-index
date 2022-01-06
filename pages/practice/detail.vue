@@ -161,9 +161,6 @@ export default {
       ],
     }
   },
-
-  layout: 'blog',
-
   asyncData ({ query, error }) {
     return realPractice.getRealPraticeDetail(query.id).then((response) => {
       return {

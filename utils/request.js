@@ -39,7 +39,20 @@ service.interceptors.response.use(
       } else if (res.message.length > 0) {
         errorMsg = res.message
       }
-      Message({ message: errorMsg, type: 'error', duration: tipsShowTime })
+      Message.closeAll()
+      if(res.code == 999) {
+        if(window) {
+          window.localStorage.setItem('redclass_token', '')
+          window.localStorage.setItem('redclass_user', '')
+        }
+        Message({ message: errorMsg, type: 'error', duration: tipsShowTime, onClose:()=>{
+          $nuxt.$router.push({
+           name: "user-login"
+         });
+         }})
+        return ;
+      }
+      Message({ message: errorMsg, type: 'error', duration: tipsShowTime})
       return Promise.reject(new Error(errorMsg))
     } else {
       return res
@@ -87,6 +100,7 @@ service.interceptors.response.use(
     } else {
       err.message = '连接服务失败!'
     }
+    Message.closeAll()
     Message({ message: err.message, type: 'error', tipsShowTime })
     return Promise.reject(err)
   },

@@ -60,24 +60,33 @@
                                    :to="{name:'course-id',params:{id:course.id}}">开始学习</nuxt-link>
                       </div>
                     </section>
-                    <h3 class="hLh30 mt10 mb5">
+
+                    <div class="course-index-title">
+                      <span class="course-index-tag">
+                        自研
+                      </span>
                       <a href="#"
                          :title="course.title"
-                         class="course-title fsize18 c-333">
+                         class="course-title-content">
                         {{ course.title }}
                       </a>
-                    </h3>
-                    <section class="hLh20 of">
-                      <span class="fr jgTag bg-green"
-                            v-if="Number(course.price) === 0">
-                        <i class="c-fff fsize12 f-fA">免费</i>
-                      </span>
+                    </div>
+                    <section class="course-info-detail">
                       <span class="fl jgAttr c-ccc f-fA">
-                        <i class="c-666">{{course.buyCount}}人学习</i>
+                        <i class="c-666">{{course.level}}</i>
                         |
-                        <i class="c-666">9634评论</i>
+                        <i class="c-666">{{course.lessonNum}}课时</i>
                       </span>
                     </section>
+                    <div class="buy-info">
+                      <div class="buy-info_left">
+                        <!----> <span class="buy-count">已有{{course.buyCount}}人学习</span>
+                      </div>
+                      <div class="buy-info_right">
+                        <!----> <span class="price" v-if="course.price>0"><span class="yan">￥</span>{{course.price}}</span>
+                                <span class="price" v-if="course.price==0">免费</span>
+                      </div>
+                    </div>
                   </div>
                 </li>
               </ul>
@@ -341,7 +350,71 @@ export default {
 
 <style>
 .jgAttr {
+  font-size: 14px;
+}
+
+.buy-info {
+  margin-top: 2px;
+  height: 35px;
+  position: relative;
+  margin-bottom: 3px;
+}
+
+.buy-info_left {
+  overflow: hidden;
+  font-size: 14px;
+  position: absolute;
+  bottom: 0;
+}
+
+.buy-info_right {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 6px;
+}
+
+.buy-info_right .price {
+  display: inline-block;
+  height: 30px;
+  font-size: 22px;
+  line-height: 30px;
+  color: #ff1d00;
+}
+
+.buy-info_right .price .yan {
+  font-size: 12px;
+}
+
+.buy-info_left .buy-count {
+  color: #818a92;
+  font-weight: 300;
+}
+.course-info-detail {
+  border-bottom: 0.5px solid rgba(153, 153, 153, 0.2);
+  height: 30px;
+}
+
+.course-index-title {
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+.course-index-title .course-title-content {
   font-size: 16px;
+  color: #333;
+  font-weight: 500;
+  padding-top: 5px;
+}
+
+.course-index-title .course-index-tag {
+  height: 20px;
+  font-size: 12px;
+  display: inline-block;
+  padding: 0 4px;
+  margin-right: 6px;
+  color: #fff;
+  border-radius: 3px;
+  background: rgba(255, 63, 41, 0.8);
 }
 
 .cc-l-wrap h3 {

@@ -10,7 +10,7 @@
                  href="/faquestion">开源实践问答</a>
               <span class="glyphicon glyphicon glyphicon-menu-right"
                     aria-hidden="true"></span>
-              <div class="active section">我要提问</div>
+              <div class="askactive section">我要提问</div>
             </div>
 
             <div class="visible-sm">
@@ -60,7 +60,10 @@
                        name="catalog"
                        value="1" />
                 <div class="ui five item pointing menu catalog">
-                  <a class="item active"
+                  <a class="item"
+                     v-bind:class="{ askactive: askType==1 }"
+                     @click="askTypeClick('1')"
+                     href="javascript:void(0);"
                      data-value="1"
                      title="技术问答">
                     <span class="glyphicon glyphicon-question-sign"
@@ -69,6 +72,9 @@
                   </a>
                   <a class="item"
                      data-value="100"
+                     v-bind:class="{ askactive: askType==100 }"
+                     @click="askTypeClick('100')"
+                     href="javascript:void(0);"
                      title="职业生涯">
                     <span class="glyphicon glyphicon-briefcase"
                           aria-hidden="true"></span>
@@ -76,6 +82,9 @@
                   </a>
                   <a class="item"
                      data-value="2"
+                     v-bind:class="{ askactive: askType==2 }"
+                     @click="askTypeClick('2')"
+                     href="javascript:void(0);"
                      title="技术分享">
                     <span class="glyphicon glyphicon-share"
                           aria-hidden="true"></span>
@@ -83,6 +92,9 @@
                   </a>
                   <a class="item"
                      data-value="3"
+                     v-bind:class="{ askactive: askType==3 }"
+                     @click="askTypeClick('3')"
+                     href="javascript:void(0);"
                      title="IT大杂烩">
                     <span class="glyphicon glyphicon-user"
                           aria-hidden="true"></span>
@@ -90,6 +102,9 @@
                   </a>
                   <a class="item"
                      data-value="4"
+                     v-bind:class="{ askactive: askType==4 }"
+                     @click="askTypeClick('4')"
+                     href="javascript:void(0);"
                      title="站务/建议">
                     <span class="glyphicon glyphicon-hand-up"
                           aria-hidden="true"></span>
@@ -132,6 +147,16 @@
                        @ready="onEditorReady($event)"
                        v-quill:myQuillEditor="editorOption">
                   </div>
+                  <el-upload class="avatar-uploader"
+                             :action="articleImgUrl"
+                             name="img"
+                             :headers="headerObj"
+                             :show-file-list="false"
+                             :on-success="uploadSuccess"
+                             :on-error="uploadError"
+                             :before-upload="beforeUpload">
+                  </el-upload>
+
                 </client-only>
               </div>
               <div class="field">
@@ -202,20 +227,44 @@ import '~/assets/css/quilleditor.css'
 export default {
   data () {
     return {
-      tipsme: true,
-      nocomment: true,
+      tipsme: false,
+      nocomment: false,
       askcontent: '',
       asktitle: '',
       asktag: '',
       errtips: '',
+      askType: 1,
       content: '',
       editorOption: {
         placeholder: "请输入您的问题",
         modules: {
-          toolbar: [
-            ['bold', 'italic', 'underline', 'strike'],
-            ['blockquote', 'code-block']
-          ]
+          toolbar: {
+            container:
+              [["bold", "italic", "underline", "strike"], // 加粗 斜体 下划线 删除线 -----['bold', 'italic', 'underline', 'strike']
+              ["code-block"], // 引用  代码块-----['blockquote', 'code-block']
+              [{ header: 1 }, { header: 2 }], // 1、2 级标题-----[{ header: 1 }, { header: 2 }]
+              [{ list: "ordered" }, { list: "bullet" }], // 有序、无序列表-----[{ list: 'ordered' }, { list: 'bullet' }]
+              [{ direction: "rtl" }], // 文本方向-----[{'direction': 'rtl'}]
+              [{ size: ["small", false, "large", "huge"] }], // 字体大小-----[{ size: ['small', false, 'large', 'huge'] }]
+              [{ header: [1, 2, 3, 4, 5, 6, false] }], // 标题-----[{ header: [1, 2, 3, 4, 5, 6, false] }]
+              [{ color: [] }, { background: [] }], // 字体颜色、字体背景颜色-----[{ color: [] }, { background: [] }]
+              [{ font: [] }], // 字体种类-----[{ font: [] }]
+              [{ align: [] }], // 对齐方式-----[{ align: [] }]
+              ["clean"], // 清除文本格式-----['clean']
+              ["image"] // 链接、图片、视频-----['link', 'image', 'video']
+              ],
+            handlers: {
+              'image': function (value) {
+                if (value) {
+                  // upload点击上传事件
+                  document.querySelector('.avatar-uploader input').click()
+                } else {
+                  this.quill.format('image', false)
+                }
+                window.console.log('ddddd');
+              }
+            }
+          }
         }
       },
     }
@@ -233,6 +282,10 @@ export default {
     onEditorChange ({ editor, html, text }) {
       console.log('editor change!', editor, html, text)
       this.content = html
+    },
+
+    askTypeClick (type) {
+      this.askType = type;
     },
     publishAsk () {
       if (this.asktitle.length < 6) {
@@ -276,9 +329,9 @@ export default {
 </script>
 
 <style>
-.active {
-  border-color: #409EFF;
-  color: #409EFF !important;
+.askactive {
+  border-color: #409eff;
+  color: #409eff !important;
 }
 .checkbox {
   margin-left: -15px;
@@ -474,5 +527,81 @@ export default {
   color: red;
   font-size: 12px;
   width: 100%;
+}
+
+.editor {
+  line-height: normal !important;
+  height: 500px;
+}
+.ql-snow .ql-tooltip[data-mode='link']::before {
+  content: '请输入链接地址:';
+}
+.ql-snow .ql-tooltip.ql-editing a.ql-action::after {
+  border-right: 0px;
+  content: '保存';
+  padding-right: 0px;
+}
+
+.ql-snow .ql-tooltip[data-mode='video']::before {
+  content: '请输入视频地址:';
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+  content: '14px';
+}
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value='small']::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value='small']::before {
+  content: '10px';
+}
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value='large']::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value='large']::before {
+  content: '18px';
+}
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value='huge']::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value='huge']::before {
+  content: '32px';
+}
+
+.ql-snow .ql-picker.ql-header .ql-picker-label::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item::before {
+  content: '文本';
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='1']::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='1']::before {
+  content: '标题1';
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='2']::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='2']::before {
+  content: '标题2';
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='3']::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='3']::before {
+  content: '标题3';
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='4']::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='4']::before {
+  content: '标题4';
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='5']::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='5']::before {
+  content: '标题5';
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='6']::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='6']::before {
+  content: '标题6';
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item::before {
+  content: '标准字体';
+}
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value='serif']::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value='serif']::before {
+  content: '衬线字体';
+}
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value='monospace']::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value='monospace']::before {
+  content: '等宽字体';
 }
 </style>

@@ -148,9 +148,10 @@
                        v-quill:myQuillEditor="editorOption">
                   </div>
                   <el-upload class="avatar-uploader"
-                             :action="articleImgUrl"
-                             name="img"
-                             :headers="headerObj"
+                             style="display:none"
+                             action="https://www.redskt.com/api/ucenter/uploadUserImage"
+                             :headers="{token:loginToken}"
+                             name="imgUpload"
                              :show-file-list="false"
                              :on-success="uploadSuccess"
                              :on-error="uploadError"
@@ -282,6 +283,31 @@ export default {
     onEditorChange ({ editor, html, text }) {
       console.log('editor change!', editor, html, text)
       this.content = html
+    },
+
+    beforeUpload () {
+      this.loginToken = this.$route.params.loginToken;
+    },
+
+    uploadSuccess () {
+      window.console.log('上传成功');
+      // res为图片服务器返回的数据
+      // 获取富文本组件实例
+      let quill = this.$refs.myQuillEditor.quill
+      // 如果上传成功
+      if (res.code === '200' && res.info !== null) {
+        // 获取光标所在位置
+        let length = quill.getSelection().index;
+        // 插入图片  res.info为服务器返回的图片地址
+        quill.insertEmbed(length, 'image', res.data.imageUrl)
+        // 调整光标到最后
+        quill.setSelection(length + 1)
+      } else {
+        this.$message.error('图片插入失败')
+      }
+    },
+    uploadError () {
+      window.console.log('上传失败');
     },
 
     askTypeClick (type) {

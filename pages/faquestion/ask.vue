@@ -141,6 +141,7 @@
                 <client-only>
                   <div class="quill-editor"
                        :content="askcontent"
+                       ref="myQuillEditor"
                        @change="onEditorChange($event)"
                        @blur="onEditorBlur($event)"
                        @focus="onEditorFocus($event)"
@@ -151,13 +152,11 @@
                              style="display:none"
                              action="https://www.redskt.com/api/ucenter/uploadUserImage"
                              :headers="{token:loginToken}"
-                             name="imgUpload"
                              :show-file-list="false"
                              :on-success="uploadSuccess"
                              :on-error="uploadError"
                              :before-upload="beforeUpload">
                   </el-upload>
-
                 </client-only>
               </div>
               <div class="field">
@@ -235,6 +234,7 @@ export default {
       asktag: '',
       errtips: '',
       askType: 1,
+      quillEditor: {},
       loginToken: '',
       editorOption: {
         placeholder: "请输入您的问题",
@@ -279,6 +279,7 @@ export default {
     },
     onEditorReady (editor) {
       console.log('editor ready!', editor)
+      this.quillEditor = editor;
     },
     onEditorChange ({ editor, html, text }) {
       console.log('editor change!', editor, html, text)
@@ -293,9 +294,9 @@ export default {
       window.console.log('上传成功');
       // res为图片服务器返回的数据
       // 获取富文本组件实例
-      let quill = this.$refs.myQuillEditor.quill
+      let quill = this.quillEditor;
       // 如果上传成功
-      if (res.code === '200' && res.info !== null) {
+      if (res.code == '20000') {
         // 获取光标所在位置
         let length = quill.getSelection().index;
         // 插入图片  res.info为服务器返回的图片地址

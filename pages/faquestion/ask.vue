@@ -286,7 +286,7 @@ export default {
     },
 
     beforeUpload () {
-      this.loginToken = this.$route.params.loginToken;
+      this.loginToken = window.localStorage.getItem('redclass_token');
     },
 
     uploadSuccess (res, file) {

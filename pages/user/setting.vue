@@ -186,7 +186,7 @@
             <div class="avatar-input">
               <div class="avatar-info">
                 <div class="avatar-uploader uploader"
-                     :style="{backgroundImage: 'url(' + userInfo.avatar + ')'}"
+                     :style="{backgroundImage: 'url(' + touxiang + ')'}"
                      @mouseover="mouseOver"
                      @mouseleave="mouseLeave">
 
@@ -374,7 +374,8 @@ export default {
       resultTips: '',
       submitChangePwd: false,
       changephine: false,
-      loginToken: ''
+      loginToken: '',
+      touxiang: ''
     };
   },
 
@@ -388,6 +389,7 @@ export default {
     getLoginUserInfo () {
       userApi.getLoginUserInfo().then((response) => {
         this.userInfo = response.data.userInfo
+        this.touxiang = this.userInfo.avatar;
       })
     },
     mouseOver () {

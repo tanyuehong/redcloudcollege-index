@@ -74,35 +74,48 @@
              class="comm-course-list">
           <ul class="of"
               id="bna">
-            <li v-for="item in data.items"
-                :key="item.id">
+            <li v-for="course in data.items"
+                :key="course.id">
               <div class="cc-l-wrap">
                 <section class="course-img">
-                  <img :src="item.imgUrl"
+                  <img :src="course.imgUrl"
                        class="img-responsive"
-                       :alt="item.title" />
+                       :alt="course.title" />
                   <div class="cc-mask">
                     <nuxt-link title="开始学习"
                                class="comm-btn c-btn-1"
-                               :to="{name:'course-id',params:{id:item.id}}">开始学习</nuxt-link>
+                               :to="{name:'course-id',params:{id:course.id}}">开始学习</nuxt-link>
                   </div>
                 </section>
-                <h3 class="hLh30 mt10">
-                  <nuxt-link :title="item.title"
-                             class="course-detail-title fsize18 c-333"
-                             :to="{name:'course-id',query:{id:item.id}}">{{ item.title }}</nuxt-link>
-                </h3>
-                <section class="mt10 hLh20 of">
-                  <span v-if="Number(item.price) === 0"
-                        class="fr jgTag bg-green">
-                    <i class="c-fff fsize12 f-fA">免费</i>
+
+                <div class="course-index-title">
+                  <span class="course-index-tag">
+                    自研
                   </span>
+                  <a href="#"
+                     :title="course.title"
+                     class="course-title-content">
+                    {{ course.title }}
+                  </a>
+                </div>
+                <section class="course-info-detail">
                   <span class="fl jgAttr c-ccc f-fA">
-                    <i class="c-666">{{item.level}}</i>
+                    <i class="c-666">{{course.level}}</i>
                     |
-                    <i class="c-666">{{item.buyCount}}人学习</i>
+                    <i class="c-666">{{course.lessonNum}}课时</i>
                   </span>
                 </section>
+                <div class="buy-info">
+                  <div class="buy-info_left">
+                    <!----> <span class="buy-count">已有{{course.buyCount}}人学习</span>
+                  </div>
+                  <div class="buy-info_right">
+                    <!----> <span class="price"
+                          v-if="course.price>0"><span class="yan">￥</span>{{course.price}}</span>
+                    <span class="price"
+                          v-if="course.price==0">免费</span>
+                  </div>
+                </div>
               </div>
             </li>
           </ul>
@@ -159,6 +172,8 @@
   </div>
 </template>
 <script>
+
+import '~/assets/css/coursecommon.css'
 import courseApi from '@/api/course'
 
 export default {

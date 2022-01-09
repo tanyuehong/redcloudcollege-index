@@ -186,7 +186,7 @@
             <div class="avatar-input">
               <div class="avatar-info">
                 <div class="avatar-uploader uploader"
-                     :style="{backgroundImage: 'url(' + userInfo.avatar + ')'}"
+                     :style="{backgroundImage: 'url(' + touxiang + ')'}"
                      @mouseover="mouseOver"
                      @mouseleave="mouseLeave">
 
@@ -374,9 +374,12 @@ export default {
       resultTips: '',
       submitChangePwd: false,
       changephine: false,
+      loginToken: '',
+      touxiang: ''
     };
   },
-  created () {
+
+  mounted () {
     this.getLoginUserInfo();
     this.loginToken = this.$route.params.loginToken;
   },
@@ -386,6 +389,7 @@ export default {
     getLoginUserInfo () {
       userApi.getLoginUserInfo().then((response) => {
         this.userInfo = response.data.userInfo
+        this.touxiang = this.userInfo.avatar;
       })
     },
     mouseOver () {
@@ -397,6 +401,7 @@ export default {
     },
     handleAvatarSuccess (res, file) {
       this.userInfo.avatar = res.data.imageUrl;
+      this.touxiang = this.userInfo.avatar;
     },
 
     beforeAvatarUpload (file) {
@@ -410,7 +415,7 @@ export default {
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!');
       }
-      return isJPG && isLt2M;
+      return (isJPG || isPng) && isLt2M;
     },
     saveUserInfo () {
       this.submitUserInfo = true;

@@ -234,7 +234,6 @@ export default {
   created () {
     //获取路径里面token值
     this.token = this.$route.query.token
-    console.log(this.token)
     if (this.token) {
       //判断路径是否有token值
       this.wxLogin()

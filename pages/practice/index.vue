@@ -11,9 +11,12 @@
                        :key="item.id">
             <ul class="op_pratice_subtag">
               <li class="li-item"
-                  v-for="sutem in subTypeList"
+                  v-for="(sutem,index) in subTypeList"
                   :key="sutem.id">
-                <a>{{ sutem.name }}</a>
+                <a v-bind:class="{ praticesubtagactive:subPraCticeTag==index }" 
+                 @click="subPraCticeTagClick(index)"
+                     href="javascript:void(0);">{{ sutem.name }}
+                </a>
               </li>
             </ul>
             <div class="op_pratice_content book_item fl">
@@ -87,7 +90,10 @@ export default {
   //异步调用，调用一次
   //params: 相当于之前 this.$route.params.id  等价  params.id
   data () {
-    return { activeName: 'first' }
+    return {
+       activeName: 'first' ,
+       subPraCticeTag:-1,
+       }
   },
   asyncData ({ params, error }) {
     return realPractice.getHomeRealPratice(1, 8).then((response) => {
@@ -109,12 +115,21 @@ export default {
       var converter = new showdown.Converter()
       return converter.makeHtml(content)
     },
+
+    subPraCticeTagClick(index) {
+      this.subPraCticeTag = index;
+      window.console.log(index);
+    }
   },
   computed: {},
 }
 </script>
 
 <style>
+
+.praticesubtagactive {
+   color: #409EFF !important;
+}
 .op_top_back {
   background-color: white;
   height: 70px;

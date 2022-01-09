@@ -83,8 +83,10 @@
                         <!----> <span class="buy-count">已有{{course.buyCount}}人学习</span>
                       </div>
                       <div class="buy-info_right">
-                        <!----> <span class="price" v-if="course.price>0"><span class="yan">￥</span>{{course.price}}</span>
-                                <span class="price" v-if="course.price==0">免费</span>
+                        <!----> <span class="price"
+                              v-if="course.price>0"><span class="yan">￥</span>{{course.price}}</span>
+                        <span class="price"
+                              v-if="course.price==0">免费</span>
                       </div>
                     </div>
                   </div>
@@ -302,6 +304,8 @@
 <script>
 import '~/assets/css/appdown.css'
 import '~/assets/css/contentlist.css'
+import '~/assets/css/coursecommon.css'
+
 import indexApi from '@/api/index'
 
 export default {
@@ -349,78 +353,7 @@ export default {
 </script>
 
 <style>
-.jgAttr {
-  font-size: 14px;
-}
 
-.buy-info {
-  margin-top: 2px;
-  height: 35px;
-  position: relative;
-  margin-bottom: 3px;
-}
-
-.buy-info_left {
-  overflow: hidden;
-  font-size: 14px;
-  position: absolute;
-  bottom: 0;
-}
-
-.buy-info_right {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  top: 6px;
-}
-
-.buy-info_right .price {
-  display: inline-block;
-  height: 30px;
-  font-size: 22px;
-  line-height: 30px;
-  color: #ff1d00;
-}
-
-.buy-info_right .price .yan {
-  font-size: 12px;
-}
-
-.buy-info_left .buy-count {
-  color: #818a92;
-  font-weight: 300;
-}
-.course-info-detail {
-  border-bottom: 0.5px solid rgba(153, 153, 153, 0.2);
-  height: 30px;
-}
-
-.course-index-title {
-  margin-top: 6px;
-  margin-bottom: 2px;
-}
-.course-index-title .course-title-content {
-  font-size: 16px;
-  color: #333;
-  font-weight: 500;
-  padding-top: 5px;
-}
-
-.course-index-title .course-index-tag {
-  height: 20px;
-  font-size: 12px;
-  display: inline-block;
-  padding: 0 4px;
-  margin-right: 6px;
-  color: #fff;
-  border-radius: 3px;
-  background: rgba(255, 63, 41, 0.8);
-}
-
-.cc-l-wrap h3 {
-  color: #404040;
-  font-weight: bold;
-}
 .el-carousel__item a {
   display: block;
   width: 100%;

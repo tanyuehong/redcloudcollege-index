@@ -270,6 +270,10 @@ export default {
       },
     }
   },
+  mounted () {
+    this.loginToken = window.localStorage.getItem('redclass_token');
+  },
+
   methods: {
     onEditorBlur (editor) {
       console.log('editor blur!', editor)
@@ -287,7 +291,17 @@ export default {
     },
 
     beforeUpload () {
-      this.loginToken = window.localStorage.getItem('redclass_token');
+      const isJPG = file.type === 'image/jpeg';
+      const isPng = file.type === 'image/png';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!(isJPG || isPng)) {
+        this.$message.error('上传头像图片只能是 JPG 和 PNG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return (isJPG || isPng) && isLt2M;
     },
 
     uploadSuccess (res, file) {

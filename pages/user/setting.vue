@@ -374,9 +374,11 @@ export default {
       resultTips: '',
       submitChangePwd: false,
       changephine: false,
+      loginToken: ''
     };
   },
-  created () {
+
+  mounted () {
     this.getLoginUserInfo();
     this.loginToken = this.$route.params.loginToken;
   },

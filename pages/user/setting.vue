@@ -401,6 +401,7 @@ export default {
     },
     handleAvatarSuccess (res, file) {
       this.userInfo.avatar = res.data.imageUrl;
+      this.touxiang = this.userInfo.avatar;
     },
 
     beforeAvatarUpload (file) {
@@ -414,7 +415,7 @@ export default {
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!');
       }
-      return isJPG && isLt2M;
+      return (isJPG || isPng) && isLt2M;
     },
     saveUserInfo () {
       this.submitUserInfo = true;

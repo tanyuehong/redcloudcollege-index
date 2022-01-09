@@ -140,7 +140,7 @@
                 </label>
                 <client-only>
                   <div class="quill-editor"
-                       :content="content"
+                       :content="askcontent"
                        @change="onEditorChange($event)"
                        @blur="onEditorBlur($event)"
                        @focus="onEditorFocus($event)"
@@ -235,7 +235,7 @@ export default {
       asktag: '',
       errtips: '',
       askType: 1,
-      content: '',
+      loginToken: '',
       editorOption: {
         placeholder: "请输入您的问题",
         modules: {
@@ -282,14 +282,14 @@ export default {
     },
     onEditorChange ({ editor, html, text }) {
       console.log('editor change!', editor, html, text)
-      this.content = html
+      this.askcontent = html
     },
 
     beforeUpload () {
       this.loginToken = this.$route.params.loginToken;
     },
 
-    uploadSuccess () {
+    uploadSuccess (res, file) {
       window.console.log('上传成功');
       // res为图片服务器返回的数据
       // 获取富文本组件实例
@@ -319,7 +319,7 @@ export default {
         return
       }
       if (this.askcontent.length < 12) {
-        this.errtips = '问题内如必须12字符以上哈！'
+        this.errtips = '问题内容必须12字符以上哈！'
         return
       }
       var userInfo = JSON.parse(window.localStorage.getItem('redclass_user'))

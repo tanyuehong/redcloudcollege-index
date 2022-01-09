@@ -388,10 +388,9 @@ export default {
       list: [],
     };
   },
-  created () {
+  mounted () {
     this.getHomeQuestionList();
   },
-
   methods: {
     getHomeQuestionList () {
       askApi.getHomeAskQuestionList().then((response) => {
@@ -399,6 +398,17 @@ export default {
       });
     },
     jumpStartQuestion () {
+      var token = localStorage.getItem('redclass_token')
+      if (!(token && token != 'undefined')) {
+        this.$message({
+          message: "提问需要登录，正在跳转登录界面中！", type: 'error', duration: 2000, onClose: () => {
+            $nuxt.$router.push({
+              name: "user-login"
+            });
+          }
+        })
+        return;
+      }
       var item = window.localStorage.getItem('show_howto-ask');
       if (item) {
         this.$router.push({

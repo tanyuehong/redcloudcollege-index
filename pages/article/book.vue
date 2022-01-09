@@ -484,7 +484,7 @@ export default {
       activeName: 'bookDescrb'
     }
   },
-  created () {
+  mounted () {
     var bookId = this.$route.query.id
     if (bookId && bookId.length > 0) {
       this.getHomeBookDetail(bookId)

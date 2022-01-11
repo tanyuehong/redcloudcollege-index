@@ -138,26 +138,9 @@
                 <label>
                   描述（请对问题进行详细描述：如软件运行环境、详细错误、异常信息等）
                 </label>
-                <client-only>
-                  <div class="quill-editor"
-                       :content="askcontent"
-                       ref="myQuillEditor"
-                       @change="onEditorChange($event)"
-                       @blur="onEditorBlur($event)"
-                       @focus="onEditorFocus($event)"
-                       @ready="onEditorReady($event)"
-                       v-quill:myQuillEditor="editorOption">
+                  <div id="askQustion_content">
                   </div>
-                  <el-upload class="avatar-uploader"
-                             style="display:none"
-                             action="https://www.redskt.com/api/ucenter/uploadUserImage"
-                             :headers="{token:loginToken}"
-                             :show-file-list="false"
-                             :on-success="uploadSuccess"
-                             :on-error="uploadError"
-                             :before-upload="beforeUpload">
-                  </el-upload>
-                </client-only>
+            
               </div>
               <div class="field">
                 <div class="ui checkbox">
@@ -219,10 +202,6 @@
 
 <script>
 import askApi from '@/api/askqustion'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
-import 'quill/dist/quill.core.css'
-import '~/assets/css/quilleditor.css'
 
 export default {
   data () {
@@ -236,42 +215,11 @@ export default {
       askType: 1,
       quillEditor: {},
       loginToken: '',
-      editorOption: {
-        placeholder: "请输入您的问题",
-        modules: {
-          toolbar: {
-            container:
-              [["bold", "italic", "underline", "strike"], // 加粗 斜体 下划线 删除线 -----['bold', 'italic', 'underline', 'strike']
-              ["code-block"], // 引用  代码块-----['blockquote', 'code-block']
-              [{ header: 1 }, { header: 2 }], // 1、2 级标题-----[{ header: 1 }, { header: 2 }]
-              [{ list: "ordered" }, { list: "bullet" }], // 有序、无序列表-----[{ list: 'ordered' }, { list: 'bullet' }]
-              [{ direction: "rtl" }], // 文本方向-----[{'direction': 'rtl'}]
-              [{ size: ["small", false, "large", "huge"] }], // 字体大小-----[{ size: ['small', false, 'large', 'huge'] }]
-              [{ header: [1, 2, 3, 4, 5, 6, false] }], // 标题-----[{ header: [1, 2, 3, 4, 5, 6, false] }]
-              [{ color: [] }, { background: [] }], // 字体颜色、字体背景颜色-----[{ color: [] }, { background: [] }]
-              [{ font: [] }], // 字体种类-----[{ font: [] }]
-              [{ align: [] }], // 对齐方式-----[{ align: [] }]
-              ["clean"], // 清除文本格式-----['clean']
-              ["image"] // 链接、图片、视频-----['link', 'image', 'video']
-              ],
-            handlers: {
-              'image': function (value) {
-                if (value) {
-                  // upload点击上传事件
-                  document.querySelector('.avatar-uploader input').click()
-                } else {
-                  this.quill.format('image', false)
-                }
-                window.console.log('ddddd');
-              }
-            }
-          }
-        }
-      },
     }
   },
   mounted () {
     this.loginToken = window.localStorage.getItem('redclass_token');
+    this.init_wangeditor();
   },
 
   methods: {
@@ -364,6 +312,14 @@ export default {
     },
     inputfocuse () {
       this.errtips = ''
+    },
+
+    init_wangeditor() {
+      let editor = this.$wangeditor('#askQustion_content')
+      editor.config.onchange = function (newHtml) {
+  console.log("change 之后最新的 html", newHtml);
+};
+      editor.create()
     },
   },
 }

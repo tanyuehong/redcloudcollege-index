@@ -20,7 +20,7 @@
     "showdown": "^1.9.1",
     "swiper": "^5.4.5",
     "vue-qriously": "^1.1.1",
-    "vue-quill-editor": "^3.0.6"
+    "wangeditor": "^4.7.11"
   },
   "devDependencies": {
     "sass-loader": "^10.1.1",

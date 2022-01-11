@@ -34,7 +34,7 @@ export default {
   */
   plugins: [
     { src: '@/plugins/element-ui'},
-    { src: '@/plugins/vue-quill-editor',ssr: false}
+    { src: '@/plugins/wangEditor',ssr: false}
   ],
     
   /*

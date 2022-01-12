@@ -138,9 +138,9 @@
                 <label>
                   描述（请对问题进行详细描述：如软件运行环境、详细错误、异常信息等）
                 </label>
-                  <div id="askQustion_content">
-                  </div>
-            
+                <div id="askQustion_content">
+                </div>
+
               </div>
               <div class="field">
                 <div class="ui checkbox">
@@ -314,11 +314,18 @@ export default {
       this.errtips = ''
     },
 
-    init_wangeditor() {
+    init_wangeditor () {
       let editor = this.$wangeditor('#askQustion_content')
+      editor.config.uploadImgMaxLength = 5
+      editor.config.uploadImgServer = '/api/ucenter/uploadImage'
+      editor.config.uploadFileName = 'file'
+      editor.config.uploadImgHeaders = {
+        token: this.loginToken
+      }
       editor.config.onchange = function (newHtml) {
-  console.log("change 之后最新的 html", newHtml);
-};
+
+        console.log("change 之后最新的 html", newHtml);
+      };
       editor.create()
     },
   },

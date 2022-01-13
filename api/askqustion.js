@@ -23,4 +23,11 @@ export default {
       method: 'get',
     })
   },
+
+  getUploadImageToken() {
+    return request({
+      url: `/eduask/uploadqiniutoken`,
+      method: 'post',
+    })
+  }
 }

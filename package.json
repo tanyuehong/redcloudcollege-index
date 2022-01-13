@@ -17,6 +17,7 @@
     "js-cookie": "^2.2.1",
     "node-sass": "^6.0.1",
     "nuxt": "^2.15.2",
+    "qiniu-js": "^3.4.0",
     "showdown": "^1.9.1",
     "swiper": "^5.4.5",
     "vue-qriously": "^1.1.1",

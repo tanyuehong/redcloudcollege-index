@@ -202,6 +202,7 @@
 
 <script>
 import askApi from '@/api/askqustion'
+const qiniu = require('qiniu-js')
 
 export default {
   data () {
@@ -213,31 +214,23 @@ export default {
       asktag: '',
       errtips: '',
       askType: 1,
-      quillEditor: {},
       loginToken: '',
+      uploadToken:'',
     }
   },
   mounted () {
     this.loginToken = window.localStorage.getItem('redclass_token');
     this.init_wangeditor();
+    this.getUploadImageToken();
   },
 
   methods: {
-    onEditorBlur (editor) {
-      console.log('editor blur!', editor)
+     getUploadImageToken () {
+      askApi.getUploadImageToken().then((response) => {
+        window.console.log(response);
+        this.uploadToken = response.data.token;
+      });
     },
-    onEditorFocus (editor) {
-      console.log('editor focus!', editor)
-    },
-    onEditorReady (editor) {
-      console.log('editor ready!', editor)
-      this.quillEditor = editor;
-    },
-    onEditorChange ({ editor, html, text }) {
-      console.log('editor change!', editor, html, text)
-      this.askcontent = html
-    },
-
     beforeUpload (file) {
       const isJPG = file.type === 'image/jpeg';
       const isPng = file.type === 'image/png';
@@ -250,27 +243,6 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!');
       }
       return (isJPG || isPng) && isLt2M;
-    },
-
-    uploadSuccess (res, file) {
-      window.console.log('上传成功');
-      // res为图片服务器返回的数据
-      // 获取富文本组件实例
-      let quill = this.quillEditor;
-      // 如果上传成功
-      if (res.code == '20000') {
-        // 获取光标所在位置
-        let length = quill.getSelection().index;
-        // 插入图片  res.info为服务器返回的图片地址
-        quill.insertEmbed(length, 'image', res.data.imageUrl)
-        // 调整光标到最后
-        quill.setSelection(length + 1)
-      } else {
-        this.$message.error('图片插入失败')
-      }
-    },
-    uploadError () {
-      window.console.log('上传失败');
     },
 
     askTypeClick (type) {
@@ -315,6 +287,7 @@ export default {
     },
 
     init_wangeditor () {
+      window.myVueComm
       let editor = this.$wangeditor('#askQustion_content')
       editor.config.uploadImgMaxLength = 5
       editor.config.uploadImgServer = '/api/ucenter/uploadImage'
@@ -322,6 +295,26 @@ export default {
       editor.config.uploadImgHeaders = {
         token: this.loginToken
       }
+    editor.config.customUploadImg = function (resultFiles, insertImgFn) {
+      // resultFiles 是 input 中选中的文件列表
+      // insertImgFn 是获取图片 url 后，插入到编辑器的方法
+
+ const observable = qiniu.upload(resultFiles, null, window.$nuxt.uploadToken, null, null);
+
+      const observer = {
+          next(res){
+                  window.console.log(res);             
+           },
+                           error(err){
+                              window.console.log(err);
+                           },
+                           complete(res){
+                              window.console.log(res);
+                           }
+       }
+      const subscription = observable.subscribe(observer)
+      insertImgFn(null)
+    }
       editor.config.onchange = function (newHtml) {
 
         console.log("change 之后最新的 html", newHtml);

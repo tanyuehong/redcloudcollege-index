@@ -215,7 +215,7 @@ export default {
       errtips: '',
       askType: 1,
       loginToken: '',
-      uploadToken:'',
+      uploadToken: '',
     }
   },
   mounted () {
@@ -225,7 +225,7 @@ export default {
   },
 
   methods: {
-     getUploadImageToken () {
+    getUploadImageToken () {
       askApi.getUploadImageToken().then((response) => {
         window.console.log(response);
         this.uploadToken = response.data.token;
@@ -287,34 +287,40 @@ export default {
     },
 
     init_wangeditor () {
-      window.myVueComm
+      window.myVueComm = this;
       let editor = this.$wangeditor('#askQustion_content')
-      editor.config.uploadImgMaxLength = 5
+      editor.config.uploadImgMaxLength = 1
       editor.config.uploadImgServer = '/api/ucenter/uploadImage'
       editor.config.uploadFileName = 'file'
       editor.config.uploadImgHeaders = {
         token: this.loginToken
       }
-    editor.config.customUploadImg = function (resultFiles, insertImgFn) {
-      // resultFiles 是 input 中选中的文件列表
-      // insertImgFn 是获取图片 url 后，插入到编辑器的方法
-
- const observable = qiniu.upload(resultFiles, null, window.$nuxt.uploadToken, null, null);
-
-      const observer = {
-          next(res){
-                  window.console.log(res);             
-           },
-                           error(err){
-                              window.console.log(err);
-                           },
-                           complete(res){
-                              window.console.log(res);
-                           }
-       }
-      const subscription = observable.subscribe(observer)
-      insertImgFn(null)
-    }
+      editor.config.customUploadImg = function (files, insertImgFn) {
+        // resultFiles 是 input 中选中的文件列表
+        // insertImgFn 是获取图片 url 后，插入到编辑器的方法
+        var file = files[0];
+        const putExtra = {
+          mimeType: file.type,
+        };
+        const config = {
+          region: qiniu.region.z2
+        };
+        const observable = qiniu.upload(file, null, window.myVueComm.uploadToken, putExtra, config);
+        window.console.log('ddddd');
+        const observer = {
+          next (res) {
+            window.console.log(res);
+          },
+          error (err) {
+            window.console.log(err);
+          },
+          complete (res) {
+            window.console.log(res);
+            insertImgFn('https://img.redskt.com/' + res.hash);
+          }
+        }
+        const subscription = observable.subscribe(observer)
+      }
       editor.config.onchange = function (newHtml) {
 
         console.log("change 之后最新的 html", newHtml);

@@ -253,6 +253,7 @@ export default {
         this.errtips = '问题标题必须六个字符以上哈！'
         return
       }
+      window.console.log(this.askcontent);
       if (this.askcontent.length < 12) {
         this.errtips = '问题内容必须12字符以上哈！'
         return
@@ -322,8 +323,7 @@ export default {
         const subscription = observable.subscribe(observer)
       }
       editor.config.onchange = function (newHtml) {
-
-        console.log("change 之后最新的 html", newHtml);
+        window.myVueComm.askcontent = newHtml;
       };
       editor.create()
     },

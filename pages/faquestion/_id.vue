@@ -13,7 +13,7 @@
                 <div class="active section">问题详情</div>
               </div>
               <div>
-                <h2 class="title_header">多线程为什么比单线程快？</h2>
+                <h2 class="title_header">{{qdetail.title}}</h2>
                 <div class="ui red label horizontal"
                      data-tooltip="置顶">
                   顶
@@ -23,7 +23,7 @@
                   热
                 </div>
                 <div class="question_info">
-                  <a href="#">缥缈飞飞</a>
+                  <a href="#">{{qdetail.nickname}}</a>
                   <span>发布于 08/04 15:27</span>
                   <span>阅读 5K+</span>
                   <span class="glyphicon glyphicon-star-empty"
@@ -99,7 +99,7 @@ export default {
       qdetail: {},
     }
   },
-  created () {
+  mounted () {
     var qId = this.$route.params.id
     this.getQustionDetail(qId)
   },

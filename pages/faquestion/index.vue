@@ -397,6 +397,14 @@ export default {
         this.list = response.data.list;
       });
     },
+      handleSelect(key, keyPath) {
+        if(key == 2) {
+
+          
+        }
+
+        console.log(key, keyPath);
+      },
     jumpStartQuestion () {
       var token = localStorage.getItem('redclass_token')
       if (!(token && token != 'undefined')) {

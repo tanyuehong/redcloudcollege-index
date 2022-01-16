@@ -46,29 +46,45 @@
             </div>
           </div>
           <div class="content_left">
+            <div class="faqustion-top-group">
+              <ul class="faqustion-typeList">
+                <li class="faqustion-type-item"
+                    v-for="(item, index) in qustionType"
+                    :key="index"
+                    :class="{comactive: typeIndex == index }">
+                  <span :title="item.name"
+                        href="#"
+                        @click="qustionTypeClick(item.id,index)">
+                    {{ item.name }}
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="faqustion-subTags"
+                 v-if="tagList.length>0">
+            </div>
             <div class="questions_tab_con">
               <el-menu :default-active="activeIndex"
                        class="el-menu-demo"
                        mode="horizontal"
                        @select="handleSelect">
-                <el-menu-item index="1">最新回答</el-menu-item>
-                <el-menu-item index="2">最新提问</el-menu-item>
+                <el-menu-item index="1">最新提问</el-menu-item>
+                <el-menu-item index="2">最新回答</el-menu-item>
                 <el-menu-item index="3">等待回答</el-menu-item>
-                <el-menu-item index="4">付费问答</el-menu-item>
-                <el-dropdown class="sort">
-                  <span class="el-dropdown-link sort_list_label">
-                    按时间排序
-                    <i class="el-icon-arrow-down el-icon--right"></i>
-                  </span>
-                  <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>时间</el-dropdown-item>
-                    <el-dropdown-item>回答数</el-dropdown-item>
-                    <el-dropdown-item>热度</el-dropdown-item>
-                  </el-dropdown-menu>
-                </el-dropdown>
+                <el-menu-item index="4">最多回答</el-menu-item>
+                <el-menu-item index="5">热门排行</el-menu-item>
+                <el-menu-item index="6">付费问答</el-menu-item>
               </el-menu>
             </div>
             <div class="questions_detail_con">
+              <div class="nodata-warper"
+                   v-if="list.length == 0">
+                <img class="nodata-image-tips"
+                     src="https://img.redskt.com/asset/img/nodata.png" />
+                <div>
+                  <span>暂时没有数据哦，赶紧抢沙发吧</span>
+                </div>
+              </div>
               <div v-for="item in list"
                    :key="item.qid"
                    class="question_list">
@@ -133,6 +149,36 @@
 </script>
 
 <style>
+.question_list .answer_title {
+  font-size: 14px;
+}
+
+.question_list .description {
+  font-size: 14px;
+}
+.faqustion-top-group {
+  border-bottom: solid 1px #e6e6e6;
+}
+.el-menu.el-menu--horizontal {
+  background: #fafafa;
+}
+.faqustion-typeList {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  margin-top: 20px;
+  height: 40px;
+  margin-left: 15px;
+}
+.faqustion-type-item {
+  font-size: 16px;
+  margin-right: 26px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.faqustion-subTags {
+  height: 20px;
+}
 .header_xuanchuan {
   height: 300px;
   width: 100%;
@@ -209,7 +255,7 @@
 }
 
 .main_content .questions_detail_con {
-  margin: 20px 40px 20px 20px;
+  margin: 20px 20px 20px 20px;
 }
 
 .main_content .question_list {
@@ -386,25 +432,35 @@ export default {
     return {
       activeIndex: "1",
       list: [],
+      qustionType: [],
+      tagList: [],
+      typeIndex: 0,
     };
   },
   mounted () {
-    this.getHomeQuestionList();
+    this.getHomeQuestionList(1);
   },
   methods: {
-    getHomeQuestionList () {
-      askApi.getHomeAskQuestionList().then((response) => {
+    getHomeQuestionList (type) {
+      askApi.getHomeAskQuestionList({ 'type': type, 'qtype': '' }).then((response) => {
         this.list = response.data.list;
+        this.qustionType = response.data.qustionType;
       });
     },
-      handleSelect(key, keyPath) {
-        if(key == 2) {
-
-          
-        }
-
-        console.log(key, keyPath);
-      },
+    qustionTypeClick (typeId, index) {
+      this.typeIndex = index;
+      window.console.log('+++' + typeId + '+++' + index);
+      askApi.getHomeAskQuestionList({ 'type': index, 'qtype': typeId }).then((response) => {
+        this.list = response.data.list;
+        this.qustionType = response.data.qustionType;
+      });
+    },
+    handleSelect (key, keyPath) {
+      askApi.getHomeAskQuestionList({ 'type': key, 'qtype': this.qustionType[this.typeIndex].id }).then((response) => {
+        this.list = response.data.list;
+        this.qustionType = response.data.qustionType;
+      });
+    },
     jumpStartQuestion () {
       var token = localStorage.getItem('redclass_token')
       if (!(token && token != 'undefined')) {

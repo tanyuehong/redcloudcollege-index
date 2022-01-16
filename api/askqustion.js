@@ -10,16 +10,17 @@ export default {
     })
   },
   //讲师详情的方法
-  getHomeAskQuestionList() {
+  getHomeAskQuestionList(parm) {
     return request({
       url: `/home/eduask/questionlist`,
-      method: 'get',
+      method: 'post',
+      data:parm,
     })
   },
   // 获取问答详情网页
   getQuestionDetails(id) {
     return request({
-      url: '/eduask/getquestiondetail/' + id,
+      url: '/home/eduask/getquestiondetail/' + id,
       method: 'get',
     })
   },

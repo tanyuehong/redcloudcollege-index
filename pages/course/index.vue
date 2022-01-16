@@ -398,7 +398,6 @@ export default {
   height: 32px;
   width: 70px;
 }
-
 .course-list-content {
   background: #ffffff;
   padding-top: 20px;

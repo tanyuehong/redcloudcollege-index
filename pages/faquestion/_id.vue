@@ -39,14 +39,16 @@
                   <a class="ui horizontal basic label popup-tag"
                      href="https://www.oschina.net/question/tag/ruby"
                      target="_blank">
-                    <img src="https://static.oschina.net/img/logo/ruby.gif" />
+                    <img class="question-tags-img"
+                         src="https://static.oschina.net/img/logo/ruby.gif" />
                     Ruby
                   </a>
 
                   <a class="ui horizontal basic label popup-tag"
                      href="https://www.oschina.net/question/tag/java"
                      target="_blank">
-                    <img src="https://static.oschina.net/img/logo/java.png" />
+                    <img class="question-tags-img"
+                         src="https://static.oschina.net/img/logo/java.png" />
                     Java
                   </a>
                 </div>
@@ -130,8 +132,7 @@ export default {
   margin-top: 10px;
 }
 
-.extra .question-tags > a,
-img {
+.question-tags-img {
   display: inline-block;
   vertical-align: baseline;
   height: 22px;

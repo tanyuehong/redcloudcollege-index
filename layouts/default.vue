@@ -76,10 +76,10 @@
                 <nuxt-link :to="{ name: 'user-ucenter' }">
                   <el-dropdown @command="handleCommand">
                     <span class="el-dropdown-link">
-                      <img :src="loginInfo.avatar"
+                      <img class="vam user-head-image"
+                           :src="loginInfo.avatar"
                            width="30"
                            height="30"
-                           class="vam picImg"
                            alt />
                       <i class="el-icon-arrow-down el-icon--right"></i>
                     </span>

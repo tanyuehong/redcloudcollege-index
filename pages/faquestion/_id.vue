@@ -13,17 +13,15 @@
                 <div class="active section">问题详情</div>
               </div>
               <div>
-                <h2 class="title_header">{{qdetail.title}}</h2>
-                <div class="ui red label horizontal"
-                     data-tooltip="置顶">
-                  顶
-                </div>
-                <div class="ui orange label horizontal"
-                     data-tooltip="热门">
-                  热
-                </div>
                 <div class="question_info">
-                  <a href="#">{{qdetail.nickname}}</a>
+                  <a href="#">
+                    <img class="vam user-head-image"
+                         :src="qdetail.avatar"
+                         width="30"
+                         height="30"
+                         alt />
+                    <span>
+                      {{qdetail.nickname}}</span></a>
                   <span>发布于 08/04 15:27</span>
                   <span>阅读 5K+</span>
                   <span class="glyphicon glyphicon-star-empty"
@@ -35,6 +33,18 @@
                     答案 3
                   </span>
                 </div>
+                <div>
+                  <h2 class="title_header">{{qdetail.title}}</h2>
+                  <div class="ui red label horizontal"
+                       data-tooltip="置顶">
+                    顶
+                  </div>
+                  <div class="ui orange label horizontal"
+                       data-tooltip="热门">
+                    热
+                  </div>
+                </div>
+
                 <div class="extra question-tags mt10">
                   <a class="ui horizontal basic label popup-tag"
                      href="https://www.oschina.net/question/tag/ruby"

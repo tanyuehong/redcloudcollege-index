@@ -1,10 +1,9 @@
 <template>
   <div class="main_global_bg">
     <div class="container">
-      <div class="main_content_bg qustin_detall_content">
-        <div class="row">
-          <div class="col-md-8">
-            <div class="ask_detail_content">
+      <div class="qustin_detall_content">
+          <div class="ask_detail_content">
+             <div class="ask-detail-lefte">
               <div class="ui breadcrumb red_breadcrumb">
                 <a class="section"
                    href="/faquestion">开源实践问答</a>
@@ -63,26 +62,15 @@
                   </a>
                 </div>
 
-                <div class="qustion_content mt10 mb10"
-                     v-html="qdetail.content"></div>
+                <div class="qustion_content"
+                     v-html="qdetail.content">
+                </div>
                 <div class="qustion_info">
-                  <div class="ui_center_button mt10">
+                  <div class="ui_center_button">
+                      <el-button  plain type="primary" icon="el-icon-star-off">收藏</el-button>
                     <div class="ui_group_button">
-                      <a class="ui basic button collect-btn hover">
-                        <i class="star outline icon"></i>
-                        收藏 (
-                        <span>0</span>
-                        )
-                      </a>
-                    </div>
-                    <div class="ui_group_button">
-                      <i class="share icon"></i>
-
                       <el-dropdown class="sort">
-                        <span class="el-dropdown-link sort_list_label">
-                          分享
-                          <i class="el-icon-arrow-down el-icon--right"></i>
-                        </span>
+                    <el-button  plain type="primary" icon="el-icon-share">分享</el-button>
                         <el-dropdown-menu slot="dropdown">
                           <el-dropdown-item>微博</el-dropdown-item>
                           <el-dropdown-item>QQ</el-dropdown-item>
@@ -91,11 +79,14 @@
                       </el-dropdown>
                     </div>
                   </div>
-                </div>
-              </div>
             </div>
+              </div>
           </div>
-        </div>
+          </div>
+          <div class="ask-detail-right">
+          </div>
+     
+     
       </div>
     </div>
   </div>
@@ -127,16 +118,35 @@ export default {
 </script>
 
 <style>
+
+.qustion_content {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
 .qustin_detall_content {
   margin-top: 15px;
+}
+
+.ask-detail-lefte {
+  margin: 15px;
 }
 
 .title_header {
   display: inline;
 }
+
 .ask_detail_content {
-  margin-top: 10px;
-  margin-left: 20px;
+  margin-left: 0px;
+  width: 780px;
+  float: left;
+  background: #ffffff;
+}
+
+.ask-detail-right {
+  float: right;
+  height: 500px;
+  width: 335px;
+  background: #ffffff;
 }
 .question_info {
   margin-top: 10px;
@@ -152,8 +162,7 @@ export default {
 }
 
 .ui_center_button {
-  border: 1px solid rgba(34, 36, 38, 0.15);
-  width: 130px;
+  width: 160px;
   margin: 0 auto;
 }
 

@@ -66,14 +66,13 @@
                    v-html="qdetail.content">
               </div>
               <div class="qustion_info">
-                <div class="">
+                <ul class="ask-issue-tool">
                   <span class="answer_span"><i class="icon ic_question_reply"></i>写回答</span>
-                  <li class="up_down_wrap wrapdisLike"><span 
-                          class="vote_span disLike"><i class="icon icon_vote_up"></i>好问题
+                  <li class="up_down_wrap wrapdisLike"><span class="vote_span disLike"><i class="icon icon_vote_up"></i>好问题
                       <!---->
                     </span> <span class="vote_span2"><i class="icon icon_vote_down"></i>提建议
                     </span></li>
-                </div>
+                </ul>
                 <div class="ui_center_button">
                   <el-button plain
                              type="primary"
@@ -129,6 +128,64 @@ export default {
 </script>
 
 <style>
+.vote_span.disLike {
+  border: 1px solid #e8e8ed;
+  border-left: 0;
+}
+.ask-issue-tool {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 24px 0 0;
+}
+.vote_span2 {
+  padding: 0 16px;
+  text-align: center;
+  border-radius: 16px;
+  display: inline-block;
+  border: 1px solid transparent;
+  height: 32px;
+  line-height: 30px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #777888;
+}
+.vote_span {
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  position: relative;
+  display: inline-block;
+  height: 32px;
+  line-height: 30px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #777888;
+}
+li.up_down_wrap {
+  font-size: 0;
+  line-height: 32px;
+  height: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* -webkit-box-align: center; */
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 16px;
+  border: 1px solid #e8e8ed;
+  margin-right: 16px;
+}
+
 .answer_span .ic_question_reply {
   margin-right: 4px;
 }

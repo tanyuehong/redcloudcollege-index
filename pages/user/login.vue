@@ -140,9 +140,15 @@ export default {
             loginApi.getLoginUserInfo().then(response => {
               this.loginInfo = response.data.userInfo;
               window.localStorage.setItem("redclass_user", JSON.stringify(this.loginInfo))
-              console.log(this.loginInfo);
               //跳转页面
-              window.location.href = "/";
+              if(window && window.gotoPage) {
+                 this.$router.push(window.gotoPage);
+              } else {
+                this.$router.push({
+                     name: "index",
+                     query: {},
+                  });
+              }
             });
           });
         } else {

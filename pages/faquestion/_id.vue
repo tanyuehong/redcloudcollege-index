@@ -21,7 +21,7 @@
                        alt />
                   <span>
                     {{qdetail.nickname}}</span></a>
-                <span class="qustion-top-item">发布于 08/04 15:27</span>
+                <span class="qustion-top-item">发布于 {{qdetail.gmtCreate}}</span>
                 <span class="glyphicon glyphicon-star-empty qustion-top-item"
                       aria-hidden="true">
                 </span>
@@ -33,7 +33,7 @@
                   已解决
                 </span>
                 <div class="qustion-right-view">
-                  已阅读 322
+                  浏览 {{qdetail.readcount}}
                 </div>
               </div>
               <div>
@@ -88,7 +88,7 @@
                   </div>
                 </div>
                   <ul class="ask-issue-tool">
-                  <span class="answer_span"><i class="icon ic_question_reply"></i>写回答</span>
+                  <span class="answer_span" @click="answerBtnClick"><i class="icon ic_question_reply"></i>写回答</span>
                   <li class="up_down_wrap wrapdisLike ask-info-item">
                     <span class="vote_span disLike">
                     <i class="icon icon_vote_up"></i>好问题
@@ -98,22 +98,30 @@
                     </span>
                  </li>
                   <li class="ask-info-item">
-                      <i class="el-icon-view"></i>
-                      123
-                  </li>
-                  <li class="ask-info-item">
                       <i class="icon icon_vote_jubao"></i>举报
                   </li>
                 </ul>
               </div>
-            </div>
-            <div class="answer-qustion-editor">
               
             </div>
           </div>
+             <div class="answer-qustion-editor">
+               <div id="answer-editor">
+                 
+               </div>
+               <div class="answer-ediot-detail">
+                 <span>报告相同问题？</span>
+                 <el-checkbox v-model="checked" class="answer-btn-check">关注问题</el-checkbox>
+               <el-button type="primary" class="answer-btn-style">提交</el-button>
+               </div>
+          </div>
         </div>
+         
+
         <div class="ask-detail-right">
+
         </div>
+        <div class="clearfloat"></div>
 
       </div>
     </div>
@@ -122,17 +130,26 @@
 
 <script>
 import askApi from '@/api/askqustion'
-import { getUrlKey } from '@/utils/commonUtils'
+const qiniu = require('qiniu-js')
 
 export default {
   data () {
     return {
       qdetail: {},
+      checked: true,
+      editor:{},
+      uploadToken:'',
     }
   },
   mounted () {
-    var qId = this.$route.params.id
-    this.getQustionDetail(qId)
+    var qId = this.$route.params.id;
+    this.getQustionDetail(qId);
+    this.init_wangeditor();
+    this.getUploadImageToken(false);
+
+    window.gotoPage  = {
+      path: `/faquestion/` + qId
+   }
   },
 
   methods: {
@@ -141,11 +158,106 @@ export default {
         this.qdetail = response.data.qdetail
       })
     },
+
+   getUploadImageToken (isForce) {
+    var token = localStorage.getItem('redclass_token')
+     if (!(token && token != 'undefined')) {
+       if(isForce) {
+          this.$message({
+          message: "回答问题需要登录，正在跳转登录界面中！", type: 'error', duration: 2000, onClose: () => {
+            $nuxt.$router.push({
+              name: "user-login"
+            });
+          }
+        })
+       }
+        return;
+   }
+   askApi.getUploadImageToken().then((response) => {
+        this.uploadToken = response.data.token;
+      });
+    },
+
+    answerBtnClick() {
+       document.getElementById("answer-editor").scrollIntoView();
+       this.editor.config.focus = true
+       this.editor.txt.html('')
+       this.getUploadImageToken(true);
+    },
+
+    init_wangeditor () {
+      window.myVueComm = this;
+      let editor = this.$wangeditor('#answer-editor')
+      this.editor = editor;
+      editor.config.uploadImgMaxLength = 1
+      editor.config.uploadImgServer = '/api/ucenter/uploadImage'
+      editor.config.uploadFileName = 'file'
+      editor.config.placeholder = '请输入回答'
+      editor.config.focus = false
+      editor.config.uploadImgHeaders = {
+        token: this.loginToken
+      }
+
+      editor.config.onfocus = function (newHtml) {
+         myVueComm.getUploadImageToken(true);
+      }
+
+      editor.config.customUploadImg = function (files, insertImgFn) {
+        // resultFiles 是 input 中选中的文件列表
+        // insertImgFn 是获取图片 url 后，插入到编辑器的方法
+        var file = files[0];
+        const putExtra = {
+          mimeType: file.type,
+        };
+        const config = {
+          region: qiniu.region.z2
+        };
+        const observable = qiniu.upload(file, null, window.myVueComm.uploadToken, putExtra, config);
+        const observer = {
+          next (res) {
+            window.console.log(res);
+          },
+          error (err) {
+            window.console.log(err);
+          },
+          complete (res) {
+            window.console.log(res);
+            insertImgFn('https://img.redskt.com/' + res.hash);
+          }
+        }
+        const subscription = observable.subscribe(observer)
+      }
+      editor.config.onchange = function (newHtml) {
+        window.myVueComm.askcontent = newHtml;
+      };
+      editor.create()
+    },
   },
 }
 </script>
 
 <style>
+
+.answer-btn-check {
+  margin-left: 485px;
+}
+
+.answer-btn-style {
+    margin-left: 20px;
+    height: 40px;
+    width: 80px;
+    margin-top: 15px;
+}
+
+.answer-qustion-editor {
+  margin-top: 10px;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 15px;
+  background: #ffffff;
+}
+
 .qustion-top-item {
   margin-left: 8px;
 }
@@ -289,7 +401,8 @@ li.up_down_wrap {
 }
 
 .ask-detail-lefte {
-  margin: 15px;
+  padding: 15px;
+  background: #ffffff;
 }
 
 .title_header {
@@ -300,7 +413,6 @@ li.up_down_wrap {
   margin-left: 0px;
   width: 780px;
   float: left;
-  background: #ffffff;
 }
 
 .ask-detail-right {

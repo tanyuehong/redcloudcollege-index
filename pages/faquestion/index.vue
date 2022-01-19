@@ -118,7 +118,7 @@
                 </div>
 
                 <div class="q_time">
-                  <span>2018.06.16 04:30来自</span>
+                  <span>{{item.gmtCreate}}来自</span>
                   <a class="user_name"
                      href="https://my.csdn.net/dabocaiqq"
                      target="_blank">{{item.nickname}}</a>

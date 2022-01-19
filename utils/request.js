@@ -40,7 +40,7 @@ service.interceptors.response.use(
         errorMsg = res.message
       }
       Message.closeAll()
-      if(res.code == 999) {
+      if(res.code == 999 || res.code == 998) {
         if(window) {
           window.localStorage.setItem('redclass_token', '')
           window.localStorage.setItem('redclass_user', '')

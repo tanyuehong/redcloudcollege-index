@@ -21,16 +21,20 @@
                        alt />
                   <span>
                     {{qdetail.nickname}}</span></a>
-                <span>发布于 08/04 15:27</span>
-                <span>阅读 5K+</span>
-                <span class="glyphicon glyphicon-star-empty"
+                <span class="qustion-top-item">发布于 08/04 15:27</span>
+                <span class="glyphicon glyphicon-star-empty qustion-top-item"
                       aria-hidden="true">
-                  收藏 30
                 </span>
-                <span class="glyphicon glyphicon-comment"
-                      aria-hidden="true">
-                  答案 3
+                <span>
+                  收藏30
                 </span>
+
+                <span class="qustion-top-item">
+                  已解决
+                </span>
+                <div class="qustion-right-view">
+                  已阅读 322
+                </div>
               </div>
               <div>
                 <h2 class="title_header">{{qdetail.title}}</h2>
@@ -66,13 +70,6 @@
                    v-html="qdetail.content">
               </div>
               <div class="qustion_info">
-                <ul class="ask-issue-tool">
-                  <span class="answer_span"><i class="icon ic_question_reply"></i>写回答</span>
-                  <li class="up_down_wrap wrapdisLike"><span class="vote_span disLike"><i class="icon icon_vote_up"></i>好问题
-                      <!---->
-                    </span> <span class="vote_span2"><i class="icon icon_vote_down"></i>提建议
-                    </span></li>
-                </ul>
                 <div class="ui_center_button">
                   <el-button plain
                              type="primary"
@@ -90,7 +87,28 @@
                     </el-dropdown>
                   </div>
                 </div>
+                  <ul class="ask-issue-tool">
+                  <span class="answer_span"><i class="icon ic_question_reply"></i>写回答</span>
+                  <li class="up_down_wrap wrapdisLike ask-info-item">
+                    <span class="vote_span disLike">
+                    <i class="icon icon_vote_up"></i>好问题
+                      <!---->
+                    </span> 
+                    <span class="vote_span2"><i class="icon icon_vote_down"></i>提建议
+                    </span>
+                 </li>
+                  <li class="ask-info-item">
+                      <i class="el-icon-view"></i>
+                      123
+                  </li>
+                  <li class="ask-info-item">
+                      <i class="icon icon_vote_jubao"></i>举报
+                  </li>
+                </ul>
               </div>
+            </div>
+            <div class="answer-qustion-editor">
+              
             </div>
           </div>
         </div>
@@ -128,6 +146,46 @@ export default {
 </script>
 
 <style>
+.qustion-top-item {
+  margin-left: 8px;
+}
+.qustion-right-view {
+  float: right;
+}
+
+.ask-info-item {
+  margin-left: 16px;
+  color: #777888;
+  font-size: 14px;
+}
+
+.icon_vote_down, .icon_vote_up {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    left: -2px;
+}
+
+.icon_vote_jubao {
+    background-image: url("https://img.redskt.com/asset/img/icon-ask-jubao.png");
+    vertical-align: middle;
+    height: 18px;
+    width: 18px;
+    margin-top: -2px;
+}
+
+.icon_vote_up {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAxZJREFUWEfFl99LVEEUx7/n3iVXUEODfkAP5l9QFkmERQ9FPyGIpEiCohAiKCqduUpd19qdmTWWkIoCoQch6MdLRUVvFVFSUFT0FhQUiZgpmbWr7T2xwZrtZrrLer1Pl3tn5vM5M3PumUuY4YtmmI+8BFz3XMnIyJDDoFpmfAPxrarK8s6GhobRXAPKWSAWixX39o0+AnP1eBgBL4hK1ip1sD8XiZwFhBO9APYaiPAWlt1EnlfGzK0MVBJRl1Zi97QJOE50o8febSLEOYDl5qR8nYK5rlkYT/AHEA0aJcqnRcB1LwUTid43DFRZhKNKyVga1NraPvdHPNlLwIDWsmJaBKQ0xxncRkSvqpcsqq6rq0umQaLl9Cokfz4AqNtosaLgAlKeLwd9fc+MMtiB1SZ87OF4iGiOHoLnnSFQp9Zif+EFmk2EPXZAdM8osT4TIKW+zsA2i2ivUuJSQQWMMaUDg/wxFX3ApppwWDzNBAhpegCe/38w/QDhLgUCp/TJoy/SbSdNwz/Ti/tayzX/gghp7gC8YSqRE+EbwV6nVOOTVPsxAde9OiuReNcG4t3MWJA1mG1vNeHGG1OB/KuN45ydwzysGbwPoMdGi5V/CUhpUi/FRIBgkbBDIfLyFUj16+joKPrU8/0zM0qCRfOKQ6E98bEZkI7+lIrcImuTUk13xlJMak7dGy0nXa6pyAnH9IO5Ilg0a04odOTL2KBiAtBEz6cCy9qsWs/GIAYBGjZalPy1BH4ItLSYZT+T/IyAl1rLxb4LSBndyfAug+i6UWK77wLCiZ4AeyGySOmIaPZdQErdxUD9+C+mr5tQOrqbGTWwUWvC8pHvM5BOQdsKzo9EDvf6KuC6sYp4YqQfoCGjRVlWLZjuNHSc9hqPk90gem6UWOq7gGhur4eX7CKiK1qJHb4LOI4OeYwTFuGUUvK47wJS6psMbIGFXSYiL2cJpIsRLGw2EXm7UMXo92F2tK8e7F1kpiShdJ7WBwayBSYpx/kUn8w+mafp3A4keRqk/iEAvAZb7Vo3XcscpiA1Pk+3391mXOAXqa2wMC1BU08AAAAASUVORK5CYII=);
+    vertical-align: middle;
+    top: -2px;
+}
+
+.icon_vote_down {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAyFJREFUWEfFl9tvDFEcx7+/2Y1dSRVtoiQe1F9AI0TE5YW4JhJRESJxSZqIkLjsOdPFdNTuOWfJhgYhggfiAS/EJR5d4vrQ0HiTkJBWQ7Vx3W2785NBF0WzW90xT5Mzv/l+P3POnPn+hvCfD/rP/sgDOM65Ydnssz0gXsOMcUMFRoQMgBawtU/r2Pn+unkAKY1msBgq4z/pWIRtSsn0z9d+ANi61X9yi6xFSsWu9hUJqdk/N1oOarkc51Q02/N6Ndg7xkw5wogqrTd29unnRf9m9K8AfUZS6ksMLIGFVSYpzwYPUG8a2GOHLEropNgZPIA0qxh8BkTnjBIrAgeIx83U3hzfJ6BZa1kTOIDjpCsy2e4OgN4bLcoDB/ANhW06wFwRjVjjXDf2yh8LbBf4ZtLW95gxzSJrllKxW8EDSH2agdVkWet1MnYycABhp3aDPRcEbZS0AweQMrWS4Z0F0QWjxPLAAeJxM6U3xw8JeKS1nBQ4gNB6JLrQBdBHo0XZLwDyexjBwmKTlFeGKoz6p6K09RtmVEYjwypdd+vbguM4GhEh1yXvX+K6qakp0tr2yQcoi0aqhrvu2kzhDUkotNQkdlwcLIBtH6pk/uj3HBsAumO0mPHLEvxN2LbNZo/5IBHd0ErM+VOdkOYqwAsKgSPCB0JonlI77hYEYIwZ0dnFL5lRHg7RtERCPOhvJKRpA3jswAD0GYRrFA7v1Y3bmn/LgoFulvUmyR7bILpulJj/24sl9QUGlllE65QSpwqZieIA5JHRoHfP/VlAKDzbJLbf/NlE1Ke2wPMOgOiEUWLDkAN8DRJpdjF4DxE9rplcXVNbW5vLb9X4/lnI9d4A6J7RYnpJAL42l9n2JwxM7N/dNjTsG/M5k2snoFNrWVESAF/UtlMLPfau+L0+hzHVNMoWf9xxzPhMll+AqMsoMbpkAL6wsFNHwV4dEZ7CCsXI88qZuYGBCUR0WiuxpqQA6XR6ePvrnttgzvd13/dzM1HZXKU2dZQU4NuUHy7r7n5vM2gms/9hweXq6lHH6+rqeooxL+hDVKxgsfWD+t0q1mSg+i/B+LEwffaI4AAAAABJRU5ErkJggg==);
+    top: -1px;
+    margin-right: 4px;
+}
+
 .vote_span.disLike {
   border: 1px solid #e8e8ed;
   border-left: 0;

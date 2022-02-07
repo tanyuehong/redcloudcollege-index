@@ -53,7 +53,6 @@ service.interceptors.response.use(
         return ;
       }
       Message({ message: errorMsg, type: 'error', duration: tipsShowTime})
-      debugger
       return Promise.reject(new Error(errorMsg))
     } else {
       return res

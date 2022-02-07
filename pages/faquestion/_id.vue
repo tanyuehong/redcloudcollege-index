@@ -180,10 +180,6 @@
                     <div :id="'replayedtor'+index"
                          class="replay-editor"
                          v-if="item.showeditor">
-
-                      <div class="">
-                        哈哈哈
-                      </div>
                     </div>
                   </transition>
                 </li>
@@ -282,7 +278,6 @@ export default {
   },
 
   methods: {
-
     goodQustionClick () {
 
     },
@@ -297,14 +292,11 @@ export default {
     },
 
     afterEnter: function (el) {
-      window.console.log("sddasdsdsd");
       this.init_replyeditor();
     },
 
     leave: function (el, done) {
       var Velocity = $.Velocity;
-      window.replyItem.editor.destroy();
-      window.replyItem.editor = null;
       Velocity(el, { height: '0px' }, { duration: 300 }, { complete: done })
     },
 
@@ -432,11 +424,12 @@ export default {
     repplaybtnclinck (item, index) {
       item.commnetId = "#replayedtor" + index;
       window.replyItem = item;
-      if (!item.showeditor) {
+      if (!item.editor) {
         item.showeditor = true;
-        window
       } else {
         item.showeditor = false;
+        item.editor.destroy();
+        item.editor = null;
       }
     },
 

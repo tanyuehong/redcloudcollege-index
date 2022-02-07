@@ -33,7 +33,6 @@
               <div class="_2LKTFF">
                 <span class="_1GPnWJ">
                   {{pitem.good}}
-                  <!-- -->
                   赞
                 </span>
               </div>
@@ -83,7 +82,6 @@
 </template>
 
 <style>
-
 .toolactive {
   color: #fff;
   background-color: #ec7259 !important;
@@ -114,7 +112,8 @@
   fill: currentColor;
   vertical-align: middle;
 }
-.tool_item, .tool_crcle {
+.tool_item,
+.tool_crcle {
   display: flex;
   align-items: center;
 }
@@ -151,7 +150,7 @@ export default {
   data () {
     return {
       title: '开源实践网',
-      goodslect:false,
+      goodslect: false,
     }
   },
   head () {
@@ -178,7 +177,7 @@ export default {
       }
     })
   },
-  mounted() {
+  mounted () {
     this.getUserPraticeGood();
   },
   methods: {
@@ -204,8 +203,8 @@ export default {
       })
     },
 
-    goodBtnClick() {
-      if(this.goodslect) {
+    goodBtnClick () {
+      if (this.goodslect) {
         this.pitem.good--;
         this.cancleleUserPraticeGood();
       } else {

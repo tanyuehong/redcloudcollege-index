@@ -5,32 +5,24 @@
         <div class="ask_detail_content">
           <div class="ask-detail-lefte">
             <div class="ui breadcrumb red_breadcrumb">
-              <a class="section" href="/faquestion">开源实践问答</a>
-              <span
-                class="glyphicon glyphicon glyphicon-menu-right"
-                aria-hidden="true"
-              ></span>
+              <a class="section"
+                 href="/faquestion">开源实践问答</a>
+              <span class="glyphicon glyphicon glyphicon-menu-right"
+                    aria-hidden="true"></span>
               <div class="active section">问题详情</div>
             </div>
             <div>
               <div class="question_info">
                 <a href="#">
-                  <img
-                    class="vam user-head-image"
-                    :src="qdetail.avatar"
-                    width="30"
-                    height="30"
-                    alt
-                  />
-                  <span> {{ qdetail.nickname }}</span></a
-                >
-                <span class="qustion-top-item"
-                  >发布于 {{ qdetail.gmtCreate }}</span
-                >
-                <span
-                  class="glyphicon glyphicon-star-empty qustion-top-item"
-                  aria-hidden="true"
-                >
+                  <img class="vam user-head-image"
+                       :src="qdetail.avatar"
+                       width="30"
+                       height="30"
+                       alt />
+                  <span> {{ qdetail.nickname }}</span></a>
+                <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
+                <span class="glyphicon glyphicon-star-empty qustion-top-item"
+                      aria-hidden="true">
                 </span>
                 <span> 收藏30 </span>
 
@@ -41,51 +33,46 @@
               </div>
               <div>
                 <h2 class="title_header">{{ qdetail.title }}</h2>
-                <div class="ui red label horizontal" data-tooltip="置顶">
+                <div class="ui red label horizontal"
+                     data-tooltip="置顶">
                   顶
                 </div>
-                <div class="ui orange label horizontal" data-tooltip="热门">
+                <div class="ui orange label horizontal"
+                     data-tooltip="热门">
                   热
                 </div>
               </div>
 
               <div class="extra question-tags mt10">
-                <a
-                  class="ui horizontal basic label popup-tag"
-                  href="https://www.oschina.net/question/tag/ruby"
-                  target="_blank"
-                >
-                  <img
-                    class="question-tags-img"
-                    src="https://static.oschina.net/img/logo/ruby.gif"
-                  />
+                <a class="ui horizontal basic label popup-tag"
+                   href="https://www.oschina.net/question/tag/ruby"
+                   target="_blank">
+                  <img class="question-tags-img"
+                       src="https://static.oschina.net/img/logo/ruby.gif" />
                   Ruby
                 </a>
 
-                <a
-                  class="ui horizontal basic label popup-tag"
-                  href="https://www.oschina.net/question/tag/java"
-                  target="_blank"
-                >
-                  <img
-                    class="question-tags-img"
-                    src="https://static.oschina.net/img/logo/java.png"
-                  />
+                <a class="ui horizontal basic label popup-tag"
+                   href="https://www.oschina.net/question/tag/java"
+                   target="_blank">
+                  <img class="question-tags-img"
+                       src="https://static.oschina.net/img/logo/java.png" />
                   Java
                 </a>
               </div>
 
-              <div class="qustion_content" v-html="qdetail.content"></div>
+              <div class="qustion_content"
+                   v-html="qdetail.content"></div>
               <div class="qustion_info">
                 <div class="ui_center_button">
-                  <el-button plain type="primary" icon="el-icon-star-off"
-                    >收藏</el-button
-                  >
+                  <el-button plain
+                             type="primary"
+                             icon="el-icon-star-off">收藏</el-button>
                   <div class="ui_group_button">
                     <el-dropdown class="sort">
-                      <el-button plain type="primary" icon="el-icon-share"
-                        >分享</el-button
-                      >
+                      <el-button plain
+                                 type="primary"
+                                 icon="el-icon-share">分享</el-button>
                       <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item>微博</el-dropdown-item>
                         <el-dropdown-item>QQ</el-dropdown-item>
@@ -95,17 +82,16 @@
                   </div>
                 </div>
                 <ul class="ask-issue-tool">
-                  <span class="answer_span" @click="answerBtnClick"
-                    ><i class="icon ic_question_reply"></i>写回答</span
-                  >
+                  <span class="answer_span"
+                        @click="answerBtnClick"><i class="icon ic_question_reply"></i>写回答</span>
                   <li class="up_down_wrap wrapdisLike ask-info-item">
-                    <span class="vote_span disLike" @click="goodQustionClick">
+                    <span class="vote_span disLike"
+                          @click="goodQustionClick">
                       <i class="icon icon_vote_up"></i>好问题
-                     <span v-if="qdetail.good>0">{{qdetail.good}}</span>
+                      <span v-if="qdetail.good>0">{{qdetail.good}}</span>
                       <!---->
                     </span>
-                    <span class="vote_span2"
-                      ><i class="icon icon_vote_down"></i>提建议
+                    <span class="vote_span2"><i class="icon icon_vote_down"></i>提建议
                     </span>
                   </li>
                   <li class="ask-info-item">
@@ -116,73 +102,58 @@
             </div>
           </div>
 
-          <div class="qustion-answer-list" v-if="replyList.length > 0">
+          <div class="qustion-answer-list"
+               v-if="replyList.length > 0">
             <h4 class="reply-title">
-              <span
-                ><em class="em1">{{ replyList.length }}</em
-                >条回答</span
-              >
+              <span><em class="em1">{{ replyList.length }}</em>条回答</span>
               <span class="reply_wrap">
-                <em
-                  class="em2"
-                  :class="{ cur: answertype }"
-                  @click="clickAnserType(true)"
-                  >默认</em
-                >
-                <em
-                  class="em2"
-                  :class="{ cur: answertype == false }"
-                  @click="clickAnserType(false)"
-                  >最新</em
-                >
+                <em class="em2"
+                    :class="{ cur: answertype }"
+                    @click="clickAnserType(true)">默认</em>
+                <em class="em2"
+                    :class="{ cur: answertype == false }"
+                    @click="clickAnserType(false)">最新</em>
               </span>
             </h4>
 
             <div class="qustion-answer-content">
               <ul class="qustion-anser-list">
-                <li
-                  class="answer-list-item"
-                  v-for="(item, index) in replyList"
-                  :key="item.id"
-                >
+                <li class="answer-list-item"
+                    v-for="(item, index) in replyList"
+                    :key="item.id">
                   <div class="answer-item-userinfo">
-                    <img
-                      class="vam user-head-image"
-                      :src="qdetail.avatar"
-                      width="30"
-                      height="30"
-                      alt
-                    />
+                    <img class="vam user-head-image"
+                         :src="qdetail.avatar"
+                         width="30"
+                         height="30"
+                         alt />
                     <span> {{ qdetail.nickname }}</span>
-                    <span class="qustion-top-item"
-                      >发布于 {{ qdetail.gmtCreate }}</span
-                    >
+                    <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
                   </div>
 
-                  <div class="answer-item-content" v-html="item.content"></div>
+                  <div class="answer-item-content"
+                       v-html="item.content"></div>
 
                   <div class="reply_content_tool">
-                    <span class="mr20px" @click="repplaybtnclinck(item,index)">
+                    <span class="mr20px"
+                          @click="repplaybtnclinck(item,index)">
                       <i class="icon icon_comment"></i>
                       评论
                     </span>
-                    <div class="vote-box vote_like" data-v-43384383="">
-                      <span
-                        data-report-click='{"spm":"3001.5631"}'
-                        class="vote_span vote_spaned"
-                        data-v-43384383=""
-                        ><i class="icon icon_vote_up" data-v-43384383=""></i>
+                    <div class="vote-box vote_like"
+                         data-v-43384383="">
+                      <span data-report-click='{"spm":"3001.5631"}'
+                            class="vote_span vote_spaned"
+                            data-v-43384383=""><i class="icon icon_vote_up"
+                           data-v-43384383=""></i>
                         解决
-                        <em data-v-43384383="">1</em></span
-                      >
-                      <span
-                        data-report-click='{"spm":"3001.5632"}'
-                        class="vote_span2"
-                        data-v-43384383=""
-                        ><i class="icon icon_vote_down" data-v-43384383=""></i
-                        >无用
-                        <!----></span
-                      >
+                        <em data-v-43384383="">1</em></span>
+                      <span data-report-click='{"spm":"3001.5632"}'
+                            class="vote_span2"
+                            data-v-43384383=""><i class="icon icon_vote_down"
+                           data-v-43384383=""></i>无用
+                        <!---->
+                      </span>
                     </div>
                     <span class="mr20px2">
                       <i class="icon icon_reward"></i>
@@ -190,31 +161,31 @@
                     </span>
                     <!---->
                     <span>
-                        <i class="icon icon_share2"></i>
-                        分享
+                      <i class="icon icon_share2"></i>
+                      分享
                     </span>
 
                     <span class="li_more li_report">
                       <i class="icon icon_ask_report"></i>
                       举报
                     </span>
-  
+
                   </div>
 
-                   <transition
-    v-on:before-enter="beforeEnter"
-    v-on:enter="enter"
-    v-on:after-enter="afterEnter"
-    v-on:leave="leave"
-    v-bind:css="false"
-  >
-                  <div :id="'replayedtor'+index" class="replay-editor" v-if="item.showeditor">
-                  
-                  <div class="">
-                    哈哈哈
-                  </div>
-                  </div>
-                   </transition>
+                  <transition v-on:before-enter="beforeEnter"
+                              v-on:enter="enter"
+                              v-on:after-enter="afterEnter"
+                              v-on:leave="leave"
+                              v-bind:css="false">
+                    <div :id="'replayedtor'+index"
+                         class="replay-editor"
+                         v-if="item.showeditor">
+
+                      <div class="">
+                        哈哈哈
+                      </div>
+                    </div>
+                  </transition>
                 </li>
               </ul>
             </div>
@@ -224,15 +195,11 @@
             <div id="answer-editor"></div>
             <div class="answer-ediot-detail">
               <span class="report-common-question">报告相同问题？</span>
-              <el-checkbox v-model="checked" class="answer-btn-check"
-                >关注问题</el-checkbox
-              >
-              <el-button
-                type="primary"
-                class="answer-btn-style"
-                @click="submitAnserClick"
-                >提交</el-button
-              >
+              <el-checkbox v-model="checked"
+                           class="answer-btn-check">关注问题</el-checkbox>
+              <el-button type="primary"
+                         class="answer-btn-style"
+                         @click="submitAnserClick">提交</el-button>
             </div>
           </div>
         </div>
@@ -248,23 +215,15 @@
             </div>
 
             <div class="ask-top-wrap">
-              <a
-                target="_blank"
-                class="ask-top-warper-item"
-                href="https://ask.csdn.net/questions/7398651"
-                >◇ 欢迎建议意见</a
-              >
               <a target="_blank"
-                class="ask-top-warper-item"
-                href="https://bbs.csdn.net/topics/603750556"
-                >◇ 开源问答上线</a
-              >
-              <a
-                target="_blank"
-                class="ask-top-warper-item"
-                href="https://bbs.csdn.net/forums/ask?category=0"
-                >◇ 通知公告</a
-              >
+                 class="ask-top-warper-item"
+                 href="https://ask.csdn.net/questions/7398651">◇ 欢迎建议意见</a>
+              <a target="_blank"
+                 class="ask-top-warper-item"
+                 href="https://bbs.csdn.net/topics/603750556">◇ 开源问答上线</a>
+              <a target="_blank"
+                 class="ask-top-warper-item"
+                 href="https://bbs.csdn.net/forums/ask?category=0">◇ 通知公告</a>
             </div>
           </div>
 
@@ -292,7 +251,7 @@ import askApi from "@/api/askqustion";
 const qiniu = require("qiniu-js");
 
 export default {
-  data() {
+  data () {
     return {
       qdetail: {},
       checked: true,
@@ -307,11 +266,11 @@ export default {
   head () {
     return {
       script: [
-      { src: 'https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js', async: true, defer: true }
-    ],
+        { src: 'https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js', async: true, defer: true }
+      ],
     }
   },
-  mounted() {
+  mounted () {
     var qId = this.$route.params.id;
     this.getQustionDetail(qId);
     this.init_wangeditor();
@@ -324,17 +283,17 @@ export default {
 
   methods: {
 
-  goodQustionClick() {
+    goodQustionClick () {
 
-  },
-  beforeEnter: function (el) {
+    },
+    beforeEnter: function (el) {
       el.style.width = '732px';
       el.style.height = '0px'
     },
 
-     enter: function (el, done) {
-      var Velocity = $.Velocity; 
-      Velocity(el, { height:'190px'}, 300, function() {done()})
+    enter: function (el, done) {
+      var Velocity = $.Velocity;
+      Velocity(el, { height: '190px' }, 300, function () { done() })
     },
 
     afterEnter: function (el) {
@@ -343,24 +302,24 @@ export default {
     },
 
     leave: function (el, done) {
-      var Velocity = $.Velocity; 
+      var Velocity = $.Velocity;
       window.replyItem.editor.destroy();
       window.replyItem.editor = null;
-      Velocity(el, { height:'0px'}, { duration: 300 },{ complete: done })
+      Velocity(el, { height: '0px' }, { duration: 300 }, { complete: done })
     },
 
-    clickAnserType(type) {
+    clickAnserType (type) {
       this.answertype = type;
     },
 
-    getQustionDetail(qId) {
+    getQustionDetail (qId) {
       askApi.getQuestionDetails(qId).then((response) => {
         this.qdetail = response.data.qdetail;
         this.replyList = response.data.replyList;
       });
     },
 
-    getUploadImageToken(isForce) {
+    getUploadImageToken (isForce) {
       var token = localStorage.getItem("redclass_token");
       if (!(token && token != "undefined")) {
         if (isForce) {
@@ -386,14 +345,14 @@ export default {
       });
     },
 
-    answerBtnClick() {
+    answerBtnClick () {
       document.getElementById("answer-editor").scrollIntoView();
       this.editor.config.focus = true;
       this.editor.txt.html("");
       this.getUploadImageToken(true);
     },
 
-    submitAnserClick() {
+    submitAnserClick () {
       if (this.replyContent.length <= 6) {
         this.answerBtnClick();
         this.$message({
@@ -419,7 +378,7 @@ export default {
       this.getQustionDetail(this.qdetail.qid);
     },
 
-    init_wangeditor() {
+    init_wangeditor () {
       window.myVueComm = this;
       let editor = this.$wangeditor("#answer-editor");
       this.editor = editor;
@@ -451,13 +410,13 @@ export default {
           config
         );
         const observer = {
-          next(res) {
+          next (res) {
             window.console.log(res);
           },
-          error(err) {
+          error (err) {
             window.console.log(err);
           },
-          complete(res) {
+          complete (res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
           },
@@ -470,24 +429,24 @@ export default {
       editor.create();
     },
 
-    repplaybtnclinck(item,index) {
+    repplaybtnclinck (item, index) {
       item.commnetId = "#replayedtor" + index;
       window.replyItem = item;
-      if(!item.showeditor) {
-         item.showeditor = true;
-         window
+      if (!item.showeditor) {
+        item.showeditor = true;
+        window
       } else {
-         item.showeditor = false;
+        item.showeditor = false;
       }
     },
 
-    init_replyeditor() {
+    init_replyeditor () {
       window.myVueComm = this;
       var item = window.replyItem;
 
-      window.console.log("dddd"+item.commnetId);
+      window.console.log("dddd" + item.commnetId);
       let editor = this.$wangeditor(item.commnetId);
-      item.editor= editor;
+      item.editor = editor;
       editor.config.uploadImgMaxLength = 1;
       editor.config.uploadImgServer = "/api/ucenter/uploadImage";
       editor.config.uploadFileName = "file";
@@ -498,22 +457,22 @@ export default {
         myVueComm.getUploadImageToken(true);
       };
       editor.config.menus = [
-    'bold',
-    'fontSize',
-    'fontName',
-    'italic',
-    'underline',
-    'indent',
-    'foreColor',
-    'link',
-    'list',
-    'todo',
-    'justify',
-    'emoticon',
-    'image',
-    'code',
-    'splitLine',
-]
+        'bold',
+        'fontSize',
+        'fontName',
+        'italic',
+        'underline',
+        'indent',
+        'foreColor',
+        'link',
+        'list',
+        'todo',
+        'justify',
+        'emoticon',
+        'image',
+        'code',
+        'splitLine',
+      ]
 
       editor.config.customUploadImg = function (files, insertImgFn) {
         // resultFiles 是 input 中选中的文件列表
@@ -533,13 +492,13 @@ export default {
           config
         );
         const observer = {
-          next(res) {
+          next (res) {
             window.console.log(res);
           },
-          error(err) {
+          error (err) {
             window.console.log(err);
           },
-          complete(res) {
+          complete (res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
           },
@@ -556,17 +515,17 @@ export default {
 </script>
 
 <style>
-
 .answer-list-item {
   margin-bottom: 16px;
   border-bottom: 1px solid rgba(28, 31, 33, 0.1);
 }
 
-.fade-enter-active, .fade-leave-active {
-    transition: height 1s
+.fade-enter-active,
+.fade-leave-active {
+  transition: height 1s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active, 2.1.8 版本以下 */ {
-    height: 10px;
+  height: 10px;
 }
 
 .replay-editor {
@@ -577,98 +536,98 @@ export default {
 }
 
 .icon_ask_report {
-    width: 16px;
-    height: 16px;
-    margin-right: 4px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAy5JREFUWEftl01oVFcUx//nTsyHNZHM0oWbUtRWaBdCXehGceHKilQodiONSmuhNZ2Ze964GGbhvHNnprEFbVEjbiyCUtquXEjd2EULLlqwtaW4cdFlQhM1iSb3yA1JGGLem48sBMmsz//c3/2fj3eHsIqfZbkT5E54d6dpKE1YKo1kJyaAs2eHx1aKsyy6ALBinlOnRrIDA0C5vLI+aFMBmN1DhXZBsc05/n85RBqAtbIRhPsEmhWxm5MumgpgWX4GsIdAX4rYXDsAzK6u0C8A3HbCezsCyBer7xivdwGd83Nme61W+LcxUVIP5PPVN0zG3wMo4w3tqFUKv3cEEEQFdpcIOgRC1cVsW2k2G4mDoqCg0arYY2ma1BIEIXM8qERs4K/EcfHvVgCiqLLVwxwlVRGJxpsCRJE7Oud1xJCeFom+SRIcP35hXTY79h5gDih0B4BNC7H/Eegu4H8aG8v+ePHiiWdJOZjjT7zSmYyh4Ti2V+YdKETuI1JcApQI9N3srDlRr+cfNyZhjg+qUg2E11NdUDwg0rxI9ENjXC5Xe62ry19Q6BGAVAnHqrG9vFSCYlEOz3mMAugH8JsT3hkSlEolMzOzPgx8LgAq6B4ZGjVqbnV39z0MMU+fTm325Pep1yGCbg8HEFDv6XnC5XLZhxjL8iuAdwFMZgyGKhW+/sIemK+dN9dAeLS43ZhdVaH5cA4Uw729U98uJl3uRICdnu77GIQRAN0EqonYwgLAHVVsyBj/QWMvNVlE8UGF+R7QZwTdLxLdbqUJmeM9CroJ0DqCP7S8HI05EgFCww0Ojt+fr7niU+f4fCuHL8ZYKydBOAfFg/HxwW1JjZkIwBy/r6DroeZ9PU/eTrI9CSqUY2pm/R+hJwh6WCS6sVJsCoC7Ot+xxnzuKoWv27n9kgvF6mfw/qswWSL2w7YALEtYOlsMdb0Vx7m/OgGIovqbXmf/BPCPE97aLsBEGMnenv7+cvnko04ASqXzG6ZnJifD6DnhgXYBUr/1rQI1ezMk9kAz4RrAmgNrDqw58Oo5sPDG39XqzVYZ98vii2tpFb90gFXeqGN50z8mHWduUfgc77mmMHr1wngAAAAASUVORK5CYII=);
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAy5JREFUWEftl01oVFcUx//nTsyHNZHM0oWbUtRWaBdCXehGceHKilQodiONSmuhNZ2Ze964GGbhvHNnprEFbVEjbiyCUtquXEjd2EULLlqwtaW4cdFlQhM1iSb3yA1JGGLem48sBMmsz//c3/2fj3eHsIqfZbkT5E54d6dpKE1YKo1kJyaAs2eHx1aKsyy6ALBinlOnRrIDA0C5vLI+aFMBmN1DhXZBsc05/n85RBqAtbIRhPsEmhWxm5MumgpgWX4GsIdAX4rYXDsAzK6u0C8A3HbCezsCyBer7xivdwGd83Nme61W+LcxUVIP5PPVN0zG3wMo4w3tqFUKv3cEEEQFdpcIOgRC1cVsW2k2G4mDoqCg0arYY2ma1BIEIXM8qERs4K/EcfHvVgCiqLLVwxwlVRGJxpsCRJE7Oud1xJCeFom+SRIcP35hXTY79h5gDih0B4BNC7H/Eegu4H8aG8v+ePHiiWdJOZjjT7zSmYyh4Ti2V+YdKETuI1JcApQI9N3srDlRr+cfNyZhjg+qUg2E11NdUDwg0rxI9ENjXC5Xe62ry19Q6BGAVAnHqrG9vFSCYlEOz3mMAugH8JsT3hkSlEolMzOzPgx8LgAq6B4ZGjVqbnV39z0MMU+fTm325Pep1yGCbg8HEFDv6XnC5XLZhxjL8iuAdwFMZgyGKhW+/sIemK+dN9dAeLS43ZhdVaH5cA4Uw729U98uJl3uRICdnu77GIQRAN0EqonYwgLAHVVsyBj/QWMvNVlE8UGF+R7QZwTdLxLdbqUJmeM9CroJ0DqCP7S8HI05EgFCww0Ojt+fr7niU+f4fCuHL8ZYKydBOAfFg/HxwW1JjZkIwBy/r6DroeZ9PU/eTrI9CSqUY2pm/R+hJwh6WCS6sVJsCoC7Ot+xxnzuKoWv27n9kgvF6mfw/qswWSL2w7YALEtYOlsMdb0Vx7m/OgGIovqbXmf/BPCPE97aLsBEGMnenv7+cvnko04ASqXzG6ZnJifD6DnhgXYBUr/1rQI1ezMk9kAz4RrAmgNrDqw58Oo5sPDG39XqzVYZ98vii2tpFb90gFXeqGN50z8mHWduUfgc77mmMHr1wngAAAAASUVORK5CYII=);
 }
 
 .icon_share2 {
-    width: 16px;
-    height: 16px;
-    margin-right: 4px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADF0lEQVRYR8WXzWtUVxiHn/dO4icqCrqwVDRuWlACVkEFRa3Glbgx+g+0pavGasw5ExEMqPcctV00KzeVbg1+gJsWUYMLxdJCae2iRbNwpQbRqG2q49xX7jgZxzjJzMlc6oW7udx7fs/9vV/nCO/5kmb1jXWXRZgtJDviuHc4dL0sADQVFeSWSHFLKERmAFOFyAxARG6p6opQJzIDiCRZpJq7ooRBZAbgnZV8/tjCUIhMAdI8CIUIAvj64JEPWpPWrZLoOoSPgSXA0lQ4dWCsBEMgGgIwxu0AuhA2A1GNWr/pnV1b/by7+/CilpaZl+vlxKQA1sZtIKcVNpYXH1X0Uk6iq0XhjySKhp6PPHvY39/3pFYDagRiQgBr4w5EBlSZCwwLUayafO+9HQnpdvXCUROgp9dvk0QvAtOBs4J+7lz+UYhwo+F4ByC1XZFfgPmCfOec2QuU2m0z10ROvAOQDhdgC8o57+2uLMQnq463AIxxOxEuqPIgEv2oGdsncqvaCeD82wDW/QysQfjSx/ZUM5YHAxjj2hF+A+79+8+spf39Xz3PGqBWHlQc6LH+uKAHEL71sd3/f4ine4cKgLHud2BlUZL1J+PeG1kCTNYLSgDpC4lG90GfDq1avmBg9+7iGEBnZ2du2bLVm4hYL+gn5d6/EJgDzABywHXv7IZa0A01ItPrtpPwI8IlH9uOdCFj3Dwi9qF8Biyu50j1MAoZSiUHrI2NIk6Qb5wz3dae2KoUf6gIK38RcRHh16RQ/HvatJn3C4XCk8eP7/w3f0Hbi/HTMGQslwB6rD8l6BcI6T1KwmmgBS1VRZf39tpEDhjrSl2yqXFsrPsJ6ECik2jSBdKC6NGh222HBwbe5EMtiPEA9WI+fo2SA8a69E/bgQLQinDEx/ZQvbiXv604ECqefl8OQXxXkA/LgoMzpo9+2tfXl4QANLUpNTYeAZmrSlGg3Xv7ZyPi1Q40tS031o2Walo442O7p1HxaoDXdoafjsZy4GXaUATd7Fx+cCoAUxGv5IDN+0FVzXlnNoIEbT7e++E0xK1a774C6ywQo/DgHbUAAAAASUVORK5CYII=);
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADF0lEQVRYR8WXzWtUVxiHn/dO4icqCrqwVDRuWlACVkEFRa3Glbgx+g+0pavGasw5ExEMqPcctV00KzeVbg1+gJsWUYMLxdJCae2iRbNwpQbRqG2q49xX7jgZxzjJzMlc6oW7udx7fs/9vV/nCO/5kmb1jXWXRZgtJDviuHc4dL0sADQVFeSWSHFLKERmAFOFyAxARG6p6opQJzIDiCRZpJq7ooRBZAbgnZV8/tjCUIhMAdI8CIUIAvj64JEPWpPWrZLoOoSPgSXA0lQ4dWCsBEMgGgIwxu0AuhA2A1GNWr/pnV1b/by7+/CilpaZl+vlxKQA1sZtIKcVNpYXH1X0Uk6iq0XhjySKhp6PPHvY39/3pFYDagRiQgBr4w5EBlSZCwwLUayafO+9HQnpdvXCUROgp9dvk0QvAtOBs4J+7lz+UYhwo+F4ByC1XZFfgPmCfOec2QuU2m0z10ROvAOQDhdgC8o57+2uLMQnq463AIxxOxEuqPIgEv2oGdsncqvaCeD82wDW/QysQfjSx/ZUM5YHAxjj2hF+A+79+8+spf39Xz3PGqBWHlQc6LH+uKAHEL71sd3/f4ine4cKgLHud2BlUZL1J+PeG1kCTNYLSgDpC4lG90GfDq1avmBg9+7iGEBnZ2du2bLVm4hYL+gn5d6/EJgDzABywHXv7IZa0A01ItPrtpPwI8IlH9uOdCFj3Dwi9qF8Biyu50j1MAoZSiUHrI2NIk6Qb5wz3dae2KoUf6gIK38RcRHh16RQ/HvatJn3C4XCk8eP7/w3f0Hbi/HTMGQslwB6rD8l6BcI6T1KwmmgBS1VRZf39tpEDhjrSl2yqXFsrPsJ6ECik2jSBdKC6NGh222HBwbe5EMtiPEA9WI+fo2SA8a69E/bgQLQinDEx/ZQvbiXv604ECqefl8OQXxXkA/LgoMzpo9+2tfXl4QANLUpNTYeAZmrSlGg3Xv7ZyPi1Q40tS031o2Walo442O7p1HxaoDXdoafjsZy4GXaUATd7Fx+cCoAUxGv5IDN+0FVzXlnNoIEbT7e++E0xK1a774C6ywQo/DgHbUAAAAASUVORK5CYII=);
 }
 
 .icon_reward {
-    width: 16px;
-    height: 16px;
-    background-image: url(https://img.redskt.com/asset/img/faqustion-dashang.png);
-    position: relative;
-    margin-right: 4px;
+  width: 16px;
+  height: 16px;
+  background-image: url(https://img.redskt.com/asset/img/faqustion-dashang.png);
+  position: relative;
+  margin-right: 4px;
 }
 
- .reply_content_tool .vote-box {
-    line-height: 32px;
-    height: 32px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    border-radius: 16px;
-    border: 1px solid #e8e8ed;
-    margin-right: 16px;
+.reply_content_tool .vote-box {
+  line-height: 32px;
+  height: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 16px;
+  border: 1px solid #e8e8ed;
+  margin-right: 16px;
 }
 
 .reply_content_tool .vote-box span.vote_span {
-    text-align: center;
-    border: 1px solid #e8e8ed;
-    border-left: 0;
-    border-radius: 16px;
-    position: relative;
-    display: inline-block;
-    height: 32px;
-    line-height: 30px;
-    padding: 0 12px;
-    font-weight: 400;
-    color: #777888;
+  text-align: center;
+  border: 1px solid #e8e8ed;
+  border-left: 0;
+  border-radius: 16px;
+  position: relative;
+  display: inline-block;
+  height: 32px;
+  line-height: 30px;
+  padding: 0 12px;
+  font-weight: 400;
+  color: #777888;
 }
 
 .icon_comment {
-    width: 16px;
-    height: 16px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAhdJREFUWEftlr9PFEEUx79vdi4YCyz4Ff8FOS7BJTQgBVcSSY64JLY2UPEn+D8QG2hsJR6GRjshIVAA5jQGjsR/wISghZGGsDePzLJcjt1lGXdnucYtNzPz+cybN28eocsf2eZzbbxPr0kbB79N1rYmwN7oQIvFWyLMaDAzPjmkXlH922maiBUBDVcQWwyUAfwJgY8IOBJQ02kSuQX+1iqDD2VpU8MDoH9R1QKq81+KRC6Bzp1Hd3sjKoyPcr3xPOkoMgukwa9BXKsMKlk6AtAvfGcgKTEzCZjAtcTZbHnoQU/PDwJ6rQmYwgs5AlN4LDFtJGER8KBgmVSrouBGAkXC7xQoGp4qcB/wWwXuC54oEIEroUSFPnxpRpM1qHJOaYsJwyaPzm3JHrsFvufuAxgnQDEgkha3BY9FgOfcxy0HP/WT6igxoYRaa79yYTGJwA8FVPWuN9+4H+AXo9UWic8AdmS9MRXNBd+nl9LhtTDsueGxCLTm3SVmLIN4Vb7/uhh0Nh3NRsexWIHHBPz5pytgWiDGkrPeeHMduvPaWFlK/h7mhDV4XMBzdwBMEuH1VWvFT5hJZ/kIA7rFSoT74TyTsh6O2ZX1xrP4EXjuLwaCrjb6CWCPoGaTEs6agO+NbRN4mIFjYui7f6yIm1KWmvRu/+Qfdmg81Og1NF4tw8D/Au0IZEikDAFvT4nfgq4L5NlOnrldT8JLe8mJMLeISrcAAAAASUVORK5CYII=);
+  width: 16px;
+  height: 16px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAhdJREFUWEftlr9PFEEUx79vdi4YCyz4Ff8FOS7BJTQgBVcSSY64JLY2UPEn+D8QG2hsJR6GRjshIVAA5jQGjsR/wISghZGGsDePzLJcjt1lGXdnucYtNzPz+cybN28eocsf2eZzbbxPr0kbB79N1rYmwN7oQIvFWyLMaDAzPjmkXlH922maiBUBDVcQWwyUAfwJgY8IOBJQ02kSuQX+1iqDD2VpU8MDoH9R1QKq81+KRC6Bzp1Hd3sjKoyPcr3xPOkoMgukwa9BXKsMKlk6AtAvfGcgKTEzCZjAtcTZbHnoQU/PDwJ6rQmYwgs5AlN4LDFtJGER8KBgmVSrouBGAkXC7xQoGp4qcB/wWwXuC54oEIEroUSFPnxpRpM1qHJOaYsJwyaPzm3JHrsFvufuAxgnQDEgkha3BY9FgOfcxy0HP/WT6igxoYRaa79yYTGJwA8FVPWuN9+4H+AXo9UWic8AdmS9MRXNBd+nl9LhtTDsueGxCLTm3SVmLIN4Vb7/uhh0Nh3NRsexWIHHBPz5pytgWiDGkrPeeHMduvPaWFlK/h7mhDV4XMBzdwBMEuH1VWvFT5hJZ/kIA7rFSoT74TyTsh6O2ZX1xrP4EXjuLwaCrjb6CWCPoGaTEs6agO+NbRN4mIFjYui7f6yIm1KWmvRu/+Qfdmg81Og1NF4tw8D/Au0IZEikDAFvT4nfgq4L5NlOnrldT8JLe8mJMLeISrcAAAAASUVORK5CYII=);
 }
 
 .reply_content_tool .mr20px {
-    padding: 0 16px;
-    text-align: center;
-    height: 32px;
-    border-radius: 16px;
-    border: 1px solid #fc5533;
-    font-size: 14px;
-    font-weight: 400;
-    color: #fc5533;
-    margin-right: 16px;
+  padding: 0 16px;
+  text-align: center;
+  height: 32px;
+  border-radius: 16px;
+  border: 1px solid #fc5533;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fc5533;
+  margin-right: 16px;
 }
 
 .reply_content_tool span {
-    color: #777888;
-    padding-right: 16px;
-    cursor: pointer;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+  color: #777888;
+  padding-right: 16px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .reply_content_tool {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    padding: 0;
-    margin: 20px 0 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  padding: 0;
+  margin: 20px 0 16px;
 }
 
 .answer-item-userinfo {
@@ -884,7 +843,7 @@ export default {
 }
 
 .icon_vote_jubao {
-  background-image: url("https://img.redskt.com/asset/img/icon-ask-jubao.png");
+  background-image: url('https://img.redskt.com/asset/img/icon-ask-jubao.png');
   vertical-align: middle;
   height: 18px;
   width: 18px;

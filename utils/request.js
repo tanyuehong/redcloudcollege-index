@@ -40,7 +40,7 @@ service.interceptors.response.use(
         errorMsg = res.message
       }
       Message.closeAll()
-      if(res.code == 999) {
+      if(res.code == 999 || res.code == 998) {
         if(window) {
           window.localStorage.setItem('redclass_token', '')
           window.localStorage.setItem('redclass_user', '')
@@ -53,6 +53,7 @@ service.interceptors.response.use(
         return ;
       }
       Message({ message: errorMsg, type: 'error', duration: tipsShowTime})
+      debugger
       return Promise.reject(new Error(errorMsg))
     } else {
       return res

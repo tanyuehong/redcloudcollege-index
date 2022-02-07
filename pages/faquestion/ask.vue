@@ -293,6 +293,7 @@ export default {
       editor.config.uploadImgMaxLength = 1
       editor.config.uploadImgServer = '/api/ucenter/uploadImage'
       editor.config.uploadFileName = 'file'
+      editor.config.placeholder = '请输入问题'
       editor.config.uploadImgHeaders = {
         token: this.loginToken
       }

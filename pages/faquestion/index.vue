@@ -139,7 +139,6 @@
               </div>
             </div>
           </div>
-
           <div class="clearnfloat"></div>
         </div>
       </section>

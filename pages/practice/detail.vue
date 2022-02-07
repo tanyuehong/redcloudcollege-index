@@ -12,6 +12,8 @@
         <div class="practice_left_show">
           <div class="tool_item">
             <div class="tool_crcle"
+                 @click="goodBtnClick"
+                 v-bind:class="{ toolactive: goodslect }"
                  role="button"
                  tabindex="-1"
                  aria-label="给文章点赞">
@@ -30,7 +32,7 @@
             <div class="P63n6G">
               <div class="_2LKTFF">
                 <span class="_1GPnWJ">
-                  12
+                  {{pitem.good}}
                   <!-- -->
                   赞
                 </span>
@@ -81,6 +83,11 @@
 </template>
 
 <style>
+
+.toolactive {
+  color: #fff;
+  background-color: #ec7259 !important;
+}
 .practice_content {
   background: white;
   padding-left: 15px;
@@ -107,11 +114,11 @@
   fill: currentColor;
   vertical-align: middle;
 }
-.tool_item,
-.tool_crcle {
+.tool_item, .tool_crcle {
   display: flex;
   align-items: center;
 }
+
 .tool_item {
   position: relative;
   flex-direction: column;
@@ -138,11 +145,13 @@
 import showdown from 'showdown'
 import '~/assets/css/markdown.css'
 import realPractice from '@/api/realpractice'
+import useract from '@/api/useract'
 
 export default {
   data () {
     return {
       title: '开源实践网',
+      goodslect:false,
     }
   },
   head () {
@@ -169,11 +178,41 @@ export default {
       }
     })
   },
+  mounted() {
+    this.getUserPraticeGood();
+  },
   methods: {
     //分页切换的方法
     //参数是页码数
     handleClick (tab, event) {
       console.log(tab, event)
+    },
+
+    getUserPraticeGood () {
+      useract.getUserPraticeGood(this.pitem.id).then((response) => {
+        this.goodslect = response.data.good;
+      })
+    },
+
+    addUserPraticeGood () {
+      useract.addUserPraticeGood(this.pitem.id).then((response) => {
+      })
+    },
+
+    cancleleUserPraticeGood () {
+      useract.cancleleUserPraticeGood(this.pitem.id).then((response) => {
+      })
+    },
+
+    goodBtnClick() {
+      if(this.goodslect) {
+        this.pitem.good--;
+        this.cancleleUserPraticeGood();
+      } else {
+        this.pitem.good++;
+        this.addUserPraticeGood();
+      }
+      this.goodslect = !this.goodslect;
     },
     changeMarkToHtml (content) {
       var converter = new showdown.Converter()

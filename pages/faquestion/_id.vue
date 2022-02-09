@@ -24,9 +24,9 @@
                 <span class="glyphicon glyphicon-star-empty qustion-top-item"
                       aria-hidden="true">
                 </span>
-                <span> 收藏30 </span>
+                <span class="qustion-good-num"> 收藏 {{qdetail.collect}} </span>
 
-                <span class="qustion-top-item"> 已解决 </span>
+                <span class="qustion-top-item top-tips"> 已解决 </span>
                 <div class="qustion-right-view">
                   浏览 {{ qdetail.readcount }}
                 </div>
@@ -67,7 +67,7 @@
                 <div class="ui_center_button">
                   <el-button plain
                              type="primary"
-                             icon="el-icon-star-off">收藏</el-button>
+                             :icon="collectIcon" @click="collectBtnClick">{{collectString}}</el-button>
                   <div class="ui_group_button">
                     <el-dropdown class="sort">
                       <el-button plain
@@ -257,6 +257,9 @@ export default {
       replyContent: "",
       uploadToken: "",
       goodqustion: false,
+      collectState: false,
+      collectIcon:"el-icon-star-off",
+      collectString:"收藏",
     };
   },
   head () {
@@ -278,7 +281,29 @@ export default {
     };
   },
 
+  computed: {
+  },
+
   methods: {
+    collectBtnClick() {
+      if(self.collectState) {
+        this.$message({
+            message: "取消收藏成功！",
+            type: "success",
+            duration: 2000,
+          });
+      } else {
+        this.$message({
+            message: "收藏成功！",
+            type: "success",
+            duration: 2000,
+          });
+      }
+  
+     this.collectState  = ! this.collectState;
+     this.collectIcon   =  this.collectState ? "el-icon-star-on":"el-icon-star-off";
+     this.collectString = this.collectState ? "已收藏":"收藏";
+    },
     goodQustionClick () {
       if (this.goodqustion) {
         this.qdetail.good--;
@@ -848,6 +873,11 @@ export default {
   background: #ffffff;
 }
 
+.top-tips {
+  color: #fc5531;
+  font-size: 14px;
+}
+
 .qustion-top-item {
   margin-left: 8px;
 }
@@ -1028,7 +1058,7 @@ li.up_down_wrap {
 }
 
 .ui_center_button {
-  width: 160px;
+  width: 170px;
   margin: 0 auto;
 }
 

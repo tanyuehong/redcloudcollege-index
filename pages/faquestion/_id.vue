@@ -271,6 +271,7 @@ export default {
     this.getQustionDetail(qId);
     this.init_wangeditor();
     this.getUploadImageToken(false);
+    this.getUserGoodQustionState(qId);
 
     window.gotoPage = {
       path: `/faquestion/` + qId,
@@ -288,19 +289,19 @@ export default {
       }
       this.goodqustion = !this.goodqustion;
     },
-    getUserGoodQustionState () {
-      useract.getUserGoodQustionState(this.qdetail.id).then((response) => {
-        this.goodslect = response.data.good;
+    getUserGoodQustionState (qId) {
+      useract.getUserGoodQustionState(qId).then((response) => {
+        this.goodqustion = response.data.goodqustion;
       })
     },
 
     addUserGoodQustion () {
-      useract.addUserGoodQustion(this.qdetail.id).then((response) => {
+      useract.addUserGoodQustion(this.qdetail.qid).then((response) => {
       })
     },
 
     cancleUserGoodQustion () {
-      useract.cancleUserGoodQustion(this.qdetail.id).then((response) => {
+      useract.cancleUserGoodQustion(this.qdetail.qid).then((response) => {
       })
     },
     beforeEnter: function (el) {

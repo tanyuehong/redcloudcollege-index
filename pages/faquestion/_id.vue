@@ -86,9 +86,12 @@
                         @click="answerBtnClick"><i class="icon ic_question_reply"></i>写回答</span>
                   <li class="up_down_wrap wrapdisLike ask-info-item">
                     <span class="vote_span disLike"
-                          @click="goodQustionClick">
+                          @click="goodQustionClick"
+                          v-bind:class="{ like: goodqustion }">
+
                       <i class="icon icon_vote_up"></i>好问题
-                      <span v-if="qdetail.good>0">{{qdetail.good}}</span>
+                      <em class="qustion-good-num"
+                          v-if="qdetail.good>0">{{qdetail.good}}</em>
                       <!---->
                     </span>
                     <span class="vote_span2"><i class="icon icon_vote_down"></i>提建议
@@ -140,18 +143,13 @@
                       <i class="icon icon_comment"></i>
                       评论
                     </span>
-                    <div class="vote-box vote_like"
-                         data-v-43384383="">
+                    <div class="vote-box vote_like">
                       <span data-report-click='{"spm":"3001.5631"}'
-                            class="vote_span vote_spaned"
-                            data-v-43384383=""><i class="icon icon_vote_up"
-                           data-v-43384383=""></i>
+                            class="vote_span vote_spaned"><i class="icon icon_vote_up"></i>
                         解决
-                        <em data-v-43384383="">1</em></span>
+                        <em class="qustion-good-num">1</em></span>
                       <span data-report-click='{"spm":"3001.5632"}'
-                            class="vote_span2"
-                            data-v-43384383=""><i class="icon icon_vote_down"
-                           data-v-43384383=""></i>无用
+                            class="vote_span2"><i class="icon icon_vote_down"></i>无用
                         <!---->
                       </span>
                     </div>
@@ -244,6 +242,7 @@
 
 <script>
 import askApi from "@/api/askqustion";
+import useract from '@/api/useract'
 const qiniu = require("qiniu-js");
 
 export default {
@@ -257,6 +256,7 @@ export default {
       replyList: [],
       replyContent: "",
       uploadToken: "",
+      goodqustion: false,
     };
   },
   head () {
@@ -279,7 +279,29 @@ export default {
 
   methods: {
     goodQustionClick () {
+      if (this.goodqustion) {
+        this.qdetail.good--;
+        this.cancleUserGoodQustion();
+      } else {
+        this.qdetail.good++;
+        this.addUserGoodQustion();
+      }
+      this.goodqustion = !this.goodqustion;
+    },
+    getUserGoodQustionState () {
+      useract.getUserGoodQustionState(this.qdetail.id).then((response) => {
+        this.goodslect = response.data.good;
+      })
+    },
 
+    addUserGoodQustion () {
+      useract.addUserGoodQustion(this.qdetail.id).then((response) => {
+      })
+    },
+
+    cancleUserGoodQustion () {
+      useract.cancleUserGoodQustion(this.qdetail.id).then((response) => {
+      })
     },
     beforeEnter: function (el) {
       el.style.width = '732px';
@@ -508,6 +530,17 @@ export default {
 </script>
 
 <style>
+.vote_span.vote_span.like i {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAhBJREFUWEfFlr1rFFEUxc/Jexs1rGgQ0TIgIgiCOrEQsm3AxmoniKCIiFhZ2Cls4weWYiXEBIsI0XmRNPoP6DZK3kQlINhYCIJiiihB4nxc2aDLZI2ZGcnum2qYOe+e35t3595LOL7o2B//BSD+wWosA1cJqYH4TuBp3yAmOG6jshsqDSD+8W0Jfr4A4GXN+oCQsRrl7KvFMhClAZK6d0+IS+ubyJQ24dmuAUh9+ERKeSZY/+gI/FDGDnQFQM4NbU2Xdy0IsO9fBgSWlLE7uwIQ1b0GiesbB5c5bcJjmw4gpw8NJlH/BwA7NgpOYFIZe2HTAZL68C2hXMsNTLmog/B+ri4jyP0L5OSB7cmW6se83eeZthKUQDNO0eh/Yl/+0ecCJGPeZRHczTMo+p6QlZQyWgnmn7fWtAFi32sVl5HfgZra2FrrPvGPvhdwf1GDIjoCb5SxhzsBJLtYG7sKF/vemudFDIpolMZuTtuv2S/QW4A42sPZt19cASxrY6vOjoDAa2XsEZcARhk75gxAiNuVwK4WNjc5IHJez4QPnAEIUKsY23QGoPTKXk4vfHYCQOCbMrbdVXueAwRCZWx7nuw5ACCPtQlP/dUNO2t+t3oBiZsqsA1nAKCc0UH40BVApFQ6xEfzn5wAKPIKg7k72XadO5B0DCpFWv1ajSAm8U4EN/SMNZ0Bckey8o7lVjgH+AVoSwkwj5cq7AAAAABJRU5ErkJggg==);
+}
+.vote_span.vote_span.like {
+  color: #fc5533;
+  background: #fff;
+  border: 1px solid #fc5533;
+}
+.qustion-good-num {
+  margin-left: -2px;
+}
 .answer-list-item {
   margin-bottom: 16px;
   border-bottom: 1px solid rgba(28, 31, 33, 0.1);
@@ -620,7 +653,7 @@ export default {
   -ms-flex-direction: row;
   flex-direction: row;
   padding: 0;
-  margin: 20px 0 16px;
+  margin: 16px 0 20px;
 }
 
 .answer-item-userinfo {
@@ -629,8 +662,8 @@ export default {
 }
 .answer-item-content {
   margin-top: 8px;
-  margin-left: 6px;
-  margin-right: 6px;
+  margin-left: 12px;
+  margin-right: 12px;
 }
 
 .qustion-answer-content {

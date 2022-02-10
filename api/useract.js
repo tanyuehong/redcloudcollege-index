@@ -42,4 +42,25 @@ export default {
         method: 'get',
       })
     },
+
+    getUserQustionCollectState(qId) {
+      return request({
+        url: `/home/eduask/qCollectState/${qId}`,
+        method: 'get',
+      })
+    },
+
+    addUserQustionCollect(qId) {
+      return request({
+        url: `/home/eduask/addqCollect/${qId}`,
+        method: 'get',
+      })
+    },
+    
+    cancleUserQustionCollect(qId) {
+      return request({
+        url: `/home/eduask/cancleqCollect/${qId}`,
+        method: 'get',
+      })
+    },
 }

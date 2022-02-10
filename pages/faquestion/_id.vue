@@ -126,12 +126,12 @@
                     :key="item.id">
                   <div class="answer-item-userinfo">
                     <img class="vam user-head-image"
-                         :src="qdetail.avatar"
+                         :src="item.avatar"
                          width="30"
                          height="30"
                          alt />
                     <span> {{ qdetail.nickname }}</span>
-                    <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
+                    <span class="qustion-top-item">发布于 {{ item.gmtCreate }}</span>
                   </div>
 
                   <div class="answer-item-content"
@@ -147,7 +147,7 @@
                       <span data-report-click='{"spm":"3001.5631"}'
                             class="vote_span vote_spaned"><i class="icon icon_vote_up"></i>
                         解决
-                        <em class="qustion-good-num">1</em></span>
+                        <em class="qustion-good-num">{{item.good}}</em></span>
                       <span data-report-click='{"spm":"3001.5632"}'
                             class="vote_span2"><i class="icon icon_vote_down"></i>无用
                         <!---->
@@ -275,6 +275,7 @@ export default {
     this.init_wangeditor();
     this.getUploadImageToken(false);
     this.getUserGoodQustionState(qId);
+    this.getUserQustionCollectState(qId);
 
     window.gotoPage = {
       path: `/faquestion/` + qId,
@@ -286,20 +287,16 @@ export default {
 
   methods: {
     collectBtnClick() {
-      if(self.collectState) {
+      if(this.collectState) {
+        this.cancleUserQustionCollect();
         this.$message({
             message: "取消收藏成功！",
             type: "success",
             duration: 2000,
           });
       } else {
-        this.$message({
-            message: "收藏成功！",
-            type: "success",
-            duration: 2000,
-          });
+        this.addUserQustionCollect();
       }
-  
      this.collectState  = ! this.collectState;
      this.collectIcon   =  this.collectState ? "el-icon-star-on":"el-icon-star-off";
      this.collectString = this.collectState ? "已收藏":"收藏";
@@ -309,11 +306,29 @@ export default {
         this.qdetail.good--;
         this.cancleUserGoodQustion();
       } else {
-        this.qdetail.good++;
         this.addUserGoodQustion();
       }
       this.goodqustion = !this.goodqustion;
     },
+
+    getUserQustionCollectState (qId) {
+      useract.getUserQustionCollectState(qId).then((response) => {
+        this.collectState = response.data.collectState;
+        this.collectIcon   =  this.collectState ? "el-icon-star-on":"el-icon-star-off";
+        this.collectString = this.collectState ? "已收藏":"收藏";
+      })
+    },
+
+    addUserQustionCollect () {
+      useract.addUserQustionCollect(this.qdetail.qid).then((response) => {
+      })
+    },
+
+    cancleUserQustionCollect () {
+      useract.cancleUserQustionCollect(this.qdetail.qid).then((response) => {
+      })
+    },
+    
     getUserGoodQustionState (qId) {
       useract.getUserGoodQustionState(qId).then((response) => {
         this.goodqustion = response.data.goodqustion;

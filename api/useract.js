@@ -2,7 +2,6 @@ import request from '@/utils/request'
 
 export default {
 
-    //讲师详情的方法
     getUserPraticeGood(praticeId) {
       return request({
         url: `/home/pratice/good/${praticeId}`,
@@ -16,10 +15,51 @@ export default {
         method: 'get',
       })
     },
-
     cancleleUserPraticeGood(praticeId) {
       return request({
         url: `/home/pratice/cancleGood/${praticeId}`,
+        method: 'get',
+      })
+    },
+
+    getUserGoodQustionState(qId) {
+      return request({
+        url: `/home/eduask/qGoodState/${qId}`,
+        method: 'get',
+      })
+    },
+
+    addUserGoodQustion(qId) {
+      return request({
+        url: `/home/eduask/addqGood/${qId}`,
+        method: 'get',
+      })
+    },
+    
+    cancleUserGoodQustion(qId) {
+      return request({
+        url: `/home/eduask/cancleqGood/${qId}`,
+        method: 'get',
+      })
+    },
+
+    getUserQustionCollectState(qId) {
+      return request({
+        url: `/home/eduask/qCollectState/${qId}`,
+        method: 'get',
+      })
+    },
+
+    addUserQustionCollect(qId) {
+      return request({
+        url: `/home/eduask/addqCollect/${qId}`,
+        method: 'get',
+      })
+    },
+    
+    cancleUserQustionCollect(qId) {
+      return request({
+        url: `/home/eduask/cancleqCollect/${qId}`,
         method: 'get',
       })
     },

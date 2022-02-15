@@ -63,4 +63,18 @@ export default {
         method: 'get',
       })
     },
+
+    addUserRelpyGood(rId) {
+      return request({
+        url: `/home/eduask/addRelpyGood/${rId}`,
+        method: 'get',
+      })
+    },
+
+    cancleRelpyGood(rId) {
+      return request({
+        url: `/home/eduask/cancleRelpyGood/${rId}`,
+        method: 'get',
+      })
+    },
 }

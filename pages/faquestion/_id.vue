@@ -67,7 +67,8 @@
                 <div class="ui_center_button">
                   <el-button plain
                              type="primary"
-                             :icon="collectIcon" @click="collectBtnClick">{{collectString}}</el-button>
+                             :icon="collectIcon"
+                             @click="collectBtnClick">{{collectString}}</el-button>
                   <div class="ui_group_button">
                     <el-dropdown class="sort">
                       <el-button plain
@@ -144,12 +145,15 @@
                       评论
                     </span>
                     <div class="vote-box vote_like">
-                      <span data-report-click='{"spm":"3001.5631"}'
-                            class="vote_span vote_spaned"><i class="icon icon_vote_up"></i>
+                      <span v-bind:class="{ like: item.goodreply }"
+                            @click="goodReplyClick(item)"
+                            class="vote_span vote_spaned">
+                        <i class="icon icon_vote_up"></i>
                         解决
                         <em class="qustion-good-num">{{item.good}}</em></span>
-                      <span data-report-click='{"spm":"3001.5632"}'
-                            class="vote_span2"><i class="icon icon_vote_down"></i>无用
+                      <span class="vote_span2"
+                            @click="badReplyClick(item)"
+                            v-bind:class="{ like: item.badreply}"><i class="icon icon_vote_down"></i>无用
                         <!---->
                       </span>
                     </div>
@@ -258,8 +262,9 @@ export default {
       uploadToken: "",
       goodqustion: false,
       collectState: false,
-      collectIcon:"el-icon-star-off",
-      collectString:"收藏",
+      forbiden: true,
+      collectIcon: "el-icon-star-off",
+      collectString: "收藏",
     };
   },
   head () {
@@ -286,20 +291,47 @@ export default {
   },
 
   methods: {
-    collectBtnClick() {
-      if(this.collectState) {
+    goodReplyClick (item) {
+      if (this.forbiden) {
+        if (item.goodreply) {
+          item.goodreply = false;
+        } else {
+          item.goodreply = true;
+        }
+      }
+      setTimeout(function () {
+        window.myVueComm.forbiden = true
+      }, 500)
+    },
+
+    badReplyClick (item) {
+      if (this.forbiden) {
+        this.forbiden = false;
+        if (item.badreply) {
+          item.badreply = false;
+        } else {
+          item.badreply = true;
+          item.goodreply = false;
+        }
+      }
+      setTimeout(function () {
+        window.myVueComm.forbiden = true
+      }, 500)
+    },
+    collectBtnClick () {
+      if (this.collectState) {
         this.cancleUserQustionCollect();
         this.$message({
-            message: "取消收藏成功！",
-            type: "success",
-            duration: 2000,
-          });
+          message: "取消收藏成功！",
+          type: "success",
+          duration: 2000,
+        });
       } else {
         this.addUserQustionCollect();
       }
-     this.collectState  = ! this.collectState;
-     this.collectIcon   =  this.collectState ? "el-icon-star-on":"el-icon-star-off";
-     this.collectString = this.collectState ? "已收藏":"收藏";
+      this.collectState = !this.collectState;
+      this.collectIcon = this.collectState ? "el-icon-star-on" : "el-icon-star-off";
+      this.collectString = this.collectState ? "已收藏" : "收藏";
     },
     goodQustionClick () {
       if (this.goodqustion) {
@@ -314,8 +346,8 @@ export default {
     getUserQustionCollectState (qId) {
       useract.getUserQustionCollectState(qId).then((response) => {
         this.collectState = response.data.collectState;
-        this.collectIcon   =  this.collectState ? "el-icon-star-on":"el-icon-star-off";
-        this.collectString = this.collectState ? "已收藏":"收藏";
+        this.collectIcon = this.collectState ? "el-icon-star-on" : "el-icon-star-off";
+        this.collectString = this.collectState ? "已收藏" : "收藏";
       })
     },
 
@@ -328,7 +360,7 @@ export default {
       useract.cancleUserQustionCollect(this.qdetail.qid).then((response) => {
       })
     },
-    
+
     getUserGoodQustionState (qId) {
       useract.getUserGoodQustionState(qId).then((response) => {
         this.goodqustion = response.data.goodqustion;
@@ -575,10 +607,21 @@ export default {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAhBJREFUWEfFlr1rFFEUxc/Jexs1rGgQ0TIgIgiCOrEQsm3AxmoniKCIiFhZ2Cls4weWYiXEBIsI0XmRNPoP6DZK3kQlINhYCIJiiihB4nxc2aDLZI2ZGcnum2qYOe+e35t3595LOL7o2B//BSD+wWosA1cJqYH4TuBp3yAmOG6jshsqDSD+8W0Jfr4A4GXN+oCQsRrl7KvFMhClAZK6d0+IS+ubyJQ24dmuAUh9+ERKeSZY/+gI/FDGDnQFQM4NbU2Xdy0IsO9fBgSWlLE7uwIQ1b0GiesbB5c5bcJjmw4gpw8NJlH/BwA7NgpOYFIZe2HTAZL68C2hXMsNTLmog/B+ri4jyP0L5OSB7cmW6se83eeZthKUQDNO0eh/Yl/+0ecCJGPeZRHczTMo+p6QlZQyWgnmn7fWtAFi32sVl5HfgZra2FrrPvGPvhdwf1GDIjoCb5SxhzsBJLtYG7sKF/vemudFDIpolMZuTtuv2S/QW4A42sPZt19cASxrY6vOjoDAa2XsEZcARhk75gxAiNuVwK4WNjc5IHJez4QPnAEIUKsY23QGoPTKXk4vfHYCQOCbMrbdVXueAwRCZWx7nuw5ACCPtQlP/dUNO2t+t3oBiZsqsA1nAKCc0UH40BVApFQ6xEfzn5wAKPIKg7k72XadO5B0DCpFWv1ajSAm8U4EN/SMNZ0Bckey8o7lVjgH+AVoSwkwj5cq7AAAAABJRU5ErkJggg==);
 }
 .vote_span.vote_span.like {
-  color: #fc5533;
-  background: #fff;
-  border: 1px solid #fc5533;
+  color: #fc5533 !important;
+  background: #fff !important;
+  border: 1px solid #fc5533 !important;
 }
+
+.vote_span2.like {
+  color: #fc5533 !important;
+  background: #fff !important;
+  border: 1px solid #fc5533 !important;
+}
+
+.vote_span2.like i {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAltJREFUWEfFlj9oE1Ecx7/f9y5i0Q61otWl4KRzkqoBxVHdBJOhWhdxcXAUREStm4NDxUUcBDXQeyhCoYiTgiBt7nBQ0CgobnEQK1RDbO5+ksufXpO2SazJ3XS897vv9/Peu9/7/YiIH0bsjwaAl07cBHC8BjSrjXOx8t403jWvAEVC3ingFo37tlkgBBD3BVUgAqKNq6oAy+Ndu4c+IOgpykna7tOwTgOgnI5LeMIybjDXPL4xCPxU2LSL5nWxrtNXgIqpJk6Ed6HvAIS6qk1uMrIdIPlQ285EZAAA5izjHogMgOB3bZztkQEEP2JsYBuzr37UUr7K0o80rK9ag/tpnPnIAKDUaWs69ygyAJLXte1ciw4AyGrjnooMAGTOsp2xyAAILGjjDkUGEKTilsEh3n+x0Pda0EjFzcNb+eD5r3A/8F6AvbVt+aCNuy/oBzKJgojs3EgZbm1CmNfGqXtVpyV9cABWeU/1VrI+12u2l4lPiuDK/wIg4SuqNKdzT1b8A2sZSDo54sP/CkFMuNzC/QsQwbwiLtN2HrfUgvUEvXTinkDOtjMlcElZambVuDJ/08x/aT2OdqqV4xlPjfpLpY/tdoHkbW07FzqQbIR03JZ7mfgdEZxfX5wvLeMc6QmAnBkb9ot+XiDDaxmQ/KZtZ6QnAEFyZJLnIP7dStteb+HDZgQWtXEHewYgIvQyyVlAjq5uwmeWcY71DCC4LyZSO/xS6Y0Idq9cPQsqpg8zO/eppwABxHhq1Fv6M0XKIYCLgMwoUTdocoVuzDu6iLoV7Da+4zTsVrjT+L9M+xoweNULvAAAAABJRU5ErkJggg==);
+}
+
 .qustion-good-num {
   margin-left: -2px;
 }

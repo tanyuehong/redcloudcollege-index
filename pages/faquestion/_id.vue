@@ -149,11 +149,11 @@
                             @click="goodReplyClick(item)"
                             class="vote_span vote_spaned">
                         <i class="icon icon_vote_up"></i>
-                        解决
-                        <em class="qustion-good-num">{{item.good}}</em></span>
+                        解决<em class="qustion-good-num">{{item.good}}</em></span>
                       <span class="vote_span2"
                             @click="badReplyClick(item)"
-                            v-bind:class="{ like: item.badreply}"><i class="icon icon_vote_down"></i>无用
+                            v-bind:class="{ like: item.badreply}"><i class="icon icon_vote_down"></i>无用<em class="qustion-good-num"
+                            v-if="item.bad>=0">{{item.bad}}</em>
                         <!---->
                       </span>
                     </div>
@@ -291,12 +291,36 @@ export default {
   },
 
   methods: {
+
+    addUserRelpyGood(rId) {
+      useract.addUserQustionCollect(this.qdetail.qid).then((response) => {
+      })
+    },
+
+    cancleRelpyGood (rId) {
+      useract.cancleRelpyGood(this.qdetail.qid).then((response) => {
+      })
+    },
+
+    addUserQustionCollect () {
+      useract.addUserQustionCollect(this.qdetail.qid).then((response) => {
+      })
+    },
+
+    cancleUserQustionCollect () {
+      useract.cancleUserQustionCollect(this.qdetail.qid).then((response) => {
+      })
+    },
     goodReplyClick (item) {
       if (this.forbiden) {
+        this.forbiden = false;
         if (item.goodreply) {
           item.goodreply = false;
         } else {
+          item.good = item.good++;
+          item.bad = item.bad--;
           item.goodreply = true;
+          item.badreply = false;
         }
       }
       setTimeout(function () {
@@ -306,10 +330,14 @@ export default {
 
     badReplyClick (item) {
       if (this.forbiden) {
+        item.bad = item.bad--;
         this.forbiden = false;
         if (item.badreply) {
           item.badreply = false;
         } else {
+          item.bad = item.bad + 1;
+          window.console.log("ddddddddddddd");
+          item.good = item.good--;
           item.badreply = true;
           item.goodreply = false;
         }
@@ -623,7 +651,7 @@ export default {
 }
 
 .qustion-good-num {
-  margin-left: -2px;
+  margin-left: 2px;
 }
 .answer-list-item {
   margin-bottom: 16px;
@@ -679,6 +707,11 @@ export default {
   border-radius: 16px;
   border: 1px solid #e8e8ed;
   margin-right: 16px;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .reply_content_tool .vote-box span.vote_span {

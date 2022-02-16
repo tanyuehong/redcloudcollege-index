@@ -71,24 +71,32 @@ export default {
       })
     },
 
-    cancleRelpyGood(rId) {
+    cancleUserRelpyGood(rId) {
       return request({
         url: `/home/eduask/cancleRelpyGood/${rId}`,
         method: 'get',
       })
     },
 
-    addUserRelpyGood(rId) {
+    addUserRelpyBad(rId) {
       return request({
-        url: `/home/eduask/addRelpyGood/${rId}`,
+        url: `/home/eduask/addRelpyBad/${rId}`,
         method: 'get',
       })
     },
 
-    cancleRelpyGood(rId) {
+    cancleUserRelpyBad(rId) {
       return request({
-        url: `/home/eduask/cancleRelpyGood/${rId}`,
+        url: `/home/eduask/cancleRelpyBad/${rId}`,
         method: 'get',
+      })
+    },
+
+    getUserGoodReplyState(rIds) {
+      return request({
+        url: `/home/eduask/getUserGoodState`,
+        method: 'post',
+        data:rIds,
       })
     },
 }

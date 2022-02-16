@@ -26,7 +26,7 @@
                 </span>
                 <span class="qustion-good-num"> 收藏 {{qdetail.collect}} </span>
 
-                <span class="qustion-top-item top-tips"> 已解决 </span>
+                <span class="qustion-top-item top-tips">已解决</span>
                 <div class="qustion-right-view">
                   浏览 {{ qdetail.readcount }}
                 </div>
@@ -148,12 +148,11 @@
                       <span v-bind:class="{ like: item.goodreply }"
                             @click="goodReplyClick(item)"
                             class="vote_span vote_spaned">
-                        <i class="icon icon_vote_up"></i>
-                        解决<em class="qustion-good-num">{{item.good}}</em></span>
+                        <i class="icon icon_vote_up"></i>解决<em class="qustion-good-num">{{item.good}}</em></span>
                       <span class="vote_span2"
                             @click="badReplyClick(item)"
                             v-bind:class="{ like: item.badreply}"><i class="icon icon_vote_down"></i>无用<em class="qustion-good-num"
-                            v-if="item.bad>=0">{{item.bad}}</em>
+                            v-if="item.bad>0">{{item.bad}}</em>
                         <!---->
                       </span>
                     </div>
@@ -281,6 +280,8 @@ export default {
     this.getUploadImageToken(false);
     this.getUserGoodQustionState(qId);
     this.getUserQustionCollectState(qId);
+    this.getUserGoodReplyState(qId);
+    
 
     window.gotoPage = {
       path: `/faquestion/` + qId,
@@ -291,24 +292,20 @@ export default {
   },
 
   methods: {
-
     addUserRelpyGood(rId) {
-      useract.addUserQustionCollect(this.qdetail.qid).then((response) => {
+      useract.addUserRelpyGood(rId).then((response) => {
       })
     },
-
-    cancleRelpyGood (rId) {
-      useract.cancleRelpyGood(this.qdetail.qid).then((response) => {
+    cancleUserRelpyGood (rId) {
+      useract.cancleUserRelpyGood(rId).then((response) => {
       })
     },
-
-    addUserQustionCollect () {
-      useract.addUserQustionCollect(this.qdetail.qid).then((response) => {
+    addUserRelpyBad (rId) {
+      useract.addUserRelpyBad(rId).then((response) => {
       })
     },
-
-    cancleUserQustionCollect () {
-      useract.cancleUserQustionCollect(this.qdetail.qid).then((response) => {
+    cancleUserRelpyBad (rId) {
+      useract.cancleUserRelpyBad(rId).then((response) => {
       })
     },
     goodReplyClick (item) {
@@ -316,11 +313,17 @@ export default {
         this.forbiden = false;
         if (item.goodreply) {
           item.goodreply = false;
+          item.good = item.good-1;
+          this.cancleUserRelpyGood(item.id);
         } else {
-          item.good = item.good++;
-          item.bad = item.bad--;
+          item.good = item.good+1;
           item.goodreply = true;
-          item.badreply = false;
+          if(item.badreply) {
+            item.badreply = false;
+            item.bad = item.bad-1;
+            this.cancleUserRelpyBad(item.id);
+          }
+          this.addUserRelpyGood(item.id);
         }
       }
       setTimeout(function () {
@@ -330,16 +333,20 @@ export default {
 
     badReplyClick (item) {
       if (this.forbiden) {
-        item.bad = item.bad--;
         this.forbiden = false;
         if (item.badreply) {
           item.badreply = false;
+           item.bad = item.bad-1;
+           this.cancleUserRelpyBad(item.id);
         } else {
           item.bad = item.bad + 1;
-          window.console.log("ddddddddddddd");
-          item.good = item.good--;
+          if(item.good) {
+            item.good = item.good--;
+            item.goodreply = false;
+            this.cancleUserRelpyGood(item.id);
+          }
           item.badreply = true;
-          item.goodreply = false;
+          this.addUserRelpyBad(item.id);
         }
       }
       setTimeout(function () {
@@ -376,6 +383,13 @@ export default {
         this.collectState = response.data.collectState;
         this.collectIcon = this.collectState ? "el-icon-star-on" : "el-icon-star-off";
         this.collectString = this.collectState ? "已收藏" : "收藏";
+      })
+    },
+
+    getUserGoodReplyState (rIds) {
+      var list = ["1487994885774188545","1485386469000052738"];
+
+      useract.getUserGoodReplyState(list).then((response) => {
       })
     },
 
@@ -1007,7 +1021,7 @@ export default {
 .icon_vote_down {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAyFJREFUWEfFl9tvDFEcx7+/2Y1dSRVtoiQe1F9AI0TE5YW4JhJRESJxSZqIkLjsOdPFdNTuOWfJhgYhggfiAS/EJR5d4vrQ0HiTkJBWQ7Vx3W2785NBF0WzW90xT5Mzv/l+P3POnPn+hvCfD/rP/sgDOM65Ydnssz0gXsOMcUMFRoQMgBawtU/r2Pn+unkAKY1msBgq4z/pWIRtSsn0z9d+ANi61X9yi6xFSsWu9hUJqdk/N1oOarkc51Q02/N6Ndg7xkw5wogqrTd29unnRf9m9K8AfUZS6ksMLIGFVSYpzwYPUG8a2GOHLEropNgZPIA0qxh8BkTnjBIrAgeIx83U3hzfJ6BZa1kTOIDjpCsy2e4OgN4bLcoDB/ANhW06wFwRjVjjXDf2yh8LbBf4ZtLW95gxzSJrllKxW8EDSH2agdVkWet1MnYycABhp3aDPRcEbZS0AweQMrWS4Z0F0QWjxPLAAeJxM6U3xw8JeKS1nBQ4gNB6JLrQBdBHo0XZLwDyexjBwmKTlFeGKoz6p6K09RtmVEYjwypdd+vbguM4GhEh1yXvX+K6qakp0tr2yQcoi0aqhrvu2kzhDUkotNQkdlwcLIBtH6pk/uj3HBsAumO0mPHLEvxN2LbNZo/5IBHd0ErM+VOdkOYqwAsKgSPCB0JonlI77hYEYIwZ0dnFL5lRHg7RtERCPOhvJKRpA3jswAD0GYRrFA7v1Y3bmn/LgoFulvUmyR7bILpulJj/24sl9QUGlllE65QSpwqZieIA5JHRoHfP/VlAKDzbJLbf/NlE1Ke2wPMOgOiEUWLDkAN8DRJpdjF4DxE9rplcXVNbW5vLb9X4/lnI9d4A6J7RYnpJAL42l9n2JwxM7N/dNjTsG/M5k2snoFNrWVESAF/UtlMLPfau+L0+hzHVNMoWf9xxzPhMll+AqMsoMbpkAL6wsFNHwV4dEZ7CCsXI88qZuYGBCUR0WiuxpqQA6XR6ePvrnttgzvd13/dzM1HZXKU2dZQU4NuUHy7r7n5vM2gms/9hweXq6lHH6+rqeooxL+hDVKxgsfWD+t0q1mSg+i/B+LEwffaI4AAAAABJRU5ErkJggg==);
   top: -1px;
-  margin-right: 4px;
+  margin-right: 0px;
 }
 
 .vote_span.disLike {

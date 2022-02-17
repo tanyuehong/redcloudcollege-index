@@ -90,8 +90,7 @@
                           @click="goodQustionClick"
                           v-bind:class="{ like: goodqustion }">
 
-                      <i class="icon icon_vote_up"></i>好问题
-                      <em class="qustion-good-num"
+                      <i class="icon icon_vote_up"></i>好问题<em class="qustion-good-num"
                           v-if="qdetail.good>0">{{qdetail.good}}</em>
                       <!---->
                     </span>
@@ -245,18 +244,17 @@
 
 <script>
 import askApi from "@/api/askqustion";
+import askServerApi from "@/api/askserver";
 import useract from '@/api/useract'
 const qiniu = require("qiniu-js");
 
 export default {
   data () {
     return {
-      qdetail: {},
       checked: true,
       answertype: true,
       editor: {},
       loginInfo: {},
-      replyList: [],
       replyContent: "",
       uploadToken: "",
       goodqustion: false,
@@ -273,16 +271,24 @@ export default {
       ],
     }
   },
+
+  asyncData ({ params, error }) {
+    return askServerApi.getQuestionDetails(params.id).then((response) => {
+      return {
+        qdetail:response.data.qdetail,
+        replyList:response.data.replyList,
+      }
+    })
+  },
+
   mounted () {
     var qId = this.$route.params.id;
-    this.getQustionDetail(qId);
     this.init_wangeditor();
     this.getUploadImageToken(false);
     this.getUserGoodQustionState(qId);
     this.getUserQustionCollectState(qId);
     this.getUserGoodReplyState(qId);
-    
-
+  
     window.gotoPage = {
       path: `/faquestion/` + qId,
     };
@@ -387,9 +393,25 @@ export default {
     },
 
     getUserGoodReplyState (rIds) {
-      var list = ["1487994885774188545","1485386469000052738"];
-
+      var list = [];
+      for(var j = 0; j < this.replyList.length; j++) {
+        list.push(this.replyList[j].id);
+      } 
       useract.getUserGoodReplyState(list).then((response) => {
+        var goodList = response.data.goodList;
+
+        for(var j = 0; j < this.replyList.length; j++) {
+          var rItem = this.replyList[j];
+
+           for(var i = 0; i < goodList.length; i++) {
+             window.console.log("ddddd");
+             if(goodList[i].rid == rItem.id) {
+               rItem.goodreply = true;
+               break;
+             }
+           }
+        } 
+          
       })
     },
 
@@ -439,13 +461,6 @@ export default {
 
     clickAnserType (type) {
       this.answertype = type;
-    },
-
-    getQustionDetail (qId) {
-      askApi.getQuestionDetails(qId).then((response) => {
-        this.qdetail = response.data.qdetail;
-        this.replyList = response.data.replyList;
-      });
     },
 
     getUploadImageToken (isForce) {
@@ -504,7 +519,6 @@ export default {
             duration: 2000,
           });
         });
-      this.getQustionDetail(this.qdetail.qid);
     },
 
     init_wangeditor () {

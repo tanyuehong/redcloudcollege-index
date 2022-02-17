@@ -8,5 +8,4 @@ export default {
       method: 'get',
     })
   },
-
 }

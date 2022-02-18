@@ -275,8 +275,8 @@ export default {
   asyncData ({ params, error }) {
     return askServerApi.getQuestionDetails(params.id).then((response) => {
       return {
-        qdetail:response.data.qdetail,
-        replyList:response.data.replyList,
+        qdetail: response.data.qdetail,
+        replyList: response.data.replyList,
       }
     })
   },
@@ -288,7 +288,7 @@ export default {
     this.getUserGoodQustionState(qId);
     this.getUserQustionCollectState(qId);
     this.getUserGoodReplyState(qId);
-  
+
     window.gotoPage = {
       path: `/faquestion/` + qId,
     };
@@ -298,7 +298,7 @@ export default {
   },
 
   methods: {
-    addUserRelpyGood(rId) {
+    addUserRelpyGood (rId) {
       useract.addUserRelpyGood(rId).then((response) => {
       })
     },
@@ -319,14 +319,14 @@ export default {
         this.forbiden = false;
         if (item.goodreply) {
           item.goodreply = false;
-          item.good = item.good-1;
+          item.good = item.good - 1;
           this.cancleUserRelpyGood(item.id);
         } else {
-          item.good = item.good+1;
+          item.good = item.good + 1;
           item.goodreply = true;
-          if(item.badreply) {
+          if (item.badreply) {
             item.badreply = false;
-            item.bad = item.bad-1;
+            item.bad = item.bad - 1;
             this.cancleUserRelpyBad(item.id);
           }
           this.addUserRelpyGood(item.id);
@@ -342,11 +342,11 @@ export default {
         this.forbiden = false;
         if (item.badreply) {
           item.badreply = false;
-           item.bad = item.bad-1;
-           this.cancleUserRelpyBad(item.id);
+          item.bad = item.bad - 1;
+          this.cancleUserRelpyBad(item.id);
         } else {
           item.bad = item.bad + 1;
-          if(item.good) {
+          if (item.good) {
             item.good = item.good--;
             item.goodreply = false;
             this.cancleUserRelpyGood(item.id);
@@ -394,24 +394,24 @@ export default {
 
     getUserGoodReplyState (rIds) {
       var list = [];
-      for(var j = 0; j < this.replyList.length; j++) {
+      for (var j = 0; j < this.replyList.length; j++) {
         list.push(this.replyList[j].id);
-      } 
+      }
       useract.getUserGoodReplyState(list).then((response) => {
         var goodList = response.data.goodList;
 
-        for(var j = 0; j < this.replyList.length; j++) {
+        for (var j = 0; j < this.replyList.length; j++) {
           var rItem = this.replyList[j];
 
-           for(var i = 0; i < goodList.length; i++) {
-             window.console.log("ddddd");
-             if(goodList[i].rid == rItem.id) {
-               rItem.goodreply = true;
-               break;
-             }
-           }
-        } 
-          
+          for (var i = 0; i < goodList.length; i++) {
+            window.console.log("ddddd");
+            if (goodList[i].rid == rItem.id) {
+              rItem.goodreply = true;
+              break;
+            }
+          }
+        }
+
       })
     },
 
@@ -1019,11 +1019,11 @@ export default {
 }
 
 .icon_vote_jubao {
-  background-image: url('https://img.redskt.com/asset/img/icon-ask-jubao.png');
-  vertical-align: middle;
-  height: 18px;
-  width: 18px;
-  margin-top: -2px;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAy5JREFUWEftl01oVFcUx//nTsyHNZHM0oWbUtRWaBdCXehGceHKilQodiONSmuhNZ2Ze964GGbhvHNnprEFbVEjbiyCUtquXEjd2EULLlqwtaW4cdFlQhM1iSb3yA1JGGLem48sBMmsz//c3/2fj3eHsIqfZbkT5E54d6dpKE1YKo1kJyaAs2eHx1aKsyy6ALBinlOnRrIDA0C5vLI+aFMBmN1DhXZBsc05/n85RBqAtbIRhPsEmhWxm5MumgpgWX4GsIdAX4rYXDsAzK6u0C8A3HbCezsCyBer7xivdwGd83Nme61W+LcxUVIP5PPVN0zG3wMo4w3tqFUKv3cEEEQFdpcIOgRC1cVsW2k2G4mDoqCg0arYY2ma1BIEIXM8qERs4K/EcfHvVgCiqLLVwxwlVRGJxpsCRJE7Oud1xJCeFom+SRIcP35hXTY79h5gDih0B4BNC7H/Eegu4H8aG8v+ePHiiWdJOZjjT7zSmYyh4Ti2V+YdKETuI1JcApQI9N3srDlRr+cfNyZhjg+qUg2E11NdUDwg0rxI9ENjXC5Xe62ry19Q6BGAVAnHqrG9vFSCYlEOz3mMAugH8JsT3hkSlEolMzOzPgx8LgAq6B4ZGjVqbnV39z0MMU+fTm325Pep1yGCbg8HEFDv6XnC5XLZhxjL8iuAdwFMZgyGKhW+/sIemK+dN9dAeLS43ZhdVaH5cA4Uw729U98uJl3uRICdnu77GIQRAN0EqonYwgLAHVVsyBj/QWMvNVlE8UGF+R7QZwTdLxLdbqUJmeM9CroJ0DqCP7S8HI05EgFCww0Ojt+fr7niU+f4fCuHL8ZYKydBOAfFg/HxwW1JjZkIwBy/r6DroeZ9PU/eTrI9CSqUY2pm/R+hJwh6WCS6sVJsCoC7Ot+xxnzuKoWv27n9kgvF6mfw/qswWSL2w7YALEtYOlsMdb0Vx7m/OgGIovqbXmf/BPCPE97aLsBEGMnenv7+cvnko04ASqXzG6ZnJifD6DnhgXYBUr/1rQI1ezMk9kAz4RrAmgNrDqw58Oo5sPDG39XqzVYZ98vii2tpFb90gFXeqGN50z8mHWduUfgc77mmMHr1wngAAAAASUVORK5CYII=);
+  margin-top: -4px;
 }
 
 .icon_vote_up {

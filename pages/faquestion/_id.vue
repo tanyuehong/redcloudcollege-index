@@ -298,27 +298,12 @@ export default {
   },
 
   methods: {
+    
     updateRelpyState (rId,type) {
       useract.updateRelpyState(rId,type).then((response) => {
       })
     },
 
-    addUserRelpyGood (rId) {
-      useract.addUserRelpyGood(rId).then((response) => {
-      })
-    },
-    cancleUserRelpyGood (rId) {
-      useract.cancleUserRelpyGood(rId).then((response) => {
-      })
-    },
-    addUserRelpyBad (rId) {
-      useract.addUserRelpyBad(rId).then((response) => {
-      })
-    },
-    cancleUserRelpyBad (rId) {
-      useract.cancleUserRelpyBad(rId).then((response) => {
-      })
-    },
     goodReplyClick (item) {
       if (this.forbiden) {
         this.forbiden = false;
@@ -412,16 +397,16 @@ export default {
           for (var i = 0; i < goodList.length; i++) {
             window.console.log("ddddd");
             if (goodList[i].rid == rItem.id) {
-              if(type == 1) {
+              if(goodList[i].type == 1) {
                 rItem.goodreply = true;
               } 
-              if(t)
-              
+              if(goodList[i].type == 2) {
+                rItem.badreply = true;
+              }
               break;
             }
           }
         }
-
       })
     },
 

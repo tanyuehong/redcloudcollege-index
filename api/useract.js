@@ -63,28 +63,7 @@ export default {
         method: 'get',
       })
     },
-
-    addUserRelpyGood(rId) {
-      return request({
-        url: `/home/eduask/addRelpyGood/${rId}`,
-        method: 'get',
-      })
-    },
-
-    cancleUserRelpyGood(rId) {
-      return request({
-        url: `/home/eduask/cancleRelpyGood/${rId}`,
-        method: 'get',
-      })
-    },
-
-    addUserRelpyBad(rId) {
-      return request({
-        url: `/home/eduask/addRelpyBad/${rId}`,
-        method: 'get',
-      })
-    },
-
+    
     updateRelpyState(rId,type) {
       return request({
         url: `/home/eduask/updateRelpyState/${rId}/${type}`,

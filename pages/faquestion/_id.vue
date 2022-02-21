@@ -298,6 +298,11 @@ export default {
   },
 
   methods: {
+    updateRelpyState (rId,type) {
+      useract.updateRelpyState(rId,type).then((response) => {
+      })
+    },
+
     addUserRelpyGood (rId) {
       useract.addUserRelpyGood(rId).then((response) => {
       })
@@ -320,16 +325,17 @@ export default {
         if (item.goodreply) {
           item.goodreply = false;
           item.good = item.good - 1;
-          this.cancleUserRelpyGood(item.id);
+          this.updateRelpyState(item.id,3);
         } else {
           item.good = item.good + 1;
           item.goodreply = true;
           if (item.badreply) {
             item.badreply = false;
             item.bad = item.bad - 1;
-            this.cancleUserRelpyBad(item.id);
+            this.updateRelpyState(item.id,6);
+          } else {
+            this.updateRelpyState(item.id,1);
           }
-          this.addUserRelpyGood(item.id);
         }
       }
       setTimeout(function () {
@@ -343,16 +349,17 @@ export default {
         if (item.badreply) {
           item.badreply = false;
           item.bad = item.bad - 1;
-          this.cancleUserRelpyBad(item.id);
+          this.updateRelpyState(item.id,4);
         } else {
           item.bad = item.bad + 1;
+          item.badreply = true;
           if (item.good) {
             item.good = item.good--;
             item.goodreply = false;
-            this.cancleUserRelpyGood(item.id);
+            this.updateRelpyState(item.id,5);
+          } else {
+            this.updateRelpyState(item.id,2);
           }
-          item.badreply = true;
-          this.addUserRelpyBad(item.id);
         }
       }
       setTimeout(function () {
@@ -402,11 +409,14 @@ export default {
 
         for (var j = 0; j < this.replyList.length; j++) {
           var rItem = this.replyList[j];
-
           for (var i = 0; i < goodList.length; i++) {
             window.console.log("ddddd");
             if (goodList[i].rid == rItem.id) {
-              rItem.goodreply = true;
+              if(type == 1) {
+                rItem.goodreply = true;
+              } 
+              if(t)
+              
               break;
             }
           }

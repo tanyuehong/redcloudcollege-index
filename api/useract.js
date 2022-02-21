@@ -85,9 +85,9 @@ export default {
       })
     },
 
-    cancleUserRelpyBad(rId) {
+    updateRelpyState(rId,type) {
       return request({
-        url: `/home/eduask/cancleRelpyBad/${rId}`,
+        url: `/home/eduask/updateRelpyState/${rId}/${type}`,
         method: 'get',
       })
     },

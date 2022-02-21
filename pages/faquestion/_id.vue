@@ -456,6 +456,15 @@ export default {
 
     clickAnserType (type) {
       this.answertype = type;
+      if(this.answertype) {
+         useract.getQustionReplyList(this.qdetail.qid,1).then((response) => {
+           this.replyList = response.data.replyList;
+         })
+      } else {
+        useract.getQustionReplyList(this.qdetail.qid,2).then((response) => {
+           this.replyList = response.data.replyList;
+         })
+      }
     },
 
     getUploadImageToken (isForce) {

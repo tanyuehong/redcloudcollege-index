@@ -63,7 +63,7 @@ export default {
         method: 'get',
       })
     },
-    
+
     updateRelpyState(rId,type) {
       return request({
         url: `/home/eduask/updateRelpyState/${rId}/${type}`,
@@ -76,6 +76,13 @@ export default {
         url: `/home/eduask/getUserGoodState`,
         method: 'post',
         data:rIds,
+      })
+    },
+
+    getQustionReplyList(rId,type) {
+      return request({
+        url: `/home/eduask/getQustionReplyList/${rId}/${type}`,
+        method: 'get',
       })
     },
 }

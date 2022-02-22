@@ -203,11 +203,38 @@
         <div class="ask-detail-right">
           <div>
             <div class="user_header">
-              <span class="addTitle">
-                <i class="icon icon_info"></i>
-                点击登录
-              </span>
+              <span class="addTitle"><i class="icon icon_info"></i>{{loginTitle}}</span>
               <span class="addQuestion">提问题</span>
+            </div>
+
+            <div class="user-center-info" v-if="this.isLogin">
+               <ul class="fa-info-list">
+                 <li class="fa-infolist-item">
+                   <span>收益(元)</span>
+                   <em class="fa-num">0.00</em>
+                 </li>
+                   <li class="fa-infolist-item">
+                   <span>被采纳</span>
+                   <em class="fa-num">0</em>
+                 </li>
+                   <li class="fa-infolist-item">
+                   <span>提问</span>
+                   <em class="fa-num">0</em>
+                 </li>
+                   <li class="fa-infolist-item">
+                   <span>被点赞</span>
+                   <em class="fa-num">0</em>
+                 </li>
+                   <li class="fa-infolist-item">
+                   <span>回答</span>
+                   <em class="fa-num">0</em>
+                 </li>
+                   <li class="fa-infolist-item">
+                   <span>被评论</span>
+                   <em class="fa-num">0</em>
+                 </li>
+                
+               </ul>
             </div>
 
             <div class="ask-top-wrap">
@@ -257,9 +284,11 @@ export default {
       loginInfo: {},
       replyContent: "",
       uploadToken: "",
+      loginTitle: "点击登录",
       goodqustion: false,
       collectState: false,
       forbiden: true,
+      isLogin:false,
       collectIcon: "el-icon-star-off",
       collectString: "收藏",
     };
@@ -283,12 +312,19 @@ export default {
 
   mounted () {
     var qId = this.$route.params.id;
+    var token = localStorage.getItem("redclass_token");
+    var userStr = localStorage.getItem("redclass_user");
+    if(!(token && token != "undefined") || !(userStr && userStr != "undefined") ) {
+      this.isLogin = false;
+    } else {
+      this.loginTitle = "我的问答";
+      this.isLogin = true;
+    }
     this.init_wangeditor();
     this.getUploadImageToken(false);
     this.getUserGoodQustionState(qId);
     this.getUserQustionCollectState(qId);
     this.getUserGoodReplyState(qId);
-
     window.gotoPage = {
       path: `/faquestion/` + qId,
     };
@@ -468,8 +504,7 @@ export default {
     },
 
     getUploadImageToken (isForce) {
-      var token = localStorage.getItem("redclass_token");
-      if (!(token && token != "undefined")) {
+      if (!this.isLogin) {
         if (isForce) {
           this.$message({
             message: "回答问题需要登录，正在跳转登录界面中！",
@@ -483,10 +518,6 @@ export default {
           });
         }
         return;
-      }
-      var userStr = localStorage.getItem("redclass_user");
-      if (userStr && userStr != "undefined") {
-        this.loginInfo = JSON.parse(userStr);
       }
       askApi.getUploadImageToken().then((response) => {
         this.uploadToken = response.data.token;
@@ -663,6 +694,54 @@ export default {
 </script>
 
 <style>
+
+.user-center-info {
+  background: #fff;
+      padding-left: 20px;
+    padding-top: 15px;
+        border-bottom: 1px solid #f0f0f2;
+}
+
+.user-center-info  .fa-info-list {
+      display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.user-center-info  .fa-info-list .fa-infolist-item {
+   margin-right: 56px;
+    margin-bottom: 16px;
+    width: 98px;
+    height: 22px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #222226;
+    line-height: 22px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.user-center-info  .fa-info-list .fa-infolist-item .fa-num {
+    padding: 0 4px;
+    background-color: #f5f6f7;
+    font-size: 15px;
+    color: #777888;
+}
+
 .vote_span.vote_span.like i {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAhBJREFUWEfFlr1rFFEUxc/Jexs1rGgQ0TIgIgiCOrEQsm3AxmoniKCIiFhZ2Cls4weWYiXEBIsI0XmRNPoP6DZK3kQlINhYCIJiiihB4nxc2aDLZI2ZGcnum2qYOe+e35t3595LOL7o2B//BSD+wWosA1cJqYH4TuBp3yAmOG6jshsqDSD+8W0Jfr4A4GXN+oCQsRrl7KvFMhClAZK6d0+IS+ubyJQ24dmuAUh9+ERKeSZY/+gI/FDGDnQFQM4NbU2Xdy0IsO9fBgSWlLE7uwIQ1b0GiesbB5c5bcJjmw4gpw8NJlH/BwA7NgpOYFIZe2HTAZL68C2hXMsNTLmog/B+ri4jyP0L5OSB7cmW6se83eeZthKUQDNO0eh/Yl/+0ecCJGPeZRHczTMo+p6QlZQyWgnmn7fWtAFi32sVl5HfgZra2FrrPvGPvhdwf1GDIjoCb5SxhzsBJLtYG7sKF/vemudFDIpolMZuTtuv2S/QW4A42sPZt19cASxrY6vOjoDAa2XsEZcARhk75gxAiNuVwK4WNjc5IHJez4QPnAEIUKsY23QGoPTKXk4vfHYCQOCbMrbdVXueAwRCZWx7nuw5ACCPtQlP/dUNO2t+t3oBiZsqsA1nAKCc0UH40BVApFQ6xEfzn5wAKPIKg7k72XadO5B0DCpFWv1ajSAm8U4EN/SMNZ0Bckey8o7lVjgH+AVoSwkwj5cq7AAAAABJRU5ErkJggg==);
 }
@@ -941,11 +1020,11 @@ export default {
   text-align: center;
   margin-top: 10px;
   cursor: pointer;
-  width: 94px;
-  height: 30px;
+  width: 82px;
+  height: 28px;
   background: #fc5531;
   border-radius: 16px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   color: #fff;
   line-height: 30px;
@@ -970,7 +1049,7 @@ export default {
 
 .user_header .addTitle {
   height: 48px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #222226;
   line-height: 48px;

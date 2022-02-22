@@ -1221,7 +1221,7 @@ a.current-2 .lh-p-icon {
 .h-r-s-box input {
   border: 1px solid #e8e8e8;
   border-radius: 20px;
-  color: #aaa;
+  color: #666;
   padding: 0 15px;
   font-family: "Microsoft YaHei";
   width: 175px;
@@ -1229,6 +1229,7 @@ a.current-2 .lh-p-icon {
   font-size: 12px;
   line-height: 30px;
   transition: 0.3s;
+  font-weight: 400;
   -webkit-transition: 0.3s;
 }
 .h-r-s-box .s-btn {

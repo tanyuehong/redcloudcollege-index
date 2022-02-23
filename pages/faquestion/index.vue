@@ -436,6 +436,15 @@ export default {
       typeIndex: 0,
     };
   },
+
+  asyncData ({ params, error }) {
+    return askApi.getHomeAskQuestionList(params.id).then((response) => {
+      return {
+        qdetail: response.data.qdetail,
+        replyList: response.data.replyList,
+      }
+    })
+  },
   mounted () {
     this.getHomeQuestionList(1);
   },

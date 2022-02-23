@@ -8,4 +8,13 @@ export default {
       method: 'get',
     })
   },
+
+  //讲师详情的方法
+  getHomeAskQuestionList(parm) {
+      return request({
+        url: `/home/eduask/questionlist`,
+        method: 'post',
+        data:parm,
+      })
+   },
 }

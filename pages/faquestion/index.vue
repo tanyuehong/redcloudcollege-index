@@ -425,36 +425,30 @@
 
 <script>
 import askApi from "@/api/askqustion";
+import askServerApi from "@/api/askserver";
 
 export default {
   data () {
     return {
       activeIndex: "1",
-      list: [],
-      qustionType: [],
       tagList: [],
       typeIndex: 0,
     };
   },
 
   asyncData ({ params, error }) {
-    return askApi.getHomeAskQuestionList(params.id).then((response) => {
+    return askServerApi.getHomeAskQuestionList({ 'type': 1, 'qtype': '' }).then((response) => {
       return {
-        qdetail: response.data.qdetail,
-        replyList: response.data.replyList,
+        list:response.data.list,
+        qustionType:response.data.qustionType,
       }
     })
   },
+
   mounted () {
-    this.getHomeQuestionList(1);
   },
+
   methods: {
-    getHomeQuestionList (type) {
-      askApi.getHomeAskQuestionList({ 'type': type, 'qtype': '' }).then((response) => {
-        this.list = response.data.list;
-        this.qustionType = response.data.qustionType;
-      });
-    },
     qustionTypeClick (typeId, index) {
       this.typeIndex = index;
       window.console.log('+++' + typeId + '+++' + index);

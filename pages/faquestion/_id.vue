@@ -86,7 +86,7 @@
                   <span class="answer_span"
                         @click="answerBtnClick"><i class="icon ic_question_reply"></i>写回答</span>
                   <li class="up_down_wrap wrapdisLike ask-info-item">
-                    <span class="vote_span disLike"
+                    <span class="vote_span disLike fbselect"
                           @click="goodQustionClick"
                           v-bind:class="{ like: goodqustion }">
 
@@ -138,7 +138,7 @@
                        v-html="item.content"></div>
 
                   <div class="reply_content_tool">
-                    <span class="mr20px"
+                    <span class="mr20px fbselect"
                           @click="repplaybtnclinck(item,index)">
                       <i class="icon icon_comment"></i>
                       评论
@@ -177,13 +177,15 @@
                               v-on:after-enter="afterEnter"
                               v-on:leave="leave"
                               v-bind:css="false">
-                    <div :id="item.replyEdortId"
+                    <div :id="'replayedtor' + index"
                          class="replay-editor"
-                         v-if="item.showeditor" :key="item.id">
+                         v-if="item.showeditor"
+                         :key="item.id">
                     </div>
                   </transition>
 
-                  <div class="reply-comment-tool" v-if="item.showeditor">
+                  <div class="reply-comment-tool"
+                       v-if="item.showeditor">
                     <span @click="repplaybtnclinck(item,index)">取消</span>
                     <div class="comment-btn">评论</div>
                   </div>
@@ -212,34 +214,35 @@
               <span class="addQuestion">提问题</span>
             </div>
 
-            <div class="user-center-info" v-if="this.isLogin">
-               <ul class="fa-info-list">
-                 <li class="fa-infolist-item">
-                   <span>收益(元)</span>
-                   <em class="fa-num">0.00</em>
-                 </li>
-                   <li class="fa-infolist-item">
-                   <span>被采纳</span>
-                   <em class="fa-num">0</em>
-                 </li>
-                   <li class="fa-infolist-item">
-                   <span>提问</span>
-                   <em class="fa-num">0</em>
-                 </li>
-                   <li class="fa-infolist-item">
-                   <span>被点赞</span>
-                   <em class="fa-num">0</em>
-                 </li>
-                   <li class="fa-infolist-item">
-                   <span>回答</span>
-                   <em class="fa-num">0</em>
-                 </li>
-                   <li class="fa-infolist-item">
-                   <span>被评论</span>
-                   <em class="fa-num">0</em>
-                 </li>
-                
-               </ul>
+            <div class="user-center-info"
+                 v-if="this.isLogin">
+              <ul class="fa-info-list">
+                <li class="fa-infolist-item">
+                  <span>收益(元)</span>
+                  <em class="fa-num">0.00</em>
+                </li>
+                <li class="fa-infolist-item">
+                  <span>被采纳</span>
+                  <em class="fa-num">0</em>
+                </li>
+                <li class="fa-infolist-item">
+                  <span>提问</span>
+                  <em class="fa-num">0</em>
+                </li>
+                <li class="fa-infolist-item">
+                  <span>被点赞</span>
+                  <em class="fa-num">0</em>
+                </li>
+                <li class="fa-infolist-item">
+                  <span>回答</span>
+                  <em class="fa-num">0</em>
+                </li>
+                <li class="fa-infolist-item">
+                  <span>被评论</span>
+                  <em class="fa-num">0</em>
+                </li>
+
+              </ul>
             </div>
 
             <div class="ask-top-wrap">
@@ -293,7 +296,7 @@ export default {
       goodqustion: false,
       collectState: false,
       forbiden: true,
-      isLogin:false,
+      isLogin: false,
       collectIcon: "el-icon-star-off",
       collectString: "收藏",
     };
@@ -319,35 +322,28 @@ export default {
     var qId = this.$route.params.id;
     var token = localStorage.getItem("redclass_token");
     var userStr = localStorage.getItem("redclass_user");
-    if(!(token && token != "undefined") || !(userStr && userStr != "undefined") ) {
+    if (!(token && token != "undefined") || !(userStr && userStr != "undefined")) {
       this.isLogin = false;
     } else {
       this.loginTitle = "我的问答";
       this.isLogin = true;
-    }
+    };
     window.myVueComm = this;
     setTimeout(function () {
-         myVueComm.init_wangeditor();
+      myVueComm.init_wangeditor();
     }, 10)
     this.getUploadImageToken(false);
     this.getUserGoodQustionState(qId);
     this.getUserQustionCollectState(qId);
-    this.getUserGoodReplyState(qId);
-    this.updateItemReplyEditorId();
+    this.getUserGoodReplyState();
     window.gotoPage = {
       path: `/faquestion/` + qId,
     };
   },
 
-  computed: {
-    replyEditorId(index) {
-      return "#replayedtor"+index;
-    } 
-  },
-
   methods: {
-    updateRelpyState (rId,type) {
-      useract.updateRelpyState(rId,type).then((response) => {
+    updateRelpyState (rId, type) {
+      useract.updateRelpyState(rId, type).then((response) => {
       })
     },
     goodReplyClick (item) {
@@ -356,16 +352,16 @@ export default {
         if (item.goodreply) {
           item.goodreply = false;
           item.good = item.good - 1;
-          this.updateRelpyState(item.id,3);
+          this.updateRelpyState(item.id, 3);
         } else {
           item.good = item.good + 1;
           item.goodreply = true;
           if (item.badreply) {
             item.badreply = false;
             item.bad = item.bad - 1;
-            this.updateRelpyState(item.id,6);
+            this.updateRelpyState(item.id, 6);
           } else {
-            this.updateRelpyState(item.id,1);
+            this.updateRelpyState(item.id, 1);
           }
         }
       }
@@ -380,16 +376,16 @@ export default {
         if (item.badreply) {
           item.badreply = false;
           item.bad = item.bad - 1;
-          this.updateRelpyState(item.id,4);
+          this.updateRelpyState(item.id, 4);
         } else {
           item.bad = item.bad + 1;
           item.badreply = true;
           if (item.good) {
             item.good = item.good--;
             item.goodreply = false;
-            this.updateRelpyState(item.id,5);
+            this.updateRelpyState(item.id, 5);
           } else {
-            this.updateRelpyState(item.id,2);
+            this.updateRelpyState(item.id, 2);
           }
         }
       }
@@ -417,6 +413,7 @@ export default {
         this.qdetail.good--;
         this.cancleUserGoodQustion();
       } else {
+        this.qdetail.good++;
         this.addUserGoodQustion();
       }
       this.goodqustion = !this.goodqustion;
@@ -430,7 +427,7 @@ export default {
       })
     },
 
-    getUserGoodReplyState (rIds) {
+    getUserGoodReplyState () {
       var list = [];
       for (var j = 0; j < this.replyList.length; j++) {
         list.push(this.replyList[j].id);
@@ -442,10 +439,10 @@ export default {
           var rItem = this.replyList[j];
           for (var i = 0; i < goodList.length; i++) {
             if (goodList[i].rid == rItem.id) {
-              if(goodList[i].type == 1) {
+              if (goodList[i].type == 1) {
                 rItem.goodreply = true;
-              } 
-              if(goodList[i].type == 2) {
+              }
+              if (goodList[i].type == 2) {
                 rItem.badreply = true;
               }
               break;
@@ -496,42 +493,32 @@ export default {
 
     leave: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '0px' }, { duration: 300 }, { complete: done })
+      Velocity(el, { height: '0px' }, 300, function () { done() })
     },
 
     clickAnserType (type) {
-      if(type == this.answertype) {
-        return ;
+      if (type == this.answertype) {
+        return;
       }
       this.answertype = type;
-       for (var j = 0; j < this.replyList.length; j++) {
-         var item = this.replyList[j];
-         item.showeditor = false;
-         if(item.editor) {
-             item.editor.destroy();
-             item.editor = null;
-          }
-       }
-
-      if(this.answertype) {
-         useract.getQustionReplyList(this.qdetail.qid,1).then((response) => {
-           this.replyList = response.data.replyList;
-           this.updateItemReplyEditorId();
-         })
-      } else {
-        useract.getQustionReplyList(this.qdetail.qid,2).then((response) => {
-           this.replyList = response.data.replyList;
-           this.updateItemReplyEditorId();
-         })
+      for (var j = 0; j < this.replyList.length; j++) {
+        var item = this.replyList[j];
+        item.showeditor = false;
+        if (item.editor) {
+          item.editor.destroy();
+          item.editor = null;
+        }
       }
-    },
 
-    updateItemReplyEditorId () {
-        for (var j = 0; j < this.replyList.length; j++) {
-         var item = this.replyList[j];
-         item.replyEdortId =  "replayedtor"+j;
-       }
-      
+      if (this.answertype) {
+        useract.getQustionReplyList(this.qdetail.qid, 1).then((response) => {
+          this.replyList = response.data.replyList;
+        })
+      } else {
+        useract.getQustionReplyList(this.qdetail.qid, 2).then((response) => {
+          this.replyList = response.data.replyList;
+        })
+      }
     },
 
     getUploadImageToken (isForce) {
@@ -639,7 +626,6 @@ export default {
 
     repplaybtnclinck (item, index) {
       item.commnetId = "#replayedtor" + index;
-      window.console.log("ddddd");
       window.replyItem = item;
       if (!item.editor) {
         item.showeditor = true;
@@ -653,8 +639,6 @@ export default {
     init_replyeditor () {
       window.myVueComm = this;
       var item = window.replyItem;
-
-      window.console.log("dddd" + item.commnetId);
       let editor = this.$wangeditor(item.commnetId);
       item.editor = editor;
       editor.config.uploadImgMaxLength = 1;
@@ -725,86 +709,81 @@ export default {
 </script>
 
 <style>
-
 .reply-comment-tool {
   height: 50px;
   padding-left: 646px;
 }
 
 .reply-comment-tool span {
-  color:#666;
+  color: #666;
   margin-right: 12px;
   font-size: 12px;
   cursor: pointer;
 }
 
 .reply-comment-tool .comment-btn {
-    bottom: 6px;
-    right: 12px;
-    z-index: 2;
-    display: inline-block;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    width: 56px;
-    height: 28px;
-    border-radius: 4px;
-    padding: 0;
-    background: #fc5531;
-    font-size: 12px;
-    font-weight: 400;
-    color: #fff;
-    line-height: 28px;
-    cursor: pointer;
-    text-align: center;
+  bottom: 6px;
+  right: 12px;
+  z-index: 2;
+  display: inline-block;
+  width: 56px;
+  height: 28px;
+  border-radius: 4px;
+  padding: 0;
+  background: #fc5531;
+  font-size: 12px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 28px;
+  cursor: pointer;
+  text-align: center;
 }
 
 .user-center-info {
   background: #fff;
-      padding-left: 20px;
-    padding-top: 15px;
-        border-bottom: 1px solid #f0f0f2;
+  padding-left: 20px;
+  padding-top: 15px;
+  border-bottom: 1px solid #f0f0f2;
 }
 
-.user-center-info  .fa-info-list {
-      display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
-    align-items: flex-start;
+.user-center-info .fa-info-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
 }
 
-.user-center-info  .fa-info-list .fa-infolist-item {
-   margin-right: 56px;
-    margin-bottom: 16px;
-    width: 98px;
-    height: 22px;
-    font-size: 14px;
-    font-weight: 400;
-    color: #222226;
-    line-height: 22px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+.user-center-info .fa-info-list .fa-infolist-item {
+  margin-right: 56px;
+  margin-bottom: 16px;
+  width: 98px;
+  height: 22px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #222226;
+  line-height: 22px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
-.user-center-info  .fa-info-list .fa-infolist-item .fa-num {
-    padding: 0 4px;
-    background-color: #f5f6f7;
-    font-size: 15px;
-    color: #777888;
+.user-center-info .fa-info-list .fa-infolist-item .fa-num {
+  padding: 0 4px;
+  background-color: #f5f6f7;
+  font-size: 15px;
+  color: #777888;
 }
 
 .vote_span.vote_span.like i {

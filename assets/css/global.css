@@ -13,6 +13,13 @@ body {
   background-color: #f6f6f6;
 }
 
+.fbselect {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .comactive {
   color: #409eff;
 }

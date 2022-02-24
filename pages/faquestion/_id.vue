@@ -177,11 +177,16 @@
                               v-on:after-enter="afterEnter"
                               v-on:leave="leave"
                               v-bind:css="false">
-                    <div :id="'replayedtor'+index"
+                    <div :id="item.replyEdortId"
                          class="replay-editor"
-                         v-if="item.showeditor">
+                         v-if="item.showeditor" :key="item.id">
                     </div>
                   </transition>
+
+                  <div class="reply-comment-tool" v-if="item.showeditor">
+                    <span @click="repplaybtnclinck(item,index)">取消</span>
+                    <div class="comment-btn">评论</div>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -320,26 +325,31 @@ export default {
       this.loginTitle = "我的问答";
       this.isLogin = true;
     }
-    this.init_wangeditor();
+    window.myVueComm = this;
+    setTimeout(function () {
+         myVueComm.init_wangeditor();
+    }, 10)
     this.getUploadImageToken(false);
     this.getUserGoodQustionState(qId);
     this.getUserQustionCollectState(qId);
     this.getUserGoodReplyState(qId);
+    this.updateItemReplyEditorId();
     window.gotoPage = {
       path: `/faquestion/` + qId,
     };
   },
 
   computed: {
+    replyEditorId(index) {
+      return "#replayedtor"+index;
+    } 
   },
 
   methods: {
-    
     updateRelpyState (rId,type) {
       useract.updateRelpyState(rId,type).then((response) => {
       })
     },
-
     goodReplyClick (item) {
       if (this.forbiden) {
         this.forbiden = false;
@@ -360,7 +370,7 @@ export default {
         }
       }
       setTimeout(function () {
-        window.myVueComm.forbiden = true
+        window.myVueComm.forbiden = true;
       }, 500)
     },
 
@@ -431,7 +441,6 @@ export default {
         for (var j = 0; j < this.replyList.length; j++) {
           var rItem = this.replyList[j];
           for (var i = 0; i < goodList.length; i++) {
-            window.console.log("ddddd");
             if (goodList[i].rid == rItem.id) {
               if(goodList[i].type == 1) {
                 rItem.goodreply = true;
@@ -491,16 +500,38 @@ export default {
     },
 
     clickAnserType (type) {
+      if(type == this.answertype) {
+        return ;
+      }
       this.answertype = type;
+       for (var j = 0; j < this.replyList.length; j++) {
+         var item = this.replyList[j];
+         item.showeditor = false;
+         if(item.editor) {
+             item.editor.destroy();
+             item.editor = null;
+          }
+       }
+
       if(this.answertype) {
          useract.getQustionReplyList(this.qdetail.qid,1).then((response) => {
            this.replyList = response.data.replyList;
+           this.updateItemReplyEditorId();
          })
       } else {
         useract.getQustionReplyList(this.qdetail.qid,2).then((response) => {
            this.replyList = response.data.replyList;
+           this.updateItemReplyEditorId();
          })
       }
+    },
+
+    updateItemReplyEditorId () {
+        for (var j = 0; j < this.replyList.length; j++) {
+         var item = this.replyList[j];
+         item.replyEdortId =  "replayedtor"+j;
+       }
+      
     },
 
     getUploadImageToken (isForce) {
@@ -557,7 +588,6 @@ export default {
     },
 
     init_wangeditor () {
-      window.myVueComm = this;
       let editor = this.$wangeditor("#answer-editor");
       this.editor = editor;
       editor.config.uploadImgMaxLength = 1;
@@ -609,6 +639,7 @@ export default {
 
     repplaybtnclinck (item, index) {
       item.commnetId = "#replayedtor" + index;
+      window.console.log("ddddd");
       window.replyItem = item;
       if (!item.editor) {
         item.showeditor = true;
@@ -629,7 +660,7 @@ export default {
       editor.config.uploadImgMaxLength = 1;
       editor.config.uploadImgServer = "/api/ucenter/uploadImage";
       editor.config.uploadFileName = "file";
-      editor.config.placeholder = "请输入回复";
+      editor.config.placeholder = "请用专业明晰的语言，指出问题，提出建议";
       editor.config.height = 150;
 
       editor.config.onfocus = function (newHtml) {
@@ -694,6 +725,40 @@ export default {
 </script>
 
 <style>
+
+.reply-comment-tool {
+  height: 50px;
+  padding-left: 646px;
+}
+
+.reply-comment-tool span {
+  color:#666;
+  margin-right: 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.reply-comment-tool .comment-btn {
+    bottom: 6px;
+    right: 12px;
+    z-index: 2;
+    display: inline-block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 56px;
+    height: 28px;
+    border-radius: 4px;
+    padding: 0;
+    background: #fc5531;
+    font-size: 12px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 28px;
+    cursor: pointer;
+    text-align: center;
+}
 
 .user-center-info {
   background: #fff;
@@ -782,6 +847,7 @@ export default {
   height: 190px;
   margin-left: 12px;
   margin-bottom: 12px;
+  position: relative;
 }
 
 .icon_ask_report {

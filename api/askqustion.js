@@ -26,13 +26,6 @@ export default {
       data:parm,
     })
   },
-  // 获取问答详情网页
-  getQuestionDetails(id) {
-    return request({
-      url: '/home/eduask/getquestiondetail/' + id,
-      method: 'get',
-    })
-  },
 
   getUploadImageToken() {
     return request({

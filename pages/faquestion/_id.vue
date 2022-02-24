@@ -26,7 +26,7 @@
                 </span>
                 <span class="qustion-good-num"> 收藏 {{qdetail.collect}} </span>
 
-                <span class="qustion-top-item top-tips"> 已解决 </span>
+                <span class="qustion-top-item top-tips">已解决</span>
                 <div class="qustion-right-view">
                   浏览 {{ qdetail.readcount }}
                 </div>
@@ -67,7 +67,8 @@
                 <div class="ui_center_button">
                   <el-button plain
                              type="primary"
-                             :icon="collectIcon" @click="collectBtnClick">{{collectString}}</el-button>
+                             :icon="collectIcon"
+                             @click="collectBtnClick">{{collectString}}</el-button>
                   <div class="ui_group_button">
                     <el-dropdown class="sort">
                       <el-button plain
@@ -85,12 +86,11 @@
                   <span class="answer_span"
                         @click="answerBtnClick"><i class="icon ic_question_reply"></i>写回答</span>
                   <li class="up_down_wrap wrapdisLike ask-info-item">
-                    <span class="vote_span disLike"
+                    <span class="vote_span disLike fbselect"
                           @click="goodQustionClick"
                           v-bind:class="{ like: goodqustion }">
 
-                      <i class="icon icon_vote_up"></i>好问题
-                      <em class="qustion-good-num"
+                      <i class="icon icon_vote_up"></i>好问题<em class="qustion-good-num"
                           v-if="qdetail.good>0">{{qdetail.good}}</em>
                       <!---->
                     </span>
@@ -138,18 +138,20 @@
                        v-html="item.content"></div>
 
                   <div class="reply_content_tool">
-                    <span class="mr20px"
+                    <span class="mr20px fbselect"
                           @click="repplaybtnclinck(item,index)">
                       <i class="icon icon_comment"></i>
                       评论
                     </span>
                     <div class="vote-box vote_like">
-                      <span data-report-click='{"spm":"3001.5631"}'
-                            class="vote_span vote_spaned"><i class="icon icon_vote_up"></i>
-                        解决
-                        <em class="qustion-good-num">{{item.good}}</em></span>
-                      <span data-report-click='{"spm":"3001.5632"}'
-                            class="vote_span2"><i class="icon icon_vote_down"></i>无用
+                      <span v-bind:class="{ like: item.goodreply }"
+                            @click="goodReplyClick(item)"
+                            class="vote_span vote_spaned">
+                        <i class="icon icon_vote_up"></i>解决<em class="qustion-good-num">{{item.good}}</em></span>
+                      <span class="vote_span2"
+                            @click="badReplyClick(item)"
+                            v-bind:class="{ like: item.badreply}"><i class="icon icon_vote_down"></i>无用<em class="qustion-good-num"
+                            v-if="item.bad>0">{{item.bad}}</em>
                         <!---->
                       </span>
                     </div>
@@ -175,11 +177,18 @@
                               v-on:after-enter="afterEnter"
                               v-on:leave="leave"
                               v-bind:css="false">
-                    <div :id="'replayedtor'+index"
+                    <div :id="'replayedtor' + index"
                          class="replay-editor"
-                         v-if="item.showeditor">
+                         v-if="item.showeditor"
+                         :key="item.id">
                     </div>
                   </transition>
+
+                  <div class="reply-comment-tool"
+                       v-if="item.showeditor">
+                    <span @click="repplaybtnclinck(item,index)">取消</span>
+                    <div class="comment-btn">评论</div>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -201,11 +210,39 @@
         <div class="ask-detail-right">
           <div>
             <div class="user_header">
-              <span class="addTitle">
-                <i class="icon icon_info"></i>
-                点击登录
-              </span>
+              <span class="addTitle"><i class="icon icon_info"></i>{{loginTitle}}</span>
               <span class="addQuestion">提问题</span>
+            </div>
+
+            <div class="user-center-info"
+                 v-if="this.isLogin">
+              <ul class="fa-info-list">
+                <li class="fa-infolist-item">
+                  <span>收益(元)</span>
+                  <em class="fa-num">0.00</em>
+                </li>
+                <li class="fa-infolist-item">
+                  <span>被采纳</span>
+                  <em class="fa-num">0</em>
+                </li>
+                <li class="fa-infolist-item">
+                  <span>提问</span>
+                  <em class="fa-num">0</em>
+                </li>
+                <li class="fa-infolist-item">
+                  <span>被点赞</span>
+                  <em class="fa-num">0</em>
+                </li>
+                <li class="fa-infolist-item">
+                  <span>回答</span>
+                  <em class="fa-num">0</em>
+                </li>
+                <li class="fa-infolist-item">
+                  <span>被评论</span>
+                  <em class="fa-num">0</em>
+                </li>
+
+              </ul>
             </div>
 
             <div class="ask-top-wrap">
@@ -242,24 +279,26 @@
 
 <script>
 import askApi from "@/api/askqustion";
+import askServerApi from "@/api/askserver";
 import useract from '@/api/useract'
 const qiniu = require("qiniu-js");
 
 export default {
   data () {
     return {
-      qdetail: {},
       checked: true,
       answertype: true,
       editor: {},
       loginInfo: {},
-      replyList: [],
       replyContent: "",
       uploadToken: "",
+      loginTitle: "点击登录",
       goodqustion: false,
       collectState: false,
-      collectIcon:"el-icon-star-off",
-      collectString:"收藏",
+      forbiden: true,
+      isLogin: false,
+      collectIcon: "el-icon-star-off",
+      collectString: "收藏",
     };
   },
   head () {
@@ -269,43 +308,112 @@ export default {
       ],
     }
   },
+
+  asyncData ({ params, error }) {
+    return askServerApi.getQuestionDetails(params.id).then((response) => {
+      return {
+        qdetail: response.data.qdetail,
+        replyList: response.data.replyList,
+      }
+    })
+  },
+
   mounted () {
     var qId = this.$route.params.id;
-    this.getQustionDetail(qId);
-    this.init_wangeditor();
+    var token = localStorage.getItem("redclass_token");
+    var userStr = localStorage.getItem("redclass_user");
+    if (!(token && token != "undefined") || !(userStr && userStr != "undefined")) {
+      this.isLogin = false;
+    } else {
+      this.loginTitle = "我的问答";
+      this.isLogin = true;
+    };
+    window.myVueComm = this;
+    setTimeout(function () {
+      myVueComm.init_wangeditor();
+    }, 10)
     this.getUploadImageToken(false);
     this.getUserGoodQustionState(qId);
     this.getUserQustionCollectState(qId);
-
+    this.getUserGoodReplyState();
     window.gotoPage = {
       path: `/faquestion/` + qId,
     };
   },
 
-  computed: {
-  },
-
   methods: {
-    collectBtnClick() {
-      if(this.collectState) {
+    updateRelpyState (rId, type) {
+      useract.updateRelpyState(rId, type).then((response) => {
+      })
+    },
+    goodReplyClick (item) {
+      if (this.forbiden) {
+        this.forbiden = false;
+        if (item.goodreply) {
+          item.goodreply = false;
+          item.good = item.good - 1;
+          this.updateRelpyState(item.id, 3);
+        } else {
+          item.good = item.good + 1;
+          item.goodreply = true;
+          if (item.badreply) {
+            item.badreply = false;
+            item.bad = item.bad - 1;
+            this.updateRelpyState(item.id, 6);
+          } else {
+            this.updateRelpyState(item.id, 1);
+          }
+        }
+      }
+      setTimeout(function () {
+        window.myVueComm.forbiden = true;
+      }, 500)
+    },
+
+    badReplyClick (item) {
+      if (this.forbiden) {
+        this.forbiden = false;
+        if (item.badreply) {
+          item.badreply = false;
+          item.bad = item.bad - 1;
+          this.updateRelpyState(item.id, 4);
+        } else {
+          item.bad = item.bad + 1;
+          item.badreply = true;
+          if (item.good) {
+            item.good = item.good--;
+            item.goodreply = false;
+            this.updateRelpyState(item.id, 5);
+          } else {
+            this.updateRelpyState(item.id, 2);
+          }
+        }
+      }
+      setTimeout(function () {
+        window.myVueComm.forbiden = true
+      }, 500)
+    },
+    collectBtnClick () {
+      if (this.collectState) {
         this.cancleUserQustionCollect();
         this.$message({
-            message: "取消收藏成功！",
-            type: "success",
-            duration: 2000,
-          });
+          message: "取消收藏成功！",
+          type: "success",
+          duration: 2000,
+        });
       } else {
         this.addUserQustionCollect();
       }
-     this.collectState  = ! this.collectState;
-     this.collectIcon   =  this.collectState ? "el-icon-star-on":"el-icon-star-off";
-     this.collectString = this.collectState ? "已收藏":"收藏";
+      this.collectState = !this.collectState;
+      this.collectIcon = this.collectState ? "el-icon-star-on" : "el-icon-star-off";
+      this.collectString = this.collectState ? "已收藏" : "收藏";
     },
     goodQustionClick () {
       if (this.goodqustion) {
         this.qdetail.good--;
         this.cancleUserGoodQustion();
       } else {
+        this.qdetail.good++;
         this.addUserGoodQustion();
       }
       this.goodqustion = !this.goodqustion;
@@ -314,8 +422,33 @@ export default {
     getUserQustionCollectState (qId) {
       useract.getUserQustionCollectState(qId).then((response) => {
         this.collectState = response.data.collectState;
-        this.collectIcon   =  this.collectState ? "el-icon-star-on":"el-icon-star-off";
-        this.collectString = this.collectState ? "已收藏":"收藏";
+        this.collectIcon = this.collectState ? "el-icon-star-on" : "el-icon-star-off";
+        this.collectString = this.collectState ? "已收藏" : "收藏";
+      })
+    },
+
+    getUserGoodReplyState () {
+      var list = [];
+      for (var j = 0; j < this.replyList.length; j++) {
+        list.push(this.replyList[j].id);
+      }
+      useract.getUserGoodReplyState(list).then((response) => {
+        var goodList = response.data.goodList;
+
+        for (var j = 0; j < this.replyList.length; j++) {
+          var rItem = this.replyList[j];
+          for (var i = 0; i < goodList.length; i++) {
+            if (goodList[i].rid == rItem.id) {
+              if (goodList[i].type == 1) {
+                rItem.goodreply = true;
+              }
+              if (goodList[i].type == 2) {
+                rItem.badreply = true;
+              }
+              break;
+            }
+          }
+        }
       })
     },
 
@@ -328,7 +461,7 @@ export default {
       useract.cancleUserQustionCollect(this.qdetail.qid).then((response) => {
       })
     },
-    
+
     getUserGoodQustionState (qId) {
       useract.getUserGoodQustionState(qId).then((response) => {
         this.goodqustion = response.data.goodqustion;
@@ -360,23 +493,36 @@ export default {
 
     leave: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '0px' }, { duration: 300 }, { complete: done })
+      Velocity(el, { height: '0px' }, 300, function () { done() })
     },
 
     clickAnserType (type) {
+      if (type == this.answertype) {
+        return;
+      }
       this.answertype = type;
-    },
+      for (var j = 0; j < this.replyList.length; j++) {
+        var item = this.replyList[j];
+        item.showeditor = false;
+        if (item.editor) {
+          item.editor.destroy();
+          item.editor = null;
+        }
+      }
 
-    getQustionDetail (qId) {
-      askApi.getQuestionDetails(qId).then((response) => {
-        this.qdetail = response.data.qdetail;
-        this.replyList = response.data.replyList;
-      });
+      if (this.answertype) {
+        useract.getQustionReplyList(this.qdetail.qid, 1).then((response) => {
+          this.replyList = response.data.replyList;
+        })
+      } else {
+        useract.getQustionReplyList(this.qdetail.qid, 2).then((response) => {
+          this.replyList = response.data.replyList;
+        })
+      }
     },
 
     getUploadImageToken (isForce) {
-      var token = localStorage.getItem("redclass_token");
-      if (!(token && token != "undefined")) {
+      if (!this.isLogin) {
         if (isForce) {
           this.$message({
             message: "回答问题需要登录，正在跳转登录界面中！",
@@ -390,10 +536,6 @@ export default {
           });
         }
         return;
-      }
-      var userStr = localStorage.getItem("redclass_user");
-      if (userStr && userStr != "undefined") {
-        this.loginInfo = JSON.parse(userStr);
       }
       askApi.getUploadImageToken().then((response) => {
         this.uploadToken = response.data.token;
@@ -430,11 +572,9 @@ export default {
             duration: 2000,
           });
         });
-      this.getQustionDetail(this.qdetail.qid);
     },
 
     init_wangeditor () {
-      window.myVueComm = this;
       let editor = this.$wangeditor("#answer-editor");
       this.editor = editor;
       editor.config.uploadImgMaxLength = 1;
@@ -499,14 +639,12 @@ export default {
     init_replyeditor () {
       window.myVueComm = this;
       var item = window.replyItem;
-
-      window.console.log("dddd" + item.commnetId);
       let editor = this.$wangeditor(item.commnetId);
       item.editor = editor;
       editor.config.uploadImgMaxLength = 1;
       editor.config.uploadImgServer = "/api/ucenter/uploadImage";
       editor.config.uploadFileName = "file";
-      editor.config.placeholder = "请输入回复";
+      editor.config.placeholder = "请用专业明晰的语言，指出问题，提出建议";
       editor.config.height = 150;
 
       editor.config.onfocus = function (newHtml) {
@@ -571,16 +709,104 @@ export default {
 </script>
 
 <style>
+.reply-comment-tool {
+  height: 50px;
+  padding-left: 646px;
+}
+
+.reply-comment-tool span {
+  color: #666;
+  margin-right: 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.reply-comment-tool .comment-btn {
+  bottom: 6px;
+  right: 12px;
+  z-index: 2;
+  display: inline-block;
+  width: 56px;
+  height: 28px;
+  border-radius: 4px;
+  padding: 0;
+  background: #fc5531;
+  font-size: 12px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 28px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.user-center-info {
+  background: #fff;
+  padding-left: 20px;
+  padding-top: 15px;
+  border-bottom: 1px solid #f0f0f2;
+}
+
+.user-center-info .fa-info-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.user-center-info .fa-info-list .fa-infolist-item {
+  margin-right: 56px;
+  margin-bottom: 16px;
+  width: 98px;
+  height: 22px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #222226;
+  line-height: 22px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.user-center-info .fa-info-list .fa-infolist-item .fa-num {
+  padding: 0 4px;
+  background-color: #f5f6f7;
+  font-size: 15px;
+  color: #777888;
+}
+
 .vote_span.vote_span.like i {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAhBJREFUWEfFlr1rFFEUxc/Jexs1rGgQ0TIgIgiCOrEQsm3AxmoniKCIiFhZ2Cls4weWYiXEBIsI0XmRNPoP6DZK3kQlINhYCIJiiihB4nxc2aDLZI2ZGcnum2qYOe+e35t3595LOL7o2B//BSD+wWosA1cJqYH4TuBp3yAmOG6jshsqDSD+8W0Jfr4A4GXN+oCQsRrl7KvFMhClAZK6d0+IS+ubyJQ24dmuAUh9+ERKeSZY/+gI/FDGDnQFQM4NbU2Xdy0IsO9fBgSWlLE7uwIQ1b0GiesbB5c5bcJjmw4gpw8NJlH/BwA7NgpOYFIZe2HTAZL68C2hXMsNTLmog/B+ri4jyP0L5OSB7cmW6se83eeZthKUQDNO0eh/Yl/+0ecCJGPeZRHczTMo+p6QlZQyWgnmn7fWtAFi32sVl5HfgZra2FrrPvGPvhdwf1GDIjoCb5SxhzsBJLtYG7sKF/vemudFDIpolMZuTtuv2S/QW4A42sPZt19cASxrY6vOjoDAa2XsEZcARhk75gxAiNuVwK4WNjc5IHJez4QPnAEIUKsY23QGoPTKXk4vfHYCQOCbMrbdVXueAwRCZWx7nuw5ACCPtQlP/dUNO2t+t3oBiZsqsA1nAKCc0UH40BVApFQ6xEfzn5wAKPIKg7k72XadO5B0DCpFWv1ajSAm8U4EN/SMNZ0Bckey8o7lVjgH+AVoSwkwj5cq7AAAAABJRU5ErkJggg==);
 }
 .vote_span.vote_span.like {
-  color: #fc5533;
-  background: #fff;
-  border: 1px solid #fc5533;
+  color: #fc5533 !important;
+  background: #fff !important;
+  border: 1px solid #fc5533 !important;
 }
+
+.vote_span2.like {
+  color: #fc5533 !important;
+  background: #fff !important;
+  border: 1px solid #fc5533 !important;
+}
+
+.vote_span2.like i {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAltJREFUWEfFlj9oE1Ecx7/f9y5i0Q61otWl4KRzkqoBxVHdBJOhWhdxcXAUREStm4NDxUUcBDXQeyhCoYiTgiBt7nBQ0CgobnEQK1RDbO5+ksufXpO2SazJ3XS897vv9/Peu9/7/YiIH0bsjwaAl07cBHC8BjSrjXOx8t403jWvAEVC3ingFo37tlkgBBD3BVUgAqKNq6oAy+Ndu4c+IOgpykna7tOwTgOgnI5LeMIybjDXPL4xCPxU2LSL5nWxrtNXgIqpJk6Ed6HvAIS6qk1uMrIdIPlQ285EZAAA5izjHogMgOB3bZztkQEEP2JsYBuzr37UUr7K0o80rK9ag/tpnPnIAKDUaWs69ygyAJLXte1ciw4AyGrjnooMAGTOsp2xyAAILGjjDkUGEKTilsEh3n+x0Pda0EjFzcNb+eD5r3A/8F6AvbVt+aCNuy/oBzKJgojs3EgZbm1CmNfGqXtVpyV9cABWeU/1VrI+12u2l4lPiuDK/wIg4SuqNKdzT1b8A2sZSDo54sP/CkFMuNzC/QsQwbwiLtN2HrfUgvUEvXTinkDOtjMlcElZambVuDJ/08x/aT2OdqqV4xlPjfpLpY/tdoHkbW07FzqQbIR03JZ7mfgdEZxfX5wvLeMc6QmAnBkb9ot+XiDDaxmQ/KZtZ6QnAEFyZJLnIP7dStteb+HDZgQWtXEHewYgIvQyyVlAjq5uwmeWcY71DCC4LyZSO/xS6Y0Idq9cPQsqpg8zO/eppwABxHhq1Fv6M0XKIYCLgMwoUTdocoVuzDu6iLoV7Da+4zTsVrjT+L9M+xoweNULvAAAAABJRU5ErkJggg==);
+}
+
 .qustion-good-num {
-  margin-left: -2px;
+  margin-left: 2px;
 }
 .answer-list-item {
   margin-bottom: 16px;
@@ -600,6 +826,7 @@ export default {
   height: 190px;
   margin-left: 12px;
   margin-bottom: 12px;
+  position: relative;
 }
 
 .icon_ask_report {
@@ -636,6 +863,11 @@ export default {
   border-radius: 16px;
   border: 1px solid #e8e8ed;
   margin-right: 16px;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .reply_content_tool .vote-box span.vote_span {
@@ -833,11 +1065,11 @@ export default {
   text-align: center;
   margin-top: 10px;
   cursor: pointer;
-  width: 94px;
-  height: 30px;
+  width: 82px;
+  height: 28px;
   background: #fc5531;
   border-radius: 16px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   color: #fff;
   line-height: 30px;
@@ -862,7 +1094,7 @@ export default {
 
 .user_header .addTitle {
   height: 48px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #222226;
   line-height: 48px;
@@ -915,11 +1147,11 @@ export default {
 }
 
 .icon_vote_jubao {
-  background-image: url('https://img.redskt.com/asset/img/icon-ask-jubao.png');
-  vertical-align: middle;
-  height: 18px;
-  width: 18px;
-  margin-top: -2px;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAy5JREFUWEftl01oVFcUx//nTsyHNZHM0oWbUtRWaBdCXehGceHKilQodiONSmuhNZ2Ze964GGbhvHNnprEFbVEjbiyCUtquXEjd2EULLlqwtaW4cdFlQhM1iSb3yA1JGGLem48sBMmsz//c3/2fj3eHsIqfZbkT5E54d6dpKE1YKo1kJyaAs2eHx1aKsyy6ALBinlOnRrIDA0C5vLI+aFMBmN1DhXZBsc05/n85RBqAtbIRhPsEmhWxm5MumgpgWX4GsIdAX4rYXDsAzK6u0C8A3HbCezsCyBer7xivdwGd83Nme61W+LcxUVIP5PPVN0zG3wMo4w3tqFUKv3cEEEQFdpcIOgRC1cVsW2k2G4mDoqCg0arYY2ma1BIEIXM8qERs4K/EcfHvVgCiqLLVwxwlVRGJxpsCRJE7Oud1xJCeFom+SRIcP35hXTY79h5gDih0B4BNC7H/Eegu4H8aG8v+ePHiiWdJOZjjT7zSmYyh4Ti2V+YdKETuI1JcApQI9N3srDlRr+cfNyZhjg+qUg2E11NdUDwg0rxI9ENjXC5Xe62ry19Q6BGAVAnHqrG9vFSCYlEOz3mMAugH8JsT3hkSlEolMzOzPgx8LgAq6B4ZGjVqbnV39z0MMU+fTm325Pep1yGCbg8HEFDv6XnC5XLZhxjL8iuAdwFMZgyGKhW+/sIemK+dN9dAeLS43ZhdVaH5cA4Uw729U98uJl3uRICdnu77GIQRAN0EqonYwgLAHVVsyBj/QWMvNVlE8UGF+R7QZwTdLxLdbqUJmeM9CroJ0DqCP7S8HI05EgFCww0Ojt+fr7niU+f4fCuHL8ZYKydBOAfFg/HxwW1JjZkIwBy/r6DroeZ9PU/eTrI9CSqUY2pm/R+hJwh6WCS6sVJsCoC7Ot+xxnzuKoWv27n9kgvF6mfw/qswWSL2w7YALEtYOlsMdb0Vx7m/OgGIovqbXmf/BPCPE97aLsBEGMnenv7+cvnko04ASqXzG6ZnJifD6DnhgXYBUr/1rQI1ezMk9kAz4RrAmgNrDqw58Oo5sPDG39XqzVYZ98vii2tpFb90gFXeqGN50z8mHWduUfgc77mmMHr1wngAAAAASUVORK5CYII=);
+  margin-top: -4px;
 }
 
 .icon_vote_up {
@@ -931,7 +1163,7 @@ export default {
 .icon_vote_down {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAyFJREFUWEfFl9tvDFEcx7+/2Y1dSRVtoiQe1F9AI0TE5YW4JhJRESJxSZqIkLjsOdPFdNTuOWfJhgYhggfiAS/EJR5d4vrQ0HiTkJBWQ7Vx3W2785NBF0WzW90xT5Mzv/l+P3POnPn+hvCfD/rP/sgDOM65Ydnssz0gXsOMcUMFRoQMgBawtU/r2Pn+unkAKY1msBgq4z/pWIRtSsn0z9d+ANi61X9yi6xFSsWu9hUJqdk/N1oOarkc51Q02/N6Ndg7xkw5wogqrTd29unnRf9m9K8AfUZS6ksMLIGFVSYpzwYPUG8a2GOHLEropNgZPIA0qxh8BkTnjBIrAgeIx83U3hzfJ6BZa1kTOIDjpCsy2e4OgN4bLcoDB/ANhW06wFwRjVjjXDf2yh8LbBf4ZtLW95gxzSJrllKxW8EDSH2agdVkWet1MnYycABhp3aDPRcEbZS0AweQMrWS4Z0F0QWjxPLAAeJxM6U3xw8JeKS1nBQ4gNB6JLrQBdBHo0XZLwDyexjBwmKTlFeGKoz6p6K09RtmVEYjwypdd+vbguM4GhEh1yXvX+K6qakp0tr2yQcoi0aqhrvu2kzhDUkotNQkdlwcLIBtH6pk/uj3HBsAumO0mPHLEvxN2LbNZo/5IBHd0ErM+VOdkOYqwAsKgSPCB0JonlI77hYEYIwZ0dnFL5lRHg7RtERCPOhvJKRpA3jswAD0GYRrFA7v1Y3bmn/LgoFulvUmyR7bILpulJj/24sl9QUGlllE65QSpwqZieIA5JHRoHfP/VlAKDzbJLbf/NlE1Ke2wPMOgOiEUWLDkAN8DRJpdjF4DxE9rplcXVNbW5vLb9X4/lnI9d4A6J7RYnpJAL42l9n2JwxM7N/dNjTsG/M5k2snoFNrWVESAF/UtlMLPfau+L0+hzHVNMoWf9xxzPhMll+AqMsoMbpkAL6wsFNHwV4dEZ7CCsXI88qZuYGBCUR0WiuxpqQA6XR6ePvrnttgzvd13/dzM1HZXKU2dZQU4NuUHy7r7n5vM2gms/9hweXq6lHH6+rqeooxL+hDVKxgsfWD+t0q1mSg+i/B+LEwffaI4AAAAABJRU5ErkJggg==);
   top: -1px;
-  margin-right: 4px;
+  margin-right: 0px;
 }
 
 .vote_span.disLike {
@@ -1030,8 +1262,8 @@ li.up_down_wrap {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAbRJREFUWEftlr0uREEYhp/XBVCwxC34KzV+Ckqh12qo9hLcg2ho1C6ADomsglJYiRuQCAo34JPZzJHj7OzunD2ztnGaTfbMmeeZmXfmGzHkR6n5Zjbu+pT0EdN3MgEzqwEnwIYHnwM7kt66iSQR8PArYA749MAx4BFY6yZRWcDMJoFLD3fAdS+Q/6+jRCWBwsh/jbbw7kzSZmgp+hboBs9Afnac2ARQCwWzL4EYuJMwsyngGRhNJlAC7nZFFsw0S1ACXgxm9RAOAt46sGJOq0HBowQGCe8pMGh4V4G/gHcU+Ct4UKAA/wIWJDWLYfWnnNvnszFFp1PY23aBmd0Bi4CDj4Q6TwVvmwEzmwZefEldAk5zVa51mBTgD6769ar50fcBM3Ol9AJoSFoNZGHbS7lprwwPzUAdOACOJe35gpI/07NlSQIPCRwBu0Bd0mGurLqbzr3PRDJ4SKABLAP7PgczPuXzgLtiBeFmln0Xc7K7NjeSVkIC70DrVht4boGtUOBSClz7ET8Bbu9nv01Jr7HDK9MuqhqW6bBs23+BnxnoI0hlZzvfvn0XDF2gynCqfDv0EH4DRAAPMH3G5MsAAAAASUVORK5CYII=);
 }
 .qustion_content {
-  margin-top: 15px;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 25px;
   font-size: 14px;
 }
 .qustin_detall_content {

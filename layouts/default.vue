@@ -122,8 +122,8 @@
                        placeholder="输入你感兴趣的内容"
                        name="queryCourse.courseName"
                        value />
-                <button type="submit"
-                        class="s-btn">
+                <button type="button"
+                        class="s-btn" @click="serchBtnClick">
                   <em class="icon18">&nbsp;</em>
                 </button>
               </label>
@@ -242,6 +242,14 @@ export default {
     this.showInfo()
   },
   methods: {
+
+    serchBtnClick() {
+      this.$message({
+          message: "搜索功能正在开发过程中，敬请期待！",
+          type: "info",
+          duration: 2000,
+        });
+    },
     //微信登录显示的方法
     handleCommand (command) {
       if (command == 'quit') {

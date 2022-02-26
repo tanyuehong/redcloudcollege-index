@@ -9,15 +9,7 @@ export default {
       method: 'get',
     })
   },
-  // 获取书籍详情页
-  getBookDetails(id) {
-    //debugger;
-    return request({
-      url: '/home/book/getBookDetail/' + id,
-      method: 'get',
-    })
-  },
-
+ 
   getBookContents(bookId) {
     return request({
       url: '/home/book/contents/getBookContents',
@@ -33,15 +25,6 @@ export default {
       url: '/home/book/comments/getBookComments',
       method: 'post',
       data: commentParam,
-    })
-  },
-
-   // 获取数据目录内容页
-   getBookArticleDetail(id) {
-    //debugger;
-    return request({
-      url: '/home/book/getBookArticleDetail/' + id,
-      method: 'get',
     })
   },
 }

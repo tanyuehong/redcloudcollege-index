@@ -82,7 +82,7 @@
                           <div v-for="content in item.chapterContents"
                                v-bind:key="content.id"
                                class="book_contens_item">
-                            <nuxt-link :to="{name:'article-detail',query:{id:content.articleId}}">
+                            <nuxt-link :to="'/book/chapter/'+content.articleId">
                               <span>{{content.title}}</span>
                               <span class="book-contens_time">2021-01</span>
                               <div class="taste-btn">试读</div>
@@ -105,7 +105,8 @@
                                  name="hotComment">
                       <div class="book_comment">
                         <div v-for="item in commentList"
-                             class="event">
+                             class="event"
+                             :key="item.id">
                           <div class="comment_label">
                             <a href="https://learnku.com/users/49196">
                               <img src="https://cdn.learnku.com/uploads/avatars/49196_1568765806.jpeg!/both/100x100" />
@@ -145,7 +146,8 @@
                                  name="bestComment">
                       <div class="book_comment">
                         <div v-for="item in commentList"
-                             class="event">
+                             class="event"
+                             :key="item.id">
                           <div class="comment_label">
                             <a href="https://learnku.com/users/49196">
                               <img src="https://cdn.learnku.com/uploads/avatars/49196_1568765806.jpeg!/both/100x100" />
@@ -185,7 +187,8 @@
                                  name="latestComment">
                       <div class="book_comment">
                         <div v-for="item in commentList"
-                             class="event">
+                             class="event"
+                             :key="item.id">
                           <div class="comment_label">
                             <a href="https://learnku.com/users/49196">
                               <img src="https://cdn.learnku.com/uploads/avatars/49196_1568765806.jpeg!/both/100x100" />
@@ -225,7 +228,8 @@
                                  name="undealComment">
                       <div class="book_comment">
                         <div v-for="item in commentList"
-                             class="event">
+                             class="event"
+                             :key="item.id">
                           <div class="comment_label">
                             <a href="https://learnku.com/users/49196">
                               <img src="https://cdn.learnku.com/uploads/avatars/49196_1568765806.jpeg!/both/100x100" />
@@ -279,6 +283,10 @@ body {
     'Hiragino Sans GB', 'Microsoft YaHei', Arial;
   line-height: 1.8;
   font-size: 14px;
+}
+
+.book_select {
+  min-height: 160px;
 }
 
 .book_top_content {
@@ -467,14 +475,13 @@ body {
 </style>
 
 <script>
-import articleApi from '@/api/article'
-import { Message } from 'element-ui'
+import bookReq from '@/api/bookReq'
+import bookServerReq from '@/api/bookServerReq'
 import showdown from "showdown";
 
 export default {
   data () {
     return {
-      bookItem: {}, //当前页
       activeComment: 'hotComment',
       bookDesc: '',
       chapterList: [],
@@ -484,29 +491,19 @@ export default {
       activeName: 'bookDescrb'
     }
   },
+
+  asyncData ({ params, error }) {
+    return bookServerReq.getBookDetails(params.id).then((response) => {
+      return {
+        bookItem: response.data.book,
+        bookContents: response.data.content_list
+      }
+    })
+  },
   mounted () {
-    var bookId = this.$route.query.id
-    if (bookId && bookId.length > 0) {
-      this.getHomeBookDetail(bookId)
-    } else {
-      Message({
-        message: '参数异常，请重新尝试！',
-        type: 'error',
-        duration: 2000,
-      })
-    }
+    this.changMarkToHtml(this.bookItem.bookDetail);
   },
   methods: {
-    //分页切换的方法
-    //参数是页码数
-    getHomeBookDetail (bookId) {
-      articleApi.getBookDetails(bookId).then((response) => {
-        this.bookItem = response.data.book
-        this.changMarkToHtml(this.bookItem.bookDetail)
-        this.bookContents = response.data.content_list
-      })
-    },
-
     tabClickBookInfo (tab, event) {
       if (tab.name == 'bookComment') {
         this.comentClick(null, null)
@@ -526,7 +523,7 @@ export default {
       if (tab && tab.name == 'undealComment') {
         type = 4
       }
-      articleApi
+      bookReq
         .getBookComments({ bookId: this.bookItem.id, type: type })
         .then((response) => {
           this.commentList = response.data.comments;
@@ -534,7 +531,7 @@ export default {
     },
 
     getBookContents () {
-      articleApi
+      bookReq
         .getBookContents({ bookId: this.bookItem.id })
         .then((response) => {
           this.chapterList = response.data.chapterList;

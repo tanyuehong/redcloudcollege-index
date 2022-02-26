@@ -169,8 +169,8 @@ export default {
       ],
     }
   },
-  asyncData ({ query, error }) {
-    return realPractice.getRealPraticeDetail(query.id).then((response) => {
+  asyncData ({ params, error }) {
+    return realPractice.getRealPraticeDetail(params.id).then((response) => {
       return {
         pitem: response.data.pitem,
         title: response.data.pitem.title,

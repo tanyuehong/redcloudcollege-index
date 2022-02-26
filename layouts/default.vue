@@ -33,7 +33,7 @@
                          active-class="current">
               <a>实践</a>
             </router-link>
-            <router-link to="/article"
+            <router-link to="/book"
                          tag="li"
                          active-class="current">
               <a>技术专题</a>

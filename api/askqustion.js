@@ -18,6 +18,17 @@ export default {
       data: reply,
     })
   },
+
+    // 问题回复评论的提交
+    submitQuestionReplyComment(replycomment) {
+      return request({
+        url: `/eduask/submitReplyComment`,
+        method: 'post',
+        data: replycomment,
+      })
+    },
+
+
   //讲师详情的方法
   getHomeAskQuestionList(parm) {
     return request({

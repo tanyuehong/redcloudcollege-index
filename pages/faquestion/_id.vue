@@ -187,7 +187,7 @@
                   <div class="reply-comment-tool"
                        v-if="item.showeditor">
                     <span @click="repplaybtnclinck(item,index)">取消</span>
-                    <div class="comment-btn">评论</div>
+                    <div class="comment-btn" @click="replyCommntClick(item)">评论</div>
                   </div>
                 </li>
               </ul>
@@ -549,14 +549,30 @@ export default {
       this.getUploadImageToken(true);
     },
 
+    replyCommntClick(item) {
+      if(!item.editor || item.editor.txt.html().length<6) {
+         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000});
+      }
+       askApi
+        .submitQuestionReplyComment({
+          content: item.editor.txt.html(),
+          qid: item.id,
+          uid: this.loginInfo.id,
+        })
+        .then((response) => {
+          this.$message({
+            message: "问题回答成功哦",
+            type: "success",
+            duration: 2000,
+          });
+        });
+
+    },
+
     submitAnserClick () {
       if (this.replyContent.length <= 6) {
         this.answerBtnClick();
-        this.$message({
-          message: "输入的内容太短了哦！",
-          type: "error",
-          duration: 2000,
-        });
+        this.$message({message: "输入的内容太短了哦！",type: "error",duration: 2000});
         return;
       }
       askApi
@@ -700,7 +716,6 @@ export default {
         const subscription = observable.subscribe(observer);
       };
       editor.config.onchange = function (newHtml) {
-        window.myVueComm.replyContent = newHtml;
       };
       editor.create();
     },

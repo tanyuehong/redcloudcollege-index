@@ -326,6 +326,7 @@ export default {
       this.isLogin = false;
     } else {
       this.loginTitle = "我的问答";
+      this.loginInfo = JSON.parse(userStr)
       this.isLogin = true;
     };
     window.myVueComm = this;
@@ -550,13 +551,16 @@ export default {
     },
 
     replyCommntClick(item) {
+       
+       window.console.log("ddddddd");
+
       if(!item.editor || item.editor.txt.html().length<6) {
          this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000});
       }
        askApi
         .submitQuestionReplyComment({
           content: item.editor.txt.html(),
-          qid: item.id,
+          rid: item.id,
           uid: this.loginInfo.id,
         })
         .then((response) => {

@@ -130,8 +130,8 @@
                          width="30"
                          height="30"
                          alt />
-                    <span> {{ qdetail.nickname }}</span>
-                    <span class="qustion-top-item">发布于 {{ item.gmtCreate }}</span>
+                    <span class="ml5"> {{ qdetail.nickname }}</span>
+                    <span class="qustion-top-item"> {{ item.gmtCreate }}</span>
                   </div>
 
                   <div class="answer-item-content"
@@ -188,6 +188,22 @@
                        v-if="item.showeditor">
                     <span @click="repplaybtnclinck(item,index)">取消</span>
                     <div class="comment-btn" @click="replyCommntClick(item)">评论</div>
+                  </div>
+
+                  <div class="reply-comment-container" v-if="item.comments.length>0">
+                    <div class="reply-comment-item"  v-for="(comment, cindex) in item.comments" :key="comment.id">
+                         <div class="answer-item-userinfo">
+                    <img class="vam user-head-image"
+                         :src="comment.avatar"
+                         width="30"
+                         height="30"
+                         alt />
+                    <span> {{ comment.name }}</span>
+                    <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
+                  </div>
+                     <div class="answer-item-content"
+                       v-html="comment.content"></div>
+                  </div>
                   </div>
                 </li>
               </ul>
@@ -730,9 +746,18 @@ export default {
 </script>
 
 <style>
+
+.reply-comment-container {
+  margin-left: 16px;
+  padding-bottom: 12px;
+}
 .reply-comment-tool {
   height: 50px;
   padding-left: 646px;
+}
+
+.reply-comment-item {
+  margin-bottom: 6px;
 }
 
 .reply-comment-tool span {
@@ -947,7 +972,7 @@ export default {
   -ms-flex-direction: row;
   flex-direction: row;
   padding: 0;
-  margin: 16px 0 20px;
+  margin: 16px 26px 20px;
 }
 
 .answer-item-userinfo {

@@ -514,10 +514,12 @@ export default {
       if (this.answertype) {
         useract.getQustionReplyList(this.qdetail.qid, 1).then((response) => {
           this.replyList = response.data.replyList;
+          this.getUserGoodReplyState();
         })
       } else {
         useract.getQustionReplyList(this.qdetail.qid, 2).then((response) => {
           this.replyList = response.data.replyList;
+          this.getUserGoodReplyState();
         })
       }
     },

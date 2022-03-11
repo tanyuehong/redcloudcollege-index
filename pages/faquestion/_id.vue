@@ -209,12 +209,24 @@
                            v-html="comment.content"></div>
                       <div class="comment-tool-bar">
                         <span class="mr15"><i class="icon icon_vote_up"></i>赞</span>
-                        <span class="mr15">回复</span>
+                        <span class="mr15" @click="commentbtnclinck(item,index)">回复</span>
                         <span class="li_more li_report">
                           <i class="icon icon_ask_report"></i>举报
                         </span>
 
                       </div>
+
+                      <transition v-on:before-enter="cbeforeEnter"
+                              v-on:enter="center"
+                              v-on:after-enter="cafterEnter"
+                              v-on:leave="cleave"
+                              v-bind:css="false">
+                    <div :id="'creplayedtor' + cindex"
+                         class="c-replay-editor"
+                         v-if="comment.showeditor"
+                         :key="comment.id">
+                    </div>
+                  </transition>
                     </div>
                   </div>
                 </li>
@@ -525,6 +537,25 @@ export default {
       Velocity(el, { height: '0px' }, 300, function () { done() })
     },
 
+    cbeforeEnter: function (el) {
+      el.style.width = '706px';
+      el.style.height = '0px'
+    },
+
+    center: function (el, done) {
+      var Velocity = $.Velocity;
+      Velocity(el, { height: '190px' }, 300, function () { done() })
+    },
+
+    cafterEnter: function (el) {
+      this.init_replyeditor();
+    },
+
+    cleave: function (el, done) {
+      var Velocity = $.Velocity;
+      Velocity(el, { height: '0px' }, 300, function () { done() })
+    },
+
     clickAnserType (type) {
       if (type == this.answertype) {
         return;
@@ -537,7 +568,18 @@ export default {
           item.editor.destroy();
           item.editor = null;
         }
+        if(item.coments.length>0) {
+          for(var i = 0; i<item.coments.length;i++) {
+            var citem = item.coments[j];
+            citem.showeditor = false;
+            if (citem.editor) {
+                citem.editor.destroy();
+                citem.editor = null;
+            }
+          }
+        }
       }
+
       if (this.answertype) {
         useract.getQustionReplyList(this.qdetail.qid, 1).then((response) => {
           this.replyList = response.data.replyList;
@@ -682,9 +724,89 @@ export default {
       }
     },
 
+    commentbtnclinck (item, index) {
+      item.commnetId = "#creplayedtor" + index;
+      window.commentItem = item;
+      if (!item.editor) {
+        item.showeditor = true;
+      } else {
+        item.showeditor = false;
+        item.editor.destroy();
+        item.editor = null;
+      }
+    },
+
     init_replyeditor () {
       window.myVueComm = this;
       var item = window.replyItem;
+      let editor = this.$wangeditor(item.commnetId);
+      item.editor = editor;
+      editor.config.uploadImgMaxLength = 1;
+      editor.config.uploadImgServer = "/api/ucenter/uploadImage";
+      editor.config.uploadFileName = "file";
+      editor.config.placeholder = "请用专业明晰的语言，指出问题，提出建议";
+      editor.config.height = 150;
+
+      editor.config.onfocus = function (newHtml) {
+        myVueComm.getUploadImageToken(true);
+      };
+      editor.config.menus = [
+        'bold',
+        'fontSize',
+        'fontName',
+        'italic',
+        'underline',
+        'indent',
+        'foreColor',
+        'link',
+        'list',
+        'todo',
+        'justify',
+        'emoticon',
+        'image',
+        'code',
+        'splitLine',
+      ]
+
+      editor.config.customUploadImg = function (files, insertImgFn) {
+        // resultFiles 是 input 中选中的文件列表
+        // insertImgFn 是获取图片 url 后，插入到编辑器的方法
+        var file = files[0];
+        const putExtra = {
+          mimeType: file.type,
+        };
+        const config = {
+          region: qiniu.region.z2,
+        };
+        const observable = qiniu.upload(
+          file,
+          null,
+          window.myVueComm.uploadToken,
+          putExtra,
+          config
+        );
+        const observer = {
+          next (res) {
+            window.console.log(res);
+          },
+          error (err) {
+            window.console.log(err);
+          },
+          complete (res) {
+            window.console.log(res);
+            insertImgFn("https://img.redskt.com/" + res.hash);
+          },
+        };
+        const subscription = observable.subscribe(observer);
+      };
+      editor.config.onchange = function (newHtml) {
+      };
+      editor.create();
+    },
+
+    init_commenteditor () {
+      window.myVueComm = this;
+      var item = window.commentItem;
       let editor = this.$wangeditor(item.commnetId);
       item.editor = editor;
       editor.config.uploadImgMaxLength = 1;

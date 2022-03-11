@@ -19,7 +19,7 @@
                        width="30"
                        height="30"
                        alt />
-                  <span> {{ qdetail.nickname }}</span></a>
+                  <span class="ml5">{{ qdetail.nickname }}</span></a>
                 <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
                 <span class="glyphicon glyphicon-star-empty qustion-top-item"
                       aria-hidden="true">
@@ -187,23 +187,35 @@
                   <div class="reply-comment-tool"
                        v-if="item.showeditor">
                     <span @click="repplaybtnclinck(item,index)">取消</span>
-                    <div class="comment-btn" @click="replyCommntClick(item)">评论</div>
+                    <div class="comment-btn"
+                         @click="replyCommntClick(item)">评论</div>
                   </div>
 
-                  <div class="reply-comment-container" v-if="item.comments.length>0">
-                    <div class="reply-comment-item"  v-for="(comment, cindex) in item.comments" :key="comment.id">
-                         <div class="answer-item-userinfo">
-                    <img class="vam user-head-image"
-                         :src="comment.avatar"
-                         width="30"
-                         height="30"
-                         alt />
-                    <span> {{ comment.name }}</span>
-                    <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
-                  </div>
-                     <div class="answer-item-content"
-                       v-html="comment.content"></div>
-                  </div>
+                  <div class="reply-comment-container"
+                       v-if="item.comments.length>0">
+                    <div class="reply-comment-item"
+                         v-for="(comment, cindex) in item.comments"
+                         :key="comment.id">
+                      <div class="answer-item-userinfo">
+                        <img class="vam user-head-image"
+                             :src="comment.avatar"
+                             width="30"
+                             height="30"
+                             alt />
+                        <span class="ml5"> {{ comment.name }}</span>
+                        <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
+                      </div>
+                      <div class="answer-item-content"
+                           v-html="comment.content"></div>
+                      <div class="comment-tool-bar">
+                        <span class="mr15"><i class="icon icon_vote_up"></i>赞</span>
+                        <span class="mr15">回复</span>
+                        <span class="li_more li_report">
+                          <i class="icon icon_ask_report"></i>举报
+                        </span>
+
+                      </div>
+                    </div>
                   </div>
                 </li>
               </ul>
@@ -257,7 +269,6 @@
                   <span>被评论</span>
                   <em class="fa-num">0</em>
                 </li>
-
               </ul>
             </div>
 
@@ -494,8 +505,9 @@ export default {
       useract.cancleUserGoodQustion(this.qdetail.qid).then((response) => {
       })
     },
+
     beforeEnter: function (el) {
-      el.style.width = '732px';
+      el.style.width = '706px';
       el.style.height = '0px'
     },
 
@@ -526,7 +538,6 @@ export default {
           item.editor = null;
         }
       }
-
       if (this.answertype) {
         useract.getQustionReplyList(this.qdetail.qid, 1).then((response) => {
           this.replyList = response.data.replyList;
@@ -568,14 +579,11 @@ export default {
       this.getUploadImageToken(true);
     },
 
-    replyCommntClick(item) {
-       
-       window.console.log("ddddddd");
-
-      if(!item.editor || item.editor.txt.html().length<6) {
-         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000});
+    replyCommntClick (item) {
+      if (!item.editor || item.editor.txt.html().length < 6) {
+        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
       }
-       askApi
+      askApi
         .submitQuestionReplyComment({
           content: item.editor.txt.html(),
           rid: item.id,
@@ -594,7 +602,7 @@ export default {
     submitAnserClick () {
       if (this.replyContent.length <= 6) {
         this.answerBtnClick();
-        this.$message({message: "输入的内容太短了哦！",type: "error",duration: 2000});
+        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
       }
       askApi
@@ -746,14 +754,30 @@ export default {
 </script>
 
 <style>
+.comment-tool-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 20px;
+  line-height: 20px;
+  margin: 12px 0 14px;
+  font-size: 14px;
+  margin-left: 38px;
+}
 
 .reply-comment-container {
-  margin-left: 16px;
+  margin-left: 36px;
   padding-bottom: 12px;
+  margin-top: 18px;
 }
+
 .reply-comment-tool {
-  height: 50px;
+  height: 30px;
   padding-left: 646px;
+  margin-bottom: 18px;
 }
 
 .reply-comment-item {
@@ -868,9 +892,7 @@ export default {
 }
 
 .replay-editor {
-  width: 726px;
-  height: 190px;
-  margin-left: 12px;
+  margin-left: 38px;
   margin-bottom: 12px;
   position: relative;
 }
@@ -898,8 +920,8 @@ export default {
 }
 
 .reply_content_tool .vote-box {
-  line-height: 32px;
-  height: 32px;
+  line-height: 30px;
+  height: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -923,7 +945,7 @@ export default {
   border-radius: 16px;
   position: relative;
   display: inline-block;
-  height: 32px;
+  height: 30px;
   line-height: 30px;
   padding: 0 12px;
   font-weight: 400;
@@ -939,7 +961,7 @@ export default {
 .reply_content_tool .mr20px {
   padding: 0 16px;
   text-align: center;
-  height: 32px;
+  height: 30px;
   border-radius: 16px;
   border: 1px solid #fc5533;
   font-size: 14px;
@@ -972,7 +994,10 @@ export default {
   -ms-flex-direction: row;
   flex-direction: row;
   padding: 0;
-  margin: 16px 26px 20px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-right: 16px;
+  margin-left: 36px;
 }
 
 .answer-item-userinfo {
@@ -981,7 +1006,7 @@ export default {
 }
 .answer-item-content {
   margin-top: 8px;
-  margin-left: 12px;
+  margin-left: 38px;
   margin-right: 12px;
 }
 
@@ -1190,6 +1215,7 @@ export default {
   height: 16px;
   position: relative;
   left: -2px;
+  margin-right: 2px;
 }
 
 .icon_vote_jubao {
@@ -1208,8 +1234,8 @@ export default {
 
 .icon_vote_down {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAyFJREFUWEfFl9tvDFEcx7+/2Y1dSRVtoiQe1F9AI0TE5YW4JhJRESJxSZqIkLjsOdPFdNTuOWfJhgYhggfiAS/EJR5d4vrQ0HiTkJBWQ7Vx3W2785NBF0WzW90xT5Mzv/l+P3POnPn+hvCfD/rP/sgDOM65Ydnssz0gXsOMcUMFRoQMgBawtU/r2Pn+unkAKY1msBgq4z/pWIRtSsn0z9d+ANi61X9yi6xFSsWu9hUJqdk/N1oOarkc51Q02/N6Ndg7xkw5wogqrTd29unnRf9m9K8AfUZS6ksMLIGFVSYpzwYPUG8a2GOHLEropNgZPIA0qxh8BkTnjBIrAgeIx83U3hzfJ6BZa1kTOIDjpCsy2e4OgN4bLcoDB/ANhW06wFwRjVjjXDf2yh8LbBf4ZtLW95gxzSJrllKxW8EDSH2agdVkWet1MnYycABhp3aDPRcEbZS0AweQMrWS4Z0F0QWjxPLAAeJxM6U3xw8JeKS1nBQ4gNB6JLrQBdBHo0XZLwDyexjBwmKTlFeGKoz6p6K09RtmVEYjwypdd+vbguM4GhEh1yXvX+K6qakp0tr2yQcoi0aqhrvu2kzhDUkotNQkdlwcLIBtH6pk/uj3HBsAumO0mPHLEvxN2LbNZo/5IBHd0ErM+VOdkOYqwAsKgSPCB0JonlI77hYEYIwZ0dnFL5lRHg7RtERCPOhvJKRpA3jswAD0GYRrFA7v1Y3bmn/LgoFulvUmyR7bILpulJj/24sl9QUGlllE65QSpwqZieIA5JHRoHfP/VlAKDzbJLbf/NlE1Ke2wPMOgOiEUWLDkAN8DRJpdjF4DxE9rplcXVNbW5vLb9X4/lnI9d4A6J7RYnpJAL42l9n2JwxM7N/dNjTsG/M5k2snoFNrWVESAF/UtlMLPfau+L0+hzHVNMoWf9xxzPhMll+AqMsoMbpkAL6wsFNHwV4dEZ7CCsXI88qZuYGBCUR0WiuxpqQA6XR6ePvrnttgzvd13/dzM1HZXKU2dZQU4NuUHy7r7n5vM2gms/9hweXq6lHH6+rqeooxL+hDVKxgsfWD+t0q1mSg+i/B+LEwffaI4AAAAABJRU5ErkJggg==);
+  vertical-align: middle;
   top: -1px;
-  margin-right: 0px;
 }
 
 .vote_span.disLike {
@@ -1237,7 +1263,7 @@ export default {
   border-radius: 16px;
   display: inline-block;
   border: 1px solid transparent;
-  height: 32px;
+  height: 30px;
   line-height: 30px;
   font-size: 12px;
   font-weight: 400;

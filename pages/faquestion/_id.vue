@@ -106,7 +106,7 @@
           </div>
 
           <div class="qustion-answer-list"
-               v-if="replyList.length > 0">
+               v-if="replyList.length">
             <h4 class="reply-title">
               <span><em class="em1">{{ replyList.length }}</em>条回答</span>
               <span class="reply_wrap">
@@ -192,7 +192,7 @@
                   </div>
 
                   <div class="reply-comment-container"
-                       v-if="item.comments.length>0">
+                       v-if="item.comments">
                     <div class="reply-comment-item"
                          v-for="(comment, cindex) in item.comments"
                          :key="comment.id">
@@ -209,7 +209,8 @@
                            v-html="comment.content"></div>
                       <div class="comment-tool-bar">
                         <span class="mr15"><i class="icon icon_vote_up"></i>赞</span>
-                        <span class="mr15" @click="commentbtnclinck(item,index)">回复</span>
+                        <span class="mr15"
+                              @click="commentbtnclinck(comment,cindex)">回复</span>
                         <span class="li_more li_report">
                           <i class="icon icon_ask_report"></i>举报
                         </span>
@@ -217,16 +218,22 @@
                       </div>
 
                       <transition v-on:before-enter="cbeforeEnter"
-                              v-on:enter="center"
-                              v-on:after-enter="cafterEnter"
-                              v-on:leave="cleave"
-                              v-bind:css="false">
-                    <div :id="'creplayedtor' + cindex"
-                         class="c-replay-editor"
-                         v-if="comment.showeditor"
-                         :key="comment.id">
-                    </div>
-                  </transition>
+                                  v-on:enter="center"
+                                  v-on:after-enter="cafterEnter"
+                                  v-on:leave="cleave"
+                                  v-bind:css="false">
+                        <div :id="'creplayedtor' + cindex"
+                             class="c-replay-editor"
+                             v-if="comment.showeditor"
+                             :key="comment.id">
+                        </div>
+                      </transition>
+                      <div class="reply-comment-tool r-comment"
+                           v-if="comment.showeditor">
+                        <span @click="commentbtnclinck(comment,cindex)">取消</span>
+                        <div class="comment-btn"
+                             @click="creplyCommntClick(comment)">回复</div>
+                      </div>
                     </div>
                   </div>
                 </li>
@@ -538,17 +545,18 @@ export default {
     },
 
     cbeforeEnter: function (el) {
-      el.style.width = '706px';
-      el.style.height = '0px'
+      el.style.width = '666px';
+      el.style.height = '0px';
+      window.console.log('dddd');
     },
 
     center: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '190px' }, 300, function () { done() })
+      Velocity(el, { height: '180px' }, 300, function () { done() })
     },
 
     cafterEnter: function (el) {
-      this.init_replyeditor();
+      this.init_commenteditor();
     },
 
     cleave: function (el, done) {
@@ -568,13 +576,13 @@ export default {
           item.editor.destroy();
           item.editor = null;
         }
-        if(item.coments.length>0) {
-          for(var i = 0; i<item.coments.length;i++) {
+        if (item.coments.length > 0) {
+          for (var i = 0; i < item.coments.length; i++) {
             var citem = item.coments[j];
             citem.showeditor = false;
             if (citem.editor) {
-                citem.editor.destroy();
-                citem.editor = null;
+              citem.editor.destroy();
+              citem.editor = null;
             }
           }
         }
@@ -621,9 +629,10 @@ export default {
       this.getUploadImageToken(true);
     },
 
-    replyCommntClick (item) {
+    creplyCommntClick (item) {
       if (!item.editor || item.editor.txt.html().length < 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        return;
       }
       askApi
         .submitQuestionReplyComment({
@@ -638,7 +647,26 @@ export default {
             duration: 2000,
           });
         });
+    },
 
+    replyCommntClick (item) {
+      if (!item.editor || item.editor.txt.html().length < 6) {
+        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        return;
+      }
+      askApi
+        .submitQuestionReplyComment({
+          content: item.editor.txt.html(),
+          rid: item.id,
+          uid: this.loginInfo.id,
+        })
+        .then((response) => {
+          this.$message({
+            message: "问题回答成功哦",
+            type: "success",
+            duration: 2000,
+          });
+        });
     },
 
     submitAnserClick () {
@@ -725,6 +753,7 @@ export default {
     },
 
     commentbtnclinck (item, index) {
+      window.console.log("ddddddddfffffffff");
       item.commnetId = "#creplayedtor" + index;
       window.commentItem = item;
       if (!item.editor) {
@@ -876,6 +905,15 @@ export default {
 </script>
 
 <style>
+.comment-tool-bar span {
+  cursor: pointer;
+}
+
+.c-replay-editor {
+  margin-left: 38px;
+  margin-bottom: 12px;
+}
+
 .comment-tool-bar {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -900,6 +938,13 @@ export default {
   height: 30px;
   padding-left: 646px;
   margin-bottom: 18px;
+}
+
+.reply-comment-tool.r-comment {
+  height: 30px;
+  padding-left: 606px;
+  margin-bottom: 0px;
+  margin-top: 18px;
 }
 
 .reply-comment-item {

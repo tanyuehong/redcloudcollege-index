@@ -203,6 +203,8 @@
                              height="30"
                              alt />
                         <span class="ml5"> {{ comment.name }}</span>
+                        <span class="ml5" v-if="comment.toname">回复</span>
+                        <span class="ml5" v-if="comment.toname">{{ comment.toname }}</span>
                         <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
                       </div>
                       <div class="answer-item-content"
@@ -232,7 +234,7 @@
                            v-if="comment.showeditor">
                         <span @click="commentbtnclinck(comment,cindex)">取消</span>
                         <div class="comment-btn"
-                             @click="creplyCommntClick(comment)">回复</div>
+                             @click="creplyCommntClick(comment,item.id)">回复</div>
                       </div>
                     </div>
                   </div>
@@ -576,9 +578,9 @@ export default {
           item.editor.destroy();
           item.editor = null;
         }
-        if (item.coments.length > 0) {
-          for (var i = 0; i < item.coments.length; i++) {
-            var citem = item.coments[j];
+        if (item.comments) {
+          for (var i = 0; i < item.comments.length; i++) {
+            var citem = item.comments[j];
             citem.showeditor = false;
             if (citem.editor) {
               citem.editor.destroy();
@@ -629,7 +631,7 @@ export default {
       this.getUploadImageToken(true);
     },
 
-    creplyCommntClick (item) {
+    creplyCommntClick (item,rid) {
       if (!item.editor || item.editor.txt.html().length < 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
@@ -637,7 +639,7 @@ export default {
       askApi
         .submitQuestionReplyComment({
           content: item.editor.txt.html(),
-          rid: item.id,
+          rid: rid,
           uid: this.loginInfo.id,
           touid: item.uid,
         })

@@ -639,6 +639,7 @@ export default {
           content: item.editor.txt.html(),
           rid: item.id,
           uid: this.loginInfo.id,
+          touid: item.uid,
         })
         .then((response) => {
           this.$message({
@@ -696,8 +697,9 @@ export default {
       editor.config.uploadImgMaxLength = 1;
       editor.config.uploadImgServer = "/api/ucenter/uploadImage";
       editor.config.uploadFileName = "file";
-      editor.config.placeholder = "请输入回答";
+      editor.config.placeholder = "请用专业明晰的语言写出您的回答";
       editor.config.focus = false;
+      editor.config.zIndex = 100;
 
       editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
@@ -775,6 +777,7 @@ export default {
       editor.config.uploadFileName = "file";
       editor.config.placeholder = "请用专业明晰的语言，指出问题，提出建议";
       editor.config.height = 150;
+      editor.config.zIndex = 100;
 
       editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
@@ -843,6 +846,7 @@ export default {
       editor.config.uploadFileName = "file";
       editor.config.placeholder = "请用专业明晰的语言，指出问题，提出建议";
       editor.config.height = 150;
+      editor.config.zIndex = 100
 
       editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);

@@ -203,8 +203,10 @@
                              height="30"
                              alt />
                         <span class="ml5"> {{ comment.name }}</span>
-                        <span class="ml5" v-if="comment.toname">回复</span>
-                        <span class="ml5" v-if="comment.toname">{{ comment.toname }}</span>
+                        <span class="ml5"
+                              v-if="comment.toname">回复</span>
+                        <span class="ml5"
+                              v-if="comment.toname">{{ comment.toname }}</span>
                         <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
                       </div>
                       <div class="answer-item-content"
@@ -234,7 +236,7 @@
                            v-if="comment.showeditor">
                         <span @click="commentbtnclinck(comment,cindex)">取消</span>
                         <div class="comment-btn"
-                             @click="creplyCommntClick(comment,item.id)">回复</div>
+                             @click="creplyCommntClick(comment,item)">提交</div>
                       </div>
                     </div>
                   </div>
@@ -549,7 +551,6 @@ export default {
     cbeforeEnter: function (el) {
       el.style.width = '666px';
       el.style.height = '0px';
-      window.console.log('dddd');
     },
 
     center: function (el, done) {
@@ -631,7 +632,7 @@ export default {
       this.getUploadImageToken(true);
     },
 
-    creplyCommntClick (item,rid) {
+    creplyCommntClick (item, rItem) {
       if (!item.editor || item.editor.txt.html().length < 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
@@ -639,11 +640,12 @@ export default {
       askApi
         .submitQuestionReplyComment({
           content: item.editor.txt.html(),
-          rid: rid,
+          rid: rItem.id,
           uid: this.loginInfo.id,
           touid: item.uid,
         })
         .then((response) => {
+          window.console.log('ddddd');
           this.$message({
             message: "问题回答成功哦",
             type: "success",

@@ -6,7 +6,7 @@
           <div class="ask-detail-lefte">
             <div class="ui breadcrumb red_breadcrumb">
               <a class="section"
-                 href="/faquestion">开源实践问答</a>
+                 href="/faquestion">实践问答</a>
               <span class="glyphicon glyphicon glyphicon-menu-right"
                     aria-hidden="true"></span>
               <div class="active section">问题详情</div>
@@ -203,7 +203,7 @@
                              height="30"
                              alt />
                         <span class="ml5"> {{ comment.name }}</span>
-                        <span class="ml5"
+                        <span class="comment-replyment"
                               v-if="comment.toname">回复</span>
                         <span class="ml5"
                               v-if="comment.toname">{{ comment.toname }}</span>
@@ -236,7 +236,7 @@
                            v-if="comment.showeditor">
                         <span @click="commentbtnclinck(comment,cindex)">取消</span>
                         <div class="comment-btn"
-                             @click="creplyCommntClick(comment,item)">提交</div>
+                             @click="creplyCommntClick(comment,item,cindex)">提交</div>
                       </div>
                     </div>
                   </div>
@@ -301,7 +301,7 @@
                  href="https://ask.csdn.net/questions/7398651">◇ 欢迎建议意见</a>
               <a target="_blank"
                  class="ask-top-warper-item"
-                 href="https://bbs.csdn.net/topics/603750556">◇ 开源问答上线</a>
+                 href="https://bbs.csdn.net/topics/603750556">◇ 实践问答上线</a>
               <a target="_blank"
                  class="ask-top-warper-item"
                  href="https://bbs.csdn.net/forums/ask?category=0">◇ 通知公告</a>
@@ -632,7 +632,7 @@ export default {
       this.getUploadImageToken(true);
     },
 
-    creplyCommntClick (item, rItem) {
+    creplyCommntClick (item, rItem,cindex) {
       if (!item.editor || item.editor.txt.html().length < 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
@@ -645,13 +645,14 @@ export default {
           touid: item.uid,
         })
         .then((response) => {
-          window.console.log('ddddd');
+          rItem.comments.unshift(response.data.comment);
           this.$message({
             message: "问题回答成功哦",
             type: "success",
             duration: 2000,
           });
         });
+      this.commentbtnclinck(item,cindex);
     },
 
     replyCommntClick (item) {
@@ -913,6 +914,11 @@ export default {
 </script>
 
 <style>
+
+.comment-replyment {
+  color: #999;
+  margin-left: 0px;
+}
 .comment-tool-bar span {
   cursor: pointer;
 }
@@ -1372,7 +1378,7 @@ export default {
 }
 
 .qustion-top-item {
-  margin-left: 8px;
+  margin-left: 6px;
 }
 .qustion-right-view {
   float: right;

@@ -187,7 +187,7 @@
                       <ul>
                         <i class="pratice_icon_view"></i>
                         <span class="icon_des">{{item.viewCount}}</span>
-                        <i class="pratice_icon_zhan"></span></i>
+                        <i class="pratice_icon_zhan"></i>
                         <span class="icon_des">{{item.good}}</span>
                         <i class="pratice_icon_comment"></i>
                         <span class="icon_des">11</span>

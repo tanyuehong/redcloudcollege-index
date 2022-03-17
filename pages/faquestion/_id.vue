@@ -211,8 +211,10 @@
                       </div>
                       <div class="answer-item-content"
                            v-html="comment.content"></div>
-                      <div class="comment-tool-bar">
-                        <span class="mr15"><i class="icon icon_vote_up"></i>赞</span>
+                      <div class="comment-tool-bar fbselect">
+                        <span class="mr15"
+                              v-bind:class="{ goodcomment: comment.goodcomment==1 }"
+                              @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>赞</span>
                         <span class="mr15"
                               @click="commentbtnclinck(comment,cindex)">回复</span>
                         <span class="li_more li_report">
@@ -414,6 +416,21 @@ export default {
           } else {
             this.updateRelpyState(item.id, 1);
           }
+        }
+      }
+      setTimeout(function () {
+        window.myVueComm.forbiden = true;
+      }, 500)
+    },
+
+    goodCommentClick (comment) {
+      window.console.log("ffffffffff");
+      if (this.forbiden) {
+        this.forbiden = false;
+        if (comment.goodcomment == 0) {
+          comment.goodcomment = 1;
+        } else {
+          comment.goodcomment = 0;
         }
       }
       setTimeout(function () {
@@ -632,7 +649,7 @@ export default {
       this.getUploadImageToken(true);
     },
 
-    creplyCommntClick (item, rItem,cindex) {
+    creplyCommntClick (item, rItem, cindex) {
       if (!item.editor || item.editor.txt.html().length < 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
@@ -652,7 +669,7 @@ export default {
             duration: 2000,
           });
         });
-      this.commentbtnclinck(item,cindex);
+      this.commentbtnclinck(item, cindex);
     },
 
     replyCommntClick (item) {
@@ -914,7 +931,6 @@ export default {
 </script>
 
 <style>
-
 .comment-replyment {
   color: #999;
   margin-left: 0px;
@@ -1037,9 +1053,11 @@ export default {
   color: #777888;
 }
 
-.vote_span.vote_span.like i {
+.vote_span.vote_span.like i,
+.goodcomment i {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAhBJREFUWEfFlr1rFFEUxc/Jexs1rGgQ0TIgIgiCOrEQsm3AxmoniKCIiFhZ2Cls4weWYiXEBIsI0XmRNPoP6DZK3kQlINhYCIJiiihB4nxc2aDLZI2ZGcnum2qYOe+e35t3595LOL7o2B//BSD+wWosA1cJqYH4TuBp3yAmOG6jshsqDSD+8W0Jfr4A4GXN+oCQsRrl7KvFMhClAZK6d0+IS+ubyJQ24dmuAUh9+ERKeSZY/+gI/FDGDnQFQM4NbU2Xdy0IsO9fBgSWlLE7uwIQ1b0GiesbB5c5bcJjmw4gpw8NJlH/BwA7NgpOYFIZe2HTAZL68C2hXMsNTLmog/B+ri4jyP0L5OSB7cmW6se83eeZthKUQDNO0eh/Yl/+0ecCJGPeZRHczTMo+p6QlZQyWgnmn7fWtAFi32sVl5HfgZra2FrrPvGPvhdwf1GDIjoCb5SxhzsBJLtYG7sKF/vemudFDIpolMZuTtuv2S/QW4A42sPZt19cASxrY6vOjoDAa2XsEZcARhk75gxAiNuVwK4WNjc5IHJez4QPnAEIUKsY23QGoPTKXk4vfHYCQOCbMrbdVXueAwRCZWx7nuw5ACCPtQlP/dUNO2t+t3oBiZsqsA1nAKCc0UH40BVApFQ6xEfzn5wAKPIKg7k72XadO5B0DCpFWv1ajSAm8U4EN/SMNZ0Bckey8o7lVjgH+AVoSwkwj5cq7AAAAABJRU5ErkJggg==);
 }
+
 .vote_span.vote_span.like {
   color: #fc5533 !important;
   background: #fff !important;

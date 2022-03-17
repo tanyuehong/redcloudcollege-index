@@ -205,16 +205,15 @@
                         <span class="ml5"> {{ comment.name }}</span>
                         <span class="comment-replyment"
                               v-if="comment.toname">回复</span>
-                        <span class="ml5"
-                              v-if="comment.toname">{{ comment.toname }}</span>
+                        <span v-if="comment.toname">{{ comment.toname }}</span>
                         <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
                       </div>
                       <div class="answer-item-content"
                            v-html="comment.content"></div>
                       <div class="comment-tool-bar fbselect">
                         <span class="mr15"
-                              v-bind:class="{ goodcomment: comment.goodcomment==1 }"
-                              @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>赞</span>
+                              v-bind:class="{ goodcomment: comment.goodcomment }"
+                              @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>{{commentGood(comment.good)}}</span>
                         <span class="mr15"
                               @click="commentbtnclinck(comment,cindex)">回复</span>
                         <span class="li_more li_report">
@@ -394,6 +393,19 @@ export default {
     };
   },
 
+  computed: {
+    // 计算属性的 getter
+    commentGood() {
+    return function (goodCount) {
+		   if(goodCount > 0){
+		      return goodCount;
+		   } else {
+		        return "赞";
+		    }
+	    }
+    },
+  },
+
   methods: {
     updateRelpyState (rId, type) {
       useract.updateRelpyState(rId, type).then((response) => {
@@ -429,8 +441,10 @@ export default {
         this.forbiden = false;
         if (comment.goodcomment == 0) {
           comment.goodcomment = 1;
+          comment.good++;
         } else {
           comment.goodcomment = 0;
+          comment.good--;
         }
       }
       setTimeout(function () {

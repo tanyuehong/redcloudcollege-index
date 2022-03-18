@@ -331,7 +331,7 @@
 <script>
 import askApi from "@/api/askqustion";
 import askServerApi from "@/api/askserver";
-import useract from '@/api/useract'
+
 const qiniu = require("qiniu-js");
 
 export default {
@@ -408,7 +408,7 @@ export default {
 
   methods: {
     updateRelpyState (rId, type) {
-      useract.updateRelpyState(rId, type).then((response) => {
+      askApi.updateRelpyState(rId, type).then((response) => {
       })
     },
     goodReplyClick (item) {
@@ -442,9 +442,11 @@ export default {
         if (comment.goodcomment == 0) {
           comment.goodcomment = 1;
           comment.good++;
+          askApi.addQcommentGood(comment.id).then((response) => { });
         } else {
           comment.goodcomment = 0;
           comment.good--;
+           askApi.cancleQcommentGood(comment.id).then((response) => { });
         }
       }
       setTimeout(function () {
@@ -502,7 +504,7 @@ export default {
     },
 
     getUserQustionCollectState (qId) {
-      useract.getUserQustionCollectState(qId).then((response) => {
+      askApi.getUserQustionCollectState(qId).then((response) => {
         this.collectState = response.data.collectState;
         this.collectIcon = this.collectState ? "el-icon-star-on" : "el-icon-star-off";
         this.collectString = this.collectState ? "已收藏" : "收藏";
@@ -514,7 +516,7 @@ export default {
       for (var j = 0; j < this.replyList.length; j++) {
         list.push(this.replyList[j].id);
       }
-      useract.getUserGoodReplyState(list).then((response) => {
+      askApi.getUserGoodReplyState(list).then((response) => {
         var goodList = response.data.goodList;
 
         for (var j = 0; j < this.replyList.length; j++) {
@@ -535,28 +537,28 @@ export default {
     },
 
     addUserQustionCollect () {
-      useract.addUserQustionCollect(this.qdetail.qid).then((response) => {
+      askApi.addUserQustionCollect(this.qdetail.qid).then((response) => {
       })
     },
 
     cancleUserQustionCollect () {
-      useract.cancleUserQustionCollect(this.qdetail.qid).then((response) => {
+      askApi.cancleUserQustionCollect(this.qdetail.qid).then((response) => {
       })
     },
 
     getUserGoodQustionState (qId) {
-      useract.getUserGoodQustionState(qId).then((response) => {
+      askApi.getUserGoodQustionState(qId).then((response) => {
         this.goodqustion = response.data.goodqustion;
       })
     },
 
     addUserGoodQustion () {
-      useract.addUserGoodQustion(this.qdetail.qid).then((response) => {
+      askApi.addUserGoodQustion(this.qdetail.qid).then((response) => {
       })
     },
 
     cancleUserGoodQustion () {
-      useract.cancleUserGoodQustion(this.qdetail.qid).then((response) => {
+      askApi.cancleUserGoodQustion(this.qdetail.qid).then((response) => {
       })
     },
 
@@ -623,12 +625,12 @@ export default {
       }
 
       if (this.answertype) {
-        useract.getQustionReplyList(this.qdetail.qid, 1).then((response) => {
+        askApi.getQustionReplyList(this.qdetail.qid, 1).then((response) => {
           this.replyList = response.data.replyList;
           this.getUserGoodReplyState();
         })
       } else {
-        useract.getQustionReplyList(this.qdetail.qid, 2).then((response) => {
+        askApi.getQustionReplyList(this.qdetail.qid, 2).then((response) => {
           this.replyList = response.data.replyList;
           this.getUserGoodReplyState();
         })

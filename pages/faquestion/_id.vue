@@ -82,11 +82,11 @@
                     </el-dropdown>
                   </div>
                 </div>
-                <ul class="ask-issue-tool">
+                <ul class="ask-issue-tool fbselect">
                   <span class="answer_span"
                         @click="answerBtnClick"><i class="icon ic_question_reply"></i>写回答</span>
                   <li class="up_down_wrap wrapdisLike ask-info-item">
-                    <span class="vote_span disLike fbselect"
+                    <span class="vote_span disLike"
                           @click="goodQustionClick"
                           v-bind:class="{ like: goodqustion }">
 
@@ -97,9 +97,21 @@
                     <span class="vote_span2"><i class="icon icon_vote_down"></i>提建议
                     </span>
                   </li>
-                  <li class="ask-info-item">
+                  <li class="ask-info-item"
+                      @click="jubaoBtnClick">
                     <i class="icon icon_vote_jubao"></i>举报
                   </li>
+                  <el-dialog title="哪些方面需要改进"
+                             :visible.sync="jubiaoDlog"
+                             :close-on-click-modal="false"
+                             center>
+                    <div slot="footer"
+                         class="dialog-footer">
+                      <el-button @click="jubiaoDlog = false">取 消</el-button>
+                      <el-button type="primary"
+                                 @click="jubiaoDlog = false">确 定</el-button>
+                    </div>
+                  </el-dialog>
                 </ul>
               </div>
             </div>
@@ -350,6 +362,7 @@ export default {
       isLogin: false,
       collectIcon: "el-icon-star-off",
       collectString: "收藏",
+      jubiaoDlog: false,
     };
   },
   head () {
@@ -395,18 +408,21 @@ export default {
 
   computed: {
     // 计算属性的 getter
-    commentGood() {
-    return function (goodCount) {
-		   if(goodCount > 0){
-		      return goodCount;
-		   } else {
-		        return "赞";
-		    }
-	    }
+    commentGood () {
+      return function (goodCount) {
+        if (goodCount > 0) {
+          return goodCount;
+        } else {
+          return "赞";
+        }
+      }
     },
   },
 
   methods: {
+    jubaoBtnClick () {
+      this.jubiaoDlog = true;
+    },
     updateRelpyState (rId, type) {
       askApi.updateRelpyState(rId, type).then((response) => {
       })
@@ -446,7 +462,7 @@ export default {
         } else {
           comment.goodcomment = 0;
           comment.good--;
-           askApi.cancleQcommentGood(comment.id).then((response) => { });
+          askApi.cancleQcommentGood(comment.id).then((response) => { });
         }
       }
       setTimeout(function () {
@@ -947,6 +963,10 @@ export default {
 </script>
 
 <style>
+.el-dialog {
+  width: 600px;
+  height: 600px;
+}
 .comment-replyment {
   color: #999;
   margin-left: 0px;
@@ -1422,6 +1442,7 @@ export default {
   margin-left: 16px;
   color: #777888;
   font-size: 12px;
+  cursor: pointer;
 }
 
 .icon_vote_down,
@@ -1482,6 +1503,7 @@ export default {
   line-height: 30px;
   font-size: 12px;
   font-weight: 400;
+  cursor: pointer;
   color: #777888;
 }
 .vote_span {
@@ -1495,6 +1517,7 @@ export default {
   padding: 0 12px;
   font-size: 12px;
   font-weight: 400;
+  cursor: pointer;
   color: #777888;
 }
 li.up_down_wrap {
@@ -1527,6 +1550,7 @@ li.up_down_wrap {
   width: 94px;
   height: 32px;
   font-size: 12px;
+  cursor: pointer;
   background: #fc5531;
   border-radius: 16px;
   font-weight: 400;

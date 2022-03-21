@@ -101,10 +101,44 @@
                       @click="jubaoBtnClick">
                     <i class="icon icon_vote_jubao"></i>举报
                   </li>
-                  <el-dialog title="哪些方面需要改进"
+                  <el-dialog title="举报反馈"
                              :visible.sync="jubiaoDlog"
                              :close-on-click-modal="false"
                              center>
+                    <div class="jubao-content">
+                      <div class="accusation-type">
+            <h2 class="accusation-secondary-title mb10">举报类型（必选）</h2>
+            <ul>
+              <li class="accusation-item" data-content="61a88002e7a4632f6682d49f">诱导点赞、关注</li><li class="accusation-item" data-content="616926cc4afdd76c5d91b9e2">抄袭、刷量作弊</li><li class="accusation-item" data-content="6053646cc623c25c2706b75b">有害信息</li><li class="accusation-item" data-content="60536464c623c25c2706b759">不友善内容</li><li class="accusation-item" data-content="6053645dc623c25c2706b758">垃圾广告信息</li><li class="accusation-item" data-content="60536454c623c25c2706b755">低质内容</li>
+            </ul>
+          </div>
+          <div class="accusation-reason">
+            <h2 class="accusation-secondary-title mb10">举报详情（选填）</h2>
+            <div class="accusation-input">
+               <el-input type="textarea"
+                                  placeholder="请详细描述举报原因，我们将第一时间核实处理"
+                                  maxlength="200"
+                                  :rows="6"
+                                  show-word-limit>
+                        </el-input>
+       
+      </div>
+          </div>
+                    </div>
+                    <div slot="footer"
+                         class="dialog-footer">
+                      <el-button @click="jubiaoDlog = false">取 消</el-button>
+                      <el-button type="primary"
+                                 @click="jubiaoDlog = false">确 定</el-button>
+                    </div>
+                  </el-dialog>
+
+                     <el-dialog title="哪些方面需要改进"
+                             :visible.sync="jubiaodDlog"
+                             :close-on-click-modal="false"
+                             center>
+                    <div class="jubao-content">
+                    </div>
                     <div slot="footer"
                          class="dialog-footer">
                       <el-button @click="jubiaoDlog = false">取 消</el-button>
@@ -963,10 +997,37 @@ export default {
 </script>
 
 <style>
+
 .el-dialog {
-  width: 600px;
-  height: 600px;
+  width: 480px;
 }
+
+ div.accusation-type ul>li {
+    display: inline-block;
+    width: 110px;
+    height: 32px;
+    background: #f0f0f5;
+    border-radius: 2px;
+    text-align: center;
+    color: #999aaa;
+    font-size: 14px;
+    line-height: 32px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+h2.accusation-secondary-title {
+    color: #555666;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
 .comment-replyment {
   color: #999;
   margin-left: 0px;

@@ -102,30 +102,29 @@
                                :close-on-click-modal="false"
                                center>
                       <div class="jubao-content">
-                        <ul class="mb15">
                           <el-radio-group v-model="radio">
-                            <li class="mt10">
-                              <el-radio :label="1"
-                                        class="jubao-lefte-item">提问应符合社区要求</el-radio>
-                              <el-radio :label="2"
-                                        class="jubao-right-item">请采纳用户回复</el-radio>
 
-                            </li>
-                            <li class="mt10">
-                              <el-radio :label="3"> 请选择合适的标签</el-radio>
+                           <div class="jubao-radio-content">
+                            <div class="jubao-lefte-items">
+                               <el-radio :label="1"
+                                        class="jubao-radio-item">提问应符合社区要求</el-radio>
+                              <el-radio :label="3" class="jubao-radio-item"> 请选择合适的标签</el-radio>
+                              <el-radio :label="5" class="jubao-radio-item"> 请详细说明问题背景</el-radio>
+                            </div>
+
+                            <div class="jubao-right-items">
+                              <el-radio :label="2"
+                                        class="jubao-radio-item">请采纳用户回复</el-radio>
                               <el-radio :label="4"
-                                        class="jubao-right-item"> 请回答用户的提问</el-radio>
-                            </li>
-                            <li class="mt10">
-                              <el-radio :label="5"> 请详细说明问题背景</el-radio>
+                                        class="jubao-radio-item"> 请回答用户的提问</el-radio>
                               <el-radio :label="6"
-                                        class="jubao-right-item"> 请提交代码</el-radio>
-                            </li>
+                                        class="jubao-radio-item"> 请提交代码</el-radio>
+                            </div>
+                           </div>
                           </el-radio-group>
-                        </ul>
-                        <div class="accusation-reason">
-                          <h2 class="accusation-secondary-title mb10">建议详情（选填）</h2>
-                          <div class="accusation-input">
+                        <div class="accusation-reason mb15">
+                          <h2 class="accusation-secondary-title">建议详情（选填）</h2>
+                          <div class="accusation-input mt10">
                             <el-input type="textarea"
                                       placeholder="请详细描述您的建议，以便帮助更多的人"
                                       maxlength="200"
@@ -247,7 +246,7 @@
                       分享
                     </span>
 
-                    <span class="li_more li_report">
+                    <span class="li_more li_report" @click="jubaoBtnClick">
                       <i class="icon icon_ask_report"></i>
                       举报
                     </span>
@@ -298,7 +297,7 @@
                               @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>{{commentGood(comment.good)}}</span>
                         <span class="mr15"
                               @click="commentbtnclinck(comment,cindex)">回复</span>
-                        <span class="li_more li_report">
+                        <span class="li_more li_report" @click="jubaoBtnClick">
                           <i class="icon icon_ask_report"></i>举报
                         </span>
 
@@ -1043,12 +1042,29 @@ export default {
 .el-dialog {
   width: 480px;
 }
-.jubao-right-item {
-  float: left;
-  margin-left: 100px;
+
+.jubao-radio-content {
+  width: 410px;
+  height: 100px;
+  padding-left: 20px;
 }
-.jubao-lefte-item {
+
+.jubao-lefte-items {
   float: left;
+  width: 160px;
+}
+
+.jubao-right-items {
+  float: right;
+  width: 160px;
+}
+.jubao-radio-item {
+  margin-bottom: 10px;
+}
+
+
+.jubao-lefte-item {
+  margin-top: 10px;
 }
 div.accusation-type ul > li {
   display: inline-block;

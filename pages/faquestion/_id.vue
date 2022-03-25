@@ -102,23 +102,22 @@
                                :close-on-click-modal="false"
                                center>
                       <div class="jubao-content">
-                          <el-radio-group v-model="radio">
-
+                          <el-radio-group v-model="jianyilable">
                            <div class="jubao-radio-content">
                             <div class="jubao-lefte-items">
                                <el-radio :label="1"
                                         class="jubao-radio-item">提问应符合社区要求</el-radio>
-                              <el-radio :label="3" class="jubao-radio-item"> 请选择合适的标签</el-radio>
-                              <el-radio :label="5" class="jubao-radio-item"> 请详细说明问题背景</el-radio>
+                              <el-radio :label="2" class="jubao-radio-item">请选择合适的标签</el-radio>
+                              <el-radio :label="3" class="jubao-radio-item">请详细说明问题背景</el-radio>
                             </div>
 
                             <div class="jubao-right-items">
-                              <el-radio :label="2"
-                                        class="jubao-radio-item">请采纳用户回复</el-radio>
                               <el-radio :label="4"
-                                        class="jubao-radio-item"> 请回答用户的提问</el-radio>
+                                        class="jubao-radio-item">请采纳用户回复</el-radio>
+                              <el-radio :label="5"
+                                        class="jubao-radio-item">请回答用户的提问</el-radio>
                               <el-radio :label="6"
-                                        class="jubao-radio-item"> 请提交代码</el-radio>
+                                        class="jubao-radio-item">请提交代码</el-radio>
                             </div>
                            </div>
                           </el-radio-group>
@@ -126,6 +125,7 @@
                           <h2 class="accusation-secondary-title">建议详情（选填）</h2>
                           <div class="accusation-input mt10">
                             <el-input type="textarea"
+                                      v-model="jianyiContent"
                                       placeholder="请详细描述您的建议，以便帮助更多的人"
                                       maxlength="200"
                                       :rows="6"
@@ -138,7 +138,7 @@
                            class="dialog-footer">
                         <el-button @click="jianyiDlog = false">取 消</el-button>
                         <el-button type="primary"
-                                   @click="jianyiDlog = false">确 定</el-button>
+                                   @click="qustionJianYiConfirm">确 定</el-button>
                       </div>
                     </el-dialog>
                   </li>
@@ -166,6 +166,7 @@
                         <h2 class="accusation-secondary-title mb10">举报详情（选填）</h2>
                         <div class="accusation-input">
                           <el-input type="textarea"
+                                    v-model="jubaoContent"
                                     placeholder="请详细描述举报原因，我们将第一时间核实处理"
                                     maxlength="200"
                                     :rows="6"
@@ -431,8 +432,11 @@ export default {
       isLogin: false,
       collectIcon: "el-icon-star-off",
       collectString: "收藏",
+      jianyilable:"",
       jubiaoDlog: false,
-      jianyiDlog: false
+      jianyiDlog: false,
+      jianyiContent:"",
+      jubaoContent:"",
     };
   },
   head () {

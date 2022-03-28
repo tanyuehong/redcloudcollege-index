@@ -2,6 +2,15 @@ import request from '@/utils/request'
 
 export default {
 
+    // 问题建议的提交接口
+    submitQuestionAdvise(advise) {
+      return request({
+        url: `/eduask/submitAdvise`,
+        method: 'post',
+        data: advise,
+      })
+    },
+
   // 问题提交的接口
   submitQuestion(qesData) {
     return request({
@@ -53,7 +62,6 @@ export default {
       method: 'get',
     })
   },
-
 
   getUserGoodQustionState(qId) {
     return request({

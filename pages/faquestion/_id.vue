@@ -95,20 +95,22 @@
                       <!---->
                     </span>
                     <span class="vote_span2"
-                          @click="jianyiBtnClick"><i class="icon icon_vote_down"></i>提建议
+                          @click="jianyiDlog = true"><i class="icon icon_vote_down"></i>提建议
                     </span>
                     <el-dialog title="哪些方面需要改进"
                                :visible.sync="jianyiDlog"
                                :close-on-click-modal="false"
                                center>
                       <div class="jubao-content">
-                          <el-radio-group v-model="jianyilable">
-                           <div class="jubao-radio-content">
+                        <el-radio-group v-model="jianyilable">
+                          <div class="jubao-radio-content">
                             <div class="jubao-lefte-items">
-                               <el-radio :label="1"
+                              <el-radio :label="1"
                                         class="jubao-radio-item">提问应符合社区要求</el-radio>
-                              <el-radio :label="2" class="jubao-radio-item">请选择合适的标签</el-radio>
-                              <el-radio :label="3" class="jubao-radio-item">请详细说明问题背景</el-radio>
+                              <el-radio :label="2"
+                                        class="jubao-radio-item">请选择合适的标签</el-radio>
+                              <el-radio :label="3"
+                                        class="jubao-radio-item">请详细说明问题背景</el-radio>
                             </div>
 
                             <div class="jubao-right-items">
@@ -119,8 +121,8 @@
                               <el-radio :label="6"
                                         class="jubao-radio-item">请提交代码</el-radio>
                             </div>
-                           </div>
-                          </el-radio-group>
+                          </div>
+                        </el-radio-group>
                         <div class="accusation-reason mb15">
                           <h2 class="accusation-secondary-title">建议详情（选填）</h2>
                           <div class="accusation-input mt10">
@@ -247,7 +249,8 @@
                       分享
                     </span>
 
-                    <span class="li_more li_report" @click="jubaoBtnClick">
+                    <span class="li_more li_report"
+                          @click="jubaoBtnClick">
                       <i class="icon icon_ask_report"></i>
                       举报
                     </span>
@@ -298,7 +301,8 @@
                               @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>{{commentGood(comment.good)}}</span>
                         <span class="mr15"
                               @click="commentbtnclinck(comment,cindex)">回复</span>
-                        <span class="li_more li_report" @click="jubaoBtnClick">
+                        <span class="li_more li_report"
+                              @click="jubaoBtnClick">
                           <i class="icon icon_ask_report"></i>举报
                         </span>
 
@@ -432,11 +436,11 @@ export default {
       isLogin: false,
       collectIcon: "el-icon-star-off",
       collectString: "收藏",
-      jianyilable:"",
+      jianyilable: "",
       jubiaoDlog: false,
       jianyiDlog: false,
-      jianyiContent:"",
-      jubaoContent:"",
+      jianyiContent: "",
+      jubaoContent: "",
     };
   },
   head () {
@@ -497,7 +501,10 @@ export default {
     jubaoBtnClick () {
       this.jubiaoDlog = true;
     },
-    jianyiBtnClick () {
+    qustionJianYiConfirm () {
+      askApi.submitQuestionAdvise({ "qid": this.qdetail.qid, "uid": this.loginInfo.id, "type": this.jianyilable, "content": this.jianyiContent }).then((response) => { });
+      var parm = { "qid": this.qdetail.qid, "uid": this.loginInfo.id, "type": this.jianyilable, "content": this.jianyiContent };
+      window.console.log(parm);
       this.jianyiDlog = true;
     },
     updateRelpyState (rId, type) {
@@ -1065,7 +1072,6 @@ export default {
 .jubao-radio-item {
   margin-bottom: 10px;
 }
-
 
 .jubao-lefte-item {
   margin-top: 10px;

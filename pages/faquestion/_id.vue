@@ -145,7 +145,7 @@
                     </el-dialog>
                   </li>
                   <li class="ask-info-item"
-                      @click="jubaoBtnClick">
+                      @click="jubaoBtnClick(qdetail.qid,'问题')">
                     <i class="icon icon_vote_jubao"></i>举报
                   </li>
                   <el-dialog title="举报反馈"
@@ -156,12 +156,12 @@
                       <div class="accusation-type">
                         <h2 class="accusation-secondary-title mb10">举报类型（必选）</h2>
                         <ul>
-                          <li class="accusation-item">诱导点赞、关注</li>
-                          <li class="accusation-item">抄袭、刷量作弊</li>
-                          <li class="accusation-item">有害信息</li>
-                          <li class="accusation-item">不友善内容</li>
-                          <li class="accusation-item">垃圾广告信息</li>
-                          <li class="accusation-item">低质内容</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==1}" @click="jubaoTypeIndex=1">诱导点赞、关注</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==2}" @click="jubaoTypeIndex=2">抄袭、刷量作弊</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==3}" @click="jubaoTypeIndex=3">有害信息</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==4}" @click="jubaoTypeIndex=4">不友善内容</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==5}" @click="jubaoTypeIndex=5">垃圾广告信息</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==6}" @click="jubaoTypeIndex=6">低质内容</li>
                         </ul>
                       </div>
                       <div class="accusation-reason">
@@ -181,7 +181,7 @@
                          class="dialog-footer">
                       <el-button @click="jubiaoDlog = false">取 消</el-button>
                       <el-button type="primary"
-                                 @click="jubiaoDlog = false">确 定</el-button>
+                                 @click="jubaoCommitBtnClick">确 定</el-button>
                     </div>
                   </el-dialog>
                 </ul>
@@ -250,7 +250,7 @@
                     </span>
 
                     <span class="li_more li_report"
-                          @click="jubaoBtnClick">
+                          @click="jubaoBtnClick(item.id,'回答')">
                       <i class="icon icon_ask_report"></i>
                       举报
                     </span>
@@ -302,7 +302,7 @@
                         <span class="mr15"
                               @click="commentbtnclinck(comment,cindex)">回复</span>
                         <span class="li_more li_report"
-                              @click="jubaoBtnClick">
+                              @click="jubaoBtnClick(comment.id,'评论')">
                           <i class="icon icon_ask_report"></i>举报
                         </span>
 
@@ -441,6 +441,9 @@ export default {
       jianyiDlog: false,
       jianyiContent: "",
       jubaoContent: "",
+      jubaoTypeIndex:0,
+      jubaoId:"",
+      jubaotype:"",
     };
   },
   head () {
@@ -498,8 +501,23 @@ export default {
   },
 
   methods: {
-    jubaoBtnClick () {
+    jubaoBtnClick (wId,jubaotype) {
+      window.console.log(wId);
+      this.jubaotype = jubaotype;
+      this.jubaoId = wId;
       this.jubiaoDlog = true;
+    },
+    jubaoCommitBtnClick() {
+      askApi.submitUserWaring({ "wid": this.jubaoId, "uid": this.loginInfo.id, "type": this.jubaoTypeIndex, "content": this.jubaoContent,"jubaotype":this.jubaotype }).then((response) => 
+      { 
+        this.$message({
+          message: "举报成功！我们将尽快处理哈",
+          type: "success",
+          duration: 2000,
+        });
+      });
+      this.jubiaoDlog = false;
+
     },
     qustionJianYiConfirm () {
       askApi.submitQuestionAdvise({ "qid": this.qdetail.qid, "uid": this.loginInfo.id, "type": this.jianyilable, "content": this.jianyiContent }).then((response) => 
@@ -1057,6 +1075,10 @@ export default {
 <style>
 .el-dialog {
   width: 480px;
+}
+
+.jubaoSlect {
+  color: #fc5531  !important;
 }
 
 .jubao-radio-content {

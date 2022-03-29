@@ -11,6 +11,15 @@ export default {
       })
     },
 
+    // 举报的接口
+    submitUserWaring(waring) {
+        return request({
+            url: `/eduask/submitWaring`,
+            method: 'post',
+            data: waring,
+        })
+    },
+
   // 问题提交的接口
   submitQuestion(qesData) {
     return request({

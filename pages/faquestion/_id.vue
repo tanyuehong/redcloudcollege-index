@@ -502,10 +502,15 @@ export default {
       this.jubiaoDlog = true;
     },
     qustionJianYiConfirm () {
-      askApi.submitQuestionAdvise({ "qid": this.qdetail.qid, "uid": this.loginInfo.id, "type": this.jianyilable, "content": this.jianyiContent }).then((response) => { });
-      var parm = { "qid": this.qdetail.qid, "uid": this.loginInfo.id, "type": this.jianyilable, "content": this.jianyiContent };
-      window.console.log(parm);
-      this.jianyiDlog = true;
+      askApi.submitQuestionAdvise({ "qid": this.qdetail.qid, "uid": this.loginInfo.id, "type": this.jianyilable, "content": this.jianyiContent }).then((response) => 
+      { 
+        this.$message({
+          message: "提交成功！",
+          type: "success",
+          duration: 2000,
+        });
+      });
+      this.jianyiDlog = false;
     },
     updateRelpyState (rId, type) {
       askApi.updateRelpyState(rId, type).then((response) => {

@@ -17,12 +17,12 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css' },
-      { rel: 'stylesheet', href: 'https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css' }
+      { rel: 'stylesheet', href: 'https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-d/font-awesome/4.7.0/css/font-awesome.min.css' },
+      { rel: 'stylesheet', href: 'https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css' }
     ],
     script:[
-      {src:'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js'},
-      {src: 'https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js'}
+      {src: 'https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-d/jquery/3.3.1/jquery.min.js'},
+      {src: 'https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'}
     ]
   },
   /*

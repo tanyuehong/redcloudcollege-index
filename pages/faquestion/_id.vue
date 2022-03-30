@@ -449,7 +449,7 @@ export default {
   head () {
     return {
       script: [
-        { src: 'https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js', async: true, defer: true }
+        { src: 'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js', async: true, defer: true }
       ],
     }
   },

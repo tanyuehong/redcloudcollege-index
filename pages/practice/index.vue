@@ -93,6 +93,24 @@ export default {
     return {
       activeName: 'first',
       subPraCticeTag: -1,
+      title:"开源实践博文，真正的实践记录者",
+      descrb:"开源实践博文，是一个记录真实项目开发过程的一个博客，里面的文章都是项目开发过程中流程和难点的总结。通过文章，能让大家提升自己的项目能力和技术能力，让别人的经验成为自己提升的基石。"
+    }
+  },
+  head () {
+    return {
+      title: this.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.descrb,
+        },
+        {
+          hid: 'og:description',
+          content: this.descrb,
+        },
+      ],
     }
   },
   asyncData ({ params, error }) {

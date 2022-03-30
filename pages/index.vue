@@ -178,7 +178,7 @@
                   <div v-else-if="item.type === 1">
                     <div class="op_artie_content">
                       <nuxt-link class="article_title"
-                                 :to="{name:'practice-detail',query:{id:item.id}}">
+                                 :to="'/practice/'+item.id">
                         {{ item.title }}
                       </nuxt-link>
                       <p class="op_pratice_describ">
@@ -187,7 +187,7 @@
                       <ul>
                         <i class="pratice_icon_view"></i>
                         <span class="icon_des">{{item.viewCount}}</span>
-                        <i class="pratice_icon_zhan"></span></i>
+                        <i class="pratice_icon_zhan"></i>
                         <span class="icon_des">{{item.good}}</span>
                         <i class="pratice_icon_comment"></i>
                         <span class="icon_des">11</span>
@@ -195,13 +195,13 @@
                     </div>
                   </div>
                   <div v-else>
-                    <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
+                    <nuxt-link :to="'/book/'+item.id">
                       <img :src="item.imgUrl"
                            class="img fl"
                            :alt="item.title">
                     </nuxt-link>
                     <div class="text_con fr">
-                      <nuxt-link :to="{name:'article-book',query:{id:item.id}}">
+                      <nuxt-link :to="'/book/'+item.id">
                         <p class="title">{{item.title}}</p>
                         {{item.title}}
                       </nuxt-link>
@@ -353,7 +353,6 @@ export default {
 </script>
 
 <style>
-
 .el-carousel__item a {
   display: block;
   width: 100%;

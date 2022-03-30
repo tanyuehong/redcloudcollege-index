@@ -13,9 +13,9 @@
               <li class="li-item"
                   v-for="(sutem,index) in subTypeList"
                   :key="sutem.id">
-                <a v-bind:class="{ praticesubtagactive:subPraCticeTag==index }" 
-                 @click="subPraCticeTagClick(index)"
-                     href="javascript:void(0);">{{ sutem.name }}
+                <a v-bind:class="{ praticesubtagactive:subPraCticeTag==index }"
+                   @click="subPraCticeTagClick(index)"
+                   href="javascript:void(0);">{{ sutem.name }}
                 </a>
               </li>
             </ul>
@@ -25,7 +25,7 @@
                     :key="bitem.id">
                   <div class="op_artie_content">
                     <nuxt-link class="article_title"
-                               :to="{name:'practice-detail',query:{id:bitem.id}}">
+                               :to="'/practice/'+bitem.id">
                       {{ bitem.title }}
                     </nuxt-link>
                     <p class="op_pratice_describ">
@@ -34,7 +34,7 @@
                     <ul>
                       <i class="pratice_icon_view"></i>
                       <span class="icon_des">{{bitem.viewCount}}</span>
-                      <i class="pratice_icon_zhan"></span></i>
+                      <i class="pratice_icon_zhan"></i>
                       <span class="icon_des">{{bitem.good}}</span>
                       <i class="pratice_icon_comment"></i>
                       <span class="icon_des">11</span>
@@ -91,9 +91,9 @@ export default {
   //params: 相当于之前 this.$route.params.id  等价  params.id
   data () {
     return {
-       activeName: 'first' ,
-       subPraCticeTag:-1,
-       }
+      activeName: 'first',
+      subPraCticeTag: -1,
+    }
   },
   asyncData ({ params, error }) {
     return realPractice.getHomeRealPratice(1, 8).then((response) => {
@@ -116,7 +116,7 @@ export default {
       return converter.makeHtml(content)
     },
 
-    subPraCticeTagClick(index) {
+    subPraCticeTagClick (index) {
       this.subPraCticeTag = index;
       window.console.log(index);
     }
@@ -126,9 +126,8 @@ export default {
 </script>
 
 <style>
-
 .praticesubtagactive {
-   color: #409EFF !important;
+  color: #409eff !important;
 }
 .op_top_back {
   background-color: white;
@@ -180,7 +179,7 @@ export default {
 }
 
 .op_pratice_subtag a:hover {
-  color: #409EFF;
+  color: #409eff;
 }
 
 .op_pratice_content {

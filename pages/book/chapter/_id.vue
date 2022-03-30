@@ -280,7 +280,8 @@ strong {
 
 <script>
 import '~/assets/css/markdown.css'
-import articleApi from '@/api/article'
+import bookReq from '@/api/bookReq'
+import bookServerReq from '@/api/bookServerReq'
 import showdown from 'showdown'
 import { Message } from 'element-ui'
 
@@ -299,33 +300,29 @@ export default {
       isShowContent: false,
     }
   },
+
+  asyncData ({ params, error }) {
+    return bookServerReq.getBookArticleDetail(params.id).then((response) => {
+      return {
+        articleItem: response.data.item,
+        bookItem: response.data.book,
+        contentsItem: response.data.contents
+      }
+    });
+  },
+
   created () {
-    var articleId = this.$route.query.id
-    if (articleId && articleId.length > 0) {
-      this.getBookArticleDetail(articleId)
-    } else {
-      Message({
-        message: '参数异常，请重新尝试！',
-        type: 'error',
-        duration: 2000,
-      })
+    if (this.articleItem.content) {
+      this.changMarkToHtml(this.articleItem.content);
     }
   },
+
   mounted () {
+
     window.addEventListener('resize', this.windowFrameChange)
     this.windowFrameChange()
   },
   methods: {
-    //分页切换的方法
-    //参数是页码数
-    getBookArticleDetail (articleId) {
-      articleApi.getBookArticleDetail(articleId).then((response) => {
-        this.articleItem = response.data.item
-        this.bookItem = response.data.book
-        this.contentsItem = response.data.contents
-        this.changMarkToHtml(this.articleItem.content)
-      })
-    },
 
     tabClickBookInfo (tab, event) {
       if (this.isFirstComment == 1 && tab.name == 'bookComment') {
@@ -350,7 +347,7 @@ export default {
       if (tab && tab.name == 'undealComment') {
         type = 4
       }
-      articleApi
+      bookReq
         .getBookComments({ bookId: this.bookItem.id, type: type })
         .then((response) => {
           this.commentList = response.data.comments
@@ -358,7 +355,7 @@ export default {
     },
 
     getBookContents () {
-      articleApi
+      bookReq
         .getBookContents({ bookId: this.bookItem.id })
         .then((response) => {
           this.chapterList = response.data.chapterList

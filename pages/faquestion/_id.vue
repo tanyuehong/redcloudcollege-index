@@ -6,7 +6,7 @@
           <div class="ask-detail-lefte">
             <div class="ui breadcrumb red_breadcrumb">
               <a class="section"
-                 href="/faquestion">开源实践问答</a>
+                 href="/faquestion">实践问答</a>
               <span class="glyphicon glyphicon glyphicon-menu-right"
                     aria-hidden="true"></span>
               <div class="active section">问题详情</div>
@@ -19,7 +19,7 @@
                        width="30"
                        height="30"
                        alt />
-                  <span> {{ qdetail.nickname }}</span></a>
+                  <span class="ml5">{{ qdetail.nickname }}</span></a>
                 <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
                 <span class="glyphicon glyphicon-star-empty qustion-top-item"
                       aria-hidden="true">
@@ -82,11 +82,11 @@
                     </el-dropdown>
                   </div>
                 </div>
-                <ul class="ask-issue-tool">
+                <ul class="ask-issue-tool fbselect">
                   <span class="answer_span"
                         @click="answerBtnClick"><i class="icon ic_question_reply"></i>写回答</span>
                   <li class="up_down_wrap wrapdisLike ask-info-item">
-                    <span class="vote_span disLike fbselect"
+                    <span class="vote_span disLike"
                           @click="goodQustionClick"
                           v-bind:class="{ like: goodqustion }">
 
@@ -94,19 +94,103 @@
                           v-if="qdetail.good>0">{{qdetail.good}}</em>
                       <!---->
                     </span>
-                    <span class="vote_span2"><i class="icon icon_vote_down"></i>提建议
+                    <span class="vote_span2"
+                          @click="jianyiDlog = true"><i class="icon icon_vote_down"></i>提建议
                     </span>
+                    <el-dialog title="哪些方面需要改进"
+                               :visible.sync="jianyiDlog"
+                               :close-on-click-modal="false"
+                               center>
+                      <div class="jubao-content">
+                        <el-radio-group v-model="jianyilable">
+                          <div class="jubao-radio-content">
+                            <div class="jubao-lefte-items">
+                              <el-radio :label="1"
+                                        class="jubao-radio-item">提问应符合社区要求</el-radio>
+                              <el-radio :label="2"
+                                        class="jubao-radio-item">请选择合适的标签</el-radio>
+                              <el-radio :label="3"
+                                        class="jubao-radio-item">请详细说明问题背景</el-radio>
+                            </div>
+
+                            <div class="jubao-right-items">
+                              <el-radio :label="4"
+                                        class="jubao-radio-item">请采纳用户回复</el-radio>
+                              <el-radio :label="5"
+                                        class="jubao-radio-item">请回答用户的提问</el-radio>
+                              <el-radio :label="6"
+                                        class="jubao-radio-item">请提交代码</el-radio>
+                            </div>
+                          </div>
+                        </el-radio-group>
+                        <div class="accusation-reason mb15">
+                          <h2 class="accusation-secondary-title">建议详情（选填）</h2>
+                          <div class="accusation-input mt10">
+                            <el-input type="textarea"
+                                      v-model="jianyiContent"
+                                      placeholder="请详细描述您的建议，以便帮助更多的人"
+                                      maxlength="200"
+                                      :rows="6"
+                                      show-word-limit>
+                            </el-input>
+                          </div>
+                        </div>
+                      </div>
+                      <div slot="footer"
+                           class="dialog-footer">
+                        <el-button @click="jianyiDlog = false">取 消</el-button>
+                        <el-button type="primary"
+                                   @click="qustionJianYiConfirm">确 定</el-button>
+                      </div>
+                    </el-dialog>
                   </li>
-                  <li class="ask-info-item">
+                  <li class="ask-info-item"
+                      @click="jubaoBtnClick(qdetail.qid,'问题')">
                     <i class="icon icon_vote_jubao"></i>举报
                   </li>
+                  <el-dialog title="举报反馈"
+                             :visible.sync="jubiaoDlog"
+                             :close-on-click-modal="false"
+                             center>
+                    <div class="jubao-content">
+                      <div class="accusation-type">
+                        <h2 class="accusation-secondary-title mb10">举报类型（必选）</h2>
+                        <ul>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==1}" @click="jubaoTypeIndex=1">诱导点赞、关注</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==2}" @click="jubaoTypeIndex=2">抄袭、刷量作弊</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==3}" @click="jubaoTypeIndex=3">有害信息</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==4}" @click="jubaoTypeIndex=4">不友善内容</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==5}" @click="jubaoTypeIndex=5">垃圾广告信息</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==6}" @click="jubaoTypeIndex=6">低质内容</li>
+                        </ul>
+                      </div>
+                      <div class="accusation-reason">
+                        <h2 class="accusation-secondary-title mb10">举报详情（选填）</h2>
+                        <div class="accusation-input">
+                          <el-input type="textarea"
+                                    v-model="jubaoContent"
+                                    placeholder="请详细描述举报原因，我们将第一时间核实处理"
+                                    maxlength="200"
+                                    :rows="6"
+                                    show-word-limit>
+                          </el-input>
+                        </div>
+                      </div>
+                    </div>
+                    <div slot="footer"
+                         class="dialog-footer">
+                      <el-button @click="jubiaoDlog = false">取 消</el-button>
+                      <el-button type="primary"
+                                 @click="jubaoCommitBtnClick">确 定</el-button>
+                    </div>
+                  </el-dialog>
                 </ul>
               </div>
             </div>
           </div>
 
           <div class="qustion-answer-list"
-               v-if="replyList.length > 0">
+               v-if="replyList.length">
             <h4 class="reply-title">
               <span><em class="em1">{{ replyList.length }}</em>条回答</span>
               <span class="reply_wrap">
@@ -130,8 +214,8 @@
                          width="30"
                          height="30"
                          alt />
-                    <span> {{ qdetail.nickname }}</span>
-                    <span class="qustion-top-item">发布于 {{ item.gmtCreate }}</span>
+                    <span class="ml5"> {{ qdetail.nickname }}</span>
+                    <span class="qustion-top-item"> {{ item.gmtCreate }}</span>
                   </div>
 
                   <div class="answer-item-content"
@@ -165,7 +249,8 @@
                       分享
                     </span>
 
-                    <span class="li_more li_report">
+                    <span class="li_more li_report"
+                          @click="jubaoBtnClick(item.id,'回答')">
                       <i class="icon icon_ask_report"></i>
                       举报
                     </span>
@@ -187,7 +272,60 @@
                   <div class="reply-comment-tool"
                        v-if="item.showeditor">
                     <span @click="repplaybtnclinck(item,index)">取消</span>
-                    <div class="comment-btn">评论</div>
+                    <div class="comment-btn"
+                         @click="replyCommntClick(item)">评论</div>
+                  </div>
+
+                  <div class="reply-comment-container"
+                       v-if="item.comments">
+                    <div class="reply-comment-item"
+                         v-for="(comment, cindex) in item.comments"
+                         :key="comment.id">
+                      <div class="answer-item-userinfo">
+                        <img class="vam user-head-image"
+                             :src="comment.avatar"
+                             width="30"
+                             height="30"
+                             alt />
+                        <span class="ml5"> {{ comment.name }}</span>
+                        <span class="comment-replyment"
+                              v-if="comment.toname">回复</span>
+                        <span v-if="comment.toname">{{ comment.toname }}</span>
+                        <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
+                      </div>
+                      <div class="answer-item-content"
+                           v-html="comment.content"></div>
+                      <div class="comment-tool-bar fbselect">
+                        <span class="mr15"
+                              v-bind:class="{ goodcomment: comment.goodcomment }"
+                              @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>{{commentGood(comment.good)}}</span>
+                        <span class="mr15"
+                              @click="commentbtnclinck(comment,cindex)">回复</span>
+                        <span class="li_more li_report"
+                              @click="jubaoBtnClick(comment.id,'评论')">
+                          <i class="icon icon_ask_report"></i>举报
+                        </span>
+
+                      </div>
+
+                      <transition v-on:before-enter="cbeforeEnter"
+                                  v-on:enter="center"
+                                  v-on:after-enter="cafterEnter"
+                                  v-on:leave="cleave"
+                                  v-bind:css="false">
+                        <div :id="'creplayedtor' + cindex"
+                             class="c-replay-editor"
+                             v-if="comment.showeditor"
+                             :key="comment.id">
+                        </div>
+                      </transition>
+                      <div class="reply-comment-tool r-comment"
+                           v-if="comment.showeditor">
+                        <span @click="commentbtnclinck(comment,cindex)">取消</span>
+                        <div class="comment-btn"
+                             @click="creplyCommntClick(comment,item,cindex)">提交</div>
+                      </div>
+                    </div>
                   </div>
                 </li>
               </ul>
@@ -241,7 +379,6 @@
                   <span>被评论</span>
                   <em class="fa-num">0</em>
                 </li>
-
               </ul>
             </div>
 
@@ -251,7 +388,7 @@
                  href="https://ask.csdn.net/questions/7398651">◇ 欢迎建议意见</a>
               <a target="_blank"
                  class="ask-top-warper-item"
-                 href="https://bbs.csdn.net/topics/603750556">◇ 开源问答上线</a>
+                 href="https://bbs.csdn.net/topics/603750556">◇ 实践问答上线</a>
               <a target="_blank"
                  class="ask-top-warper-item"
                  href="https://bbs.csdn.net/forums/ask?category=0">◇ 通知公告</a>
@@ -280,7 +417,7 @@
 <script>
 import askApi from "@/api/askqustion";
 import askServerApi from "@/api/askserver";
-import useract from '@/api/useract'
+
 const qiniu = require("qiniu-js");
 
 export default {
@@ -299,6 +436,14 @@ export default {
       isLogin: false,
       collectIcon: "el-icon-star-off",
       collectString: "收藏",
+      jianyilable: "",
+      jubiaoDlog: false,
+      jianyiDlog: false,
+      jianyiContent: "",
+      jubaoContent: "",
+      jubaoTypeIndex:0,
+      jubaoId:"",
+      jubaotype:"",
     };
   },
   head () {
@@ -326,6 +471,7 @@ export default {
       this.isLogin = false;
     } else {
       this.loginTitle = "我的问答";
+      this.loginInfo = JSON.parse(userStr)
       this.isLogin = true;
     };
     window.myVueComm = this;
@@ -341,9 +487,51 @@ export default {
     };
   },
 
+  computed: {
+    // 计算属性的 getter
+    commentGood () {
+      return function (goodCount) {
+        if (goodCount > 0) {
+          return goodCount;
+        } else {
+          return "赞";
+        }
+      }
+    },
+  },
+
   methods: {
+    jubaoBtnClick (wId,jubaotype) {
+      window.console.log(wId);
+      this.jubaotype = jubaotype;
+      this.jubaoId = wId;
+      this.jubiaoDlog = true;
+    },
+    jubaoCommitBtnClick() {
+      askApi.submitUserWaring({ "wid": this.jubaoId, "uid": this.loginInfo.id, "type": this.jubaoTypeIndex, "content": this.jubaoContent,"jubaotype":this.jubaotype }).then((response) => 
+      { 
+        this.$message({
+          message: "举报成功！我们将尽快处理哈",
+          type: "success",
+          duration: 2000,
+        });
+      });
+      this.jubiaoDlog = false;
+
+    },
+    qustionJianYiConfirm () {
+      askApi.submitQuestionAdvise({ "qid": this.qdetail.qid, "uid": this.loginInfo.id, "type": this.jianyilable, "content": this.jianyiContent }).then((response) => 
+      { 
+        this.$message({
+          message: "提交成功！",
+          type: "success",
+          duration: 2000,
+        });
+      });
+      this.jianyiDlog = false;
+    },
     updateRelpyState (rId, type) {
-      useract.updateRelpyState(rId, type).then((response) => {
+      askApi.updateRelpyState(rId, type).then((response) => {
       })
     },
     goodReplyClick (item) {
@@ -363,6 +551,25 @@ export default {
           } else {
             this.updateRelpyState(item.id, 1);
           }
+        }
+      }
+      setTimeout(function () {
+        window.myVueComm.forbiden = true;
+      }, 500)
+    },
+
+    goodCommentClick (comment) {
+      window.console.log("ffffffffff");
+      if (this.forbiden) {
+        this.forbiden = false;
+        if (comment.goodcomment == 0) {
+          comment.goodcomment = 1;
+          comment.good++;
+          askApi.addQcommentGood(comment.id).then((response) => { });
+        } else {
+          comment.goodcomment = 0;
+          comment.good--;
+          askApi.cancleQcommentGood(comment.id).then((response) => { });
         }
       }
       setTimeout(function () {
@@ -420,7 +627,7 @@ export default {
     },
 
     getUserQustionCollectState (qId) {
-      useract.getUserQustionCollectState(qId).then((response) => {
+      askApi.getUserQustionCollectState(qId).then((response) => {
         this.collectState = response.data.collectState;
         this.collectIcon = this.collectState ? "el-icon-star-on" : "el-icon-star-off";
         this.collectString = this.collectState ? "已收藏" : "收藏";
@@ -428,11 +635,14 @@ export default {
     },
 
     getUserGoodReplyState () {
+      if (!this.replyList) {
+        return;
+      }
       var list = [];
       for (var j = 0; j < this.replyList.length; j++) {
         list.push(this.replyList[j].id);
       }
-      useract.getUserGoodReplyState(list).then((response) => {
+      askApi.getUserGoodReplyState(list).then((response) => {
         var goodList = response.data.goodList;
 
         for (var j = 0; j < this.replyList.length; j++) {
@@ -453,32 +663,33 @@ export default {
     },
 
     addUserQustionCollect () {
-      useract.addUserQustionCollect(this.qdetail.qid).then((response) => {
+      askApi.addUserQustionCollect(this.qdetail.qid).then((response) => {
       })
     },
 
     cancleUserQustionCollect () {
-      useract.cancleUserQustionCollect(this.qdetail.qid).then((response) => {
+      askApi.cancleUserQustionCollect(this.qdetail.qid).then((response) => {
       })
     },
 
     getUserGoodQustionState (qId) {
-      useract.getUserGoodQustionState(qId).then((response) => {
+      askApi.getUserGoodQustionState(qId).then((response) => {
         this.goodqustion = response.data.goodqustion;
       })
     },
 
     addUserGoodQustion () {
-      useract.addUserGoodQustion(this.qdetail.qid).then((response) => {
+      askApi.addUserGoodQustion(this.qdetail.qid).then((response) => {
       })
     },
 
     cancleUserGoodQustion () {
-      useract.cancleUserGoodQustion(this.qdetail.qid).then((response) => {
+      askApi.cancleUserGoodQustion(this.qdetail.qid).then((response) => {
       })
     },
+
     beforeEnter: function (el) {
-      el.style.width = '732px';
+      el.style.width = '706px';
       el.style.height = '0px'
     },
 
@@ -496,6 +707,25 @@ export default {
       Velocity(el, { height: '0px' }, 300, function () { done() })
     },
 
+    cbeforeEnter: function (el) {
+      el.style.width = '666px';
+      el.style.height = '0px';
+    },
+
+    center: function (el, done) {
+      var Velocity = $.Velocity;
+      Velocity(el, { height: '180px' }, 300, function () { done() })
+    },
+
+    cafterEnter: function (el) {
+      this.init_commenteditor();
+    },
+
+    cleave: function (el, done) {
+      var Velocity = $.Velocity;
+      Velocity(el, { height: '0px' }, 300, function () { done() })
+    },
+
     clickAnserType (type) {
       if (type == this.answertype) {
         return;
@@ -508,15 +738,27 @@ export default {
           item.editor.destroy();
           item.editor = null;
         }
+        if (item.comments) {
+          for (var i = 0; i < item.comments.length; i++) {
+            var citem = item.comments[j];
+            citem.showeditor = false;
+            if (citem.editor) {
+              citem.editor.destroy();
+              citem.editor = null;
+            }
+          }
+        }
       }
 
       if (this.answertype) {
-        useract.getQustionReplyList(this.qdetail.qid, 1).then((response) => {
+        askApi.getQustionReplyList(this.qdetail.qid, 1).then((response) => {
           this.replyList = response.data.replyList;
+          this.getUserGoodReplyState();
         })
       } else {
-        useract.getQustionReplyList(this.qdetail.qid, 2).then((response) => {
+        askApi.getQustionReplyList(this.qdetail.qid, 2).then((response) => {
           this.replyList = response.data.replyList;
+          this.getUserGoodReplyState();
         })
       }
     },
@@ -549,14 +791,53 @@ export default {
       this.getUploadImageToken(true);
     },
 
+    creplyCommntClick (item, rItem, cindex) {
+      if (!item.editor || item.editor.txt.html().length < 6) {
+        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        return;
+      }
+      askApi
+        .submitQuestionReplyComment({
+          content: item.editor.txt.html(),
+          rid: rItem.id,
+          uid: this.loginInfo.id,
+          touid: item.uid,
+        })
+        .then((response) => {
+          rItem.comments.unshift(response.data.comment);
+          this.$message({
+            message: "问题回答成功哦",
+            type: "success",
+            duration: 2000,
+          });
+        });
+      this.commentbtnclinck(item, cindex);
+    },
+
+    replyCommntClick (item) {
+      if (!item.editor || item.editor.txt.html().length < 6) {
+        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        return;
+      }
+      askApi
+        .submitQuestionReplyComment({
+          content: item.editor.txt.html(),
+          rid: item.id,
+          uid: this.loginInfo.id,
+        })
+        .then((response) => {
+          this.$message({
+            message: "问题回答成功哦",
+            type: "success",
+            duration: 2000,
+          });
+        });
+    },
+
     submitAnserClick () {
       if (this.replyContent.length <= 6) {
         this.answerBtnClick();
-        this.$message({
-          message: "输入的内容太短了哦！",
-          type: "error",
-          duration: 2000,
-        });
+        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
       }
       askApi
@@ -580,8 +861,9 @@ export default {
       editor.config.uploadImgMaxLength = 1;
       editor.config.uploadImgServer = "/api/ucenter/uploadImage";
       editor.config.uploadFileName = "file";
-      editor.config.placeholder = "请输入回答";
+      editor.config.placeholder = "请用专业明晰的语言写出您的回答";
       editor.config.focus = false;
+      editor.config.zIndex = 100;
 
       editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
@@ -636,6 +918,19 @@ export default {
       }
     },
 
+    commentbtnclinck (item, index) {
+      window.console.log("ddddddddfffffffff");
+      item.commnetId = "#creplayedtor" + index;
+      window.commentItem = item;
+      if (!item.editor) {
+        item.showeditor = true;
+      } else {
+        item.showeditor = false;
+        item.editor.destroy();
+        item.editor = null;
+      }
+    },
+
     init_replyeditor () {
       window.myVueComm = this;
       var item = window.replyItem;
@@ -646,6 +941,7 @@ export default {
       editor.config.uploadFileName = "file";
       editor.config.placeholder = "请用专业明晰的语言，指出问题，提出建议";
       editor.config.height = 150;
+      editor.config.zIndex = 100;
 
       editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
@@ -700,7 +996,75 @@ export default {
         const subscription = observable.subscribe(observer);
       };
       editor.config.onchange = function (newHtml) {
-        window.myVueComm.replyContent = newHtml;
+      };
+      editor.create();
+    },
+
+    init_commenteditor () {
+      window.myVueComm = this;
+      var item = window.commentItem;
+      let editor = this.$wangeditor(item.commnetId);
+      item.editor = editor;
+      editor.config.uploadImgMaxLength = 1;
+      editor.config.uploadImgServer = "/api/ucenter/uploadImage";
+      editor.config.uploadFileName = "file";
+      editor.config.placeholder = "请用专业明晰的语言，指出问题，提出建议";
+      editor.config.height = 150;
+      editor.config.zIndex = 100
+
+      editor.config.onfocus = function (newHtml) {
+        myVueComm.getUploadImageToken(true);
+      };
+      editor.config.menus = [
+        'bold',
+        'fontSize',
+        'fontName',
+        'italic',
+        'underline',
+        'indent',
+        'foreColor',
+        'link',
+        'list',
+        'todo',
+        'justify',
+        'emoticon',
+        'image',
+        'code',
+        'splitLine',
+      ]
+
+      editor.config.customUploadImg = function (files, insertImgFn) {
+        // resultFiles 是 input 中选中的文件列表
+        // insertImgFn 是获取图片 url 后，插入到编辑器的方法
+        var file = files[0];
+        const putExtra = {
+          mimeType: file.type,
+        };
+        const config = {
+          region: qiniu.region.z2,
+        };
+        const observable = qiniu.upload(
+          file,
+          null,
+          window.myVueComm.uploadToken,
+          putExtra,
+          config
+        );
+        const observer = {
+          next (res) {
+            window.console.log(res);
+          },
+          error (err) {
+            window.console.log(err);
+          },
+          complete (res) {
+            window.console.log(res);
+            insertImgFn("https://img.redskt.com/" + res.hash);
+          },
+        };
+        const subscription = observable.subscribe(observer);
+      };
+      editor.config.onchange = function (newHtml) {
       };
       editor.create();
     },
@@ -709,9 +1073,110 @@ export default {
 </script>
 
 <style>
+.el-dialog {
+  width: 480px;
+}
+
+.jubaoSlect {
+  color: #fc5531  !important;
+}
+
+.jubao-radio-content {
+  width: 410px;
+  height: 100px;
+  padding-left: 20px;
+}
+
+.jubao-lefte-items {
+  float: left;
+  width: 160px;
+}
+
+.jubao-right-items {
+  float: right;
+  width: 160px;
+}
+.jubao-radio-item {
+  margin-bottom: 10px;
+}
+
+.jubao-lefte-item {
+  margin-top: 10px;
+}
+div.accusation-type ul > li {
+  display: inline-block;
+  width: 110px;
+  height: 32px;
+  background: #f0f0f5;
+  border-radius: 2px;
+  text-align: center;
+  color: #999aaa;
+  font-size: 14px;
+  line-height: 32px;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+h2.accusation-secondary-title {
+  color: #555666;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.comment-replyment {
+  color: #999;
+  margin-left: 0px;
+}
+.comment-tool-bar span {
+  cursor: pointer;
+}
+
+.c-replay-editor {
+  margin-left: 38px;
+  margin-bottom: 12px;
+}
+
+.comment-tool-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 20px;
+  line-height: 20px;
+  margin: 12px 0 14px;
+  font-size: 14px;
+  margin-left: 38px;
+}
+
+.reply-comment-container {
+  margin-left: 36px;
+  padding-bottom: 12px;
+  margin-top: 18px;
+}
+
 .reply-comment-tool {
-  height: 50px;
+  height: 30px;
   padding-left: 646px;
+  margin-bottom: 18px;
+}
+
+.reply-comment-tool.r-comment {
+  height: 30px;
+  padding-left: 606px;
+  margin-bottom: 0px;
+  margin-top: 18px;
+}
+
+.reply-comment-item {
+  margin-bottom: 6px;
 }
 
 .reply-comment-tool span {
@@ -786,9 +1251,11 @@ export default {
   color: #777888;
 }
 
-.vote_span.vote_span.like i {
+.vote_span.vote_span.like i,
+.goodcomment i {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAhBJREFUWEfFlr1rFFEUxc/Jexs1rGgQ0TIgIgiCOrEQsm3AxmoniKCIiFhZ2Cls4weWYiXEBIsI0XmRNPoP6DZK3kQlINhYCIJiiihB4nxc2aDLZI2ZGcnum2qYOe+e35t3595LOL7o2B//BSD+wWosA1cJqYH4TuBp3yAmOG6jshsqDSD+8W0Jfr4A4GXN+oCQsRrl7KvFMhClAZK6d0+IS+ubyJQ24dmuAUh9+ERKeSZY/+gI/FDGDnQFQM4NbU2Xdy0IsO9fBgSWlLE7uwIQ1b0GiesbB5c5bcJjmw4gpw8NJlH/BwA7NgpOYFIZe2HTAZL68C2hXMsNTLmog/B+ri4jyP0L5OSB7cmW6se83eeZthKUQDNO0eh/Yl/+0ecCJGPeZRHczTMo+p6QlZQyWgnmn7fWtAFi32sVl5HfgZra2FrrPvGPvhdwf1GDIjoCb5SxhzsBJLtYG7sKF/vemudFDIpolMZuTtuv2S/QW4A42sPZt19cASxrY6vOjoDAa2XsEZcARhk75gxAiNuVwK4WNjc5IHJez4QPnAEIUKsY23QGoPTKXk4vfHYCQOCbMrbdVXueAwRCZWx7nuw5ACCPtQlP/dUNO2t+t3oBiZsqsA1nAKCc0UH40BVApFQ6xEfzn5wAKPIKg7k72XadO5B0DCpFWv1ajSAm8U4EN/SMNZ0Bckey8o7lVjgH+AVoSwkwj5cq7AAAAABJRU5ErkJggg==);
 }
+
 .vote_span.vote_span.like {
   color: #fc5533 !important;
   background: #fff !important;
@@ -822,9 +1289,7 @@ export default {
 }
 
 .replay-editor {
-  width: 726px;
-  height: 190px;
-  margin-left: 12px;
+  margin-left: 38px;
   margin-bottom: 12px;
   position: relative;
 }
@@ -852,8 +1317,8 @@ export default {
 }
 
 .reply_content_tool .vote-box {
-  line-height: 32px;
-  height: 32px;
+  line-height: 30px;
+  height: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -877,7 +1342,7 @@ export default {
   border-radius: 16px;
   position: relative;
   display: inline-block;
-  height: 32px;
+  height: 30px;
   line-height: 30px;
   padding: 0 12px;
   font-weight: 400;
@@ -893,7 +1358,7 @@ export default {
 .reply_content_tool .mr20px {
   padding: 0 16px;
   text-align: center;
-  height: 32px;
+  height: 30px;
   border-radius: 16px;
   border: 1px solid #fc5533;
   font-size: 14px;
@@ -926,7 +1391,10 @@ export default {
   -ms-flex-direction: row;
   flex-direction: row;
   padding: 0;
-  margin: 16px 0 20px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-right: 16px;
+  margin-left: 36px;
 }
 
 .answer-item-userinfo {
@@ -935,7 +1403,7 @@ export default {
 }
 .answer-item-content {
   margin-top: 8px;
-  margin-left: 12px;
+  margin-left: 38px;
   margin-right: 12px;
 }
 
@@ -1126,7 +1594,7 @@ export default {
 }
 
 .qustion-top-item {
-  margin-left: 8px;
+  margin-left: 6px;
 }
 .qustion-right-view {
   float: right;
@@ -1136,6 +1604,7 @@ export default {
   margin-left: 16px;
   color: #777888;
   font-size: 12px;
+  cursor: pointer;
 }
 
 .icon_vote_down,
@@ -1144,6 +1613,7 @@ export default {
   height: 16px;
   position: relative;
   left: -2px;
+  margin-right: 2px;
 }
 
 .icon_vote_jubao {
@@ -1162,8 +1632,8 @@ export default {
 
 .icon_vote_down {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAyFJREFUWEfFl9tvDFEcx7+/2Y1dSRVtoiQe1F9AI0TE5YW4JhJRESJxSZqIkLjsOdPFdNTuOWfJhgYhggfiAS/EJR5d4vrQ0HiTkJBWQ7Vx3W2785NBF0WzW90xT5Mzv/l+P3POnPn+hvCfD/rP/sgDOM65Ydnssz0gXsOMcUMFRoQMgBawtU/r2Pn+unkAKY1msBgq4z/pWIRtSsn0z9d+ANi61X9yi6xFSsWu9hUJqdk/N1oOarkc51Q02/N6Ndg7xkw5wogqrTd29unnRf9m9K8AfUZS6ksMLIGFVSYpzwYPUG8a2GOHLEropNgZPIA0qxh8BkTnjBIrAgeIx83U3hzfJ6BZa1kTOIDjpCsy2e4OgN4bLcoDB/ANhW06wFwRjVjjXDf2yh8LbBf4ZtLW95gxzSJrllKxW8EDSH2agdVkWet1MnYycABhp3aDPRcEbZS0AweQMrWS4Z0F0QWjxPLAAeJxM6U3xw8JeKS1nBQ4gNB6JLrQBdBHo0XZLwDyexjBwmKTlFeGKoz6p6K09RtmVEYjwypdd+vbguM4GhEh1yXvX+K6qakp0tr2yQcoi0aqhrvu2kzhDUkotNQkdlwcLIBtH6pk/uj3HBsAumO0mPHLEvxN2LbNZo/5IBHd0ErM+VOdkOYqwAsKgSPCB0JonlI77hYEYIwZ0dnFL5lRHg7RtERCPOhvJKRpA3jswAD0GYRrFA7v1Y3bmn/LgoFulvUmyR7bILpulJj/24sl9QUGlllE65QSpwqZieIA5JHRoHfP/VlAKDzbJLbf/NlE1Ke2wPMOgOiEUWLDkAN8DRJpdjF4DxE9rplcXVNbW5vLb9X4/lnI9d4A6J7RYnpJAL42l9n2JwxM7N/dNjTsG/M5k2snoFNrWVESAF/UtlMLPfau+L0+hzHVNMoWf9xxzPhMll+AqMsoMbpkAL6wsFNHwV4dEZ7CCsXI88qZuYGBCUR0WiuxpqQA6XR6ePvrnttgzvd13/dzM1HZXKU2dZQU4NuUHy7r7n5vM2gms/9hweXq6lHH6+rqeooxL+hDVKxgsfWD+t0q1mSg+i/B+LEwffaI4AAAAABJRU5ErkJggg==);
+  vertical-align: middle;
   top: -1px;
-  margin-right: 0px;
 }
 
 .vote_span.disLike {
@@ -1191,10 +1661,11 @@ export default {
   border-radius: 16px;
   display: inline-block;
   border: 1px solid transparent;
-  height: 32px;
+  height: 30px;
   line-height: 30px;
   font-size: 12px;
   font-weight: 400;
+  cursor: pointer;
   color: #777888;
 }
 .vote_span {
@@ -1208,6 +1679,7 @@ export default {
   padding: 0 12px;
   font-size: 12px;
   font-weight: 400;
+  cursor: pointer;
   color: #777888;
 }
 li.up_down_wrap {
@@ -1240,6 +1712,7 @@ li.up_down_wrap {
   width: 94px;
   height: 32px;
   font-size: 12px;
+  cursor: pointer;
   background: #fc5531;
   border-radius: 16px;
   font-weight: 400;

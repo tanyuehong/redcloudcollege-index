@@ -133,7 +133,7 @@
                      target="_blank"
                      href="/questions/1087364#answer_form">
                     <span>{{item.reply}}</span>
-                    <p>回答</p>
+                    <p class="anser-lable">回答</p>
                   </a>
                 </div>
               </div>
@@ -148,6 +148,10 @@
 </script>
 
 <style>
+.answer_num .anser-lable {
+  margin-top: -6px;
+}
+
 .question_list .answer_title {
   font-size: 14px;
 }
@@ -439,8 +443,8 @@ export default {
   asyncData ({ params, error }) {
     return askServerApi.getHomeAskQuestionList({ 'type': 1, 'qtype': '' }).then((response) => {
       return {
-        list:response.data.list,
-        qustionType:response.data.qustionType,
+        list: response.data.list,
+        qustionType: response.data.qustionType,
       }
     })
   },

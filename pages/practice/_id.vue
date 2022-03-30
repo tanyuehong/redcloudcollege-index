@@ -5,6 +5,9 @@
         <div class="practice_header"></div>
 
         <div class="practice_content">
+          <div class="pratice-header">
+            <h1>{{pitem.title}}</h1>
+          </div>
           <div class="mark_content"
                v-html="changeMarkToHtml(pitem.content)"></div>
         </div>

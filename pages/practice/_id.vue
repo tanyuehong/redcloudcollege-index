@@ -198,24 +198,26 @@ export default {
 
     addUserPraticeGood () {
       useract.addUserPraticeGood(this.pitem.id).then((response) => {
+        this.pitem.good++;
+        this.goodslect = true;
       })
     },
 
     cancleleUserPraticeGood () {
       useract.cancleleUserPraticeGood(this.pitem.id).then((response) => {
+        this.pitem.good--;
+        this.goodslect = false;
       })
     },
 
     goodBtnClick () {
       if (this.goodslect) {
-        this.pitem.good--;
         this.cancleleUserPraticeGood();
       } else {
-        this.pitem.good++;
         this.addUserPraticeGood();
       }
-      this.goodslect = !this.goodslect;
     },
+
     changeMarkToHtml (content) {
       var converter = new showdown.Converter()
       return converter.makeHtml(content)

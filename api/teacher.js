@@ -11,7 +11,7 @@ export default {
   //讲师详情的方法
   getTeacherInfo(id) {
     return request({
-      url: `/home/teacher/getTeacherInfo/${id}`,
+      url: `/home/course/getTeacherDetail/${id}`,
       method: 'get',
     })
   },

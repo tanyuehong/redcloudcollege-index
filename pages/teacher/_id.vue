@@ -32,7 +32,7 @@
               <p>开源实践网官方</p>
               <span>精英讲师</span>
             </div>
-            <p class="tea-nickname">谭月红</p>
+            <p class="tea-nickname">{{teacher.name}}</p>
             <p class="tea-professional">全栈工程师</p>
             <a href="javascript:void(0);"
                class="moco-btn payattention-btn js-payattention-btn js-add-attention"
@@ -296,7 +296,8 @@
     </div>
   </div>
 </template>
-<style>
+
+<style scoped>
 .top_backgroud_box {
   position: relative;
   width: 100%;
@@ -768,8 +769,18 @@ ins {
 </style>
 <script>
 import teacherApi from '@/api/teacher'
+
 export default {
-  //params.id获取路径id值
+
+  data () {
+    return {
+      activeName: 'first',
+      subPraCticeTag: -1,
+      title: "开源实践-",
+      descrb: "开源实践博文，是一个记录真实项目开发过程的一个博客，里面的文章都是项目开发过程中流程和难点的总结。通过文章，能让大家提升自己的项目能力和技术能力，让别人的经验成为自己提升的基石。"
+    }
+  },
+
   asyncData ({ params, error }) {
     return teacherApi.getTeacherInfo(params.id).then((response) => {
       return {
@@ -777,6 +788,23 @@ export default {
         courseList: response.data.courseList,
       }
     })
+  },
+
+  head () {
+    return {
+      title: this.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.descrb,
+        },
+        {
+          hid: 'og:description',
+          content: this.descrb,
+        },
+      ],
+    }
   },
 }
 </script>

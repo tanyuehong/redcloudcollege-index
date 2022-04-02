@@ -207,7 +207,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .zhuanti-top-group {
   border-bottom: 1px solid rgba(28, 31, 33, 0.1);
   margin-bottom: 20px;

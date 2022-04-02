@@ -332,7 +332,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .askactive {
   border-color: #409eff;
   color: #409eff !important;

@@ -144,6 +144,12 @@ export default {
 </script>
 
 <style>
+.el-tabs__nav {
+  height: 50px;
+}
+</style>
+
+<style scoped>
 .praticesubtagactive {
   color: #409eff !important;
 }
@@ -165,10 +171,6 @@ export default {
 
 .el-tabs__nav-wrap::after {
   background-color: white;
-}
-
-.el-tabs__nav {
-  height: 50px;
 }
 
 .op_pratice_subtag {

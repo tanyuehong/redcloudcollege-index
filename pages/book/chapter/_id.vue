@@ -122,7 +122,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 body {
   font-family: -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell,
     Noto Sans, sans-serif, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC',

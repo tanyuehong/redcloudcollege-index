@@ -84,7 +84,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .toolactive {
   color: #fff;
   background-color: #ec7259 !important;

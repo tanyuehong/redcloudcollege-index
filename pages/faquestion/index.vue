@@ -147,7 +147,7 @@
 </template>
 </script>
 
-<style>
+<style scoped>
 .answer_num .anser-lable {
   margin-top: -6px;
 }

@@ -176,7 +176,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .el-form-item__error {
   z-index: 9999999;
 }

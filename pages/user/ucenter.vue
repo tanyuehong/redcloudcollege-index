@@ -107,7 +107,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .header-backgroud {
   background-image: url(https://static.redskt.com/assets/img/usercover.jpg);
   background-position: center;

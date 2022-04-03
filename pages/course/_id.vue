@@ -30,16 +30,9 @@
               <span>{{ courseWebVo.title }}</span>
             </div>
             <div class="course_buy_describ">
-              <span class="course_info_text">
-                {{ courseWebVo.buyCount }} 购买
-              </span>
-
+              <span class="course_info_text">{{ courseWebVo.buyCount }} 购买</span>
               <i class="icon-sep"></i>
-              <span class="course_info_text">
-                好评度
-                <span class="rate-num">
-                  100%
-                </span>
+              <span class="course_info_text">好评度<span class="rate-num">100%</span>
               </span>
               <i class="icon-sep"></i>
               <img src="~/assets/img/course-faver.png"
@@ -50,8 +43,10 @@
             </div>
             <div class="clearfix"></div>
             <div class="course-other-info">
-              <nuxt-link :to="{ name: 'teacher-id' }">
-                <span>主讲老师:</span> <span>{{courseWebVo.teacherName}}</span>
+              <span>主讲老师:</span>
+              <nuxt-link title="老师详情"
+                         :to="'/teacher/'+courseWebVo.teacherId">
+                <span>{{courseWebVo.teacherName}}</span>
               </nuxt-link>
 
             </div>
@@ -166,7 +161,12 @@
   </div>
 </template>
 
-<style class="course_header">
+<style scoped>
+.course-other-info {
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
 .course_header {
   background: #ffffff;
   padding-top: 15px;
@@ -180,7 +180,7 @@
 }
 
 .path_courent {
-  color: #409EFF;
+  color: #409eff;
 }
 
 .course_top_content {
@@ -202,8 +202,7 @@
 }
 
 .icon-sep {
-  float: left;
-  margin: 2px 20px 0;
+  margin: 2px 13px 0;
   display: inline-block;
   vertical-align: middle;
   width: 1px;
@@ -212,8 +211,9 @@
 }
 
 .course_buy_describ {
-  margin-top: 10px;
+  margin-top: 15px;
   font-size: 14px;
+  display: flex;
 }
 
 .course_buy_describ .course_info_text {

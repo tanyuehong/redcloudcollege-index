@@ -168,10 +168,10 @@ export default {
             //提示注册成功
             this.$message({
               type: "success",
-              message: "注册成功"
+              message: "注册成功,请登录您的账号"
             });
             //跳转登录页面
-            this.$router.push({ path: "/login" });
+            this.$router.push({ path: "/user/login" });
           });
         } else {
           this.errtips = "数据格式验证失败！";

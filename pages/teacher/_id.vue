@@ -32,17 +32,15 @@
               <p>开源实践网官方</p>
               <span>精英讲师</span>
             </div>
-            <p class="tea-nickname">谭月红</p>
-            <p class="tea-professional">全栈工程师</p>
+            <p class="tea-nickname">{{teacher.name}}</p>
+            <p class="tea-professional">{{teacher.career}}</p>
             <a href="javascript:void(0);"
                class="moco-btn payattention-btn js-payattention-btn js-add-attention"
                data-id="2134188">
               <i class="icon-group_add"></i>
               关注Ta
             </a>
-            <p class="tea-desc">
-              曾就职于IBM，中软国际等大型互联网公司，参与主持了Nebula云平台，Peony分布式前端渲染平台，Taims医疗云，Jobseeker人才库等大型系统的开发，多次担任教育部大学生互联网创新创业大赛导师与评委。
-            </p>
+            <p class="tea-desc">{{teacher.intro}}</p>
             <div class="tea-detail-box">
               <ul class="clearfix">
                 <li>
@@ -77,9 +75,39 @@
     </div>
 
     <div class="bottom-box">
+      <div class="course-box">
+        <h2 id="Course">课程</h2>
+        <p class="cato-desc">精品体系课程应有尽有，快速帮你查漏补缺</p>
+        <div class="course-del-box">
+          <ul>
+            <li class="moco-course-wrap"
+                v-for="course in courseList"
+                :key="course.qid">
+              <nuxt-link :to="'/course/'+course.id"
+                         title="课程详情">
+                <div class="moco-course-box">
+                  <img alt="课程封面"
+                       :src="course.adimage"
+                       height="155"
+                       width="100%" />
+                  <div class="moco-course-intro">
+                    <h3 class="c-333">
+                      {{course.title}}
+                    </h3>
+                    <p>{{course.cdescribe}}</p>
+                  </div>
+                  <div class="moco-course-bottom">
+                    <span class="l">{{course.buyCount}}人在学</span>
+                  </div>
+                </div>
+              </nuxt-link>
+            </li>
+          </ul>
+        </div>
+      </div>
       <div class="shizhan-box">
-        <h2 id="Shizhan">实践</h2>
-        <p class="cato-desc">纸上得来终觉浅，绝知此事要躬行</p>
+        <h2 id="Article">专题</h2>
+        <p class="cato-desc">分享经验交流心得，学习前沿流行技术</p>
         <div class="shizhan-del-box">
           <ul>
             <li style="background-image: url('//img1.sycdn.imooc.com/szimg/5b8e74ac00019f7d05400300-500-284.jpg');">
@@ -185,40 +213,9 @@
           </ul>
         </div>
       </div>
-      <div class="course-box">
-        <h2 id="Course">课程</h2>
-        <p class="cato-desc">精品体系课程应有尽有，快速帮你查漏补缺</p>
-        <div class="course-del-box">
-          <ul>
-            <li class="moco-course-wrap">
-              <a href="/learn/993"
-                 target="_target">
-                <div class="moco-course-box">
-                  <img alt="测试克隆慕课网"
-                       src="//img1.sycdn.imooc.com/5afd3bee0001afdc06000338-240-135.jpg"
-                       height="135"
-                       width="100%" />
-                  <div class="moco-course-intro">
-                    <h3>
-                      <i>中级</i>
-                      MySQL集群（PXC）入门
-                    </h3>
-                    <p>
-                      本课程以项目演示为例，讲解PXC集群原理、PXC数据同步与Replication同步的区别、PXC的多节点并发写入、Docker虚拟机部署MySQL集群，并以案例验证Replication方案的数据不一致性、PXC方案数据一致性
-                    </p>
-                  </div>
-                  <div class="moco-course-bottom">
-                    <span class="l">26683人在学</span>
-                  </div>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
       <div class="article-box">
-        <h2 id="Article">专题</h2>
-        <p class="cato-desc">分享经验交流心得，学习前沿流行技术</p>
+        <h2 id="Shizhan">实践</h2>
+        <p class="cato-desc">纸上得来终觉浅，绝知此事要躬行</p>
         <div class="article-del-box">
           <ul>
             <li>
@@ -293,10 +290,17 @@
           </ul>
         </div>
       </div>
+
     </div>
   </div>
 </template>
-<style>
+
+<style scoped>
+.moco-course-intro h3 {
+  margin-top: 0px;
+  margin-bottom: 6px;
+  font-weight: 550;
+}
 .top_backgroud_box {
   position: relative;
   width: 100%;
@@ -647,14 +651,14 @@
   position: absolute;
   padding: 10px 20px;
   transition: top 0.5s;
-  top: 135px;
-  height: 144px;
+  top: 145px;
+  height: 134px;
   width: 100%;
   background: #eee;
 }
 
 .moco-course-wrap .moco-course-box .moco-course-intro p {
-  color: #93999f;
+  color: #666;
   font-size: 12px;
   height: 40px;
   overflow: hidden;
@@ -768,8 +772,18 @@ ins {
 </style>
 <script>
 import teacherApi from '@/api/teacher'
+
 export default {
-  //params.id获取路径id值
+
+  data () {
+    return {
+      activeName: 'first',
+      subPraCticeTag: -1,
+      title: "开源实践-",
+      descrb: "开源实践博文，是一个记录真实项目开发过程的一个博客，里面的文章都是项目开发过程中流程和难点的总结。通过文章，能让大家提升自己的项目能力和技术能力，让别人的经验成为自己提升的基石。"
+    }
+  },
+
   asyncData ({ params, error }) {
     return teacherApi.getTeacherInfo(params.id).then((response) => {
       return {
@@ -777,6 +791,23 @@ export default {
         courseList: response.data.courseList,
       }
     })
+  },
+
+  head () {
+    return {
+      title: this.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.descrb,
+        },
+        {
+          hid: 'og:description',
+          content: this.descrb,
+        },
+      ],
+    }
   },
 }
 </script>

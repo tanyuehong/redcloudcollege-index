@@ -92,11 +92,11 @@
                   <span class="course-index-tag">
                     自研
                   </span>
-                  <a href="#"
+                  <nuxt-link :to="{name:'course-id',params:{id:course.id}}"
                      :title="course.title"
                      class="course-title-content">
                     {{ course.title }}
-                  </a>
+                  </nuxt-link>
                 </div>
                 <section class="course-info-detail">
                   <span class="fl jgAttr c-ccc f-fA">

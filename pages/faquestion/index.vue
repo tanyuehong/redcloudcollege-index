@@ -147,7 +147,7 @@
 </template>
 </script>
 
-<style>
+<style scoped>
 .answer_num .anser-lable {
   margin-top: -6px;
 }
@@ -437,8 +437,29 @@ export default {
       activeIndex: "1",
       tagList: [],
       typeIndex: 0,
+      title:"开源实践问答-有问必答的务实问答社区",
+      descrb:"开源实践问答，秉承有问必答的理念。对每一个问题细心维护，让您能用最短的时间获取最好的答案,是一个真正务实，能解决问题的社区。"
     };
   },
+
+  head () {
+    return {
+      title: this.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.descrb,
+        },
+        {
+          hid: 'og:description',
+          content: this.descrb,
+        },
+      ],
+    }
+  },
+
+
 
   asyncData ({ params, error }) {
     return askServerApi.getHomeAskQuestionList({ 'type': 1, 'qtype': '' }).then((response) => {

@@ -141,13 +141,15 @@ export default {
               this.loginInfo = response.data.userInfo;
               window.localStorage.setItem("redclass_user", JSON.stringify(this.loginInfo))
               //跳转页面
-              if(window && window.gotoPage) {
-                 this.$router.push(window.gotoPage);
+              if (window && window.gotoPage) {
+                window.console.log("跳转" + window.gotoPage)
+                this.$router.push(window.gotoPage);
               } else {
                 this.$router.push({
-                     name: "index",
-                     query: {},
-                  });
+                  name: "index",
+                  query: {},
+                });
+                window.console.log("跳转首页");
               }
             });
           });

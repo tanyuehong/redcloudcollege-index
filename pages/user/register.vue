@@ -171,7 +171,7 @@ export default {
               message: "注册成功"
             });
             //跳转登录页面
-            this.$router.push({ path: "/login" });
+            this.$router.push({ path: "/user/login" });
           });
         } else {
           this.errtips = "数据格式验证失败！";

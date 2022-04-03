@@ -80,9 +80,11 @@
         <p class="cato-desc">精品体系课程应有尽有，快速帮你查漏补缺</p>
         <div class="course-del-box">
           <ul>
-            <li class="moco-course-wrap" v-for="course in courseList"
-                   :key="course.qid">
-              <nuxt-link :to="'/course/'+course.id" title="课程详情">
+            <li class="moco-course-wrap"
+                v-for="course in courseList"
+                :key="course.qid">
+              <nuxt-link :to="'/course/'+course.id"
+                         title="课程详情">
                 <div class="moco-course-box">
                   <img alt="课程封面"
                        :src="course.adimage"
@@ -90,7 +92,6 @@
                        width="100%" />
                   <div class="moco-course-intro">
                     <h3 class="c-333">
-                      <i class="c-666">{{course.level}}</i>
                       {{course.title}}
                     </h3>
                     <p>{{course.cdescribe}}</p>
@@ -104,86 +105,9 @@
           </ul>
         </div>
       </div>
-      <div class="article-box">
+      <div class="shizhan-box">
         <h2 id="Article">专题</h2>
         <p class="cato-desc">分享经验交流心得，学习前沿流行技术</p>
-        <div class="article-del-box">
-          <ul>
-            <li>
-              <a href="/article/316559"
-                 target="_blank">
-                <p class="article-title"
-                   title="如何在SpringBoot中快速整合Swagger？">
-                  如何在SpringBoot中快速整合Swagger？
-                </p>
-                <p class="article-desc">
-                  一、传统的Swagger配置方式
-                  开发前后端分离或者微服务项目，调试后端Web接口必然会用到Swagger，特别是给Swagger添加上JWT的时候，配置代码写起来较为复杂和啰嗦。例如下面的这个配置类，就是给SpringBoot设置Swagger，并且附带上JWT，一堆集合，看着就让人头晕。
-                  @Configuration @EnableSwagger2 public class SwaggerConfig {
-                  @Bean public Docket createRestApi() { Docket docket = new
-                  Docket(DocumentationType.SWAGGER_2); ApiInfoBuilder builder =
-                  new ApiInfoBu
-                </p>
-                <div class="bottom-box clearfix">
-                  <p class="item fl">2977浏览</p>
-                  <em class="fl"></em>
-                  <p class="item fl">4推荐</p>
-                  <em class="fl"></em>
-                  <p class="item fl">1评论</p>
-                  <p class="icon icon-right fr"></p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="/article/292009"
-                 target="_blank">
-                <p class="article-title"
-                   title="面试的时候被问“擅长前端还是后台”应该怎么回答？">
-                  面试的时候被问“擅长前端还是后台”应该怎么回答？
-                </p>
-                <p class="article-desc">
-                  昨天在实战课的QQ群里面，有一个同学来问我，说他自己参加了一个技术面试，面试官问他擅长前端还是后台，他觉得前端比后台简单，就说自己擅长前端。于是面试官问了很多前端底层的技术问题，搞的他这次面试的情况不太乐观。他觉得自己学的是全栈方向，前端后台都懂一些，但是掌握的都不如专业人员那么精深。所以他就打退堂鼓了，全栈方向这条技术路线到底有没有必要坚持下去？我相信很多学习全栈的同学，在面试的时候都会遇到这样的经历。下面我就来解答一下这个疑问。首先在面试的时候，再被问到“擅长前端还是后台”，你应该这样回答“开发项目的时候，前端很后台我都要写，我们的项目组，没有明确的责任划分。我负责的模块，前端跟后台都是我写的，所以前端跟后台项目我都懂一些。甚至维护数据库的工作也是我负责的。”你这样回答，其实就是在前端跟后台两个选项中，硬生生插入了第三个选项。你这么回答的好处是让面试官觉得你在项目组里面是个万金油的角色，哪里需要人，都可以把你派过去，所以你在同等面试人员里面优势就凸显出来了。再有，各种技术多少都会一些的人，面试官心里也清
-                </p>
-                <div class="bottom-box clearfix">
-                  <p class="item fl">5659浏览</p>
-                  <em class="fl"></em>
-                  <p class="item fl">10推荐</p>
-                  <em class="fl"></em>
-                  <p class="item fl">5评论</p>
-                  <p class="icon icon-right fr"></p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="/article/30432"
-                 target="_blank">
-                <p class="article-title"
-                   title="Percona向左，MariaDB向右，MySQL衍生版如何取舍？">
-                  Percona向左，MariaDB向右，MySQL衍生版如何取舍？
-                </p>
-                <p class="article-desc">
-                  缘起
-                  自从甲骨文公司收购了MySQL后，有将MySQL闭源的潜在风险。而且Oracle对培养MySQL这个免费的儿子并不太用心，漏洞修补和版本升级的速度一段时间非常缓慢，所以业界对MySQL的未来普遍不抱有乐观态度。因此社区采用分支的方式来避开这个风险，例如谷歌、Facebook、RedHat都将MySQL替换成了衍生版，国内也有企业纷纷放弃了MySQL官方版,像阿里和腾讯还做起了自己的MySQL衍生版。
-                  目前MySQL领域存在着众多的衍生版数据库，主流的有官方MySQL、MariaDB以及Percona
-                  Server，小众一些的还有阿里的
-                </p>
-                <div class="bottom-box clearfix">
-                  <p class="item fl">10331浏览</p>
-                  <em class="fl"></em>
-                  <p class="item fl">25推荐</p>
-                  <em class="fl"></em>
-                  <p class="item fl">4评论</p>
-                  <p class="icon icon-right fr">
-                  </p>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-         <div class="shizhan-box">
-        <h2 id="Shizhan">实践</h2>
-        <p class="cato-desc">纸上得来终觉浅，绝知此事要躬行</p>
         <div class="shizhan-del-box">
           <ul>
             <li style="background-image: url('//img1.sycdn.imooc.com/szimg/5b8e74ac00019f7d05400300-500-284.jpg');">
@@ -289,11 +213,94 @@
           </ul>
         </div>
       </div>
+      <div class="article-box">
+        <h2 id="Shizhan">实践</h2>
+        <p class="cato-desc">纸上得来终觉浅，绝知此事要躬行</p>
+        <div class="article-del-box">
+          <ul>
+            <li>
+              <a href="/article/316559"
+                 target="_blank">
+                <p class="article-title"
+                   title="如何在SpringBoot中快速整合Swagger？">
+                  如何在SpringBoot中快速整合Swagger？
+                </p>
+                <p class="article-desc">
+                  一、传统的Swagger配置方式
+                  开发前后端分离或者微服务项目，调试后端Web接口必然会用到Swagger，特别是给Swagger添加上JWT的时候，配置代码写起来较为复杂和啰嗦。例如下面的这个配置类，就是给SpringBoot设置Swagger，并且附带上JWT，一堆集合，看着就让人头晕。
+                  @Configuration @EnableSwagger2 public class SwaggerConfig {
+                  @Bean public Docket createRestApi() { Docket docket = new
+                  Docket(DocumentationType.SWAGGER_2); ApiInfoBuilder builder =
+                  new ApiInfoBu
+                </p>
+                <div class="bottom-box clearfix">
+                  <p class="item fl">2977浏览</p>
+                  <em class="fl"></em>
+                  <p class="item fl">4推荐</p>
+                  <em class="fl"></em>
+                  <p class="item fl">1评论</p>
+                  <p class="icon icon-right fr"></p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="/article/292009"
+                 target="_blank">
+                <p class="article-title"
+                   title="面试的时候被问“擅长前端还是后台”应该怎么回答？">
+                  面试的时候被问“擅长前端还是后台”应该怎么回答？
+                </p>
+                <p class="article-desc">
+                  昨天在实战课的QQ群里面，有一个同学来问我，说他自己参加了一个技术面试，面试官问他擅长前端还是后台，他觉得前端比后台简单，就说自己擅长前端。于是面试官问了很多前端底层的技术问题，搞的他这次面试的情况不太乐观。他觉得自己学的是全栈方向，前端后台都懂一些，但是掌握的都不如专业人员那么精深。所以他就打退堂鼓了，全栈方向这条技术路线到底有没有必要坚持下去？我相信很多学习全栈的同学，在面试的时候都会遇到这样的经历。下面我就来解答一下这个疑问。首先在面试的时候，再被问到“擅长前端还是后台”，你应该这样回答“开发项目的时候，前端很后台我都要写，我们的项目组，没有明确的责任划分。我负责的模块，前端跟后台都是我写的，所以前端跟后台项目我都懂一些。甚至维护数据库的工作也是我负责的。”你这样回答，其实就是在前端跟后台两个选项中，硬生生插入了第三个选项。你这么回答的好处是让面试官觉得你在项目组里面是个万金油的角色，哪里需要人，都可以把你派过去，所以你在同等面试人员里面优势就凸显出来了。再有，各种技术多少都会一些的人，面试官心里也清
+                </p>
+                <div class="bottom-box clearfix">
+                  <p class="item fl">5659浏览</p>
+                  <em class="fl"></em>
+                  <p class="item fl">10推荐</p>
+                  <em class="fl"></em>
+                  <p class="item fl">5评论</p>
+                  <p class="icon icon-right fr"></p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="/article/30432"
+                 target="_blank">
+                <p class="article-title"
+                   title="Percona向左，MariaDB向右，MySQL衍生版如何取舍？">
+                  Percona向左，MariaDB向右，MySQL衍生版如何取舍？
+                </p>
+                <p class="article-desc">
+                  缘起
+                  自从甲骨文公司收购了MySQL后，有将MySQL闭源的潜在风险。而且Oracle对培养MySQL这个免费的儿子并不太用心，漏洞修补和版本升级的速度一段时间非常缓慢，所以业界对MySQL的未来普遍不抱有乐观态度。因此社区采用分支的方式来避开这个风险，例如谷歌、Facebook、RedHat都将MySQL替换成了衍生版，国内也有企业纷纷放弃了MySQL官方版,像阿里和腾讯还做起了自己的MySQL衍生版。
+                  目前MySQL领域存在着众多的衍生版数据库，主流的有官方MySQL、MariaDB以及Percona
+                  Server，小众一些的还有阿里的
+                </p>
+                <div class="bottom-box clearfix">
+                  <p class="item fl">10331浏览</p>
+                  <em class="fl"></em>
+                  <p class="item fl">25推荐</p>
+                  <em class="fl"></em>
+                  <p class="item fl">4评论</p>
+                  <p class="icon icon-right fr">
+                  </p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <style scoped>
+.moco-course-intro h3 {
+  margin-top: 0px;
+  margin-bottom: 6px;
+  font-weight: 550;
+}
 .top_backgroud_box {
   position: relative;
   width: 100%;
@@ -644,14 +651,14 @@
   position: absolute;
   padding: 10px 20px;
   transition: top 0.5s;
-  top: 135px;
-  height: 144px;
+  top: 145px;
+  height: 134px;
   width: 100%;
   background: #eee;
 }
 
 .moco-course-wrap .moco-course-box .moco-course-intro p {
-  color: #93999f;
+  color: #666;
   font-size: 12px;
   height: 40px;
   overflow: hidden;

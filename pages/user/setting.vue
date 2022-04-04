@@ -508,7 +508,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .ucenter-setting-header {
   height: 45.98px;
   background: #fff;

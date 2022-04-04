@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="golobal_content">
     <div class="container">
       <div class="ucenter-setting-header">
@@ -352,8 +352,7 @@
 </template>
 
 <script>
-
-import userApi from '@/api/user'
+import userApi from '@/api/user';
 
 export default {
 
@@ -390,6 +389,7 @@ export default {
       userApi.getLoginUserInfo().then((response) => {
         this.userInfo = response.data.userInfo
         this.touxiang = this.userInfo.avatar;
+        window.localStorage.setItem("redclass_user", JSON.stringify(this.userInfo));
       })
     },
     mouseOver () {
@@ -436,6 +436,7 @@ export default {
             type: 'success'
           });
         }
+        this.getLoginUserInfo();
       })
     },
     zhanghuSettingClick () {

@@ -123,7 +123,8 @@
                        name="queryCourse.courseName"
                        value />
                 <button type="button"
-                        class="s-btn" @click="serchBtnClick">
+                        class="s-btn"
+                        @click="serchBtnClick">
                   <em class="icon18">&nbsp;</em>
                 </button>
               </label>
@@ -243,12 +244,12 @@ export default {
   },
   methods: {
 
-    serchBtnClick() {
+    serchBtnClick () {
       this.$message({
-          message: "搜索功能正在开发过程中，敬请期待！",
-          type: "info",
-          duration: 2000,
-        });
+        message: "搜索功能正在开发过程中，敬请期待！",
+        type: "info",
+        duration: 2000,
+      });
     },
     //微信登录显示的方法
     handleCommand (command) {
@@ -263,14 +264,14 @@ export default {
     wxLogin () {
       //console.log('************'+this.token)
       //把token值放到cookie里面
-      cookie.set('redskt_token', this.token, { domain: 'redskt' })
-      cookie.set('redskt_ucenter', '', { domain: 'redskt' })
+      //cookie.set('redskt_token', this.token, { domain: 'redskt' })
+      //cookie.set('redskt_ucenter', '', { domain: 'redskt' })
       //console.log('====='+cookie.get('guli_token'))
       //调用接口，根据token值获取用户信息
       loginApi.getLoginUserInfo().then((response) => {
         // console.log('################'+response.data.userInfo)
         this.loginInfo = response.data.userInfo
-        cookie.set('redskt_ucenter', this.loginInfo, { domain: 'redskt' })
+        window.localStorage.setItem("redclass_user", JSON.stringify(this.loginInfo));
       })
     },
     //创建方法，从cookie获取用户信息

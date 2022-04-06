@@ -668,9 +668,7 @@ export default {
     return {
       activeName: 'first',
       subPraCticeTag: -1,
-      isFocus: false,
-      title: "开源实践-",
-      derscb: "哈哈",
+      isFocus: false
     }
   },
 

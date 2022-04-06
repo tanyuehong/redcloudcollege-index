@@ -6,10 +6,10 @@
         <h3 class="h2k-strong">先搜索，再提问</h3>
         <p>
           你提问前有在 Google、百度或者我们的
-          <a href="https://segmentfault.com/search">搜索栏</a>
+          <strong>搜索栏</strong>
           先行搜索过吗？使用搜索（引擎），能更快地帮你找到答案。即使没找到，在看了相关或者类似的问题之后，你的提问会更准确。
         </p>
-        <form action="/search">
+        <form @submit.prevent="submitCheck">
           <div class="row pb20">
             <div class="col-sm-6 col-xs-8">
               <input class="form-control h2k-search"
@@ -59,9 +59,7 @@
                 <div class="clearfix"></div>
               </li>
               <li class="mb5 hook hook-primary">
-                善用
-                <a href="/markdown">编辑器</a>
-                排版你的问题，提高可读性
+                善用 <strong>编辑器</strong> 排版你的问题，提高可读性
               </li>
               <li class="hook hook-primary">
                 准确地使用多个
@@ -100,6 +98,48 @@
     </div>
   </div>
 </template>
+
+<script>
+
+export default {
+  data () {
+    return {
+      description: '开源实践问答提问技巧,详细的讲述了一个好技术问题的标准，全面的提高用户的提问题水平',
+    }
+  },
+
+  head () {
+    return {
+      title: "开源问题-如何更快的获得优质回答",
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: "开源问答,如何提问，问答技巧",
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.description,
+        },
+        {
+          hid: 'og:description',
+          content: this.description,
+        },
+      ]
+    }
+  },
+  methods: {
+    submitCheck () {
+      this.$message({
+        message: "该功能正在紧急开发中哈，敬请期待！",
+        type: "success",
+        duration: 2000,
+      });
+    }
+  },
+}
+</script>
 
 <style scoped>
 .pull-left {
@@ -152,4 +192,5 @@
   padding-left: 0px;
 }
 </style>
->
+
+

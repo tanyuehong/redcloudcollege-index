@@ -93,8 +93,8 @@ export default {
     return {
       activeName: 'first',
       subPraCticeTag: -1,
-      title:"开源实践博文，真正的实践记录者",
-      descrb:"开源实践博文，是一个记录真实项目开发过程的一个博客，里面的文章都是项目开发过程中流程和难点的总结。通过文章，能让大家提升自己的项目能力和技术能力，让别人的经验成为自己提升的基石。"
+      title: "开源实践博文，真正的实践记录者",
+      descrb: "开源实践博文，是一个记录真实项目开发过程的一个博客，里面的文章都是项目开发过程中流程和难点的总结。通过文章，能让大家提升自己的项目能力和技术能力，让别人的经验成为自己提升的基石。"
     }
   },
   head () {
@@ -143,13 +143,20 @@ export default {
 }
 </script>
 
+
 <style>
-.el-tabs__nav {
+.practice-content .el-tabs__nav {
   height: 50px;
 }
-</style>
 
-<style scoped>
+.practice-content .el-tabs__header {
+  background-color: white;
+}
+
+.practice-content .el-tabs__nav-wrap::after {
+  background-color: white;
+}
+
 .praticesubtagactive {
   color: #409eff !important;
 }
@@ -162,14 +169,7 @@ export default {
   margin-top: -50px;
 }
 
-.el-tabs__header {
-  background-color: white;
-}
 .teacher_content {
-  background-color: white;
-}
-
-.el-tabs__nav-wrap::after {
   background-color: white;
 }
 

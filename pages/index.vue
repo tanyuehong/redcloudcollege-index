@@ -140,8 +140,9 @@
                       </div>
                       <div class="clearfloat"></div>
 
-                      <nuxt-link class="author-box"
-                                 :to="{name:'teacher-id',query:{id:item.id}}">
+                      <nuxt-link title="老师详情"
+                                 :to="'/teacher/'+item.auid"
+                                 class="author-box">
                         <div class="author-img"
                              style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
                         </div>
@@ -152,7 +153,6 @@
                       <div class="price_con cleartopicfix fr">
                         <!-- 没有订阅购买 -->
                         <a class="sale-price cleartopicfix"
-                           href="/read/80"
                            target="_blank">
                           <p class="ori fr">原价 ¥ {{ item.oldPrice }}</p>
                           <p class="sale fr">¥ {{ item.price }}</p>
@@ -206,17 +206,19 @@
                       </nuxt-link>
                       <p class="desc">{{item.content}}</p>
 
-                      <div class="try-read-box">
-                        <a class="try-read-item"
-                           href="/read/80/article/2090"
-                           target="_blank">
+                      <div class="try-read-box"
+                           v-if="item.fcid">
+                        <nuxt-link :to="'/book/chapter/'+item.fcid"
+                                   class="try-read-item"
+                                   target="_blank">
                           <div class="try-read-img"></div>
                           <p class="try-read-title"
-                             title="01 开篇词：带你走进网络编程的世界">
-                            01 开篇词：带你走进网络编程的世界
+                             :title="item.ftitle">
+                            {{item.ftitle}}
                           </p>
-                        </a>
+                        </nuxt-link>
                       </div>
+
                       <div class="info">
                         <img src="~/assets/img/article_point.png"
                              class="img_point">
@@ -226,8 +228,9 @@
                         <span>{{ item.buyCount }}人已购买</span>
                       </div>
                       <div class="clearfix"> </div>
-                      <nuxt-link class="author-box"
-                                 :to="{name:'teacher-id',query:{id:item.id}}">
+                      <nuxt-link title="老师详情"
+                                 :to="'/teacher/'+item.auid"
+                                 class="author-box">
                         <div class="author-img"
                              style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
                         </div>
@@ -238,8 +241,7 @@
 
                       <div class="price_con cleartopicfix fr">
                         <!-- 没有订阅购买 -->
-                        <a class="sale-price cleartopicfix"
-                           href="/read/80">
+                        <a class="sale-price cleartopicfix">
                           <p class="ori fr">原价 ¥ {{ item.oldPrice }}</p>
                           <p class="sale fr">¥ {{ item.price }}</p>
                           <div class="countdown fr"

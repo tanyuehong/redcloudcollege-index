@@ -150,7 +150,7 @@
           </h4>
           <ul class="of flink-list">
             <li>
-              <a href="http://www.atguigu.com/"
+              <a href="https://ke.qq.com/"
                  title="腾讯课堂"
                  target="_blank">
                 腾讯课堂

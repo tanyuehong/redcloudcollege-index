@@ -506,6 +506,7 @@ export default {
       }
     })
   },
+  
   mounted () {
     this.changMarkToHtml(this.bookItem.bookDetail);
   },

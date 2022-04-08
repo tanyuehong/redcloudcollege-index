@@ -29,17 +29,16 @@
         <div class="catalog-con">
           <p class="title">目录</p>
           <div class="book_lefte_descrb">
-            <div class="item">
+            <div class="item" v-for="chapter in chapterList" :key="chapter.id">
               <div class="section clearfix">
-                <p class="sec_name l">第 1 章：微服务的规划与设计</p>
+                <p class="sec_name l">{{chapter.title}}</p>
               </div>
               <ul>
-                <li>
+                <li v-for="ccontents in chapter.chapterContents" :key="ccontents.id">
                   <!-- 开放 -->
-                  <a href="/read/91/article/2551"
-                     class="js-read">
+                  <nuxt-link :to="'/book/chapter/'+ccontents.articleId" class="js-read">
                     <div class="articleName">
-                      01 开篇词-什么是微服务，是否要实施微服务？
+                      {{ccontents.title}}
                     </div>
                     <div class="info">
                       <!-- 开放 -->
@@ -47,63 +46,7 @@
                     </div>
                     <!-- 未购买 -->
                     <div class="taste-btn">试读</div>
-                  </a>
-                </li>
-                <li>
-                  <!-- 开放 -->
-                  <a href="/read/91/article/2552"
-                     class="js-read">
-                    <div class="articleName">
-                      02 单体服务转为微服务体系需要注意什么问题？
-                    </div>
-                    <div class="info">
-                      <!-- 开放 -->
-                      <!-- <span>4485 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>966 次阅读</span>-->
-                    </div>
-                    <!-- 未购买 -->
-                    <div class="taste-btn">试读</div>
-                  </a>
-                </li>
-                <li>
-                  <!-- 开放 -->
-                  <a href="javascript:;"
-                     class="js-lock">
-                    <div class="articleName">
-                      03 如何确立微服务的技术架构体系与服务分层？
-                    </div>
-                    <div class="info">
-                      <!-- 开放 -->
-                      <!-- <span>4105 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>123 次阅读</span>-->
-                    </div>
-                    <!-- 未购买 -->
-                    <div class="lock-btn"><i class="imv2-lock"></i></div>
-                  </a>
-                </li>
-                <li>
-                  <!-- 开放 -->
-                  <a href="/read/91/article/2554"
-                     class="js-read">
-                    <div class="articleName">04 如何进行微服务的技术选型？</div>
-                    <div class="info">
-                      <!-- 开放 -->
-                      <!-- <span>5419 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>824 次阅读</span>-->
-                    </div>
-                    <!-- 未购买 -->
-                    <div class="taste-btn">试读</div>
-                  </a>
-                </li>
-                <li>
-                  <!-- 开放 -->
-                  <a href="javascript:;"
-                     class="js-lock">
-                    <div class="articleName">05 怎样进行微服务的拆分？</div>
-                    <div class="info">
-                      <!-- 开放 -->
-                      <!-- <span>3462 个文字</span>                              <i class="imv2-dot_samll"></i>                             <span>103 次阅读</span>-->
-                    </div>
-                    <!-- 未购买 -->
-                    <div class="lock-btn"><i class="imv2-lock"></i></div>
-                  </a>
+                  </nuxt-link>
                 </li>
               </ul>
             </div>
@@ -283,7 +226,6 @@ import '~/assets/css/markdown.css'
 import bookReq from '@/api/bookReq'
 import bookServerReq from '@/api/bookServerReq'
 import showdown from 'showdown'
-import { Message } from 'element-ui'
 
 export default {
   data () {
@@ -318,46 +260,17 @@ export default {
   },
 
   mounted () {
-
     window.addEventListener('resize', this.windowFrameChange)
-    this.windowFrameChange()
+    this.windowFrameChange();
+    this.getBookContents();
   },
+
   methods: {
-
-    tabClickBookInfo (tab, event) {
-      if (this.isFirstComment == 1 && tab.name == 'bookComment') {
-        this.comentClick(null, null)
-        this.isFirstComment = 2
-      }
-
-      if (tab.name == 'bookContents') {
-        this.getBookContents()
-        this.isFirstComment = 2
-      }
-    },
-
-    comentClick (tab, event) {
-      var type = 1
-      if (tab && tab.name == 'bestComment') {
-        type = 2
-      }
-      if (tab && tab.name == 'latestComment') {
-        type = 3
-      }
-      if (tab && tab.name == 'undealComment') {
-        type = 4
-      }
-      bookReq
-        .getBookComments({ bookId: this.bookItem.id, type: type })
-        .then((response) => {
-          this.commentList = response.data.comments
-        })
-    },
-
     getBookContents () {
       bookReq
         .getBookContents({ bookId: this.bookItem.id })
         .then((response) => {
+          window.console.log("dddfffff");
           this.chapterList = response.data.chapterList
         })
     },

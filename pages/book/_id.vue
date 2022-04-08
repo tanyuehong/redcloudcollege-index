@@ -27,12 +27,13 @@
             <div class="book_info">
               <span class="intro">跟着 10 年资深架构师一起学微服务架构</span>
               <span class="sep">|</span>
-              <a href="/u/7568351"
-                 target="_blank">
+              <nuxt-link title="老师详情"
+                         :to="'/teacher/'+bookItem.auid"
+                         target="_blank">
                 <span>
                   {{ bookItem.author }} / {{ bookItem.authorPositon }}
                 </span>
-              </a>
+              </nuxt-link>
               <img src="~/assets/img/article_point.png"
                    class="img_point" />
               <span>共32节</span>
@@ -277,6 +278,7 @@
 </template>
 
 <style scoped>
+
 body {
   font-family: -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell,
     Noto Sans, sans-serif, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC',
@@ -287,6 +289,10 @@ body {
 
 .book_select {
   min-height: 160px;
+}
+
+.el-tabs__nav {
+  height: 160px !important;
 }
 
 .book_top_content {
@@ -500,6 +506,7 @@ export default {
       }
     })
   },
+  
   mounted () {
     this.changMarkToHtml(this.bookItem.bookDetail);
   },

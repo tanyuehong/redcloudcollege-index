@@ -25,8 +25,7 @@
         </div>
 
         <div class="home_function">
-          <a href="/teacher/1"
-             class="function_btn ml180 mt20 fl">
+          <a class="function_btn ml180 mt20 fl">
             <img src="~/assets/img/home_study_progress.png"
                  alt="" />
             <div class="btn_title">学习进度</div>
@@ -66,8 +65,8 @@
                         自研
                       </span>
                       <nuxt-link :to="{name:'course-id',params:{id:course.id}}"
-                         :title="course.title"
-                         class="course-title-content">
+                                 :title="course.title"
+                                 class="course-title-content">
                         {{ course.title }}
                       </nuxt-link>
                     </div>

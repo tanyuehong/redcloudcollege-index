@@ -2,13 +2,6 @@ import request from '@/utils/request'
 
 
 export default {
-  // 获取首页书籍列表
-  getHomeBookList() {
-    return request({
-      url: `/home/book/getBooks`,
-      method: 'get',
-    })
-  },
  
   getBookContents(bookId) {
     return request({

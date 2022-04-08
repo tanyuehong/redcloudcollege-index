@@ -55,16 +55,17 @@
                     {{item.title}}
                   </nuxt-link>
                   <p class="desc">{{item.describ}}</p>
-                  <div class="try-read-box">
-                    <a class="try-read-item"
-                       href="/read/80/article/2090"
-                       target="_blank">
+                  <div class="try-read-box"
+                       v-if="item.fcid">
+                    <nuxt-link :to="'/book/chapter/'+item.fcid"
+                               class="try-read-item"
+                               target="_blank">
                       <div class="try-read-img"></div>
                       <p class="try-read-title"
-                         title="01 开篇词：带你走进网络编程的世界">
-                        01 开篇词：带你走进网络编程的世界
+                         :title="item.ftitle">
+                        {{item.ftitle}}
                       </p>
-                    </a>
+                    </nuxt-link>
                   </div>
                   <div class="info">
                     <img src="~/assets/img/article_point.png"
@@ -75,16 +76,17 @@
                     <span>{{ item.buyCount }}人已购买</span>
                   </div>
                   <div class="clearfloat"></div>
-                  <a class="author-box"
-                     href="/u/6773399"
-                     target="_blank">
+                  <nuxt-link title="老师详情"
+                             :to="'/teacher/'+item.auid"
+                             class="author-box"
+                             target="_blank">
                     <div class="author-img"
                          style="background-image: url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
                     </div>
                     <span class="author-name">{{item.author}}</span>
                     <span>/</span>
                     <span class="author-title">{{item.authorPositon}}</span>
-                  </a>
+                  </nuxt-link>
                   <div class="price_con cleartopicfix fr">
                     <!-- 没有订阅购买 -->
                     <a class="sale-price cleartopicfix"
@@ -156,6 +158,8 @@
 import '~/assets/css/appdown.css'
 import '~/assets/css/contentlist.css'
 import bookReq from "@/api/bookReq";
+import bookSReq from "@/api/bookServerReq";
+
 export default {
   data () {
     return {
@@ -170,9 +174,7 @@ export default {
           src: "/pic/banner-3.jpg",
         },
       ],
-      page: 1, //当前页
-      bookList: [],
-      data: {}, //课程列表
+
       subjectNestedList: [], // 一级分类列表
       subSubjectList: [], // 二级分类列表
 
@@ -183,20 +185,36 @@ export default {
       buyCountSort: "",
       gmtCreateSort: "",
       priceSort: "",
+      description: "开源实践网推出的开源专题频道，主要是满足用户对文字内容的学习需求，旨在打造系统、完整、高效的专题内容，满足不同用户的学习感受，让每一位用户收获满满的知识。"
     };
   },
 
-  created () {
-    this.getHomeBooks();
+  asyncData ({ params, error }) {
+    return bookSReq.getHomeBookList().then((response) => {
+      return {
+        bookList: response.data.bookList
+      }
+    })
+  },
+
+  head () {
+    return {
+      title: "开源专题-系统完整高效的技术专题-开源实践网",
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.description,
+        },
+        {
+          hid: 'og:description',
+          content: this.description,
+        },
+      ],
+    }
   },
 
   methods: {
-    getHomeBooks () {
-      bookReq.getHomeBookList().then((response) => {
-        this.bookList = response.data.bookList;
-        // debugger;
-      });
-    },
     jumpStartQuestion () {
       this.$router.push({
         name: "faquestion-howtoask",

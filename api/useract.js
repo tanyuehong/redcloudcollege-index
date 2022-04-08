@@ -40,7 +40,7 @@ export default {
   // 获取关注的方法
   getTeacherFocus(fid) {
     return request({
-      url: `/classroom/userfocus/getUserFocus/${fid}`,
+      url: `/home/course/getUserFocus/${fid}`,
       method: 'get',
     })
   },

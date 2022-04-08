@@ -90,7 +90,6 @@
                   <div class="price_con cleartopicfix fr">
                     <!-- 没有订阅购买 -->
                     <a class="sale-price cleartopicfix"
-                       href="/read/80"
                        target="_blank">
                       <p class="ori fr">原价 ¥ {{ item.oldPrice }}</p>
                       <p class="sale fr">¥ {{ item.price }}</p>

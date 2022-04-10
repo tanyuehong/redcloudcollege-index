@@ -1,4 +1,4 @@
-import request from '@/utils/serverRq'
+import request from '@/utils/request'
 
 export default {
   //条件分页课程查询的方法
@@ -9,17 +9,27 @@ export default {
       data: searchObj,
     })
   },
-  //查询所有分类的方法
-  getAllSubject() {
+
+  //分页讲师查询的方法
+  getTeacherList(page, limit) {
     return request({
-      url: '/home/course/getAllSubject',
+      url: `/home/teacher/getTeacherList/${page}/${limit}`,
       method: 'post',
     })
   },
-  //课程详情的方法
-  getCourseInfo(id) {
+
+  // 讲师关注的方法
+  addTeacherFocus(fid) {
     return request({
-      url: '/home/course/getFrontCourseInfo/' + id,
+      url: `/classroom/userfocus/addUserFocus/${fid}`,
+      method: 'get',
+    })
+  },
+
+  // 取消关注的方法
+  cancleTeacherFocus(fid) {
+    return request({
+      url: `/classroom/userfocus/cancleUserFocus/${fid}`,
       method: 'get',
     })
   },

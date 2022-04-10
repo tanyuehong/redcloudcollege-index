@@ -659,8 +659,8 @@ ins {
 }
 </style>
 <script>
-import teacherApi from '@/api/teacher'
-import userApi from '@/api/useract'
+import teacherApi from '@/api/courseSerReq'
+import cousrseApi from '@/api/course'
 
 export default {
 
@@ -686,7 +686,7 @@ export default {
 
   head () {
     return {
-      title: this.teacher.name+"-" + this.teacherTypeString + this.teacher.tposition,
+      title: this.teacher.name + "-" + this.teacherTypeString + this.teacher.tposition,
       meta: [
         {
           hid: 'keywords',
@@ -734,12 +734,12 @@ export default {
     focusTeacherClick () {
       if (this.isLogin) {
         if (this.isFocus) {
-          userApi.cancleTeacherFocus(this.teacher.id).then((response) => {
+          cousrseApi.cancleTeacherFocus(this.teacher.id).then((response) => {
             this.isFocus = response.data.focus;
             this.teacher.focus--;
           });
         } else {
-          userApi.addTeacherFocus(this.teacher.id).then((response) => {
+          cousrseApi.addTeacherFocus(this.teacher.id).then((response) => {
             this.isFocus = response.data.focus;
             this.teacher.focus++;
           });

@@ -712,7 +712,7 @@ export default {
       this.isLogin = false;
     } else {
       this.isLogin = true;
-      userApi.getTeacherFocus(this.teacher.id).then((response) => {
+      cousrseApi.getTeacherFocus(this.teacher.id).then((response) => {
         this.isFocus = response.data.focus;
       })
     };

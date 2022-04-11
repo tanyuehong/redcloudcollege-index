@@ -93,8 +93,8 @@
                     自研
                   </span>
                   <nuxt-link :to="{name:'course-id',params:{id:course.id}}"
-                     :title="course.title"
-                     class="course-title-content">
+                             :title="course.title"
+                             class="course-title-content">
                     {{ course.title }}
                   </nuxt-link>
                 </div>
@@ -175,15 +175,14 @@
 
 import '~/assets/css/coursecommon.css'
 import courseApi from '@/api/course'
+import courseSerApi from '@/api/courseSerReq'
 
 export default {
   data () {
     return {
       page: 1, //当前页
-      data: {}, //课程列表
-      subjectNestedList: [], // 一级分类列表
+      subjectNestedList: [],
       subSubjectList: [], // 二级分类列表
-
       searchObj: {}, // 查询表单对象
 
       oneIndex: -1,
@@ -191,29 +190,42 @@ export default {
       buyCountSort: '',
       gmtCreateSort: '',
       priceSort: '',
+      descrb: '开源实践课堂是IT技能学习平台。开源实践网课程涉及JAVA、前端、Python、安卓,iOS,windows等主流平台，以真实的全平台项目，覆盖了面试就业、职业成长、自我提升，全栈开发等需求场景，帮助用户实现从技能提升到岗位，提升的技术能力，提升互联网创业能力的闭环。'
     }
   },
-  created () {
-    //课程第一次查询
-    this.initCourseFirst()
-    //一级分类显示
-    this.initSubject()
+
+  head () {
+    return {
+      title: "开源实践课堂",
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: '开源实践网,全栈开发,安卓开发,小行业软件开发,iOS开发,安卓开发,iOS面试,安卓面试,JAVA,前端,Python,大数据',
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.descrb,
+        },
+        {
+          hid: 'og:description',
+          content: this.descrb,
+        },
+      ],
+    }
   },
+
+  asyncData ({ params, error }) {
+    return courseSerApi.getCourseIndex().then((response) => {
+      return {
+        data: response.data.coursList,  //课程列表
+        subjectNestedList: response.data.list // 一级分类列表
+      }
+    })
+  },
+
   methods: {
-    //1 查询第一页数据
-    initCourseFirst () {
-      courseApi.getCourseList(1, 8, this.searchObj).then((response) => {
-        this.data = response.data
-      })
-    },
-
-    //2 查询所有一级分类
-    initSubject () {
-      courseApi.getAllSubject().then((response) => {
-        this.subjectNestedList = response.data.list
-      })
-    },
-
     //3 分页切换的方法
     gotoPage (page) {
       if (page == 0 || page > this.data.pages) {
@@ -311,6 +323,7 @@ export default {
   },
 }
 </script>
+
 <style scoped>
 .course-title {
   overflow: hidden;

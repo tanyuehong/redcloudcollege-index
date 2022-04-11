@@ -301,10 +301,16 @@
 
 <script>
 import '~/assets/css/appdown.css'
-import courseApi from '@/api/course'
+import courseApi from '@/api/courseSerReq'
 import ordersApi from '@/api/orders'
 
 export default {
+  data () {
+    return {
+      descrb: '开源实践课堂是IT技能学习平台。开源实践网课程涉及JAVA、前端、Python、安卓,iOS,windows等主流平台，以真实的全平台项目，覆盖了面试就业、职业成长、自我提升，全栈开发等需求场景，帮助用户实现从技能提升到岗位，提升的技术能力，提升互联网创业能力的闭环。'
+    }
+  },
+
   asyncData ({ params, error }) {
     return courseApi.getCourseInfo(params.id).then((response) => {
       return {
@@ -313,6 +319,28 @@ export default {
         courseId: params.id,
       }
     })
+  },
+
+  head () {
+    return {
+      title: this.courseWebVo.title + "- 开源实践网",
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: '开源实践网,全栈开发,安卓开发,小行业软件开发,iOS开发,安卓开发,iOS面试,安卓面试,JAVA,前端,Python,大数据',
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.descrb,
+        },
+        {
+          hid: 'og:description',
+          content: this.descrb,
+        },
+      ],
+    }
   },
   methods: {
     //生成订单

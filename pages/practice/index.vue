@@ -102,6 +102,11 @@ export default {
       title: this.title,
       meta: [
         {
+          hid: 'keywords',
+          name: 'keywords',
+          content: '开源实践,客户端面试,iOS面试题,安卓面试题,Vue.js,前端面试题,nginx配置,Kotlin,RxJava,React Native,敏捷开发,Python',
+        },
+        {
           hid: 'description',
           name: 'description',
           content: this.descrb,

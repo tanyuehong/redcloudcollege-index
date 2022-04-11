@@ -92,7 +92,8 @@
                     <a class="sale-price cleartopicfix"
                        target="_blank">
                       <p class="ori fr">原价 ¥ {{ item.oldPrice }}</p>
-                      <p class="sale fr">¥ {{ item.price }}</p>
+                      <p class="sale fr" v-if="item.price>0">¥ {{ item.price }}</p>
+                      <p class="sale fr" v-if="item.price<=0">免费</p>
                       <div class="countdown fr"
                            data-remain="1617854"
                            style="clear: both">

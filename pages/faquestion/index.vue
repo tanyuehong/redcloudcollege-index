@@ -154,9 +154,6 @@
   font-size: 14px;
 }
 
-.question_list .description {
-  font-size: 14px;
-}
 .faqustion-top-group {
   border-bottom: solid 1px #e6e6e6;
 }
@@ -354,8 +351,14 @@
 }
 
 .questions_detail_con .description {
+  font-size: 14px;
   margin-top: 10px;
   margin-bottom: 10px;
+   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+  max-height: 40px;
 }
 
 .questions_detail_con .answer_count {

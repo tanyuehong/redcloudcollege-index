@@ -1072,7 +1072,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .el-dialog {
   width: 480px;
 }
@@ -1738,6 +1738,11 @@ li.up_down_wrap {
   margin-top: 20px;
   margin-bottom: 25px;
   font-size: 14px;
+}
+
+.qustion_content  p {
+  line-height: 1.6;
+
 }
 .qustin_detall_content {
   margin-top: 15px;

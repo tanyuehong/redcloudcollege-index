@@ -180,9 +180,7 @@
                                  :to="'/practice/'+item.id">
                         {{ item.title }}
                       </nuxt-link>
-                      <p class="op_pratice_describ">
-                        {{ item.content }}
-                      </p>
+                      <p class="op_pratice_describ">{{ item.content }}</p>
                       <ul>
                         <i class="pratice_icon_view"></i>
                         <span class="icon_des">{{item.viewCount}}</span>

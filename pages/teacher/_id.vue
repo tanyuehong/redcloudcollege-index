@@ -668,7 +668,9 @@ export default {
     return {
       activeName: 'first',
       subPraCticeTag: -1,
-      isFocus: false
+      isFocus: false,
+      forbiden: true,
+
     }
   },
 
@@ -713,6 +715,7 @@ export default {
     } else {
       this.isLogin = true;
       cousrseApi.getTeacherFocus(this.teacher.id).then((response) => {
+        window.console.log(response);
         this.isFocus = response.data.focus;
       })
     };
@@ -732,25 +735,42 @@ export default {
   },
   methods: {
     focusTeacherClick () {
-      if (this.isLogin) {
-        if (this.isFocus) {
-          cousrseApi.cancleTeacherFocus(this.teacher.id).then((response) => {
-            this.isFocus = response.data.focus;
-            this.teacher.focus--;
-          });
+      window.myVueComm = this;
+      if (this.forbiden) {
+        this.forbiden = false;
+        if (this.isLogin) {
+          if (this.isFocus) {
+            cousrseApi.cancleTeacherFocus(this.teacher.id).then((response) => {
+              this.isFocus = response.data.focus;
+              this.teacher.focus--;
+              this.$message({
+                message: "取消关闭老师成功哈~",
+                type: "success",
+                duration: 2000,
+              });
+            });
+          } else {
+            cousrseApi.addTeacherFocus(this.teacher.id).then((response) => {
+              this.isFocus = response.data.focus;
+              this.teacher.focus++;
+              this.$message({
+                message: "关注老师成功哈~",
+                type: "success",
+                duration: 2000,
+              });
+            });
+          }
         } else {
-          cousrseApi.addTeacherFocus(this.teacher.id).then((response) => {
-            this.isFocus = response.data.focus;
-            this.teacher.focus++;
+          this.$message({
+            message: "请您登录以后在关注哈",
+            type: "success",
+            duration: 2000,
           });
         }
-      } else {
-        this.$message({
-          message: "请您登录以后在关注哈",
-          type: "success",
-          duration: 2000,
-        });
       }
+      setTimeout(function () {
+        window.myVueComm.forbiden = true;
+      }, 500)
 
     }
   }

@@ -33,4 +33,11 @@ export default {
       method: 'get',
     })
   },
+
+  getTeacherFocus(fid) {
+    return request({
+      url: `/home/course/getUserFocus/${fid}`,
+      method: 'get',
+    })
+  },
 }

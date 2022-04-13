@@ -286,7 +286,7 @@
                        v-if="item.showeditor">
                     <span @click="repplaybtnclinck(item,index)">取消</span>
                     <div class="comment-btn"
-                         @click="replyCommntClick(item)">评论</div>
+                         @click="replyCommntClick(item,index)">评论</div>
                   </div>
 
                   <div class="reply-comment-container"
@@ -824,7 +824,7 @@ export default {
       this.commentbtnclinck(item, cindex);
     },
 
-    replyCommntClick (item) {
+    replyCommntClick (item, index) {
       if (!item.editor || item.editor.txt.html().length < 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
@@ -836,12 +836,15 @@ export default {
           uid: this.loginInfo.id,
         })
         .then((response) => {
+          item.comments.unshift(response.data.comment);
+          item.editor.txt.html("");
           this.$message({
             message: "问题回答成功哦",
             type: "success",
             duration: 2000,
           });
         });
+      this.repplaybtnclinck(item, index);
     },
 
     submitAnserClick () {
@@ -858,7 +861,7 @@ export default {
         })
         .then((response) => {
           this.editor.txt.html("");
-          window.document.getElementById("answer-editor").scrollIntoView();
+          window.document.getElementById("answer-list").scrollIntoView();
           this.replyList.unshift(response.data.reply);
           this.$message({
             message: "问题回答成功哦",
@@ -931,7 +934,6 @@ export default {
     },
 
     commentbtnclinck (item, index) {
-      window.console.log("ddddddddfffffffff");
       item.commnetId = "#creplayedtor" + index;
       window.commentItem = item;
       if (!item.editor) {

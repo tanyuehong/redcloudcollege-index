@@ -156,12 +156,24 @@
                       <div class="accusation-type">
                         <h2 class="accusation-secondary-title mb10">举报类型（必选）</h2>
                         <ul>
-                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==1}" @click="jubaoTypeIndex=1">诱导点赞、关注</li>
-                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==2}" @click="jubaoTypeIndex=2">抄袭、刷量作弊</li>
-                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==3}" @click="jubaoTypeIndex=3">有害信息</li>
-                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==4}" @click="jubaoTypeIndex=4">不友善内容</li>
-                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==5}" @click="jubaoTypeIndex=5">垃圾广告信息</li>
-                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==6}" @click="jubaoTypeIndex=6">低质内容</li>
+                          <li class="accusation-item"
+                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==1}"
+                              @click="jubaoTypeIndex=1">诱导点赞、关注</li>
+                          <li class="accusation-item"
+                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==2}"
+                              @click="jubaoTypeIndex=2">抄袭、刷量作弊</li>
+                          <li class="accusation-item"
+                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==3}"
+                              @click="jubaoTypeIndex=3">有害信息</li>
+                          <li class="accusation-item"
+                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==4}"
+                              @click="jubaoTypeIndex=4">不友善内容</li>
+                          <li class="accusation-item"
+                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==5}"
+                              @click="jubaoTypeIndex=5">垃圾广告信息</li>
+                          <li class="accusation-item"
+                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==6}"
+                              @click="jubaoTypeIndex=6">低质内容</li>
                         </ul>
                       </div>
                       <div class="accusation-reason">
@@ -189,7 +201,8 @@
             </div>
           </div>
 
-          <div id="answer-list" class="qustion-answer-list" 
+          <div id="answer-list"
+               class="qustion-answer-list"
                v-if="replyList.length">
             <h4 class="reply-title">
               <span><em class="em1">{{ replyList.length }}</em>条回答</span>
@@ -440,9 +453,9 @@ export default {
       jianyiDlog: false,
       jianyiContent: "",
       jubaoContent: "",
-      jubaoTypeIndex:0,
-      jubaoId:"",
-      jubaotype:"",
+      jubaoTypeIndex: 0,
+      jubaoId: "",
+      jubaotype: "",
     };
   },
   head () {
@@ -500,15 +513,14 @@ export default {
   },
 
   methods: {
-    jubaoBtnClick (wId,jubaotype) {
+    jubaoBtnClick (wId, jubaotype) {
       window.console.log(wId);
       this.jubaotype = jubaotype;
       this.jubaoId = wId;
       this.jubiaoDlog = true;
     },
-    jubaoCommitBtnClick() {
-      askApi.submitUserWaring({ "wid": this.jubaoId, "uid": this.loginInfo.id, "type": this.jubaoTypeIndex, "content": this.jubaoContent,"jubaotype":this.jubaotype }).then((response) => 
-      { 
+    jubaoCommitBtnClick () {
+      askApi.submitUserWaring({ "wid": this.jubaoId, "uid": this.loginInfo.id, "type": this.jubaoTypeIndex, "content": this.jubaoContent, "jubaotype": this.jubaotype }).then((response) => {
         this.$message({
           message: "举报成功！我们将尽快处理哈",
           type: "success",
@@ -519,8 +531,7 @@ export default {
 
     },
     qustionJianYiConfirm () {
-      askApi.submitQuestionAdvise({ "qid": this.qdetail.qid, "uid": this.loginInfo.id, "type": this.jianyilable, "content": this.jianyiContent }).then((response) => 
-      { 
+      askApi.submitQuestionAdvise({ "qid": this.qdetail.qid, "uid": this.loginInfo.id, "type": this.jianyilable, "content": this.jianyiContent }).then((response) => {
         this.$message({
           message: "提交成功！",
           type: "success",
@@ -804,7 +815,6 @@ export default {
         })
         .then((response) => {
           rItem.comments.unshift(response.data.comment);
-          window.console.log(dddd);
           this.$message({
             message: "问题回答成功哦",
             type: "success",
@@ -848,7 +858,8 @@ export default {
         })
         .then((response) => {
           this.editor.txt.html("");
-          document.getElementById("answer-editor").scrollIntoView();
+          window.document.getElementById("answer-editor").scrollIntoView();
+          this.replyList.unshift(response.data.reply);
           this.$message({
             message: "问题回答成功哦",
             type: "success",
@@ -1078,7 +1089,7 @@ export default {
 }
 
 .jubaoSlect {
-  color: #fc5531  !important;
+  color: #fc5531 !important;
 }
 
 .jubao-radio-content {
@@ -1740,9 +1751,8 @@ li.up_down_wrap {
   font-size: 14px;
 }
 
-.qustion_content  p {
+.qustion_content p {
   line-height: 1.6;
-
 }
 .qustin_detall_content {
   margin-top: 15px;

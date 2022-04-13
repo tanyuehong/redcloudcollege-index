@@ -740,7 +740,7 @@ export default {
         }
         if (item.comments) {
           for (var i = 0; i < item.comments.length; i++) {
-            var citem = item.comments[j];
+            var citem = item.comments[i];
             citem.showeditor = false;
             if (citem.editor) {
               citem.editor.destroy();

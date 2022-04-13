@@ -189,7 +189,7 @@
             </div>
           </div>
 
-          <div class="qustion-answer-list"
+          <div id="answer-list" class="qustion-answer-list" 
                v-if="replyList.length">
             <h4 class="reply-title">
               <span><em class="em1">{{ replyList.length }}</em>条回答</span>
@@ -427,7 +427,6 @@ export default {
       answertype: true,
       editor: {},
       loginInfo: {},
-      replyContent: "",
       uploadToken: "",
       loginTitle: "点击登录",
       goodqustion: false,
@@ -805,6 +804,7 @@ export default {
         })
         .then((response) => {
           rItem.comments.unshift(response.data.comment);
+          window.console.log(dddd);
           this.$message({
             message: "问题回答成功哦",
             type: "success",
@@ -835,18 +835,20 @@ export default {
     },
 
     submitAnserClick () {
-      if (this.replyContent.length <= 6) {
+      if (this.editor.txt.html().length <= 6) {
         this.answerBtnClick();
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
       }
       askApi
         .submitQuestionReply({
-          content: this.replyContent,
+          content: this.editor.txt.html(),
           qid: this.qdetail.qid,
           uid: this.loginInfo.id,
         })
         .then((response) => {
+          this.editor.txt.html("");
+          document.getElementById("answer-editor").scrollIntoView();
           this.$message({
             message: "问题回答成功哦",
             type: "success",
@@ -864,6 +866,7 @@ export default {
       editor.config.placeholder = "请用专业明晰的语言写出您的回答";
       editor.config.focus = false;
       editor.config.zIndex = 100;
+      editor.config.height = 210;
 
       editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
@@ -900,9 +903,7 @@ export default {
         };
         const subscription = observable.subscribe(observer);
       };
-      editor.config.onchange = function (newHtml) {
-        window.myVueComm.replyContent = newHtml;
-      };
+      // editor.config.onchange = function (newHtml) {};
       editor.create();
     },
 
@@ -1064,8 +1065,7 @@ export default {
         };
         const subscription = observable.subscribe(observer);
       };
-      editor.config.onchange = function (newHtml) {
-      };
+      //editor.config.onchange = function (newHtml) {}};
       editor.create();
     },
   },

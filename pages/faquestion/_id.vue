@@ -458,10 +458,28 @@ export default {
       jubaotype: "",
     };
   },
+
   head () {
     return {
       script: [
         { src: 'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js', async: true, defer: true }
+      ],
+      title: this.qdetail.title + "-开源实践问答",
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: "技术问答,技术答疑,生活问题,我问你答，开源实践问答",
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.descrb,
+        },
+        {
+          hid: 'og:description',
+          content: this.descrb,
+        },
       ],
     }
   },
@@ -471,6 +489,7 @@ export default {
       return {
         qdetail: response.data.qdetail,
         replyList: response.data.replyList,
+        descrb: '开源实践问答为您找到 ' + response.data.qdetail.title + ' 等相关问题答案，如果想了解更多关于 ' + response.data.qdetail.title + ' 问题等相关问答，请访问开源实践问答。',
       }
     })
   },

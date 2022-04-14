@@ -448,6 +448,11 @@ export default {
       title: this.title,
       meta: [
         {
+          hid: 'keywords',
+          name: 'keywords',
+          content: "技术问答,技术答疑,生活问题,我问你答，开源实践问答",
+        },
+        {
           hid: 'description',
           name: 'description',
           content: this.descrb,

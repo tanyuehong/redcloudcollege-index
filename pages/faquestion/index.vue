@@ -89,14 +89,14 @@
                    :key="item.qid"
                    class="question_list">
                 <div class="answer_title">
-                  <router-link :to="'/faquestion/'+item.qid"
+                  <nuxt-link :to="'/faquestion/'+item.qid"
                                class="header">
                     {{item.title}}
                     <div class="ui red label horizontal"
                          data-tooltip="置顶">顶</div>
                     <div class="ui orange label horizontal"
                          data-tooltip="热门">热</div>
-                  </router-link>
+                  </nuxt-link>
                 </div>
 
                 <div class="description">
@@ -127,12 +127,12 @@
                     <a href="javascript:;"
                        title="个人悬赏">{{item.price}}C</a>
                   </b>
-                  <router-link :to="'/faquestion/'+item.qid"
+                  <nuxt-link :to="'/faquestion/'+item.qid"
                                class="answer_num"
                                title="问题回答数量">
                     <span>{{item.reply}}</span>
                     <p class="anser-lable">回答</p>
-                  </router-link>
+                  </nuxt-link>
                 </div>
               </div>
             </div>

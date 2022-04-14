@@ -396,9 +396,7 @@
             </div>
 
             <div class="ask-top-wrap">
-              <a target="_blank"
-                 class="ask-top-warper-item"
-                 href="https://ask.csdn.net/questions/7398651">◇ 欢迎建议意见</a>
+              <nuxt-link :to="'/faquestion/1481862372760240130'" class="ask-top-warper-item" target="_blank" rel="nofollow noopener noreferrer" >◇ 欢迎建议意见</nuxt-link>
               <a target="_blank"
                  class="ask-top-warper-item"
                  href="https://bbs.csdn.net/topics/603750556">◇ 实践问答上线</a>
@@ -1538,12 +1536,14 @@ h2.accusation-secondary-title {
 }
 .ask-top-warper-item {
   display: block;
+  margin-top: 6px;
 }
 
 .ask-top-wrap {
   padding: 14px 20px;
   color: #507999;
   background: #ffffff;
+  font-size: 14px;
 }
 
 .user_header {

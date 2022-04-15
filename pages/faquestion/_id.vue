@@ -238,7 +238,7 @@
                          width="30"
                          height="30"
                          alt />
-                    <span class="ml5"> {{ qdetail.nickname }}</span>
+                    <span class="ml5"> {{ item.username }}</span>
                     <span class="qustion-top-item"> {{ item.gmtCreate }}</span>
                   </div>
 

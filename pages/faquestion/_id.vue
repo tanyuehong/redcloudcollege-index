@@ -148,15 +148,15 @@
                       @click="jubaoBtnClick(qdetail.qid,'问题')">
                     <i class="icon icon_vote_jubao"></i>举报
                   </li>
-                   <li class="ask-info-item">
-                      <el-dropdown szie="small">
-  <span class="el-dropdown-link drop-menu">
-    <i class="icon icon_more"></i>
-  </span>
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>删除</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
+                  <li class="ask-info-item">
+                    <el-dropdown szie="mini">
+                      <span class="el-dropdown-link drop-menu">
+                        <i class="icon icon_more"></i>
+                      </span>
+                      <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item>删除</el-dropdown-item>
+                      </el-dropdown-menu>
+                    </el-dropdown>
                   </li>
 
                   <el-dialog title="举报反馈"
@@ -407,7 +407,10 @@
             </div>
 
             <div class="ask-top-wrap">
-              <nuxt-link :to="'/faquestion/1481862372760240130'" class="ask-top-warper-item" target="_blank" rel="nofollow noopener noreferrer" >◇ 欢迎建议意见</nuxt-link>
+              <nuxt-link :to="'/faquestion/1481862372760240130'"
+                         class="ask-top-warper-item"
+                         target="_blank"
+                         rel="nofollow noopener noreferrer">◇ 欢迎建议意见</nuxt-link>
               <a target="_blank"
                  class="ask-top-warper-item"
                  href="https://bbs.csdn.net/topics/603750556">◇ 实践问答上线</a>
@@ -1118,6 +1121,11 @@ export default {
   width: 480px;
 }
 
+.el-dropdown-menu {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 .jubaoSlect {
   color: #fc5531 !important;
 }
@@ -1401,9 +1409,9 @@ h2.accusation-secondary-title {
 }
 
 .icon_more {
-width: 16px;
-height: 16px;
-background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAcUlEQVRYR2NkGGDAOMD2M4w6YDQERkNgNARGQ2A0BDBCoLyqw5PxP+NMUCX1n/F/emdbxXZsFRa11GE4oKKy89H///9lQZYyMjI+7mgvl8PmAGqpG3wOoFbQwkKNkHmjuWA0BEZDYDQERkNgNARGQwAAtIpgIVBMgJ0AAAAASUVORK5CYII=);
+  width: 16px;
+  height: 16px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAcUlEQVRYR2NkGGDAOMD2M4w6YDQERkNgNARGQ2A0BDBCoLyqw5PxP+NMUCX1n/F/emdbxXZsFRa11GE4oKKy89H///9lQZYyMjI+7mgvl8PmAGqpG3wOoFbQwkKNkHmjuWA0BEZDYDQERkNgNARGQwAAtIpgIVBMgJ0AAAAASUVORK5CYII=);
 }
 
 .reply_content_tool .mr20px {

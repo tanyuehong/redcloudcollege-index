@@ -373,7 +373,9 @@
           <div>
             <div class="user_header">
               <span class="addTitle"><i class="icon icon_info"></i>{{loginTitle}}</span>
-              <span class="addQuestion">提问题</span>
+              <nuxt-link :to="{name:'faquestion-ask'}" class="addQuestion">
+                提问题
+              </nuxt-link>
             </div>
 
             <div class="user-center-info"

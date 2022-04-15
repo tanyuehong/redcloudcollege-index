@@ -100,7 +100,7 @@ body {
 .ui.label {
   display: inline-block;
   line-height: 1;
-  vertical-align: baseline;
+  vertical-align: super;
   margin: 0 0.14285714em;
   background-color: #f2711c;
   background-image: none;

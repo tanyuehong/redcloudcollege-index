@@ -148,6 +148,17 @@
                       @click="jubaoBtnClick(qdetail.qid,'问题')">
                     <i class="icon icon_vote_jubao"></i>举报
                   </li>
+                  <li class="ask-info-item">
+                    <el-dropdown szie="mini">
+                      <span class="el-dropdown-link drop-menu">
+                        <i class="icon icon_more"></i>
+                      </span>
+                      <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item>删除</el-dropdown-item>
+                      </el-dropdown-menu>
+                    </el-dropdown>
+                  </li>
+
                   <el-dialog title="举报反馈"
                              :visible.sync="jubiaoDlog"
                              :close-on-click-modal="false"
@@ -156,12 +167,24 @@
                       <div class="accusation-type">
                         <h2 class="accusation-secondary-title mb10">举报类型（必选）</h2>
                         <ul>
-                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==1}" @click="jubaoTypeIndex=1">诱导点赞、关注</li>
-                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==2}" @click="jubaoTypeIndex=2">抄袭、刷量作弊</li>
-                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==3}" @click="jubaoTypeIndex=3">有害信息</li>
-                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==4}" @click="jubaoTypeIndex=4">不友善内容</li>
-                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==5}" @click="jubaoTypeIndex=5">垃圾广告信息</li>
-                          <li class="accusation-item" v-bind:class="{ jubaoSlect:jubaoTypeIndex==6}" @click="jubaoTypeIndex=6">低质内容</li>
+                          <li class="accusation-item"
+                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==1}"
+                              @click="jubaoTypeIndex=1">诱导点赞、关注</li>
+                          <li class="accusation-item"
+                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==2}"
+                              @click="jubaoTypeIndex=2">抄袭、刷量作弊</li>
+                          <li class="accusation-item"
+                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==3}"
+                              @click="jubaoTypeIndex=3">有害信息</li>
+                          <li class="accusation-item"
+                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==4}"
+                              @click="jubaoTypeIndex=4">不友善内容</li>
+                          <li class="accusation-item"
+                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==5}"
+                              @click="jubaoTypeIndex=5">垃圾广告信息</li>
+                          <li class="accusation-item"
+                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==6}"
+                              @click="jubaoTypeIndex=6">低质内容</li>
                         </ul>
                       </div>
                       <div class="accusation-reason">
@@ -189,7 +212,8 @@
             </div>
           </div>
 
-          <div class="qustion-answer-list"
+          <div id="answer-list"
+               class="qustion-answer-list"
                v-if="replyList.length">
             <h4 class="reply-title">
               <span><em class="em1">{{ replyList.length }}</em>条回答</span>
@@ -214,7 +238,7 @@
                          width="30"
                          height="30"
                          alt />
-                    <span class="ml5"> {{ qdetail.nickname }}</span>
+                    <span class="ml5"> {{ item.username }}</span>
                     <span class="qustion-top-item"> {{ item.gmtCreate }}</span>
                   </div>
 
@@ -273,7 +297,7 @@
                        v-if="item.showeditor">
                     <span @click="repplaybtnclinck(item,index)">取消</span>
                     <div class="comment-btn"
-                         @click="replyCommntClick(item)">评论</div>
+                         @click="replyCommntClick(item,index)">评论</div>
                   </div>
 
                   <div class="reply-comment-container"
@@ -349,7 +373,9 @@
           <div>
             <div class="user_header">
               <span class="addTitle"><i class="icon icon_info"></i>{{loginTitle}}</span>
-              <span class="addQuestion">提问题</span>
+              <nuxt-link :to="{name:'faquestion-ask'}" class="addQuestion">
+                提问题
+              </nuxt-link>
             </div>
 
             <div class="user-center-info"
@@ -383,9 +409,10 @@
             </div>
 
             <div class="ask-top-wrap">
-              <a target="_blank"
-                 class="ask-top-warper-item"
-                 href="https://ask.csdn.net/questions/7398651">◇ 欢迎建议意见</a>
+              <nuxt-link :to="'/faquestion/1481862372760240130'"
+                         class="ask-top-warper-item"
+                         target="_blank"
+                         rel="nofollow noopener noreferrer">◇ 欢迎建议意见</nuxt-link>
               <a target="_blank"
                  class="ask-top-warper-item"
                  href="https://bbs.csdn.net/topics/603750556">◇ 实践问答上线</a>
@@ -427,7 +454,6 @@ export default {
       answertype: true,
       editor: {},
       loginInfo: {},
-      replyContent: "",
       uploadToken: "",
       loginTitle: "点击登录",
       goodqustion: false,
@@ -441,15 +467,33 @@ export default {
       jianyiDlog: false,
       jianyiContent: "",
       jubaoContent: "",
-      jubaoTypeIndex:0,
-      jubaoId:"",
-      jubaotype:"",
+      jubaoTypeIndex: 0,
+      jubaoId: "",
+      jubaotype: "",
     };
   },
+
   head () {
     return {
       script: [
         { src: 'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js', async: true, defer: true }
+      ],
+      title: this.qdetail.title + "-开源实践问答",
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: "技术问答,技术答疑,生活问题,我问你答，开源实践问答",
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.descrb,
+        },
+        {
+          hid: 'og:description',
+          content: this.descrb,
+        },
       ],
     }
   },
@@ -459,6 +503,7 @@ export default {
       return {
         qdetail: response.data.qdetail,
         replyList: response.data.replyList,
+        descrb: '开源实践问答为您找到 ' + response.data.qdetail.title + ' 等相关问题答案，如果想了解更多关于 ' + response.data.qdetail.title + ' 问题等相关问答，请访问开源实践问答。',
       }
     })
   },
@@ -501,15 +546,14 @@ export default {
   },
 
   methods: {
-    jubaoBtnClick (wId,jubaotype) {
+    jubaoBtnClick (wId, jubaotype) {
       window.console.log(wId);
       this.jubaotype = jubaotype;
       this.jubaoId = wId;
       this.jubiaoDlog = true;
     },
-    jubaoCommitBtnClick() {
-      askApi.submitUserWaring({ "wid": this.jubaoId, "uid": this.loginInfo.id, "type": this.jubaoTypeIndex, "content": this.jubaoContent,"jubaotype":this.jubaotype }).then((response) => 
-      { 
+    jubaoCommitBtnClick () {
+      askApi.submitUserWaring({ "wid": this.jubaoId, "uid": this.loginInfo.id, "type": this.jubaoTypeIndex, "content": this.jubaoContent, "jubaotype": this.jubaotype }).then((response) => {
         this.$message({
           message: "举报成功！我们将尽快处理哈",
           type: "success",
@@ -520,8 +564,7 @@ export default {
 
     },
     qustionJianYiConfirm () {
-      askApi.submitQuestionAdvise({ "qid": this.qdetail.qid, "uid": this.loginInfo.id, "type": this.jianyilable, "content": this.jianyiContent }).then((response) => 
-      { 
+      askApi.submitQuestionAdvise({ "qid": this.qdetail.qid, "uid": this.loginInfo.id, "type": this.jianyilable, "content": this.jianyiContent }).then((response) => {
         this.$message({
           message: "提交成功！",
           type: "success",
@@ -740,7 +783,7 @@ export default {
         }
         if (item.comments) {
           for (var i = 0; i < item.comments.length; i++) {
-            var citem = item.comments[j];
+            var citem = item.comments[i];
             citem.showeditor = false;
             if (citem.editor) {
               citem.editor.destroy();
@@ -814,7 +857,7 @@ export default {
       this.commentbtnclinck(item, cindex);
     },
 
-    replyCommntClick (item) {
+    replyCommntClick (item, index) {
       if (!item.editor || item.editor.txt.html().length < 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
@@ -826,27 +869,33 @@ export default {
           uid: this.loginInfo.id,
         })
         .then((response) => {
+          item.comments.unshift(response.data.comment);
+          item.editor.txt.html("");
           this.$message({
             message: "问题回答成功哦",
             type: "success",
             duration: 2000,
           });
         });
+      this.repplaybtnclinck(item, index);
     },
 
     submitAnserClick () {
-      if (this.replyContent.length <= 6) {
+      if (this.editor.txt.html().length <= 6) {
         this.answerBtnClick();
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
       }
       askApi
         .submitQuestionReply({
-          content: this.replyContent,
+          content: this.editor.txt.html(),
           qid: this.qdetail.qid,
           uid: this.loginInfo.id,
         })
         .then((response) => {
+          this.editor.txt.html("");
+          window.document.getElementById("answer-list").scrollIntoView();
+          this.replyList.unshift(response.data.reply);
           this.$message({
             message: "问题回答成功哦",
             type: "success",
@@ -864,6 +913,7 @@ export default {
       editor.config.placeholder = "请用专业明晰的语言写出您的回答";
       editor.config.focus = false;
       editor.config.zIndex = 100;
+      editor.config.height = 210;
 
       editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
@@ -900,9 +950,7 @@ export default {
         };
         const subscription = observable.subscribe(observer);
       };
-      editor.config.onchange = function (newHtml) {
-        window.myVueComm.replyContent = newHtml;
-      };
+      // editor.config.onchange = function (newHtml) {};
       editor.create();
     },
 
@@ -919,7 +967,6 @@ export default {
     },
 
     commentbtnclinck (item, index) {
-      window.console.log("ddddddddfffffffff");
       item.commnetId = "#creplayedtor" + index;
       window.commentItem = item;
       if (!item.editor) {
@@ -1064,21 +1111,25 @@ export default {
         };
         const subscription = observable.subscribe(observer);
       };
-      editor.config.onchange = function (newHtml) {
-      };
+      //editor.config.onchange = function (newHtml) {}};
       editor.create();
     },
   },
 };
 </script>
 
-<style scoped>
+<style>
 .el-dialog {
   width: 480px;
 }
 
+.el-dropdown-menu {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 .jubaoSlect {
-  color: #fc5531  !important;
+  color: #fc5531 !important;
 }
 
 .jubao-radio-content {
@@ -1355,6 +1406,16 @@ h2.accusation-secondary-title {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAhdJREFUWEftlr9PFEEUx79vdi4YCyz4Ff8FOS7BJTQgBVcSSY64JLY2UPEn+D8QG2hsJR6GRjshIVAA5jQGjsR/wISghZGGsDePzLJcjt1lGXdnucYtNzPz+cybN28eocsf2eZzbbxPr0kbB79N1rYmwN7oQIvFWyLMaDAzPjmkXlH922maiBUBDVcQWwyUAfwJgY8IOBJQ02kSuQX+1iqDD2VpU8MDoH9R1QKq81+KRC6Bzp1Hd3sjKoyPcr3xPOkoMgukwa9BXKsMKlk6AtAvfGcgKTEzCZjAtcTZbHnoQU/PDwJ6rQmYwgs5AlN4LDFtJGER8KBgmVSrouBGAkXC7xQoGp4qcB/wWwXuC54oEIEroUSFPnxpRpM1qHJOaYsJwyaPzm3JHrsFvufuAxgnQDEgkha3BY9FgOfcxy0HP/WT6igxoYRaa79yYTGJwA8FVPWuN9+4H+AXo9UWic8AdmS9MRXNBd+nl9LhtTDsueGxCLTm3SVmLIN4Vb7/uhh0Nh3NRsexWIHHBPz5pytgWiDGkrPeeHMduvPaWFlK/h7mhDV4XMBzdwBMEuH1VWvFT5hJZ/kIA7rFSoT74TyTsh6O2ZX1xrP4EXjuLwaCrjb6CWCPoGaTEs6agO+NbRN4mIFjYui7f6yIm1KWmvRu/+Qfdmg81Og1NF4tw8D/Au0IZEikDAFvT4nfgq4L5NlOnrldT8JLe8mJMLeISrcAAAAASUVORK5CYII=);
 }
 
+.ask-info-item .drop-menu {
+  color: red;
+}
+
+.icon_more {
+  width: 16px;
+  height: 16px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAcUlEQVRYR2NkGGDAOMD2M4w6YDQERkNgNARGQ2A0BDBCoLyqw5PxP+NMUCX1n/F/emdbxXZsFRa11GE4oKKy89H///9lQZYyMjI+7mgvl8PmAGqpG3wOoFbQwkKNkHmjuWA0BEZDYDQERkNgNARGQwAAtIpgIVBMgJ0AAAAASUVORK5CYII=);
+}
+
 .reply_content_tool .mr20px {
   padding: 0 16px;
   text-align: center;
@@ -1506,12 +1567,14 @@ h2.accusation-secondary-title {
 }
 .ask-top-warper-item {
   display: block;
+  margin-top: 6px;
 }
 
 .ask-top-wrap {
   padding: 14px 20px;
   color: #507999;
   background: #ffffff;
+  font-size: 14px;
 }
 
 .user_header {
@@ -1738,6 +1801,10 @@ li.up_down_wrap {
   margin-top: 20px;
   margin-bottom: 25px;
   font-size: 14px;
+}
+
+.qustion_content p {
+  line-height: 1.6;
 }
 .qustin_detall_content {
   margin-top: 15px;

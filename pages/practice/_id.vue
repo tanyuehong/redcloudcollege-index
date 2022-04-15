@@ -2,12 +2,17 @@
   <div class="golobal_content">
     <section class="container">
       <div class="practice_detail">
-        <div class="practice_header"></div>
-
         <div class="practice_content">
+           <div class="practice_header">
           <div class="pratice-header">
             <h1>{{pitem.title}}</h1>
+               <img class="vam user-head-image"
+                           :src="loginInfo.avatar"
+                           width="30"
+                           height="30"
+                           alt />
           </div>
+       </div>
           <div class="mark_content"
                v-html="changeMarkToHtml(pitem.content)"></div>
         </div>

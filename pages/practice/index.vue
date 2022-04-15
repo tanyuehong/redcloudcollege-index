@@ -28,9 +28,7 @@
                                :to="'/practice/'+bitem.id">
                       {{ bitem.title }}
                     </nuxt-link>
-                    <p class="op_pratice_describ">
-                      {{ bitem.descrb }}
-                    </p>
+                    <p class="op_pratice_describ">{{ bitem.descrb }}</p>
                     <ul>
                       <i class="pratice_icon_view"></i>
                       <span class="icon_des">{{bitem.viewCount}}</span>

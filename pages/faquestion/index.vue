@@ -89,14 +89,14 @@
                    :key="item.qid"
                    class="question_list">
                 <div class="answer_title">
-                  <router-link :to="'/faquestion/'+item.qid"
+                  <nuxt-link :to="'/faquestion/'+item.qid"
                                class="header">
                     {{item.title}}
                     <div class="ui red label horizontal"
                          data-tooltip="置顶">顶</div>
                     <div class="ui orange label horizontal"
                          data-tooltip="热门">热</div>
-                  </router-link>
+                  </nuxt-link>
                 </div>
 
                 <div class="description">
@@ -127,12 +127,12 @@
                     <a href="javascript:;"
                        title="个人悬赏">{{item.price}}C</a>
                   </b>
-                  <router-link :to="'/faquestion/'+item.qid"
+                  <nuxt-link :to="'/faquestion/'+item.qid"
                                class="answer_num"
                                title="问题回答数量">
                     <span>{{item.reply}}</span>
                     <p class="anser-lable">回答</p>
-                  </router-link>
+                  </nuxt-link>
                 </div>
               </div>
             </div>
@@ -154,9 +154,6 @@
   font-size: 14px;
 }
 
-.question_list .description {
-  font-size: 14px;
-}
 .faqustion-top-group {
   border-bottom: solid 1px #e6e6e6;
 }
@@ -354,8 +351,14 @@
 }
 
 .questions_detail_con .description {
+  font-size: 14px;
   margin-top: 10px;
   margin-bottom: 10px;
+   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+  max-height: 40px;
 }
 
 .questions_detail_con .answer_count {
@@ -444,6 +447,11 @@ export default {
     return {
       title: this.title,
       meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: "技术问答,技术答疑,生活问题,我问你答，开源实践问答",
+        },
         {
           hid: 'description',
           name: 'description',

@@ -486,7 +486,8 @@ export default {
       });
     },
     handleSelect (key, keyPath) {
-      askApi.getHomeAskQuestionList({ 'type': key, 'qtype': this.qustionType[this.typeIndex].id }).then((response) => {
+      var qtype = this.typeIndex == 0 ? "" : this.qustionType[this.typeIndex].id;
+      askApi.getHomeAskQuestionList({ 'type': key, 'qtype': qtype }).then((response) => {
         this.list = response.data.list;
         this.qustionType = response.data.qustionType;
       });

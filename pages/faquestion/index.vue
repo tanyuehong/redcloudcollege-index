@@ -90,7 +90,7 @@
                    class="question_list">
                 <div class="answer_title">
                   <nuxt-link :to="'/faquestion/'+item.qid"
-                               class="header">
+                             class="header">
                     {{item.title}}
                     <div class="ui red label horizontal"
                          data-tooltip="置顶">顶</div>
@@ -128,8 +128,8 @@
                        title="个人悬赏">{{item.price}}C</a>
                   </b>
                   <nuxt-link :to="'/faquestion/'+item.qid"
-                               class="answer_num"
-                               title="问题回答数量">
+                             class="answer_num"
+                             title="问题回答数量">
                     <span>{{item.reply}}</span>
                     <p class="anser-lable">回答</p>
                   </nuxt-link>
@@ -354,7 +354,7 @@
   font-size: 14px;
   margin-top: 10px;
   margin-bottom: 10px;
-   overflow: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   vertical-align: middle;
@@ -465,8 +465,6 @@ export default {
     }
   },
 
-
-
   asyncData ({ params, error }) {
     return askServerApi.getHomeAskQuestionList({ 'type': 1, 'qtype': '' }).then((response) => {
       return {
@@ -476,13 +474,12 @@ export default {
     })
   },
 
-  mounted () {
-  },
-
   methods: {
     qustionTypeClick (typeId, index) {
       this.typeIndex = index;
-      window.console.log('+++' + typeId + '+++' + index);
+      if (index == 0) {
+        typeId = "";
+      }
       askApi.getHomeAskQuestionList({ 'type': index, 'qtype': typeId }).then((response) => {
         this.list = response.data.list;
         this.qustionType = response.data.qustionType;

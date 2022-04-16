@@ -373,7 +373,8 @@
           <div>
             <div class="user_header">
               <span class="addTitle"><i class="icon icon_info"></i>{{loginTitle}}</span>
-              <nuxt-link :to="{name:'faquestion-ask'}" class="addQuestion">
+              <nuxt-link :to="{name:'faquestion-ask'}"
+                         class="addQuestion">
                 提问题
               </nuxt-link>
             </div>
@@ -646,11 +647,6 @@ export default {
     collectBtnClick () {
       if (this.collectState) {
         this.cancleUserQustionCollect();
-        this.$message({
-          message: "取消收藏成功！",
-          type: "success",
-          duration: 2000,
-        });
       } else {
         this.addUserQustionCollect();
       }
@@ -687,7 +683,9 @@ export default {
       }
       askApi.getUserGoodReplyState(list).then((response) => {
         var goodList = response.data.goodList;
-
+        if (!goodList) {
+          return;
+        }
         for (var j = 0; j < this.replyList.length; j++) {
           var rItem = this.replyList[j];
           for (var i = 0; i < goodList.length; i++) {
@@ -707,11 +705,24 @@ export default {
 
     addUserQustionCollect () {
       askApi.addUserQustionCollect(this.qdetail.qid).then((response) => {
+        this.qdetail.collect++;
+        this.$message({
+          message: "问题收藏成功！",
+          type: "success",
+          duration: 2000,
+        });
       })
     },
 
     cancleUserQustionCollect () {
       askApi.cancleUserQustionCollect(this.qdetail.qid).then((response) => {
+        this.qdetail.collect--;
+        window.console.log("ddd");
+        this.$message({
+          message: "取消收藏成功！",
+          type: "success",
+          duration: 2000,
+        });
       })
     },
 

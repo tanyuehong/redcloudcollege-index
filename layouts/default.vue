@@ -4,7 +4,7 @@
     <header id="header">
       <section class="container">
         <h1 id="logo">
-          <router-link to="/"
+          <nuxt-link to="/"
                        title="开源实践网">
             <img src="~/assets/img/logo.png"
                  class="logo_index"
@@ -12,37 +12,37 @@
             <img src="~/assets/img/logo_descrb.png"
                  class="logo_decrb"
                  alt="" />
-          </router-link>
+          </nuxt-link>
         </h1>
 
         <div class="h-r-nsl">
           <ul class="nav">
-            <router-link to="/"
+            <nuxt-link to="/"
                          tag="li"
                          active-class="current"
                          exact>
               <a>首页</a>
-            </router-link>
-            <router-link to="/course"
+            </nuxt-link>
+            <nuxt-link to="/course"
                          tag="li"
                          active-class="current">
               <a>课程</a>
-            </router-link>
-            <router-link to="/practice"
+            </nuxt-link>
+            <nuxt-link to="/practice"
                          tag="li"
                          active-class="current">
               <a>实践</a>
-            </router-link>
-            <router-link to="/book"
+            </nuxt-link>
+            <nuxt-link to="/book"
                          tag="li"
                          active-class="current">
               <a>技术专题</a>
-            </router-link>
-            <router-link to="/faquestion"
+            </nuxt-link>
+            <nuxt-link to="/faquestion"
                          tag="li"
                          active-class="current">
               <a>问答</a>
-            </router-link>
+            </nuxt-link>
           </ul>
           <!-- / nav -->
           <!-- / nav -->

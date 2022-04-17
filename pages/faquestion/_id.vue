@@ -425,8 +425,8 @@
 
           <div class="qustion-type-warper">
             <div class="qustion-tag-header">
-              <span> 技术问答</span>
-              <span> / 前端 </span>
+              <span> {{qdetail.typeString}}</span>
+              <span> > 前端 </span>
               <span class="ask-tag-user-fawllow">关注</span>
             </div>
 

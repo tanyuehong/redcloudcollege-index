@@ -131,7 +131,7 @@
 <style scoped>
 
 .header-focus .el-button {
-  padding: 10px 12px;
+  padding: 8px 10px;
   font-size: 12px;
 }
 

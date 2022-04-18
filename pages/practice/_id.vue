@@ -6,11 +6,11 @@
           <div class="practice_header">
             <div class="pratice-header">
               <h1>{{pitem.title}}</h1>
-              <!-- <img class="vam user-head-image"
-                           :src="loginInfo.avatar"
-                           width="30"
-                           height="30"
-                           alt /> -->
+              <img class="vam user-head-image"
+                   :src="pitem.aAvatar"
+                   width="30"
+                   height="30"
+                   alt />
             </div>
           </div>
           <div class="mark_content"

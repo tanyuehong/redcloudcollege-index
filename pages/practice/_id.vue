@@ -74,15 +74,22 @@
 
         </div>
 
+        <div class="bottom-content">
         <div class="bottom-comment">
-          <div class="commet-editor">
-            <div id="comment-editor"></div>
-            <div class="answer-ediot-detail">
-              <el-button type="primary"
-                         class="answer-btn-style"
-                         @click="submitAnserClick">提交</el-button>
-            </div>
+          <div class="comment-header">
+             <nuxt-link class="article_title"
+                           :to="'/teacher/' + pitem.authorUid">
+                  <img class="vam user-head-image article-avatar"
+                       :src="pitem.authorAvatar"
+                       width="30"
+                       height="30"
+                       alt />
+                </nuxt-link>
           </div>
+          <div class="commet-editor-content">
+            <div id="comment-editor"></div>
+          </div>
+        <div class="purclearfix"></div>
         </div>
 
         <div id="answer-list"
@@ -228,6 +235,7 @@
             </ul>
           </div>
         </div>
+        </div>
 
         <div class="practice_left_show">
           <div class="tool_item">
@@ -308,14 +316,32 @@
 </template>
 
 <style scoped>
-.commet-editor {
-  width: 600px;
+
+.bottom-content {
+  background: #fff;
+}
+
+.commet-editor-content {
+  width: 550px;
   padding-top: 20px;
+  float: right;
+  margin-right: 20px;
 }
 
 .bottom-comment {
   background: #fff;
+  padding-bottom: 20px;
+  margin-bottom: 15px;
+  width: 630px;
 }
+
+.bottom-comment .comment-header {
+  width: 40px;
+  float: left;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
 .bottom-tool_item {
   display: flex;
   cursor: pointer;
@@ -486,7 +512,7 @@ export default {
       editor.config.placeholder = "写下你的评论...";
       editor.config.focus = false;
       editor.config.zIndex = 100;
-      editor.config.height = 210;
+      editor.config.height = 120;
       editor.config.showFullScreen = false;
       editor.config.menus = [
         'bold',

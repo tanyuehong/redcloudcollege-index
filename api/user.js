@@ -51,5 +51,13 @@ export default {
       method: 'post',
       data: pwdData,
     })
-  }
+  },
+
+    // 获取编辑器图片上传token
+  getUploadImageToken() {
+      return request({
+        url: `/eduask/uploadqiniutoken`,
+        method: 'post',
+      })
+    },
 }

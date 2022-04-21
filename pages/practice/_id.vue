@@ -88,6 +88,17 @@
             </div>
             <div class="commet-editor-content">
               <div id="comment-editor"></div>
+
+          <transition     v-on:before-enter="cbeforeEnter" 
+                                  v-on:enter="center"
+                                  v-on:leave="cleave"
+                                  v-bind:css="false">
+                   <div class="editor-submit-tool" v-if="showComment">
+                <el-button type="primary" round size="small">发布</el-button>
+                <el-button round size="small" @click="cancleCommentClick">取消</el-button>
+              </div>
+                      </transition>
+              
             </div>
             <div class="purclearfix"></div>
           </div>
@@ -316,6 +327,19 @@
 </template>
 
 <style scoped>
+
+.editor-submit-tool {
+  padding-top: 8px;
+  overflow: hidden;
+}
+
+.editor-submit-tool .el-button {
+  padding: 6px 12px;
+  font-size: 10px;
+  border-radius: 14px;
+  
+}
+
 .bottom-content {
   background: #fff;
 }
@@ -325,6 +349,7 @@
   padding-top: 20px;
   float: right;
   margin-right: 20px;
+  font-size: 12px;
 }
 
 .bottom-comment {
@@ -461,17 +486,24 @@ import showdown from "showdown";
 import "~/assets/css/markdown.css";
 import realPractice from "@/api/realpractice";
 import useract from "@/api/useract";
+import userApi from "@/api/user";
 
 export default {
   data () {
     return {
       title: "开源实践网",
       goodslect: false,
+      showComment:false,
       commentList: [],
+      isLogin:false,
+      loginInfo:{},
     };
   },
   head () {
     return {
+       script: [
+        { src: 'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js', async: true, defer: true }
+      ],
       title: this.title,
       meta: [
         {
@@ -500,8 +532,54 @@ export default {
     setTimeout(function () {
       myVueComm.initCommentEditor();
     }, 10)
+
+    var token = localStorage.getItem("redclass_token");
+    var userStr = localStorage.getItem("redclass_user");
+    if (!(token && token != "undefined") || !(userStr && userStr != "undefined")) {
+      this.isLogin = false;
+    } else {
+      this.loginInfo = JSON.parse(userStr)
+      this.isLogin = true;
+    };
   },
   methods: {
+    cbeforeEnter: function (el) {
+      el.style.height = '0px';
+    },
+    center: function (el, done) {
+      var Velocity = $.Velocity;
+      Velocity(el, { height: '34px' }, 300, function () { done() })
+    },
+     cleave: function (el, done) {
+      var Velocity = $.Velocity;
+      Velocity(el, { height: '0px' }, 300, function () { done() })
+    },
+
+    cancleCommentClick() {
+      this.showComment = false;
+    },
+
+     getUploadImageToken(isForce) {
+      if (!this.isLogin) {
+        if (isForce) {
+          this.$message({
+            message: "回答问题需要登录，正在跳转登录界面中！",
+            type: "error",
+            duration: 2000,
+            onClose: () => {
+              $nuxt.$router.push({
+                name: "user-login",
+              });
+            },
+          });
+        }
+        return;
+      }
+      userApi.getUploadImageToken().then((response) => {
+        this.uploadToken = response.data.token;
+      });
+    },
+
     initCommentEditor () {
       let editor = this.$wangeditor("#comment-editor");
       this.editor = editor;
@@ -513,6 +591,7 @@ export default {
       editor.config.zIndex = 100;
       editor.config.height = 120;
       editor.config.showFullScreen = false;
+
       editor.config.menus = [
         'bold',
         'link',
@@ -521,7 +600,9 @@ export default {
       ]
 
       editor.config.onfocus = function (newHtml) {
+        window.console.log("ffffff");
         myVueComm.getUploadImageToken(true);
+        myVueComm.showComment = true;
       };
 
       editor.config.customUploadImg = function (files, insertImgFn) {

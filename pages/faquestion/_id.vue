@@ -443,6 +443,7 @@
 </template>
 
 <script>
+import userApi from "@/api/user";
 import askApi from "@/api/askqustion";
 import askServerApi from "@/api/askserver";
 
@@ -833,7 +834,7 @@ export default {
         }
         return;
       }
-      askApi.getUploadImageToken().then((response) => {
+      userApi.getUploadImageToken().then((response) => {
         this.uploadToken = response.data.token;
       });
     },

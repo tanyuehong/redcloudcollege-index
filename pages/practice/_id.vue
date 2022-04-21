@@ -97,17 +97,15 @@
                 <el-button type="primary" round size="small">发布</el-button>
                 <el-button round size="small" @click="cancleCommentClick">取消</el-button>
               </div>
-                      </transition>
+            </transition>
               
             </div>
             <div class="purclearfix"></div>
           </div>
 
-          <div id="answer-list"
-               class="qustion-answer-list"
-               v-if="commentList.length">
+          <div class="comment-list-content">
             <h4 class="reply-title">
-              <span><em class="em1">{{ commentList.length }}</em>条回答</span>
+              <span><em class="em1">全部评论{{commentList.length}}</em></span>
               <span class="reply_wrap">
                 <em class="em2"
                     :class="{ cur: answertype }"
@@ -117,6 +115,11 @@
                     @click="clickAnserType(false)">最新</em>
               </span>
             </h4>
+          
+          <div id="answer-list"
+               class="qustion-answer-list"
+               v-if="commentList.length">
+            
 
             <div class="qustion-answer-content">
               <ul class="qustion-anser-list">
@@ -246,6 +249,7 @@
               </ul>
             </div>
           </div>
+        </div>
         </div>
 
         <div class="practice_left_show">

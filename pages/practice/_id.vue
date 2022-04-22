@@ -97,7 +97,7 @@
                      v-if="showComment">
                   <el-button type="primary"
                              round
-                             size="small">发布</el-button>
+                             size="small" @click="commentBtnSubmit">发布</el-button>
                   <el-button round
                              size="small"
                              @click="cancleCommentClick">取消</el-button>
@@ -534,7 +534,8 @@
 <script>
 import showdown from "showdown";
 import "~/assets/css/markdown.css";
-import realPractice from "@/api/realpractice";
+import realPractice from "@/api/practiceblogReq";
+import blogPractice from '@/api/practiceblog'
 import useract from "@/api/useract";
 import userApi from "@/api/user";
 
@@ -547,6 +548,7 @@ export default {
       commentList: [],
       isLogin: false,
       loginInfo: {},
+      editor:{},
     };
   },
   head () {
@@ -630,6 +632,27 @@ export default {
       });
     },
 
+   commentBtnSubmit() {
+      if (!this.editor || this.editor.txt.html().length < 6) {
+        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        return;
+      }
+      blogPractice
+        .submitBlogComment({
+          content: this.editor.txt.html(),
+          rid: this.pitem.id,
+          uid: this.loginInfo.id,
+        })
+        .then((response) => {
+          this.editor.txt.html("");
+         // this.commentList.unshift(response.data.comment);
+          this.$message({
+            message: "问题回答成功哦",
+            type: "success",
+            duration: 2000,
+          });
+        });
+    },
     initCommentEditor () {
       let editor = this.$wangeditor("#comment-editor");
       this.editor = editor;

@@ -89,167 +89,179 @@
             <div class="commet-editor-content">
               <div id="comment-editor"></div>
 
-          <transition     v-on:before-enter="cbeforeEnter" 
-                                  v-on:enter="center"
-                                  v-on:leave="cleave"
-                                  v-bind:css="false">
-                   <div class="editor-submit-tool" v-if="showComment">
-                <el-button type="primary" round size="small">发布</el-button>
-                <el-button round size="small" @click="cancleCommentClick">取消</el-button>
-              </div>
-            </transition>
-              
+              <transition v-on:before-enter="cbeforeEnter"
+                          v-on:enter="center"
+                          v-on:leave="cleave"
+                          v-bind:css="false">
+                <div class="editor-submit-tool"
+                     v-if="showComment">
+                  <el-button type="primary"
+                             round
+                             size="small">发布</el-button>
+                  <el-button round
+                             size="small"
+                             @click="cancleCommentClick">取消</el-button>
+                </div>
+              </transition>
+
             </div>
             <div class="purclearfix"></div>
           </div>
 
           <div class="comment-list-content">
-            <h4 class="reply-title">
-              <span><em class="em1">全部评论{{commentList.length}}</em></span>
+            <div class="reply-title">
+              <span><em class="em1">全部评论 {{commentList.length}}</em></span>
               <span class="reply_wrap">
                 <em class="em2"
                     :class="{ cur: answertype }"
-                    @click="clickAnserType(true)">默认</em>
+                    @click="clickAnserType(true)">按时间倒序</em>
                 <em class="em2"
                     :class="{ cur: answertype == false }"
-                    @click="clickAnserType(false)">最新</em>
+                    @click="clickAnserType(false)">按时间正序</em>
               </span>
-            </h4>
-          
-          <div id="answer-list"
-               class="qustion-answer-list"
-               v-if="commentList.length">
-            
 
-            <div class="qustion-answer-content">
-              <ul class="qustion-anser-list">
-                <li class="answer-list-item"
-                    v-for="(item, index) in commentList"
-                    :key="item.id">
-                  <div class="answer-item-userinfo">
-                    <img class="vam user-head-image"
-                         :src="item.avatar"
-                         width="30"
-                         height="30"
-                         alt />
-                    <span class="ml5"> {{ item.username }}</span>
-                    <span class="qustion-top-item"> {{ item.gmtCreate }}</span>
-                  </div>
+              <div class="no-commet">
+                <img class="nocommet-image-tips"
+                     src="https://img.redskt.com/asset/img/nodata.png" />
+                <div>
+                  <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
+                </div>
+              </div>
+            </div>
 
-                  <div class="answer-item-content"
-                       v-html="item.content"></div>
+            <div id="answer-list"
+                 class="qustion-answer-list"
+                 v-if="commentList.length">
 
-                  <div class="reply_content_tool">
-                    <span class="mr20px fbselect"
-                          @click="repplaybtnclinck(item,index)">
-                      <i class="icon icon_comment"></i>
-                      评论
-                    </span>
-                    <div class="vote-box vote_like">
-                      <span v-bind:class="{ like: item.goodreply }"
-                            @click="goodReplyClick(item)"
-                            class="vote_span vote_spaned">
-                        <i class="icon icon_vote_up"></i>解决<em class="qustion-good-num">{{item.good}}</em></span>
-                      <span class="vote_span2"
-                            @click="badReplyClick(item)"
-                            v-bind:class="{ like: item.badreply}"><i class="icon icon_vote_down"></i>无用<em class="qustion-good-num"
-                            v-if="item.bad>0">{{item.bad}}</em>
-                        <!---->
+              <div class="qustion-answer-content">
+                <ul class="qustion-anser-list">
+                  <li class="answer-list-item"
+                      v-for="(item, index) in commentList"
+                      :key="item.id">
+                    <div class="answer-item-userinfo">
+                      <img class="vam user-head-image"
+                           :src="item.avatar"
+                           width="30"
+                           height="30"
+                           alt />
+                      <span class="ml5"> {{ item.username }}</span>
+                      <span class="qustion-top-item"> {{ item.gmtCreate }}</span>
+                    </div>
+
+                    <div class="answer-item-content"
+                         v-html="item.content"></div>
+
+                    <div class="reply_content_tool">
+                      <span class="mr20px fbselect"
+                            @click="repplaybtnclinck(item,index)">
+                        <i class="icon icon_comment"></i>
+                        评论
                       </span>
-                    </div>
-                    <span class="mr20px2">
-                      <i class="icon icon_reward"></i>
-                      打赏
-                    </span>
-                    <!---->
-                    <span>
-                      <i class="icon icon_share2"></i>
-                      分享
-                    </span>
-
-                    <span class="li_more li_report"
-                          @click="jubaoBtnClick(item.id,'回答')">
-                      <i class="icon icon_ask_report"></i>
-                      举报
-                    </span>
-
-                  </div>
-
-                  <transition v-on:before-enter="beforeEnter"
-                              v-on:enter="enter"
-                              v-on:after-enter="afterEnter"
-                              v-on:leave="leave"
-                              v-bind:css="false">
-                    <div :id="'replayedtor' + index"
-                         class="replay-editor"
-                         v-if="item.showeditor"
-                         :key="item.id">
-                    </div>
-                  </transition>
-
-                  <div class="reply-comment-tool"
-                       v-if="item.showeditor">
-                    <span @click="repplaybtnclinck(item,index)">取消</span>
-                    <div class="comment-btn"
-                         @click="replyCommntClick(item,index)">评论</div>
-                  </div>
-
-                  <div class="reply-comment-container"
-                       v-if="item.comments">
-                    <div class="reply-comment-item"
-                         v-for="(comment, cindex) in item.comments"
-                         :key="comment.id">
-                      <div class="answer-item-userinfo">
-                        <img class="vam user-head-image"
-                             :src="comment.avatar"
-                             width="30"
-                             height="30"
-                             alt />
-                        <span class="ml5"> {{ comment.name }}</span>
-                        <span class="comment-replyment"
-                              v-if="comment.toname">回复</span>
-                        <span v-if="comment.toname">{{ comment.toname }}</span>
-                        <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
-                      </div>
-                      <div class="answer-item-content"
-                           v-html="comment.content"></div>
-                      <div class="comment-tool-bar fbselect">
-                        <span class="mr15"
-                              v-bind:class="{ goodcomment: comment.goodcomment }"
-                              @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>{{commentGood(comment.good)}}</span>
-                        <span class="mr15"
-                              @click="commentbtnclinck(comment,cindex)">回复</span>
-                        <span class="li_more li_report"
-                              @click="jubaoBtnClick(comment.id,'评论')">
-                          <i class="icon icon_ask_report"></i>举报
+                      <div class="vote-box vote_like">
+                        <span v-bind:class="{ like: item.goodreply }"
+                              @click="goodReplyClick(item)"
+                              class="vote_span vote_spaned">
+                          <i class="icon icon_vote_up"></i>解决<em class="qustion-good-num">{{item.good}}</em></span>
+                        <span class="vote_span2"
+                              @click="badReplyClick(item)"
+                              v-bind:class="{ like: item.badreply}"><i class="icon icon_vote_down"></i>无用<em class="qustion-good-num"
+                              v-if="item.bad>0">{{item.bad}}</em>
+                          <!---->
                         </span>
-
                       </div>
+                      <span class="mr20px2">
+                        <i class="icon icon_reward"></i>
+                        打赏
+                      </span>
+                      <!---->
+                      <span>
+                        <i class="icon icon_share2"></i>
+                        分享
+                      </span>
 
-                      <transition v-on:before-enter="cbeforeEnter"
-                                  v-on:enter="center"
-                                  v-on:after-enter="cafterEnter"
-                                  v-on:leave="cleave"
-                                  v-bind:css="false">
-                        <div :id="'creplayedtor' + cindex"
-                             class="c-replay-editor"
-                             v-if="comment.showeditor"
-                             :key="comment.id">
+                      <span class="li_more li_report"
+                            @click="jubaoBtnClick(item.id,'回答')">
+                        <i class="icon icon_ask_report"></i>
+                        举报
+                      </span>
+
+                    </div>
+
+                    <transition v-on:before-enter="beforeEnter"
+                                v-on:enter="enter"
+                                v-on:after-enter="afterEnter"
+                                v-on:leave="leave"
+                                v-bind:css="false">
+                      <div :id="'replayedtor' + index"
+                           class="replay-editor"
+                           v-if="item.showeditor"
+                           :key="item.id">
+                      </div>
+                    </transition>
+
+                    <div class="reply-comment-tool"
+                         v-if="item.showeditor">
+                      <span @click="repplaybtnclinck(item,index)">取消</span>
+                      <div class="comment-btn"
+                           @click="replyCommntClick(item,index)">评论</div>
+                    </div>
+
+                    <div class="reply-comment-container"
+                         v-if="item.comments">
+                      <div class="reply-comment-item"
+                           v-for="(comment, cindex) in item.comments"
+                           :key="comment.id">
+                        <div class="answer-item-userinfo">
+                          <img class="vam user-head-image"
+                               :src="comment.avatar"
+                               width="30"
+                               height="30"
+                               alt />
+                          <span class="ml5"> {{ comment.name }}</span>
+                          <span class="comment-replyment"
+                                v-if="comment.toname">回复</span>
+                          <span v-if="comment.toname">{{ comment.toname }}</span>
+                          <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
                         </div>
-                      </transition>
-                      <div class="reply-comment-tool r-comment"
-                           v-if="comment.showeditor">
-                        <span @click="commentbtnclinck(comment,cindex)">取消</span>
-                        <div class="comment-btn"
-                             @click="creplyCommntClick(comment,item,cindex)">提交</div>
+                        <div class="answer-item-content"
+                             v-html="comment.content"></div>
+                        <div class="comment-tool-bar fbselect">
+                          <span class="mr15"
+                                v-bind:class="{ goodcomment: comment.goodcomment }"
+                                @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>{{commentGood(comment.good)}}</span>
+                          <span class="mr15"
+                                @click="commentbtnclinck(comment,cindex)">回复</span>
+                          <span class="li_more li_report"
+                                @click="jubaoBtnClick(comment.id,'评论')">
+                            <i class="icon icon_ask_report"></i>举报
+                          </span>
+
+                        </div>
+
+                        <transition v-on:before-enter="cbeforeEnter"
+                                    v-on:enter="center"
+                                    v-on:after-enter="cafterEnter"
+                                    v-on:leave="cleave"
+                                    v-bind:css="false">
+                          <div :id="'creplayedtor' + cindex"
+                               class="c-replay-editor"
+                               v-if="comment.showeditor"
+                               :key="comment.id">
+                          </div>
+                        </transition>
+                        <div class="reply-comment-tool r-comment"
+                             v-if="comment.showeditor">
+                          <span @click="commentbtnclinck(comment,cindex)">取消</span>
+                          <div class="comment-btn"
+                               @click="creplyCommntClick(comment,item,cindex)">提交</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
-              </ul>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
         </div>
 
         <div class="practice_left_show">
@@ -331,7 +343,41 @@
 </template>
 
 <style scoped>
+.reply-title .no-commet .nocommet-image-tips {
+  width: 120px;
+  margin: 0 auto;
+}
 
+.reply-title .no-commet {
+  text-align: center;
+  margin: 10px auto;
+}
+
+.reply-title .no-commet .tips {
+  font-size: 12px;
+  color: #666;
+}
+.comment-list-content {
+  padding-left: 15px;
+  padding-bottom: 25px;
+  width: 605px;
+}
+.comment-list-content .reply-title {
+  font-size: 14px;
+}
+
+.comment-list-content .reply-title .reply_wrap {
+  margin-left: 350px;
+}
+.comment-list-content .reply-title .em1 {
+  font-size: 16px;
+  font-weight: 550;
+}
+
+.comment-list-content .reply-title .em2 {
+  font-size: 12px;
+  margin-left: 12px;
+}
 .editor-submit-tool {
   padding-top: 8px;
   overflow: hidden;
@@ -341,15 +387,15 @@
   padding: 6px 12px;
   font-size: 10px;
   border-radius: 14px;
-  
 }
 
 .bottom-content {
   background: #fff;
+  margin-bottom: 15px;
 }
 
 .commet-editor-content {
-  width: 600px;
+  width: 540px;
   padding-top: 20px;
   float: right;
   margin-right: 20px;
@@ -360,7 +406,7 @@
   background: #fff;
   padding-bottom: 20px;
   margin-bottom: 15px;
-  width: 680px;
+  width: 620px;
 }
 
 .bottom-comment .comment-header {
@@ -497,15 +543,15 @@ export default {
     return {
       title: "开源实践网",
       goodslect: false,
-      showComment:false,
+      showComment: false,
       commentList: [],
-      isLogin:false,
-      loginInfo:{},
+      isLogin: false,
+      loginInfo: {},
     };
   },
   head () {
     return {
-       script: [
+      script: [
         { src: 'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js', async: true, defer: true }
       ],
       title: this.title,
@@ -554,16 +600,16 @@ export default {
       var Velocity = $.Velocity;
       Velocity(el, { height: '34px' }, 300, function () { done() })
     },
-     cleave: function (el, done) {
+    cleave: function (el, done) {
       var Velocity = $.Velocity;
       Velocity(el, { height: '0px' }, 300, function () { done() })
     },
 
-    cancleCommentClick() {
+    cancleCommentClick () {
       this.showComment = false;
     },
 
-     getUploadImageToken(isForce) {
+    getUploadImageToken (isForce) {
       if (!this.isLogin) {
         if (isForce) {
           this.$message({

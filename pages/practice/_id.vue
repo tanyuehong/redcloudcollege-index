@@ -97,7 +97,8 @@
                      v-if="showComment">
                   <el-button type="primary"
                              round
-                             size="small" @click="commentBtnSubmit">发布</el-button>
+                             size="small"
+                             @click="commentBtnSubmit">发布</el-button>
                   <el-button round
                              size="small"
                              @click="cancleCommentClick">取消</el-button>
@@ -529,6 +530,11 @@
   width: 23px;
   margin-top: 3px;
 }
+.w-e-toolbar p,
+.w-e-text-container p,
+.w-e-menu-panel p {
+  font-size: 14px !important;
+}
 </style>
 
 <script>
@@ -548,7 +554,7 @@ export default {
       commentList: [],
       isLogin: false,
       loginInfo: {},
-      editor:{},
+      editor: {},
     };
   },
   head () {
@@ -600,11 +606,11 @@ export default {
     },
     center: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '34px' }, 300, function () { done() })
+      Velocity(el, { height: '34px' }, 150, function () { done() })
     },
     cleave: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '0px' }, 300, function () { done() })
+      Velocity(el, { height: '0px' }, 150, function () { done() })
     },
 
     cancleCommentClick () {
@@ -632,7 +638,7 @@ export default {
       });
     },
 
-   commentBtnSubmit() {
+    commentBtnSubmit () {
       if (!this.editor || this.editor.txt.html().length < 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
@@ -645,7 +651,7 @@ export default {
         })
         .then((response) => {
           this.editor.txt.html("");
-         // this.commentList.unshift(response.data.comment);
+          // this.commentList.unshift(response.data.comment);
           this.$message({
             message: "问题回答成功哦",
             type: "success",
@@ -673,9 +679,12 @@ export default {
       ]
 
       editor.config.onfocus = function (newHtml) {
-        window.console.log("ffffff");
         myVueComm.getUploadImageToken(true);
         myVueComm.showComment = true;
+      };
+
+      editor.config.onblur = function (newHtml) {
+        myVueComm.cancleCommentClick();
       };
 
       editor.config.customUploadImg = function (files, insertImgFn) {

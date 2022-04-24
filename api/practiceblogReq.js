@@ -16,4 +16,12 @@ export default {
     })
   },
 
+   //讲师详情的方法
+   getPraticeBlogCommentLists(bid) {
+    return request({
+      url: `/home/pratice/getCommentList/${bid}`,
+      method: 'get',
+    })
+  },
+
 }

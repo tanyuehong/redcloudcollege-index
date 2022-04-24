@@ -599,8 +599,15 @@ export default {
       this.loginInfo = JSON.parse(userStr)
       this.isLogin = true;
     };
+
+    this.getCommentList();
   },
   methods: {
+    getCommentList() {
+      realPractice.getPraticeBlogCommentLists(this.pitem.id).then((response) => {
+          window.console.log("dddd");
+      });
+    },
     cbeforeEnter: function (el) {
       el.style.height = '0px';
     },

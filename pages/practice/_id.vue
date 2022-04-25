@@ -343,7 +343,8 @@
   </div>
 </template>
 
-<style scoped>
+<style>
+
 .reply-title .no-commet .nocommet-image-tips {
   width: 120px;
   margin: 0 auto;
@@ -603,9 +604,9 @@ export default {
     this.getCommentList();
   },
   methods: {
-    getCommentList() {
+    getCommentList () {
       realPractice.getPraticeBlogCommentLists(this.pitem.id).then((response) => {
-          window.console.log("dddd");
+        window.console.log("dddd");
       });
     },
     cbeforeEnter: function (el) {

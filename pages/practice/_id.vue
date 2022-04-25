@@ -121,7 +121,7 @@
                     @click="clickAnserType(false)">按时间正序</em>
               </span>
 
-              <div class="no-commet">
+              <div class="no-commet" v-if="commentList.length==0">
                 <img class="nocommet-image-tips"
                      src="https://img.redskt.com/asset/img/nodata.png" />
                 <div>
@@ -163,17 +163,7 @@
                               @click="goodReplyClick(item)"
                               class="vote_span vote_spaned">
                           <i class="icon icon_vote_up"></i>解决<em class="qustion-good-num">{{item.good}}</em></span>
-                        <span class="vote_span2"
-                              @click="badReplyClick(item)"
-                              v-bind:class="{ like: item.badreply}"><i class="icon icon_vote_down"></i>无用<em class="qustion-good-num"
-                              v-if="item.bad>0">{{item.bad}}</em>
-                          <!---->
-                        </span>
                       </div>
-                      <span class="mr20px2">
-                        <i class="icon icon_reward"></i>
-                        打赏
-                      </span>
                       <!---->
                       <span>
                         <i class="icon icon_share2"></i>
@@ -344,6 +334,64 @@
 </template>
 
 <style>
+
+.reply_content_tool .vote-box {
+  line-height: 30px;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 16px;
+  border: 1px solid #e8e8ed;
+  margin-right: 16px;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.reply_content_tool .vote-box span.vote_span {
+  text-align: center;
+  border: 1px solid #e8e8ed;
+  border-left: 0;
+  border-radius: 16px;
+  position: relative;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 12px;
+  font-weight: 400;
+  color: #777888;
+}
+
+.icon_comment {
+  width: 16px;
+  height: 16px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAhdJREFUWEftlr9PFEEUx79vdi4YCyz4Ff8FOS7BJTQgBVcSSY64JLY2UPEn+D8QG2hsJR6GRjshIVAA5jQGjsR/wISghZGGsDePzLJcjt1lGXdnucYtNzPz+cybN28eocsf2eZzbbxPr0kbB79N1rYmwN7oQIvFWyLMaDAzPjmkXlH922maiBUBDVcQWwyUAfwJgY8IOBJQ02kSuQX+1iqDD2VpU8MDoH9R1QKq81+KRC6Bzp1Hd3sjKoyPcr3xPOkoMgukwa9BXKsMKlk6AtAvfGcgKTEzCZjAtcTZbHnoQU/PDwJ6rQmYwgs5AlN4LDFtJGER8KBgmVSrouBGAkXC7xQoGp4qcB/wWwXuC54oEIEroUSFPnxpRpM1qHJOaYsJwyaPzm3JHrsFvufuAxgnQDEgkha3BY9FgOfcxy0HP/WT6igxoYRaa79yYTGJwA8FVPWuN9+4H+AXo9UWic8AdmS9MRXNBd+nl9LhtTDsueGxCLTm3SVmLIN4Vb7/uhh0Nh3NRsexWIHHBPz5pytgWiDGkrPeeHMduvPaWFlK/h7mhDV4XMBzdwBMEuH1VWvFT5hJZ/kIA7rFSoT74TyTsh6O2ZX1xrP4EXjuLwaCrjb6CWCPoGaTEs6agO+NbRN4mIFjYui7f6yIm1KWmvRu/+Qfdmg81Og1NF4tw8D/Au0IZEikDAFvT4nfgq4L5NlOnrldT8JLe8mJMLeISrcAAAAASUVORK5CYII=);
+}
+
+.qustion-answer-list {
+  margin-top: 10px;
+  background: #ffffff;
+  padding: 15px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.answer-item-userinfo {
+  font-size: 12px;
+  color: #666;
+}
+
+.answer-item-content {
+  margin-top: 8px;
+  margin-left: 38px;
+  margin-right: 12px;
+}
 
 .reply-title .no-commet .nocommet-image-tips {
   width: 120px;
@@ -603,10 +651,25 @@ export default {
 
     this.getCommentList();
   },
+
+    computed: {
+    // 计算属性的 getter
+    commentGood () {
+      return function (goodCount) {
+        if (goodCount > 0) {
+          return goodCount;
+        } else {
+          return "赞";
+        }
+      }
+    },
+  },
+
   methods: {
     getCommentList () {
       realPractice.getPraticeBlogCommentLists(this.pitem.id).then((response) => {
-        window.console.log("dddd");
+        this.commentList = response.data.comments;
+
       });
     },
     cbeforeEnter: function (el) {
@@ -767,7 +830,6 @@ export default {
       var converter = new showdown.Converter();
       return converter.makeHtml(content);
     },
-  },
-  computed: {},
-};
+  }
+}
 </script>

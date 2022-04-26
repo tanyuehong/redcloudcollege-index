@@ -199,7 +199,7 @@
                       <el-button type="primary"
                                  round
                                  size="small"
-                                 @click="commentReplySubmit(item,index)">回复</el-button>
+                                 @click="commentReplySubmit(item,index)">提交</el-button>
                       <el-button round
                                  size="small"
                                  @click="repplaybtnclinck(item,index)">取消</el-button>
@@ -265,12 +265,16 @@
                                :key="comment.id">
                           </div>
                         </transition>
-                        <div class="reply-comment-tool r-comment"
-                             v-if="comment.showeditor">
-                          <span @click="commentbtnclinck(comment,cindex)">取消</span>
-                          <div class="comment-btn"
-                               @click="creplyCommntClick(comment,item,cindex)">提交</div>
-                        </div>
+                      <div class="editor-submit-tool"
+                         v-if="comment.showeditor">
+                      <el-button type="primary"
+                                 round
+                                 size="small"
+                                 @click="commentReplyToSubmit(comment,item.id,comment.uid)">提交</el-button>
+                      <el-button round
+                                 size="small"
+                                 @click="replyCommentbtnclick(comment,cindex)">取消</el-button>
+                    </div>
                       </div>
                     </div>
                   </li>
@@ -359,6 +363,10 @@
 </template>
 
 <style>
+
+.c-replay-editor {
+  margin-left: 30px;
+}
 
 .comment-reply-container {
   margin-left: 15px;
@@ -481,7 +489,7 @@
 }
 
 .qustion-anser-list .editor-submit-tool {
-  margin-left: 26px;
+  margin-left: 30px;
   margin-top: 2px;
   margin-bottom: 16px;
 }
@@ -816,7 +824,7 @@ export default {
       editor.create();
     },
   
-    replyCommentbtnclick(comment,index) {
+    replyCommentbtnclick(comment,index,) {
       comment.replyId = "#creplayedtor" + index;
       window.console.log('hhhdddd');
       window.commentItem = comment;
@@ -835,7 +843,7 @@ export default {
 
     renter: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '180px' }, 300, function () { done() })
+      Velocity(el, { height: '140px' }, 300, function () { done() })
     },
 
     rafterEnter: function (el) {
@@ -931,9 +939,7 @@ export default {
       this.showComment = false;
     },
 
-    commentReplySubmit (item, index) {
-      var texxt = item.editor.txt.html();
-      window.console.log(texxt);
+     commentReplySubmit (item, index) {
       if (!item.editor || item.editor.txt.html().length < 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
@@ -942,7 +948,31 @@ export default {
         .submitBlogReply({
           content: item.editor.txt.html(),
           rid: item.id,
+          uid: this.loginInfo.id
+        })
+        .then((response) => {
+          item.editor.txt.html("");
+          // this.commentList.unshift(response.data.comment);
+          this.$message({
+            message: "问题回答成功哦",
+            type: "success",
+            duration: 2000,
+          });
+        });
+    },
+
+    commentReplyToSubmit (item, cid,uid) {
+      window.console.log("dddddd");
+      if (!item.editor || item.editor.txt.html().length < 6) {
+        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        return;
+      }
+      blogPractice
+        .submitBlogReply({
+          content: item.editor.txt.html(),
+          rid: cid,
           uid: this.loginInfo.id,
+          touid:uid
         })
         .then((response) => {
           item.editor.txt.html("");

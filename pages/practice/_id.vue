@@ -98,7 +98,7 @@
                   <el-button type="primary"
                              round
                              size="small"
-                             @click="commentBtnSubmit">发布</el-button>
+                             @click="commentBtnSubmit">发表评论</el-button>
                   <el-button round
                              size="small"
                              @click="cancleCommentClick">取消</el-button>
@@ -121,7 +121,8 @@
                     @click="clickAnserType(false)">按时间正序</em>
               </span>
 
-              <div class="no-commet" v-if="commentList.length==0">
+              <div class="no-commet"
+                   v-if="commentList.length==0">
                 <img class="nocommet-image-tips"
                      src="https://img.redskt.com/asset/img/nodata.png" />
                 <div>
@@ -153,18 +154,29 @@
                          v-html="item.content"></div>
 
                     <div class="reply_content_tool">
-                     <div class="tool-item">
+                      <div class="tool-item">
                         <span v-bind:class="{ like: item.goodreply }"
                               @click="goodReplyClick(item)">
                           <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{commentGood(item.good)}}</em></span>
                       </div>
                       <div class="tool-item fbselect"
-                            @click="repplaybtnclinck(item,index)">
-                        <svg data-v-d5fd42b8="" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class=""><path data-v-d5fd42b8="" fill-rule="evenodd" clip-rule="evenodd" d="M2.30136 10.1142L2.30019 3.45191C2.30024 2.6778 2.92779 2.05019 3.70191 2.05019H12.3989C13.1731 2.05019 13.8006 2.67785 13.8006 3.452L13.8018 10.1144C13.8017 10.8885 13.1742 11.516 12.4001 11.516H10.1322C9.97329 11.516 9.81862 11.5675 9.69142 11.6629L6.65162 13.9406C6.62173 13.9598 6.58148 13.9444 6.57209 13.91L6.15416 12.0869C6.07758 11.7528 5.78033 11.516 5.43761 11.516H3.70308C2.92893 11.516 2.30136 10.8884 2.30136 10.1142ZM3.70191 1C2.34776 1 1.25 2.09776 1.25 3.45191L1.25117 10.1144C1.25122 11.4685 2.34896 12.5662 3.70308 12.5662H5.18661L5.54953 14.1495L5.55107 14.1558C5.73515 14.9153 6.62879 15.248 7.26458 14.7937L10.2372 12.5662H12.4001C13.7542 12.5662 14.852 11.4684 14.852 10.1142L14.8508 3.45182C14.8508 2.09771 13.753 1 12.3989 1H3.70191ZM4.78612 7.91404C5.35027 7.91404 5.8076 7.45671 5.8076 6.89257C5.8076 6.32842 5.35027 5.87109 4.78612 5.87109C4.22198 5.87109 3.76465 6.32842 3.76465 6.89257C3.76465 7.45671 4.22198 7.91404 4.78612 7.91404ZM8.98631 6.89257C8.98631 7.45671 8.52898 7.91404 7.96483 7.91404C7.40069 7.91404 6.94336 7.45671 6.94336 6.89257C6.94336 6.32842 7.40069 5.87109 7.96483 5.87109C8.52898 5.87109 8.98631 6.32842 8.98631 6.89257ZM11.1484 7.91404C11.7126 7.91404 12.1699 7.45671 12.1699 6.89257C12.1699 6.32842 11.7126 5.87109 11.1484 5.87109C10.5843 5.87109 10.127 6.32842 10.127 6.89257C10.127 7.45671 10.5843 7.91404 11.1484 7.91404Z"></path></svg>
+                           @click="repplaybtnclinck(item,index)">
+                        <svg data-v-d5fd42b8=""
+                             width="16"
+                             height="16"
+                             viewBox="0 0 16 16"
+                             fill="none"
+                             xmlns="http://www.w3.org/2000/svg"
+                             class="">
+                          <path data-v-d5fd42b8=""
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M2.30136 10.1142L2.30019 3.45191C2.30024 2.6778 2.92779 2.05019 3.70191 2.05019H12.3989C13.1731 2.05019 13.8006 2.67785 13.8006 3.452L13.8018 10.1144C13.8017 10.8885 13.1742 11.516 12.4001 11.516H10.1322C9.97329 11.516 9.81862 11.5675 9.69142 11.6629L6.65162 13.9406C6.62173 13.9598 6.58148 13.9444 6.57209 13.91L6.15416 12.0869C6.07758 11.7528 5.78033 11.516 5.43761 11.516H3.70308C2.92893 11.516 2.30136 10.8884 2.30136 10.1142ZM3.70191 1C2.34776 1 1.25 2.09776 1.25 3.45191L1.25117 10.1144C1.25122 11.4685 2.34896 12.5662 3.70308 12.5662H5.18661L5.54953 14.1495L5.55107 14.1558C5.73515 14.9153 6.62879 15.248 7.26458 14.7937L10.2372 12.5662H12.4001C13.7542 12.5662 14.852 11.4684 14.852 10.1142L14.8508 3.45182C14.8508 2.09771 13.753 1 12.3989 1H3.70191ZM4.78612 7.91404C5.35027 7.91404 5.8076 7.45671 5.8076 6.89257C5.8076 6.32842 5.35027 5.87109 4.78612 5.87109C4.22198 5.87109 3.76465 6.32842 3.76465 6.89257C3.76465 7.45671 4.22198 7.91404 4.78612 7.91404ZM8.98631 6.89257C8.98631 7.45671 8.52898 7.91404 7.96483 7.91404C7.40069 7.91404 6.94336 7.45671 6.94336 6.89257C6.94336 6.32842 7.40069 5.87109 7.96483 5.87109C8.52898 5.87109 8.98631 6.32842 8.98631 6.89257ZM11.1484 7.91404C11.7126 7.91404 12.1699 7.45671 12.1699 6.89257C12.1699 6.32842 11.7126 5.87109 11.1484 5.87109C10.5843 5.87109 10.127 6.32842 10.127 6.89257C10.127 7.45671 10.5843 7.91404 11.1484 7.91404Z"></path>
+                        </svg>
                         回复
                       </div>
                       <div class="tool-item"
-                            @click="jubaoBtnClick(item.id,'回答')">
+                           @click="jubaoBtnClick(item.id,'回答')">
                         <i class="icon icon_ask_report"></i>
                         举报
                       </div>
@@ -182,12 +194,15 @@
                            :key="item.id">
                       </div>
                     </transition>
-
-                    <div class="reply-comment-tool"
+                    <div class="editor-submit-tool"
                          v-if="item.showeditor">
-                      <span @click="repplaybtnclinck(item,index)">取消</span>
-                      <div class="comment-btn"
-                           @click="replyCommntClick(item,index)">评论</div>
+                      <el-button type="primary"
+                                 round
+                                 size="small"
+                                 @click="commentReplySubmit(item,index)">发布</el-button>
+                      <el-button round
+                                 size="small"
+                                 @click="repplaybtnclinck(item,index)">取消</el-button>
                     </div>
 
                     <div class="reply-comment-container"
@@ -327,7 +342,12 @@
 </template>
 
 <style>
-
+.answer-list-item {
+  margin-bottom: 10px;
+}
+.replay-editor {
+  margin-left: 28px;
+}
 .icon {
   display: inline-block;
   background-position: 50%;
@@ -351,24 +371,24 @@
 }
 
 .reply_content_tool svg {
-    fill: #8a919f;
-    margin-right: 2px;
-    vertical-align: middle;
+  fill: #8a919f;
+  margin-right: 2px;
+  vertical-align: middle;
 }
 
-.reply_content_tool  .tool-item {
-    margin-right: 16px;
-    line-height: 22px;
-    font-size: 12px;
-    cursor: pointer;
-    color: #8a919f;
+.reply_content_tool .tool-item {
+  margin-right: 16px;
+  line-height: 22px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #8a919f;
 }
 
 .icon_ask_report {
-     width: 16px;
-    height: 16px;
-    margin-right: 4px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAy5JREFUWEftl01oVFcUx//nTsyHNZHM0oWbUtRWaBdCXehGceHKilQodiONSmuhNZ2Ze964GGbhvHNnprEFbVEjbiyCUtquXEjd2EULLlqwtaW4cdFlQhM1iSb3yA1JGGLem48sBMmsz//c3/2fj3eHsIqfZbkT5E54d6dpKE1YKo1kJyaAs2eHx1aKsyy6ALBinlOnRrIDA0C5vLI+aFMBmN1DhXZBsc05/n85RBqAtbIRhPsEmhWxm5MumgpgWX4GsIdAX4rYXDsAzK6u0C8A3HbCezsCyBer7xivdwGd83Nme61W+LcxUVIP5PPVN0zG3wMo4w3tqFUKv3cEEEQFdpcIOgRC1cVsW2k2G4mDoqCg0arYY2ma1BIEIXM8qERs4K/EcfHvVgCiqLLVwxwlVRGJxpsCRJE7Oud1xJCeFom+SRIcP35hXTY79h5gDih0B4BNC7H/Eegu4H8aG8v+ePHiiWdJOZjjT7zSmYyh4Ti2V+YdKETuI1JcApQI9N3srDlRr+cfNyZhjg+qUg2E11NdUDwg0rxI9ENjXC5Xe62ry19Q6BGAVAnHqrG9vFSCYlEOz3mMAugH8JsT3hkSlEolMzOzPgx8LgAq6B4ZGjVqbnV39z0MMU+fTm325Pep1yGCbg8HEFDv6XnC5XLZhxjL8iuAdwFMZgyGKhW+/sIemK+dN9dAeLS43ZhdVaH5cA4Uw729U98uJl3uRICdnu77GIQRAN0EqonYwgLAHVVsyBj/QWMvNVlE8UGF+R7QZwTdLxLdbqUJmeM9CroJ0DqCP7S8HI05EgFCww0Ojt+fr7niU+f4fCuHL8ZYKydBOAfFg/HxwW1JjZkIwBy/r6DroeZ9PU/eTrI9CSqUY2pm/R+hJwh6WCS6sVJsCoC7Ot+xxnzuKoWv27n9kgvF6mfw/qswWSL2w7YALEtYOlsMdb0Vx7m/OgGIovqbXmf/BPCPE97aLsBEGMnenv7+cvnko04ASqXzG6ZnJifD6DnhgXYBUr/1rQI1ezMk9kAz4RrAmgNrDqw58Oo5sPDG39XqzVYZ98vii2tpFb90gFXeqGN50z8mHWduUfgc77mmMHr1wngAAAAASUVORK5CYII=);
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAy5JREFUWEftl01oVFcUx//nTsyHNZHM0oWbUtRWaBdCXehGceHKilQodiONSmuhNZ2Ze964GGbhvHNnprEFbVEjbiyCUtquXEjd2EULLlqwtaW4cdFlQhM1iSb3yA1JGGLem48sBMmsz//c3/2fj3eHsIqfZbkT5E54d6dpKE1YKo1kJyaAs2eHx1aKsyy6ALBinlOnRrIDA0C5vLI+aFMBmN1DhXZBsc05/n85RBqAtbIRhPsEmhWxm5MumgpgWX4GsIdAX4rYXDsAzK6u0C8A3HbCezsCyBer7xivdwGd83Nme61W+LcxUVIP5PPVN0zG3wMo4w3tqFUKv3cEEEQFdpcIOgRC1cVsW2k2G4mDoqCg0arYY2ma1BIEIXM8qERs4K/EcfHvVgCiqLLVwxwlVRGJxpsCRJE7Oud1xJCeFom+SRIcP35hXTY79h5gDih0B4BNC7H/Eegu4H8aG8v+ePHiiWdJOZjjT7zSmYyh4Ti2V+YdKETuI1JcApQI9N3srDlRr+cfNyZhjg+qUg2E11NdUDwg0rxI9ENjXC5Xe62ry19Q6BGAVAnHqrG9vFSCYlEOz3mMAugH8JsT3hkSlEolMzOzPgx8LgAq6B4ZGjVqbnV39z0MMU+fTm325Pep1yGCbg8HEFDv6XnC5XLZhxjL8iuAdwFMZgyGKhW+/sIemK+dN9dAeLS43ZhdVaH5cA4Uw729U98uJl3uRICdnu77GIQRAN0EqonYwgLAHVVsyBj/QWMvNVlE8UGF+R7QZwTdLxLdbqUJmeM9CroJ0DqCP7S8HI05EgFCww0Ojt+fr7niU+f4fCuHL8ZYKydBOAfFg/HxwW1JjZkIwBy/r6DroeZ9PU/eTrI9CSqUY2pm/R+hJwh6WCS6sVJsCoC7Ot+xxnzuKoWv27n9kgvF6mfw/qswWSL2w7YALEtYOlsMdb0Vx7m/OgGIovqbXmf/BPCPE97aLsBEGMnenv7+cvnko04ASqXzG6ZnJifD6DnhgXYBUr/1rQI1ezMk9kAz4RrAmgNrDqw58Oo5sPDG39XqzVYZ98vii2tpFb90gFXeqGN50z8mHWduUfgc77mmMHr1wngAAAAASUVORK5CYII=);
 }
 
 .icon_vote_up {
@@ -401,22 +421,22 @@
 }
 
 .reply-title .no-commet .nocommet-image-tips {
-  width: 120px;
+  width: 140px;
   margin: 0 auto;
 }
 
 .reply-title .no-commet {
   text-align: center;
-  margin: 10px auto;
+  margin: 20px auto;
 }
 
 .reply-title .no-commet .tips {
-  font-size: 12px;
+  font-size: 14px;
   color: #666;
 }
 .comment-list-content {
   padding-left: 15px;
-  padding-bottom: 25px;
+  padding-bottom: 6px;
   width: 605px;
 }
 .comment-list-content .reply-title {
@@ -434,6 +454,12 @@
 .comment-list-content .reply-title .em2 {
   font-size: 12px;
   margin-left: 12px;
+}
+
+.qustion-anser-list .editor-submit-tool {
+  margin-left: 26px;
+  margin-top: 2px;
+  margin-bottom: 16px;
 }
 .editor-submit-tool {
   padding-top: 8px;
@@ -611,6 +637,7 @@ export default {
       isLogin: false,
       loginInfo: {},
       editor: {},
+      answertype: false
     };
   },
   head () {
@@ -659,7 +686,7 @@ export default {
     this.getCommentList();
   },
 
-    computed: {
+  computed: {
     // 计算属性的 getter
     commentGood () {
       return function (goodCount) {
@@ -673,6 +700,98 @@ export default {
   },
 
   methods: {
+    beforeEnter: function (el) {
+      el.style.width = '540px';
+      el.style.height = '0px'
+    },
+
+    enter: function (el, done) {
+      var Velocity = $.Velocity;
+      Velocity(el, { height: '140px' }, 150, function () { done() })
+    },
+
+    afterEnter: function (el) {
+      this.initReplyeditor();
+    },
+
+    initReplyeditor () {
+      let editor = this.$wangeditor(window.replyItem.replyId);
+      this.editor = editor;
+      window.replyItem.editor = editor;
+      editor.config.uploadImgMaxLength = 1;
+      editor.config.uploadImgServer = "/api/ucenter/uploadImage";
+      editor.config.uploadFileName = "file";
+      editor.config.placeholder = "写下你的评论...";
+      editor.config.focus = false;
+      editor.config.zIndex = 100;
+      editor.config.height = 100;
+      editor.config.showFullScreen = false;
+
+      editor.config.menus = [
+        'bold',
+        'link',
+        'emoticon',
+        'image'
+      ]
+
+      editor.config.onfocus = function (newHtml) {
+        myVueComm.getUploadImageToken(true);
+      };
+
+      editor.config.onblur = function (newHtml) {
+      };
+
+      editor.config.customUploadImg = function (files, insertImgFn) {
+        // resultFiles 是 input 中选中的文件列表
+        // insertImgFn 是获取图片 url 后，插入到编辑器的方法
+        var file = files[0];
+        const putExtra = {
+          mimeType: file.type,
+        };
+        const config = {
+          region: qiniu.region.z2,
+        };
+        const observable = qiniu.upload(
+          file,
+          null,
+          window.myVueComm.uploadToken,
+          putExtra,
+          config
+        );
+        const observer = {
+          next (res) {
+            window.console.log(res);
+          },
+          error (err) {
+            window.console.log(err);
+          },
+          complete (res) {
+            window.console.log(res);
+            insertImgFn("https://img.redskt.com/" + res.hash);
+          },
+        };
+        const subscription = observable.subscribe(observer);
+      };
+      // editor.config.onchange = function (newHtml) {};
+      editor.create();
+    },
+
+    leave: function (el, done) {
+      var Velocity = $.Velocity;
+      Velocity(el, { height: '0px' }, 300, function () { done() })
+    },
+    repplaybtnclinck (item, index) {
+      window.console.log("ddddfffff");
+      item.replyId = "#replayedtor" + index;
+      window.replyItem = item;
+      if (!item.editor) {
+        item.showeditor = true;
+      } else {
+        item.showeditor = false;
+        item.editor.destroy();
+        item.editor = null;
+      }
+    },
     getCommentList () {
       realPractice.getPraticeBlogCommentLists(this.pitem.id).then((response) => {
         this.commentList = response.data.comments;
@@ -693,6 +812,30 @@ export default {
 
     cancleCommentClick () {
       this.showComment = false;
+    },
+
+    commentReplySubmit (item, index) {
+      var texxt = item.editor.txt.html();
+      window.console.log(texxt);
+      if (!item.editor || item.txt.html().length < 6) {
+        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        return;
+      }
+      blogPractice
+        .submitBlogReply({
+          content: item.editor.txt.html(),
+          bid: this.pitem.id,
+          uid: this.loginInfo.id,
+        })
+        .then((response) => {
+          item.editor.txt.html("");
+          // this.commentList.unshift(response.data.comment);
+          this.$message({
+            message: "问题回答成功哦",
+            type: "success",
+            duration: 2000,
+          });
+        });
     },
 
     getUploadImageToken (isForce) {
@@ -717,6 +860,8 @@ export default {
     },
 
     commentBtnSubmit () {
+      var texxt = this.editor.txt.html();
+      window.console.log(texxt);
       if (!this.editor || this.editor.txt.html().length < 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
@@ -724,7 +869,7 @@ export default {
       blogPractice
         .submitBlogComment({
           content: this.editor.txt.html(),
-          rid: this.pitem.id,
+          bid: this.pitem.id,
           uid: this.loginInfo.id,
         })
         .then((response) => {
@@ -753,7 +898,7 @@ export default {
         'bold',
         'link',
         'emoticon',
-        'image',
+        'image'
       ]
 
       editor.config.onfocus = function (newHtml) {

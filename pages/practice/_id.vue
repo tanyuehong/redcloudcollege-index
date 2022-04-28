@@ -115,10 +115,10 @@
               <span class="reply_wrap">
                 <em class="em2"
                     :class="{ cur: answertype }"
-                    @click="clickAnserType(true)">按时间倒序</em>
+                    @click="clickAnserType(true)">按热度排序</em>
                 <em class="em2"
                     :class="{ cur: answertype == false }"
-                    @click="clickAnserType(false)">按时间正序</em>
+                    @click="clickAnserType(false)">按时间排序</em>
               </span>
 
               <div class="no-commet"
@@ -270,7 +270,7 @@
                           <el-button type="primary"
                                      round
                                      size="small"
-                                     @click="commentReplyToSubmit(comment,item.id,comment.uid)">提交</el-button>
+                                     @click="commentReplyToSubmit(comment,item,comment.uid,cindex)">提交</el-button>
                           <el-button round
                                      size="small"
                                      @click="replyCommentbtnclick(comment,cindex)">取消</el-button>
@@ -719,8 +719,7 @@ export default {
       this.loginInfo = JSON.parse(userStr)
       this.isLogin = true;
     };
-
-    this.getCommentList();
+    this.getCommentList(1);
   },
 
   computed: {
@@ -739,7 +738,11 @@ export default {
   methods: {
     clickAnserType (type) {
       this.answertype = type;
-
+      if(this.answertype) {
+         this.getCommentList(1);
+      } else {
+        this.getCommentList(2);
+      }
     },
     repplaybtnclinck (item, index) {
       item.replyId = "#replayedtor" + index;
@@ -926,11 +929,11 @@ export default {
       editor.create();
     },
 
-    getCommentList () {
-      realPractice.getPraticeBlogCommentLists(this.pitem.id).then((response) => {
+    getCommentList (type) {
+      realPractice.getPraticeBlogCommentLists(this.pitem.id,type).then((response) => {
         this.commentList = response.data.comments;
-
       });
+
     },
     cbeforeEnter: function (el) {
       el.style.height = '0px';
@@ -961,7 +964,9 @@ export default {
         })
         .then((response) => {
           item.editor.txt.html("");
+          myVueComm.repplaybtnclinck(item,index);
           item.comments.unshift(response.data.reply);
+          window.console.log(item.comments);
           this.$message({
             message: "问题回答成功哦",
             type: "success",
@@ -970,7 +975,7 @@ export default {
         });
     },
 
-    commentReplyToSubmit (item, cid, uid) {
+    commentReplyToSubmit (item, comment, uid,index) {
       window.console.log("dddddd");
       if (!item.editor || item.editor.txt.html().length < 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
@@ -979,13 +984,14 @@ export default {
       blogPractice
         .submitBlogReply({
           content: item.editor.txt.html(),
-          rid: cid,
+          rid: comment.id,
           uid: this.loginInfo.id,
           touid: uid
         })
         .then((response) => {
           item.editor.txt.html("");
-          item.comments.unshift(response.data.reply);
+          comment.comments.unshift(response.data.reply);
+          myVueComm.replyCommentbtnclick(item,index);
           this.$message({
             message: "问题回答成功哦",
             type: "success",

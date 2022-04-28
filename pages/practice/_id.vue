@@ -228,7 +228,7 @@
                           <div class="tool-item">
                             <span v-bind:class="{ like: item.goodreply }"
                                   @click="goodReplyClick(item)">
-                              <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{commentGood(item.good)}}</em></span>
+                              <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{commentGood(comment.good)}}</em></span>
                           </div>
                           <div class="tool-item fbselect"
                                @click="replyCommentbtnclick(comment,cindex)">

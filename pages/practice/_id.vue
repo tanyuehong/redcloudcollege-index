@@ -156,7 +156,7 @@
                     <div class="reply_content_tool">
                       <div class="tool-item">
                         <span v-bind:class="{ like: item.goodreply }"
-                              @click="goodReplyClick(item)">
+                              @click="goodReplyClick(item,1)">
                           <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{commentGood(item.good)}}</em></span>
                       </div>
                       <div class="tool-item fbselect"
@@ -226,8 +226,9 @@
                              v-html="comment.content"></div>
                         <div class="reply_content_tool">
                           <div class="tool-item">
-                            <span v-bind:class="{ like: item.goodreply }"
-                                  @click="goodReplyClick(item)">
+                            <span class="comment-reply"
+                                  v-bind:class="{ like: comment.goodreply }"
+                                  @click="goodReplyClick(comment,2)">
                               <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{commentGood(comment.good)}}</em></span>
                           </div>
                           <div class="tool-item fbselect"
@@ -363,6 +364,15 @@
 </template>
 
 <style>
+.tool-item .comment-reply {
+  font-size: 12px;
+}
+.tool-item .like i {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAhBJREFUWEfFlr1rFFEUxc/Jexs1rGgQ0TIgIgiCOrEQsm3AxmoniKCIiFhZ2Cls4weWYiXEBIsI0XmRNPoP6DZK3kQlINhYCIJiiihB4nxc2aDLZI2ZGcnum2qYOe+e35t3595LOL7o2B//BSD+wWosA1cJqYH4TuBp3yAmOG6jshsqDSD+8W0Jfr4A4GXN+oCQsRrl7KvFMhClAZK6d0+IS+ubyJQ24dmuAUh9+ERKeSZY/+gI/FDGDnQFQM4NbU2Xdy0IsO9fBgSWlLE7uwIQ1b0GiesbB5c5bcJjmw4gpw8NJlH/BwA7NgpOYFIZe2HTAZL68C2hXMsNTLmog/B+ri4jyP0L5OSB7cmW6se83eeZthKUQDNO0eh/Yl/+0ecCJGPeZRHczTMo+p6QlZQyWgnmn7fWtAFi32sVl5HfgZra2FrrPvGPvhdwf1GDIjoCb5SxhzsBJLtYG7sKF/vemudFDIpolMZuTtuv2S/QW4A42sPZt19cASxrY6vOjoDAa2XsEZcARhk75gxAiNuVwK4WNjc5IHJez4QPnAEIUKsY23QGoPTKXk4vfHYCQOCbMrbdVXueAwRCZWx7nuw5ACCPtQlP/dUNO2t+t3oBiZsqsA1nAKCc0UH40BVApFQ6xEfzn5wAKPIKg7k72XadO5B0DCpFWv1ajSAm8U4EN/SMNZ0Bckey8o7lVjgH+AVoSwkwj5cq7AAAAABJRU5ErkJggg==);
+}
+.tool-item .like {
+  color: #fc5533 !important;
+}
 .c-replay-editor {
   margin-left: 30px;
 }
@@ -422,12 +432,11 @@
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAy5JREFUWEftl01oVFcUx//nTsyHNZHM0oWbUtRWaBdCXehGceHKilQodiONSmuhNZ2Ze964GGbhvHNnprEFbVEjbiyCUtquXEjd2EULLlqwtaW4cdFlQhM1iSb3yA1JGGLem48sBMmsz//c3/2fj3eHsIqfZbkT5E54d6dpKE1YKo1kJyaAs2eHx1aKsyy6ALBinlOnRrIDA0C5vLI+aFMBmN1DhXZBsc05/n85RBqAtbIRhPsEmhWxm5MumgpgWX4GsIdAX4rYXDsAzK6u0C8A3HbCezsCyBer7xivdwGd83Nme61W+LcxUVIP5PPVN0zG3wMo4w3tqFUKv3cEEEQFdpcIOgRC1cVsW2k2G4mDoqCg0arYY2ma1BIEIXM8qERs4K/EcfHvVgCiqLLVwxwlVRGJxpsCRJE7Oud1xJCeFom+SRIcP35hXTY79h5gDih0B4BNC7H/Eegu4H8aG8v+ePHiiWdJOZjjT7zSmYyh4Ti2V+YdKETuI1JcApQI9N3srDlRr+cfNyZhjg+qUg2E11NdUDwg0rxI9ENjXC5Xe62ry19Q6BGAVAnHqrG9vFSCYlEOz3mMAugH8JsT3hkSlEolMzOzPgx8LgAq6B4ZGjVqbnV39z0MMU+fTm325Pep1yGCbg8HEFDv6XnC5XLZhxjL8iuAdwFMZgyGKhW+/sIemK+dN9dAeLS43ZhdVaH5cA4Uw729U98uJl3uRICdnu77GIQRAN0EqonYwgLAHVVsyBj/QWMvNVlE8UGF+R7QZwTdLxLdbqUJmeM9CroJ0DqCP7S8HI05EgFCww0Ojt+fr7niU+f4fCuHL8ZYKydBOAfFg/HxwW1JjZkIwBy/r6DroeZ9PU/eTrI9CSqUY2pm/R+hJwh6WCS6sVJsCoC7Ot+xxnzuKoWv27n9kgvF6mfw/qswWSL2w7YALEtYOlsMdb0Vx7m/OgGIovqbXmf/BPCPE97aLsBEGMnenv7+cvnko04ASqXzG6ZnJifD6DnhgXYBUr/1rQI1ezMk9kAz4RrAmgNrDqw58Oo5sPDG39XqzVYZ98vii2tpFb90gFXeqGN50z8mHWduUfgc77mmMHr1wngAAAAASUVORK5CYII=);
 }
 
-.icon_vote_up {
+.tool-item .icon_vote_up {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAxZJREFUWEfFl99LVEEUx7/n3iVXUEODfkAP5l9QFkmERQ9FPyGIpEiCohAiKCqduUpd19qdmTWWkIoCoQch6MdLRUVvFVFSUFT0FhQUiZgpmbWr7T2xwZrtZrrLer1Pl3tn5vM5M3PumUuY4YtmmI+8BFz3XMnIyJDDoFpmfAPxrarK8s6GhobRXAPKWSAWixX39o0+AnP1eBgBL4hK1ip1sD8XiZwFhBO9APYaiPAWlt1EnlfGzK0MVBJRl1Zi97QJOE50o8febSLEOYDl5qR8nYK5rlkYT/AHEA0aJcqnRcB1LwUTid43DFRZhKNKyVga1NraPvdHPNlLwIDWsmJaBKQ0xxncRkSvqpcsqq6rq0umQaLl9Cokfz4AqNtosaLgAlKeLwd9fc+MMtiB1SZ87OF4iGiOHoLnnSFQp9Zif+EFmk2EPXZAdM8osT4TIKW+zsA2i2ivUuJSQQWMMaUDg/wxFX3ApppwWDzNBAhpegCe/38w/QDhLgUCp/TJoy/SbSdNwz/Ti/tayzX/gghp7gC8YSqRE+EbwV6nVOOTVPsxAde9OiuReNcG4t3MWJA1mG1vNeHGG1OB/KuN45ydwzysGbwPoMdGi5V/CUhpUi/FRIBgkbBDIfLyFUj16+joKPrU8/0zM0qCRfOKQ6E98bEZkI7+lIrcImuTUk13xlJMak7dGy0nXa6pyAnH9IO5Ilg0a04odOTL2KBiAtBEz6cCy9qsWs/GIAYBGjZalPy1BH4ItLSYZT+T/IyAl1rLxb4LSBndyfAug+i6UWK77wLCiZ4AeyGySOmIaPZdQErdxUD9+C+mr5tQOrqbGTWwUWvC8pHvM5BOQdsKzo9EDvf6KuC6sYp4YqQfoCGjRVlWLZjuNHSc9hqPk90gem6UWOq7gGhur4eX7CKiK1qJHb4LOI4OeYwTFuGUUvK47wJS6psMbIGFXSYiL2cJpIsRLGw2EXm7UMXo92F2tK8e7F1kpiShdJ7WBwayBSYpx/kUn8w+mafp3A4keRqk/iEAvAZb7Vo3XcscpiA1Pk+3391mXOAXqa2wMC1BU08AAAAASUVORK5CYII=);
-  vertical-align: middle;
+  vertical-align: sub;
   width: 16px;
   height: 16px;
-  top: -2px;
   margin-right: 4px;
 }
 
@@ -736,6 +745,13 @@ export default {
   },
 
   methods: {
+    goodReplyClick (item, type) {
+      blogPractice.addCommentGood(item.id, type).then((response) => {
+        item.good = item.good + 1;
+        item.goodreply = true;
+      });
+    },
+
     clickAnserType (type) {
       this.answertype = type;
       for (var j = 0; j < this.commentList.length; j++) {
@@ -756,8 +772,8 @@ export default {
           }
         }
       }
-      if(this.answertype) {
-         this.getCommentList(1);
+      if (this.answertype) {
+        this.getCommentList(1);
       } else {
         this.getCommentList(2);
       }
@@ -947,11 +963,11 @@ export default {
     },
 
     getCommentList (type) {
-      realPractice.getPraticeBlogCommentLists(this.pitem.id,type).then((response) => {
+      realPractice.getPraticeBlogCommentLists(this.pitem.id, type).then((response) => {
         this.commentList = response.data.comments;
       });
-
     },
+
     cbeforeEnter: function (el) {
       el.style.height = '0px';
     },
@@ -981,7 +997,7 @@ export default {
         })
         .then((response) => {
           item.editor.txt.html("");
-          myVueComm.repplaybtnclinck(item,index);
+          myVueComm.repplaybtnclinck(item, index);
           item.comments.unshift(response.data.reply);
           window.console.log(item.comments);
           this.$message({
@@ -992,7 +1008,7 @@ export default {
         });
     },
 
-    commentReplyToSubmit (item, comment, uid,index) {
+    commentReplyToSubmit (item, comment, uid, index) {
       window.console.log("dddddd");
       if (!item.editor || item.editor.txt.html().length < 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
@@ -1008,7 +1024,7 @@ export default {
         .then((response) => {
           item.editor.txt.html("");
           comment.comments.unshift(response.data.reply);
-          myVueComm.replyCommentbtnclick(item,index);
+          myVueComm.replyCommentbtnclick(item, index);
           this.$message({
             message: "问题回答成功哦",
             type: "success",

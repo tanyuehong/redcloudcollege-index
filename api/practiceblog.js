@@ -31,4 +31,11 @@ export default {
       data: reply,
     })
   },
+
+  addCommentGood(cid, type) {
+    return request({
+      url: `/blogCommet/addCommentGood/${cid}/${type}`,
+      method: 'get',
+    })
+  },
 }

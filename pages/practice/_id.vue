@@ -738,6 +738,24 @@ export default {
   methods: {
     clickAnserType (type) {
       this.answertype = type;
+      for (var j = 0; j < this.commentList.length; j++) {
+        var item = this.commentList[j];
+        item.showeditor = false;
+        if (item.editor) {
+          item.editor.destroy();
+          item.editor = null;
+        }
+        if (item.comments) {
+          for (var i = 0; i < item.comments.length; i++) {
+            var citem = item.comments[i];
+            citem.showeditor = false;
+            if (citem.editor) {
+              citem.editor.destroy();
+              citem.editor = null;
+            }
+          }
+        }
+      }
       if(this.answertype) {
          this.getCommentList(1);
       } else {
@@ -838,7 +856,6 @@ export default {
 
     replyCommentbtnclick (comment, index,) {
       comment.replyId = "#creplayedtor" + index;
-      window.console.log('hhhdddd');
       window.commentItem = comment;
       if (!comment.editor) {
         comment.showeditor = true;

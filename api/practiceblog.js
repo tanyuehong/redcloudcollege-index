@@ -38,4 +38,11 @@ export default {
       method: 'get',
     })
   },
+
+  cancleCommentGood(cid, type) {
+    return request({
+      url: `/blogCommet/cancleCommentGood/${cid}/${type}`,
+      method: 'get',
+    })
+  },
 }

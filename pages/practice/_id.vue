@@ -33,7 +33,7 @@
               <div class="header-focus">
                 <el-button type="primary"
                            plain
-                           icon="el-icon-plus">关注</el-button>
+                           icon="el-icon-plus" @click="focusUserClick">{{focusString}}</el-button>
               </div>
             </div>
             <div class="purclearfix"> </div>
@@ -364,6 +364,11 @@
 </template>
 
 <style>
+
+.bottom-tool_item .tool_crcle {
+  width: 38px;
+  height: 38px;
+}
 .tool-item .comment-reply {
   font-size: 12px;
 }
@@ -555,7 +560,8 @@
 .bottom-tool_item .bottom-good {
   font-size: 14px;
   color: #666;
-  margin-top: 14px;
+  margin-top: 10px;
+  margin-left: 6px;
 }
 .bottom-tool {
   display: flex;
@@ -672,6 +678,7 @@ import realPractice from "@/api/practiceblogReq";
 import blogPractice from '@/api/practiceblog'
 import useract from "@/api/useract";
 import userApi from "@/api/user";
+import cousrseApi from '@/api/course'
 
 export default {
   data () {
@@ -683,7 +690,9 @@ export default {
       isLogin: false,
       loginInfo: {},
       editor: {},
-      answertype: true
+      answertype: true,
+      isFocus:false,
+      forbiden: true,
     };
   },
   head () {
@@ -742,14 +751,63 @@ export default {
         }
       }
     },
+    focusString: function () {
+      return this.isFocus ? "已关注" : "关注Ta";
+    },
   },
 
   methods: {
+
+    focusUserClick() {
+      if (this.forbiden) {
+        this.forbiden = false;
+        if (this.isLogin) {
+          if (this.isFocus) {
+            cousrseApi.cancleTeacherFocus(this.pitem.uid).then((response) => {
+              this.isFocus = response.data.focus;
+              this.teacher.focus--;
+              this.$message({
+                message: "取消关闭老师成功哈~",
+                type: "success",
+                duration: 2000,
+              });
+            });
+          } else {
+            cousrseApi.addTeacherFocus(this.pitem.uid).then((response) => {
+              this.isFocus = response.data.focus;
+              this.teacher.focus++;
+              this.$message({
+                message: "关注老师成功哈~",
+                type: "success",
+                duration: 2000,
+              });
+            });
+          }
+        } else {
+          this.$message({
+            message: "请您登录以后在关注哈",
+            type: "success",
+            duration: 2000,
+          });
+        }
+      }
+      setTimeout(function () {
+        window.myVueComm.forbiden = true;
+      }, 500)
+    },
     goodReplyClick (item, type) {
-      blogPractice.addCommentGood(item.id, type).then((response) => {
+      if(item.goodreply) {
+         blogPractice.cancleCommentGood(item.id, type).then((response) => {
+        item.good = item.good - 1;
+        item.goodreply = false;
+      });
+
+      } else {
+        blogPractice.addCommentGood(item.id, type).then((response) => {
         item.good = item.good + 1;
         item.goodreply = true;
       });
+      }
     },
 
     clickAnserType (type) {

@@ -906,7 +906,6 @@ export default {
         })
         .then((response) => {
           this.editor.txt.html("");
-          window.document.getElementById("answer-list").scrollIntoView();
           this.replyList.unshift(response.data.reply);
           this.$message({
             message: "问题回答成功哦",

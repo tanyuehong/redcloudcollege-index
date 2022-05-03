@@ -35,7 +35,7 @@
                       <i class="pratice_icon_zhan"></i>
                       <span class="icon_des">{{bitem.good}}</span>
                       <i class="pratice_icon_comment"></i>
-                      <span class="icon_des">11</span>
+                      <span class="icon_des">{{bitem.ccount}}</span>
                     </ul>
                   </div>
                 </li>

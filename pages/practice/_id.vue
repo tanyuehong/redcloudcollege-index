@@ -33,7 +33,8 @@
               <div class="header-focus">
                 <el-button type="primary"
                            plain
-                           icon="el-icon-plus" @click="focusUserClick">{{focusString}}</el-button>
+                           icon="el-icon-plus"
+                           @click="focusUserClick">{{focusString}}</el-button>
               </div>
             </div>
             <div class="purclearfix"> </div>
@@ -64,8 +65,10 @@
                 <span>{{ pitem.good }}人点赞</span>
               </div>
             </div>
-            <div class="bottom-tool_item">
-              <div class="tool_crcle _1fDw5l">
+            <div class="bottom-tool_item"
+                 @click="collectBtnClick">
+              <div class="tool_crcle"
+                   v-bind:class="{ toolactive: isCollect }">
                 <i class="el-icon-collection fsize24"></i>
               </div>
               <div class="bottom-good">收藏</div>
@@ -314,8 +317,10 @@
               </div>
             </div>
           </div>
-          <div class="tool_item">
-            <div class="tool_crcle _1fDw5l">
+          <div class="tool_item"
+               @click="collectBtnClick">
+            <div class="tool_crcle"
+                 v-bind:class="{ toolactive: isCollect }">
               <i class="el-icon-collection fsize24"></i>
             </div>
             <div class="P63n6G">收藏</div>
@@ -339,7 +344,7 @@
             </div>
           </div>
           <div class="tool_item">
-            <div class="tool_crcle _1fDw5l">
+            <div class="tool_crcle">
               <img src="~/assets/img/gengduo.png"
                    class="tool_item_image" />
             </div>
@@ -364,7 +369,6 @@
 </template>
 
 <style>
-
 .bottom-tool_item .tool_crcle {
   width: 38px;
   height: 38px;
@@ -678,7 +682,6 @@ import realPractice from "@/api/practiceblogReq";
 import blogPractice from '@/api/practiceblog'
 import useract from "@/api/useract";
 import userApi from "@/api/user";
-import cousrseApi from '@/api/course'
 
 export default {
   data () {
@@ -691,7 +694,8 @@ export default {
       loginInfo: {},
       editor: {},
       answertype: true,
-      isFocus:false,
+      isFocus: false,
+      isCollect: false,
       forbiden: true,
     };
   },
@@ -723,7 +727,7 @@ export default {
     });
   },
   mounted () {
-    this.getUserPraticeGood();
+    this.getUserBlogStatus();
     window.myVueComm = this;
     setTimeout(function () {
       myVueComm.initCommentEditor();
@@ -757,27 +761,61 @@ export default {
   },
 
   methods: {
-
-    focusUserClick() {
+    collectBtnClick () {
       if (this.forbiden) {
         this.forbiden = false;
         if (this.isLogin) {
-          if (this.isFocus) {
-            cousrseApi.cancleTeacherFocus(this.pitem.uid).then((response) => {
-              this.isFocus = response.data.focus;
-              this.teacher.focus--;
+          if (this.isCollect) {
+            blogPractice.cancleBlogCollect(this.pitem.id).then((response) => {
+              window.console.log("ffffffffff");
+              this.isCollect = false;
               this.$message({
-                message: "取消关闭老师成功哈~",
+                message: "取消收藏成功哈~",
                 type: "success",
                 duration: 2000,
               });
             });
           } else {
-            cousrseApi.addTeacherFocus(this.pitem.uid).then((response) => {
-              this.isFocus = response.data.focus;
-              this.teacher.focus++;
+            blogPractice.addBlogCollect(this.pitem.id).then((response) => {
+              this.isCollect = true;
               this.$message({
-                message: "关注老师成功哈~",
+                message: "收藏成功哈~",
+                type: "success",
+                duration: 2000,
+              });
+            });
+          }
+        } else {
+          this.$message({
+            message: "请您登录以后在收藏哈",
+            type: "success",
+            duration: 2000,
+          });
+        }
+      }
+      setTimeout(function () {
+        window.myVueComm.forbiden = true;
+      }, 500)
+    },
+    focusUserClick () {
+      if (this.forbiden) {
+        this.forbiden = false;
+        if (this.isLogin) {
+          if (this.isFocus) {
+            useract.cancleUserFocus(this.pitem.authorUid).then((response) => {
+              this.isFocus = response.data.focus;
+              this.$message({
+                message: "取消关注成功哈~",
+                type: "success",
+                duration: 2000,
+              });
+            });
+          } else {
+            window.console.log("dddddddddddddddd");
+            useract.addUserFocus(this.pitem.authorUid).then((response) => {
+              this.isFocus = response.data.focus;
+              this.$message({
+                message: "关注成功哈~",
                 type: "success",
                 duration: 2000,
               });
@@ -796,17 +834,17 @@ export default {
       }, 500)
     },
     goodReplyClick (item, type) {
-      if(item.goodreply) {
-         blogPractice.cancleCommentGood(item.id, type).then((response) => {
-        item.good = item.good - 1;
-        item.goodreply = false;
-      });
+      if (item.goodreply) {
+        blogPractice.cancleCommentGood(item.id, type).then((response) => {
+          item.good = item.good - 1;
+          item.goodreply = false;
+        });
 
       } else {
         blogPractice.addCommentGood(item.id, type).then((response) => {
-        item.good = item.good + 1;
-        item.goodreply = true;
-      });
+          item.good = item.good + 1;
+          item.goodreply = true;
+        });
       }
     },
 
@@ -1204,9 +1242,11 @@ export default {
       console.log(tab, event);
     },
 
-    getUserPraticeGood () {
-      useract.getUserPraticeGood(this.pitem.id).then((response) => {
-        this.goodslect = response.data.good;
+    getUserBlogStatus () {
+      useract.getUserBlogStatus(this.pitem.id).then((response) => {
+        this.goodslect = response.data.status.goodslect;
+        this.isCollect = response.data.status.isCollect;
+        this.isFocus = response.data.status.isFocus;
       });
     },
 

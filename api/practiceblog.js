@@ -18,7 +18,7 @@ export default {
 
   submitBlogComment(comment) {
     return request({
-      url: `/blogCommet/submit`,
+      url: `/blog/commet/submit`,
       method: 'post',
       data: comment,
     })
@@ -26,7 +26,7 @@ export default {
 
   submitBlogReply(reply) {
     return request({
-      url: `/blogCommet/submitReply`,
+      url: `/blog/commet/submitReply`,
       method: 'post',
       data: reply,
     })
@@ -34,14 +34,28 @@ export default {
 
   addCommentGood(cid, type) {
     return request({
-      url: `/blogCommet/addCommentGood/${cid}/${type}`,
+      url: `/blog/commet/addCommentGood/${cid}/${type}`,
       method: 'get',
     })
   },
 
   cancleCommentGood(cid, type) {
     return request({
-      url: `/blogCommet/cancleCommentGood/${cid}/${type}`,
+      url: `/blog/commet/cancleCommentGood/${cid}/${type}`,
+      method: 'get',
+    })
+  },
+
+  addBlogCollect(bid) {
+    return request({
+      url: `/blog/collect/addBlogCollect/${bid}`,
+      method: 'get',
+    })
+  },
+
+  cancleBlogCollect(bid, type) {
+    return request({
+      url: `/blog/collect/cancleBlogCollect/${bid}`,
       method: 'get',
     })
   },

@@ -148,4 +148,11 @@ export default {
       method: 'get',
     })
   },
+
+  getUserAskInfo() {
+    return request({
+      url: `/eduask/getUserAskInfo`,
+      method: 'get',
+    })
+  },
 }

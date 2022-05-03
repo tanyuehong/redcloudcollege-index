@@ -660,7 +660,7 @@ ins {
 </style>
 <script>
 import teacherApi from '@/api/courseSerReq'
-import cousrseApi from '@/api/course'
+import useractApi from '@/api/useract'
 
 export default {
 
@@ -714,7 +714,7 @@ export default {
       this.isLogin = false;
     } else {
       this.isLogin = true;
-      cousrseApi.getTeacherFocus(this.teacher.id).then((response) => {
+      useractApi.getUserFocus(this.teacher.id).then((response) => {
         window.console.log(response);
         this.isFocus = response.data.focus;
       })
@@ -740,7 +740,7 @@ export default {
         this.forbiden = false;
         if (this.isLogin) {
           if (this.isFocus) {
-            cousrseApi.cancleTeacherFocus(this.teacher.id).then((response) => {
+            useractApi.cancleUserFocus(this.teacher.id).then((response) => {
               this.isFocus = response.data.focus;
               this.teacher.focus--;
               this.$message({
@@ -750,7 +750,7 @@ export default {
               });
             });
           } else {
-            cousrseApi.addTeacherFocus(this.teacher.id).then((response) => {
+            useractApi.addUserFocus(this.teacher.id).then((response) => {
               this.isFocus = response.data.focus;
               this.teacher.focus++;
               this.$message({

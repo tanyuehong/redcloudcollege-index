@@ -384,27 +384,27 @@
               <ul class="fa-info-list">
                 <li class="fa-infolist-item">
                   <span>收益(元)</span>
-                  <em class="fa-num">0.00</em>
+                  <em class="fa-num">{{NumFormat}}</em>
                 </li>
                 <li class="fa-infolist-item">
                   <span>被采纳</span>
-                  <em class="fa-num">0</em>
+                  <em class="fa-num">{{userAskInfo.adopt}}</em>
                 </li>
                 <li class="fa-infolist-item">
                   <span>提问</span>
-                  <em class="fa-num">0</em>
+                  <em class="fa-num">{{userAskInfo.qcount}}</em>
                 </li>
                 <li class="fa-infolist-item">
                   <span>被点赞</span>
-                  <em class="fa-num">0</em>
+                  <em class="fa-num">{{userAskInfo.qgood+userAskInfo.rgood+userAskInfo.cgood}}</em>
                 </li>
                 <li class="fa-infolist-item">
                   <span>回答</span>
-                  <em class="fa-num">0</em>
+                  <em class="fa-num">{{userAskInfo.qanswer}}</em>
                 </li>
                 <li class="fa-infolist-item">
-                  <span>被评论</span>
-                  <em class="fa-num">0</em>
+                  <span>被回复</span>
+                  <em class="fa-num">{{userAskInfo.ccomment+userAskInfo.crComment}}</em>
                 </li>
               </ul>
             </div>
@@ -443,6 +443,7 @@
 </template>
 
 <script>
+import userApi from "@/api/user";
 import askApi from "@/api/askqustion";
 import askServerApi from "@/api/askserver";
 
@@ -455,6 +456,7 @@ export default {
       answertype: true,
       editor: {},
       loginInfo: {},
+      userAskInfo: {},
       uploadToken: "",
       loginTitle: "点击登录",
       goodqustion: false,
@@ -531,6 +533,7 @@ export default {
     window.gotoPage = {
       path: `/faquestion/` + qId,
     };
+    this.getUserAskInfo();
   },
 
   computed: {
@@ -544,9 +547,36 @@ export default {
         }
       }
     },
+
+    // 金额显示.00格式
+    NumFormat () {
+      var value = this.userAskInfo.qmoney
+      if (!value) return '0.00'
+      value = value.toFixed(2)
+      var intPart = Math.trunc(value)// 获取整数部分
+      var intPartFormat = intPart.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') // 将整数部分逢三一断
+      var floatPart = '.00' // 预定义小数部分
+      var value2Array = value.split('.')
+      // =2表示数据有小数位
+      if (value2Array.length === 2) {
+        floatPart = value2Array[1].toString() // 拿到小数部分
+        if (floatPart.length === 1) { // 补0,实际上用不着
+          return intPartFormat + '.' + floatPart + '0'
+        } else {
+          return intPartFormat + '.' + floatPart
+        }
+      } else {
+        return intPartFormat + floatPart
+      }
+    }
   },
 
   methods: {
+    getUserAskInfo () {
+      askApi.getUserAskInfo().then((response) => {
+        this.userAskInfo = response.data.askInfo;
+      });
+    },
     jubaoBtnClick (wId, jubaotype) {
       window.console.log(wId);
       this.jubaotype = jubaotype;
@@ -833,7 +863,7 @@ export default {
         }
         return;
       }
-      askApi.getUploadImageToken().then((response) => {
+      userApi.getUploadImageToken().then((response) => {
         this.uploadToken = response.data.token;
       });
     },
@@ -905,7 +935,6 @@ export default {
         })
         .then((response) => {
           this.editor.txt.html("");
-          window.document.getElementById("answer-list").scrollIntoView();
           this.replyList.unshift(response.data.reply);
           this.$message({
             message: "问题回答成功哦",
@@ -1576,9 +1605,10 @@ h2.accusation-secondary-title {
   padding: 15px;
   background: #ffffff;
 }
-.ask-top-warper-item {
+.ask-top-wrap .ask-top-warper-item {
   display: block;
   margin-top: 6px;
+  text-decoration: none;
 }
 
 .ask-top-wrap {

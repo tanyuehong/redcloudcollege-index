@@ -35,7 +35,7 @@
                       <i class="pratice_icon_zhan"></i>
                       <span class="icon_des">{{bitem.good}}</span>
                       <i class="pratice_icon_comment"></i>
-                      <span class="icon_des">11</span>
+                      <span class="icon_des">{{bitem.ccount}}</span>
                     </ul>
                   </div>
                 </li>
@@ -82,7 +82,7 @@
 import '~/assets/css/appdown.css'
 import '~/assets/css/contentlist.css'
 import showdown from 'showdown'
-import realPractice from '@/api/realpractice'
+import realPractice from '@/api/practiceblogReq'
 
 export default {
   //异步调用，调用一次

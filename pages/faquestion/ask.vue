@@ -201,6 +201,7 @@
 </template>
 
 <script>
+import userApi from '@/api/user'
 import askApi from '@/api/askqustion'
 const qiniu = require('qiniu-js')
 
@@ -226,7 +227,7 @@ export default {
 
   methods: {
     getUploadImageToken () {
-      askApi.getUploadImageToken().then((response) => {
+      userApi.getUploadImageToken().then((response) => {
         window.console.log(response);
         this.uploadToken = response.data.token;
       });

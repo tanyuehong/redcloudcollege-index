@@ -55,14 +55,6 @@ export default {
     })
   },
 
-  // 获取编辑器图片上传token
-  getUploadImageToken() {
-    return request({
-      url: `/eduask/uploadqiniutoken`,
-      method: 'post',
-    })
-  },
-
   // 获取回答回复列表
   getQustionReplyList(rId, type) {
     return request({
@@ -153,6 +145,13 @@ export default {
   deleteReplyComment(cId) {
     return request({
       url: `/eduask/deleteReplyComment/${cId}`,
+      method: 'get',
+    })
+  },
+
+  getUserAskInfo() {
+    return request({
+      url: `/eduask/getUserAskInfo`,
       method: 'get',
     })
   },

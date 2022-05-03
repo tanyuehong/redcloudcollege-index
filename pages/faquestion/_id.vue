@@ -1605,9 +1605,10 @@ h2.accusation-secondary-title {
   padding: 15px;
   background: #ffffff;
 }
-.ask-top-warper-item {
+.ask-top-wrap .ask-top-warper-item {
   display: block;
   margin-top: 6px;
+  text-decoration: none;
 }
 
 .ask-top-wrap {

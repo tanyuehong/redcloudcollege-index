@@ -5,8 +5,10 @@
         <div class="ask_detail_content">
           <div class="ask-detail-lefte">
             <div class="ui breadcrumb red_breadcrumb">
-              <a class="section"
-                 href="/faquestion">实践问答</a>
+              <nuxt-link :to="{name:'faquestion-index'}"
+                         class="section">
+                实践问答
+              </nuxt-link>
               <span class="glyphicon glyphicon glyphicon-menu-right"
                     aria-hidden="true"></span>
               <div class="active section">问题详情</div>
@@ -410,6 +412,13 @@
             </div>
 
             <div class="ask-top-wrap">
+              <div class="user_header">
+                <span class="ask-message-tips">问答通知</span>
+                <nuxt-link :to="{name:'faquestion-message'}"
+                           class="ask-message-more">
+                  查看更多
+                </nuxt-link>
+              </div>
               <nuxt-link :to="'/faquestion/1481862372760240130'"
                          class="ask-top-warper-item"
                          target="_blank"
@@ -1159,6 +1168,17 @@ export default {
 </script>
 
 <style>
+.ask-top-wrap .ask-message-tips {
+  font-weight: 500;
+  color: #222226;
+  font-size: 14px;
+}
+
+.ask-top-wrap .ask-message-more {
+  font-size: 14px;
+  margin-right: 18px;
+  text-decoration: none;
+}
 .el-dialog {
   width: 480px;
 }
@@ -1607,12 +1627,13 @@ h2.accusation-secondary-title {
 }
 .ask-top-wrap .ask-top-warper-item {
   display: block;
-  margin-top: 6px;
+  margin-top: 12px;
   text-decoration: none;
+  margin-left: 20px;
 }
 
 .ask-top-wrap {
-  padding: 14px 20px;
+  padding: 10px 20px 20px 0px;
   color: #507999;
   background: #ffffff;
   font-size: 14px;

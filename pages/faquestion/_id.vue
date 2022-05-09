@@ -5,7 +5,7 @@
         <div class="ask_detail_content">
           <div class="ask-detail-lefte">
             <div class="ui breadcrumb red_breadcrumb">
-              <nuxt-link :to="{name:'faquestion-index'}"
+              <nuxt-link :to="{name:'faquestion'}"
                          class="section">
                 实践问答
               </nuxt-link>
@@ -530,6 +530,7 @@ export default {
       this.loginTitle = "我的问答";
       this.loginInfo = JSON.parse(userStr)
       this.isLogin = true;
+      this.getUserAskInfo();
     };
     window.myVueComm = this;
     setTimeout(function () {
@@ -542,7 +543,6 @@ export default {
     window.gotoPage = {
       path: `/faquestion/` + qId,
     };
-    this.getUserAskInfo();
   },
 
   computed: {

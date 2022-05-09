@@ -19,8 +19,9 @@
                    class="el-menu-demo"
                    mode="horizontal"
                    @select="handleSelect">
-            <el-menu-item index="1">最新发布</el-menu-item>
-            <el-menu-item index="2">最新回复</el-menu-item>
+            <el-menu-item index="1">综合</el-menu-item>
+            <el-menu-item index="2">公告</el-menu-item>
+            <el-menu-item index="3">社区</el-menu-item>
           </el-menu>
         </div>
       </div>
@@ -29,6 +30,10 @@
 </template>
 
 <style scoped>
+
+.mess-content-lefte .questions_tab_con{
+  margin-left: -15px;
+}
 .main-content {
   min-height: 800px;
 }

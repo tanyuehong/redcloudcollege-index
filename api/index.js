@@ -15,4 +15,11 @@ export default {
       method: 'get',
     })
   },
+  
+  getMessageList() {
+    return request({
+      url: '/home/message/getMessageList',
+      method: 'get',
+    })
+  },
 }

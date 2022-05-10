@@ -1,7 +1,7 @@
 <template>
   <div class="main_global_bg">
     <div class="container main-content">
-      <div class="mess-content-lefte">
+      <div class="col-md-8 mess-content-lefte">
         <div class="message-top-rumb">
           <div class="ui breadcrumb red_breadcrumb">
             <nuxt-link :to="{name:'faquestion'}"
@@ -21,34 +21,73 @@
                    @select="handleSelect">
             <el-menu-item index="1">综合</el-menu-item>
             <el-menu-item index="2">公告</el-menu-item>
-            <el-menu-item index="3">社区</el-menu-item>
+            <!-- <el-menu-item index="3">社区</el-menu-item> -->
           </el-menu>
+        </div>
+
+        <div class="message-list">
+          <ul>
+            <li v-for="message in messageList"
+                :key="message.id">
+              <nuxt-link :to="{ name: 'user-login' }"
+                         v-if="message.type==0">
+                {{message.title}}
+                <span class="message-time">{{message.gmtCreate}}</span>
+                <span class="message-detail">查看详情</span>
+              </nuxt-link>
+              <span v-if="message.type==1">{{message.title}}<span class="message-time">{{message.gmtCreate}}</span></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div data-v-99224d36=""
+           class="col-md-4">
+        <div data-v-99224d36=""
+             class="wechatma-con js-wechatma-con">
+          <div data-v-99224d36=""
+               class="ma-con">
+            <div data-v-99224d36=""
+                 class="ma"></div>
+            <div data-v-99224d36=""
+                 class="desc">
+              <div data-v-99224d36=""
+                   class="title">扫码关注开源实践网服务号</div>
+              <div data-v-99224d36=""
+                   class="item-con">
+                <div data-v-99224d36=""
+                     class="item">干货分享</div>
+                <div data-v-99224d36=""
+                     class="item">定期活动</div>
+                <div data-v-99224d36=""
+                     class="item">课程优惠</div>
+                <div data-v-99224d36=""
+                     class="item">专栏福利</div>
+              </div>
+            </div>
+          </div>
+          <div data-v-99224d36=""
+               class="text-con">
+            官方优惠福利活动一手掌握，关注开源实践官网（ID：www.redskt.com），和1万+客户端程序员一起成长！
+          </div>
+        </div>
+        <div data-v-99224d36=""
+             class="download-app js-show-download clearfix"><img data-v-99224d36=""
+               src="/_nuxt/assets/img/appLogo.png"
+               alt=""
+               class="logo-icon fl">
+          <div data-v-99224d36=""
+               class="text fl">
+            <h4 data-v-99224d36="">下载开源实践APP</h4>
+            <p data-v-99224d36="">更好的体验 学习随处可享</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-
-.mess-content-lefte .questions_tab_con{
-  margin-left: -15px;
-}
-.main-content {
-  min-height: 800px;
-}
-.mess-content-lefte {
-  background: #fff;
-  padding: 15px;
-}
-
-.mess-content-lefte .message-top-rumb {
-}
-</style>
-
 <script>
-import askApi from "@/api/askqustion";
-import askServerApi from "@/api/askserver";
+import messageApi from "@/api/index";
 
 export default {
   data () {
@@ -61,6 +100,14 @@ export default {
     };
   },
 
+  asyncData ({ params, error }) {
+    return messageApi.getMessageList().then((response) => {
+      return {
+        messageList: response.data.messageList
+      }
+    })
+  },
+
   head () {
     return {
       title: this.title,
@@ -68,7 +115,7 @@ export default {
         {
           hid: 'keywords',
           name: 'keywords',
-          content: "问答公告，问答反馈中心，开源实践问答反馈",
+          content: "开源实践通知中心，问答公告，开源实践问答反馈",
         },
         {
           hid: 'description',
@@ -83,15 +130,6 @@ export default {
     }
   },
 
-  asyncData ({ params, error }) {
-    return askServerApi.getHomeAskQuestionList({ 'type': 1, 'qtype': '' }).then((response) => {
-      return {
-        list: response.data.list,
-        qustionType: response.data.qustionType,
-      }
-    })
-  },
-
   methods: {
     qustionTypeClick (typeId, index) {
       this.typeIndex = index;
@@ -104,11 +142,6 @@ export default {
       });
     },
     handleSelect (key, keyPath) {
-      var qtype = this.typeIndex == 0 ? "" : this.qustionType[this.typeIndex].id;
-      askApi.getHomeAskQuestionList({ 'type': key, 'qtype': qtype }).then((response) => {
-        this.list = response.data.list;
-        this.qustionType = response.data.qustionType;
-      });
     },
     jumpStartQuestion () {
       var token = localStorage.getItem('redclass_token')
@@ -139,3 +172,64 @@ export default {
   },
 };
 </script>
+
+
+<style scoped>
+.message-list {
+  margin-top: 20px;
+}
+
+.message-list li:hover:before {
+  display: block;
+  content: '';
+  width: 5px;
+  height: 100%;
+  background: #409eff;
+  position: absolute;
+  top: 0;
+}
+
+.message-list .message-time {
+  margin-left: 120px;
+}
+
+.message-list .message-detail {
+  margin-left: 60px;
+}
+
+.message-list li:hover a {
+  color: #409eff;
+}
+.message-list li a {
+  display: block;
+  color: #666;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  padding-left: 12px;
+}
+
+.message-list li {
+  height: 44px;
+  border-bottom: 1px solid #e6e6e6;
+  line-height: 44px;
+  padding-left: 10px;
+  font-size: 14px;
+  position: relative;
+}
+
+.mess-content-lefte .questions_tab_con {
+  margin-left: -15px;
+}
+.main-content {
+  min-height: 800px;
+}
+.mess-content-lefte {
+  background: #fff;
+  padding: 15px;
+}
+
+.mess-content-lefte .message-top-rumb {
+}
+</style>

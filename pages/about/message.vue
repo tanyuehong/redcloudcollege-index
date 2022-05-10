@@ -4,9 +4,9 @@
       <div class="col-md-8 mess-content-lefte">
         <div class="message-top-rumb">
           <div class="ui breadcrumb red_breadcrumb">
-            <nuxt-link :to="{name:'faquestion'}"
+            <nuxt-link to="/"
                        class="section">
-              实践问答
+              首页
             </nuxt-link>
             <span class="glyphicon glyphicon glyphicon-menu-right"
                   aria-hidden="true"></span>
@@ -29,7 +29,7 @@
           <ul>
             <li v-for="message in messageList"
                 :key="message.id">
-              <nuxt-link :to="{ name: 'user-login' }"
+              <nuxt-link :to="'/about/detail/'+message.id"
                          v-if="message.type==0">
                 {{message.title}}
                 <span class="message-time">{{message.gmtCreate}}</span>
@@ -207,14 +207,13 @@ export default {
   width: 100%;
   height: 100%;
   text-decoration: none;
-  padding-left: 12px;
+  padding-left: 8px;
 }
 
 .message-list li {
   height: 44px;
   border-bottom: 1px solid #e6e6e6;
   line-height: 44px;
-  padding-left: 10px;
   font-size: 14px;
   position: relative;
 }
@@ -224,6 +223,7 @@ export default {
 }
 .main-content {
   min-height: 800px;
+  margin-top: 15px;
 }
 .mess-content-lefte {
   background: #fff;

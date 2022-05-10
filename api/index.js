@@ -22,4 +22,11 @@ export default {
       method: 'get',
     })
   },
+
+  getMessageDetail(mId) {
+    return request({
+      url: `/home/message/getMessageDetail/${mId}`,
+      method: 'get',
+    })
+  }
 }

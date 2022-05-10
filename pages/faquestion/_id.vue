@@ -414,7 +414,7 @@
             <div class="ask-top-wrap">
               <div class="user_header">
                 <span class="ask-message-tips">问答通知</span>
-                <nuxt-link :to="{name:'faquestion-message'}"
+                <nuxt-link :to="{name:'about-message'}"
                            class="ask-message-more">
                   查看更多
                 </nuxt-link>

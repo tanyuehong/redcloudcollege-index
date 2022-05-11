@@ -1,8 +1,31 @@
 <template>
   <div class="golobal_content">
     <section class="container">
+
+      <div class="mess-top-header">
+        <div class="message-top-rumb">
+          <div class="ui breadcrumb red_breadcrumb">
+            <nuxt-link to="/"
+                       class="section">
+
+              <div class="active section">首页</div>
+            </nuxt-link>
+            <span class="glyphicon glyphicon glyphicon-menu-right"
+                  aria-hidden="true"></span>
+            <nuxt-link to="/"
+                       class="section">
+              <div class="active section">消息通知</div>
+            </nuxt-link>
+            <span class="glyphicon glyphicon glyphicon-menu-right"
+                  aria-hidden="true"></span>
+            <div class="section">通知详情</div>
+          </div>
+        </div>
+        <div class="message-spreate">
+        </div>
+      </div>
       <div class="practice_detail">
-        <div class="practice_content">
+        <div class="message-detail-content">
           <div class="practice_header">
             <h1>{{ pitem.title }}</h1>
 
@@ -369,6 +392,24 @@
 </template>
 
 <style>
+.mess-top-header .message-spreate {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('https://img.redskt.com/asset/img/mess-top-sprate.png');
+  height: 25px;
+  margin-left: -10px;
+}
+
+.mess-top-header .message-top-rumb {
+  padding-top: 15px;
+  padding-left: 15px;
+  background: #fff;
+}
+.mess-top-header .message-top-rumb .breadcrumb {
+  margin-bottom: 0px;
+  padding-bottom: 6px;
+}
 .bottom-tool_item .tool_crcle {
   width: 38px;
   height: 38px;
@@ -616,13 +657,13 @@
   color: #fff;
   background-color: #ec7259 !important;
 }
-.practice_content {
+.message-detail-content {
   background: white;
   padding-left: 15px;
   padding-top: 20px;
   padding-bottom: 15px;
   margin-bottom: 15px;
-  margin-top: 15px;
+  margin-top: 0px;
   padding-right: 15px;
 }
 .practice_left_show {
@@ -697,7 +738,7 @@ export default {
       isFocus: false,
       isCollect: false,
       forbiden: true,
-      pitem:{}
+      pitem: {}
     };
   },
   head () {

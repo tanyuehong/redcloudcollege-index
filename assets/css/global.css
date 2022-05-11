@@ -20,6 +20,11 @@ body {
   user-select: none;
 }
 
+.fix-col-md {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
 .comactive {
   color: #409eff;
 }

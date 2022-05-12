@@ -50,6 +50,12 @@
                 <i class="iconfont icon-weixin" />
               </div>
             </div>
+
+            <div class="bottom-tool_item" @click="collectBtnClick">
+              <div class="tool_crcle" v-bind:class="{ toolactive: isCollect }">
+                <i class="iconfont icon-qq" />
+              </div>
+            </div>
           </div>
         </div>
         <div class="bottom-content">
@@ -59,7 +65,7 @@
                 <img class="vam user-head-image article-avatar" :src="pitem.authorAvatar" width="30" height="30" alt />
               </nuxt-link>
             </div>
-            <div class="commet-editor-content">
+            <div class="message-editor-content">
               <div id="comment-editor"></div>
 
               <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:leave="cleave" v-bind:css="false">
@@ -213,18 +219,18 @@
                 <div>
                   <a href="/space/news.shtml?initGrid=0&amp;id=54f76f85-cf8c-422d-aa8e-d6c753f6d1a0" class="name"
                     target="_blank" title="英雄联盟官方" onclick="PTTSendClick('sAuthor','sAuthor-author_home','英雄联盟官方');">
-                    {{pitem.authorName}}
+                    {{ pitem.authorName }}
                   </a>
                   <p class="num-read">1万次 总阅读量</p>
                 </div>
               </div>
-                     <div class="ct-lt">
-                  <p class="num-follower">100 粉丝</p>
+              <div class="ct-lt">
+                <p class="num-follower">100 粉丝</p>
 
-                  <a href="javascript:" class="focus"
-                    onclick="PTTSendClick('sAuthor','sAuthor-focus','关注');ArticleDetail.doFollowPlayer(true, '54f76f85-cf8c-422d-aa8e-d6c753f6d1a0')">关注</a>
+                <a href="javascript:" class="focus"
+                  onclick="PTTSendClick('sAuthor','sAuthor-focus','关注');ArticleDetail.doFollowPlayer(true, '54f76f85-cf8c-422d-aa8e-d6c753f6d1a0')">关注</a>
 
-                </div>
+              </div>
             </div>
             <!--他的文章-->
             <h2 class="tit">TA的文章</h2>
@@ -307,7 +313,7 @@
         </div>
       </div>
 
-      <div class="practice_left_show">
+      <div class="message_left_show">
         <div class="tool_item">
           <div class="tool_crcle" @click="goodBtnClick" v-bind:class="{ toolactive: goodslect }" role="button"
             tabindex="-1" aria-label="给文章点赞">
@@ -317,14 +323,6 @@
               </svg>
             </i>
           </div>
-          <div class="P63n6G">
-            <div class="_2LKTFF">
-              <span class="_1GPnWJ">
-                {{ pitem.good }}
-                赞
-              </span>
-            </div>
-          </div>
         </div>
         <div class="tool_item" @click="collectBtnClick">
           <div class="tool_crcle" v-bind:class="{ toolactive: isCollect }">
@@ -332,22 +330,15 @@
           </div>
         </div>
         <div class="tool_item">
-          <div class="tool_crcle" role="button" tabindex="-1" aria-label="赞赏作者">
-            <i aria-label="ic-shang" class="anticon">
-              <img src="~/assets/img/dashang.png" class="tool_item_image" />
-            </i>
-          </div>
-          <div class="P63n6G" role="button" tabindex="-1" aria-label="查看赞赏列表">
-            赞赏
+          <div class="tool_crcle" role="button" tabindex="-1" aria-label="qq分享">
+            <i class="iconfont icon-qq" />
           </div>
         </div>
-        <div class="tool_item">
+        <!-- <div class="tool_item"> 微博分享预留
           <div class="tool_crcle">
             <img src="~/assets/img/gengduo.png" class="tool_item_image" />
           </div>
-
-          <div class="P63n6G">更多好文</div>
-        </div>
+        </div> -->
       </div>
     </section>
     <svg class="svgcostClass" style="display: none; width: 0; height: 0" width="0" height="0" focusable="false"
@@ -362,157 +353,162 @@
 </template>
 
 <style>
-
 .tool_crcle .iconfont {
-    color: #00bb29;
-    font-size: 20px;
+  color: #00bb29;
+  font-size: 20px;
+}
+
+.tool_crcle .icon-qq {
+  color: #498ad5;
 }
 
 .message-share-qq {
-    float: left;
-    width: 16px;
-    height: 16px;
-    margin-right: 5px;
-    text-indent: -9999em;
-    overflow: hidden;
-    background-image: url(//ossweb-img.qq.com/images/icon/share/icon-sns-16.png);
-    background-position: 0px 0px;
-    background-repeat: no-repeat;
+  float: left;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  text-indent: -9999em;
+  overflow: hidden;
+  background-image: url(//ossweb-img.qq.com/images/icon/share/icon-sns-16.png);
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
 }
 
- .author-info {
+.author-info {
   background: #fff;
-  margin-top: 15px;
+  margin-top: 10px;
   padding-bottom: 1px;
 }
 
 .author-info .push-lf {
-    float: left;
-    width: 100px;
-    height: 60px;
-    overflow: hidden;
-    margin-right: 8px;
-}
-.author-info  .read-tx {
-    margin-right: 15px;
-    color: #999;
-    font-size: 12px;
+  float: left;
+  width: 100px;
+  height: 60px;
+  overflow: hidden;
+  margin-right: 8px;
 }
 
-.author-info  .art-more-look {
-    display: block;
-    height: 30px;
-    background-color: #f1f1f1;
-    line-height: 30px;
-    text-align: center;
-    margin-bottom: 30px;
-    margin: 0 30px 30px;
-    color:#333;
-    margin-top: 20px;
+.author-info .read-tx {
+  margin-right: 15px;
+  color: #999;
+  font-size: 12px;
 }
 
-.author-info  li {
-    padding: 10px 30px;
-    transition: all .2s;
-    margin: 0!important;
+.author-info .art-more-look {
+  display: block;
+  height: 30px;
+  background-color: #f1f1f1;
+  line-height: 30px;
+  text-align: center;
+  margin-bottom: 30px;
+  margin: 0 30px 30px;
+  color: #333;
+  margin-top: 20px;
+}
+
+.author-info li {
+  padding: 10px 30px;
+  transition: all 0.2s;
+  margin: 0 !important;
 }
 
 .author-info .push-rt p:first-child a {
-    display: block;
-    height: 36px;
-    line-height: 18px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: #444;
-    font-size: 14px;
+  display: block;
+  height: 36px;
+  line-height: 18px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #444;
+  font-size: 14px;
 }
 
 .author-info .push-lf img {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }
 
- .author-info .tit {
-    margin-top: 26px;
-    font-size: 18px;
-    color: #444;
-    padding: 0 30px;
+.author-info .tit {
+  margin-top: 26px;
+  font-size: 18px;
+  color: #444;
+  padding: 0 30px;
 }
 
- .author-info .tit:before {
-    content: "";
-    width: 3px;
-    height: 18px;
-    display: inline-block;
-    background-color: #0baac0;
-    vertical-align: -3px;
-    margin-right: 4px;
+.author-info .tit:before {
+  content: '';
+  width: 3px;
+  height: 18px;
+  display: inline-block;
+  background-color: #0baac0;
+  vertical-align: -3px;
+  margin-right: 4px;
 }
 
- .author-info .ct-lt {
-   float: right;
+.author-info .ct-lt {
+  float: right;
 }
 
- .author-info .name {
-    display: inline-block;
-    vertical-align: middle;
-    max-width: 130px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin: 0 0 5px;
-    color: #333;
-    font-weight: 500;
-    font-size: 14px;
-}
- .author-info .num-read , .author-info .num-follower {
-    margin: 2px 0;
-    color: #aaa;
+.author-info .name {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0 0 5px;
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
 }
 
+.author-info .num-read,
+.author-info .num-follower {
+  margin: 2px 0;
+  color: #aaa;
+  text-align: center;
+}
 
- .author-info .focus {
-    width: 64px;
-    height: 24px;
-    border: 1px solid #bb9a6c;
-    display: block;
-    text-align: center;
-    line-height: 24px;
-    color: #bb9a6c;
+.author-info .focus {
+  width: 64px;
+  height: 24px;
+  border: 1px solid #bb9a6c;
+  display: block;
+  text-align: center;
+  line-height: 24px;
+  color: #bb9a6c;
 }
 
 .con-top-bar {
-    float: left;
-    margin-top: 6px;
+  float: left;
+  margin-top: 6px;
 }
 
 .author-info .s-top-bar {
-    padding: 30px;
-    border-bottom: 1px solid #e4e4e4;
+  padding: 30px;
+  border-bottom: 1px solid #e4e4e4;
 }
 
 .c-por-bg {
-    float: left;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: 2px solid #d7b86f;
-    margin-right: 9px;
+  float: left;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid #d7b86f;
+  margin-right: 9px;
 }
 
 .c-por-bg img {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
 }
 
 .mess-top-header {
   margin-bottom: 0px;
 }
-
 
 .mess-top-header .message-spreate {
   border: 0;
@@ -534,11 +530,6 @@
 .mess-top-header .message-top-rumb .breadcrumb {
   margin-bottom: 0px;
   padding-bottom: 6px;
-}
-
-.bottom-tool_item .tool_crcle {
-  width: 38px;
-  height: 38px;
 }
 
 .tool-item .comment-reply {
@@ -660,9 +651,9 @@
 }
 
 .comment-list-content {
-  padding-left: 15px;
+  padding-left: 20px;
   padding-bottom: 6px;
-  width: 605px;
+  width: 700px;
 }
 
 .comment-list-content .reply-title {
@@ -670,7 +661,7 @@
 }
 
 .comment-list-content .reply-title .reply_wrap {
-  margin-left: 350px;
+  margin-left: 420px;
 }
 
 .comment-list-content .reply-title .em1 {
@@ -709,10 +700,11 @@
 .bottom-content {
   background: #fff;
   margin-bottom: 15px;
+  margin-left: -15px;
 }
 
-.commet-editor-content {
-  width: 540px;
+.message-editor-content {
+  width: 615px;
   padding-top: 20px;
   float: right;
   margin-right: 20px;
@@ -723,14 +715,14 @@
   background: #fff;
   padding-bottom: 20px;
   margin-bottom: 15px;
-  width: 620px;
+  width: 700px;
 }
 
 .bottom-comment .comment-header {
   width: 40px;
   float: left;
-  margin-left: 15px;
-  margin-top: 15px;
+  margin-left: 20px;
+  margin-top: 20px;
 }
 
 .bottom-tool_item {
@@ -803,12 +795,12 @@
   padding-top: 30px;
   padding-bottom: 15px;
   margin-bottom: 15px;
-  margin-top: 15px;
+  margin-top: 10px;
   padding-right: 20px;
   margin-left: -15px;
 }
 
-.practice_left_show {
+.message_left_show {
   position: fixed;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -816,7 +808,7 @@
   user-select: none;
   height: 600px;
   width: 60px;
-  margin-left: -75px;
+  margin-left: -72px;
   top: 86px;
   z-index: 2;
 }
@@ -840,13 +832,23 @@
   color: #969696;
 }
 
-.tool_crcle {
+.message_left_show .tool_crcle {
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   font-size: 18px;
   border-radius: 50%;
   box-shadow: 0 2px 10px rgb(0 0 0 / 5%);
+  background-color: #fff;
+}
+
+.bottom-tool_item .tool_crcle {
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  font-size: 18px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 8%);
   background-color: #fff;
 }
 
@@ -872,7 +874,7 @@ import useract from "@/api/useract";
 import userApi from "@/api/user";
 
 export default {
-  data() {
+  data () {
     return {
       title: "开源实践网",
       goodslect: false,
@@ -888,7 +890,7 @@ export default {
       pitem: {},
     };
   },
-  head() {
+  head () {
     return {
       script: [
         {
@@ -900,14 +902,14 @@ export default {
       title: this.title,
     };
   },
-  asyncData({ params, error }) {
+  asyncData ({ params, error }) {
     return messageApi.getMessageDetail(params.id).then((response) => {
       return {
         pitem: response.data.pitem,
       };
     });
   },
-  mounted() {
+  mounted () {
     window.myVueComm = this;
     setTimeout(function () {
       myVueComm.initCommentEditor();
@@ -933,7 +935,7 @@ export default {
 
   computed: {
     // 计算属性的 getter
-    commentGood() {
+    commentGood () {
       return function (goodCount) {
         if (goodCount > 0) {
           return goodCount;
@@ -948,7 +950,7 @@ export default {
   },
 
   methods: {
-    collectBtnClick() {
+    collectBtnClick () {
       if (this.forbiden) {
         this.forbiden = false;
         if (this.isLogin) {
@@ -984,7 +986,7 @@ export default {
         window.myVueComm.forbiden = true;
       }, 500);
     },
-    focusUserClick() {
+    focusUserClick () {
       if (this.forbiden) {
         this.forbiden = false;
         if (this.isLogin) {
@@ -1020,7 +1022,7 @@ export default {
         window.myVueComm.forbiden = true;
       }, 500);
     },
-    goodReplyClick(item, type) {
+    goodReplyClick (item, type) {
       if (item.goodreply) {
         blogPractice.cancleCommentGood(item.id, type).then((response) => {
           item.good = item.good - 1;
@@ -1034,7 +1036,7 @@ export default {
       }
     },
 
-    clickAnserType(type) {
+    clickAnserType (type) {
       this.answertype = type;
       for (var j = 0; j < this.commentList.length; j++) {
         var item = this.commentList[j];
@@ -1060,7 +1062,7 @@ export default {
         this.getCommentList(2);
       }
     },
-    repplaybtnclinck(item, index) {
+    repplaybtnclinck (item, index) {
       item.replyId = "#replayedtor" + index;
       window.replyItem = item;
       if (!item.editor) {
@@ -1094,7 +1096,7 @@ export default {
       });
     },
 
-    initReplyeditor() {
+    initReplyeditor () {
       let editor = this.$wangeditor(window.replyItem.replyId);
       this.editor = editor;
       window.replyItem.editor = editor;
@@ -1133,13 +1135,13 @@ export default {
           config
         );
         const observer = {
-          next(res) {
+          next (res) {
             window.console.log(res);
           },
-          error(err) {
+          error (err) {
             window.console.log(err);
           },
-          complete(res) {
+          complete (res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
           },
@@ -1150,7 +1152,7 @@ export default {
       editor.create();
     },
 
-    replyCommentbtnclick(comment, index) {
+    replyCommentbtnclick (comment, index) {
       comment.replyId = "#creplayedtor" + index;
       window.commentItem = comment;
       if (!comment.editor) {
@@ -1184,7 +1186,7 @@ export default {
       });
     },
 
-    initCommentReplyeditor() {
+    initCommentReplyeditor () {
       let editor = this.$wangeditor(window.commentItem.replyId);
       this.editor = editor;
       window.commentItem.editor = editor;
@@ -1223,13 +1225,13 @@ export default {
           config
         );
         const observer = {
-          next(res) {
+          next (res) {
             window.console.log(res);
           },
-          error(err) {
+          error (err) {
             window.console.log(err);
           },
-          complete(res) {
+          complete (res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
           },
@@ -1240,7 +1242,7 @@ export default {
       editor.create();
     },
 
-    getCommentList(type) {
+    getCommentList (type) {
       realPractice
         .getPraticeBlogCommentLists(this.pitem.id, type)
         .then((response) => {
@@ -1264,11 +1266,11 @@ export default {
       });
     },
 
-    cancleCommentClick() {
+    cancleCommentClick () {
       this.showComment = false;
     },
 
-    commentReplySubmit(item, index) {
+    commentReplySubmit (item, index) {
       if (!item.editor || item.editor.txt.html().length < 6) {
         this.$message({
           message: "输入的内容太短了哦！",
@@ -1296,7 +1298,7 @@ export default {
         });
     },
 
-    commentReplyToSubmit(item, comment, uid, index) {
+    commentReplyToSubmit (item, comment, uid, index) {
       window.console.log("dddddd");
       if (!item.editor || item.editor.txt.html().length < 6) {
         this.$message({
@@ -1325,7 +1327,7 @@ export default {
         });
     },
 
-    getUploadImageToken(isForce) {
+    getUploadImageToken (isForce) {
       if (!this.isLogin) {
         if (isForce) {
           this.$message({
@@ -1346,7 +1348,7 @@ export default {
       });
     },
 
-    commentBtnSubmit() {
+    commentBtnSubmit () {
       var texxt = this.editor.txt.html();
       window.console.log(texxt);
       if (!this.editor || this.editor.txt.html().length < 6) {
@@ -1374,7 +1376,7 @@ export default {
           });
         });
     },
-    initCommentEditor() {
+    initCommentEditor () {
       let editor = this.$wangeditor("#comment-editor");
       this.editor = editor;
       editor.config.uploadImgMaxLength = 1;
@@ -1415,13 +1417,13 @@ export default {
           config
         );
         const observer = {
-          next(res) {
+          next (res) {
             window.console.log(res);
           },
-          error(err) {
+          error (err) {
             window.console.log(err);
           },
-          complete(res) {
+          complete (res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
           },
@@ -1433,25 +1435,25 @@ export default {
     },
     //分页切换的方法
     //参数是页码数
-    handleClick(tab, event) {
+    handleClick (tab, event) {
       console.log(tab, event);
     },
 
-    addUserPraticeGood() {
+    addUserPraticeGood () {
       useract.addUserPraticeGood(this.pitem.id).then((response) => {
         this.pitem.good++;
         this.goodslect = true;
       });
     },
 
-    cancleleUserPraticeGood() {
+    cancleleUserPraticeGood () {
       useract.cancleleUserPraticeGood(this.pitem.id).then((response) => {
         this.pitem.good--;
         this.goodslect = false;
       });
     },
 
-    goodBtnClick() {
+    goodBtnClick () {
       if (this.goodslect) {
         this.cancleleUserPraticeGood();
       } else {
@@ -1459,7 +1461,7 @@ export default {
       }
     },
 
-    changeMarkToHtml(content) {
+    changeMarkToHtml (content) {
       var converter = new showdown.Converter();
       return converter.makeHtml(content);
     },

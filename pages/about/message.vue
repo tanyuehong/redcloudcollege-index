@@ -4,21 +4,16 @@
       <div class="col-md-8 mess-content-lefte">
         <div class="message-top-rumb">
           <div class="ui breadcrumb red_breadcrumb">
-            <nuxt-link to="/"
-                       class="section">
+            <nuxt-link to="/" class="section">
               首页
             </nuxt-link>
-            <span class="glyphicon glyphicon glyphicon-menu-right"
-                  aria-hidden="true"></span>
+            <span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
             <div class="active section">消息通知</div>
           </div>
         </div>
 
         <div class="questions_tab_con">
-          <el-menu :default-active="activeIndex"
-                   class="el-menu-demo"
-                   mode="horizontal"
-                   @select="handleSelect">
+          <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
             <el-menu-item index="1">综合</el-menu-item>
             <el-menu-item index="2">公告</el-menu-item>
             <!-- <el-menu-item index="3">社区</el-menu-item> -->
@@ -27,58 +22,41 @@
 
         <div class="message-list">
           <ul>
-            <li v-for="message in messageList"
-                :key="message.id">
-              <nuxt-link :to="'/about/detail/'+message.id"
-                         v-if="message.type==0">
-                {{message.title}}
-                <span class="message-time">{{message.gmtCreate}}</span>
+            <li v-for="message in messageList" :key="message.id">
+              <nuxt-link :to="'/about/detail/' + message.id" v-if="message.type == 0">
+                {{ message.title }}
+                <span class="message-time">{{ message.gmtCreate }}</span>
                 <span class="message-detail">查看详情</span>
               </nuxt-link>
-              <span v-if="message.type==1">{{message.title}}<span class="message-time">{{message.gmtCreate}}</span></span>
+              <span v-if="message.type == 1">{{ message.title }}<span class="message-time">{{ message.gmtCreate
+              }}</span></span>
             </li>
           </ul>
         </div>
       </div>
-      <div data-v-99224d36=""
-           class="col-md-4">
-        <div data-v-99224d36=""
-             class="wechatma-con js-wechatma-con">
-          <div data-v-99224d36=""
-               class="ma-con">
-            <div data-v-99224d36=""
-                 class="ma"></div>
-            <div data-v-99224d36=""
-                 class="desc">
-              <div data-v-99224d36=""
-                   class="title">扫码关注开源实践网服务号</div>
-              <div data-v-99224d36=""
-                   class="item-con">
-                <div data-v-99224d36=""
-                     class="item">干货分享</div>
-                <div data-v-99224d36=""
-                     class="item">定期活动</div>
-                <div data-v-99224d36=""
-                     class="item">课程优惠</div>
-                <div data-v-99224d36=""
-                     class="item">专栏福利</div>
+      <div class="col-md-4">
+        <div class="wechatma-con js-wechatma-con">
+          <div class="ma-con">
+            <div class="ma"></div>
+            <div class="desc">
+              <div class="title">扫码关注开源实践网服务号</div>
+              <div class="item-con">
+                <div class="item">干货分享</div>
+                <div class="item">定期活动</div>
+                <div class="item">课程优惠</div>
+                <div class="item">专栏福利</div>
               </div>
             </div>
           </div>
-          <div data-v-99224d36=""
-               class="text-con">
+          <div class="text-con">
             官方优惠福利活动一手掌握，关注开源实践官网（ID：www.redskt.com），和1万+客户端程序员一起成长！
           </div>
         </div>
-        <div data-v-99224d36=""
-             class="download-app js-show-download clearfix"><img data-v-99224d36=""
-               src="/_nuxt/assets/img/appLogo.png"
-               alt=""
-               class="logo-icon fl">
-          <div data-v-99224d36=""
-               class="text fl">
-            <h4 data-v-99224d36="">下载开源实践APP</h4>
-            <p data-v-99224d36="">更好的体验 学习随处可享</p>
+        <div class="download-app js-show-download clearfix">
+          <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
+          <div class="text fl">
+            <h4>下载开源实践APP</h4>
+            <p>更好的体验 学习随处可享</p>
           </div>
         </div>
       </div>
@@ -87,6 +65,8 @@
 </template>
 
 <script>
+
+import '~/assets/css/appdown.css'
 import messageApi from "@/api/index";
 
 export default {
@@ -200,6 +180,7 @@ export default {
 .message-list li:hover a {
   color: #409eff;
 }
+
 .message-list li a {
   display: block;
   color: #666;
@@ -221,15 +202,16 @@ export default {
 .mess-content-lefte .questions_tab_con {
   margin-left: -15px;
 }
+
 .main-content {
   min-height: 800px;
   margin-top: 15px;
 }
+
 .mess-content-lefte {
   background: #fff;
   padding: 15px;
 }
 
-.mess-content-lefte .message-top-rumb {
-}
+.mess-content-lefte .message-top-rumb {}
 </style>

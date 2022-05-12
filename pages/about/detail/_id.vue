@@ -24,7 +24,7 @@
 
             <div class="message-header-bloginfo">
               <nuxt-link class="article_title" :to="'/teacher/' + pitem.authorUid">
-                <span class="article-author">{{ pitem.authorName }}</span>
+                <span>{{ pitem.authorName }}</span>
               </nuxt-link>
               <span>{{ pitem.gmtCreate }} </span>
               <span class="message-viewcount">阅读 {{ pitem.viewCount }} </span>
@@ -221,7 +221,7 @@
                     target="_blank" title="英雄联盟官方" onclick="PTTSendClick('sAuthor','sAuthor-author_home','英雄联盟官方');">
                     {{ pitem.authorName }}
                   </a>
-                  <p class="num-read">1万次 总阅读量</p>
+                  <p class="num-read">{{ pitem.allvcount }}次 总阅读量</p>
                 </div>
               </div>
               <div class="ct-lt">
@@ -768,12 +768,12 @@
 
 .message-header-bloginfo .article_title {
   color: #333;
-  font-weight: 500;
+  font-weight: 550;
   text-decoration: none;
 }
 
 .message-header-bloginfo .message-viewcount {
-  margin-left: 380px;
+  margin-left: 370px;
 }
 
 .practice_header .header-focus {
@@ -868,6 +868,7 @@
 import showdown from "showdown";
 import "~/assets/css/iconfont.css";
 import "~/assets/css/markdown.css";
+import '~/assets/css/appdown.css'
 import messageApi from "@/api/index";
 import blogPractice from "@/api/practiceblog";
 import useract from "@/api/useract";

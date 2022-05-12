@@ -8,7 +8,7 @@
               <div class="active section">首页</div>
             </nuxt-link>
             <span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-            <nuxt-link to="/" class="section">
+            <nuxt-link :to="{ name: 'about-message' }" class="section">
               <div class="active section">消息通知</div>
             </nuxt-link>
             <span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>

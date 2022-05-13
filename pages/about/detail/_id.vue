@@ -30,7 +30,7 @@
               <span class="message-viewcount">阅读 {{ pitem.viewCount }} </span>
             </div>
           </div>
-          <div class="mark_content" v-html="changeMarkToHtml(pitem.content)"></div>
+          <div class="mark_content" v-html="pitem.content"></div>
           <div class="bottom-tool">
             <div class="bottom-tool_item">
               <div class="tool_crcle" @click="goodBtnClick" v-bind:class="{ toolactive: goodslect }" role="button"
@@ -45,13 +45,13 @@
                 <span>{{ pitem.good }}人点赞</span>
               </div>
             </div>
-            <div class="bottom-tool_item" @click="collectBtnClick">
+            <div class="bottom-tool_item" @click="userShareClick">
               <div class="tool_crcle" v-bind:class="{ toolactive: isCollect }">
                 <i class="iconfont icon-weixin" />
               </div>
             </div>
 
-            <div class="bottom-tool_item" @click="collectBtnClick">
+            <div class="bottom-tool_item" @click="userShareClick">
               <div class="tool_crcle" v-bind:class="{ toolactive: isCollect }">
                 <i class="iconfont icon-qq" />
               </div>
@@ -210,9 +210,7 @@
               <div class="c-por-bg">
                 <a href="/space/news.shtml?initGrid=0&amp;id=54f76f85-cf8c-422d-aa8e-d6c753f6d1a0" target="_blank"
                   class="name" onclick="PTTSendClick('sAuthor','sAuthor-author_home','英雄联盟官方');">
-
-                  <img :src="pitem.authorAvatar">
-
+                  <img :src="pitem.authorAvatar" />
                 </a>
               </div>
               <div class="con-top-bar">
@@ -229,19 +227,17 @@
 
                 <a href="javascript:" class="focus"
                   onclick="PTTSendClick('sAuthor','sAuthor-focus','关注');ArticleDetail.doFollowPlayer(true, '54f76f85-cf8c-422d-aa8e-d6c753f6d1a0')">关注</a>
-
               </div>
             </div>
             <!--他的文章-->
             <h2 class="tit">TA的文章</h2>
             <ul class="push-ul" id="authorArticleList">
               <li class="clearfix">
-
                 <div class="push-lf">
                   <a href="/news/space-detail.shtml?docid=10211860651276234502"
                     onclick="PTTSendClick('sAuthor','sAuthor-article0','《云顶之弈》开发者报告：2022 年 5 月');"><img
                       src="//shp.qpic.cn/cfwebcap/0/1f0d93094b2ea975bdf418cff8a58227/0/?width=686&amp;height=368"
-                      onerror="onerror=null;src='//ossweb-img.qq.com/images/lol/space/placeholder.png'"></a>
+                      onerror="onerror=null;src='//ossweb-img.qq.com/images/lol/space/placeholder.png'" /></a>
                 </div>
 
                 <div class="push-rt">
@@ -260,12 +256,11 @@
               </li>
 
               <li class="clearfix">
-
                 <div class="push-lf">
                   <a href="/news/space-detail.shtml?docid=6513350797495154075"
                     onclick="PTTSendClick('sAuthor','sAuthor-article1','小小英雄开放领取 共庆LiLuo全球总决赛夺冠');"><img
                       src="//shp.qpic.cn/cfwebcap/0/c0012bc9fccd805dc9000dfd06c67477/0/?width=686&amp;height=368"
-                      onerror="onerror=null;src='//ossweb-img.qq.com/images/lol/space/placeholder.png'"></a>
+                      onerror="onerror=null;src='//ossweb-img.qq.com/images/lol/space/placeholder.png'" /></a>
                 </div>
 
                 <div class="push-rt">
@@ -324,12 +319,12 @@
             </i>
           </div>
         </div>
-        <div class="tool_item" @click="collectBtnClick">
+        <div class="tool_item" @click="userShareClick">
           <div class="tool_crcle" v-bind:class="{ toolactive: isCollect }">
             <i class="iconfont icon-weixin" />
           </div>
         </div>
-        <div class="tool_item">
+        <div class="tool_item" @click="userShareClick">
           <div class="tool_crcle" role="button" tabindex="-1" aria-label="qq分享">
             <i class="iconfont icon-qq" />
           </div>
@@ -438,7 +433,7 @@
 }
 
 .author-info .tit:before {
-  content: '';
+  content: "";
   width: 3px;
   height: 18px;
   display: inline-block;
@@ -868,7 +863,7 @@
 import showdown from "showdown";
 import "~/assets/css/iconfont.css";
 import "~/assets/css/markdown.css";
-import '~/assets/css/appdown.css'
+import "~/assets/css/appdown.css";
 import messageApi from "@/api/index";
 import blogPractice from "@/api/practiceblog";
 import useract from "@/api/useract";
@@ -888,29 +883,31 @@ export default {
       isFocus: false,
       isCollect: false,
       forbiden: true,
-      pitem: {},
+      pitem: {}
     };
   },
   head () {
     return {
       script: [
         {
-          src: "https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js",
+          src:
+            "https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js",
           async: true,
-          defer: true,
-        },
+          defer: true
+        }
       ],
-      title: this.title,
+      title: this.title
     };
   },
   asyncData ({ params, error }) {
-    return messageApi.getMessageDetail(params.id).then((response) => {
+    return messageApi.getMessageDetail(params.id).then(response => {
       return {
-        pitem: response.data.pitem,
+        pitem: response.data.pitem
       };
     });
   },
   mounted () {
+    this.getUserMessageStatus();
     window.myVueComm = this;
     setTimeout(function () {
       myVueComm.initCommentEditor();
@@ -927,10 +924,6 @@ export default {
       this.loginInfo = JSON.parse(userStr);
       this.isLogin = true;
     }
-    // messageApi.getMessageDetail(1523552231247499265).then((response) => {
-    //     window.console.log(response);
-    //     this.pitem = response.data.pitem;
-    // });
     //this.getCommentList(1);
   },
 
@@ -947,41 +940,18 @@ export default {
     },
     focusString: function () {
       return this.isFocus ? "已关注" : "关注Ta";
-    },
+    }
   },
 
   methods: {
-    collectBtnClick () {
+    userShareClick () {
       if (this.forbiden) {
         this.forbiden = false;
-        if (this.isLogin) {
-          if (this.isCollect) {
-            blogPractice.cancleBlogCollect(this.pitem.id).then((response) => {
-              window.console.log("ffffffffff");
-              this.isCollect = false;
-              this.$message({
-                message: "取消收藏成功哈~",
-                type: "success",
-                duration: 2000,
-              });
-            });
-          } else {
-            blogPractice.addBlogCollect(this.pitem.id).then((response) => {
-              this.isCollect = true;
-              this.$message({
-                message: "收藏成功哈~",
-                type: "success",
-                duration: 2000,
-              });
-            });
-          }
-        } else {
-          this.$message({
-            message: "请您登录以后在收藏哈",
-            type: "success",
-            duration: 2000,
-          });
-        }
+        this.$message({
+          message: "分享功能正在开发中哈，敬请期待",
+          type: "info",
+          duration: 2000
+        });
       }
       setTimeout(function () {
         window.myVueComm.forbiden = true;
@@ -992,22 +962,22 @@ export default {
         this.forbiden = false;
         if (this.isLogin) {
           if (this.isFocus) {
-            useract.cancleUserFocus(this.pitem.authorUid).then((response) => {
+            useract.cancleUserFocus(this.pitem.authorUid).then(response => {
               this.isFocus = response.data.focus;
               this.$message({
                 message: "取消关注成功哈~",
                 type: "success",
-                duration: 2000,
+                duration: 2000
               });
             });
           } else {
             window.console.log("dddddddddddddddd");
-            useract.addUserFocus(this.pitem.authorUid).then((response) => {
+            useract.addUserFocus(this.pitem.authorUid).then(response => {
               this.isFocus = response.data.focus;
               this.$message({
                 message: "关注成功哈~",
                 type: "success",
-                duration: 2000,
+                duration: 2000
               });
             });
           }
@@ -1015,7 +985,7 @@ export default {
           this.$message({
             message: "请您登录以后在关注哈",
             type: "success",
-            duration: 2000,
+            duration: 2000
           });
         }
       }
@@ -1025,12 +995,12 @@ export default {
     },
     goodReplyClick (item, type) {
       if (item.goodreply) {
-        blogPractice.cancleCommentGood(item.id, type).then((response) => {
+        blogPractice.cancleCommentGood(item.id, type).then(response => {
           item.good = item.good - 1;
           item.goodreply = false;
         });
       } else {
-        blogPractice.addCommentGood(item.id, type).then((response) => {
+        blogPractice.addCommentGood(item.id, type).then(response => {
           item.good = item.good + 1;
           item.goodreply = true;
         });
@@ -1123,10 +1093,10 @@ export default {
         // insertImgFn 是获取图片 url 后，插入到编辑器的方法
         var file = files[0];
         const putExtra = {
-          mimeType: file.type,
+          mimeType: file.type
         };
         const config = {
-          region: qiniu.region.z2,
+          region: qiniu.region.z2
         };
         const observable = qiniu.upload(
           file,
@@ -1145,7 +1115,7 @@ export default {
           complete (res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
-          },
+          }
         };
         const subscription = observable.subscribe(observer);
       };
@@ -1213,10 +1183,10 @@ export default {
         // insertImgFn 是获取图片 url 后，插入到编辑器的方法
         var file = files[0];
         const putExtra = {
-          mimeType: file.type,
+          mimeType: file.type
         };
         const config = {
-          region: qiniu.region.z2,
+          region: qiniu.region.z2
         };
         const observable = qiniu.upload(
           file,
@@ -1235,7 +1205,7 @@ export default {
           complete (res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
-          },
+          }
         };
         const subscription = observable.subscribe(observer);
       };
@@ -1246,7 +1216,7 @@ export default {
     getCommentList (type) {
       realPractice
         .getPraticeBlogCommentLists(this.pitem.id, type)
-        .then((response) => {
+        .then(response => {
           this.commentList = response.data.comments;
         });
     },
@@ -1276,7 +1246,7 @@ export default {
         this.$message({
           message: "输入的内容太短了哦！",
           type: "error",
-          duration: 2000,
+          duration: 2000
         });
         return;
       }
@@ -1284,9 +1254,9 @@ export default {
         .submitBlogReply({
           content: item.editor.txt.html(),
           rid: item.id,
-          uid: this.loginInfo.id,
+          uid: this.loginInfo.id
         })
-        .then((response) => {
+        .then(response => {
           item.editor.txt.html("");
           myVueComm.repplaybtnclinck(item, index);
           item.comments.unshift(response.data.reply);
@@ -1294,7 +1264,7 @@ export default {
           this.$message({
             message: "问题回答成功哦",
             type: "success",
-            duration: 2000,
+            duration: 2000
           });
         });
     },
@@ -1305,7 +1275,7 @@ export default {
         this.$message({
           message: "输入的内容太短了哦！",
           type: "error",
-          duration: 2000,
+          duration: 2000
         });
         return;
       }
@@ -1314,16 +1284,16 @@ export default {
           content: item.editor.txt.html(),
           rid: comment.id,
           uid: this.loginInfo.id,
-          touid: uid,
+          touid: uid
         })
-        .then((response) => {
+        .then(response => {
           item.editor.txt.html("");
           comment.comments.unshift(response.data.reply);
           myVueComm.replyCommentbtnclick(item, index);
           this.$message({
             message: "问题回答成功哦",
             type: "success",
-            duration: 2000,
+            duration: 2000
           });
         });
     },
@@ -1337,14 +1307,14 @@ export default {
             duration: 2000,
             onClose: () => {
               $nuxt.$router.push({
-                name: "user-login",
+                name: "user-login"
               });
-            },
+            }
           });
         }
         return;
       }
-      userApi.getUploadImageToken().then((response) => {
+      userApi.getUploadImageToken().then(response => {
         this.uploadToken = response.data.token;
       });
     },
@@ -1356,7 +1326,7 @@ export default {
         this.$message({
           message: "输入的内容太短了哦！",
           type: "error",
-          duration: 2000,
+          duration: 2000
         });
         return;
       }
@@ -1364,16 +1334,16 @@ export default {
         .submitBlogComment({
           content: this.editor.txt.html(),
           bid: this.pitem.id,
-          uid: this.loginInfo.id,
+          uid: this.loginInfo.id
         })
-        .then((response) => {
+        .then(response => {
           this.editor.txt.html("");
           debugger;
           this.commentList.unshift(response.data.comment);
           this.$message({
             message: "问题回答成功哦",
             type: "success",
-            duration: 2000,
+            duration: 2000
           });
         });
     },
@@ -1405,10 +1375,10 @@ export default {
         // insertImgFn 是获取图片 url 后，插入到编辑器的方法
         var file = files[0];
         const putExtra = {
-          mimeType: file.type,
+          mimeType: file.type
         };
         const config = {
-          region: qiniu.region.z2,
+          region: qiniu.region.z2
         };
         const observable = qiniu.upload(
           file,
@@ -1427,7 +1397,7 @@ export default {
           complete (res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
-          },
+          }
         };
         const subscription = observable.subscribe(observer);
       };
@@ -1440,15 +1410,22 @@ export default {
       console.log(tab, event);
     },
 
-    addUserPraticeGood () {
-      useract.addUserPraticeGood(this.pitem.id).then((response) => {
+    getUserMessageStatus () {
+      useract.getUserMessageStatus(this.pitem.id).then((response) => {
+        this.goodslect = response.data.status.goodslect;
+        this.isFocus = response.data.status.isFocus;
+      });
+    },
+
+    addUserMessageGood () {
+      useract.addUserMessageGood(this.pitem.id).then(response => {
         this.pitem.good++;
         this.goodslect = true;
       });
     },
 
-    cancleleUserPraticeGood () {
-      useract.cancleleUserPraticeGood(this.pitem.id).then((response) => {
+    cancleleUserMessageGood () {
+      useract.cancleleUserMessageGood(this.pitem.id).then(response => {
         this.pitem.good--;
         this.goodslect = false;
       });
@@ -1456,16 +1433,11 @@ export default {
 
     goodBtnClick () {
       if (this.goodslect) {
-        this.cancleleUserPraticeGood();
+        this.cancleleUserMessageGood();
       } else {
-        this.addUserPraticeGood();
+        this.addUserMessageGood();
       }
     },
-
-    changeMarkToHtml (content) {
-      var converter = new showdown.Converter();
-      return converter.makeHtml(content);
-    },
-  },
+  }
 };
 </script>

@@ -225,8 +225,9 @@
               <div class="ct-lt">
                 <p class="num-follower">100 粉丝</p>
 
-                <a href="javascript:" class="focus"
-                  onclick="PTTSendClick('sAuthor','sAuthor-focus','关注');ArticleDetail.doFollowPlayer(true, '54f76f85-cf8c-422d-aa8e-d6c753f6d1a0')">关注</a>
+                <a href="javascript:" class="focus" @click="focusUserClick" v-bind:class="{ active: isFocus }">{{
+                    focusString
+                }}</a>
               </div>
             </div>
             <!--他的文章-->
@@ -474,6 +475,13 @@
   text-align: center;
   line-height: 24px;
   color: #bb9a6c;
+  text-decoration: none;
+}
+
+.author-info .focus.active {
+  background: #409EFF;
+  border: 1px solid #409EFF;
+  color: #fff;
 }
 
 .con-top-bar {

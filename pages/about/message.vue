@@ -174,7 +174,7 @@ export default {
 }
 
 .message-list .message-detail {
-  margin-left: 60px;
+  margin-left: 150px;
 }
 
 .message-list li:hover a {

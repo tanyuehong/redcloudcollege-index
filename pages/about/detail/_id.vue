@@ -208,15 +208,13 @@
             <!--作者信息-->
             <div class="s-top-bar clearfix" id="authorInfo">
               <div class="c-por-bg">
-                <a href="/space/news.shtml?initGrid=0&amp;id=54f76f85-cf8c-422d-aa8e-d6c753f6d1a0" target="_blank"
-                  class="name" onclick="PTTSendClick('sAuthor','sAuthor-author_home','英雄联盟官方');">
+                <a href="javascript:" class="name">
                   <img :src="pitem.authorAvatar" />
                 </a>
               </div>
               <div class="con-top-bar">
                 <div>
-                  <a href="/space/news.shtml?initGrid=0&amp;id=54f76f85-cf8c-422d-aa8e-d6c753f6d1a0" class="name"
-                    target="_blank" title="英雄联盟官方" onclick="PTTSendClick('sAuthor','sAuthor-author_home','英雄联盟官方');">
+                  <a href="javascript:" class="name" title="个人详细信息">
                     {{ pitem.authorName }}
                   </a>
                   <p class="num-read">{{ pitem.allvcount }}次 总阅读量</p>
@@ -232,48 +230,20 @@
             <!--他的文章-->
             <h2 class="tit">TA的文章</h2>
             <ul class="push-ul" id="authorArticleList">
-              <li class="clearfix">
+              <li class="clearfix" v-for="item in messageList" :key="item.id">
                 <div class="push-lf">
-                  <a href="/news/space-detail.shtml?docid=10211860651276234502"
-                    onclick="PTTSendClick('sAuthor','sAuthor-article0','《云顶之弈》开发者报告：2022 年 5 月');"><img
-                      src="//shp.qpic.cn/cfwebcap/0/1f0d93094b2ea975bdf418cff8a58227/0/?width=686&amp;height=368"
-                      onerror="onerror=null;src='//ossweb-img.qq.com/images/lol/space/placeholder.png'" /></a>
+                  <nuxt-link :to="'/about/detail/' + item.id" target="_blank">
+                    <img :src="item.cover" />
+                  </nuxt-link>
                 </div>
 
                 <div class="push-rt">
                   <p>
-                    <a href="/news/space-detail.shtml?docid=10211860651276234502"
-                      onclick="PTTSendClick('sAuthor','sAuthor-article0','《云顶之弈》开发者报告：2022 年 5 月');">《云顶之弈》开发者报告：2022 年
-                      5 月</a>
+                    <nuxt-link :to="'/about/detail/' + item.id" target="_blank">{{ item.title }}</nuxt-link>
                   </p>
                   <p>
                     <i class="icon-read"></i>
-                    <span class="read-tx">4007阅读</span>
-                    <!--<i class="icon-comment"></i>
-                                        <a href="javascript:">68评论</a>-->
-                  </p>
-                </div>
-              </li>
-
-              <li class="clearfix">
-                <div class="push-lf">
-                  <a href="/news/space-detail.shtml?docid=6513350797495154075"
-                    onclick="PTTSendClick('sAuthor','sAuthor-article1','小小英雄开放领取 共庆LiLuo全球总决赛夺冠');"><img
-                      src="//shp.qpic.cn/cfwebcap/0/c0012bc9fccd805dc9000dfd06c67477/0/?width=686&amp;height=368"
-                      onerror="onerror=null;src='//ossweb-img.qq.com/images/lol/space/placeholder.png'" /></a>
-                </div>
-
-                <div class="push-rt">
-                  <p>
-                    <a href="/news/space-detail.shtml?docid=6513350797495154075"
-                      onclick="PTTSendClick('sAuthor','sAuthor-article1','小小英雄开放领取 共庆LiLuo全球总决赛夺冠');">小小英雄开放领取
-                      共庆LiLuo全球总决赛夺冠</a>
-                  </p>
-                  <p>
-                    <i class="icon-read"></i>
-                    <span class="read-tx">107万阅读</span>
-                    <!--<i class="icon-comment"></i>
-                                        <a href="javascript:">68评论</a>-->
+                    <span class="read-tx">{{ item.viewCount }} 阅读</span>
                   </p>
                 </div>
               </li>
@@ -883,7 +853,6 @@ import userApi from "@/api/user";
 export default {
   data () {
     return {
-      title: "开源实践网",
       goodslect: false,
       showComment: false,
       commentList: [],
@@ -894,7 +863,8 @@ export default {
       isFocus: false,
       isCollect: false,
       forbiden: true,
-      pitem: {}
+      pitem: {},
+      descrb:"开源实践问答终于在我们团队辛勤的努力下完满的完成了上线。虽然这只是我们开源实践万里长征的一小步，但是我们坚信，在我们的始终如一的坚持为小伙伴们解决问题的初衷下，我们的问答系统会越做越好，也必然的会有越来越多小伙伴的喜爱，知名度也会越来越高。",
     };
   },
   head () {
@@ -907,13 +877,30 @@ export default {
           defer: true
         }
       ],
-      title: this.title
+      title: this.pitem.title + "-开源实践网",
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: "开源实践问答上线，官方通知中心",
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.descrb,
+        },
+        {
+          hid: 'og:description',
+          content: this.descrb,
+        },
+      ],
     };
   },
   asyncData ({ params, error }) {
     return messageApi.getMessageDetail(params.id).then(response => {
       return {
-        pitem: response.data.pitem
+        pitem: response.data.pitem,
+        messageList: response.data.messageList
       };
     });
   },

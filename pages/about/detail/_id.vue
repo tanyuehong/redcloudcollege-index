@@ -70,7 +70,7 @@
 
               <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:leave="cleave" v-bind:css="false">
                 <div class="editor-submit-tool" v-if="showComment">
-                  <el-button type="primary" round size="small" @click="commentBtnSubmit">发表评论</el-button>
+                  <el-button type="primary" round size="small" @click="commentBtnSubmit">评论</el-button>
                   <el-button round size="small" @click="cancleCommentClick">取消</el-button>
                 </div>
               </transition>
@@ -223,8 +223,7 @@
                 </div>
               </div>
               <div class="ct-lt">
-                <p class="num-follower">100 粉丝</p>
-
+                <p class="num-follower">{{ pitem.fanscount }} 粉丝</p>
                 <a href="javascript:" class="focus" @click="focusUserClick" v-bind:class="{ active: isFocus }">{{
                     focusString
                 }}</a>
@@ -776,7 +775,11 @@
 }
 
 .message-header-bloginfo .message-viewcount {
-  margin-left: 370px;
+  margin-left: 325px;
+  width: 80px;
+  float: right;
+  text-align: right;
+  margin-right: 6px;
 }
 
 .practice_header .header-focus {
@@ -868,13 +871,13 @@
 </style>
 
 <script>
-import showdown from "showdown";
 import "~/assets/css/iconfont.css";
 import "~/assets/css/markdown.css";
 import "~/assets/css/appdown.css";
+
 import messageApi from "@/api/index";
-import blogPractice from "@/api/practiceblog";
 import useract from "@/api/useract";
+import message from "@/api/message";
 import userApi from "@/api/user";
 
 export default {
@@ -932,7 +935,7 @@ export default {
       this.loginInfo = JSON.parse(userStr);
       this.isLogin = true;
     }
-    //this.getCommentList(1);
+    this.getCommentList(1);
   },
 
   computed: {
@@ -1003,12 +1006,12 @@ export default {
     },
     goodReplyClick (item, type) {
       if (item.goodreply) {
-        blogPractice.cancleCommentGood(item.id, type).then(response => {
+        message.cancleCommentGood(item.id, type).then(response => {
           item.good = item.good - 1;
           item.goodreply = false;
         });
       } else {
-        blogPractice.addCommentGood(item.id, type).then(response => {
+        message.addCommentGood(item.id, type).then(response => {
           item.good = item.good + 1;
           item.goodreply = true;
         });
@@ -1222,8 +1225,7 @@ export default {
     },
 
     getCommentList (type) {
-      realPractice
-        .getPraticeBlogCommentLists(this.pitem.id, type)
+      message.getMessageCommentLists(this.pitem.id, type)
         .then(response => {
           this.commentList = response.data.comments;
         });
@@ -1258,8 +1260,8 @@ export default {
         });
         return;
       }
-      blogPractice
-        .submitBlogReply({
+      message
+        .submitMessageReply({
           content: item.editor.txt.html(),
           rid: item.id,
           uid: this.loginInfo.id
@@ -1287,8 +1289,8 @@ export default {
         });
         return;
       }
-      blogPractice
-        .submitBlogReply({
+      message
+        .submitMessageReply({
           content: item.editor.txt.html(),
           rid: comment.id,
           uid: this.loginInfo.id,
@@ -1338,10 +1340,10 @@ export default {
         });
         return;
       }
-      blogPractice
-        .submitBlogComment({
+      message
+        .submitMessageComment({
           content: this.editor.txt.html(),
-          bid: this.pitem.id,
+          mid: this.pitem.id,
           uid: this.loginInfo.id
         })
         .then(response => {
@@ -1419,21 +1421,21 @@ export default {
     },
 
     getUserMessageStatus () {
-      useract.getUserMessageStatus(this.pitem.id).then((response) => {
+      message.getUserMessageStatus(this.pitem.id).then((response) => {
         this.goodslect = response.data.status.goodslect;
         this.isFocus = response.data.status.isFocus;
       });
     },
 
     addUserMessageGood () {
-      useract.addUserMessageGood(this.pitem.id).then(response => {
+      message.addUserMessageGood(this.pitem.id).then(response => {
         this.pitem.good++;
         this.goodslect = true;
       });
     },
 
     cancleleUserMessageGood () {
-      useract.cancleleUserMessageGood(this.pitem.id).then(response => {
+      message.cancleleUserMessageGood(this.pitem.id).then(response => {
         this.pitem.good--;
         this.goodslect = false;
       });

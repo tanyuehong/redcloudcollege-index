@@ -43,5 +43,5 @@ export default {
       url: `/home/ucenter/getUserFocus/${fid}`,
       method: 'get',
     })
-  }
+  },
 }

@@ -5,26 +5,21 @@
         <div class="ask_detail_content">
           <div class="ask-detail-lefte">
             <div class="ui breadcrumb red_breadcrumb">
-              <a class="section"
-                 href="/faquestion">实践问答</a>
-              <span class="glyphicon glyphicon glyphicon-menu-right"
-                    aria-hidden="true"></span>
+              <nuxt-link :to="{ name: 'faquestion' }" class="section">
+                实践问答
+              </nuxt-link>
+              <span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
               <div class="active section">问题详情</div>
             </div>
             <div>
               <div class="question_info">
                 <a href="#">
-                  <img class="vam user-head-image"
-                       :src="qdetail.avatar"
-                       width="30"
-                       height="30"
-                       alt />
+                  <img class="vam user-head-image" :src="qdetail.avatar" width="30" height="30" alt />
                   <span class="ml5">{{ qdetail.nickname }}</span></a>
                 <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
-                <span class="glyphicon glyphicon-star-empty qustion-top-item"
-                      aria-hidden="true">
+                <span class="glyphicon glyphicon-star-empty qustion-top-item" aria-hidden="true">
                 </span>
-                <span class="qustion-good-num"> 收藏 {{qdetail.collect}} </span>
+                <span class="qustion-good-num"> 收藏 {{ qdetail.collect }} </span>
 
                 <span class="qustion-top-item top-tips">已解决</span>
                 <div class="qustion-right-view">
@@ -33,47 +28,36 @@
               </div>
               <div>
                 <h2 class="title_header">{{ qdetail.title }}</h2>
-                <div class="ui red label horizontal"
-                     data-tooltip="置顶">
+                <div class="ui red label horizontal" data-tooltip="置顶">
                   顶
                 </div>
-                <div class="ui orange label horizontal"
-                     data-tooltip="热门">
+                <div class="ui orange label horizontal" data-tooltip="热门">
                   热
                 </div>
               </div>
 
               <div class="extra question-tags mt10">
-                <a class="ui horizontal basic label popup-tag"
-                   href="https://www.oschina.net/question/tag/ruby"
-                   target="_blank">
-                  <img class="question-tags-img"
-                       src="https://static.oschina.net/img/logo/ruby.gif" />
+                <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
+                  target="_blank">
+                  <img class="question-tags-img" src="https://static.oschina.net/img/logo/ruby.gif" />
                   Ruby
                 </a>
 
-                <a class="ui horizontal basic label popup-tag"
-                   href="https://www.oschina.net/question/tag/java"
-                   target="_blank">
-                  <img class="question-tags-img"
-                       src="https://static.oschina.net/img/logo/java.png" />
+                <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/java"
+                  target="_blank">
+                  <img class="question-tags-img" src="https://static.oschina.net/img/logo/java.png" />
                   Java
                 </a>
               </div>
 
-              <div class="qustion_content"
-                   v-html="qdetail.content"></div>
+              <div class="qustion_content" v-html="qdetail.content"></div>
               <div class="qustion_info">
                 <div class="ui_center_button">
-                  <el-button plain
-                             type="primary"
-                             :icon="collectIcon"
-                             @click="collectBtnClick">{{collectString}}</el-button>
+                  <el-button plain type="primary" :icon="collectIcon" @click="collectBtnClick">{{ collectString }}
+                  </el-button>
                   <div class="ui_group_button">
                     <el-dropdown class="sort">
-                      <el-button plain
-                                 type="primary"
-                                 icon="el-icon-share">分享</el-button>
+                      <el-button plain type="primary" icon="el-icon-share">分享</el-button>
                       <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item>微博</el-dropdown-item>
                         <el-dropdown-item>QQ</el-dropdown-item>
@@ -83,69 +67,50 @@
                   </div>
                 </div>
                 <ul class="ask-issue-tool fbselect">
-                  <span class="answer_span"
-                        @click="answerBtnClick"><i class="icon ic_question_reply"></i>写回答</span>
+                  <span class="answer_span" @click="answerBtnClick"><i class="icon ic_question_reply"></i>写回答</span>
                   <li class="up_down_wrap wrapdisLike ask-info-item">
-                    <span class="vote_span disLike"
-                          @click="goodQustionClick"
-                          v-bind:class="{ like: goodqustion }">
+                    <span class="vote_span disLike" @click="goodQustionClick" v-bind:class="{ like: goodqustion }">
 
-                      <i class="icon icon_vote_up"></i>好问题<em class="qustion-good-num"
-                          v-if="qdetail.good>0">{{qdetail.good}}</em>
+                      <i class="icon icon_vote_up"></i>好问题<em class="qustion-good-num" v-if="qdetail.good > 0">{{
+                          qdetail.good
+                      }}</em>
                       <!---->
                     </span>
-                    <span class="vote_span2"
-                          @click="jianyiDlog = true"><i class="icon icon_vote_down"></i>提建议
+                    <span class="vote_span2" @click="jianyiDlog = true"><i class="icon icon_vote_down"></i>提建议
                     </span>
-                    <el-dialog title="哪些方面需要改进"
-                               :visible.sync="jianyiDlog"
-                               :close-on-click-modal="false"
-                               center>
+                    <el-dialog title="哪些方面需要改进" :visible.sync="jianyiDlog" :close-on-click-modal="false" center>
                       <div class="jubao-content">
                         <el-radio-group v-model="jianyilable">
                           <div class="jubao-radio-content">
                             <div class="jubao-lefte-items">
-                              <el-radio :label="1"
-                                        class="jubao-radio-item">提问应符合社区要求</el-radio>
-                              <el-radio :label="2"
-                                        class="jubao-radio-item">请选择合适的标签</el-radio>
-                              <el-radio :label="3"
-                                        class="jubao-radio-item">请详细说明问题背景</el-radio>
+                              <el-radio :label="1" class="jubao-radio-item">提问应符合社区要求</el-radio>
+                              <el-radio :label="2" class="jubao-radio-item">请选择合适的标签</el-radio>
+                              <el-radio :label="3" class="jubao-radio-item">请详细说明问题背景</el-radio>
                             </div>
 
                             <div class="jubao-right-items">
-                              <el-radio :label="4"
-                                        class="jubao-radio-item">请采纳用户回复</el-radio>
-                              <el-radio :label="5"
-                                        class="jubao-radio-item">请回答用户的提问</el-radio>
-                              <el-radio :label="6"
-                                        class="jubao-radio-item">请提交代码</el-radio>
+                              <el-radio :label="4" class="jubao-radio-item">请采纳用户回复</el-radio>
+                              <el-radio :label="5" class="jubao-radio-item">请回答用户的提问</el-radio>
+                              <el-radio :label="6" class="jubao-radio-item">请提交代码</el-radio>
                             </div>
                           </div>
                         </el-radio-group>
                         <div class="accusation-reason mb15">
                           <h2 class="accusation-secondary-title">建议详情（选填）</h2>
                           <div class="accusation-input mt10">
-                            <el-input type="textarea"
-                                      v-model="jianyiContent"
-                                      placeholder="请详细描述您的建议，以便帮助更多的人"
-                                      maxlength="200"
-                                      :rows="6"
-                                      show-word-limit>
+                            <el-input type="textarea" v-model="jianyiContent" placeholder="请详细描述您的建议，以便帮助更多的人"
+                              maxlength="200" :rows="6" show-word-limit>
                             </el-input>
                           </div>
                         </div>
                       </div>
-                      <div slot="footer"
-                           class="dialog-footer">
+                      <div slot="footer" class="dialog-footer">
                         <el-button @click="jianyiDlog = false">取 消</el-button>
-                        <el-button type="primary"
-                                   @click="qustionJianYiConfirm">确 定</el-button>
+                        <el-button type="primary" @click="qustionJianYiConfirm">确 定</el-button>
                       </div>
                     </el-dialog>
                   </li>
-                  <li class="ask-info-item"
-                      @click="jubaoBtnClick(qdetail.qid,'问题')">
+                  <li class="ask-info-item" @click="jubaoBtnClick(qdetail.qid, '问题')">
                     <i class="icon icon_vote_jubao"></i>举报
                   </li>
                   <li class="ask-info-item">
@@ -159,52 +124,37 @@
                     </el-dropdown>
                   </li>
 
-                  <el-dialog title="举报反馈"
-                             :visible.sync="jubiaoDlog"
-                             :close-on-click-modal="false"
-                             center>
+                  <el-dialog title="举报反馈" :visible.sync="jubiaoDlog" :close-on-click-modal="false" center>
                     <div class="jubao-content">
                       <div class="accusation-type">
                         <h2 class="accusation-secondary-title mb10">举报类型（必选）</h2>
                         <ul>
-                          <li class="accusation-item"
-                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==1}"
-                              @click="jubaoTypeIndex=1">诱导点赞、关注</li>
-                          <li class="accusation-item"
-                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==2}"
-                              @click="jubaoTypeIndex=2">抄袭、刷量作弊</li>
-                          <li class="accusation-item"
-                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==3}"
-                              @click="jubaoTypeIndex=3">有害信息</li>
-                          <li class="accusation-item"
-                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==4}"
-                              @click="jubaoTypeIndex=4">不友善内容</li>
-                          <li class="accusation-item"
-                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==5}"
-                              @click="jubaoTypeIndex=5">垃圾广告信息</li>
-                          <li class="accusation-item"
-                              v-bind:class="{ jubaoSlect:jubaoTypeIndex==6}"
-                              @click="jubaoTypeIndex=6">低质内容</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect: jubaoTypeIndex == 1 }"
+                            @click="jubaoTypeIndex = 1">诱导点赞、关注</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect: jubaoTypeIndex == 2 }"
+                            @click="jubaoTypeIndex = 2">抄袭、刷量作弊</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect: jubaoTypeIndex == 3 }"
+                            @click="jubaoTypeIndex = 3">有害信息</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect: jubaoTypeIndex == 4 }"
+                            @click="jubaoTypeIndex = 4">不友善内容</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect: jubaoTypeIndex == 5 }"
+                            @click="jubaoTypeIndex = 5">垃圾广告信息</li>
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect: jubaoTypeIndex == 6 }"
+                            @click="jubaoTypeIndex = 6">低质内容</li>
                         </ul>
                       </div>
                       <div class="accusation-reason">
                         <h2 class="accusation-secondary-title mb10">举报详情（选填）</h2>
                         <div class="accusation-input">
-                          <el-input type="textarea"
-                                    v-model="jubaoContent"
-                                    placeholder="请详细描述举报原因，我们将第一时间核实处理"
-                                    maxlength="200"
-                                    :rows="6"
-                                    show-word-limit>
+                          <el-input type="textarea" v-model="jubaoContent" placeholder="请详细描述举报原因，我们将第一时间核实处理"
+                            maxlength="200" :rows="6" show-word-limit>
                           </el-input>
                         </div>
                       </div>
                     </div>
-                    <div slot="footer"
-                         class="dialog-footer">
+                    <div slot="footer" class="dialog-footer">
                       <el-button @click="jubiaoDlog = false">取 消</el-button>
-                      <el-button type="primary"
-                                 @click="jubaoCommitBtnClick">确 定</el-button>
+                      <el-button type="primary" @click="jubaoCommitBtnClick">确 定</el-button>
                     </div>
                   </el-dialog>
                 </ul>
@@ -212,54 +162,38 @@
             </div>
           </div>
 
-          <div id="answer-list"
-               class="qustion-answer-list"
-               v-if="replyList.length">
+          <div id="answer-list" class="qustion-answer-list" v-if="replyList.length">
             <h4 class="reply-title">
               <span><em class="em1">{{ replyList.length }}</em>条回答</span>
               <span class="reply_wrap">
-                <em class="em2"
-                    :class="{ cur: answertype }"
-                    @click="clickAnserType(true)">默认</em>
-                <em class="em2"
-                    :class="{ cur: answertype == false }"
-                    @click="clickAnserType(false)">最新</em>
+                <em class="em2" :class="{ cur: answertype }" @click="clickAnserType(true)">默认</em>
+                <em class="em2" :class="{ cur: answertype == false }" @click="clickAnserType(false)">最新</em>
               </span>
             </h4>
 
             <div class="qustion-answer-content">
               <ul class="qustion-anser-list">
-                <li class="answer-list-item"
-                    v-for="(item, index) in replyList"
-                    :key="item.id">
+                <li class="answer-list-item" v-for="(item, index) in replyList" :key="item.id">
                   <div class="answer-item-userinfo">
-                    <img class="vam user-head-image"
-                         :src="item.avatar"
-                         width="30"
-                         height="30"
-                         alt />
+                    <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
                     <span class="ml5"> {{ item.username }}</span>
                     <span class="qustion-top-item"> {{ item.gmtCreate }}</span>
                   </div>
 
-                  <div class="answer-item-content"
-                       v-html="item.content"></div>
+                  <div class="answer-item-content" v-html="item.content"></div>
 
                   <div class="reply_content_tool">
-                    <span class="mr20px fbselect"
-                          @click="repplaybtnclinck(item,index)">
+                    <span class="mr20px fbselect" @click="repplaybtnclinck(item, index)">
                       <i class="icon icon_comment"></i>
                       评论
                     </span>
                     <div class="vote-box vote_like">
-                      <span v-bind:class="{ like: item.goodreply }"
-                            @click="goodReplyClick(item)"
-                            class="vote_span vote_spaned">
-                        <i class="icon icon_vote_up"></i>解决<em class="qustion-good-num">{{item.good}}</em></span>
-                      <span class="vote_span2"
-                            @click="badReplyClick(item)"
-                            v-bind:class="{ like: item.badreply}"><i class="icon icon_vote_down"></i>无用<em class="qustion-good-num"
-                            v-if="item.bad>0">{{item.bad}}</em>
+                      <span v-bind:class="{ like: item.goodreply }" @click="goodReplyClick(item)"
+                        class="vote_span vote_spaned">
+                        <i class="icon icon_vote_up"></i>解决<em class="qustion-good-num">{{ item.good }}</em></span>
+                      <span class="vote_span2" @click="badReplyClick(item)" v-bind:class="{ like: item.badreply }"><i
+                          class="icon icon_vote_down"></i>无用<em class="qustion-good-num" v-if="item.bad > 0">{{ item.bad
+                          }}</em>
                         <!---->
                       </span>
                     </div>
@@ -273,81 +207,55 @@
                       分享
                     </span>
 
-                    <span class="li_more li_report"
-                          @click="jubaoBtnClick(item.id,'回答')">
+                    <span class="li_more li_report" @click="jubaoBtnClick(item.id, '回答')">
                       <i class="icon icon_ask_report"></i>
                       举报
                     </span>
 
                   </div>
 
-                  <transition v-on:before-enter="beforeEnter"
-                              v-on:enter="enter"
-                              v-on:after-enter="afterEnter"
-                              v-on:leave="leave"
-                              v-bind:css="false">
-                    <div :id="'replayedtor' + index"
-                         class="replay-editor"
-                         v-if="item.showeditor"
-                         :key="item.id">
+                  <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter"
+                    v-on:leave="leave" v-bind:css="false">
+                    <div :id="'replayedtor' + index" class="replay-editor" v-if="item.showeditor" :key="item.id">
                     </div>
                   </transition>
 
-                  <div class="reply-comment-tool"
-                       v-if="item.showeditor">
-                    <span @click="repplaybtnclinck(item,index)">取消</span>
-                    <div class="comment-btn"
-                         @click="replyCommntClick(item,index)">评论</div>
+                  <div class="reply-comment-tool" v-if="item.showeditor">
+                    <span @click="repplaybtnclinck(item, index)">取消</span>
+                    <div class="comment-btn" @click="replyCommntClick(item, index)">评论</div>
                   </div>
 
-                  <div class="reply-comment-container"
-                       v-if="item.comments">
-                    <div class="reply-comment-item"
-                         v-for="(comment, cindex) in item.comments"
-                         :key="comment.id">
+                  <div class="reply-comment-container" v-if="item.comments">
+                    <div class="reply-comment-item" v-for="(comment, cindex) in item.comments" :key="comment.id">
                       <div class="answer-item-userinfo">
-                        <img class="vam user-head-image"
-                             :src="comment.avatar"
-                             width="30"
-                             height="30"
-                             alt />
+                        <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt />
                         <span class="ml5"> {{ comment.name }}</span>
-                        <span class="comment-replyment"
-                              v-if="comment.toname">回复</span>
+                        <span class="comment-replyment" v-if="comment.toname">回复</span>
                         <span v-if="comment.toname">{{ comment.toname }}</span>
                         <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
                       </div>
-                      <div class="answer-item-content"
-                           v-html="comment.content"></div>
+                      <div class="answer-item-content" v-html="comment.content"></div>
                       <div class="comment-tool-bar fbselect">
-                        <span class="mr15"
-                              v-bind:class="{ goodcomment: comment.goodcomment }"
-                              @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>{{commentGood(comment.good)}}</span>
-                        <span class="mr15"
-                              @click="commentbtnclinck(comment,cindex)">回复</span>
-                        <span class="li_more li_report"
-                              @click="jubaoBtnClick(comment.id,'评论')">
+                        <span class="mr15" v-bind:class="{ goodcomment: comment.goodcomment }"
+                          @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>{{
+                              commentGood(comment.good)
+                          }}</span>
+                        <span class="mr15" @click="commentbtnclinck(comment, cindex)">回复</span>
+                        <span class="li_more li_report" @click="jubaoBtnClick(comment.id, '评论')">
                           <i class="icon icon_ask_report"></i>举报
                         </span>
 
                       </div>
 
-                      <transition v-on:before-enter="cbeforeEnter"
-                                  v-on:enter="center"
-                                  v-on:after-enter="cafterEnter"
-                                  v-on:leave="cleave"
-                                  v-bind:css="false">
-                        <div :id="'creplayedtor' + cindex"
-                             class="c-replay-editor"
-                             v-if="comment.showeditor"
-                             :key="comment.id">
+                      <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:after-enter="cafterEnter"
+                        v-on:leave="cleave" v-bind:css="false">
+                        <div :id="'creplayedtor' + cindex" class="c-replay-editor" v-if="comment.showeditor"
+                          :key="comment.id">
                         </div>
                       </transition>
-                      <div class="reply-comment-tool r-comment"
-                           v-if="comment.showeditor">
-                        <span @click="commentbtnclinck(comment,cindex)">取消</span>
-                        <div class="comment-btn"
-                             @click="creplyCommntClick(comment,item,cindex)">提交</div>
+                      <div class="reply-comment-tool r-comment" v-if="comment.showeditor">
+                        <span @click="commentbtnclinck(comment, cindex)">取消</span>
+                        <div class="comment-btn" @click="creplyCommntClick(comment, item, cindex)">提交</div>
                       </div>
                     </div>
                   </div>
@@ -360,11 +268,8 @@
             <div id="answer-editor"></div>
             <div class="answer-ediot-detail">
               <span class="report-common-question">报告相同问题？</span>
-              <el-checkbox v-model="checked"
-                           class="answer-btn-check">关注问题</el-checkbox>
-              <el-button type="primary"
-                         class="answer-btn-style"
-                         @click="submitAnserClick">提交</el-button>
+              <el-checkbox v-model="checked" class="answer-btn-check">关注问题</el-checkbox>
+              <el-button type="primary" class="answer-btn-style" @click="submitAnserClick">提交</el-button>
             </div>
           </div>
         </div>
@@ -372,60 +277,57 @@
         <div class="ask-detail-right">
           <div>
             <div class="user_header">
-              <span class="addTitle"><i class="icon icon_info"></i>{{loginTitle}}</span>
-              <nuxt-link :to="{name:'faquestion-ask'}"
-                         class="addQuestion">
+              <span class="addTitle"><i class="icon icon_info"></i>{{ loginTitle }}</span>
+              <nuxt-link :to="{ name: 'faquestion-ask' }" class="addQuestion">
                 提问题
               </nuxt-link>
             </div>
 
-            <div class="user-center-info"
-                 v-if="this.isLogin">
+            <div class="user-center-info" v-if="this.isLogin">
               <ul class="fa-info-list">
                 <li class="fa-infolist-item">
                   <span>收益(元)</span>
-                  <em class="fa-num">{{NumFormat}}</em>
+                  <em class="fa-num">{{ NumFormat }}</em>
                 </li>
                 <li class="fa-infolist-item">
                   <span>被采纳</span>
-                  <em class="fa-num">{{userAskInfo.adopt}}</em>
+                  <em class="fa-num">{{ userAskInfo.adopt }}</em>
                 </li>
                 <li class="fa-infolist-item">
                   <span>提问</span>
-                  <em class="fa-num">{{userAskInfo.qcount}}</em>
+                  <em class="fa-num">{{ userAskInfo.qcount }}</em>
                 </li>
                 <li class="fa-infolist-item">
                   <span>被点赞</span>
-                  <em class="fa-num">{{userAskInfo.qgood+userAskInfo.rgood+userAskInfo.cgood}}</em>
+                  <em class="fa-num">{{ userAskInfo.qgood + userAskInfo.rgood + userAskInfo.cgood }}</em>
                 </li>
                 <li class="fa-infolist-item">
                   <span>回答</span>
-                  <em class="fa-num">{{userAskInfo.qanswer}}</em>
+                  <em class="fa-num">{{ userAskInfo.qanswer }}</em>
                 </li>
                 <li class="fa-infolist-item">
                   <span>被回复</span>
-                  <em class="fa-num">{{userAskInfo.ccomment+userAskInfo.crComment}}</em>
+                  <em class="fa-num">{{ userAskInfo.ccomment + userAskInfo.crComment }}</em>
                 </li>
               </ul>
             </div>
 
             <div class="ask-top-wrap">
-              <nuxt-link :to="'/faquestion/1481862372760240130'"
-                         class="ask-top-warper-item"
-                         target="_blank"
-                         rel="nofollow noopener noreferrer">◇ 欢迎建议意见</nuxt-link>
-              <a target="_blank"
-                 class="ask-top-warper-item"
-                 href="https://bbs.csdn.net/topics/603750556">◇ 实践问答上线</a>
-              <a target="_blank"
-                 class="ask-top-warper-item"
-                 href="https://bbs.csdn.net/forums/ask?category=0">◇ 通知公告</a>
+              <div class="user_header">
+                <span class="ask-message-tips">问答通知</span>
+                <nuxt-link :to="{ name: 'about-message' }" class="ask-message-more">
+                  查看更多
+                </nuxt-link>
+              </div>
+              <nuxt-link :to="'/faquestion/1481862372760240130'" class="ask-top-warper-item" target="_blank"
+                rel="nofollow noopener noreferrer">◇ 欢迎建议意见</nuxt-link>
+              <nuxt-link :to="'/about/detail/1523552231247499265'" class="ask-top-warper-item">◇ 实践问答上线</nuxt-link>
             </div>
           </div>
 
           <div class="qustion-type-warper">
             <div class="qustion-tag-header">
-              <span> {{qdetail.typeString}}</span>
+              <span> {{ qdetail.typeString }}</span>
               <span> > 前端 </span>
               <span class="ask-tag-user-fawllow">关注</span>
             </div>
@@ -521,6 +423,7 @@ export default {
       this.loginTitle = "我的问答";
       this.loginInfo = JSON.parse(userStr)
       this.isLogin = true;
+      this.getUserAskInfo();
     };
     window.myVueComm = this;
     setTimeout(function () {
@@ -533,7 +436,6 @@ export default {
     window.gotoPage = {
       path: `/faquestion/` + qId,
     };
-    this.getUserAskInfo();
   },
 
   computed: {
@@ -1159,6 +1061,18 @@ export default {
 </script>
 
 <style>
+.ask-top-wrap .ask-message-tips {
+  font-weight: 500;
+  color: #222226;
+  font-size: 14px;
+}
+
+.ask-top-wrap .ask-message-more {
+  font-size: 14px;
+  margin-right: 0px;
+  text-decoration: none;
+}
+
 .el-dialog {
   width: 480px;
 }
@@ -1187,6 +1101,7 @@ export default {
   float: right;
   width: 160px;
 }
+
 .jubao-radio-item {
   margin-bottom: 10px;
 }
@@ -1194,7 +1109,8 @@ export default {
 .jubao-lefte-item {
   margin-top: 10px;
 }
-div.accusation-type ul > li {
+
+div.accusation-type ul>li {
   display: inline-block;
   width: 110px;
   height: 32px;
@@ -1224,6 +1140,7 @@ h2.accusation-secondary-title {
   color: #999;
   margin-left: 0px;
 }
+
 .comment-tool-bar span {
   cursor: pointer;
 }
@@ -1366,6 +1283,7 @@ h2.accusation-secondary-title {
 .qustion-good-num {
   margin-left: 2px;
 }
+
 .answer-list-item {
   margin-bottom: 16px;
   border-bottom: 1px solid rgba(28, 31, 33, 0.1);
@@ -1375,7 +1293,12 @@ h2.accusation-secondary-title {
 .fade-leave-active {
   transition: height 1s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active, 2.1.8 版本以下 */ {
+
+.fade-enter,
+.fade-leave-to
+
+/* .fade-leave-active, 2.1.8 版本以下 */
+  {
   height: 10px;
 }
 
@@ -1502,6 +1425,7 @@ h2.accusation-secondary-title {
   font-size: 12px;
   color: #666;
 }
+
 .answer-item-content {
   margin-top: 8px;
   margin-left: 38px;
@@ -1605,14 +1529,16 @@ h2.accusation-secondary-title {
   padding: 15px;
   background: #ffffff;
 }
+
 .ask-top-wrap .ask-top-warper-item {
   display: block;
-  margin-top: 6px;
+  margin-top: 12px;
   text-decoration: none;
+  margin-left: 20px;
 }
 
 .ask-top-wrap {
-  padding: 14px 20px;
+  padding: 10px 20px 20px 0px;
   color: #507999;
   background: #ffffff;
   font-size: 14px;
@@ -1700,6 +1626,7 @@ h2.accusation-secondary-title {
 .qustion-top-item {
   margin-left: 6px;
 }
+
 .qustion-right-view {
   float: right;
 }
@@ -1744,6 +1671,7 @@ h2.accusation-secondary-title {
   border: 1px solid #e8e8ed;
   border-left: 0;
 }
+
 .ask-issue-tool {
   position: relative;
   display: -webkit-box;
@@ -1759,6 +1687,7 @@ h2.accusation-secondary-title {
   margin: 24px 0 0;
   font-size: 12px;
 }
+
 .vote_span2 {
   padding: 0 12px;
   text-align: center;
@@ -1772,6 +1701,7 @@ h2.accusation-secondary-title {
   cursor: pointer;
   color: #777888;
 }
+
 .vote_span {
   text-align: center;
   border: 1px solid transparent;
@@ -1786,6 +1716,7 @@ h2.accusation-secondary-title {
   cursor: pointer;
   color: #777888;
 }
+
 li.up_down_wrap {
   font-size: 0;
   line-height: 32px;
@@ -1804,6 +1735,7 @@ li.up_down_wrap {
 .answer_span .ic_question_reply {
   margin-right: 4px;
 }
+
 .icon {
   display: inline-block;
   background-position: 50%;
@@ -1833,11 +1765,13 @@ li.up_down_wrap {
   -ms-flex-pack: center;
   justify-content: center;
 }
+
 .ic_question_reply {
   width: 16px;
   height: 16px;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAbRJREFUWEftlr0uREEYhp/XBVCwxC34KzV+Ckqh12qo9hLcg2ho1C6ADomsglJYiRuQCAo34JPZzJHj7OzunD2ztnGaTfbMmeeZmXfmGzHkR6n5Zjbu+pT0EdN3MgEzqwEnwIYHnwM7kt66iSQR8PArYA749MAx4BFY6yZRWcDMJoFLD3fAdS+Q/6+jRCWBwsh/jbbw7kzSZmgp+hboBs9Afnac2ARQCwWzL4EYuJMwsyngGRhNJlAC7nZFFsw0S1ACXgxm9RAOAt46sGJOq0HBowQGCe8pMGh4V4G/gHcU+Ct4UKAA/wIWJDWLYfWnnNvnszFFp1PY23aBmd0Bi4CDj4Q6TwVvmwEzmwZefEldAk5zVa51mBTgD6769ar50fcBM3Ol9AJoSFoNZGHbS7lprwwPzUAdOACOJe35gpI/07NlSQIPCRwBu0Bd0mGurLqbzr3PRDJ4SKABLAP7PgczPuXzgLtiBeFmln0Xc7K7NjeSVkIC70DrVht4boGtUOBSClz7ET8Bbu9nv01Jr7HDK9MuqhqW6bBs23+BnxnoI0hlZzvfvn0XDF2gynCqfDv0EH4DRAAPMH3G5MsAAAAASUVORK5CYII=);
 }
+
 .qustion_content {
   margin-top: 20px;
   margin-bottom: 25px;
@@ -1847,6 +1781,7 @@ li.up_down_wrap {
 .qustion_content p {
   line-height: 1.6;
 }
+
 .qustin_detall_content {
   margin-top: 15px;
 }
@@ -1871,6 +1806,7 @@ li.up_down_wrap {
   height: 500px;
   width: 335px;
 }
+
 .question_info {
   margin-top: 10px;
   margin-bottom: 6px;

@@ -13,9 +13,11 @@
             </div>
             <div>
               <div class="question_info">
-                <a href="#">
+
+                <nuxt-link :to="'/user/' + qdetail.uid">
                   <img class="vam user-head-image" :src="qdetail.avatar" width="30" height="30" alt />
-                  <span class="ml5">{{ qdetail.nickname }}</span></a>
+                  <span class="ml5">{{ qdetail.nickname }}</span>
+                </nuxt-link>
                 <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
                 <span class="glyphicon glyphicon-star-empty qustion-top-item" aria-hidden="true">
                 </span>

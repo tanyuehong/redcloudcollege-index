@@ -678,9 +678,8 @@
 <script>
 import showdown from "showdown";
 import "~/assets/css/markdown.css";
-import realPractice from "@/api/practiceblogReq";
-import blogPractice from '@/api/practiceblog'
-import useract from "@/api/useract";
+import blogServerApi from "@/api/blogServerReq";
+import blogApi from '@/api/blog'
 import userApi from "@/api/user";
 
 export default {
@@ -719,7 +718,7 @@ export default {
     };
   },
   asyncData ({ params, error }) {
-    return realPractice.getRealPraticeDetail(params.id).then((response) => {
+    return blogServerApi.getRealPraticeDetail(params.id).then((response) => {
       return {
         pitem: response.data.pitem,
         title: response.data.pitem.title,
@@ -766,7 +765,7 @@ export default {
         this.forbiden = false;
         if (this.isLogin) {
           if (this.isCollect) {
-            blogPractice.cancleBlogCollect(this.pitem.id).then((response) => {
+            blogApi.cancleBlogCollect(this.pitem.id).then((response) => {
               window.console.log("ffffffffff");
               this.isCollect = false;
               this.$message({
@@ -776,7 +775,7 @@ export default {
               });
             });
           } else {
-            blogPractice.addBlogCollect(this.pitem.id).then((response) => {
+            blogApi.addBlogCollect(this.pitem.id).then((response) => {
               this.isCollect = true;
               this.$message({
                 message: "收藏成功哈~",
@@ -802,7 +801,7 @@ export default {
         this.forbiden = false;
         if (this.isLogin) {
           if (this.isFocus) {
-            useract.cancleUserFocus(this.pitem.authorUid).then((response) => {
+            userApi.cancleUserFocus(this.pitem.authorUid).then((response) => {
               this.isFocus = response.data.focus;
               this.$message({
                 message: "取消关注成功哈~",
@@ -812,7 +811,7 @@ export default {
             });
           } else {
             window.console.log("dddddddddddddddd");
-            useract.addUserFocus(this.pitem.authorUid).then((response) => {
+            userApi.addUserFocus(this.pitem.authorUid).then((response) => {
               this.isFocus = response.data.focus;
               this.$message({
                 message: "关注成功哈~",
@@ -835,13 +834,13 @@ export default {
     },
     goodReplyClick (item, type) {
       if (item.goodreply) {
-        blogPractice.cancleCommentGood(item.id, type).then((response) => {
+        blogApi.cancleCommentGood(item.id, type).then((response) => {
           item.good = item.good - 1;
           item.goodreply = false;
         });
 
       } else {
-        blogPractice.addCommentGood(item.id, type).then((response) => {
+        blogApi.addCommentGood(item.id, type).then((response) => {
           item.good = item.good + 1;
           item.goodreply = true;
         });
@@ -1059,7 +1058,7 @@ export default {
     },
 
     getCommentList (type) {
-      realPractice.getPraticeBlogCommentLists(this.pitem.id, type).then((response) => {
+      blogServerApi.getPraticeBlogCommentLists(this.pitem.id, type).then((response) => {
         this.commentList = response.data.comments;
       });
     },
@@ -1085,7 +1084,7 @@ export default {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
       }
-      blogPractice
+      blogApi
         .submitBlogReply({
           content: item.editor.txt.html(),
           rid: item.id,
@@ -1110,7 +1109,7 @@ export default {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
       }
-      blogPractice
+      blogApi
         .submitBlogReply({
           content: item.editor.txt.html(),
           rid: comment.id,
@@ -1157,7 +1156,7 @@ export default {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
       }
-      blogPractice
+      blogApi
         .submitBlogComment({
           content: this.editor.txt.html(),
           bid: this.pitem.id,
@@ -1243,7 +1242,7 @@ export default {
     },
 
     getUserBlogStatus () {
-      useract.getUserBlogStatus(this.pitem.id).then((response) => {
+      blogApi.getUserBlogStatus(this.pitem.id).then((response) => {
         this.goodslect = response.data.status.goodslect;
         this.isCollect = response.data.status.isCollect;
         this.isFocus = response.data.status.isFocus;
@@ -1251,14 +1250,14 @@ export default {
     },
 
     addUserPraticeGood () {
-      useract.addUserPraticeGood(this.pitem.id).then((response) => {
+      blogApi.addUserPraticeGood(this.pitem.id).then((response) => {
         this.pitem.good++;
         this.goodslect = true;
       });
     },
 
     cancleleUserPraticeGood () {
-      useract.cancleleUserPraticeGood(this.pitem.id).then((response) => {
+      blogApi.cancleleUserPraticeGood(this.pitem.id).then((response) => {
         this.pitem.good--;
         this.goodslect = false;
       });

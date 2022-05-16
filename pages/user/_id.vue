@@ -21,9 +21,6 @@
 								<span>{{ userInfo.sign }}</span>
 							</div>
 						</div>
-						<div class="user-info-setting">
-							<el-button @click="personSetting" round>个人设置</el-button>
-						</div>
 						<ul class="user-about-item">
 							<li class="user-about-item-li">
 								<div class="user-about-count">18h</div>
@@ -73,7 +70,6 @@
 import userApi from '@/api/user'
 
 export default {
-
 	data () {
 		return {
 			userInfo: {}, // 查询表单对象
@@ -86,17 +82,9 @@ export default {
 		//分页切换的方法
 		//参数是页码数
 		getLoginUserInfo () {
-			userApi.getLoginUserInfo().then((response) => {
+			userApi.getShowUserInfo().then((response) => {
 				this.userInfo = response.data.userInfo
-				cookie.set('redskt_ucenter', this.loginInfo, { domain: 'redskt' })
 			})
-		},
-		personSetting () {
-			var loginToken = window.localStorage.getItem('redclass_token');
-			this.$router.push({
-				name: "user-setting",
-				params: { "loginToken": loginToken },
-			});
 		}
 	},
 	computed: {},
@@ -204,8 +192,4 @@ export default {
 	text-align: center;
 }
 
-.user-info-right .user-info-setting {
-	float: right;
-	margin-top: 15px;
-}
 </style>

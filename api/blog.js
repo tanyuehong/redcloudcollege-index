@@ -1,17 +1,38 @@
 import request from '@/utils/request'
 
 export default {
-  //分页讲师查询的方法
+  
   getHomeRealPratice() {
     return request({
       url: `/home/pratice/index`,
       method: 'get',
     })
   },
-  //讲师详情的方法
+
   getRealPraticeDetail(id) {
     return request({
       url: `/home/pratice/getDetail/${id}`,
+      method: 'get',
+    })
+  },
+
+  getUserBlogStatus(praticeId) {
+    return request({
+      url: `/home/pratice/status/${praticeId}`,
+      method: 'get',
+    })
+  },
+
+  addUserPraticeGood(praticeId) {
+    return request({
+      url: `/home/pratice/addGood/${praticeId}`,
+      method: 'get',
+    })
+  },
+
+  cancleleUserPraticeGood(praticeId) {
+    return request({
+      url: `/home/pratice/cancleGood/${praticeId}`,
       method: 'get',
     })
   },

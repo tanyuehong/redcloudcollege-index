@@ -82,7 +82,7 @@
 import '~/assets/css/appdown.css'
 import '~/assets/css/contentlist.css'
 import showdown from 'showdown'
-import realPractice from '@/api/practiceblogReq'
+import realPractice from '@/api/blogServerReq'
 
 export default {
   //异步调用，调用一次

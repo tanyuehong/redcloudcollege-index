@@ -18,6 +18,37 @@ export default {
     })
   },
 
+   // 获取查看用户的信息
+   getShowUserInfo(uId) {
+    return request({
+      url: `/home/ucenter/getShowUserInfo/${uId}`,
+      method: 'get',
+    })
+  },
+
+    // 关注的方法
+    addUserFocus(fid) {
+      return request({
+        url: `/ucenter/addUserFocus/${fid}`,
+        method: 'get',
+      })
+    },
+  
+    // 取消关注的方法
+    cancleUserFocus(fid) {
+      return request({
+        url: `/ucenter/cancleUserFocus/${fid}`,
+        method: 'get',
+      })
+    },
+  
+    getUserFocus(fid) {
+      return request({
+        url: `/home/ucenter/getUserFocus/${fid}`,
+        method: 'get',
+      })
+    },
+
   //根据手机号发验证码
   sendCode(phone) {
     return request({
@@ -59,5 +90,5 @@ export default {
         url: `/eduask/uploadqiniutoken`,
         method: 'post',
       })
-    },
+  },
 }

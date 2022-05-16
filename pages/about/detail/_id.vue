@@ -846,7 +846,6 @@ import "~/assets/css/markdown.css";
 import "~/assets/css/appdown.css";
 
 import messageApi from "@/api/index";
-import useract from "@/api/useract";
 import message from "@/api/message";
 import userApi from "@/api/user";
 
@@ -960,7 +959,7 @@ export default {
         this.forbiden = false;
         if (this.isLogin) {
           if (this.isFocus) {
-            useract.cancleUserFocus(this.pitem.authorUid).then(response => {
+            userApi.cancleUserFocus(this.pitem.authorUid).then(response => {
               this.isFocus = response.data.focus;
               this.$message({
                 message: "取消关注成功哈~",
@@ -970,7 +969,7 @@ export default {
             });
           } else {
             window.console.log("dddddddddddddddd");
-            useract.addUserFocus(this.pitem.authorUid).then(response => {
+            userApi.addUserFocus(this.pitem.authorUid).then(response => {
               this.isFocus = response.data.focus;
               this.$message({
                 message: "关注成功哈~",

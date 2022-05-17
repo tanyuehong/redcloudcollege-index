@@ -17,15 +17,6 @@ export default {
       method: 'get',
     })
   },
-
-   // 获取查看用户的信息
-   getShowUserInfo(uId) {
-    return request({
-      url: `/home/ucenter/getShowUserInfo/${uId}`,
-      method: 'get',
-    })
-  },
-
     // 关注的方法
     addUserFocus(fid) {
       return request({

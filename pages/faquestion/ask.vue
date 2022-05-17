@@ -202,7 +202,7 @@
 
 <script>
 import userApi from '@/api/user'
-import askApi from '@/api/askqustion'
+import askApi from '@/api/ask'
 const qiniu = require('qiniu-js')
 
 export default {

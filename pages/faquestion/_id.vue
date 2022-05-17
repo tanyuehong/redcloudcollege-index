@@ -348,8 +348,8 @@
 
 <script>
 import userApi from "@/api/user";
-import askApi from "@/api/askqustion";
-import askServerApi from "@/api/askserver";
+import askApi from "@/api/ask";
+import askServerApi from "@/api/askServerReq";
 
 const qiniu = require("qiniu-js");
 

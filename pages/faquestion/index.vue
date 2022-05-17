@@ -429,8 +429,8 @@
 </style>
 
 <script>
-import askApi from "@/api/askqustion";
-import askServerApi from "@/api/askserver";
+import askApi from "@/api/ask";
+import askServerApi from "@/api/askServerReq";
 
 export default {
   data () {

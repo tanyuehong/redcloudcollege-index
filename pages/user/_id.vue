@@ -57,11 +57,32 @@
     <div class="container">
 	  <div class="col-md-8">
       <div class="ucenter-home-content">
-        <el-tabs style="height:200px;">
-          <el-tab-pane label="动态">动态</el-tab-pane>
-          <el-tab-pane label="文章">文章</el-tab-pane>
-          <el-tab-pane label="收藏">收藏</el-tab-pane>
-		  <el-tab-pane label="关注">关注</el-tab-pane>
+        <el-tabs>
+           <el-tab-pane label="文章">      <div class="op_pratice_content book_item fl">
+              <ul class="article_list">
+                <li v-for="bitem in articleList"
+                    :key="bitem.id">
+                  <div class="op_artie_content">
+                    <nuxt-link class="article_title"
+                               :to="'/practice/'+bitem.id">
+                      {{ bitem.title }}
+                    </nuxt-link>
+                    <p class="op_pratice_describ">{{ bitem.descrb }}</p>
+                    <ul>
+                      <i class="pratice_icon_view"></i>
+                      <span class="icon_des">{{bitem.viewCount}}</span>
+                      <i class="pratice_icon_zhan"></i>
+                      <span class="icon_des">{{bitem.good}}</span>
+                      <i class="pratice_icon_comment"></i>
+                      <span class="icon_des">{{bitem.ccount}}</span>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            </el-tab-pane>
+           <el-tab-pane label="收藏">收藏</el-tab-pane>
+		       <el-tab-pane label="关注">关注</el-tab-pane>
         </el-tabs>
       </div>
 	  </div>
@@ -80,7 +101,7 @@ export default {
 
   data() {
     return {
-      test: {} // 查询表单对象
+      articleList: [], // 查询表单对象
     };
   },
 
@@ -88,16 +109,19 @@ export default {
     return userServerApi.getShowUserInfo(params.id).then(response => {
       return {
         userInfo: response.data.userInfo,
+        parmUid:params.id
       };
     });
   },
+   mounted () {
+     this.getUserArticleList();
+  },
 
   methods: {
-    //分页切换的方法
-    //参数是页码数
-    getLoginUserInfo() {
-      userApi.getShowUserInfo().then(response => {
-        this.userInfo = response.data.userInfo;
+    // 获取文章列表的方法
+    getUserArticleList() {
+       userApi.getUserArticleList(this.parmUid).then(response => {
+        this.articleList = response.data.articleList;
       });
     }
   },
@@ -136,7 +160,7 @@ export default {
 
   padding-bottom: 15px;
   margin-bottom: 20px;
-  height: 600px;
+  min-height: 600px;
 }
 
 .user-info {

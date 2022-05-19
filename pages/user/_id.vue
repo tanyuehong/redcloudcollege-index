@@ -6,10 +6,7 @@
           <div class="user-info">
             <div class="user-pic">
               <div class="user-pic-bg">
-                <img
-                  class="user-header-img"
-                  :src="userInfo.avatar"
-                />
+                <img class="user-header-img" :src="userInfo.avatar" />
               </div>
             </div>
           </div>
@@ -52,42 +49,41 @@
           </div>
         </div>
       </div>
-	  <div class="message-spreate"></div>
+      <div class="message-spreate"></div>
     </div>
     <div class="container">
-	  <div class="col-md-8">
-      <div class="ucenter-home-content">
-        <el-tabs>
-           <el-tab-pane label="文章">      <div class="op_pratice_content book_item fl">
-              <ul class="article_list">
-                <li v-for="bitem in articleList"
-                    :key="bitem.id">
-                  <div class="op_artie_content">
-                    <nuxt-link class="article_title"
-                               :to="'/practice/'+bitem.id">
-                      {{ bitem.title }}
-                    </nuxt-link>
-                    <p class="op_pratice_describ">{{ bitem.descrb }}</p>
-                    <ul>
-                      <i class="pratice_icon_view"></i>
-                      <span class="icon_des">{{bitem.viewCount}}</span>
-                      <i class="pratice_icon_zhan"></i>
-                      <span class="icon_des">{{bitem.good}}</span>
-                      <i class="pratice_icon_comment"></i>
-                      <span class="icon_des">{{bitem.ccount}}</span>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </div>
+      <div class="col-md-8">
+        <div class="ucenter-home-content">
+          <el-tabs>
+            <el-tab-pane label="文章">
+              <div class="user_article_content book_item fl">
+                <ul class="article_list">
+                  <li v-for="bitem in articleList" :key="bitem.id">
+                    <div class="op_artie_content">
+                      <nuxt-link class="article_title" :to="'/practice/' + bitem.id">
+                        {{ bitem.title }}
+                      </nuxt-link>
+                      <p class="op_pratice_describ">{{ bitem.descrb }}</p>
+                      <ul>
+                        <i class="pratice_icon_view"></i>
+                        <span class="icon_des">{{ bitem.viewCount }}</span>
+                        <i class="pratice_icon_zhan"></i>
+                        <span class="icon_des">{{ bitem.good }}</span>
+                        <i class="pratice_icon_comment"></i>
+                        <span class="icon_des">{{ bitem.ccount }}</span>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </el-tab-pane>
-           <el-tab-pane label="收藏">收藏</el-tab-pane>
-		       <el-tab-pane label="关注">关注</el-tab-pane>
-        </el-tabs>
+            <el-tab-pane label="收藏">收藏</el-tab-pane>
+            <el-tab-pane label="关注">关注</el-tab-pane>
+          </el-tabs>
+        </div>
       </div>
-	  </div>
-	  <div class="col-md-4 ucenter-home-rightinfo">
-	  </div>
+      <div class="col-md-4 ucenter-home-rightinfo">
+      </div>
     </div>
   </div>
 </template>
@@ -99,28 +95,28 @@ import userServerApi from "@/api/userServerReq";
 
 export default {
 
-  data() {
+  data () {
     return {
       articleList: [], // 查询表单对象
     };
   },
 
-  asyncData({ params, error }) {
+  asyncData ({ params, error }) {
     return userServerApi.getShowUserInfo(params.id).then(response => {
       return {
         userInfo: response.data.userInfo,
-        parmUid:params.id
+        parmUid: params.id
       };
     });
   },
-   mounted () {
-     this.getUserArticleList();
+  mounted () {
+    this.getUserArticleList();
   },
 
   methods: {
     // 获取文章列表的方法
-    getUserArticleList() {
-       userApi.getUserArticleList(this.parmUid).then(response => {
+    getUserArticleList () {
+      userApi.getUserArticleList(this.parmUid).then(response => {
         this.articleList = response.data.articleList;
       });
     }
@@ -130,19 +126,22 @@ export default {
 </script>
 
 <style>
+.user_article_content .article_list {
+  padding-left: 0px;
+}
 
 .ucenter-home-rightinfo {
-	background: #fff;
-	height: 600px;
-	margin-top: 15px;
+  background: #fff;
+  height: 600px;
+  margin-top: 15px;
 }
 
 .ucenter-home-header .message-spreate {
-	border: 0;
-    height: 1px;
-    background: #333;
-    background-image: linear-gradient(90deg,#ccc,#333,#ccc);
-	clear: both;
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(90deg, #ccc, #333, #ccc);
+  clear: both;
 }
 
 .header-backgroud {

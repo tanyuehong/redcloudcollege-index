@@ -248,8 +248,9 @@
                 </div>
               </li>
             </ul>
-            <a class="art-more-look" href="/space/news.shtml?initGrid=0&amp;id=54f76f85-cf8c-422d-aa8e-d6c753f6d1a0"
-              target="_blank">更多TA的内容</a>
+            <nuxt-link :to="'/user/' + pitem.authorUid" class="art-more-look" target="_blank">
+              更多TA的内容
+            </nuxt-link>
           </div>
           <div class="wechatma-con js-wechatma-con mt15">
             <div class="ma-con">
@@ -863,7 +864,7 @@ export default {
       isCollect: false,
       forbiden: true,
       pitem: {},
-      descrb:"开源实践问答终于在我们团队辛勤的努力下完满的完成了上线。虽然这只是我们开源实践万里长征的一小步，但是我们坚信，在我们的始终如一的坚持为小伙伴们解决问题的初衷下，我们的问答系统会越做越好，也必然的会有越来越多小伙伴的喜爱，知名度也会越来越高。",
+      descrb: "开源实践问答终于在我们团队辛勤的努力下完满的完成了上线。虽然这只是我们开源实践万里长征的一小步，但是我们坚信，在我们的始终如一的坚持为小伙伴们解决问题的初衷下，我们的问答系统会越做越好，也必然的会有越来越多小伙伴的喜爱，知名度也会越来越高。",
     };
   },
   head () {

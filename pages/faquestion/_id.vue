@@ -13,7 +13,6 @@
             </div>
             <div>
               <div class="question_info">
-
                 <nuxt-link :to="'/user/' + qdetail.uid">
                   <img class="vam user-head-image" :src="qdetail.avatar" width="30" height="30" alt />
                   <span class="ml5">{{ qdetail.nickname }}</span>

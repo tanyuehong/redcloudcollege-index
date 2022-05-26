@@ -49,12 +49,10 @@
 								v-bind:class="{ active: parmType.substring(0, 5) == 'focus' }">
 								<div class="item-title">关注</div>
 							</nuxt-link>
-							<a href="/user/43636194286093/collections" class="nav-item">
-								<div class="item-title">收藏集</div>
-								<div class="item-count only-in-scroll-mode">2</div>
-							</a><a href="/user/43636194286093/tags" class="nav-item">
-								<div class="item-title">关注</div>
-							</a>
+							<nuxt-link :to="'/user/' + userInfo.id + '/good-blog'" class="nav-item"
+								v-bind:class="{ active: parmType.substring(0, 4) == 'good' }">
+								<div class="item-title">赞</div>
+							</nuxt-link>
 
 						</div>
 
@@ -263,6 +261,116 @@
 								</ul>
 							</div>
 						</div>
+						<div class="user-good-content" v-if="parmType.substring(0, 4) == 'good'">
+							<div class="sub-header">
+								<div class="sub-header-title">赞</div>
+								<div class="sub-type-box">
+									<nuxt-link :to="'/user/' + userInfo.id + '/good-blog'" class="sub-type"
+										v-bind:class="{ active: parmType.substring(5, 9) == 'blog' }">
+										文章
+									</nuxt-link>
+									<nuxt-link :to="'/user/' + userInfo.id + '/good-ask'" class="sub-type"
+										v-bind:class="{ active: parmType.substring(5, 8) == 'ask' }">
+										问题
+									</nuxt-link>
+								</div>
+							</div>
+							<div class="good-content-list book_item" v-if="parmType.substring(5, 9) == 'blog'">
+								<div class="nodata-warper" v-if="dataList.length == 0">
+									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+									<div>
+										<span>该用户暂时还没有点赞文章哦</span>
+									</div>
+								</div>
+								<ul class="article_list">
+									<li v-for="bitem in dataList" :key="bitem.id">
+										<div class="op_artie_content" v-if="bitem.ctype === 1">
+											<nuxt-link class="article_title" :to="'/practice/' + bitem.id">
+												{{ bitem.title }}
+											</nuxt-link>
+											<p class="op_pratice_describ">{{ bitem.descrb }}</p>
+											<ul>
+												<i class="pratice_icon_view"></i>
+												<span class="icon_des">{{ bitem.viewCount }}</span>
+												<i class="pratice_icon_zhan"></i>
+												<span class="icon_des">{{ bitem.good }}</span>
+												<i class="pratice_icon_comment"></i>
+												<span class="icon_des">{{ bitem.ccount }}</span>
+											</ul>
+										</div>
+										<div class="op_message_content" v-else>
+											<div class="push-lf">
+												<nuxt-link :to="'/about/detail/' + bitem.id">
+													<img :src="bitem.cover" />
+												</nuxt-link>
+											</div>
+
+											<div class="push-rt">
+												<p class="message-title">
+													<nuxt-link :to="'/about/detail/' + bitem.id" target="_blank">{{ bitem.title }}</nuxt-link>
+												</p>
+												<div class="message-info">
+													<div class="info-item">
+														<i class="el-icon-view"></i>
+														<span class="read-tx">{{ bitem.viewCount }} 阅读</span>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix">
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="collect-content-list ask-item" v-if="parmType.substring(5, 8) == 'ask'">
+								<div class="nodata-warper" v-if="dataList.length == 0">
+									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+									<div>
+										<span>该用户暂时还没有点赞问题哦</span>
+									</div>
+								</div>
+								<div class="questions_collect_con">
+									<div v-for="item in dataList" :key="item.qid" class="question_list">
+										<div class="answer_title">
+											<nuxt-link :to="'/faquestion/' + item.qid" class="header">
+												{{ item.title }}
+												<div class="ui red label horizontal" data-tooltip="置顶">顶</div>
+												<div class="ui orange label horizontal" data-tooltip="热门">热</div>
+											</nuxt-link>
+										</div>
+
+										<div class="description">
+											<p class="line-clamp" v-html="item.content"></p>
+										</div>
+										<div class="extra question-tags">
+											<a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
+												target="_blank">
+												<img src="https://static.oschina.net/img/logo/ruby.gif" />Ruby
+											</a>
+
+											<a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/java"
+												target="_blank">
+												<img src="https://static.oschina.net/img/logo/java.png" />Java
+											</a>
+										</div>
+
+										<div class="q_time">
+											<span>{{ item.gmtCreate }}来自</span>
+											<a class="user_name" href="https://my.csdn.net/dabocaiqq" target="_blank">{{ item.nickname }}</a>
+											<b>
+												悬赏
+												<a href="javascript:;" title="个人悬赏">{{ item.price }}C</a>
+											</b>
+											<nuxt-link :to="'/faquestion/' + item.qid" class="answer_num" title="问题回答数量">
+												<span>{{ item.reply }}</span>
+												<p class="anser-lable">回答</p>
+											</nuxt-link>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -305,21 +413,25 @@
 					</div>
 				</div>
 				<!---->
-				<div class="follow-block shadow"><a href="/user/1592558262169277/following" rel="nofollow" class="follow-item"
-						data-v-4fa4e5da="">
+				<div class="follow-block shadow">
+					<nuxt-link :to="'/user/' + userInfo.id + '/focus-mine'" rel="nofollow" class="follow-item">
 						<div class="item-title">关注了</div>
 						<div class="item-count">{{ userInfo.mfocus }}</div>
-					</a><a href="/user/1592558262169277/followers" class="follow-item" data-v-4fa4e5da="">
+					</nuxt-link>
+					<nuxt-link :to="'/user/' + userInfo.id + '/focus-fans'" rel="nofollow" class="follow-item">
 						<div class="item-title">粉丝</div>
 						<div class="item-count">{{ userInfo.focus }}</div>
-					</a></div>
-				<div class="more-block block"><a href="/user/1592558262169277/collections" class="more-item" data-v-4fa4e5da="">
-						<div class="item-title">收藏集</div>
-						<div class="item-count">2</div>
-					</a><a href="/user/1592558262169277/tags" class="more-item" data-v-4fa4e5da="">
+					</nuxt-link>
+				</div>
+				<div class="more-block block">
+					<nuxt-link :to="'/user/' + userInfo.id + '/collect-blog'" class="more-item">
+						<div class="item-title">收藏</div>
+						<div class="item-count">{{ userInfo.ccollect }}</div>
+					</nuxt-link>
+					<nuxt-link :to="'/user/' + userInfo.id + '/focus-mine'" class="more-item">
 						<div class="item-title">关注标签</div>
-						<div class="item-count">8</div>
-					</a>
+						<div class="item-count">{{ userInfo.ftag }}</div>
+					</nuxt-link>
 					<div class="more-item">
 						<div class="item-title">加入于</div>
 						<div class="item-count"><time datetime="2021-12-25T11:20:25.000Z" title="2021-12-25 19:20:25"

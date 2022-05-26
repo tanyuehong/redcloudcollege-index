@@ -45,8 +45,8 @@
 								v-bind:class="{ active: parmType.substring(0, 7) == 'collect' }">
 								<div class="item-title">收藏</div>
 							</nuxt-link>
-							<nuxt-link :to="'/user/' + userInfo.id + '/focus'" class="nav-item"
-								v-bind:class="{ active: parmType == 'focus' }">
+							<nuxt-link :to="'/user/' + userInfo.id + '/focus-mine'" class="nav-item"
+								v-bind:class="{ active: parmType.substring(0, 5) == 'focus' }">
 								<div class="item-title">关注</div>
 							</nuxt-link>
 							<a href="/user/43636194286093/collections" class="nav-item">
@@ -60,7 +60,7 @@
 
 					</div>
 					<div class="list-body">
-						<div class="user_article_content book_item" v-if="parmType == 'blog'">
+						<div class="user_article_content book_item" v-if="parmType == 'blog' || parmType == ''">
 							<div class="nodata-warper" v-if="dataList.length == 0">
 								<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
 								<div>
@@ -216,6 +216,51 @@
 									</div>
 								</div>
 
+							</div>
+						</div>
+						<div class="user-focus-content" v-if="parmType.substring(0, 5) == 'focus'">
+							<div class="sub-header">
+								<div class="sub-header-title">关注</div>
+								<div class="sub-type-box">
+									<nuxt-link :to="'/user/' + userInfo.id + '/focus-mine'" class="sub-type"
+										v-bind:class="{ active: parmType.substring(6, 10) == 'mine' }">
+										关注
+									</nuxt-link>
+									<nuxt-link :to="'/user/' + userInfo.id + '/focus-fans'" class="sub-type"
+										v-bind:class="{ active: parmType.substring(6, 11) == 'fans' }">
+										粉丝
+									</nuxt-link>
+								</div>
+							</div>
+							<div class="user-focus-list">
+								<ul class="tag-list">
+									<li class="item" v-for="item in dataList" :key="item.id">
+										<div class="user">
+											<meta itemprop="url" :content="'https://www.redskt.com/user/' + item.id">
+											<meta itemprop="image" :content="item.avatar">
+											<meta itemprop="name" :content="item.nickname">
+											<!---->
+											<!---->
+											<div blank="true" class="link"><img :src="item.avatar" :alt="item.nickname + '的头像'"
+													class="lazy avatar avatar" loading="lazy">
+												<div class="info-box">
+													<nuxt-link :to="'/user/' + item.id + '/blog'" target="_blank" class="username">
+														<span class="name" style="max-width: 128px;">
+															{{ item.nickname }}
+														</span> <span blank="true" class="rank">
+															<!-- <img
+																src="//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/e108c685147dfe1fb03d4a37257fb417.svg"
+																alt="lv-3"> -->
+														</span>
+													</nuxt-link>
+													<!---->
+												</div> <button class="follow-btn">
+													关注
+												</button>
+											</div>
+										</div>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -376,6 +421,56 @@ export default {
 </script>
 
 <style>
+.user-focus-list .follow-btn {
+	flex: 0 0 auto;
+	margin: 6px 0 0 10px;
+	padding: 0;
+	width: 75px;
+	height: 28px;
+	font-size: 12px;
+	color: #92c452;
+	background-color: #fff;
+	border: 1px solid #92c452;
+	border-radius: 2px;
+}
+
+.user-focus-list .info-box .username {
+	font-size: 16px;
+	font-weight: 600;
+	color: #2e3135;
+	text-decoration: none;
+}
+
+.user-focus-list .info-box {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.user-focus-list .user {
+	position: relative;
+	box-sizing: border-box;
+}
+
+.user-focus-list .item:not(:last-child) {
+	border-bottom: 1px solid rgba(230, 230, 231, .5);
+}
+
+.user-focus-list .link {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	padding: 5px 24px;
+	min-height: 70px;
+}
+
+.user-focus-list .avatar {
+	flex: 0 0 auto;
+	margin-right: 16px;
+	width: 37px;
+	height: 37px;
+	border-radius: 50%;
+}
+
 .questions_collect_con {
 	margin-top: 20px;
 }
@@ -581,6 +676,7 @@ export default {
 	width: 350px;
 	line-height: 1.2;
 	margin-top: 25px;
+	margin-bottom: 15px;
 }
 
 .follow-block .follow-item .item-count {
@@ -726,10 +822,8 @@ export default {
 	margin-top: 16px;
 	padding-top: 15px;
 	padding-left: 20px;
-
 	padding-bottom: 15px;
 	margin-bottom: 20px;
-	min-height: 600px;
 }
 
 .user-info {

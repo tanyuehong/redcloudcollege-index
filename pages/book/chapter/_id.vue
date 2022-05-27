@@ -223,7 +223,7 @@ strong {
 
 <script>
 import '~/assets/css/markdown.css'
-import bookReq from '@/api/bookReq'
+import bookApi from '@/api/book'
 import bookServerReq from '@/api/bookServerReq'
 import showdown from 'showdown'
 
@@ -267,7 +267,7 @@ export default {
 
   methods: {
     getBookContents () {
-      bookReq
+      bookApi
         .getBookContents({ bookId: this.bookItem.id })
         .then((response) => {
           window.console.log("dddfffff");

@@ -481,7 +481,8 @@ body {
 </style>
 
 <script>
-import bookReq from '@/api/bookReq'
+
+import bookApi from '@/api/book'
 import bookServerReq from '@/api/bookServerReq'
 import showdown from "showdown";
 
@@ -530,7 +531,7 @@ export default {
       if (tab && tab.name == 'undealComment') {
         type = 4
       }
-      bookReq
+      bookApi
         .getBookComments({ bookId: this.bookItem.id, type: type })
         .then((response) => {
           this.commentList = response.data.comments;
@@ -538,7 +539,7 @@ export default {
     },
 
     getBookContents () {
-      bookReq
+      bookApi
         .getBookContents({ bookId: this.bookItem.id })
         .then((response) => {
           this.chapterList = response.data.chapterList;

@@ -25,8 +25,8 @@
             <li v-for="message in messageList" :key="message.id">
               <nuxt-link :to="'/about/detail/' + message.id" v-if="message.type == 0">
                 {{ message.title }}
-                <span class="message-time">{{ message.gmtCreate }}</span>
                 <span class="message-detail">查看详情</span>
+                <span class="message-time">{{ message.gmtCreate }}</span>
               </nuxt-link>
               <span v-if="message.type == 1">{{ message.title }}<span class="message-time">{{ message.gmtCreate
               }}</span></span>
@@ -170,11 +170,13 @@ export default {
 }
 
 .message-list .message-time {
-  margin-left: 120px;
+  margin-right: 80px;
+  float: right;
 }
 
 .message-list .message-detail {
-  margin-left: 150px;
+  margin-right: 30px;
+  float: right;
 }
 
 .message-list li:hover a {
@@ -211,6 +213,8 @@ export default {
 .mess-content-lefte {
   background: #fff;
   padding: 15px;
+  min-height: 800px;
+  margin-bottom: 15px;
 }
 
 .mess-content-lefte .message-top-rumb {}

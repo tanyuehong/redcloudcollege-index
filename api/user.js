@@ -1,6 +1,15 @@
 import request from '@/utils/request'
 
 export default {
+
+  getUserFocusState(fIds) {
+    return request({
+      url: `/home/ucenter/getUserFocusState`,
+      method: 'post',
+      data: fIds,
+    })
+  },
+
   //登录的方法
   submitLoginUser(userInfo) {
     return request({
@@ -14,6 +23,28 @@ export default {
   getLoginUserInfo() {
     return request({
       url: `/ucenter/getUserInfo`,
+      method: 'get',
+    })
+  },
+  // 关注的方法
+  addUserFocus(fid) {
+    return request({
+      url: `/ucenter/addUserFocus/${fid}`,
+      method: 'get',
+    })
+  },
+
+  // 取消关注的方法
+  cancleUserFocus(fid) {
+    return request({
+      url: `/ucenter/cancleUserFocus/${fid}`,
+      method: 'get',
+    })
+  },
+
+  getUserFocus(fid) {
+    return request({
+      url: `/home/ucenter/getUserFocus/${fid}`,
       method: 'get',
     })
   },
@@ -35,8 +66,8 @@ export default {
     })
   },
 
-   //根据token获取用户信息
-   updateUserInfo(userData) {
+  //根据token获取用户信息
+  updateUserInfo(userData) {
     return request({
       url: `/ucenter/updateUserInfo`,
       method: 'post',
@@ -53,11 +84,11 @@ export default {
     })
   },
 
-    // 获取编辑器图片上传token
+  // 获取编辑器图片上传token
   getUploadImageToken() {
-      return request({
-        url: `/eduask/uploadqiniutoken`,
-        method: 'post',
-      })
-    },
+    return request({
+      url: `/eduask/uploadqiniutoken`,
+      method: 'post',
+    })
+  },
 }

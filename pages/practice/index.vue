@@ -3,39 +3,30 @@
     <div class="op_top_back"></div>
     <section class="container">
       <div class="practice-content">
-        <el-tabs v-model="activeName"
-                 @tab-click="handleClick">
-          <el-tab-pane :label="item.name"
-                       :name="item.id"
-                       v-for="item in typeList"
-                       :key="item.id">
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">
             <ul class="op_pratice_subtag">
-              <li class="li-item"
-                  v-for="(sutem,index) in subTypeList"
-                  :key="sutem.id">
-                <a v-bind:class="{ praticesubtagactive:subPraCticeTag==index }"
-                   @click="subPraCticeTagClick(index)"
-                   href="javascript:void(0);">{{ sutem.name }}
+              <li class="li-item" v-for="(sutem, index) in subTypeList" :key="sutem.id">
+                <a v-bind:class="{ praticesubtagactive: subPraCticeTag == index }" @click="subPraCticeTagClick(index)"
+                  href="javascript:void(0);">{{ sutem.name }}
                 </a>
               </li>
             </ul>
             <div class="op_pratice_content book_item fl">
               <ul class="article_list">
-                <li v-for="bitem in blogList"
-                    :key="bitem.id">
+                <li v-for="bitem in blogList" :key="bitem.id">
                   <div class="op_artie_content">
-                    <nuxt-link class="article_title"
-                               :to="'/practice/'+bitem.id">
+                    <nuxt-link class="article_title" :to="'/practice/' + bitem.id">
                       {{ bitem.title }}
                     </nuxt-link>
                     <p class="op_pratice_describ">{{ bitem.descrb }}</p>
                     <ul>
                       <i class="pratice_icon_view"></i>
-                      <span class="icon_des">{{bitem.viewCount}}</span>
+                      <span class="icon_des">{{ bitem.viewCount }}</span>
                       <i class="pratice_icon_zhan"></i>
-                      <span class="icon_des">{{bitem.good}}</span>
+                      <span class="icon_des">{{ bitem.good }}</span>
                       <i class="pratice_icon_comment"></i>
-                      <span class="icon_des">{{bitem.ccount}}</span>
+                      <span class="icon_des">{{ bitem.ccount }}</span>
                     </ul>
                   </div>
                 </li>
@@ -62,9 +53,7 @@
                   </div>
                 </div>
                 <div class="download-app js-show-download clearfix">
-                  <img src="~/assets/img/appLogo.png"
-                       alt=""
-                       class="logo-icon fl" />
+                  <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
                   <div class="text fl">
                     <h4>下载开源实践APP</h4>
                     <p>更好的体验 学习随处可享</p>
@@ -82,7 +71,7 @@
 import '~/assets/css/appdown.css'
 import '~/assets/css/contentlist.css'
 import showdown from 'showdown'
-import realPractice from '@/api/practiceblogReq'
+import realPractice from '@/api/blogServerReq'
 
 export default {
   //异步调用，调用一次
@@ -163,6 +152,7 @@ export default {
 .praticesubtagactive {
   color: #409eff !important;
 }
+
 .op_top_back {
   background-color: white;
   height: 70px;
@@ -182,6 +172,7 @@ export default {
   height: auto;
   padding-left: 0px;
 }
+
 .op_pratice_subtag .li-item {
   display: flex;
   justify-content: center;
@@ -221,6 +212,7 @@ export default {
   width: 326px;
   height: 400px;
 }
+
 .download-app .text p {
   margin-top: 0px;
   margin-bottom: 0px;

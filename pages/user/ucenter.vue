@@ -7,24 +7,22 @@
           <div class="user-info">
             <div class="user-pic">
               <div class="user-pic-bg">
-                <img class="user-header-img"
-                     src="https://static.redskt.com/assets/img/yonghutouxiangnan.png">
+                <img class="user-header-img" src="https://static.redskt.com/assets/img/yonghutouxiangnan.png">
               </div>
             </div>
           </div>
           <div class="user-info-right">
             <div class="user-info-detail">
               <div class="user-name">
-                <span>{{userInfo.nickname}}</span>
+                <span>{{ userInfo.nickname }}</span>
               </div>
 
               <div class="user-sign">
-                <span>{{userInfo.sign}}</span>
+                <span>{{ userInfo.sign }}</span>
               </div>
             </div>
             <div class="user-info-setting">
-              <el-button @click="personSetting"
-                         round>个人设置</el-button>
+              <el-button @click="personSetting" round>个人设置</el-button>
             </div>
             <ul class="user-about-item">
               <li class="user-about-item-li">
@@ -58,8 +56,7 @@
     </div>
     <div class="container">
       <div class="ucenter-home-content">
-        <el-tabs tab-position="left"
-                 style="height:200px;">
+        <el-tabs tab-position="left" style="height:200px;">
           <el-tab-pane label="学习进度">学习进度</el-tab-pane>
           <el-tab-pane label="我的收藏">我的收藏</el-tab-pane>
           <el-tab-pane label="我的文章">我的文章</el-tab-pane>
@@ -67,7 +64,6 @@
         </el-tabs>
       </div>
     </div>
-  </div>
   </div>
 
 </template>
@@ -186,6 +182,7 @@ export default {
   margin-right: 20px;
   float: right;
 }
+
 .user-about-item .user-about-item-li {
   display: block;
   margin-right: 16px;

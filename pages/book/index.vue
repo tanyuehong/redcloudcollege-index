@@ -157,7 +157,7 @@
 <script>
 import '~/assets/css/appdown.css'
 import '~/assets/css/contentlist.css'
-import bookReq from "@/api/bookReq";
+import bookApi from "@/api/book";
 import bookSReq from "@/api/bookServerReq";
 
 export default {

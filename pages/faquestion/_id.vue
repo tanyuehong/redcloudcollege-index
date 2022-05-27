@@ -13,9 +13,10 @@
             </div>
             <div>
               <div class="question_info">
-                <a href="#">
+                <nuxt-link :to="'/user/' + qdetail.uid + '/blog'">
                   <img class="vam user-head-image" :src="qdetail.avatar" width="30" height="30" alt />
-                  <span class="ml5">{{ qdetail.nickname }}</span></a>
+                  <span class="ml5">{{ qdetail.nickname }}</span>
+                </nuxt-link>
                 <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
                 <span class="glyphicon glyphicon-star-empty qustion-top-item" aria-hidden="true">
                 </span>
@@ -175,9 +176,11 @@
               <ul class="qustion-anser-list">
                 <li class="answer-list-item" v-for="(item, index) in replyList" :key="item.id">
                   <div class="answer-item-userinfo">
-                    <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
-                    <span class="ml5"> {{ item.username }}</span>
-                    <span class="qustion-top-item"> {{ item.gmtCreate }}</span>
+                    <nuxt-link :to="'/user/' + item.uid + '/blog'" class="anser-info">
+                      <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
+                      <span class="ml5"> {{ item.username }}</span>
+                      <span class="qustion-top-item anser-time"> {{ item.gmtCreate }}</span>
+                    </nuxt-link>
                   </div>
 
                   <div class="answer-item-content" v-html="item.content"></div>
@@ -320,8 +323,8 @@
                 </nuxt-link>
               </div>
               <nuxt-link :to="'/faquestion/1481862372760240130'" class="ask-top-warper-item" target="_blank"
-                rel="nofollow noopener noreferrer">◇ 欢迎建议意见</nuxt-link>
-              <nuxt-link :to="'/about/detail/1523552231247499265'" class="ask-top-warper-item">◇ 实践问答上线</nuxt-link>
+                rel="nofollow noopener noreferrer">◇ 欢迎大家的建议和反馈</nuxt-link>
+              <nuxt-link :to="'/about/detail/1523552231247499265'" class="ask-top-warper-item">◇ 开源实践问答上线</nuxt-link>
             </div>
           </div>
 
@@ -346,8 +349,8 @@
 
 <script>
 import userApi from "@/api/user";
-import askApi from "@/api/askqustion";
-import askServerApi from "@/api/askserver";
+import askApi from "@/api/ask";
+import askServerApi from "@/api/askServerReq";
 
 const qiniu = require("qiniu-js");
 
@@ -1061,6 +1064,15 @@ export default {
 </script>
 
 <style>
+.answer-item-userinfo .anser-info {
+  text-decoration: none;
+}
+
+.answer-item-userinfo .anser-time {
+  color: #333;
+  text-decoration: none;
+}
+
 .ask-top-wrap .ask-message-tips {
   font-weight: 500;
   color: #222226;

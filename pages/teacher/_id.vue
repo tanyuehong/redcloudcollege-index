@@ -714,7 +714,7 @@ export default {
       this.isLogin = false;
     } else {
       this.isLogin = true;
-      userApiApi.getUserFocus(this.teacher.id).then((response) => {
+      userApi.getUserFocus(this.teacher.id).then((response) => {
         window.console.log(response);
         this.isFocus = response.data.focus;
       })
@@ -740,7 +740,7 @@ export default {
         this.forbiden = false;
         if (this.isLogin) {
           if (this.isFocus) {
-            userApiApi.cancleUserFocus(this.teacher.id).then((response) => {
+            userApi.cancleUserFocus(this.teacher.id).then((response) => {
               this.isFocus = response.data.focus;
               this.teacher.focus--;
               this.$message({
@@ -750,7 +750,7 @@ export default {
               });
             });
           } else {
-            userApiApi.addUserFocus(this.teacher.id).then((response) => {
+            userApi.addUserFocus(this.teacher.id).then((response) => {
               this.isFocus = response.data.focus;
               this.teacher.focus++;
               this.$message({

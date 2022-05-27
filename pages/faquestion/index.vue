@@ -28,7 +28,7 @@
                   </li>
                   <li>
                     <span></span>
-                    <nuxt-link :to="{ name: 'faquestion-howtoask' }">【新手提问导读】提问的艺术</nuxt-link>
+                    <nuxt-link :to="{ name: 'faquestion-howtoask' }" target="_blank">【新手提问导读】提问的艺术</nuxt-link>
                   </li>
                   <li>
                     <span></span>

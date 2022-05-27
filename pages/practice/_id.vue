@@ -19,8 +19,7 @@
               </div>
 
               <div class="blog-info-detail">
-                <nuxt-link class="article_title"
-                           :to="'/teacher/' + pitem.authorUid">
+                <nuxt-link :to="'/user/' + pitem.authorUid + '/blog'" class="article_title" target="_blank">
                   <div class="article-author">{{ pitem.authorName }}</div>
                 </nuxt-link>
                 <div>

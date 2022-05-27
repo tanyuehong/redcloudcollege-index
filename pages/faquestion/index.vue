@@ -7,9 +7,8 @@
           <p class="desc">每一个问题，我们都会选择一个最优的答案。并且通过人工分类和技术专家维护问题列表，方便查找，为大家在学习路上解疑答惑。</p>
         </div>
 
-        <img src="https://image.boxueio.com/swift-wtf-to-omg-avatar@2x.jpg"
-             alt="Image Description"
-             class="rounded-circle" />
+        <img src="https://image.boxueio.com/swift-wtf-to-omg-avatar@2x.jpg" alt="Image Description"
+          class="rounded-circle" />
         <div class="clear"></div>
       </div>
     </div>
@@ -17,9 +16,7 @@
       <section class="container">
         <div class="main_content">
           <div class="question_right_con">
-            <el-button type="danger"
-                       class="startqustionbtn"
-                       @click="jumpStartQuestion">我要提问</el-button>
+            <el-button type="danger" class="startqustionbtn" @click="jumpStartQuestion">我要提问</el-button>
 
             <div class="mod_about_teacher">
               <h3>最新公告</h3>
@@ -27,19 +24,16 @@
                 <ul>
                   <li>
                     <span></span>
-                    <a href="https://zhibo.zuoyebang.com/static/hy/yike-sell-pc-vue/teacher-page.html"
-                       target="_blank">问答WAP版改版上线</a>
+                    <nuxt-link :to="'/about/detail/1523552231247499265'" target="_blank">开源实践问答上线</nuxt-link>
                   </li>
                   <li>
                     <span></span>
-                    <nuxt-link :to="{name:'faquestion-howtoask'}">
-                      【新手提问导读】提问的艺术
-                    </nuxt-link>
+                    <nuxt-link :to="{ name: 'faquestion-howtoask' }">【新手提问导读】提问的艺术</nuxt-link>
                   </li>
                   <li>
                     <span></span>
-                    <a href="airclass://www.zuoyebang.com/live/native/mvp/video?courseId=560460&lessonId=516822"
-                       target="_blank">欢迎加入开源问答用户群</a>
+                    <nuxt-link :to="'/faquestion/1481862372760240130'" target="_blank"
+                      rel="nofollow noopener noreferrer">欢迎大家的建议和反馈</nuxt-link>
                   </li>
                 </ul>
               </div>
@@ -48,26 +42,18 @@
           <div class="content_left">
             <div class="faqustion-top-group">
               <ul class="faqustion-typeList">
-                <li class="faqustion-type-item"
-                    v-for="(item, index) in qustionType"
-                    :key="index"
-                    :class="{comactive: typeIndex == index }">
-                  <span :title="item.name"
-                        href="#"
-                        @click="qustionTypeClick(item.id,index)">
+                <li class="faqustion-type-item" v-for="(item, index) in qustionType" :key="index"
+                  :class="{ comactive: typeIndex == index }">
+                  <span :title="item.name" href="#" @click="qustionTypeClick(item.id, index)">
                     {{ item.name }}
                   </span>
                 </li>
               </ul>
             </div>
-            <div class="faqustion-subTags"
-                 v-if="tagList.length>0">
+            <div class="faqustion-subTags" v-if="tagList.length > 0">
             </div>
             <div class="questions_tab_con">
-              <el-menu :default-active="activeIndex"
-                       class="el-menu-demo"
-                       mode="horizontal"
-                       @select="handleSelect">
+              <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                 <el-menu-item index="1">最新提问</el-menu-item>
                 <el-menu-item index="2">最新回答</el-menu-item>
                 <el-menu-item index="3">等待回答</el-menu-item>
@@ -77,60 +63,47 @@
               </el-menu>
             </div>
             <div class="questions_detail_con">
-              <div class="nodata-warper"
-                   v-if="list.length == 0">
-                <img class="nodata-image-tips"
-                     src="https://img.redskt.com/asset/img/nodata.png" />
+              <div class="nodata-warper" v-if="list.length == 0">
+                <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
                 <div>
                   <span>暂时没有数据哦，赶紧抢沙发吧</span>
                 </div>
               </div>
-              <div v-for="item in list"
-                   :key="item.qid"
-                   class="question_list">
+              <div v-for="item in list" :key="item.qid" class="question_list">
                 <div class="answer_title">
-                  <nuxt-link :to="'/faquestion/'+item.qid"
-                             class="header">
-                    {{item.title}}
-                    <div class="ui red label horizontal"
-                         data-tooltip="置顶">顶</div>
-                    <div class="ui orange label horizontal"
-                         data-tooltip="热门">热</div>
+                  <nuxt-link :to="'/faquestion/' + item.qid" class="header">
+                    {{ item.title }}
+                    <div class="ui red label horizontal" data-tooltip="置顶">顶</div>
+                    <div class="ui orange label horizontal" data-tooltip="热门">热</div>
                   </nuxt-link>
                 </div>
 
                 <div class="description">
-                  <p class="line-clamp"
-                     v-html="item.content"></p>
+                  <p class="line-clamp" v-html="item.content"></p>
                 </div>
                 <div class="extra question-tags">
-                  <a class="ui horizontal basic label popup-tag"
-                     href="https://www.oschina.net/question/tag/ruby"
-                     target="_blank">
+                  <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
+                    target="_blank">
                     <img src="https://static.oschina.net/img/logo/ruby.gif" />Ruby
                   </a>
 
-                  <a class="ui horizontal basic label popup-tag"
-                     href="https://www.oschina.net/question/tag/java"
-                     target="_blank">
+                  <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/java"
+                    target="_blank">
                     <img src="https://static.oschina.net/img/logo/java.png" />Java
                   </a>
                 </div>
 
                 <div class="q_time">
-                  <span>{{item.gmtCreate}}来自</span>
-                  <a class="user_name"
-                     href="https://my.csdn.net/dabocaiqq"
-                     target="_blank">{{item.nickname}}</a>
+                  <span>{{ item.gmtCreate }}来自</span>
+                  <nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name" target="_blank">
+                    {{ item.nickname }}
+                  </nuxt-link>
                   <b>
                     悬赏
-                    <a href="javascript:;"
-                       title="个人悬赏">{{item.price}}C</a>
+                    <a href="javascript:;" title="个人悬赏">{{ item.price }}C</a>
                   </b>
-                  <nuxt-link :to="'/faquestion/'+item.qid"
-                             class="answer_num"
-                             title="问题回答数量">
-                    <span>{{item.reply}}</span>
+                  <nuxt-link :to="'/faquestion/' + item.qid" class="answer_num" title="问题回答数量">
+                    <span>{{ item.reply }}</span>
                     <p class="anser-lable">回答</p>
                   </nuxt-link>
                 </div>
@@ -157,9 +130,11 @@
 .faqustion-top-group {
   border-bottom: solid 1px #e6e6e6;
 }
+
 .el-menu.el-menu--horizontal {
   background: #fafafa;
 }
+
 .faqustion-typeList {
   display: flex;
   flex-wrap: wrap;
@@ -168,15 +143,18 @@
   height: 40px;
   margin-left: 15px;
 }
+
 .faqustion-type-item {
   font-size: 16px;
   margin-right: 26px;
   font-weight: 500;
   cursor: pointer;
 }
+
 .faqustion-subTags {
   height: 20px;
 }
+
 .header_xuanchuan {
   height: 300px;
   width: 100%;
@@ -187,11 +165,13 @@
 .header_annation .answer_title {
   color: white;
 }
+
 .header_annation .desc {
   color: white;
   font-size: 16px;
   margin-top: 25px;
 }
+
 .header_annation {
   width: 620px;
   float: left;
@@ -221,6 +201,7 @@
   margin-right: 20px;
   margin-top: 13px;
 }
+
 .questions_tab_con .sort .sort_list_label {
   height: 37px;
   line-height: 37px;
@@ -233,9 +214,11 @@
   cursor: pointer;
   color: #409eff;
 }
+
 .el-icon-arrow-down {
   font-size: 12px;
 }
+
 .demonstration {
   display: block;
   color: #8492a6;
@@ -344,6 +327,7 @@
   transition: color 0.1s ease;
   border-top: none;
 }
+
 .questions_detail_con .q_time {
   margin-top: 10px;
   margin-bottom: 10px;

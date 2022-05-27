@@ -201,7 +201,9 @@
 
 										<div class="q_time">
 											<span>{{ item.gmtCreate }}来自</span>
-											<a class="user_name" href="https://my.csdn.net/dabocaiqq" target="_blank">{{ item.nickname }}</a>
+											<nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name" target="_blank">
+												{{ item.nickname }}
+											</nuxt-link>
 											<b>
 												悬赏
 												<a href="javascript:;" title="个人悬赏">{{ item.price }}C</a>
@@ -356,7 +358,8 @@
 
 										<div class="q_time">
 											<span>{{ item.gmtCreate }}来自</span>
-											<a class="user_name" href="https://my.csdn.net/dabocaiqq" target="_blank">{{ item.nickname }}</a>
+											<nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name" target="_blank">{{ item.nickname
+											}}</nuxt-link>
 											<b>
 												悬赏
 												<a href="javascript:;" title="个人悬赏">{{ item.price }}C</a>

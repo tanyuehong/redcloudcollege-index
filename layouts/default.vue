@@ -59,19 +59,19 @@
                       <el-dropdown-item command="userHome" icon="el-icon-user-solid">
                         我的主页
                       </el-dropdown-item>
-                      <el-dropdown-item icon="el-icon-star-off">
+                      <!-- <el-dropdown-item icon="el-icon-star-off">
                         学习进度
+                      </el-dropdown-item> -->
+                      <el-dropdown-item command="userStar" icon="el-icon-star-off">
+                        我的关注
                       </el-dropdown-item>
-                      <el-dropdown-item icon="el-icon-star-off">
+                      <el-dropdown-item command="userCollect" icon="el-icon-s-order">
                         我的收藏
                       </el-dropdown-item>
-                      <el-dropdown-item icon="el-icon-s-order">
-                        我的订单
-                      </el-dropdown-item>
-                      <el-dropdown-item icon="el-icon-question">
+                      <!-- <el-dropdown-item icon="el-icon-question">
                         帮助与反馈
-                      </el-dropdown-item>
-                      <el-dropdown-item icon=" el-icon-setting">
+                      </el-dropdown-item> -->
+                      <el-dropdown-item command="userSetting" icon=" el-icon-setting">
                         设置
                       </el-dropdown-item>
                       <el-dropdown-item command="quit" icon="el-icon-switch-button">
@@ -211,6 +211,22 @@ export default {
         this.$router.push({
           name: "user-id-type",
           params: { id: this.loginInfo.id, type: "blog" }
+        });
+      } else if (command == 'userStar') {
+        this.$router.push({
+          name: "user-id-type",
+          params: { id: this.loginInfo.id, type: "focus" }
+        });
+      } else if (command == 'userCollect') {
+        this.$router.push({
+          name: "user-id-type",
+          params: { id: this.loginInfo.id, type: "collect" }
+        });
+      } else if (command == 'userSetting') {
+        var loginToken = window.localStorage.getItem('redclass_token');
+        this.$router.push({
+          name: "user-setting",
+          params: { "loginToken": loginToken },
         });
       }
     },

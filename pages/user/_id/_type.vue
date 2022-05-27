@@ -252,7 +252,7 @@
 														</span>
 													</nuxt-link>
 													<!---->
-												</div> <button class="follow-btn">
+												</div> <button class="follow-btn" v-bind:class="{ active: item.bfocus }">
 													关注
 												</button>
 											</div>
@@ -488,20 +488,40 @@ export default {
 				this.isSetting = true;
 			}
 		}
+		this.getUserFocusState();
 	},
 
 	methods: {
-		// 获取文章列表的方法
-		getUserArticleList () {
-			userApi.getArticleList(this.parmUid).then(response => {
-				this.articleList = response.data.articleList;
-			});
-		},
-
-		getUserCollectArticleList () {
-			userApi.getCollectArticleList(this.parmUid).then(response => {
-				//this.articleList = response.data.articleList;
-			});
+		getUserFocusState () {
+			if (!(this.parmType == "focus-mine" || this.parmType == "focus-fans") || !this.dataList) {
+				return;
+			}
+			if (this.isLogin && this.loginInfo.id == this.parmUid && this.parmType == "focus-mine") {
+				for (var j = 0; j < this.dataList.length; j++) {
+					var fItem = this.dataList[j];
+					fItem.bfocus = true;
+				}
+				return;
+			}
+			var list = [];
+			for (var j = 0; j < this.dataList.length; j++) {
+				list.push(this.dataList[j].id);
+			}
+			userApi.getUserFocusState(list).then((response) => {
+				var focusList = response.data.focusList;
+				if (!focusList) {
+					return;
+				}
+				for (var j = 0; j < this.dataList.length; j++) {
+					var fItem = this.dataList[j];
+					for (var i = 0; i < focusList.length; i++) {
+						if (focusList[i].fid == fItem.id) {
+							fItem.bfocus = true;
+							break;
+						}
+					}
+				}
+			})
 		},
 		focusUserClick () {
 
@@ -533,6 +553,11 @@ export default {
 </script>
 
 <style>
+.user-focus-list .follow-btn.active {
+	color: #fff;
+	background-color: #92c452;
+}
+
 .user-focus-list .follow-btn {
 	flex: 0 0 auto;
 	margin: 6px 0 0 10px;

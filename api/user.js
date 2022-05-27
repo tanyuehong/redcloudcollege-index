@@ -1,25 +1,12 @@
 import request from '@/utils/request'
 
 export default {
-  // 获取用户文章列表
-  getArticleList(uId) {
-    return request({
-      url: `/home/ucenter/getArticleList/${uId}`,
-      method: 'get',
-    })
-  },
 
-  getCollectArticleList(uId) {
+  getUserFocusState(fIds) {
     return request({
-      url: `/home/ucenter/getCollectArticleList/${uId}`,
-      method: 'get',
-    })
-  },
-
-  getCollectAskList(uId) {
-    return request({
-      url: `/home/ucenter/getCollectAskList/${uId}`,
-      method: 'get',
+      url: `/home/ucenter/getUserFocusState`,
+      method: 'post',
+      data: fIds,
     })
   },
 

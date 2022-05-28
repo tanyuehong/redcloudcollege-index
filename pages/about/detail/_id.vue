@@ -61,7 +61,7 @@
         <div class="bottom-content">
           <div class="bottom-comment">
             <div class="comment-header">
-              <nuxt-link class="article_title" :to="'/teacher/' + pitem.authorUid">
+              <nuxt-link :to="'/user/' + pitem.authorUid + '/blog'" class="article_title" title="个人详细信息">
                 <img class="vam user-head-image article-avatar" :src="pitem.authorAvatar" width="30" height="30" alt />
               </nuxt-link>
             </div>

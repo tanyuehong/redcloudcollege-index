@@ -475,6 +475,31 @@ export default {
 			};
 		});
 	},
+
+	head () {
+		return {
+			script: [
+				{ src: 'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js', async: true, defer: true }
+			],
+			title: this.userInfo.nickname + " 的个人主页 - " + this.getTypeName() + " - 开源实践网",
+			meta: [
+				{
+					hid: 'keywords',
+					name: 'keywords',
+					content: this.userInfo.nickname,
+				},
+				{
+					hid: 'description',
+					name: 'description',
+					content: this.userInfo.position + " @ " + this.userInfo.company + " " + this.userInfo.perintroduction,
+				},
+				{
+					hid: 'og:description',
+					content: this.userInfo.position + " @ " + this.userInfo.company + " " + this.userInfo.perintroduction,
+				},
+			],
+		}
+	},
 	mounted () {
 		var token = localStorage.getItem("redclass_token");
 		var userStr = localStorage.getItem("redclass_user");
@@ -495,6 +520,30 @@ export default {
 	},
 
 	methods: {
+		getTypeName () {
+			if (this.focusUserClickparmType == "blog") {
+				return "文章"
+			}
+			if (this.parmType == "collect-blog") {
+				return "收藏的文章"
+			}
+			if (this.parmType == "collect-ask") {
+				return "收藏的问题"
+			}
+			if (this.parmType == "focus-mine") {
+				return "关注用户"
+			}
+			if (this.parmType == "focus-fans") {
+				return "我的粉丝"
+			}
+			if (this.parmType == "good-blog") {
+				return "赞的文章"
+			}
+			if (this.parmType == "good-ask") {
+				return "赞的问题"
+			}
+			return "文章";
+		},
 		getUserFocusState () {
 			if (!(this.parmType == "focus-mine" || this.parmType == "focus-fans") || !this.dataList) {
 				return;

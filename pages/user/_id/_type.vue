@@ -254,8 +254,9 @@
 														</span>
 													</nuxt-link>
 													<!---->
-												</div> <button class="follow-btn" v-bind:class="{ active: item.bfocus }">
-													关注
+												</div> <button class="follow-btn" v-bind:class="{ active: item.bfocus }"
+													@click="clickFocusBtnClick(item)">
+													{{ setFocusString(item.bfocus) }}
 												</button>
 											</div>
 										</div>
@@ -520,6 +521,36 @@ export default {
 	},
 
 	methods: {
+		clickFocusBtnClick (item) {
+			if (this.isLogin) {
+				if (item.bfocus) {
+					userApi.cancleUserFocus(item.id).then((response) => {
+						item.bfocus = response.data.focus;
+						this.$message({
+							message: "取消关注成功哈~",
+							type: "success",
+							duration: 2000,
+						});
+					});
+				} else {
+					userApi.addUserFocus(item.id).then((response) => {
+						item.bfocus = response.data.focus;
+						this.$message({
+							message: "关注成功哈~",
+							type: "success",
+							duration: 2000,
+						});
+					});
+				}
+			} else {
+				this.$message({
+					message: "请您登录以后在关注哈",
+					type: "success",
+					duration: 2000,
+				});
+			}
+
+		},
 		getTypeName () {
 			if (this.focusUserClickparmType == "blog") {
 				return "文章"
@@ -545,9 +576,6 @@ export default {
 			return "文章";
 		},
 		getUserFocusState () {
-			if (!(this.parmType == "focus-mine" || this.parmType == "focus-fans") || !this.dataList) {
-				return;
-			}
 			if (this.isLogin && this.loginInfo.id == this.parmUid && this.parmType == "focus-mine") {
 				for (var j = 0; j < this.dataList.length; j++) {
 					var fItem = this.dataList[j];
@@ -556,27 +584,66 @@ export default {
 				return;
 			}
 			var list = [];
-			for (var j = 0; j < this.dataList.length; j++) {
-				list.push(this.dataList[j].id);
+			list.push(this.parmUid);
+			if ((this.parmType == "focus-mine" || this.parmType == "focus-fans") && this.dataList) {
+				for (var j = 0; j < this.dataList.length; j++) {
+					list.push(this.dataList[j].id);
+				}
 			}
+
 			userApi.getUserFocusState(list).then((response) => {
 				var focusList = response.data.focusList;
 				if (!focusList) {
 					return;
 				}
-				for (var j = 0; j < this.dataList.length; j++) {
-					var fItem = this.dataList[j];
-					for (var i = 0; i < focusList.length; i++) {
-						if (focusList[i].fid == fItem.id) {
-							fItem.bfocus = true;
-							break;
+				for (var i = 0; i < focusList.length; i++) {
+					if (focusList[i].fid == this.parmUid) {
+						this.isFocus = true;
+						break;
+					}
+				}
+
+				if ((this.parmType == "focus-mine" || this.parmType == "focus-fans") && this.dataList) {
+					for (var j = 0; j < this.dataList.length; j++) {
+						var fItem = this.dataList[j];
+						for (var i = 0; i < focusList.length; i++) {
+							if (focusList[i].fid == fItem.id) {
+								fItem.bfocus = true;
+								break;
+							}
 						}
 					}
 				}
 			})
 		},
 		focusUserClick () {
-
+			if (this.isLogin) {
+				if (this.isFocus) {
+					userApi.cancleUserFocus(this.parmUid).then((response) => {
+						this.isFocus = response.data.focus;
+						this.$message({
+							message: "取消关注成功哈~",
+							type: "success",
+							duration: 2000,
+						});
+					});
+				} else {
+					userApi.addUserFocus(this.parmUid).then((response) => {
+						this.isFocus = response.data.focus;
+						this.$message({
+							message: "关注成功哈~",
+							type: "success",
+							duration: 2000,
+						});
+					});
+				}
+			} else {
+				this.$message({
+					message: "请您登录以后在关注哈",
+					type: "success",
+					duration: 2000,
+				});
+			}
 		},
 		personSetting () {
 			var loginToken = window.localStorage.getItem('redclass_token');
@@ -599,7 +666,16 @@ export default {
 		},
 		focusString: function () {
 			return this.isFocus ? "已关注" : "关注Ta";
-		}
+		},
+		setFocusString: function () {
+			return function (focus) {
+				if (focus) {
+					return "已关注";
+				} else {
+					return "关注Ta";
+				}
+			};
+		},
 	},
 };
 </script>

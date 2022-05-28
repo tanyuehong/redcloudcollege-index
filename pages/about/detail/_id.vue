@@ -23,7 +23,7 @@
             <h1>{{ pitem.title }}</h1>
 
             <div class="message-header-bloginfo">
-              <nuxt-link class="article_title" :to="'/teacher/' + pitem.authorUid">
+              <nuxt-link :to="'/user/' + pitem.authorUid + '/blog'" class="article_title">
                 <span>{{ pitem.authorName }}</span>
               </nuxt-link>
               <span>{{ pitem.gmtCreate }} </span>
@@ -214,9 +214,9 @@
               </div>
               <div class="con-top-bar">
                 <div>
-                  <a href="javascript:" class="name" title="个人详细信息">
+                  <nuxt-link :to="'/user/' + pitem.authorUid + '/blog'" class="name" title="个人详细信息">
                     {{ pitem.authorName }}
-                  </a>
+                  </nuxt-link>
                   <p class="num-read">{{ pitem.allvcount }}次 总阅读量</p>
                 </div>
               </div>

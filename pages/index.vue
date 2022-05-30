@@ -283,7 +283,7 @@
                 官方优惠福利活动一手掌握，关注开源实践官网（ID：www.redskt.com），和1万+客户端程序员一起成长！
               </div>
             </div>
-            <div class="download-app js-show-download clearfix">
+            <div class="download-app clearfix">
               <img src="~/assets/img/appLogo.png"
                    alt=""
                    class="logo-icon fl" />

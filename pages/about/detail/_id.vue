@@ -248,7 +248,7 @@
                 </div>
               </li>
             </ul>
-            <nuxt-link :to="'/user/' + pitem.authorUid" class="art-more-look" target="_blank">
+            <nuxt-link :to="'/user/' + pitem.authorUid + '/blog'" class="art-more-look" target="_blank">
               更多TA的内容
             </nuxt-link>
           </div>

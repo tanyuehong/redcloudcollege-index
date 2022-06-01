@@ -125,13 +125,9 @@
           <section class="fl col-7">
             <section class="mr20">
               <section class="b-f-link">
-                <a href="#" title="关于我们" target="_blank">关于我们</a>
+                <nuxt-link :to="'/about/detail/1523552231247499263'" target="_blank" title="关于我们">关于我们</nuxt-link>
                 |
-                <a href="#" title="联系我们" target="_blank">联系我们</a>
-                |
-                <a href="#" title="帮助中心" target="_blank">帮助中心</a>
-                |
-                <a href="#" title="资源下载" target="_blank">资源下载</a>
+                <nuxt-link :to="'/about/detail/1523552231247499263'" target="_blank" title="联系我们">联系我们</nuxt-link>
                 |
                 <span>服务热线：16623170187</span>
                 <span>Email：redskt@163.com</span>

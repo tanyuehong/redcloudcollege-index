@@ -3,71 +3,47 @@
     <div class="container">
       <div class="ucenter-setting-header">
         <li class="ucenter-back-item">
-          <nuxt-link :to="{ name: 'user-ucenter'}">
+          <nuxt-link :to="'/user/' + userInfo.id + '/blog'">
             <span>返回个人主页</span>
             <i class="el-icon-arrow-right back_item"></i>
           </nuxt-link>
         </li>
       </div>
       <div class="setting-lefte-menu">
-        <div @click="personSettingClick"
-             class="setting-menu-item">
-          <div data-v-55200008=""
-               class="nav-item"
-               v-bind:class="{ active: settingtype==1 }"><svg data-v-55200008=""
-                 width="16"
-                 height="16"
-                 viewBox="0 0 16 16"
-                 fill="none"
-                 xmlns="http://www.w3.org/2000/svg"
-                 class="svg">
-              <path data-v-55200008=""
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M15.3331 14.1052V14.3207C15.3331 14.5048 15.1839 14.654 14.9998 14.654H14.3204C14.1413 14.654 13.9967 14.5122 13.9801 14.3339C13.9778 14.3097 13.9754 14.2872 13.9728 14.2679C13.8008 12.9838 12.8312 12 11.7742 12H9.88471C8.82066 12 7.8512 12.997 7.68991 14.2937C7.68842 14.3056 7.68699 14.3189 7.68563 14.333C7.66842 14.5116 7.52439 14.654 7.34498 14.654H6.66643C6.48233 14.654 6.33309 14.5048 6.33309 14.3207V14.1052C6.33309 12.5335 7.41668 11.2082 8.82833 10.7979C8.3268 10.2875 8.01744 9.58768 8.01744 8.81561C8.01744 7.25359 9.2837 5.98733 10.8457 5.98733C12.4077 5.98733 13.674 7.25359 13.674 8.81561C13.674 9.59004 13.3627 10.2918 12.8585 10.8025C14.2611 11.2181 15.3331 12.5395 15.3331 14.1052ZM1.99984 2.66665V12.6666H4.9165V14H1.33317C0.964981 14 0.666504 13.7015 0.666504 13.3333V1.99998C0.666504 1.63179 0.964981 1.33331 1.33317 1.33331H13.3332C13.7014 1.33331 13.9998 1.63179 13.9998 1.99998V5.82955C13.5945 5.49574 13.1466 5.21989 12.6665 5.01331V2.66665H1.99984ZM3.33309 5.99994C3.33309 5.81584 3.48233 5.66661 3.66642 5.66661H6.66642C6.85052 5.66661 6.99976 5.81584 6.99976 5.99994V6.6666C6.99976 6.8507 6.85052 6.99994 6.66642 6.99994H3.66642C3.48233 6.99994 3.33309 6.8507 3.33309 6.66661V5.99994ZM3.33309 8.66661C3.33309 8.48251 3.48233 8.33327 3.66642 8.33327H4.99976C5.18385 8.33327 5.33309 8.48251 5.33309 8.66661V9.33327C5.33309 9.51737 5.18385 9.66661 4.99976 9.66661H3.66642C3.48233 9.66661 3.33309 9.51737 3.33309 9.33327V8.66661ZM10.8457 7.32066C10.0201 7.32066 9.35075 7.98997 9.35075 8.81561C9.35075 9.64125 10.0201 10.3106 10.8457 10.3106C11.6713 10.3106 12.3406 9.64125 12.3406 8.81561C12.3406 7.98997 11.6713 7.32066 10.8457 7.32066Z"
-                    class="close-path"></path>
+        <div @click="personSettingClick" class="setting-menu-item">
+          <div class="nav-item" v-bind:class="{ active: settingtype == 1 }"><svg width="16" height="16"
+              viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M15.3331 14.1052V14.3207C15.3331 14.5048 15.1839 14.654 14.9998 14.654H14.3204C14.1413 14.654 13.9967 14.5122 13.9801 14.3339C13.9778 14.3097 13.9754 14.2872 13.9728 14.2679C13.8008 12.9838 12.8312 12 11.7742 12H9.88471C8.82066 12 7.8512 12.997 7.68991 14.2937C7.68842 14.3056 7.68699 14.3189 7.68563 14.333C7.66842 14.5116 7.52439 14.654 7.34498 14.654H6.66643C6.48233 14.654 6.33309 14.5048 6.33309 14.3207V14.1052C6.33309 12.5335 7.41668 11.2082 8.82833 10.7979C8.3268 10.2875 8.01744 9.58768 8.01744 8.81561C8.01744 7.25359 9.2837 5.98733 10.8457 5.98733C12.4077 5.98733 13.674 7.25359 13.674 8.81561C13.674 9.59004 13.3627 10.2918 12.8585 10.8025C14.2611 11.2181 15.3331 12.5395 15.3331 14.1052ZM1.99984 2.66665V12.6666H4.9165V14H1.33317C0.964981 14 0.666504 13.7015 0.666504 13.3333V1.99998C0.666504 1.63179 0.964981 1.33331 1.33317 1.33331H13.3332C13.7014 1.33331 13.9998 1.63179 13.9998 1.99998V5.82955C13.5945 5.49574 13.1466 5.21989 12.6665 5.01331V2.66665H1.99984ZM3.33309 5.99994C3.33309 5.81584 3.48233 5.66661 3.66642 5.66661H6.66642C6.85052 5.66661 6.99976 5.81584 6.99976 5.99994V6.6666C6.99976 6.8507 6.85052 6.99994 6.66642 6.99994H3.66642C3.48233 6.99994 3.33309 6.8507 3.33309 6.66661V5.99994ZM3.33309 8.66661C3.33309 8.48251 3.48233 8.33327 3.66642 8.33327H4.99976C5.18385 8.33327 5.33309 8.48251 5.33309 8.66661V9.33327C5.33309 9.51737 5.18385 9.66661 4.99976 9.66661H3.66642C3.48233 9.66661 3.33309 9.51737 3.33309 9.33327V8.66661ZM10.8457 7.32066C10.0201 7.32066 9.35075 7.98997 9.35075 8.81561C9.35075 9.64125 10.0201 10.3106 10.8457 10.3106C11.6713 10.3106 12.3406 9.64125 12.3406 8.81561C12.3406 7.98997 11.6713 7.32066 10.8457 7.32066Z"
+                class="close-path"></path>
             </svg>
             个人资料
           </div>
         </div>
-        <div @click="zhanghuSettingClick"
-             class="setting-menu-item">
-          <div class="nav-item"
-               data-v-55200008=""
-               v-bind:class="{ active: settingtype==2 }"><svg width="16"
-                 height="16"
-                 viewBox="0 0 16 16"
-                 fill="none"
-                 xmlns="http://www.w3.org/2000/svg"
-                 class="svg"
-                 data-v-55200008="">
-              <path fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M9.58901 0.903176C9.07116 0.786587 8.53915 0.727234 7.99989 0.727234C7.46051 0.727234 6.92838 0.786615 6.41041 0.903258L6.11154 0.970562L5.17999 3.09499L2.88551 2.84416L2.67809 3.07008C1.95184 3.86112 1.40698 4.80463 1.08759 5.83506L0.997559 6.12553L2.36299 7.99996L1.17661 9.62859L0.997559 9.87439L1.08759 10.1649C1.40698 11.1953 1.95184 12.1388 2.67809 12.9298L2.88551 13.1558L5.17999 12.9049L5.98852 14.7488L6.11154 15.0294L6.41041 15.0967C6.92838 15.2133 7.46051 15.2727 7.99989 15.2727C8.53915 15.2727 9.07116 15.2133 9.58901 15.0967L9.88786 15.0295L10.8198 12.9049L13.1143 13.1558L13.3217 12.9298C14.0479 12.1389 14.5927 11.1955 14.9121 10.1652L15.0021 9.87479L13.6368 7.99996L14.8231 6.37093L15.0021 6.12513L14.9121 5.83469C14.5927 4.80441 14.0479 3.86103 13.3217 3.07008L13.1143 2.84416L10.8198 3.095L9.88786 0.970458L9.58901 0.903176ZM6.97185 2.02705C7.30885 1.96884 7.65237 1.93931 7.99995 1.93931C8.34745 1.93931 8.69087 1.96882 9.02778 2.027L9.7747 3.72978C9.94877 4.1266 10.3602 4.36453 10.791 4.31745L12.6271 4.11672C13.0706 4.65049 13.4202 5.257 13.6589 5.91059L12.5627 7.41589C12.3092 7.76397 12.3092 8.23586 12.5627 8.58396L13.6589 10.0892C13.4202 10.7428 13.0706 11.3493 12.6271 11.8831L10.791 11.6824C10.3602 11.6353 9.94877 11.8732 9.7747 12.27L9.02778 13.9728C8.69087 14.031 8.34745 14.0605 7.99995 14.0605C7.65237 14.0605 7.30885 14.031 6.97185 13.9728L6.22524 12.2701C6.05114 11.8732 5.63967 11.6353 5.20892 11.6824L3.3728 11.8831C2.92928 11.3493 2.5796 10.7427 2.3409 10.089L3.43719 8.58401C3.69075 8.23586 3.69075 7.76397 3.43723 7.41588L2.3409 5.91086C2.5796 5.25717 2.92928 4.65056 3.3728 4.11672L5.20891 4.31745C5.63967 4.36453 6.05114 4.1266 6.2252 3.72979L6.97185 2.02705ZM7.99996 4.96962C9.66782 4.96962 11.0187 6.32698 11.0187 7.99993C11.0187 9.67287 9.66782 11.0302 7.99996 11.0302C6.3321 11.0302 4.9812 9.67287 4.9812 7.99993C4.9812 6.32698 6.3321 4.96962 7.99996 4.96962ZM6.19336 7.99992C6.19336 6.99512 7.00287 6.18174 8 6.18174C8.99713 6.18174 9.80663 6.99512 9.80663 7.99992C9.80663 9.00472 8.99713 9.81811 8 9.81811C7.00287 9.81811 6.19336 9.00472 6.19336 7.99992Z"
-                    class="close-path"
-                    data-v-55200008=""></path>
+        <div @click="zhanghuSettingClick" class="setting-menu-item">
+          <div class="nav-item" v-bind:class="{ active: settingtype == 2 }"><svg width="16" height="16"
+              viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M9.58901 0.903176C9.07116 0.786587 8.53915 0.727234 7.99989 0.727234C7.46051 0.727234 6.92838 0.786615 6.41041 0.903258L6.11154 0.970562L5.17999 3.09499L2.88551 2.84416L2.67809 3.07008C1.95184 3.86112 1.40698 4.80463 1.08759 5.83506L0.997559 6.12553L2.36299 7.99996L1.17661 9.62859L0.997559 9.87439L1.08759 10.1649C1.40698 11.1953 1.95184 12.1388 2.67809 12.9298L2.88551 13.1558L5.17999 12.9049L5.98852 14.7488L6.11154 15.0294L6.41041 15.0967C6.92838 15.2133 7.46051 15.2727 7.99989 15.2727C8.53915 15.2727 9.07116 15.2133 9.58901 15.0967L9.88786 15.0295L10.8198 12.9049L13.1143 13.1558L13.3217 12.9298C14.0479 12.1389 14.5927 11.1955 14.9121 10.1652L15.0021 9.87479L13.6368 7.99996L14.8231 6.37093L15.0021 6.12513L14.9121 5.83469C14.5927 4.80441 14.0479 3.86103 13.3217 3.07008L13.1143 2.84416L10.8198 3.095L9.88786 0.970458L9.58901 0.903176ZM6.97185 2.02705C7.30885 1.96884 7.65237 1.93931 7.99995 1.93931C8.34745 1.93931 8.69087 1.96882 9.02778 2.027L9.7747 3.72978C9.94877 4.1266 10.3602 4.36453 10.791 4.31745L12.6271 4.11672C13.0706 4.65049 13.4202 5.257 13.6589 5.91059L12.5627 7.41589C12.3092 7.76397 12.3092 8.23586 12.5627 8.58396L13.6589 10.0892C13.4202 10.7428 13.0706 11.3493 12.6271 11.8831L10.791 11.6824C10.3602 11.6353 9.94877 11.8732 9.7747 12.27L9.02778 13.9728C8.69087 14.031 8.34745 14.0605 7.99995 14.0605C7.65237 14.0605 7.30885 14.031 6.97185 13.9728L6.22524 12.2701C6.05114 11.8732 5.63967 11.6353 5.20892 11.6824L3.3728 11.8831C2.92928 11.3493 2.5796 10.7427 2.3409 10.089L3.43719 8.58401C3.69075 8.23586 3.69075 7.76397 3.43723 7.41588L2.3409 5.91086C2.5796 5.25717 2.92928 4.65056 3.3728 4.11672L5.20891 4.31745C5.63967 4.36453 6.05114 4.1266 6.2252 3.72979L6.97185 2.02705ZM7.99996 4.96962C9.66782 4.96962 11.0187 6.32698 11.0187 7.99993C11.0187 9.67287 9.66782 11.0302 7.99996 11.0302C6.3321 11.0302 4.9812 9.67287 4.9812 7.99993C4.9812 6.32698 6.3321 4.96962 7.99996 4.96962ZM6.19336 7.99992C6.19336 6.99512 7.00287 6.18174 8 6.18174C8.99713 6.18174 9.80663 6.99512 9.80663 7.99992C9.80663 9.00472 8.99713 9.81811 8 9.81811C7.00287 9.81811 6.19336 9.00472 6.19336 7.99992Z"
+                class="close-path"></path>
             </svg>
             账号设置
           </div>
         </div>
       </div>
-      <div v-if="settingtype===1">
+      <div v-if="settingtype === 1">
         <div class="person-setting shadow">
           <div class="nav-text">个人资料</div>
           <div class="user-infos">
             <div class="info-input">
               <form class="form byte-form byte-form--label-right">
                 <div class="divide"></div>
-                <div class="byte-form-item byte-form-item--success"><label for="username"
-                         class="byte-form-item__label"
-                         style="width: 56px;">用户名</label>
+                <div class="byte-form-item byte-form-item--success"><label for="username" class="byte-form-item__label"
+                    style="width: 56px;">用户名</label>
                   <div class="byte-form-item__content">
                     <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <el-input type="text"
-                                placeholder="填写你的用户名"
-                                v-model="userInfo.nickname"
-                                maxlength="20"
-                                show-word-limit>
+                      <el-input type="text" placeholder="填写你的用户名" v-model="userInfo.nickname" maxlength="20"
+                        show-word-limit>
                       </el-input>
                     </div>
                     <!---->
@@ -76,9 +52,8 @@
                 </div>
                 <div class="divide"></div>
 
-                <div class="byte-form-item byte-form-item--success"><label for="username"
-                         class="byte-form-item__label"
-                         style="width: 56px;">性别</label>
+                <div class="byte-form-item byte-form-item--success"><label for="username" class="byte-form-item__label"
+                    style="width: 56px;">性别</label>
                   <div class="byte-form-item__content">
                     <div class="input byte-input byte-input--normal byte-input--suffixed">
                       <el-radio-group v-model="userInfo.sex">
@@ -92,16 +67,12 @@
                   </div>
                 </div>
                 <div class="divide"></div>
-                <div class="byte-form-item byte-form-item--success"><label for="job_title"
-                         class="byte-form-item__label"
-                         style="width: 56px;">职位</label>
+                <div class="byte-form-item byte-form-item--success"><label for="job_title" class="byte-form-item__label"
+                    style="width: 56px;">职位</label>
                   <div class="byte-form-item__content">
                     <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <el-input type="text"
-                                placeholder="填写你的职位"
-                                v-model="userInfo.position"
-                                maxlength="20"
-                                show-word-limit>
+                      <el-input type="text" placeholder="填写你的职位" v-model="userInfo.position" maxlength="20"
+                        show-word-limit>
                       </el-input>
                     </div>
                     <!---->
@@ -109,16 +80,12 @@
                   </div>
                 </div>
                 <div class="divide"></div>
-                <div class="byte-form-item"><label for="company"
-                         class="byte-form-item__label"
-                         style="width: 56px;">公司</label>
+                <div class="byte-form-item"><label for="company" class="byte-form-item__label"
+                    style="width: 56px;">公司</label>
                   <div class="byte-form-item__content">
                     <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <el-input type="text"
-                                placeholder="填写你的公司"
-                                v-model="userInfo.company"
-                                maxlength="30"
-                                show-word-limit>
+                      <el-input type="text" placeholder="填写你的公司" v-model="userInfo.company" maxlength="30"
+                        show-word-limit>
                       </el-input>
                     </div>
                     <!---->
@@ -126,16 +93,12 @@
                   </div>
                 </div>
                 <div class="divide"></div>
-                <div class="byte-form-item"><label for="blog_address"
-                         class="byte-form-item__label"
-                         style="width: 56px;">个人主页</label>
+                <div class="byte-form-item"><label for="blog_address" class="byte-form-item__label"
+                    style="width: 56px;">个人主页</label>
                   <div class="byte-form-item__content">
                     <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <el-input type="text"
-                                placeholder="填写你的个人主页"
-                                v-model="userInfo.perpage"
-                                maxlength="30"
-                                show-word-limit>
+                      <el-input type="text" placeholder="填写你的个人主页" v-model="userInfo.perpage" maxlength="30"
+                        show-word-limit>
                       </el-input>
                     </div>
                     <!---->
@@ -143,34 +106,25 @@
                   </div>
                 </div>
                 <div class="divide"></div>
-                <div class="byte-form-item"><label for="blog_address"
-                         class="byte-form-item__label"
-                         style="width: 56px;">个人签名</label>
+                <div class="byte-form-item"><label for="blog_address" class="byte-form-item__label"
+                    style="width: 56px;">个人签名</label>
                   <div class="byte-form-item__content">
                     <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <el-input type="text"
-                                placeholder="填写你的个人签名"
-                                v-model="userInfo.sign"
-                                maxlength="30"
-                                show-word-limit>
+                      <el-input type="text" placeholder="填写你的个人签名" v-model="userInfo.sign" maxlength="30"
+                        show-word-limit>
                       </el-input>
                     </div>
                   </div>
                 </div>
                 <div class="divide"></div>
-                <div class="byte-form-item"><label for="description"
-                         class="byte-form-item__label"
-                         style="width: 56px;">个人介绍</label>
+                <div class="byte-form-item"><label for="description" class="byte-form-item__label"
+                    style="width: 56px;">个人介绍</label>
                   <div class="byte-form-item__content">
                     <div class="textarea-input">
                       <div class="input textarea byte-input byte-input--normal">
 
-                        <el-input type="textarea"
-                                  placeholder="填写职业技能、擅长的事情、喜欢的事情等"
-                                  v-model="userInfo.perintroduction"
-                                  maxlength="100"
-                                  :rows="8"
-                                  show-word-limit>
+                        <el-input type="textarea" placeholder="填写职业技能、擅长的事情、喜欢的事情等" v-model="userInfo.perintroduction"
+                          maxlength="100" :rows="8" show-word-limit>
                         </el-input>
                       </div>
                     </div>
@@ -178,37 +132,26 @@
                 </div>
               </form>
               <div class="divide"></div>
-              <el-button type="primary"
-                         plain
-                         :loading="submitUserInfo"
-                         @click="saveUserInfo">保存修改</el-button>
+              <el-button type="primary" plain :loading="submitUserInfo" @click="saveUserInfo">保存修改</el-button>
             </div>
             <div class="avatar-input">
               <div class="avatar-info">
-                <div class="avatar-uploader uploader"
-                     :style="{backgroundImage: 'url(' + touxiang + ')'}"
-                     @mouseover="mouseOver"
-                     @mouseleave="mouseLeave">
+                <div class="avatar-uploader uploader" :style="{ backgroundImage: 'url(' + touxiang + ')' }"
+                  @mouseover="mouseOver" @mouseleave="mouseLeave">
 
-                  <el-upload class="avatar-uploader"
-                             action="https://www.redskt.com/api/ucenter/uploadUserImage"
-                             :headers="{token:loginToken}"
-                             :show-file-list="false"
-                             :on-success="handleAvatarSuccess"
-                             :before-upload="beforeAvatarUpload">
+                  <el-upload class="avatar-uploader" action="https://www.redskt.com/api/ucenter/uploadUserImage"
+                    :headers="{ token: loginToken }" :show-file-list="false" :on-success="handleAvatarSuccess"
+                    :before-upload="beforeAvatarUpload">
                     <i class="el-icon-plus avatar-uploader-icon"></i>
                   </el-upload>
 
-                  <div class="click-cover"
-                       v-bind:class="{ isShow: isUploadHiden }"><i class="add-icon byte-icon byte-icon--plus-circle"><svg t="1561635709826"
-                           class="icon"
-                           viewBox="0 0 1024 1024"
-                           version="1.1"
-                           xmlns="http://www.w3.org/2000/svg"
-                           p-id="375017"
-                           xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <path d="M464.883436 464.883436V302.244035A23.732788 23.732788 0 0 1 488.616224 279.209271h46.069529a23.732788 23.732788 0 0 1 23.732788 23.034764v162.639401h162.6394a23.732788 23.732788 0 0 1 23.034765 23.732788v46.069529a23.732788 23.732788 0 0 1-23.034765 23.732788H558.418541v162.6394a23.732788 23.732788 0 0 1-23.732788 23.034765H488.616224a23.732788 23.732788 0 0 1-23.732788-23.034765V558.418541H302.244035A23.732788 23.732788 0 0 1 279.209271 534.685753V488.616224a23.732788 23.732788 0 0 1 23.034764-23.732788z m46.767552 465.581458a418.813906 418.813906 0 1 0-418.813906-418.813906 418.813906 418.813906 0 0 0 418.813906 418.813906z m0 92.837083a511.650988 511.650988 0 1 1 511.650989-511.650989 511.650988 511.650988 0 0 1-511.650989 511.650989z"
-                              p-id="375018"></path>
+                  <div class="click-cover" v-bind:class="{ isShow: isUploadHiden }"><i
+                      class="add-icon byte-icon byte-icon--plus-circle"><svg t="1561635709826" class="icon"
+                        viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="375017"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path
+                          d="M464.883436 464.883436V302.244035A23.732788 23.732788 0 0 1 488.616224 279.209271h46.069529a23.732788 23.732788 0 0 1 23.732788 23.034764v162.639401h162.6394a23.732788 23.732788 0 0 1 23.034765 23.732788v46.069529a23.732788 23.732788 0 0 1-23.034765 23.732788H558.418541v162.6394a23.732788 23.732788 0 0 1-23.732788 23.034765H488.616224a23.732788 23.732788 0 0 1-23.732788-23.034765V558.418541H302.244035A23.732788 23.732788 0 0 1 279.209271 534.685753V488.616224a23.732788 23.732788 0 0 1 23.034764-23.732788z m46.767552 465.581458a418.813906 418.813906 0 1 0-418.813906-418.813906 418.813906 418.813906 0 0 0 418.813906 418.813906z m0 92.837083a511.650988 511.650988 0 1 1 511.650989-511.650989 511.650988 511.650988 0 0 1-511.650989 511.650989z"
+                          p-id="375018"></path>
                       </svg></i>
                     <div class="click-text">点击修改头像</div>
                     <!---->
@@ -228,7 +171,7 @@
         </div>
 
       </div>
-      <div v-if="settingtype===2">
+      <div v-if="settingtype === 2">
         <div class="person-setting shadow">
           <div class="nav-text">账号设置</div>
           <div class="user-infos">
@@ -236,24 +179,18 @@
               <form class="form byte-form byte-form--label-right">
                 <div class="divide"></div>
                 <div class="zhanghu-form-item">
-                  <label for="phone"
-                         class="byte-form-item__label"
-                         style="width: 56px;">手机</label>
+                  <label for="phone" class="byte-form-item__label" style="width: 56px;">手机</label>
                   <div class="zhanghu-setting-chang">
-                    <el-button type="text"
-                               @click="changephine=true">换绑</el-button>
-                    <el-dialog title="温馨提示"
-                               :visible.sync="changephine"
-                               center>
-                      <span>尊贵的用户您好，目前PC端暂不支持手机换绑功能，如您确实需要修改手机号，建议您扫描二维码前往App端我-设置-账号注销进行注销操作，然后重新注册新手机。给您带来的不便，我们深感抱歉。如果您有任何建议和反馈，可以发送邮箱到 16623170187@163.com 联系我们。</span>
+                    <el-button type="text" @click="changephine = true">换绑</el-button>
+                    <el-dialog title="温馨提示" :visible.sync="changephine" center>
+                      <span>尊贵的用户您好，目前PC端暂不支持手机换绑功能，如您确实需要修改手机号，建议您扫描二维码前往App端我-设置-账号注销进行注销操作，然后重新注册新手机。给您带来的不便，我们深感抱歉。如果您有任何建议和反馈，可以发送邮箱到
+                        16623170187@163.com 联系我们。</span>
                       <div class="app-download-wapma">
                         <div class="app-download-ma"></div>
                       </div>
-                      <span slot="footer"
-                            class="dialog-footer">
+                      <span slot="footer" class="dialog-footer">
                         <el-button @click="changephine = false">取 消</el-button>
-                        <el-button type="primary"
-                                   @click="changephine = false">确 定</el-button>
+                        <el-button type="primary" @click="changephine = false">确 定</el-button>
                       </span>
                     </el-dialog>
                   </div>
@@ -261,54 +198,34 @@
                 <div class="divide"></div>
 
                 <div class="zhanghu-form-item">
-                  <label for="phone"
-                         class="byte-form-item__label"
-                         style="width: 56px;">密码</label>
+                  <label for="phone" class="byte-form-item__label" style="width: 56px;">密码</label>
                   <div class="zhanghu-setting-chang">
-                    <el-button type="text"
-                               @click="pwdChange = true">重置</el-button>
+                    <el-button type="text" @click="pwdChange = true">重置</el-button>
 
-                    <el-dialog title="密码重置"
-                               :visible.sync="pwdChange"
-                               :close-on-click-modal="false"
-                               :before-close="changePwdClose"
-                               width="450px">
+                    <el-dialog title="密码重置" :visible.sync="pwdChange" :close-on-click-modal="false"
+                      :before-close="changePwdClose" width="450px">
                       <el-form class="pwchang-form">
                         <el-form-item label="旧密码">
-                          <span class="pwd-change-errtiops"
-                                v-if="oldPwdTips.length>0">{{oldPwdTips}}</span>
-                          <el-input placeholder="请输入密码"
-                                    v-model="oldPwd"
-                                    @input="inputChange('oldPwd')"
-                                    show-password></el-input>
+                          <span class="pwd-change-errtiops" v-if="oldPwdTips.length > 0">{{ oldPwdTips }}</span>
+                          <el-input placeholder="请输入密码" v-model="oldPwd" @input="inputChange('oldPwd')" show-password>
+                          </el-input>
                         </el-form-item>
 
                         <el-form-item label="新密码">
-                          <span class="pwd-change-errtiops"
-                                v-if="newPwd.length>0">{{newPwdTips}}</span>
-                          <el-input placeholder="请输入密码"
-                                    v-model="newPwd"
-                                    @input="inputChange('newPwd')"
-                                    show-password></el-input>
+                          <span class="pwd-change-errtiops" v-if="newPwd.length > 0">{{ newPwdTips }}</span>
+                          <el-input placeholder="请输入密码" v-model="newPwd" @input="inputChange('newPwd')" show-password>
+                          </el-input>
                         </el-form-item>
                         <el-form-item label="确认密码">
-                          <span class="pwd-change-errtiops"
-                                v-if="confirmPwd.length>0">{{confirmPwdTips}}</span>
-                          <el-input placeholder="请输入密码"
-                                    v-model="confirmPwd"
-                                    @input="inputChange('confirmPwd')"
-                                    show-password></el-input>
+                          <span class="pwd-change-errtiops" v-if="confirmPwd.length > 0">{{ confirmPwdTips }}</span>
+                          <el-input placeholder="请输入密码" v-model="confirmPwd" @input="inputChange('confirmPwd')"
+                            show-password></el-input>
                         </el-form-item>
                       </el-form>
-                      <span slot="footer"
-                            class="dialog-footer">
-                        <span class="pwd-confim-errtiops"
-                              v-if="resultTips.length>0">{{resultTips}}</span>
-                        <el-button type="primary"
-                                   :loading="submitChangePwd"
-                                   class="chang-pwd-btn"
-                                   @click="changePwdClick"
-                                   center>修 改</el-button>
+                      <span slot="footer" class="dialog-footer">
+                        <span class="pwd-confim-errtiops" v-if="resultTips.length > 0">{{ resultTips }}</span>
+                        <el-button type="primary" :loading="submitChangePwd" class="chang-pwd-btn"
+                          @click="changePwdClick" center>修 改</el-button>
                       </span>
                     </el-dialog>
                   </div>
@@ -316,26 +233,20 @@
 
                 <div class="divide"></div>
                 <div class="zhanghu-form-item">
-                  <label for="phone"
-                         class="byte-form-item__label"
-                         style="width: 56px;">账户注销</label>
+                  <label for="phone" class="byte-form-item__label" style="width: 56px;">账户注销</label>
                   <div class="zhanghu-setting-chang">
 
-                    <el-button type="text"
-                               @click="zhuxiaodlog = true">注销</el-button>
+                    <el-button type="text" @click="zhuxiaodlog = true">注销</el-button>
 
-                    <el-dialog title="温馨提示"
-                               :visible.sync="zhuxiaodlog"
-                               center>
-                      <span>尊贵的用户您好，目前PC端暂不支持注销功能，如您申请账号注销，需要扫描二维码前往App端我-设置-账号注销进行注销操作，给您带来的不便，我们深感抱歉。如果您有任何建议和反馈，可以发送邮箱到 16623170187@163.com 联系我们。</span>
+                    <el-dialog title="温馨提示" :visible.sync="zhuxiaodlog" center>
+                      <span>尊贵的用户您好，目前PC端暂不支持注销功能，如您申请账号注销，需要扫描二维码前往App端我-设置-账号注销进行注销操作，给您带来的不便，我们深感抱歉。如果您有任何建议和反馈，可以发送邮箱到
+                        16623170187@163.com 联系我们。</span>
                       <div class="app-download-wapma">
                         <div class="app-download-ma"></div>
                       </div>
-                      <span slot="footer"
-                            class="dialog-footer">
+                      <span slot="footer" class="dialog-footer">
                         <el-button @click="zhuxiaodlog = false">取 消</el-button>
-                        <el-button type="primary"
-                                   @click="zhuxiaodlog = false">确 定</el-button>
+                        <el-button type="primary" @click="zhuxiaodlog = false">确 定</el-button>
                       </span>
                     </el-dialog>
                   </div>
@@ -536,13 +447,13 @@ export default {
   padding: 8px;
 }
 
-.setting-menu-item .nav-item.active[data-v-55200008] {
+.setting-menu-item .nav-item.active {
   background: #e8f3ff;
   color: #409eff;
   cursor: pointer;
 }
 
-.setting-menu-item .nav-item[data-v-55200008] {
+.setting-menu-item .nav-item {
   display: flex;
   align-items: center;
   font-weight: 400;
@@ -553,16 +464,16 @@ export default {
   cursor: pointer;
 }
 
-.nav-item .svg[data-v-55200008] {
+.nav-item .svg {
   margin-right: 12px;
   margin-left: 24px;
 }
 
-.nav-item.active .svg .close-path[data-v-55200008] {
+.nav-item.active .svg .close-path {
   fill: #409eff;
 }
 
-.nav-item .svg .close-path[data-v-55200008] {
+.nav-item .svg .close-path {
   fill: #86909c;
 }
 
@@ -857,6 +768,7 @@ input[type='file' i] {
 .avatar-uploader .click-cover:hover {
   visibility: visible;
 }
+
 .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
@@ -865,6 +777,7 @@ input[type='file' i] {
   line-height: 178px;
   text-align: center;
 }
+
 .avatar {
   width: 178px;
   height: 178px;
@@ -919,6 +832,7 @@ input[type='file' i] {
 .el-dialog__footer {
   text-align: center;
 }
+
 .el-dialog__title {
   font-weight: 600;
 }
@@ -966,6 +880,7 @@ input[type='file' i] {
 .el-textarea__inner {
   resize: none;
 }
+
 .el-dialog {
   width: 610px;
 }

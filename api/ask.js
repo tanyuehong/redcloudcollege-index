@@ -135,9 +135,9 @@ export default {
     })
   },
 
-  deleteQustionReply(cId) {
+  deleteQustionReply(rId) {
     return request({
-      url: `/eduask/deleteQustionReply/${cId}`,
+      url: `/eduask/deleteQustionReply/${rId}`,
       method: 'get',
     })
   },

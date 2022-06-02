@@ -114,7 +114,7 @@
                   <li class="ask-info-item" @click="jubaoBtnClick(qdetail.qid, '问题')">
                     <i class="icon icon_vote_jubao"></i>举报
                   </li>
-                  <li class="ask-info-item">
+                  <li class="ask-info-item" v-if="qdetail.uid == loginInfo.id">
                     <el-dropdown szie="mini">
                       <span class="el-dropdown-link drop-menu">
                         <i class="icon icon_more"></i>
@@ -210,12 +210,31 @@
                       分享
                     </span>
 
-                    <span class="li_more li_report" @click="jubaoBtnClick(item.id, '回答')">
+                    <span class="li_more" @click="jubaoBtnClick(item.id, '回答')">
                       <i class="icon icon_ask_report"></i>
                       举报
                     </span>
 
+                    <span v-if="item.uid == loginInfo.id">
+                      <el-dropdown szie="mini" @command="replyClickCommend">
+                        <span class="el-dropdown-link drop-menu">
+                          <i class="icon icon_more"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                          <el-dropdown-item :command="beforeHandleCommand('d', item)">删除</el-dropdown-item>
+                        </el-dropdown-menu>
+                      </el-dropdown>
+                    </span>
                   </div>
+                  <el-dialog title="确认删除吗？" :visible.sync="deleteDialogVisible" width="30%" center>
+                    <div class="tac">
+                      <span>删除后您的回答将不会出现在该问题下,请三思哦~</span>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
+                      <el-button @click="deleteReply(item)">删 除</el-button>
+                      <el-button type="primary" @click="deleteDialogVisible = false">再等等</el-button>
+                    </span>
+                  </el-dialog>
 
                   <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter"
                     v-on:leave="leave" v-bind:css="false">
@@ -244,7 +263,7 @@
                               commentGood(comment.good)
                           }}</span>
                         <span class="mr15" @click="commentbtnclinck(comment, cindex)">回复</span>
-                        <span class="li_more li_report" @click="jubaoBtnClick(comment.id, '评论')">
+                        <span class="li_more" @click="jubaoBtnClick(comment.id, '评论')">
                           <i class="icon icon_ask_report"></i>举报
                         </span>
 
@@ -378,6 +397,7 @@ export default {
       jubaoTypeIndex: 0,
       jubaoId: "",
       jubaotype: "",
+      deleteDialogVisible: false,
     };
   },
 
@@ -477,6 +497,31 @@ export default {
   },
 
   methods: {
+    beforeHandleCommand (commd, item) {
+      return {
+        'command': commd,
+        'item': item
+      }
+    },
+    replyClickCommend (command) {
+      if (command.command == 'd') {
+        this.deleteDialogVisible = true;
+      }
+    },
+
+    deleteReply (item) {
+      askApi.deleteQustionReply(item.id).then((response) => {
+        this.replyList = this.replyList.filter(function (item) {
+          return item.id == response.data.rId;
+        });
+        this.$message({
+          message: "删除回答成功哈！",
+          type: "success",
+          duration: 2000,
+        });
+      });
+    },
+
     getUserAskInfo () {
       askApi.getUserAskInfo().then((response) => {
         this.userAskInfo = response.data.askInfo;
@@ -1064,6 +1109,11 @@ export default {
 </script>
 
 <style>
+.li_more.li_delete {
+  color: red;
+  font-size: 12px;
+}
+
 .answer-item-userinfo .anser-info {
   text-decoration: none;
 }

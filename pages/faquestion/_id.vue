@@ -263,11 +263,29 @@
                               commentGood(comment.good)
                           }}</span>
                         <span class="mr15" @click="commentbtnclinck(comment, cindex)">回复</span>
-                        <span class="li_more" @click="jubaoBtnClick(comment.id, '评论')">
+                        <span class="mr15" @click="jubaoBtnClick(comment.id, '评论')">
                           <i class="icon icon_ask_report"></i>举报
                         </span>
-
+                        <span v-if="comment.uid == loginInfo.id">
+                          <el-dropdown szie="mini" @command="commentClickCommend">
+                            <span class="el-dropdown-link drop-menu">
+                              <i class="icon icon_more"></i>
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                              <el-dropdown-item :command="beforeHandleCommand('d', comment)">删除</el-dropdown-item>
+                            </el-dropdown-menu>
+                          </el-dropdown>
+                        </span>
                       </div>
+                      <el-dialog title="确认删除吗？" :visible.sync="deleteCommentVisible" width="30%" center>
+                        <div class="tac">
+                          <span>删除后您的评论将不会出现在该回答下,请三思哦~</span>
+                        </div>
+                        <span slot="footer" class="dialog-footer">
+                          <el-button @click="deleteCommentReply(comment, item)">删 除</el-button>
+                          <el-button type="primary" @click="deleteCommentVisible = false">再等等</el-button>
+                        </span>
+                      </el-dialog>
 
                       <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:after-enter="cafterEnter"
                         v-on:leave="cleave" v-bind:css="false">
@@ -398,6 +416,7 @@ export default {
       jubaoId: "",
       jubaotype: "",
       deleteDialogVisible: false,
+      deleteCommentVisible: false,
     };
   },
 
@@ -509,10 +528,17 @@ export default {
       }
     },
 
-    deleteReply (item) {
-      askApi.deleteQustionReply(item.id).then((response) => {
+    commentClickCommend (command) {
+      if (command.command == 'd') {
+        this.deleteCommentVisible = true;
+      }
+    },
+
+    deleteReply (reply) {
+      this.deleteDialogVisible = false;
+      askApi.deleteQustionReply(reply.id).then((response) => {
         this.replyList = this.replyList.filter(function (item) {
-          return item.id == response.data.rId;
+          return item.id != response.data.rId;
         });
         this.$message({
           message: "删除回答成功哈！",
@@ -522,6 +548,19 @@ export default {
       });
     },
 
+    deleteCommentReply (comment, citem) {
+      this.deleteCommentReply = false;
+      askApi.deleteReplyComment(comment.id).then((response) => {
+        citem.comments = citem.comments.filter(function (item) {
+          return item.id != response.data.cId;
+        });
+        this.$message({
+          message: "删除评论成功哈！",
+          type: "success",
+          duration: 2000,
+        });
+      });
+    },
     getUserAskInfo () {
       askApi.getUserAskInfo().then((response) => {
         this.userAskInfo = response.data.askInfo;

@@ -115,15 +115,24 @@
                     <i class="icon icon_vote_jubao"></i>举报
                   </li>
                   <li class="ask-info-item" v-if="qdetail.uid == loginInfo.id">
-                    <el-dropdown szie="mini">
+                    <el-dropdown szie="mini" @command="questionClickCommend">
                       <span class="el-dropdown-link drop-menu">
                         <i class="icon icon_more"></i>
                       </span>
                       <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>删除</el-dropdown-item>
+                        <el-dropdown-item :command="beforeHandleCommand('d', qdetail)">删除</el-dropdown-item>
                       </el-dropdown-menu>
                     </el-dropdown>
                   </li>
+                  <el-dialog title="确认删除问题吗？" :visible.sync="questionDialogVisible" width="30%" center>
+                    <div class="tac">
+                      <span>删除后您的问题将不会出现在问题列表中，你将不能获得别人的帮助，请三思哦~</span>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
+                      <el-button @click="deleteQuestion(qdetail)">删 除</el-button>
+                      <el-button type="primary" @click="questionDialogVisible = false">再等等</el-button>
+                    </span>
+                  </el-dialog>
 
                   <el-dialog title="举报反馈" :visible.sync="jubiaoDlog" :close-on-click-modal="false" center>
                     <div class="jubao-content">
@@ -226,12 +235,12 @@
                       </el-dropdown>
                     </span>
                   </div>
-                  <el-dialog title="确认删除吗？" :visible.sync="deleteDialogVisible" width="30%" center>
+                  <el-dialog title="确认删除回答吗？" :visible.sync="deleteDialogVisible" width="30%" center>
                     <div class="tac">
                       <span>删除后您的回答将不会出现在该问题下,请三思哦~</span>
                     </div>
                     <span slot="footer" class="dialog-footer">
-                      <el-button @click="deleteReply(item)">删 除</el-button>
+                      <el-button @click="deleteQuestionReply(item)">删 除</el-button>
                       <el-button type="primary" @click="deleteDialogVisible = false">再等等</el-button>
                     </span>
                   </el-dialog>
@@ -277,7 +286,7 @@
                           </el-dropdown>
                         </span>
                       </div>
-                      <el-dialog title="确认删除吗？" :visible.sync="deleteCommentVisible" width="30%" center>
+                      <el-dialog title="确认删除评论吗？" :visible.sync="deleteCommentVisible" width="30%" center>
                         <div class="tac">
                           <span>删除后您的评论将不会出现在该回答下,请三思哦~</span>
                         </div>
@@ -417,6 +426,7 @@ export default {
       jubaotype: "",
       deleteDialogVisible: false,
       deleteCommentVisible: false,
+      questionDialogVisible: false,
     };
   },
 
@@ -522,6 +532,14 @@ export default {
         'item': item
       }
     },
+
+    questionClickCommend (command) {
+      if (command.command == 'd') {
+
+      }
+      this.questionDialogVisible = true;
+    },
+
     replyClickCommend (command) {
       if (command.command == 'd') {
         this.deleteDialogVisible = true;
@@ -534,9 +552,39 @@ export default {
       }
     },
 
-    deleteReply (reply) {
+    deleteQuestion (qItem) {
+      this.questionDialogVisible = false;
+      if (qItem.state == 99 && this.replyList.length > 0) {
+        this.$message({
+          message: "已经提交删除申请，无需反复提交哈",
+          type: "success",
+          duration: 2000,
+        });
+        return;
+      }
+      askApi.deleteQuestion(qItem.qid).then((response) => {
+        if (!response.data.sucess) {
+          qItem.state = 99;
+          this.$message({
+            message: response.data.tips,
+            type: "success",
+            duration: 2000,
+          });
+          return;
+        }
+
+        this.$message({
+          message: "删除问题成功, 即将跳转问题列表页面", type: "success", duration: 2000,
+          onClose: () => {
+            $nuxt.$router.push({ name: "faquestion" });
+          }
+        });
+      });
+    },
+
+    deleteQuestionReply (reply) {
       this.deleteDialogVisible = false;
-      askApi.deleteQustionReply(reply.id).then((response) => {
+      askApi.deleteQuestionReply(reply.id).then((response) => {
         this.replyList = this.replyList.filter(function (item) {
           return item.id != response.data.rId;
         });

@@ -266,6 +266,7 @@ export default {
             uid: userInfo.id,
             title: this.asktitle,
             content: this.askcontent,
+            qustype: this.
           })
           .then((response) => {
             this.$message({

@@ -32,12 +32,6 @@
               </ol>
             </div>
             <form class="ui new-question form">
-              <input type="hidden" name="user_code" value="IMqpO8mgcnPOwUeaVbRFT5zlfSFKllVq4AFnIACu" />
-              <input type="hidden" name="userId" value="2825958" />
-              <input type="hidden" name="id" value />
-              <input type="hidden" name="askUserId" value="0" />
-              <input type="hidden" name="tag" value />
-              <input type="hidden" name="tag_type" value />
               <div class="field">
                 <label>选择版块</label>
                 <input type="hidden" name="catalog" value="1" />
@@ -56,9 +50,7 @@
                 </div>
               </div>
               <div class="field">
-                <a href="https://www.oschina.net/question/12_21851" target="_blank">
-                  什么样的问题算是一个好问题？
-                </a>
+                <nuxt-link :to="{ name: 'faquestion-howtoask' }" target="_blank">什么样的问题算是一个好问题？</nuxt-link>
               </div>
               <div class="field">
                 <label>语言 平台 标签</label>
@@ -104,22 +96,9 @@
             <div class="ui warning small message">
               <h4 class="header">提问和发帖必读</h4>
               <ol class="list">
-                <li>技术无关问题请勿在此发布</li>
+                <li>请不要发布违反法律法规的内容</li>
                 <li>提问有人回答后不允许修改和删除</li>
-                <li>
-                  请勿在此发布招聘信息，
-                  <a href="https://www.oschina.net/job">我要招聘</a>
-                </li>
-                <li>
-                  请勿在此发布活动信息，
-                  <a href="https://www.oschina.net/event">我要发布活动</a>
-                </li>
-                <li>
-                  更多信息请查阅 &nbsp;
-                  <a href="https://www.oschina.net/question/2918182_2262855" target="_blank">
-                    新版社区规范
-                  </a>
-                </li>
+                <li>内容违规，保留问题删除的权利，具体以国家规定为基准</li>
               </ol>
             </div>
           </div>
@@ -156,6 +135,28 @@ export default {
         typeList: response.data.typeList,
       }
     })
+  },
+
+  head () {
+    return {
+      title: "创建新问题 - 开源实践问答",
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: "开源实践问答,创建问题，提问题，技术问题",
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: "开源实践问答问题创建页面",
+        },
+        {
+          hid: 'og:description',
+          content: "开源实践问答问题创建页面",
+        },
+      ],
+    }
   },
 
   mounted () {
@@ -452,6 +453,8 @@ export default {
 
 .ui.warning.message .header {
   color: #794b02;
+  margin-top: 16px;
+  margin-bottom: 10px;
 }
 
 .ui.message .list:not(.ui) li:before {
@@ -464,11 +467,15 @@ export default {
 
 .ui.message .list {
   margin-left: 16px;
+  padding: 0px;
+  font-size: 14px;
 }
 
 .ui.message .list li {
   padding-top: 5px;
   margin-left: 5px;
+  margin-bottom: 8px;
+  line-height: 16px;
 }
 
 .tips_error_show {

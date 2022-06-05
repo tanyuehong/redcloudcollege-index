@@ -1,15 +1,12 @@
 <template>
   <div class="main_global_bg">
     <div class="container">
-      <div class="ask_content"
-           id="newQuestion">
+      <div class="ask_content" id="newQuestion">
         <div class="row">
           <div class="col-md-8">
             <div class="breadcrumb red_breadcrumb">
-              <a class="section"
-                 href="/faquestion">开源实践问答</a>
-              <span class="glyphicon glyphicon glyphicon-menu-right"
-                    aria-hidden="true"></span>
+              <a class="section" href="/faquestion">开源实践问答</a>
+              <span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
               <div class="askactive section">我要提问</div>
             </div>
 
@@ -28,109 +25,45 @@
                 </li>
                 <li>
                   更多信息请查阅 &nbsp;
-                  <a href="https://www.oschina.net/question/2918182_2262855"
-                     target="_blank">
+                  <a href="https://www.oschina.net/question/2918182_2262855" target="_blank">
                     新版社区规范
                   </a>
                 </li>
               </ol>
             </div>
             <form class="ui new-question form">
-              <input type="hidden"
-                     name="user_code"
-                     value="IMqpO8mgcnPOwUeaVbRFT5zlfSFKllVq4AFnIACu" />
-              <input type="hidden"
-                     name="userId"
-                     value="2825958" />
-              <input type="hidden"
-                     name="id"
-                     value />
-              <input type="hidden"
-                     name="askUserId"
-                     value="0" />
-              <input type="hidden"
-                     name="tag"
-                     value />
-              <input type="hidden"
-                     name="tag_type"
-                     value />
+              <input type="hidden" name="user_code" value="IMqpO8mgcnPOwUeaVbRFT5zlfSFKllVq4AFnIACu" />
+              <input type="hidden" name="userId" value="2825958" />
+              <input type="hidden" name="id" value />
+              <input type="hidden" name="askUserId" value="0" />
+              <input type="hidden" name="tag" value />
+              <input type="hidden" name="tag_type" value />
               <div class="field">
                 <label>选择版块</label>
-                <input type="hidden"
-                       name="catalog"
-                       value="1" />
+                <input type="hidden" name="catalog" value="1" />
                 <div class="ui five item pointing menu catalog">
-                  <a class="item"
-                     v-bind:class="{ askactive: askType==1 }"
-                     @click="askTypeClick('1')"
-                     href="javascript:void(0);"
-                     data-value="1"
-                     title="技术问答">
-                    <span class="glyphicon glyphicon-question-sign"
-                          aria-hidden="true"></span>
-                    <span>技术问答</span>
-                  </a>
-                  <a class="item"
-                     data-value="100"
-                     v-bind:class="{ askactive: askType==100 }"
-                     @click="askTypeClick('100')"
-                     href="javascript:void(0);"
-                     title="职业生涯">
-                    <span class="glyphicon glyphicon-briefcase"
-                          aria-hidden="true"></span>
-                    <span>职业生涯</span>
-                  </a>
-                  <a class="item"
-                     data-value="2"
-                     v-bind:class="{ askactive: askType==2 }"
-                     @click="askTypeClick('2')"
-                     href="javascript:void(0);"
-                     title="技术分享">
-                    <span class="glyphicon glyphicon-share"
-                          aria-hidden="true"></span>
-                    <span>技术分享</span>
-                  </a>
-                  <a class="item"
-                     data-value="3"
-                     v-bind:class="{ askactive: askType==3 }"
-                     @click="askTypeClick('3')"
-                     href="javascript:void(0);"
-                     title="IT大杂烩">
-                    <span class="glyphicon glyphicon-user"
-                          aria-hidden="true"></span>
-                    <span>IT大杂烩</span>
-                  </a>
-                  <a class="item"
-                     data-value="4"
-                     v-bind:class="{ askactive: askType==4 }"
-                     @click="askTypeClick('4')"
-                     href="javascript:void(0);"
-                     title="站务/建议">
-                    <span class="glyphicon glyphicon-hand-up"
-                          aria-hidden="true"></span>
-                    <span>站务/建议</span>
+                  <a class="item" v-bind:class="{ askactive: askType == index }" v-for="(item, index) in typeList"
+                    :key="item.id" @click="askTypeClick(index)" href="javascript:void(0);" :title="item.name">
+                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    <span>{{ item.name }}</span>
                   </a>
                 </div>
               </div>
               <div class="required field">
                 <label>标题</label>
                 <div class="ui input focus">
-                  <el-input v-model="asktitle"
-                            placeholder="您有什么技术问题，请在此输入"
-                            v-on:focus="inputfocuse"></el-input>
+                  <el-input v-model="asktitle" placeholder="您有什么技术问题，请在此输入" v-on:focus="inputfocuse"></el-input>
                 </div>
               </div>
               <div class="field">
-                <a href="https://www.oschina.net/question/12_21851"
-                   target="_blank">
+                <a href="https://www.oschina.net/question/12_21851" target="_blank">
                   什么样的问题算是一个好问题？
                 </a>
               </div>
               <div class="field">
                 <label>语言 平台 标签</label>
                 <div class="search_input">
-                  <el-input v-model="asktag"
-                            placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多5个)"></el-input>
+                  <el-input v-model="asktag" placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多5个)"></el-input>
                 </div>
               </div>
 
@@ -147,8 +80,7 @@
                   <el-checkbox v-model="tipsme">
                     有人回答时邮件通知我 (957963898@qq.com)
                   </el-checkbox>
-                  <a href="https://my.oschina.net/redskt/admin/mail-settings"
-                     target="_blank">
+                  <a href="https://my.oschina.net/redskt/admin/mail-settings" target="_blank">
                     更改提醒邮箱？
                   </a>
                 </div>
@@ -159,12 +91,10 @@
                 </div>
               </div>
               <div class="publish_ask">
-                <el-button type="primary"
-                           @click="publishAsk">
+                <el-button type="primary" @click="publishAsk">
                   发布问题
                 </el-button>
-                <p class="tips_error_show"
-                   v-show="this.errtips.length > 0">
+                <p class="tips_error_show" v-show="this.errtips.length > 0">
                   {{ errtips }}
                 </p>
               </div>
@@ -186,8 +116,7 @@
                 </li>
                 <li>
                   更多信息请查阅 &nbsp;
-                  <a href="https://www.oschina.net/question/2918182_2262855"
-                     target="_blank">
+                  <a href="https://www.oschina.net/question/2918182_2262855" target="_blank">
                     新版社区规范
                   </a>
                 </li>
@@ -203,6 +132,7 @@
 <script>
 import userApi from '@/api/user'
 import askApi from '@/api/ask'
+import askServerApi from "@/api/askServerReq";
 const qiniu = require('qiniu-js')
 
 export default {
@@ -214,11 +144,20 @@ export default {
       asktitle: '',
       asktag: '',
       errtips: '',
-      askType: 1,
+      askType: 0,
       loginToken: '',
       uploadToken: '',
     }
   },
+
+  asyncData ({ params, error }) {
+    return askServerApi.getQuestionTypeList(params.id).then((response) => {
+      return {
+        typeList: response.data.typeList,
+      }
+    })
+  },
+
   mounted () {
     this.loginToken = window.localStorage.getItem('redclass_token');
     this.init_wangeditor();
@@ -254,7 +193,6 @@ export default {
         this.errtips = '问题标题必须六个字符以上哈！'
         return
       }
-      window.console.log(this.askcontent);
       if (this.askcontent.length < 12) {
         this.errtips = '问题内容必须12字符以上哈！'
         return
@@ -266,7 +204,7 @@ export default {
             uid: userInfo.id,
             title: this.asktitle,
             content: this.askcontent,
-            qustype: this.
+            qustype: this.typeList[this.askType].id
           })
           .then((response) => {
             this.$message({
@@ -339,6 +277,7 @@ export default {
   border-color: #409eff;
   color: #409eff !important;
 }
+
 .checkbox {
   margin-left: -15px;
 }
@@ -363,7 +302,7 @@ export default {
   margin: 0 0 1em;
 }
 
-.ui.form .field > label {
+.ui.form .field>label {
   display: block;
   margin: 0 0 0.28571429rem 0;
   color: rgba(0, 0, 0, 0.87);
@@ -385,12 +324,15 @@ export default {
   -ms-flex-pack: center;
   justify-content: center;
 }
+
 .ui.menu:last-child {
   margin-bottom: 0;
 }
+
 .ui.menu {
   font-size: 1rem;
 }
+
 .ui.menu {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -414,6 +356,7 @@ export default {
   padding-bottom: 6px;
   border-right: 1px solid rgba(34, 36, 38, 0.15);
 }
+
 .ui.menu.five.item a {
   display: block;
   color: rgba(0, 0, 0, 0.87);
@@ -424,16 +367,17 @@ export default {
   font-weight: 600;
 }
 
-.ui.form .required.field > label:after {
+.ui.form .required.field>label:after {
   display: inline-block;
   vertical-align: top;
 }
 
-.required.field > label:after {
+.required.field>label:after {
   margin: -0.2em 0 0 0.2em;
   content: '*';
   color: #db2828;
 }
+
 .ui .input {
   width: 100%;
 }
@@ -526,6 +470,7 @@ export default {
   padding-top: 5px;
   margin-left: 5px;
 }
+
 .tips_error_show {
   position: absolute;
   top: 10px;
@@ -539,9 +484,11 @@ export default {
   line-height: normal !important;
   height: 500px;
 }
+
 .ql-snow .ql-tooltip[data-mode='link']::before {
   content: '请输入链接地址:';
 }
+
 .ql-snow .ql-tooltip.ql-editing a.ql-action::after {
   border-right: 0px;
   content: '保存';
@@ -556,14 +503,17 @@ export default {
 .ql-snow .ql-picker.ql-size .ql-picker-item::before {
   content: '14px';
 }
+
 .ql-snow .ql-picker.ql-size .ql-picker-label[data-value='small']::before,
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value='small']::before {
   content: '10px';
 }
+
 .ql-snow .ql-picker.ql-size .ql-picker-label[data-value='large']::before,
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value='large']::before {
   content: '18px';
 }
+
 .ql-snow .ql-picker.ql-size .ql-picker-label[data-value='huge']::before,
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value='huge']::before {
   content: '32px';
@@ -573,26 +523,32 @@ export default {
 .ql-snow .ql-picker.ql-header .ql-picker-item::before {
   content: '文本';
 }
+
 .ql-snow .ql-picker.ql-header .ql-picker-label[data-value='1']::before,
 .ql-snow .ql-picker.ql-header .ql-picker-item[data-value='1']::before {
   content: '标题1';
 }
+
 .ql-snow .ql-picker.ql-header .ql-picker-label[data-value='2']::before,
 .ql-snow .ql-picker.ql-header .ql-picker-item[data-value='2']::before {
   content: '标题2';
 }
+
 .ql-snow .ql-picker.ql-header .ql-picker-label[data-value='3']::before,
 .ql-snow .ql-picker.ql-header .ql-picker-item[data-value='3']::before {
   content: '标题3';
 }
+
 .ql-snow .ql-picker.ql-header .ql-picker-label[data-value='4']::before,
 .ql-snow .ql-picker.ql-header .ql-picker-item[data-value='4']::before {
   content: '标题4';
 }
+
 .ql-snow .ql-picker.ql-header .ql-picker-label[data-value='5']::before,
 .ql-snow .ql-picker.ql-header .ql-picker-item[data-value='5']::before {
   content: '标题5';
 }
+
 .ql-snow .ql-picker.ql-header .ql-picker-label[data-value='6']::before,
 .ql-snow .ql-picker.ql-header .ql-picker-item[data-value='6']::before {
   content: '标题6';
@@ -602,10 +558,12 @@ export default {
 .ql-snow .ql-picker.ql-font .ql-picker-item::before {
   content: '标准字体';
 }
+
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value='serif']::before,
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value='serif']::before {
   content: '衬线字体';
 }
+
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value='monospace']::before,
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value='monospace']::before {
   content: '等宽字体';

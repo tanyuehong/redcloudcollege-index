@@ -11,10 +11,17 @@ export default {
 
   //讲师详情的方法
   getHomeAskQuestionList(parm) {
-      return request({
-        url: `/home/eduask/questionlist`,
-        method: 'post',
-        data:parm,
-      })
-   },
+    return request({
+      url: `/home/eduask/questionlist`,
+      method: 'post',
+      data: parm,
+    })
+  },
+
+  getQuestionTypeList() {
+    return request({
+      url: `/home/eduask/questionTypeList`,
+      method: 'get',
+    })
+  },
 }

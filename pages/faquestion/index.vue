@@ -78,8 +78,7 @@
                   </nuxt-link>
                 </div>
 
-                <div class="description">
-                  <p class="line-clamp" v-html="item.content"></p>
+                <div class="description" v-html="item.content">
                 </div>
                 <div class="extra question-tags">
                   <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
@@ -118,7 +117,12 @@
 </template>
 </script>
 
-<style scoped>
+<style>
+
+.questions_detail_con .description  p {
+   padding: 0px;
+   font-size: 14px;
+}
 .answer_num .anser-lable {
   margin-top: 0px;
 }
@@ -340,9 +344,14 @@
   margin-bottom: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   vertical-align: middle;
-  max-height: 40px;
+
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+
+  display: -webkit-box;
+
+  
 }
 
 .questions_detail_con .answer_count {
@@ -452,7 +461,7 @@ export default {
   asyncData ({ params, error }) {
     return askServerApi.getHomeAskQuestionList({ 'type': 1, 'qtype': '' }).then((response) => {
       return {
-        list: response.data.list,
+        list: response.data.list ? response.data.list:[],
         qustionType: response.data.qustionType,
       }
     })

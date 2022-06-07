@@ -340,18 +340,14 @@
 
 .questions_detail_con .description {
   font-size: 14px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 12px;
+  margin-bottom: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
   vertical-align: middle;
-
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
-
   display: -webkit-box;
-
-  
 }
 
 .questions_detail_con .answer_count {

@@ -156,6 +156,13 @@ export default {
     })
   },
 
+  fixQuestion(rId) {
+    return request({
+      url: `/eduask/fixQuestion/${rId}`,
+      method: 'get',
+    })
+  },
+
   deleteReplyComment(cId) {
     return request({
       url: `/eduask/deleteReplyComment/${cId}`,

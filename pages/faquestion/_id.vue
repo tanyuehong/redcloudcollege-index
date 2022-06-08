@@ -20,9 +20,9 @@
                 <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
                 <span class="glyphicon glyphicon-star-empty qustion-top-item" aria-hidden="true">
                 </span>
-                <span class="qustion-good-num"> 收藏 {{ qdetail.collect }} </span>
+                <span class="qustion-good-num">收藏 {{ qdetail.collect }} </span>
 
-                <span class="qustion-top-item top-tips">已解决</span>
+                <span class="qustion-top-item top-tips" v-if="qdetail.state == 9">已解决</span>
                 <div class="qustion-right-view">
                   浏览 {{ qdetail.readcount }}
                 </div>
@@ -137,7 +137,7 @@
 
                   <el-dialog title="确认将问题设为已解决吗？" :visible.sync="fixDialogVisible" width="30%" center>
                     <div class="tac">
-                      <span>为了你的问题能帮助更多的人，请设置或者编写最佳答案，没有最佳答案的问题，将不能设置为已完结哦~</span>
+                      <span>为了你的问题能帮助更多的人，请设置或者编写最佳答案，没有最佳答案的问题，将不能设置为已解决哦~</span>
                     </div>
                     <span slot="footer" class="dialog-footer">
                       <el-button @click="fixDialogVisible = false">再等等</el-button>
@@ -582,6 +582,24 @@ export default {
     },
 
     fixQuestion (qItem) {
+      this.fixDialogVisible = false;
+      askApi.fixQuestion(qItem.qid).then((response) => {
+        if(response.data.sucess) {
+          this.qdetail.state = response.data.state;
+          this.$message({
+          message: response.data.tips,
+          type: "success",
+          duration: 2000,
+        });
+        } else {
+          this.$message({
+          message: response.data.tips,
+          type: "info",
+          duration: 2000,
+        });
+        }
+        
+      });
 
     },
 
@@ -1474,7 +1492,7 @@ h2.accusation-secondary-title {
 }
 
 .qustion-good-num {
-  margin-left: 2px;
+  margin-left: 0px;
 }
 
 .answer-list-item {
@@ -2003,6 +2021,12 @@ li.up_down_wrap {
 .question_info {
   margin-top: 10px;
   margin-bottom: 6px;
+  font-size: 14px;
+  color: #666;
+}
+
+.question_info a {
+  text-decoration: none;
 }
 
 .question-tags-img {

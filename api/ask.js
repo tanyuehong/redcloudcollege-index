@@ -149,6 +149,13 @@ export default {
     })
   },
 
+  questionGoodReply(rId) {
+    return request({
+      url: `/eduask/questionGoodReply/${rId}`,
+      method: 'get',
+    })
+  },
+
   deleteReplyComment(cId) {
     return request({
       url: `/eduask/deleteReplyComment/${cId}`,

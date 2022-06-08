@@ -121,6 +121,7 @@
                       </span>
                       <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item :command="beforeHandleCommand('d', qdetail)">删除</el-dropdown-item>
+                        <el-dropdown-item :command="beforeHandleCommand('c', qdetail)">已解决</el-dropdown-item>
                       </el-dropdown-menu>
                     </el-dropdown>
                   </li>
@@ -131,6 +132,16 @@
                     <span slot="footer" class="dialog-footer">
                       <el-button @click="deleteQuestion(qdetail)">删 除</el-button>
                       <el-button type="primary" @click="questionDialogVisible = false">再等等</el-button>
+                    </span>
+                  </el-dialog>
+
+                  <el-dialog title="确认将问题设为已解决吗？" :visible.sync="fixDialogVisible" width="30%" center>
+                    <div class="tac">
+                      <span>为了你的问题能帮助更多的人，请设置或者编写最佳答案，没有最佳答案的问题，将不能设置为已完结哦~</span>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
+                      <el-button @click="fixDialogVisible = false">再等等</el-button>
+                      <el-button type="primary" @click="fixQuestion(qdetail)">设为已解决</el-button>
                     </span>
                   </el-dialog>
 
@@ -231,10 +242,20 @@
                         </span>
                         <el-dropdown-menu slot="dropdown">
                           <el-dropdown-item :command="beforeHandleCommand('d', item)">删除</el-dropdown-item>
+                          <el-dropdown-item :command="beforeHandleCommand('g', item)">最佳</el-dropdown-item>
                         </el-dropdown-menu>
                       </el-dropdown>
                     </span>
                   </div>
+                  <el-dialog title="确认将该回答设为最佳吗？" :visible.sync="goodDialogVisible" width="30%" center>
+                    <div class="tac">
+                      <span>最佳答案能够有更明确的提示，正确的回答将帮助其他有同样问题的同学，并且最佳答案会奖励该问题回答者，请尽量选择正确的回答哈~</span>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
+                      <el-button @click="goodDialogVisible = false">再等等</el-button>
+                      <el-button type="primary" @click="questionGoodReply(item)">确 认</el-button>
+                    </span>
+                  </el-dialog>
                   <el-dialog title="确认删除回答吗？" :visible.sync="deleteDialogVisible" width="30%" center>
                     <div class="tac">
                       <span>删除后您的回答将不会出现在该问题下,请三思哦~</span>
@@ -427,6 +448,8 @@ export default {
       deleteDialogVisible: false,
       deleteCommentVisible: false,
       questionDialogVisible: false,
+      fixDialogVisible: false,
+      goodDialogVisible: false,
     };
   },
 
@@ -535,14 +558,20 @@ export default {
 
     questionClickCommend (command) {
       if (command.command == 'd') {
-
+        this.questionDialogVisible = true;
       }
-      this.questionDialogVisible = true;
+      if (command.command == 'c') {
+        this.fixDialogVisible = true;
+      }
+
     },
 
     replyClickCommend (command) {
       if (command.command == 'd') {
         this.deleteDialogVisible = true;
+      }
+      if (command.command == 'g') {
+        this.goodDialogVisible = true;
       }
     },
 
@@ -550,6 +579,10 @@ export default {
       if (command.command == 'd') {
         this.deleteCommentVisible = true;
       }
+    },
+
+    fixQuestion (qItem) {
+
     },
 
     deleteQuestion (qItem) {
@@ -578,6 +611,17 @@ export default {
           onClose: () => {
             $nuxt.$router.push({ name: "faquestion" });
           }
+        });
+      });
+    },
+
+    questionGoodReply (reply) {
+      this.goodDialogVisible = false;
+      askApi.questionGoodReply(reply.id).then((response) => {
+        this.$message({
+          message: "设置最佳回答成功哈！",
+          type: "success",
+          duration: 2000,
         });
       });
     },

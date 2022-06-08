@@ -22,7 +22,7 @@
                 </span>
                 <span class="qustion-good-num">收藏 {{ qdetail.collect }} </span>
 
-                <span class="qustion-top-item top-tips" v-if="qdetail.state == 9">已解决</span>
+                <span class="top-tips" v-if="qdetail.state == 9">已解决</span>
                 <div class="qustion-right-view">
                   浏览 {{ qdetail.readcount }}
                 </div>
@@ -201,6 +201,12 @@
                       <span class="ml5"> {{ item.username }}</span>
                       <span class="qustion-top-item anser-time"> {{ item.gmtCreate }}</span>
                     </nuxt-link>
+
+                    <span class="good_answer">
+                      <span class="glyphicon glyphicon-heart"></span>
+                      最佳回答
+                    </span>
+
                   </div>
 
                   <div class="answer-item-content" v-html="item.content"></div>
@@ -584,21 +590,21 @@ export default {
     fixQuestion (qItem) {
       this.fixDialogVisible = false;
       askApi.fixQuestion(qItem.qid).then((response) => {
-        if(response.data.sucess) {
+        if (response.data.sucess) {
           this.qdetail.state = response.data.state;
           this.$message({
-          message: response.data.tips,
-          type: "success",
-          duration: 2000,
-        });
+            message: response.data.tips,
+            type: "success",
+            duration: 2000,
+          });
         } else {
           this.$message({
-          message: response.data.tips,
-          type: "info",
-          duration: 2000,
-        });
+            message: response.data.tips,
+            type: "info",
+            duration: 2000,
+          });
         }
-        
+
       });
 
     },
@@ -1258,6 +1264,16 @@ export default {
 </script>
 
 <style>
+.good_answer {
+  color: white;
+  background: #fc5533;
+  padding: 4px 6px;
+  border-color: red;
+  border-radius: 4px;
+  float: right;
+  margin-right: 20px;
+}
+
 .li_more.li_delete {
   color: red;
   font-size: 12px;
@@ -1830,8 +1846,9 @@ h2.accusation-secondary-title {
 }
 
 .top-tips {
-  color: #fc5531;
+  color: red;
   font-size: 14px;
+  margin-left: 12px;
 }
 
 .qustion-top-item {

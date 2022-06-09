@@ -73,8 +73,9 @@
                 <div class="answer_title">
                   <nuxt-link :to="'/faquestion/' + item.qid" class="header">
                     {{ item.title }}
-                    <div class="ui red label horizontal" data-tooltip="置顶">顶</div>
-                    <div class="ui orange label horizontal" data-tooltip="热门">热</div>
+                    <div class="ui red label horizontal">顶</div>
+                    <div class="ui orange label horizontal">热</div>
+                    <div class="ui red label horizontal fix" v-if="item.state == 9">已解决</div>
                   </nuxt-link>
                 </div>
 
@@ -118,11 +119,11 @@
 </script>
 
 <style>
-
-.questions_detail_con .description  p {
-   padding: 0px;
-   font-size: 14px;
+.questions_detail_con .description p {
+  padding: 0px;
+  font-size: 14px;
 }
+
 .answer_num .anser-lable {
   margin-top: 0px;
 }
@@ -272,6 +273,10 @@
     sans-serif;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.85);
+}
+
+.questions_detail_con .header .horizontal.label.fix {
+  background-color: #25a88a !important;
 }
 
 .questions_detail_con .header .horizontal.label {
@@ -457,7 +462,7 @@ export default {
   asyncData ({ params, error }) {
     return askServerApi.getHomeAskQuestionList({ 'type': 1, 'qtype': '' }).then((response) => {
       return {
-        list: response.data.list ? response.data.list:[],
+        list: response.data.list ? response.data.list : [],
         qustionType: response.data.qustionType,
       }
     })

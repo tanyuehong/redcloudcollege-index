@@ -202,7 +202,7 @@
                       <span class="qustion-top-item anser-time"> {{ item.gmtCreate }}</span>
                     </nuxt-link>
 
-                    <span class="good_answer">
+                    <span class="good_answer" v-if="item.state == 9">
                       <span class="glyphicon glyphicon-heart"></span>
                       最佳回答
                     </span>
@@ -248,12 +248,22 @@
                         </span>
                         <el-dropdown-menu slot="dropdown">
                           <el-dropdown-item :command="beforeHandleCommand('d', item)">删除</el-dropdown-item>
-                          <el-dropdown-item :command="beforeHandleCommand('g', item)">最佳</el-dropdown-item>
+                          <el-dropdown-item :command="beforeHandleCommand('g', item)">{{ goodReplyString(item) }}
+                          </el-dropdown-item>
                         </el-dropdown-menu>
                       </el-dropdown>
                     </span>
                   </div>
-                  <el-dialog title="确认将该回答设为最佳吗？" :visible.sync="goodDialogVisible" width="30%" center>
+                  <el-dialog title="确认取消最佳回答吗？" :visible.sync="cgoodDialogVisible" width="30%" center>
+                    <div class="tac">
+                      <span>最佳答案能够有更明确的提示，正确的回答将帮助其他有同样问题的同学，并且最佳答案会奖励该问题回答者，请尽量选择正确的回答哈~</span>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
+                      <el-button type="primary" @click="questionGoodReply(item, 2)">确 认</el-button>
+                      <el-button @click="cgoodDialogVisible = false">再等等</el-button>
+                    </span>
+                  </el-dialog>
+                  <el-dialog title="确认设为最佳回答吗？" :visible.sync="goodDialogVisible" width="30%" center>
                     <div class="tac">
                       <span>最佳答案能够有更明确的提示，正确的回答将帮助其他有同样问题的同学，并且最佳答案会奖励该问题回答者，请尽量选择正确的回答哈~</span>
                     </div>
@@ -267,7 +277,7 @@
                       <span>删除后您的回答将不会出现在该问题下,请三思哦~</span>
                     </div>
                     <span slot="footer" class="dialog-footer">
-                      <el-button @click="deleteQuestionReply(item)">删 除</el-button>
+                      <el-button @click="deleteQuestionReply(item, 1)">删 除</el-button>
                       <el-button type="primary" @click="deleteDialogVisible = false">再等等</el-button>
                     </span>
                   </el-dialog>
@@ -527,6 +537,16 @@ export default {
           return goodCount;
         } else {
           return "赞";
+        }
+      }
+    },
+
+    goodReplyString () {
+      return function (item) {
+        if (item.state == 9) {
+          return "取消最佳";
+        } else {
+          return "最佳";
         }
       }
     },

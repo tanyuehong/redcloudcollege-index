@@ -135,9 +135,30 @@ export default {
     })
   },
 
-  deleteQustionReply(cId) {
+  deleteQuestion(qId) {
     return request({
-      url: `/eduask/deleteQustionReply/${cId}`,
+      url: `/eduask/deleteQuestion/${qId}`,
+      method: 'get',
+    })
+  },
+
+  deleteQuestionReply(rId) {
+    return request({
+      url: `/eduask/deleteQuestionReply/${rId}`,
+      method: 'get',
+    })
+  },
+
+  questionGoodReply(rId) {
+    return request({
+      url: `/eduask/questionGoodReply/${rId}`,
+      method: 'get',
+    })
+  },
+
+  fixQuestion(rId) {
+    return request({
+      url: `/eduask/fixQuestion/${rId}`,
       method: 'get',
     })
   },

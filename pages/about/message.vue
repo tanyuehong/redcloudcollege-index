@@ -75,7 +75,7 @@ export default {
       activeIndex: "1",
       tagList: [],
       typeIndex: 0,
-      title: "问答公告-开源实践问答",
+      title: "问答公告- 开源实践问答",
       descrb: "开源实践问答公告中心，用来发布官方通知公告的中心，欢迎反馈哈~"
     };
   },

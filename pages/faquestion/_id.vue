@@ -20,9 +20,9 @@
                 <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
                 <span class="glyphicon glyphicon-star-empty qustion-top-item" aria-hidden="true">
                 </span>
-                <span class="qustion-good-num"> 收藏 {{ qdetail.collect }} </span>
+                <span class="qustion-good-num">收藏 {{ qdetail.collect }} </span>
 
-                <span class="qustion-top-item top-tips">已解决</span>
+                <span class="top-tips" v-if="qdetail.state == 9">已解决</span>
                 <div class="qustion-right-view">
                   浏览 {{ qdetail.readcount }}
                 </div>
@@ -114,16 +114,36 @@
                   <li class="ask-info-item" @click="jubaoBtnClick(qdetail.qid, '问题')">
                     <i class="icon icon_vote_jubao"></i>举报
                   </li>
-                  <li class="ask-info-item">
-                    <el-dropdown szie="mini">
+                  <li class="ask-info-item" v-if="qdetail.uid == loginInfo.id">
+                    <el-dropdown szie="mini" @command="questionClickCommend">
                       <span class="el-dropdown-link drop-menu">
                         <i class="icon icon_more"></i>
                       </span>
                       <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>删除</el-dropdown-item>
+                        <el-dropdown-item :command="beforeHandleCommand('d', qdetail)">删除</el-dropdown-item>
+                        <el-dropdown-item :command="beforeHandleCommand('c', qdetail)">已解决</el-dropdown-item>
                       </el-dropdown-menu>
                     </el-dropdown>
                   </li>
+                  <el-dialog title="确认删除问题吗？" :visible.sync="questionDialogVisible" width="30%" center>
+                    <div class="tac">
+                      <span>删除后您的问题将不会出现在问题列表中，你将不能获得别人的帮助，请三思哦~</span>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
+                      <el-button @click="deleteQuestion(qdetail)">删 除</el-button>
+                      <el-button type="primary" @click="questionDialogVisible = false">再等等</el-button>
+                    </span>
+                  </el-dialog>
+
+                  <el-dialog title="确认将问题设为已解决吗？" :visible.sync="fixDialogVisible" width="30%" center>
+                    <div class="tac">
+                      <span>为了你的问题能帮助更多的人，请设置或者编写最佳答案，没有最佳答案的问题，将不能设置为已解决哦~</span>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
+                      <el-button @click="fixDialogVisible = false">再等等</el-button>
+                      <el-button type="primary" @click="fixQuestion(qdetail)">设为已解决</el-button>
+                    </span>
+                  </el-dialog>
 
                   <el-dialog title="举报反馈" :visible.sync="jubiaoDlog" :close-on-click-modal="false" center>
                     <div class="jubao-content">
@@ -181,6 +201,12 @@
                       <span class="ml5"> {{ item.username }}</span>
                       <span class="qustion-top-item anser-time"> {{ item.gmtCreate }}</span>
                     </nuxt-link>
+
+                    <span class="good_answer" v-if="item.state == 9">
+                      <span class="glyphicon glyphicon-heart"></span>
+                      最佳回答
+                    </span>
+
                   </div>
 
                   <div class="answer-item-content" v-html="item.content"></div>
@@ -210,12 +236,51 @@
                       分享
                     </span>
 
-                    <span class="li_more li_report" @click="jubaoBtnClick(item.id, '回答')">
+                    <span class="li_more" @click="jubaoBtnClick(item.id, '回答')">
                       <i class="icon icon_ask_report"></i>
                       举报
                     </span>
 
+                    <span v-if="item.uid == loginInfo.id">
+                      <el-dropdown szie="mini" @command="replyClickCommend">
+                        <span class="el-dropdown-link drop-menu">
+                          <i class="icon icon_more"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                          <el-dropdown-item :command="beforeHandleCommand('d', item)">删除</el-dropdown-item>
+                          <el-dropdown-item :command="beforeHandleCommand('g', item)">{{ goodReplyString(item) }}
+                          </el-dropdown-item>
+                        </el-dropdown-menu>
+                      </el-dropdown>
+                    </span>
                   </div>
+                  <el-dialog title="确认取消最佳回答吗？" :visible.sync="cgoodDialogVisible" width="30%" center>
+                    <div class="tac">
+                      <span>最佳答案能够有更明确的提示，正确的回答将帮助其他有同样问题的同学，并且最佳答案会奖励该问题回答者，请尽量选择正确的回答哈~</span>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
+                      <el-button type="primary" @click="questionGoodReply(item, 2)">确 认</el-button>
+                      <el-button @click="cgoodDialogVisible = false">再等等</el-button>
+                    </span>
+                  </el-dialog>
+                  <el-dialog title="确认设为最佳回答吗？" :visible.sync="goodDialogVisible" width="30%" center>
+                    <div class="tac">
+                      <span>最佳答案能够有更明确的提示，正确的回答将帮助其他有同样问题的同学，并且最佳答案会奖励该问题回答者，请尽量选择正确的回答哈~</span>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
+                      <el-button @click="goodDialogVisible = false">再等等</el-button>
+                      <el-button type="primary" @click="questionGoodReply(item)">确 认</el-button>
+                    </span>
+                  </el-dialog>
+                  <el-dialog title="确认删除回答吗？" :visible.sync="deleteDialogVisible" width="30%" center>
+                    <div class="tac">
+                      <span>删除后您的回答将不会出现在该问题下,请三思哦~</span>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
+                      <el-button @click="deleteQuestionReply(item, 1)">删 除</el-button>
+                      <el-button type="primary" @click="deleteDialogVisible = false">再等等</el-button>
+                    </span>
+                  </el-dialog>
 
                   <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter"
                     v-on:leave="leave" v-bind:css="false">
@@ -244,11 +309,29 @@
                               commentGood(comment.good)
                           }}</span>
                         <span class="mr15" @click="commentbtnclinck(comment, cindex)">回复</span>
-                        <span class="li_more li_report" @click="jubaoBtnClick(comment.id, '评论')">
+                        <span class="mr15" @click="jubaoBtnClick(comment.id, '评论')">
                           <i class="icon icon_ask_report"></i>举报
                         </span>
-
+                        <span v-if="comment.uid == loginInfo.id">
+                          <el-dropdown szie="mini" @command="commentClickCommend">
+                            <span class="el-dropdown-link drop-menu">
+                              <i class="icon icon_more"></i>
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                              <el-dropdown-item :command="beforeHandleCommand('d', comment)">删除</el-dropdown-item>
+                            </el-dropdown-menu>
+                          </el-dropdown>
+                        </span>
                       </div>
+                      <el-dialog title="确认删除评论吗？" :visible.sync="deleteCommentVisible" width="30%" center>
+                        <div class="tac">
+                          <span>删除后您的评论将不会出现在该回答下,请三思哦~</span>
+                        </div>
+                        <span slot="footer" class="dialog-footer">
+                          <el-button @click="deleteCommentReply(comment, item)">删 除</el-button>
+                          <el-button type="primary" @click="deleteCommentVisible = false">再等等</el-button>
+                        </span>
+                      </el-dialog>
 
                       <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:after-enter="cafterEnter"
                         v-on:leave="cleave" v-bind:css="false">
@@ -378,6 +461,11 @@ export default {
       jubaoTypeIndex: 0,
       jubaoId: "",
       jubaotype: "",
+      deleteDialogVisible: false,
+      deleteCommentVisible: false,
+      questionDialogVisible: false,
+      fixDialogVisible: false,
+      goodDialogVisible: false,
     };
   },
 
@@ -453,6 +541,16 @@ export default {
       }
     },
 
+    goodReplyString () {
+      return function (item) {
+        if (item.state == 9) {
+          return "取消最佳";
+        } else {
+          return "最佳";
+        }
+      }
+    },
+
     // 金额显示.00格式
     NumFormat () {
       var value = this.userAskInfo.qmoney
@@ -477,6 +575,128 @@ export default {
   },
 
   methods: {
+    beforeHandleCommand (commd, item) {
+      return {
+        'command': commd,
+        'item': item
+      }
+    },
+
+    questionClickCommend (command) {
+      if (command.command == 'd') {
+        this.questionDialogVisible = true;
+      }
+      if (command.command == 'c') {
+        this.fixDialogVisible = true;
+      }
+
+    },
+
+    replyClickCommend (command) {
+      if (command.command == 'd') {
+        this.deleteDialogVisible = true;
+      }
+      if (command.command == 'g') {
+        this.goodDialogVisible = true;
+      }
+    },
+
+    commentClickCommend (command) {
+      if (command.command == 'd') {
+        this.deleteCommentVisible = true;
+      }
+    },
+
+    fixQuestion (qItem) {
+      this.fixDialogVisible = false;
+      askApi.fixQuestion(qItem.qid).then((response) => {
+        if (response.data.sucess) {
+          this.qdetail.state = response.data.state;
+          this.$message({
+            message: response.data.tips,
+            type: "success",
+            duration: 2000,
+          });
+        } else {
+          this.$message({
+            message: response.data.tips,
+            type: "info",
+            duration: 2000,
+          });
+        }
+
+      });
+
+    },
+
+    deleteQuestion (qItem) {
+      this.questionDialogVisible = false;
+      if (qItem.state == 99 && this.replyList.length > 0) {
+        this.$message({
+          message: "已经提交删除申请，无需反复提交哈",
+          type: "success",
+          duration: 2000,
+        });
+        return;
+      }
+      askApi.deleteQuestion(qItem.qid).then((response) => {
+        if (!response.data.sucess) {
+          qItem.state = 99;
+          this.$message({
+            message: response.data.tips,
+            type: "success",
+            duration: 2000,
+          });
+          return;
+        }
+
+        this.$message({
+          message: "删除问题成功, 即将跳转问题列表页面", type: "success", duration: 2000,
+          onClose: () => {
+            $nuxt.$router.push({ name: "faquestion" });
+          }
+        });
+      });
+    },
+
+    questionGoodReply (reply) {
+      this.goodDialogVisible = false;
+      askApi.questionGoodReply(reply.id).then((response) => {
+        this.$message({
+          message: "设置最佳回答成功哈！",
+          type: "success",
+          duration: 2000,
+        });
+      });
+    },
+
+    deleteQuestionReply (reply) {
+      this.deleteDialogVisible = false;
+      askApi.deleteQuestionReply(reply.id).then((response) => {
+        this.replyList = this.replyList.filter(function (item) {
+          return item.id != response.data.rId;
+        });
+        this.$message({
+          message: "删除回答成功哈！",
+          type: "success",
+          duration: 2000,
+        });
+      });
+    },
+
+    deleteCommentReply (comment, citem) {
+      this.deleteCommentReply = false;
+      askApi.deleteReplyComment(comment.id).then((response) => {
+        citem.comments = citem.comments.filter(function (item) {
+          return item.id != response.data.cId;
+        });
+        this.$message({
+          message: "删除评论成功哈！",
+          type: "success",
+          duration: 2000,
+        });
+      });
+    },
     getUserAskInfo () {
       askApi.getUserAskInfo().then((response) => {
         this.userAskInfo = response.data.askInfo;
@@ -1064,6 +1284,21 @@ export default {
 </script>
 
 <style>
+.good_answer {
+  color: white;
+  background: #fc5533;
+  padding: 4px 6px;
+  border-color: red;
+  border-radius: 4px;
+  float: right;
+  margin-right: 20px;
+}
+
+.li_more.li_delete {
+  color: red;
+  font-size: 12px;
+}
+
 .answer-item-userinfo .anser-info {
   text-decoration: none;
 }
@@ -1293,7 +1528,7 @@ h2.accusation-secondary-title {
 }
 
 .qustion-good-num {
-  margin-left: 2px;
+  margin-left: 0px;
 }
 
 .answer-list-item {
@@ -1631,8 +1866,9 @@ h2.accusation-secondary-title {
 }
 
 .top-tips {
-  color: #fc5531;
+  color: red;
   font-size: 14px;
+  margin-left: 12px;
 }
 
 .qustion-top-item {
@@ -1822,6 +2058,12 @@ li.up_down_wrap {
 .question_info {
   margin-top: 10px;
   margin-bottom: 6px;
+  font-size: 14px;
+  color: #666;
+}
+
+.question_info a {
+  text-decoration: none;
 }
 
 .question-tags-img {

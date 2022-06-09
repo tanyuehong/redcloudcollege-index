@@ -73,13 +73,13 @@
                 <div class="answer_title">
                   <nuxt-link :to="'/faquestion/' + item.qid" class="header">
                     {{ item.title }}
-                    <div class="ui red label horizontal" data-tooltip="置顶">顶</div>
-                    <div class="ui orange label horizontal" data-tooltip="热门">热</div>
+                    <div class="ui red label horizontal">顶</div>
+                    <div class="ui orange label horizontal">热</div>
+                    <div class="ui red label horizontal fix" v-if="item.state == 9">已解决</div>
                   </nuxt-link>
                 </div>
 
-                <div class="description">
-                  <p class="line-clamp" v-html="item.content"></p>
+                <div class="description" v-html="item.content">
                 </div>
                 <div class="extra question-tags">
                   <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
@@ -118,7 +118,12 @@
 </template>
 </script>
 
-<style scoped>
+<style>
+.questions_detail_con .description p {
+  padding: 0px;
+  font-size: 14px;
+}
+
 .answer_num .anser-lable {
   margin-top: 0px;
 }
@@ -270,6 +275,10 @@
   color: rgba(0, 0, 0, 0.85);
 }
 
+.questions_detail_con .header .horizontal.label.fix {
+  background-color: #25a88a !important;
+}
+
 .questions_detail_con .header .horizontal.label {
   vertical-align: middle !important;
   margin-top: -2px;
@@ -336,13 +345,14 @@
 
 .questions_detail_con .description {
   font-size: 14px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 12px;
+  margin-bottom: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   vertical-align: middle;
-  max-height: 40px;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
 }
 
 .questions_detail_con .answer_count {
@@ -422,7 +432,7 @@ export default {
       activeIndex: "1",
       tagList: [],
       typeIndex: 0,
-      title: "开源实践问答-有问必答的务实问答社区",
+      title: "开源实践问答 - 有问必答的务实问答社区",
       descrb: "开源实践问答，秉承有问必答的理念。对每一个问题细心维护，让您能用最短的时间获取最好的答案,是一个真正务实，能解决问题的社区。"
     };
   },
@@ -452,7 +462,7 @@ export default {
   asyncData ({ params, error }) {
     return askServerApi.getHomeAskQuestionList({ 'type': 1, 'qtype': '' }).then((response) => {
       return {
-        list: response.data.list,
+        list: response.data.list ? response.data.list : [],
         qustionType: response.data.qustionType,
       }
     })

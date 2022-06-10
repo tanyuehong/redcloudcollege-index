@@ -9,6 +9,9 @@ export default {
    ** Headers of the page
    */
   head: {
+    htmlAttrs: { 
+      lang: 'zh',
+    },
     title: '开源实践网',
     meta: [
       { charset: 'utf-8' },

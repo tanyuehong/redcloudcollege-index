@@ -42,24 +42,23 @@
           <div class="content_left">
             <div class="faqustion-top-group">
               <ul class="faqustion-typeList">
-                  <nuxt-link :to="'/faquestion/category/' + item.type" class="faqustion-type-item" :class="{ comactive: typeIndex == index }" v-for="(item, index) in qustionType" :key="index">
-                  <span :title="item.name" @click="qustionTypeClick(item.id, index)">
-                    {{ item.name }}
-                  </span>
+                <nuxt-link :to="typePath(item, index)" :title="item.name" v-for="(item, index) in qustionType"
+                  :class="{ comactive: type == item.type }" :key="item.id" class="faqustion-type-item">
+                  {{ item.name }}
                 </nuxt-link>
               </ul>
             </div>
             <div class="faqustion-subTags" v-if="tagList.length > 0">
             </div>
             <div class="questions_tab_con">
-              <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                <el-menu-item index="1">最新提问</el-menu-item>
-                <el-menu-item index="2">最新回答</el-menu-item>
-                <el-menu-item index="3">等待回答</el-menu-item>
-                <el-menu-item index="4">最多回答</el-menu-item>
-                <el-menu-item index="5">热门排行</el-menu-item>
-                <el-menu-item index="6">付费问答</el-menu-item>
-              </el-menu>
+              <ul class="faqustion-subtypelist">
+                <nuxt-link :to="sortPath(item)" v-for="item in sortList" :key="item.path"
+                  :class="{ comactive: sort == item.path }" class="faqustion-subtype-item">
+                  <span :title="item.name">
+                    {{ item.name }}
+                  </span>
+                </nuxt-link>
+              </ul>
             </div>
             <div class="questions_detail_con">
               <div class="nodata-warper" v-if="list.length == 0">
@@ -117,6 +116,7 @@
 </template>
 
 <script>
+
 import '~/assets/css/askindex.css'
 import askApi from "@/api/ask";
 import askServerApi from "@/api/askServerReq";
@@ -155,32 +155,43 @@ export default {
   },
 
   asyncData ({ params, error }) {
-    return askServerApi.getHomeAskQuestionList({ 'type': 1, 'qtype': '' }).then((response) => {
+    return askServerApi.getHomeAskQuestionList({ 'type': params.type, 'tag': params.tag,'sort':params.sort }).then((response) => {
       return {
         list: response.data.list ? response.data.list : [],
         qustionType: response.data.qustionType,
+        sortList: response.data.sortList,
+        type: params.type,
+        tag:params.tag,
+        sort: params.sort ? params.sort : response.data.sortList[0].path,
       }
     })
   },
 
-  methods: {
-    qustionTypeClick (typeId, index) {
-      this.typeIndex = index;
-      if (index == 0) {
-        typeId = "";
+  mounted () {
+    var sort = this.sort;
+    var type = this.type;
+    var myparm = this.myparms;
+  },
+
+  computed: {
+    // 计算属性的 getter
+    typePath () {
+      return function (item, index) {
+        if (index == 0) {
+          return "/faquestion";
+        }
+        return "/faquestion/category/" + item.type;
       }
-      askApi.getHomeAskQuestionList({ 'type': index, 'qtype': typeId }).then((response) => {
-        this.list = response.data.list;
-        this.qustionType = response.data.qustionType;
-      });
     },
-    handleSelect (key, keyPath) {
-      var qtype = this.typeIndex == 0 ? "" : this.qustionType[this.typeIndex].id;
-      askApi.getHomeAskQuestionList({ 'type': key, 'qtype': qtype }).then((response) => {
-        this.list = response.data.list;
-        this.qustionType = response.data.qustionType;
-      });
-    },
+
+    sortPath () {
+      return function (item) {
+        return "/faquestion/category/" + this.type + "/" + item.path;
+      }
+    }
+  },
+
+  methods: {
     jumpStartQuestion () {
       var token = localStorage.getItem('redclass_token')
       if (!(token && token != 'undefined')) {

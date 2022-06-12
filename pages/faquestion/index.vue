@@ -42,7 +42,8 @@
           <div class="content_left">
             <div class="faqustion-top-group">
               <ul class="faqustion-typeList">
-                <nuxt-link :to="'/faquestion/category/' " :title="item.name" :class="{ comactive: typeIndex == index }" v-for="(item, index) in qustionType" class="faqustion-type-item" :key="index">
+                <nuxt-link :to="typePath(item, index)" :title="item.name" v-for="(item, index) in qustionType"
+                  :class="{ comactive: typeIndex == index }" :key="item.id" class="faqustion-type-item">
                   {{ item.name }}
                 </nuxt-link>
               </ul>
@@ -50,35 +51,11 @@
             <div class="faqustion-subTags" v-if="tagList.length > 0">
             </div>
             <div class="questions_tab_con">
-               <ul class="faqustion-subtypelist">
-                <nuxt-link :to="'/faquestion/category/'" class="faqustion-subtype-item" :class="{ comactive: typeIndex == index }">
-                  <span title="最新提问" @click="qustionsubTypeClick(item.id, index)">
-                    最新提问
-                  </span>
-                </nuxt-link>
-                <nuxt-link :to="'/faquestion/category/'" class="faqustion-subtype-item" :class="{ comactive: typeIndex == index }">
-                  <span title="最新回答" @click="qustionsubTypeClick(item.id, index)">
-                    最新回答
-                  </span>
-                </nuxt-link>
-                <nuxt-link :to="'/faquestion/category/'" class="faqustion-subtype-item" :class="{ comactive: typeIndex == index }">
-                  <span title="等待回答" @click="qustionsubTypeClick(item.id, index)">
-                   等待回答
-                  </span>
-                </nuxt-link>
-                <nuxt-link :to="'/faquestion/category/'" class="faqustion-subtype-item" :class="{ comactive: typeIndex == index }">
-                  <span title="最多回答" @click="qustionsubTypeClick(item.id, index)">
-                   最多回答
-                  </span>
-                </nuxt-link>
-                <nuxt-link :to="'/faquestion/category/'" class="faqustion-subtype-item" :class="{ comactive: typeIndex == index }">
-                  <span title="热门排行" @click="qustionsubTypeClick(item.id, index)">
-                   热门排行
-                  </span>
-                </nuxt-link>
-                <nuxt-link :to="'/faquestion/category/'" class="faqustion-subtype-item" :class="{ comactive: typeIndex == index }">
-                  <span title="付费问答" @click="qustionsubTypeClick(item.id, index)">
-                  付费问答
+              <ul class="faqustion-subtypelist">
+                <nuxt-link :to="sortPath(item)" v-for="(item, index) in sortList" :key="item.path"
+                  :class="{ comactive: typeIndex == index }" class="faqustion-subtype-item">
+                  <span :title="item.name">
+                    {{ item.name }}
                   </span>
                 </nuxt-link>
               </ul>
@@ -178,32 +155,38 @@ export default {
   },
 
   asyncData ({ params, error }) {
-    return askServerApi.getHomeAskQuestionList({ 'type': 1, 'qtype': '' }).then((response) => {
+    return askServerApi.getHomeAskQuestionList({ 'type': '', 'sort': '', 'tag': '' }).then((response) => {
       return {
         list: response.data.list ? response.data.list : [],
         qustionType: response.data.qustionType,
+        sortList: response.data.sortList,
+        type: response.data.qustionType[0].type,
       }
     })
   },
 
-  methods: {
-    qustionTypeClick (typeId, index) {
-      this.typeIndex = index;
-      if (index == 0) {
-        typeId = "";
+  mounted () {
+  },
+
+  computed: {
+    // 计算属性的 getter
+    typePath () {
+      return function (item, index) {
+        if (index == 0) {
+          return "/faquestion";
+        }
+        return "/faquestion/category/" + item.type;
       }
-      askApi.getHomeAskQuestionList({ 'type': index, 'qtype': typeId }).then((response) => {
-        this.list = response.data.list;
-        this.qustionType = response.data.qustionType;
-      });
     },
-    handleSelect (key, keyPath) {
-      var qtype = this.typeIndex == 0 ? "" : this.qustionType[this.typeIndex].id;
-      askApi.getHomeAskQuestionList({ 'type': key, 'qtype': qtype }).then((response) => {
-        this.list = response.data.list;
-        this.qustionType = response.data.qustionType;
-      });
-    },
+
+    sortPath () {
+      return function (item) {
+        return "/faquestion/category/" + this.type + "/" + item.path;
+      }
+    }
+  },
+
+  methods: {
     jumpStartQuestion () {
       var token = localStorage.getItem('redclass_token')
       if (!(token && token != 'undefined')) {

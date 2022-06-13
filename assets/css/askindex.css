@@ -1,0 +1,334 @@
+@charset "utf-8";
+
+.faqustion-subtypelist .faqustion-subtype-item {
+  line-height: 60px;
+  font-size: 14px;
+  color: #666;
+  padding: 20px 20px;
+  text-decoration: none;
+}
+
+.faqustion-subtypelist .faqustion-subtype-item:hover {
+  background: #fff;
+}
+
+.faqustion-subtypelist {
+  background: #fafafa;
+}
+
+.faqustion-subtypelist .faqustion-subtype-item.comactive {
+  border-bottom: 2px solid #409eff;
+  color: #303133;
+}
+.questions_detail_con .description p {
+  padding: 0px;
+  font-size: 14px;
+}
+
+.answer_num .anser-lable {
+  margin-top: 0px;
+}
+
+.question_list .answer_title {
+  font-size: 14px;
+}
+
+.faqustion-top-group {
+  border-bottom: solid 1px #e6e6e6;
+}
+
+.el-menu.el-menu--horizontal {
+  background: #fafafa;
+}
+
+.faqustion-typeList {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  height: 40px;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.faqustion-type-item {
+  font-size: 16px;
+  margin-right: 26px;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+}
+
+.faqustion-type-item:hover {
+  text-decoration: none;
+  color: #409eff;
+}
+
+.faqustion-type-item.comactive {
+  color: #409eff;
+}
+
+.faqustion-subTags {
+  height: 20px;
+}
+
+.header_xuanchuan {
+  height: 300px;
+  width: 100%;
+  background-repeat: repeat-x;
+  background-image: linear-gradient(225deg, #3ec2e3, #5b85df);
+}
+
+.header_annation .answer_title {
+  color: white;
+}
+
+.header_annation .desc {
+  color: white;
+  font-size: 16px;
+  margin-top: 25px;
+}
+
+.header_annation {
+  width: 650px;
+  float: left;
+  margin-top: 60px;
+  margin-left: 40px;
+}
+
+.main_content {
+  position: relative;
+}
+
+.header_xuanchuan img {
+  vertical-align: middle;
+  border-style: none;
+  width: 200px;
+  height: 200px;
+  margin-left: 120px;
+  margin-top: 50px;
+}
+
+.questions_tab_con {
+  border-bottom: 1px solid #eee;
+}
+
+.questions_tab_con .sort {
+  float: right;
+  margin-right: 20px;
+  margin-top: 13px;
+}
+
+.questions_tab_con .sort .sort_list_label {
+  height: 37px;
+  line-height: 37px;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409eff;
+}
+
+.el-icon-arrow-down {
+  font-size: 12px;
+}
+
+.demonstration {
+  display: block;
+  color: #8492a6;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.main_content .content_left {
+  background: white;
+  margin-right: 8px;
+  margin-bottom: 20px;
+  width: 842px;
+  border: none;
+  float: left;
+}
+
+.main_content .questions_detail_con {
+  margin: 20px 20px 20px 20px;
+}
+
+.main_content .question_list {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.main_content .questions_detail_con .content {
+  display: block;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  background: 0 0;
+  margin: 0;
+  padding: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  font-size: 1em;
+  border: none;
+  border-radius: 0;
+}
+
+.main_content .questions_detail_con .header {
+  display: inline-block;
+  text-decoration: none;
+  margin: -0.21425em 0 0;
+  font-family: "PingFang SC", "Helvetica Neue", "Microsoft YaHei UI",
+    "Microsoft YaHei", "Noto Sans CJK SC", Sathu, EucrosiaUPC, Arial, Helvetica,
+    sans-serif;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.questions_detail_con .header .horizontal.label.fix {
+  background-color: #25a88a !important;
+}
+
+.questions_detail_con .header .horizontal.label {
+  vertical-align: middle !important;
+  margin-top: -2px;
+}
+
+.questions_detail_con .header .horizontal.label {
+  padding: 0.4em;
+  min-width: 0;
+  margin-right: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-left: 5px;
+  color: white;
+}
+
+.questions_detail_con .answer_num {
+  width: 50px;
+  height: 50px;
+  background: #a0d56d;
+  position: absolute;
+  right: 0px;
+  top: -30px;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 5px;
+}
+
+.questions_detail_con .extra img {
+  display: inline-block;
+  vertical-align: baseline;
+  height: 22px !important;
+  border-radius: 0.14285714rem;
+  padding: 2px 0;
+  margin: -0.5833em 0.5em -0.5833em 0;
+}
+
+.questions_detail_con .extra {
+  display: block;
+  position: relative;
+  background: 0 0;
+  margin: 0.5rem 0 0;
+  width: 100%;
+  padding: 0 0 0;
+  top: 0;
+  left: 0;
+  color: rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: color 0.1s ease;
+  transition: color 0.1s ease;
+  border-top: none;
+}
+
+.questions_detail_con .q_time {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.questions_detail_con .description {
+  font-size: 14px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  max-height: 40px;
+}
+
+.questions_detail_con .answer_count {
+  margin-top: 10px;
+}
+
+.questions_tab_con a {
+  line-height: 20px;
+}
+
+.question_right_con {
+  width: 280px;
+  float: right;
+  background: white;
+}
+
+.main_content .clearnfloat {
+  clear: both;
+}
+
+.question_right_con .startqustionbtn {
+  margin: 10px;
+  width: 93%;
+}
+
+.question_right_con .mod_about_teacher h3 {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 44px;
+  line-height: 44px;
+  border-bottom: 1px solid #f0f0f0;
+  text-indent: 20px;
+  font-size: 18px;
+  font-weight: normal;
+  color: #333;
+}
+
+.question_right_con .mod_about_teacher .answer_list {
+  padding: 0 20px;
+}
+
+.question_right_con .mod_about_teacher {
+  margin-bottom: 10px;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+}
+
+.question_right_con .mod_about_teacher .answer_list ul li {
+  border-bottom: 1px solid #f0f0f0;
+  line-height: 45px;
+}
+
+.question_right_con .mod_about_teacher .answer_list ul li span {
+  margin-right: 8px;
+  margin-top: 23px;
+  width: 3px;
+  height: 3px;
+  background: #cfcfcf;
+  display: block;
+  float: left;
+}
+
+.question_right_con .mod_about_teacher .answer_list ul li a {
+  font-size: 14px;
+  color: #666;
+}

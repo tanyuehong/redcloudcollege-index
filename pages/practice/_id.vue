@@ -61,7 +61,7 @@
           <div class="bottom-content col-md-8">
 
             <div class="bottom-comment">
-              <div class="comment-header">
+              <div class="comment-blog">
                 <nuxt-link class="article_title" :to="'/teacher/' + pitem.authorUid">
                   <img class="vam user-head-image article-avatar" :src="pitem.authorAvatar" width="30" height="30"
                     alt />
@@ -541,7 +541,7 @@
   padding-right: 5px;
 }
 
-.bottom-comment .comment-header {
+.bottom-comment .comment-blog {
   width: 40px;
   height: 40px;
   float: left;

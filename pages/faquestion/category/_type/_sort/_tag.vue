@@ -127,14 +127,13 @@ export default {
       activeIndex: "1",
       tagList: [],
       typeIndex: 0,
-      title: "开源实践问答 - 有问必答的务实问答社区",
       descrb: "开源实践问答，秉承有问必答的理念。对每一个问题细心维护，让您能用最短的时间获取最好的答案,是一个真正务实，能解决问题的社区。"
     };
   },
 
   head () {
     return {
-      title: this.title,
+      title: this.getTitle(),
       meta: [
         {
           hid: 'keywords',
@@ -192,6 +191,32 @@ export default {
   },
 
   methods: {
+    getTitle () {
+      if(!this.type) {
+        return "开源实践问答 - 有问必答的务实问答社区";
+      }
+     var typeString = "";
+     if(this.type && this.qustionType) {
+        for (var j = 0; j < this.qustionType.length; j++) {
+          if(this.qustionType[j].type == this.type) {
+            typeString =  this.qustionType[j].name;
+            break;
+          }
+        }
+     }
+
+      var tagString  = this.tag ?  this.tag + " - " : "";
+      var srotString = "";
+      if(this.sort && this.sortList) {
+        for (var j = 0; j < this.sortList.length; j++) {
+          if(this.sortList[j].path == this.sort) {
+            srotString =  this.sortList[j].name;
+            break;
+          }
+        }
+      }
+      return typeString + " - " +  tagString + srotString + " - 开源实践问答";
+    },
     jumpStartQuestion () {
       var token = localStorage.getItem('redclass_token')
       if (!(token && token != 'undefined')) {

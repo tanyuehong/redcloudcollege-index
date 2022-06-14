@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+.q_time .user_name {
+  margin-left: 3px;
+  margin-right: 3px;
+}
 .faqustion-subtypelist .faqustion-subtype-item {
   line-height: 60px;
   font-size: 14px;

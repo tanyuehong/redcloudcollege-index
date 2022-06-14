@@ -55,7 +55,24 @@
               <div class="field">
                 <label>语言 平台 标签</label>
                 <div class="search_input">
-                  <el-input v-model="asktag" placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多5个)"></el-input>
+                  <el-select v-model="value" multiple filterable allow-create default-first-option remote
+                    placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多5个)" style="width:600px">
+                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+
+                  <span class="tips_tag" @click="visible = !visible">
+                    <span class="span_add" style="color: rgb(39, 124, 204);">
+                      <i class="icon icon_add icon_add_pos"></i>
+                    </span> 选择标签</span>
+                  <el-popover placement="bottom" width="600" trigger="manual" v-model="visible">
+                    <el-tabs tab-position="left" style="height: 200px;">
+                      <el-tab-pane label="用户管理">用户管理</el-tab-pane>
+                      <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+                      <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+                      <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+                    </el-tabs>
+                  </el-popover>
                 </div>
               </div>
 
@@ -126,6 +143,7 @@ export default {
       askType: 0,
       loginToken: '',
       uploadToken: '',
+      visible: false,
     }
   },
 
@@ -235,6 +253,7 @@ export default {
       editor.config.uploadImgServer = '/api/ucenter/uploadImage'
       editor.config.uploadFileName = 'file'
       editor.config.placeholder = '请输入问题'
+      editor.config.zIndex = 100;
       editor.config.uploadImgHeaders = {
         token: this.loginToken
       }
@@ -274,6 +293,48 @@ export default {
 </script>
 
 <style scoped>
+.tips_tag {
+  height: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #507999;
+  line-height: 24px;
+  cursor: pointer;
+  margin-left: 12px;
+}
+
+.icon_add_pos {
+  margin-left: 0;
+  position: relative;
+  top: -1px;
+}
+
+.icon {
+  display: inline-block;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  vertical-align: middle;
+}
+
+.icon_add {
+  width: 12px;
+  height: 12px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAXElEQVRIS2NkoDFgpLH5DERbEFA58z+yYza0pxOllyhFIINHLSAY16NBRPsgQg9jgjYSUADLJ/B8MGoBeohhBBGhMB/NB4RCaLQ0JRhCwyCICPsRuwqi62RyLQAAilhQGRoPkngAAAAASUVORK5CYII=);
+  cursor: pointer;
+}
+
+.span_add {
+  display: inline-block !important;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 24px;
+  background-color: #ebf2f7;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
 .askactive {
   border-color: #409eff;
   color: #409eff !important;

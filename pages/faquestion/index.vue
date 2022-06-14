@@ -72,7 +72,7 @@
                   <nuxt-link :to="'/faquestion/' + item.qid" class="header">
                     {{ item.title }}
                     <div class="ui red label horizontal">顶</div>
-                    <div class="ui orange label horizontal">热</div>
+                    <div class="ui orange label horizontal" v-if="item.readcount > 300">热</div>
                     <div class="ui red label horizontal fix" v-if="item.state == 9">已解决</div>
                   </nuxt-link>
                 </div>
@@ -96,9 +96,9 @@
                   <nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name" target="_blank">
                     {{ item.nickname }}
                   </nuxt-link>
-                  <b>
+                  <b v-if="item.price > 0">
                     悬赏
-                    <a href="javascript:;" title="个人悬赏">{{ item.price }}C</a>
+                    <a href="javascript:;" title="个人悬赏">¥{{ item.price }}</a>
                   </b>
                   <nuxt-link :to="'/faquestion/' + item.qid" class="answer_num" title="问题回答数量">
                     <span>{{ item.reply }}</span>

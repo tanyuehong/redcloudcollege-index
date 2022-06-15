@@ -55,7 +55,7 @@
               <div class="field mb20">
                 <label>语言 平台 标签</label>
                 <div class="search_input">
-                  <el-select multiple filterable remote multiple-limit='3' v-model="selectTags"
+                  <el-select multiple filterable multiple-limit='3' v-model="selectTags" popper-class="pop-class"
                     placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多3个)" :remote-method="searchTagMethod" @focus="searchTagFocus" style="width:600px;">
                     <el-option v-for="item in tagList" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
@@ -70,7 +70,7 @@
                       @tab-click="handleTagClick">
                       <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">
                         <div class="group-taglist">
-                          <el-tag v-for="tag in groupTagList" @click="groupTagClick(tag)" :key="tag.id">{{tag.name}}</el-tag>
+                          <el-tag class="tag-list" v-for="tag in groupTagList" @click="groupTagClick(tag)" :key="tag.id">{{tag.name}}</el-tag>
                         </div>
                       </el-tab-pane>
                     </el-tabs>
@@ -327,7 +327,28 @@ export default {
 }
 </script>
 
+<style>
+
+.search_input .el-tag.el-tag--info { 
+
+  background-color: #ecf5ff;
+    border-color: #d9ecff;
+    display: inline-block;
+    font-size: 12px;
+    color: #409eff;
+}
+
+</style>>
+
 <style scoped>
+
+.group-taglist .tag-list {
+  margin-right: 12px;
+}
+
+.group-taglist {
+  margin-top: 6px;
+}
 .tips_tag {
   height: 20px;
   font-size: 14px;
@@ -403,7 +424,7 @@ export default {
   display: block;
   margin: 0 0 0.28571429rem 0;
   color: rgba(0, 0, 0, 0.87);
-  font-size: 0.92857143em;
+  font-size: 14px;
   font-weight: 700;
   text-transform: none;
   margin-bottom: 10px;

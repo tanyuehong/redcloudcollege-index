@@ -1,6 +1,15 @@
 import request from '@/utils/request'
 
 export default {
+
+  // 获取回答回复列表
+  getAskTagList(typeId) {
+    return request({
+      url: `/home/eduask/getAskTagList/${typeId}`,
+      method: 'get',
+    })
+  },
+
   // 问题建议的提交接口
   submitQuestionAdvise(advise) {
     return request({

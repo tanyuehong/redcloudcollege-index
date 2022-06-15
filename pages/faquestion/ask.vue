@@ -55,9 +55,9 @@
               <div class="field mb20">
                 <label>语言 平台 标签</label>
                 <div class="search_input">
-                  <el-select v-model="tagList" multiple filterable allow-create default-first-option remote
-                    placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多5个)" style="width:600px;">
-                    <el-option v-for="item in selectTags" :key="item.value" :label="item.label" :value="item.value">
+                  <el-select multiple filterable remote multiple-limit='3' v-model="selectTags"
+                    placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多3个)" :remote-method="searchTagMethod" @focus="searchTagFocus" style="width:600px;">
+                    <el-option v-for="item in tagList" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
                   </el-select>
 
@@ -68,7 +68,10 @@
                   <el-popover placement="bottom" width="600" trigger="manual" v-model="tagsVisible">
                     <el-tabs tab-position="left" style="height: 260px;" v-model="selectType"
                       @tab-click="handleTagClick">
-                      <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">item.name
+                      <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">
+                        <div class="group-taglist">
+                          <el-tag v-for="tag in groupTagList" @click="groupTagClick(tag)" :key="tag.id">{{tag.name}}</el-tag>
+                        </div>
                       </el-tab-pane>
                     </el-tabs>
                   </el-popover>
@@ -145,6 +148,7 @@ export default {
       tagsVisible: false,
       selectTags: [],
       tagList: [],
+      groupTagList:[],
     }
   },
 
@@ -183,17 +187,36 @@ export default {
     this.loginToken = window.localStorage.getItem('redclass_token');
     this.init_wangeditor();
     this.getUploadImageToken();
+    askApi.getAskTagList(1).then((response) => {
+        this.tagList = response.data.tagList;
+    });
   },
 
   methods: {
+    groupTagClick(tag) {
+      this.selectTags.push(tag.id);
+    },
+    searchTagFocus() {
+      this.tagsVisible = false;
+    },
+    searchTagMethod() {
+      this.tagsVisible = false;
+    },
+
     slectTagClick() {
       if(this.tagsVisible) {
         this.tagsVisible = false;
       } else {
         this.tagsVisible = true;
+        askApi.getAskTagList(this.selectType).then((response) => {
+          this.groupTagList = response.data.tagList;
+        });
       }
+      
     },
     handleTagClick (tab, event) {
+
+
       console.log(tab.name, event)
     },
     getUploadImageToken () {

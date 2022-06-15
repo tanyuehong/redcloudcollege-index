@@ -450,7 +450,7 @@ section {
   margin-right: 15px;
 }
 .mb15 {
-  margin-bottom: 15px;
+  margin-bottom: 15px !important;
 }
 .ml15 {
   margin-left: 15px;

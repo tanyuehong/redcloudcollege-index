@@ -52,25 +52,24 @@
               <div class="field">
                 <nuxt-link :to="{ name: 'faquestion-howtoask' }" target="_blank">什么样的问题算是一个好问题？</nuxt-link>
               </div>
-              <div class="field">
+              <div class="field mb20">
                 <label>语言 平台 标签</label>
                 <div class="search_input">
-                  <el-select v-model="value" multiple filterable allow-create default-first-option remote
-                    placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多5个)" style="width:600px">
-                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                  <el-select v-model="tagList" multiple filterable allow-create default-first-option remote
+                    placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多5个)" style="width:600px;">
+                    <el-option v-for="item in selectTags" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                   </el-select>
 
-                  <span class="tips_tag" @click="visible = !visible">
+                  <span class="tips_tag" @click="slectTagClick">
                     <span class="span_add" style="color: rgb(39, 124, 204);">
                       <i class="icon icon_add icon_add_pos"></i>
                     </span> 选择标签</span>
-                  <el-popover placement="bottom" width="600" trigger="manual" v-model="visible">
-                    <el-tabs tab-position="left" style="height: 200px;">
-                      <el-tab-pane label="用户管理">用户管理</el-tab-pane>
-                      <el-tab-pane label="配置管理">配置管理</el-tab-pane>
-                      <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-                      <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+                  <el-popover placement="bottom" width="600" trigger="manual" v-model="tagsVisible">
+                    <el-tabs tab-position="left" style="height: 260px;" v-model="selectType"
+                      @tab-click="handleTagClick">
+                      <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">item.name
+                      </el-tab-pane>
                     </el-tabs>
                   </el-popover>
                 </div>
@@ -143,7 +142,9 @@ export default {
       askType: 0,
       loginToken: '',
       uploadToken: '',
-      visible: false,
+      tagsVisible: false,
+      selectTags: [],
+      tagList: [],
     }
   },
 
@@ -151,6 +152,7 @@ export default {
     return askServerApi.getQuestionTypeList(params.id).then((response) => {
       return {
         typeList: response.data.typeList,
+        selectType: response.data.typeList[0].id,
       }
     })
   },
@@ -184,6 +186,16 @@ export default {
   },
 
   methods: {
+    slectTagClick() {
+      if(this.tagsVisible) {
+        this.tagsVisible = false;
+      } else {
+        this.tagsVisible = true;
+      }
+    },
+    handleTagClick (tab, event) {
+      console.log(tab.name, event)
+    },
     getUploadImageToken () {
       userApi.getUploadImageToken().then((response) => {
         window.console.log(response);
@@ -361,7 +373,7 @@ export default {
 
 .ui.form .field {
   clear: both;
-  margin: 0 0 1em;
+  margin: 0 0 10px;
 }
 
 .ui.form .field>label {
@@ -551,89 +563,5 @@ export default {
 .editor {
   line-height: normal !important;
   height: 500px;
-}
-
-.ql-snow .ql-tooltip[data-mode='link']::before {
-  content: '请输入链接地址:';
-}
-
-.ql-snow .ql-tooltip.ql-editing a.ql-action::after {
-  border-right: 0px;
-  content: '保存';
-  padding-right: 0px;
-}
-
-.ql-snow .ql-tooltip[data-mode='video']::before {
-  content: '请输入视频地址:';
-}
-
-.ql-snow .ql-picker.ql-size .ql-picker-label::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item::before {
-  content: '14px';
-}
-
-.ql-snow .ql-picker.ql-size .ql-picker-label[data-value='small']::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value='small']::before {
-  content: '10px';
-}
-
-.ql-snow .ql-picker.ql-size .ql-picker-label[data-value='large']::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value='large']::before {
-  content: '18px';
-}
-
-.ql-snow .ql-picker.ql-size .ql-picker-label[data-value='huge']::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value='huge']::before {
-  content: '32px';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item::before {
-  content: '文本';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='1']::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='1']::before {
-  content: '标题1';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='2']::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='2']::before {
-  content: '标题2';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='3']::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='3']::before {
-  content: '标题3';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='4']::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='4']::before {
-  content: '标题4';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='5']::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='5']::before {
-  content: '标题5';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='6']::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='6']::before {
-  content: '标题6';
-}
-
-.ql-snow .ql-picker.ql-font .ql-picker-label::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item::before {
-  content: '标准字体';
-}
-
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value='serif']::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value='serif']::before {
-  content: '衬线字体';
-}
-
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value='monospace']::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value='monospace']::before {
-  content: '等宽字体';
 }
 </style>

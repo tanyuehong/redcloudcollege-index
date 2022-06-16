@@ -55,8 +55,9 @@
               <div class="field mb20">
                 <label>语言 平台 标签</label>
                 <div class="search_input">
-                  <el-select multiple filterable multiple-limit='3' v-model="selectTags" popper-class="pop-class"
-                    placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多3个)" :remote-method="searchTagMethod" @focus="searchTagFocus" style="width:600px;">
+                  <el-select multiple filterable :multiple-limit="3" v-model="selectTags" popper-class="pop-class"
+                    placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多3个)" :remote-method="searchTagMethod"
+                    @focus="searchTagFocus" style="width:600px;">
                     <el-option v-for="item in tagList" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
                   </el-select>
@@ -65,12 +66,19 @@
                     <span class="span_add" style="color: rgb(39, 124, 204);">
                       <i class="icon icon_add icon_add_pos"></i>
                     </span> 选择标签</span>
-                  <el-popover placement="bottom" width="600" trigger="manual" v-model="tagsVisible">
+                  <el-popover placement="bottom" width="600" trigger="hover" v-model="tagsVisible">
                     <el-tabs tab-position="left" style="height: 260px;" v-model="selectType"
                       @tab-click="handleTagClick">
                       <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">
                         <div class="group-taglist">
-                          <el-tag class="tag-list" v-for="tag in groupTagList" @click="groupTagClick(tag)" :key="tag.id">{{tag.name}}</el-tag>
+                          <div class="nodata-warper" v-if="groupTagList.length == 0">
+                            <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                            <div>
+                              <span>该模块下暂时没有标签哦</span>
+                            </div>
+                          </div>
+                          <el-tag class="tag-list" v-for="tag in groupTagList" @click="groupTagClick(tag)"
+                            :key="tag.id">{{ tag.name }}</el-tag>
                         </div>
                       </el-tab-pane>
                     </el-tabs>
@@ -86,7 +94,7 @@
                 </div>
 
               </div>
-              <div class="field">
+              <!-- <div class="field">
                 <div class="ui checkbox">
                   <el-checkbox v-model="tipsme">
                     有人回答时邮件通知我 (957963898@qq.com)
@@ -95,12 +103,12 @@
                     更改提醒邮箱？
                   </a>
                 </div>
-              </div>
-              <div class="field">
+              </div> -->
+              <!-- <div class="field">
                 <div class="ui checkbox">
                   <el-checkbox v-model="nocomment">此帖不允许评论</el-checkbox>
                 </div>
-              </div>
+              </div> -->
               <div class="publish_ask">
                 <el-button type="primary" @click="publishAsk">
                   发布问题
@@ -148,7 +156,7 @@ export default {
       tagsVisible: false,
       selectTags: [],
       tagList: [],
-      groupTagList:[],
+      groupTagList: [],
     }
   },
 
@@ -188,23 +196,35 @@ export default {
     this.init_wangeditor();
     this.getUploadImageToken();
     askApi.getAskTagList(1).then((response) => {
-        this.tagList = response.data.tagList;
+      this.tagList = response.data.tagList;
     });
   },
 
   methods: {
-    groupTagClick(tag) {
-      this.selectTags.push(tag.id);
+    groupTagClick (tag) {
+      var index = this.selectTags.indexOf(tag.id);
+      if (index == -1) {
+        if (this.selectTags.length >= 3) {
+          this.$message({
+            type: 'error',
+            message: '标签最多只能有3个哈！',
+          });
+          return;
+        }
+        this.selectTags.push(tag.id);
+      } else {
+        this.selectTags.splice(index, 1)
+      }
     },
-    searchTagFocus() {
+    searchTagFocus () {
       this.tagsVisible = false;
     },
-    searchTagMethod() {
+    searchTagMethod () {
       this.tagsVisible = false;
     },
 
-    slectTagClick() {
-      if(this.tagsVisible) {
+    slectTagClick () {
+      if (this.tagsVisible) {
         this.tagsVisible = false;
       } else {
         this.tagsVisible = true;
@@ -212,12 +232,13 @@ export default {
           this.groupTagList = response.data.tagList;
         });
       }
-      
+
     },
     handleTagClick (tab, event) {
-
-
-      console.log(tab.name, event)
+      this.selectType = tab.name;
+      askApi.getAskTagList(this.selectType).then((response) => {
+        this.groupTagList = response.data.tagList;
+      });
     },
     getUploadImageToken () {
       userApi.getUploadImageToken().then((response) => {
@@ -258,7 +279,8 @@ export default {
             uid: userInfo.id,
             title: this.asktitle,
             content: this.askcontent,
-            qustype: this.typeList[this.askType].id
+            qustype: this.typeList[this.askType].id,
+            tagList: this.selectTags
           })
           .then((response) => {
             this.$message({
@@ -328,19 +350,28 @@ export default {
 </script>
 
 <style>
-
-.search_input .el-tag.el-tag--info { 
-
+.search_input .el-select .el-tag__close.el-icon-close {
   background-color: #ecf5ff;
-    border-color: #d9ecff;
-    display: inline-block;
-    font-size: 12px;
-    color: #409eff;
 }
 
+.search_input .el-tag.el-tag--info .el-tag__close:hover {
+  background-color: #409eff;
+}
+
+.search_input .el-tag.el-tag--info {
+  background-color: #ecf5ff;
+  border-color: #d9ecff;
+  display: inline-block;
+  font-size: 12px;
+  color: #409eff;
+}
 </style>>
 
 <style scoped>
+.group-taglist .nodata-image-tips {
+  width: 150px;
+  height: 150px;
+}
 
 .group-taglist .tag-list {
   margin-right: 12px;
@@ -349,6 +380,7 @@ export default {
 .group-taglist {
   margin-top: 6px;
 }
+
 .tips_tag {
   height: 20px;
   font-size: 14px;

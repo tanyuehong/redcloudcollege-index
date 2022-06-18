@@ -37,11 +37,11 @@
                 </div>
               </div>
 
-              <div class="extra question-tags mt10">
+              <div class="extra question-tags mt10" v-if="qdetail.tags">
                 <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
                   target="_blank">
                   <img class="question-tags-img" src="https://static.oschina.net/img/logo/ruby.gif" />
-                  Ruby
+                  {{}}
                 </a>
 
                 <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/java"

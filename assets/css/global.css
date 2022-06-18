@@ -117,11 +117,13 @@ body {
 }
 
 .ui.basic.label {
-  background: none #fff;
+  background: none #ffffff;
   border: 1px solid rgba(34, 36, 38, 0.15);
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(64, 158, 255, 0.9);
   -webkit-box-shadow: none;
   box-shadow: none;
+  border-radius: 3px;
+  margin-right: 6px;
 }
 
 a.ui.basic.label:hover {

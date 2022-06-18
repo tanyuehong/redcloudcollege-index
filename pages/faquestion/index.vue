@@ -79,15 +79,10 @@
 
                 <div class="description" v-html="item.content">
                 </div>
-                <div class="extra question-tags">
+                <div class="extra question-tags" v-if="item.tags">
                   <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
-                    target="_blank">
-                    <img src="https://static.oschina.net/img/logo/ruby.gif" />Ruby
-                  </a>
-
-                  <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/java"
-                    target="_blank">
-                    <img src="https://static.oschina.net/img/logo/java.png" />Java
+                    target="_blank" v-for="tag in item.tags" :key="tag.id">
+                    <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
                   </a>
                 </div>
 

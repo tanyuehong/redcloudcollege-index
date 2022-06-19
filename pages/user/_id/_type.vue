@@ -1067,14 +1067,6 @@ export default {
 	font-weight: 500;
 }
 
-.ucenter-home-header .message-spreate {
-	border: 0;
-	height: 1px;
-	background: #333;
-	background-image: linear-gradient(90deg, #ccc, #333, #ccc);
-	clear: both;
-}
-
 .header-backgroud {
 	background-image: url(https://static.redskt.com/assets/img/usercover.jpg);
 	background-position: center;

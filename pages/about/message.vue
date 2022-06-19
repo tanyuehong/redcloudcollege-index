@@ -216,6 +216,4 @@ export default {
   min-height: 800px;
   margin-bottom: 15px;
 }
-
-.mess-content-lefte .message-top-rumb {}
 </style>

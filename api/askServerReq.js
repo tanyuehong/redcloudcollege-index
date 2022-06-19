@@ -24,4 +24,11 @@ export default {
       method: 'get',
     })
   },
+
+  getAllTagList(typeId) {
+    return request({
+      url: `/home/eduask/getAllTagList`,
+      method: 'get',
+    })
+  },
 }

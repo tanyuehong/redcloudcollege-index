@@ -52,7 +52,7 @@
               <div class="field">
                 <nuxt-link :to="{ name: 'faquestion-howtoask' }" target="_blank">什么样的问题算是一个好问题？</nuxt-link>
               </div>
-              <div class="field mb20">
+              <div class="required field mb20">
                 <label>语言 平台 标签</label>
                 <div class="search_input">
                   <el-select multiple filterable :multiple-limit="3" v-model="selectTags" popper-class="pop-class"

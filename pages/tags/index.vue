@@ -37,8 +37,7 @@
 
 <script>
 
-import askApi from '@/api/ask'
-import askServerApi from "@/api/askServerReq";
+import tagServerApi from "@/api/tagServerReq";
 
 export default {
 	data () {
@@ -46,7 +45,7 @@ export default {
 	},
 
 	asyncData ({ params, error }) {
-		return askServerApi.getAllTagList().then((response) => {
+		return tagServerApi.getAllTagList().then((response) => {
 			return {
 				tagsList: response.data.tagList,
 			}

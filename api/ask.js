@@ -4,7 +4,7 @@ export default {
 
   getAskTagList(typeId) {
     return request({
-      url: `/home/eduask/getAskTagList/${typeId}`,
+      url: `/home/tags/getAskTagList/${typeId}`,
       method: 'get',
     })
   },

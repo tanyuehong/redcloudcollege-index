@@ -27,7 +27,7 @@ export default {
 
   getAllTagList(typeId) {
     return request({
-      url: `/home/eduask/getAllTagList`,
+      url: `/home/tags/getAllTagList`,
       method: 'get',
     })
   },

@@ -7,25 +7,48 @@
 						首页
 					</nuxt-link>
 					<span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+					<nuxt-link to="/" class="section">
+						所有标签
+					</nuxt-link>
+					<span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
 					<div class="active section">所有标签</div>
 				</div>
 			</div>
 			<div class="message-spreate"></div>
 			<div class="tags-content">
-				<h2>
-					标签是 开源实践网用来标识一个问题的关键字，使用标签可以快速定位同类知识。
-				</h2>
+				<div class="ui basic segment tag-card">
+					<div class="ui items">
+						<div class="item">
+							<div class="ui image">
+								<img src="https://static.oschina.net/uploads/logo/spring_bKe1l.png">
+							</div>
+							<div class="content">
+								<div class="header-wrap clearfix">
+									<h2 class="ui header green">Spring</h2>
+									<div class="header-action">
+										<a class="ui mini compact green basic button project-home-btn"
+											href="https://www.oschina.net/p/spring"><i class="home icon"></i>软件主页</a>
+										<div class="ui mini compact green button question-follow-btn" data-id="313" data-type="33"
+											data-follow-status="2"><i class="check icon"></i><span class="text">已关注</span></div>
+									</div>
+								</div>
+								<div class="description">
+									Spring Framework 是一个开源的 Java/Java EE 全功能栈（full-stack）的应用程序框架，以 Apache 许可证形式发布，也有 .NET 平台上的移植版本。该框架基于
+									Expert One...
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 				<div class="tags-warper">
 					<div class="cards">
 						<div class="card tag-card" v-for="tag in tagsList" :key="tag.id">
 							<div class="content">
-								<nuxt-link :to="'/tags/' + tag.id" class="header" target="_blank">{{ tag.name
-								}}</nuxt-link>
-								<nuxt-link :to="'/tags/' + tag.id" class="meta">{{ tag.askcount }} 个问答</nuxt-link>
-								<nuxt-link :to="'/tags/' + tag.id" class="description">{{ tag.describ }}
-								</nuxt-link>
-								<!-- </nuxt-link> -->
+								<a class="header" href="https://www.oschina.net/question/tag/yunweiw" target="_blank">{{ tag.name }}</a>
+								<div class="meta">{{ tag.askcount }} 个问答</div>
+								<div class="description">{{ tag.describ }}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -123,10 +146,8 @@ export default {
 
 .tags-warper .cards .content .meta {
 	color: #999;
-	margin-top: 6px;
-	margin-bottom: 6px;
-	display: block;
-	text-decoration: none;
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 .tags-warper .cards .content .description {
@@ -138,7 +159,6 @@ export default {
 	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
 	display: -webkit-box;
-	text-decoration: none;
 }
 
 .tags-warper .cards .content {

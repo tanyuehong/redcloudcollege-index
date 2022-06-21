@@ -123,7 +123,6 @@ export default {
 .tags-warper .cards .content .meta {
 	color: #999;
 	margin-top: 6px;
-	margin-bottom: 6px;
 	display: block;
 	text-decoration: none;
 }
@@ -138,6 +137,7 @@ export default {
 	-webkit-box-orient: vertical;
 	display: -webkit-box;
 	text-decoration: none;
+	margin-top: 6px;
 }
 
 .tags-warper .cards .content {

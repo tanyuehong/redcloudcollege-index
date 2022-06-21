@@ -705,7 +705,7 @@ export default {
       script: [
         { src: 'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js', async: true, defer: true }
       ],
-      title: this.title,
+      title: this.pitem.title + " - 开源实践博文",
       meta: [
         {
           hid: "description",
@@ -723,8 +723,7 @@ export default {
     return blogServerApi.getRealPraticeDetail(params.id).then((response) => {
       return {
         pitem: response.data.pitem,
-        hotList: response.data.blogList,
-        title: response.data.pitem.title,
+        hotList: response.data.blogList
       };
     });
   },

@@ -1,6 +1,14 @@
 import request from '@/utils/request'
 
 export default {
+
+  getAskTagList(typeId) {
+    return request({
+      url: `/home/tags/getAskTagList/${typeId}`,
+      method: 'get',
+    })
+  },
+
   // 问题建议的提交接口
   submitQuestionAdvise(advise) {
     return request({

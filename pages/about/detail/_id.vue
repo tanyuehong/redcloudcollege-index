@@ -483,16 +483,6 @@
   margin-bottom: 0px;
 }
 
-.mess-top-header .message-spreate {
-  border: 0;
-
-  height: 1px;
-
-  background: #333;
-
-  background-image: linear-gradient(to right, #ccc, #333, #ccc);
-}
-
 .mess-top-header .message-top-rumb {
   padding-top: 25px;
   padding-left: 20px;

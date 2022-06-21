@@ -13,6 +13,14 @@ body {
   background-color: #f6f6f6;
 }
 
+.message-spreate {
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
+  clear: both;
+}
+
 .fbselect {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -117,11 +125,13 @@ body {
 }
 
 .ui.basic.label {
-  background: none #fff;
+  background: none #ffffff;
   border: 1px solid rgba(34, 36, 38, 0.15);
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(64, 158, 255, 0.9);
   -webkit-box-shadow: none;
   box-shadow: none;
+  border-radius: 3px;
+  margin-right: 6px;
 }
 
 a.ui.basic.label:hover {
@@ -261,10 +271,7 @@ a:focus {
   outline: 0;
   -moz-outline: 0;
 }
-a:active {
-  outline: 0;
-  blr: expression(this.onFocus=this.blur());
-}
+
 h1 {
   font-size: 36px;
   line-height: 45px;
@@ -450,7 +457,7 @@ section {
   margin-right: 15px;
 }
 .mb15 {
-  margin-bottom: 15px;
+  margin-bottom: 15px !important;
 }
 .ml15 {
   margin-left: 15px;

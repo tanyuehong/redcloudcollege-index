@@ -180,24 +180,19 @@
 											<nuxt-link :to="'/faquestion/' + item.qid" class="header">
 												{{ item.title }}
 												<div class="ui red label horizontal" data-tooltip="置顶">顶</div>
-												<div class="ui orange label horizontal" data-tooltip="热门">热</div>
+												<div class="ui orange label horizontal" v-if="item.readcount > 300">热</div>
 											</nuxt-link>
 										</div>
 
 										<div class="description">
 											<p class="line-clamp" v-html="item.content"></p>
 										</div>
-										<div class="extra question-tags">
-											<a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
-												target="_blank">
-												<img src="https://static.oschina.net/img/logo/ruby.gif" />Ruby
-											</a>
-
-											<a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/java"
-												target="_blank">
-												<img src="https://static.oschina.net/img/logo/java.png" />Java
-											</a>
-										</div>
+										<div class="extra question-tags mt10" v-if="item.tags">
+                <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
+                  target="_blank" v-for="tag in item.tags" :key="tag.id">
+                  <img :src="tag.img" v-if="tag.img" />{{ tag.name }}</a>
+              </div>
+								
 
 										<div class="q_time">
 											<span>{{ item.gmtCreate }}来自</span>
@@ -345,17 +340,11 @@
 										<div class="description">
 											<p class="line-clamp" v-html="item.content"></p>
 										</div>
-										<div class="extra question-tags">
-											<a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
-												target="_blank">
-												<img src="https://static.oschina.net/img/logo/ruby.gif" />Ruby
-											</a>
-
-											<a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/java"
-												target="_blank">
-												<img src="https://static.oschina.net/img/logo/java.png" />Java
-											</a>
-										</div>
+										<div class="extra question-tags mt10" v-if="item.tags">
+                <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
+                  target="_blank" v-for="tag in item.tags" :key="tag.id">
+                  <img :src="tag.img" v-if="tag.img" />{{ tag.name }}</a>
+              </div>
 
 										<div class="q_time">
 											<span>{{ item.gmtCreate }}来自</span>
@@ -791,13 +780,15 @@ export default {
 
 .questions_collect_con .description {
 	font-size: 14px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	vertical-align: middle;
-	max-height: 40px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    max-height: 40px;
 }
 
 .questions_collect_con .header {
@@ -1065,14 +1056,6 @@ export default {
 .info-honor .stat-item .count {
 	margin-left: 6px;
 	font-weight: 500;
-}
-
-.ucenter-home-header .message-spreate {
-	border: 0;
-	height: 1px;
-	background: #333;
-	background-image: linear-gradient(90deg, #ccc, #333, #ccc);
-	clear: both;
 }
 
 .header-backgroud {

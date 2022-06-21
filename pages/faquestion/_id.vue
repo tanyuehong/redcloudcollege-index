@@ -37,17 +37,10 @@
                 </div>
               </div>
 
-              <div class="extra question-tags mt10">
+              <div class="extra question-tags mt10" v-if="qdetail.tags">
                 <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
-                  target="_blank">
-                  <img class="question-tags-img" src="https://static.oschina.net/img/logo/ruby.gif" />
-                  Ruby
-                </a>
-
-                <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/java"
-                  target="_blank">
-                  <img class="question-tags-img" src="https://static.oschina.net/img/logo/java.png" />
-                  Java
+                  target="_blank" v-for="tag in qdetail.tags" :key="tag.id">
+                  <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
                 </a>
               </div>
 
@@ -1284,6 +1277,15 @@ export default {
 </script>
 
 <style>
+.extra.question-tags img {
+  display: inline-block;
+  vertical-align: baseline;
+  height: 22px !important;
+  border-radius: 0.14285714rem;
+  padding: 2px 0;
+  margin: -0.5833em 0.5em -0.5833em 0;
+}
+
 .good_answer {
   color: white;
   background: #fc5533;
@@ -2064,15 +2066,6 @@ li.up_down_wrap {
 
 .question_info a {
   text-decoration: none;
-}
-
-.question-tags-img {
-  display: inline-block;
-  vertical-align: baseline;
-  height: 22px;
-  border-radius: 0.14285714rem;
-  padding: 2px 0;
-  margin: -0.5833em 0.5em -0.5833em 0;
 }
 
 .ui_center_button {

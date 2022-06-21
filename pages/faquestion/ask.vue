@@ -52,10 +52,37 @@
               <div class="field">
                 <nuxt-link :to="{ name: 'faquestion-howtoask' }" target="_blank">什么样的问题算是一个好问题？</nuxt-link>
               </div>
-              <div class="field">
+              <div class="required field mb20">
                 <label>语言 平台 标签</label>
                 <div class="search_input">
-                  <el-input v-model="asktag" placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多5个)"></el-input>
+                  <el-select multiple filterable :multiple-limit="3" v-model="selectTags" popper-class="pop-class"
+                    placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多3个)" :remote-method="searchTagMethod"
+                    @focus="searchTagFocus" style="width:600px;">
+                    <el-option v-for="item in tagList" :key="item.id" :label="item.name" :value="item.id">
+                    </el-option>
+                  </el-select>
+
+                  <span class="tips_tag" @click="slectTagClick">
+                    <span class="span_add" style="color: rgb(39, 124, 204);">
+                      <i class="icon icon_add icon_add_pos"></i>
+                    </span> 选择标签</span>
+                  <el-popover placement="bottom" width="600" trigger="hover" v-model="tagsVisible">
+                    <el-tabs tab-position="left" style="height: 260px;" v-model="selectType"
+                      @tab-click="handleTagClick">
+                      <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">
+                        <div class="group-taglist">
+                          <div class="nodata-warper" v-if="groupTagList.length == 0">
+                            <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                            <div>
+                              <span>该模块下暂时没有标签哦</span>
+                            </div>
+                          </div>
+                          <el-tag class="tag-list" v-for="tag in groupTagList" @click="groupTagClick(tag)"
+                            :key="tag.id">{{ tag.name }}</el-tag>
+                        </div>
+                      </el-tab-pane>
+                    </el-tabs>
+                  </el-popover>
                 </div>
               </div>
 
@@ -67,7 +94,7 @@
                 </div>
 
               </div>
-              <div class="field">
+              <!-- <div class="field">
                 <div class="ui checkbox">
                   <el-checkbox v-model="tipsme">
                     有人回答时邮件通知我 (957963898@qq.com)
@@ -76,12 +103,12 @@
                     更改提醒邮箱？
                   </a>
                 </div>
-              </div>
-              <div class="field">
+              </div> -->
+              <!-- <div class="field">
                 <div class="ui checkbox">
                   <el-checkbox v-model="nocomment">此帖不允许评论</el-checkbox>
                 </div>
-              </div>
+              </div> -->
               <div class="publish_ask">
                 <el-button type="primary" @click="publishAsk">
                   发布问题
@@ -126,6 +153,10 @@ export default {
       askType: 0,
       loginToken: '',
       uploadToken: '',
+      tagsVisible: false,
+      selectTags: [],
+      tagList: [],
+      groupTagList: [],
     }
   },
 
@@ -133,6 +164,7 @@ export default {
     return askServerApi.getQuestionTypeList(params.id).then((response) => {
       return {
         typeList: response.data.typeList,
+        selectType: response.data.typeList[0].id,
       }
     })
   },
@@ -163,9 +195,51 @@ export default {
     this.loginToken = window.localStorage.getItem('redclass_token');
     this.init_wangeditor();
     this.getUploadImageToken();
+    askApi.getAskTagList(1).then((response) => {
+      this.tagList = response.data.tagList;
+    });
   },
 
   methods: {
+    groupTagClick (tag) {
+      var index = this.selectTags.indexOf(tag.id);
+      if (index == -1) {
+        if (this.selectTags.length >= 3) {
+          this.$message({
+            type: 'error',
+            message: '标签最多只能有3个哈！',
+          });
+          return;
+        }
+        this.selectTags.push(tag.id);
+      } else {
+        this.selectTags.splice(index, 1)
+      }
+    },
+    searchTagFocus () {
+      this.tagsVisible = false;
+    },
+    searchTagMethod () {
+      this.tagsVisible = false;
+    },
+
+    slectTagClick () {
+      if (this.tagsVisible) {
+        this.tagsVisible = false;
+      } else {
+        this.tagsVisible = true;
+        askApi.getAskTagList(this.selectType).then((response) => {
+          this.groupTagList = response.data.tagList;
+        });
+      }
+
+    },
+    handleTagClick (tab, event) {
+      this.selectType = tab.name;
+      askApi.getAskTagList(this.selectType).then((response) => {
+        this.groupTagList = response.data.tagList;
+      });
+    },
     getUploadImageToken () {
       userApi.getUploadImageToken().then((response) => {
         window.console.log(response);
@@ -205,7 +279,8 @@ export default {
             uid: userInfo.id,
             title: this.asktitle,
             content: this.askcontent,
-            qustype: this.typeList[this.askType].id
+            qustype: this.typeList[this.askType].id,
+            tagList: this.selectTags
           })
           .then((response) => {
             this.$message({
@@ -235,6 +310,7 @@ export default {
       editor.config.uploadImgServer = '/api/ucenter/uploadImage'
       editor.config.uploadFileName = 'file'
       editor.config.placeholder = '请输入问题'
+      editor.config.zIndex = 100;
       editor.config.uploadImgHeaders = {
         token: this.loginToken
       }
@@ -273,7 +349,80 @@ export default {
 }
 </script>
 
+<style>
+.search_input .el-select .el-tag__close.el-icon-close {
+  background-color: #ecf5ff;
+}
+
+.search_input .el-tag.el-tag--info .el-tag__close:hover {
+  background-color: #409eff;
+}
+
+.search_input .el-tag.el-tag--info {
+  background-color: #ecf5ff;
+  border-color: #d9ecff;
+  display: inline-block;
+  font-size: 12px;
+  color: #409eff;
+}
+</style>>
+
 <style scoped>
+.group-taglist .nodata-image-tips {
+  width: 150px;
+  height: 150px;
+}
+
+.group-taglist .tag-list {
+  margin-right: 12px;
+}
+
+.group-taglist {
+  margin-top: 6px;
+}
+
+.tips_tag {
+  height: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #507999;
+  line-height: 24px;
+  cursor: pointer;
+  margin-left: 12px;
+}
+
+.icon_add_pos {
+  margin-left: 0;
+  position: relative;
+  top: -1px;
+}
+
+.icon {
+  display: inline-block;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  vertical-align: middle;
+}
+
+.icon_add {
+  width: 12px;
+  height: 12px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAXElEQVRIS2NkoDFgpLH5DERbEFA58z+yYza0pxOllyhFIINHLSAY16NBRPsgQg9jgjYSUADLJ/B8MGoBeohhBBGhMB/NB4RCaLQ0JRhCwyCICPsRuwqi62RyLQAAilhQGRoPkngAAAAASUVORK5CYII=);
+  cursor: pointer;
+}
+
+.span_add {
+  display: inline-block !important;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 24px;
+  background-color: #ebf2f7;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
 .askactive {
   border-color: #409eff;
   color: #409eff !important;
@@ -300,14 +449,14 @@ export default {
 
 .ui.form .field {
   clear: both;
-  margin: 0 0 1em;
+  margin: 0 0 10px;
 }
 
 .ui.form .field>label {
   display: block;
   margin: 0 0 0.28571429rem 0;
   color: rgba(0, 0, 0, 0.87);
-  font-size: 0.92857143em;
+  font-size: 14px;
   font-weight: 700;
   text-transform: none;
   margin-bottom: 10px;
@@ -490,89 +639,5 @@ export default {
 .editor {
   line-height: normal !important;
   height: 500px;
-}
-
-.ql-snow .ql-tooltip[data-mode='link']::before {
-  content: '请输入链接地址:';
-}
-
-.ql-snow .ql-tooltip.ql-editing a.ql-action::after {
-  border-right: 0px;
-  content: '保存';
-  padding-right: 0px;
-}
-
-.ql-snow .ql-tooltip[data-mode='video']::before {
-  content: '请输入视频地址:';
-}
-
-.ql-snow .ql-picker.ql-size .ql-picker-label::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item::before {
-  content: '14px';
-}
-
-.ql-snow .ql-picker.ql-size .ql-picker-label[data-value='small']::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value='small']::before {
-  content: '10px';
-}
-
-.ql-snow .ql-picker.ql-size .ql-picker-label[data-value='large']::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value='large']::before {
-  content: '18px';
-}
-
-.ql-snow .ql-picker.ql-size .ql-picker-label[data-value='huge']::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value='huge']::before {
-  content: '32px';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item::before {
-  content: '文本';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='1']::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='1']::before {
-  content: '标题1';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='2']::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='2']::before {
-  content: '标题2';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='3']::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='3']::before {
-  content: '标题3';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='4']::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='4']::before {
-  content: '标题4';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='5']::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='5']::before {
-  content: '标题5';
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value='6']::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='6']::before {
-  content: '标题6';
-}
-
-.ql-snow .ql-picker.ql-font .ql-picker-label::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item::before {
-  content: '标准字体';
-}
-
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value='serif']::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value='serif']::before {
-  content: '衬线字体';
-}
-
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value='monospace']::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value='monospace']::before {
-  content: '等宽字体';
 }
 </style>

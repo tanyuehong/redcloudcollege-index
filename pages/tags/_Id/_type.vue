@@ -16,7 +16,7 @@
           <div class="ui items">
             <div class="item">
               <div class="ui image">
-                <img src="https://static.oschina.net/uploads/logo/spring_bKe1l.png" />
+                <img :src="tag.img" />
               </div>
               <div class="content">
                 <div class="header-wrap clearfix">
@@ -32,10 +32,11 @@
         <div class="tag-list-container">
           <div class="question-tab-wrap">
             <a href="?show=updated" class="item active">问题列表</a>
-            <a href="?show=my_reply" class="item">文章列表</a>
+            
+            <!-- <a href="?show=my_reply" class="item">文章列表</a>
             <a href="?show=my_reply" class="item">专题列表</a>
             <a href="?show=my_reply" class="item">视频列表</a>
-            <a href="?show=my_reply" class="item">书籍列表</a>
+            <a href="?show=my_reply" class="item">书籍列表</a> -->
           </div>
 
 
@@ -60,10 +61,10 @@
                 <div class="description" v-html="item.content">
                 </div>
                 <div class="extra question-tags" v-if="item.tags">
-                  <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
+                 <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" 
                     target="_blank" v-for="tag in item.tags" :key="tag.id">
                     <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
-                  </a>
+                  </nuxt-link>
                 </div>
 
                 <div class="q_time">
@@ -115,21 +116,21 @@ export default {
 
   head () {
     return {
-      title: "所有标签列表 - 开源实践网",
+      title: this.tag.name + "详情 - 开源实践网",
       meta: [
         {
           hid: "keywords",
           name: "keywords",
-          content: "标签列表"
+          content: this.tag.name
         },
         {
           hid: "description",
           name: "description",
-          content: "标签列表"
+          content: this.tag.describ
         },
         {
           hid: "og:description",
-          content: "标签列表"
+          content: this.tag.describ
         }
       ]
     };
@@ -155,6 +156,7 @@ export default {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   border-bottom: 2px solid #efefef;
+  margin-top: 50px;
 }
 
 .question-tab-wrap .item {

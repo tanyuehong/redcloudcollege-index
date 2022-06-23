@@ -126,9 +126,8 @@ export default {
         subTypeList: response.data.subTypeList,
         blogList: response.data.blogList,
         activeName: response.data.typeList[0].id,
-        type:response.data.typeList[0].type,
-        tag:response.data.typeList[0].type,
-        sort:params.sort ? params.sort:"recommand",
+        type:params.type ? params.type:response.data.typeList[0],
+        sort:params.sort,
       }
     })
   },
@@ -144,11 +143,7 @@ export default {
     }
   },
 
-  mounted () {
-    window.console.log(this.type);
-	},
- 
-  computed: {
+    computed: {
     // 计算属性的 getter
     typePath () {
       return function (item, index) {
@@ -158,13 +153,12 @@ export default {
         return "/practice/category/" + item.type;
       }
     },
-
-    sortPath () {
+     sortPath () {
       return function (sort) {
         return "/practice/category/" + this.type + "/" + sort;
       }
     }
-  }
+    }
 }
 </script>
 

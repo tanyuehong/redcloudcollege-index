@@ -1,68 +1,81 @@
 <template>
   <div class="golobal_content">
-    <div class="op_top_back"></div>
+
+    <div class="blog-top-type">
+      <section class="container">
+        <ul class="blog-typeList">
+          <a href="/faquestion" v-for="(item, index) in typeList" :key="item.id" class="blog-type-item"
+            v-bind:class="{ active: typeIndex == index }" title="全部">
+            {{ item.name }}
+          </a>
+        </ul>
+      </section>
+    </div>
     <section class="container">
       <div class="practice-content">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">
-            <ul class="op_pratice_subtag">
-              <li class="li-item" v-for="(sutem, index) in subTypeList" :key="sutem.id">
-                <a v-bind:class="{ praticesubtagactive: subPraCticeTag == index }" @click="subPraCticeTagClick(index)"
-                  href="javascript:void(0);">{{ sutem.name }}
-                </a>
-              </li>
-            </ul>
-            <div class="op_pratice_content book_item fl">
-              <ul class="article_list">
-                <li v-for="bitem in blogList" :key="bitem.id">
-                  <div class="op_artie_content">
-                    <nuxt-link class="article_title" :to="'/practice/' + bitem.id">
-                      {{ bitem.title }}
-                    </nuxt-link>
-                    <p class="op_pratice_describ">{{ bitem.descrb }}</p>
-                    <ul>
-                      <i class="pratice_icon_view"></i>
-                      <span class="icon_des">{{ bitem.viewCount }}</span>
-                      <i class="pratice_icon_zhan"></i>
-                      <span class="icon_des">{{ bitem.good }}</span>
-                      <i class="pratice_icon_comment"></i>
-                      <span class="icon_des">{{ bitem.ccount }}</span>
-                    </ul>
-                  </div>
+        <div class="op_pratice_content book_item fl">
+          <header class="list-header" style="">
+            <nav role="navigation" class="list-nav">
+              <ul class="nav-list left">
+                <li class="nav-item active"><a href="/recommended">推荐</a></li>
+                <li class="nav-item"><a href="/recommended?sort=newest">最新</a>
                 </li>
+                <li class="nav-item"><a href="/recommended?sort=three_days_hottest">热榜</a></li>
               </ul>
-            </div>
+              <div class="dorp-down-area">
+                <!---->
+              </div>
+            </nav>
+          </header>
+          <ul class="article_list">
+            <li v-for="bitem in blogList" :key="bitem.id">
+              <div class="op_artie_content">
+                <nuxt-link class="article_title" :to="'/practice/' + bitem.id">
+                  {{ bitem.title }}
+                </nuxt-link>
+                <p class="op_pratice_describ">{{ bitem.descrb }}</p>
+                <ul>
+                  <i class="pratice_icon_view"></i>
+                  <span class="icon_des">{{ bitem.viewCount }}</span>
+                  <i class="pratice_icon_zhan"></i>
+                  <span class="icon_des">{{ bitem.good }}</span>
+                  <i class="pratice_icon_comment"></i>
+                  <span class="icon_des">{{ bitem.ccount }}</span>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
 
-            <div class="op_pratice_aside fr">
-              <div class="op_app_decrb fr">
-                <div class="wechatma-con js-wechatma-con">
-                  <div class="ma-con">
-                    <div class="ma"></div>
-                    <div class="desc">
-                      <div class="title">扫码关注开源实践网服务号</div>
-                      <div class="item-con">
-                        <div class="item">干货分享</div>
-                        <div class="item">定期活动</div>
-                        <div class="item">课程优惠</div>
-                        <div class="item">专栏福利</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="text-con">
-                    官方优惠福利活动一手掌握，关注开源实践官网（ID：www.redskt.com），和1万+客户端程序员一起成长！
-                  </div>
-                </div>
-                <div class="download-app clearfix">
-                  <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
-                  <div class="text fl">
-                    <h4>下载开源实践APP</h4>
-                    <p>更好的体验 学习随处可享</p>
+        <div class="op_pratice_aside fr">
+          <div class="op_app_decrb fr">
+            <div class="wechatma-con js-wechatma-con">
+              <div class="ma-con">
+                <div class="ma"></div>
+                <div class="desc">
+                  <div class="title">扫码关注开源实践网服务号</div>
+                  <div class="item-con">
+                    <div class="item">干货分享</div>
+                    <div class="item">定期活动</div>
+                    <div class="item">课程优惠</div>
+                    <div class="item">专栏福利</div>
                   </div>
                 </div>
               </div>
+              <div class="text-con">
+                官方优惠福利活动一手掌握，关注开源实践官网（ID：www.redskt.com），和1万+客户端程序员一起成长！
+              </div>
             </div>
-          </el-tab-pane>
-        </el-tabs>
+            <div class="download-app clearfix">
+              <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
+              <div class="text fl">
+                <h4>下载开源实践APP</h4>
+                <p>更好的体验 学习随处可享</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   </div>
@@ -80,6 +93,7 @@ export default {
     return {
       activeName: 'first',
       subPraCticeTag: -1,
+      typeIndex: 0,
       title: "开源实践博文，真正的实践记录者",
       descrb: "开源实践博文，是一个记录真实项目开发过程的一个博客，里面的文章都是项目开发过程中流程和难点的总结。通过文章，能让大家提升自己的项目能力和技术能力，让别人的经验成为自己提升的基石。"
     }
@@ -116,11 +130,6 @@ export default {
     })
   },
   methods: {
-    //分页切换的方法
-    //参数是页码数
-    handleClick (tab, event) {
-      console.log(tab, event)
-    },
     changModelMarkToHtml (content) {
       var converter = new showdown.Converter()
       return converter.makeHtml(content)
@@ -137,29 +146,56 @@ export default {
 
 
 <style>
-.practice-content .el-tabs__nav {
-  height: 50px;
+.list-header {
+  padding: 16px 10px;
+  border-bottom: 1px solid hsla(0, 0%, 59.2%, .1);
 }
 
-.practice-content .el-tabs__header {
-  background-color: white;
+.list-header .list-nav ul {
+  line-height: 10px;
+  font-size: 16px;
+  display: flex;
 }
 
-.practice-content .el-tabs__nav-wrap::after {
-  background-color: white;
+.op_pratice_content .list-header .nav-item {
+  padding: 10px 14px;
+  font-size: 14px;
+  border-right: 1px solid hsla(0, 0%, 59.2%, .2);
+}
+
+.list-header .list-nav {}
+
+.blog-top-type {
+  background: #fff;
+}
+
+.blog-top-type .blog-typeList {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  height: 40px;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.blog-top-type .blog-typeList .blog-type-item {
+  font-size: 16px;
+  margin-right: 26px;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+}
+
+.blog-top-type .blog-typeList .blog-type-item.active {
+  color: #409eff;
 }
 
 .praticesubtagactive {
   color: #409eff !important;
 }
 
-.op_top_back {
-  background-color: white;
-  height: 70px;
-}
-
 .practice-content {
-  margin-top: -50px;
+  margin-top: 10px;
 }
 
 .teacher_content {

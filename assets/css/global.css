@@ -39,6 +39,11 @@ body {
   height: 300px;
 }
 
+.nodata-title {
+  font-size: 14px;
+  color: #666;
+}
+
 .nodata-warper {
   text-align: center;
   margin: 0 auto;

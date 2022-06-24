@@ -80,8 +80,8 @@
                 <div class="description" v-html="item.content">
                 </div>
                 <div class="extra question-tags" v-if="item.tags">
-                  <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag"
-                    target="_blank" v-for="tag in item.tags" :key="tag.id">
+                  <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" target="_blank"
+                    v-for="tag in item.tags" :key="tag.id">
                     <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
                   </nuxt-link>
                 </div>
@@ -113,7 +113,6 @@
 <script>
 
 import '~/assets/css/askindex.css'
-import askApi from "@/api/ask";
 import askServerApi from "@/api/askServerReq";
 
 export default {

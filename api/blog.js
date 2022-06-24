@@ -1,13 +1,6 @@
 import request from '@/utils/request'
 
 export default {
-  
-  getHomeRealPratice() {
-    return request({
-      url: `/home/pratice/index`,
-      method: 'get',
-    })
-  },
 
   getRealPraticeDetail(id) {
     return request({

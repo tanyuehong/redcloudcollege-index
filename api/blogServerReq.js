@@ -2,12 +2,14 @@ import request from '@/utils/serverRq'
 
 export default {
   //分页讲师查询的方法
-  getHomeRealPratice() {
+  getHomeRealPratice(parm) {
     return request({
       url: `/home/pratice/index`,
-      method: 'get',
+      method: 'post',
+      data: parm,
     })
   },
+
   //讲师详情的方法
   getRealPraticeDetail(id) {
     return request({
@@ -16,12 +18,10 @@ export default {
     })
   },
 
-   getPraticeBlogCommentLists(bid,type) {
+  getPraticeBlogCommentLists(bid, type) {
     return request({
       url: `/home/pratice/getCommentList/${bid}/${type}`,
       method: 'get',
     })
-
   },
-
 }

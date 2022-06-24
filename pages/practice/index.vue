@@ -4,7 +4,7 @@
     <div class="blog-top-type">
       <section class="container">
         <ul class="blog-typeList">
-          <nuxt-link :to="typePath(item,index)" v-for="(item, index) in typeList" :key="item.id" class="blog-type-item"
+          <nuxt-link :to="typePath(item, index)" v-for="(item, index) in typeList" :key="item.id" class="blog-type-item"
             v-bind:class="{ active: type == item.type }" :title="item.name">
             {{ item.name }}
           </nuxt-link>
@@ -13,19 +13,36 @@
     </div>
     <section class="container">
       <div class="practice-content">
+        <div class="tag-list" v-if="tagList.length>0">
+          <ul class="tag-warper">
+            <li class="tag-item" v-for="item in tagList" :key="item.id">
+               <a class="tag-link">{{item.name}}</a>
+             </li>
+          </ul>
+        </div>
+
         <div class="op_pratice_content fl">
-          <div class="blog-list-header" v-if="type=='all'">
-              <ul class="nav-list">
-                <li class="blog-item right">
-                  <nuxt-link :to="sortPath('recommand')" class="content-type-item" v-bind:class="{ active: sort == 'recommand' }">推荐</nuxt-link>
-                </li>
-                <li class="blog-item right">
-                  <nuxt-link :to="sortPath('latest')" class="content-type-item" v-bind:class="{ active: sort == 'latest' }">最新</nuxt-link>
-                </li>
-                <li class="blog-item">
-                  <nuxt-link :to="sortPath('hot')" class="content-type-item" v-bind:class="{ active: sort == 'hot' }">热榜</nuxt-link>
-                  </li>
-              </ul>
+          <div class="nodata-warper" v-if="blogList.length == 0">
+            <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+            <div>
+              <span class="nodata-title">该分类下暂时没有文章哦！</span>
+            </div>
+          </div>
+          <div class="blog-list-header" v-if="type == 'all' && blogList.length > 0">
+            <ul class="nav-list">
+              <li class="blog-item right">
+                <nuxt-link :to="sortPath('recommand')" class="content-type-item"
+                  v-bind:class="{ active: sort == 'recommand' }">推荐</nuxt-link>
+              </li>
+              <li class="blog-item right">
+                <nuxt-link :to="sortPath('latest')" class="content-type-item"
+                  v-bind:class="{ active: sort == 'latest' }">最新</nuxt-link>
+              </li>
+              <li class="blog-item">
+                <nuxt-link :to="sortPath('hot')" class="content-type-item" v-bind:class="{ active: sort == 'hot' }">热榜
+                </nuxt-link>
+              </li>
+            </ul>
           </div>
           <ul class="article_list">
             <li v-for="bitem in blogList" :key="bitem.id">
@@ -120,15 +137,15 @@ export default {
     }
   },
   asyncData ({ params, error }) {
-    return realPractice.getHomeRealPratice(1, 8).then((response) => {
+    return realPractice.getHomeRealPratice({ "type": params.type, "sort": params.sort, "tag": params.tag }).then((response) => {
       return {
         typeList: response.data.typeList,
-        subTypeList: response.data.subTypeList,
+        tagList: response.data.tagList,
         blogList: response.data.blogList,
         activeName: response.data.typeList[0].id,
-        type:response.data.typeList[0].type,
-        tag:response.data.typeList[0].type,
-        sort:params.sort ? params.sort:"recommand",
+        type: response.data.typeList[0].type,
+        tag: response.data.typeList[0].type,
+        sort: params.sort ? params.sort : "recommand",
       }
     })
   },
@@ -146,8 +163,8 @@ export default {
 
   mounted () {
     window.console.log(this.type);
-	},
- 
+  },
+
   computed: {
     // 计算属性的 getter
     typePath () {
@@ -170,7 +187,6 @@ export default {
 
 
 <style>
-
 .article_list li:not(:last-child) {
   border-bottom: 1px solid #e5e6eb;
 }
@@ -204,8 +220,8 @@ export default {
   text-decoration: none;
 }
 
-.blog-list-header .blog-item  .content-type-item.active {
-  color:#409eff;
+.blog-list-header .blog-item .content-type-item.active {
+  color: #409eff;
 }
 
 .blog-list-header .nav-list {

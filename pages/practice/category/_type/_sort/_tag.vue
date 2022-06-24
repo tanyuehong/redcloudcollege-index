@@ -4,7 +4,7 @@
     <div class="blog-top-type">
       <section class="container">
         <ul class="blog-typeList">
-          <nuxt-link :to="typePath(item,index)" v-for="(item, index) in typeList" :key="item.id" class="blog-type-item"
+          <nuxt-link :to="typePath(item, index)" v-for="(item, index) in typeList" :key="item.id" class="blog-type-item"
             v-bind:class="{ active: type == item.type }" :title="item.name">
             {{ item.name }}
           </nuxt-link>
@@ -13,19 +13,36 @@
     </div>
     <section class="container">
       <div class="practice-content">
+        <div class="tag-list" v-if="tagList.length > 0">
+          <ul class="tag-warper">
+            <li class="tag-item" v-for="item in tagList" :key="item.id">
+              <nuxt-link :to="tagPath(item)" class="tag-link" v-bind:class="{ active: tag == item.id }">{{ item.name }}
+              </nuxt-link>
+            </li>
+          </ul>
+        </div>
         <div class="op_pratice_content fl">
-          <div class="blog-list-header" v-if="type=='all'">
-              <ul class="nav-list">
-                <li class="blog-item right">
-                  <nuxt-link :to="sortPath('recommand')" class="content-type-item" v-bind:class="{ active: sort == 'recommand' }">推荐</nuxt-link>
-                </li>
-                <li class="blog-item right">
-                  <nuxt-link :to="sortPath('latest')" class="content-type-item" v-bind:class="{ active: sort == 'latest' }">最新</nuxt-link>
-                </li>
-                <li class="blog-item">
-                  <nuxt-link :to="sortPath('hot')" class="content-type-item" v-bind:class="{ active: sort == 'hot' }">热榜</nuxt-link>
-                  </li>
-              </ul>
+          <div class="nodata-warper" v-if="blogList.length == 0">
+            <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+            <div>
+              <span class="nodata-title">该分类下暂时没有文章哦！</span>
+            </div>
+          </div>
+          <div class="blog-list-header" v-if="(type == 'all' || tag == 'all') && blogList.length > 0">
+            <ul class="nav-list">
+              <li class="blog-item right">
+                <nuxt-link :to="sortPath('recommand')" class="content-type-item"
+                  v-bind:class="{ active: sort == 'recommand' }">推荐</nuxt-link>
+              </li>
+              <li class="blog-item right">
+                <nuxt-link :to="sortPath('latest')" class="content-type-item"
+                  v-bind:class="{ active: sort == 'latest' }">最新</nuxt-link>
+              </li>
+              <li class="blog-item">
+                <nuxt-link :to="sortPath('hot')" class="content-type-item" v-bind:class="{ active: sort == 'hot' }">热榜
+                </nuxt-link>
+              </li>
+            </ul>
           </div>
           <ul class="article_list">
             <li v-for="bitem in blogList" :key="bitem.id">
@@ -94,13 +111,12 @@ export default {
       activeName: 'first',
       subPraCticeTag: -1,
       typeIndex: 0,
-      title: "开源实践博文，真正的实践记录者",
       descrb: "开源实践博文，是一个记录真实项目开发过程的一个博客，里面的文章都是项目开发过程中流程和难点的总结。通过文章，能让大家提升自己的项目能力和技术能力，让别人的经验成为自己提升的基石。"
     }
   },
   head () {
     return {
-      title: this.title,
+      title: this.type+ " - t",
       meta: [
         {
           hid: 'keywords',
@@ -120,16 +136,20 @@ export default {
     }
   },
   asyncData ({ params, error }) {
-    return realPractice.getHomeRealPratice(1, 8).then((response) => {
+    return realPractice.getHomeRealPratice({ "type": params.type, "sort": params.sort, "tag": params.tag }).then((response) => {
       return {
         typeList: response.data.typeList,
-        subTypeList: response.data.subTypeList,
+        tagList: response.data.tagList,
         blogList: response.data.blogList,
         activeName: response.data.typeList[0].id,
-        type:params.type ? params.type:response.data.typeList[0],
-        sort:params.sort,
+        type: params.type ? params.type : response.data.typeList[0],
+        sort: params.sort ? params.sort : "recommand",
+        tag: params.tag ? params.tag : "all",
       }
     })
+  },
+  mounted () {
+    var mysort = this.sort;
   },
   methods: {
     changModelMarkToHtml (content) {
@@ -143,7 +163,7 @@ export default {
     }
   },
 
-    computed: {
+  computed: {
     // 计算属性的 getter
     typePath () {
       return function (item, index) {
@@ -153,17 +173,61 @@ export default {
         return "/practice/category/" + item.type;
       }
     },
-     sortPath () {
+    sortPath () {
       return function (sort) {
         return "/practice/category/" + this.type + "/" + sort;
       }
+    },
+
+    tagPath () {
+      return function (item) {
+        if (item.id == 'all') {
+          return "/practice/category/" + this.type;
+        }
+        return "/practice/category/" + this.type + "/" + this.sort + "/" + item.id;
+      }
     }
-    }
+  }
 }
 </script>
 
 
 <style>
+.tag-list {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.tag-list .tag-warper {
+  display: flex;
+}
+
+.tag-list .tag-warper .tag-item {
+  margin-right: 18px;
+}
+
+.tag-list .tag-warper .tag-item .tag-link {
+  background: #fff;
+  border-radius: 14px;
+  padding: 5px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #666;
+}
+
+.tag-list .tag-warper .tag-item .tag-link.active {
+  background: #409eff;
+  color: #fff;
+}
+
+.tag-list .tag-warper .tag-item .tag-link.active:hover {
+  background: #409eff;
+  color: #fff;
+}
+
+.tag-list .tag-warper .tag-item .tag-link:hover {
+  color: #409eff;
+}
 
 .article_list li:not(:last-child) {
   border-bottom: 1px solid #e5e6eb;
@@ -198,8 +262,8 @@ export default {
   text-decoration: none;
 }
 
-.blog-list-header .blog-item  .content-type-item.active {
-  color:#409eff;
+.blog-list-header .blog-item .content-type-item.active {
+  color: #409eff;
 }
 
 .blog-list-header .nav-list {

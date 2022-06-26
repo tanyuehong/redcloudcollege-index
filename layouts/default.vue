@@ -254,6 +254,7 @@ export default {
     logout () {
       window.localStorage.setItem('redclass_token', '')
       window.localStorage.setItem('redclass_user', '')
+      this.$cookies.set('token', '')
       //回到首页面
       window.location.href = '/'
     },

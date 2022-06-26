@@ -13,11 +13,11 @@
     </div>
     <section class="container">
       <div class="practice-content">
-        <div class="tag-list" v-if="tagList.length>0">
+        <div class="tag-list" v-if="tagList.length > 0">
           <ul class="tag-warper">
             <li class="tag-item" v-for="item in tagList" :key="item.id">
-               <a class="tag-link">{{item.name}}</a>
-             </li>
+              <a class="tag-link">{{ item.name }}</a>
+            </li>
           </ul>
         </div>
 
@@ -136,8 +136,9 @@ export default {
       ],
     }
   },
-  asyncData ({ params, error }) {
-    return realPractice.getHomeRealPratice({ "type": params.type, "sort": params.sort, "tag": params.tag }).then((response) => {
+  asyncData ({ params, error, app }) {
+    var getToken = app.$cookies.get("token");
+    return realPractice.getHomeRealPratice({ "type": params.type, "sort": params.sort, "tag": params.tag, "token": getToken }).then((response) => {
       return {
         typeList: response.data.typeList,
         tagList: response.data.tagList,
@@ -162,7 +163,6 @@ export default {
   },
 
   mounted () {
-    window.console.log(this.type);
   },
 
   computed: {

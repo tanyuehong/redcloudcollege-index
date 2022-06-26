@@ -111,32 +111,32 @@ export default {
       activeName: 'first',
       subPraCticeTag: -1,
       typeIndex: 0,
-      descrb: "开源实践博文，是一个记录真实项目开发过程的一个博客，里面的文章都是项目开发过程中流程和难点的总结。通过文章，能让大家提升自己的项目能力和技术能力，让别人的经验成为自己提升的基石。"
     }
   },
   head () {
     return {
-      title: this.type+ " - t",
+      title: this.getPageTitle(),
       meta: [
         {
           hid: 'keywords',
           name: 'keywords',
-          content: '开源实践,客户端面试,iOS面试题,安卓面试题,Vue.js,前端面试题,nginx配置,Kotlin,RxJava,React Native,敏捷开发,Python',
+          content: this.getPageKeywords(),
         },
         {
           hid: 'description',
           name: 'description',
-          content: this.descrb,
+          content: this.getPageDescrb(),
         },
         {
           hid: 'og:description',
-          content: this.descrb,
+          content: this.getPageDescrb(),
         },
       ],
     }
   },
-  asyncData ({ params, error }) {
-    return realPractice.getHomeRealPratice({ "type": params.type, "sort": params.sort, "tag": params.tag }).then((response) => {
+  asyncData ({ params, error, app }) {
+    var getToken = app.$cookies.get("token");
+    return realPractice.getHomeRealPratice({ "type": params.type, "sort": params.sort, "tag": params.tag, "token": getToken }).then((response) => {
       return {
         typeList: response.data.typeList,
         tagList: response.data.tagList,
@@ -144,14 +144,89 @@ export default {
         activeName: response.data.typeList[0].id,
         type: params.type ? params.type : response.data.typeList[0],
         sort: params.sort ? params.sort : "recommand",
-        tag: params.tag ? params.tag : "all",
+        tag: params.tag ? params.tag : (response.data.tagList.length > 0 ? "all" : "")
       }
     })
   },
   mounted () {
-    var mysort = this.sort;
+    var mysort = this.type;
+    window.console.log(mysort);
   },
   methods: {
+    getPageKeywords () {
+      var keywords = "开源实践,客户端面试,iOS面试题,安卓面试题,Vue.js,前端面试题,nginx配置,Kotlin,RxJava,React Native,敏捷开发,Python";
+      if (this.type == 'all' || this.type == 'focus') {
+        return keywords;
+      }
+      for (var j = 0; j < this.typeList.length; j++) {
+        if (this.typeList[j].type == this.type) {
+          keywords = this.typeList[j].keywords;
+          break;
+        }
+      }
+      for (var j = 0; j < this.tagList.length; j++) {
+        if (this.tagList[j].id == this.tag) {
+          keywords = this.typeList[j].keywords;
+          break;
+        }
+      }
+      return keywords;
+    },
+    getPageDescrb () {
+      var descrb = "开源实践博文，是一个记录真实项目开发过程的一个博客，里面的文章都是项目开发过程中流程和难点的总结。通过文章，能让大家提升自己的项目能力和技术能力，让别人的经验成为自己提升的基石。";
+      if (this.type == 'all' || this.type == 'focus') {
+        return descrb;
+      }
+      for (var j = 0; j < this.typeList.length; j++) {
+        if (this.typeList[j].type == this.type) {
+          descrb = this.typeList[j].descrb;
+          break;
+        }
+      }
+      for (var j = 0; j < this.tagList.length; j++) {
+        if (this.tagList[j].id == this.tag) {
+          descrb = this.typeList[j].bdescrb;
+          break;
+        }
+      }
+      return descrb;
+    },
+
+    getPageTitle () {
+      if (this.type == 'all') {
+        return "推荐 - 文章 -开源实践博文";
+      }
+      if (this.type == 'focus') {
+        return "关注 - 文章 -开源实践博文";
+      }
+
+      var typeName = ""
+      for (var j = 0; j < this.typeList.length; j++) {
+        if (this.typeList[j].type == this.type) {
+          typeName = this.typeList[j].name;
+          this.descrb = this.typeList[j].descrb;
+          this.keywords = this.typeList[j].keywords;
+          break;
+        }
+      }
+      if (this.tag == 'all' || !this.tag) {
+        return typeName + " - 开源实践博文";
+      }
+
+      var tagName = ""
+      for (var j = 0; j < this.tagList.length; j++) {
+        if (this.tagList[j].id == this.tag) {
+          tagName = this.tagList[j].name;
+          this.descrb = this.typeList[j].bdescrb;
+          this.keywords = this.typeList[j].keywords;
+          break;
+        }
+      }
+      if (tagName == typeName) {
+        return typeName + " - 开源实践博文";
+      }
+      return tagName + " - " + typeName + " - 开源实践博文";
+    },
     changModelMarkToHtml (content) {
       var converter = new showdown.Converter()
       return converter.makeHtml(content)

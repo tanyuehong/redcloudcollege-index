@@ -9,7 +9,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    htmlAttrs: { 
+    htmlAttrs: {
       lang: 'zh',
     },
     title: '开源实践网',
@@ -72,7 +72,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ['cookie-universal-nuxt'],
   server: {
     port: 9528, // default: 3000
   },

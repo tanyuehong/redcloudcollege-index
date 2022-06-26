@@ -2,51 +2,37 @@
   <div class="main fr">
     <div class="sing_main">
       <div class="title">
-        <nuxt-link class="active"
-                   :to="{name:'user-login'}">
+        <nuxt-link class="active" :to="{ name: 'user-login' }">
           登录
         </nuxt-link>
         <span>·</span>
-        <nuxt-link :to="{name:'user-register'}">
+        <nuxt-link :to="{ name: 'user-register' }">
           注册
         </nuxt-link>
       </div>
 
       <div class="sign-up-container">
-        <el-form ref="userForm"
-                 :model="user">
-          <el-form-item class="input-prepend restyle"
-                        prop="username"
-                        :rules="[{ required: true, message: '请输入手机号码',trigger: 'blur'},{validator: checkPhone, trigger: 'blur'}]">
+        <el-form ref="userForm" :model="user">
+          <el-form-item class="input-prepend restyle" prop="username"
+            :rules="[{ required: true, message: '请输入手机号码', trigger: 'blur' }, { validator: checkPhone, trigger: 'blur' }]">
             <div>
-              <el-input type="text"
-                        v-on:focus="formfocuse"
-                        placeholder="手机号"
-                        v-model="user.username" />
+              <el-input type="text" v-on:focus="formfocuse" placeholder="手机号" v-model="user.username" />
               <i class="iconfont icon-phone" />
             </div>
           </el-form-item>
 
-          <el-form-item class="input-prepend"
-                        prop="password"
-                        :rules="[{ required: true, message: '请输入密码', trigger: 'blur' }]">
+          <el-form-item class="input-prepend" prop="password"
+            :rules="[{ required: true, message: '请输入密码', trigger: 'blur' }]">
             <div>
-              <el-input type="password"
-                        v-on:focus="formfocuse"
-                        placeholder="密码"
-                        v-model="user.password" />
+              <el-input type="password" v-on:focus="formfocuse" placeholder="密码" v-model="user.password" />
               <i class="iconfont icon-password" />
             </div>
           </el-form-item>
 
           <div class="sign_btn">
-            <p class="tips_error_show"
-               v-show="this.errtips.length>0">{{errtips}}</p>
-            <input type="button"
-                   class="sign-in-button"
-                   value="登录"
-                   @click="submitLogin('userForm')"
-                   v-on:keyup.enter="submitLogin('userForm')" />
+            <p class="tips_error_show" v-show="this.errtips.length > 0">{{ errtips }}</p>
+            <input type="button" class="sign-in-button" value="登录" @click="submitLogin('userForm')"
+              v-on:keyup.enter="submitLogin('userForm')" />
           </div>
         </el-form>
         <!-- 更多登录方式 -->
@@ -56,18 +42,12 @@
             <li>
 
               <!-- href="http://qy.free.idcfengye.com/api/ucenter/weixinLogin/login   target="_blank"" -->
-              <a id="weixin"
-                 class="weixin"
-                 @click="weixinLoginClick"
-                 href="javascript:void(0);">
+              <a id="weixin" class="weixin" @click="weixinLoginClick" href="javascript:void(0);">
                 <i class="iconfont icon-weixin" />
               </a>
             </li>
             <li>
-              <a id="qq"
-                 class="qq"
-                 @click="weixinLoginClick"
-                 href="javascript:void(0);">
+              <a id="qq" class="qq" @click="weixinLoginClick" href="javascript:void(0);">
                 <i class="iconfont icon-qq" />
               </a>
             </li>
@@ -136,6 +116,7 @@ export default {
           }
           loginApi.submitLoginUser(this.user).then(response => {
             window.localStorage.setItem("redclass_token", response.data.token)
+            this.$cookies.set('token', response.data.token)
             //第四步 调用接口 根据token获取用户信息，为了首页面显示
             loginApi.getLoginUserInfo().then(response => {
               this.loginInfo = response.data.userInfo;
@@ -182,6 +163,7 @@ export default {
 .el-form-item__error {
   z-index: 9999999;
 }
+
 .btn .tips_error_show {
   position: absolute;
   top: -2.5px;

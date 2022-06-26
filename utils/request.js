@@ -40,19 +40,25 @@ service.interceptors.response.use(
         errorMsg = res.message
       }
       Message.closeAll()
-      if(res.code == 999 || res.code == 998) {
-        if(window) {
+      if (res.code == 999 || res.code == 998) {
+        if (window) {
           window.localStorage.setItem('redclass_token', '')
           window.localStorage.setItem('redclass_user', '')
+          this.$cookies.set('token', '')
         }
-        Message({ message: errorMsg, type: 'error', duration: tipsShowTime, onClose:()=>{
-          $nuxt.$router.push({
-           name: "user-login"
-         });
-         }})
-        return ;
+        Message({
+          message: errorMsg,
+          type: 'error',
+          duration: tipsShowTime,
+          onClose: () => {
+            $nuxt.$router.push({
+              name: 'user-login',
+            })
+          },
+        })
+        return
       }
-      Message({ message: errorMsg, type: 'error', duration: tipsShowTime})
+      Message({ message: errorMsg, type: 'error', duration: tipsShowTime })
       return Promise.reject(new Error(errorMsg))
     } else {
       return res

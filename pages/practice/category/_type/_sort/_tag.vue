@@ -150,7 +150,8 @@ export default {
   },
   mounted () {
     var mysort = this.type;
-    window.console.log(mysort);
+    var list = this.tagList;
+    window.console.log(list);
   },
   methods: {
     getPageKeywords () {
@@ -164,9 +165,12 @@ export default {
           break;
         }
       }
+      if (this.tag == 'all' || !this.tag) {
+        return keywords;
+      }
       for (var j = 0; j < this.tagList.length; j++) {
         if (this.tagList[j].id == this.tag) {
-          keywords = this.typeList[j].keywords;
+          keywords = this.tagList[j].keywords;
           break;
         }
       }
@@ -179,13 +183,16 @@ export default {
       }
       for (var j = 0; j < this.typeList.length; j++) {
         if (this.typeList[j].type == this.type) {
-          descrb = this.typeList[j].descrb;
+          descrb = this.typeList[j].describ;
           break;
         }
       }
+      if (this.tag == 'all' || !this.tag) {
+        return descrb;
+      }
       for (var j = 0; j < this.tagList.length; j++) {
         if (this.tagList[j].id == this.tag) {
-          descrb = this.typeList[j].bdescrb;
+          descrb = this.tagList[j].bdescrib;
           break;
         }
       }
@@ -204,8 +211,6 @@ export default {
       for (var j = 0; j < this.typeList.length; j++) {
         if (this.typeList[j].type == this.type) {
           typeName = this.typeList[j].name;
-          this.descrb = this.typeList[j].descrb;
-          this.keywords = this.typeList[j].keywords;
           break;
         }
       }
@@ -217,8 +222,6 @@ export default {
       for (var j = 0; j < this.tagList.length; j++) {
         if (this.tagList[j].id == this.tag) {
           tagName = this.tagList[j].name;
-          this.descrb = this.typeList[j].bdescrb;
-          this.keywords = this.typeList[j].keywords;
           break;
         }
       }

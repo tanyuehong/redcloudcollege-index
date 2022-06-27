@@ -139,6 +139,20 @@ export default {
       errtips: ""
     };
   },
+
+  head () {
+    return {
+      title: "注册 - 开源实践网",
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: "开源实践网,用户注册,登陆,加入",
+        }
+      ],
+    }
+  },
+
   methods: {
     //注册提交的方法
     submitRegister (formName) {

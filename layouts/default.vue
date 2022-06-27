@@ -43,9 +43,9 @@
                 </nuxt-link>
               </li>
               <li v-if="loginInfo.id" id="is-login-one" class="mr10">
-                <a id="headerMsgCountId" href="#" title="消息">
+               <nuxt-link :to="'/about/message'" title="消息">
                   <em class="icon18 news-icon">&nbsp;</em>
-                </a>
+                </nuxt-link>
                 <q class="red-point" style="display: none;">&nbsp;</q>
               </li>
               <li v-if="loginInfo.id" id="is-login-two" class="h-r-user">

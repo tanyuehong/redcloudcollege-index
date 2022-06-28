@@ -507,6 +507,28 @@ export default {
       }
     })
   },
+
+  head () {
+    return {
+      title: this.bookItem.title + " - 开源实践专题",
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: this.bookItem.keywords,
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.bookItem.describ,
+        },
+        {
+          hid: 'og:description',
+          content: this.bookItem.describ,
+        },
+      ],
+    }
+  },
   
   mounted () {
     this.changMarkToHtml(this.bookItem.bookDetail);

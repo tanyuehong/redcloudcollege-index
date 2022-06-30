@@ -2,7 +2,7 @@
   <div class="main_global_bg">
     <div class="container main-content">
       <div class="col-md-8 mess-content-lefte">
-        <div class="message-top-rumb">
+        <div class="mess-top-rumb">
           <div class="ui breadcrumb red_breadcrumb">
             <nuxt-link to="/" class="section">
               首页
@@ -203,6 +203,7 @@ export default {
 
 .mess-content-lefte .questions_tab_con {
   margin-left: -15px;
+  margin-right: -15px;
 }
 
 .main-content {

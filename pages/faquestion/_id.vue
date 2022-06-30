@@ -459,6 +459,7 @@ export default {
       questionDialogVisible: false,
       fixDialogVisible: false,
       goodDialogVisible: false,
+      cgoodDialogVisible:false,
     };
   },
 

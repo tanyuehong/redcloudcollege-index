@@ -443,6 +443,9 @@ section {
 .ml5 {
   margin-left: 5px;
 }
+.ml3 {
+  margin-left: 3px;
+}
 .mt10 {
   margin-top: 10px;
 }
@@ -1164,7 +1167,7 @@ a.current-2 .lh-p-icon {
 }
 
 .nav {
-  padding: 10px 0 0 50px;
+  padding: 10px 0 0 30px;
 }
 .nav,
 .nav li,
@@ -1232,7 +1235,7 @@ a.current-2 .lh-p-icon {
   text-indent: -9999px;
 }
 .h-r-search {
-  margin: 12px 20px 0 0;
+  margin: 12px 15px 0 0;
 }
 .h-r-s-box {
   display: block;

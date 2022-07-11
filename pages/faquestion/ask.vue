@@ -375,6 +375,7 @@ export default {
 
 .group-taglist .tag-list {
   margin-right: 12px;
+  margin-bottom: 10px;
 }
 
 .group-taglist {

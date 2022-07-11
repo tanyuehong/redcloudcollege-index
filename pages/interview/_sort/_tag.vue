@@ -22,7 +22,7 @@
                   <div class="icon___2NyVK"
                     style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513787)"></div>
                   <div class="content___2eWOS cardContent___24wEe">
-                    <h5 class="title___1e416 title___2VARs">模拟面试</h5>
+                    <h5 class="title___1e416 title___2VARs">智能出题</h5>
                     <p class="desc___3fiGh desc___3Su17">多款云产品，永久免费</p>
                   </div>
                 </section>
@@ -45,7 +45,7 @@
                   <div class="icon___2NyVK"
                     style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513880)"></div>
                   <div class="content___2eWOS cardContent___24wEe">
-                    <h5 class="title___1e416 title___2VARs">我要出题</h5>
+                    <h5 class="title___1e416 title___2VARs">面试题提交</h5>
                     <p class="desc___3fiGh desc___3Su17">注册即享免费额度</p>
                   </div>
                 </section>
@@ -121,13 +121,7 @@
           </div>
 
           <div class="interview_content-list">
-            <div class="faqustion-top-group">
-              <ul class="faqustion-typeList">
-                <nuxt-link :to="typePath(item, index)" v-for="(item, index) in typeList" :key="item.id"
-                  class="interview-type-item" v-bind:class="{ active: type == item.type }" :title="item.name">
-                  {{ item.name }}
-                </nuxt-link>
-              </ul>
+            <div class="interview-top-group">
               <div class="interview-tag-list" v-if="tagList.length > 0">
                 <ul class="tag-warper">
                   <li class="tag-item" v-for="item in tagList" :key="item.id">
@@ -156,7 +150,23 @@
                   <span>暂时没有数据哦，赶紧抢沙发吧</span>
                 </div>
               </div>
-              <div v-for="item in list" :key="item.qid" class="question_list">
+            <div class="interview-list-header" v-if="list.length > 0">
+            <ul class="nav-list">
+              <li class="blog-item right">
+                <nuxt-link :to="sortPath('recommand')" class="content-type-item"
+                  v-bind:class="{ active: sort == 'recommand' }">推荐</nuxt-link>
+              </li>
+              <li class="blog-item right">
+                <nuxt-link :to="sortPath('latest')" class="content-type-item"
+                  v-bind:class="{ active: sort == 'latest' }">最新</nuxt-link>
+              </li>
+              <li class="blog-item">
+                <nuxt-link :to="sortPath('hot')" class="content-type-item" v-bind:class="{ active: sort == 'hot' }">热榜
+                </nuxt-link>
+              </li>
+            </ul>
+          </div>
+              <div v-for="item in list" :key="item.qid" class="interview_list">
                 <div class="answer_title">
                   <nuxt-link :to="'/faquestion/' + item.qid" class="header">
                     {{ item.title }}
@@ -193,9 +203,6 @@
             </div>
             <div class="clearnfloat"></div>
           </div>
-
-
-
         </div>
       </section>
     </div>
@@ -317,6 +324,15 @@ export default {
 </script>
 
 <style scoped>
+
+.interview_list {
+  margin-top: 10px;
+}
+.interview-top-group {
+  border-bottom: solid 1px #e6e6e6;
+  margin-top: 25px;
+  padding-bottom: 10px;
+}
 .interview-content {
   margin-bottom: 20px;
 }
@@ -326,8 +342,45 @@ export default {
   color: #409eff;
 }
 
+
+.interview-list-header {
+    margin-left: -10px;
+    padding-left: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid hsla(0,0%,59.2%,.1);
+}
+
+.interview-list-header .nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 2px;
+}
+
+.interview-list-header .blog-item .content-type-item.active {
+    color: #409eff;
+}
+
+.interview-list-header .blog-item {
+    font-size: 14px;
+    border-bottom: none;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    padding-left: 26px;
+    padding-right: 26px;
+}
+
+.interview-list-header .blog-item .content-type-item {
+    color: #666;
+    text-decoration: none;
+}
+
+.blog-item.right {
+    border-right: 1px solid hsla(0,0%,59.2%,.2);
+}
+
 .interview-content .interview_detail_con {
-  margin: 20px 20px 20px 20px;
+  margin: 10px 20px 20px 20px;
   padding-bottom: 25px;
 }
 
@@ -345,12 +398,12 @@ export default {
 }
 
 .interview-tag-list .tag-warper .tag-item .tag-link {
-  background: #fafafa;
-  border-radius: 14px;
-  padding: 5px 16px;
-  font-size: 14px;
-  text-decoration: none;
-  color: #666;
+    background: #efefef;
+    border-radius: 14px;
+    padding: 8px 20px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #666;
 }
 
 .interview-type-item.active {

@@ -256,7 +256,7 @@
             <div class="ma-con">
               <div class="ma"></div>
               <div class="desc">
-                <div class="title">扫码关注开源实践网服务号</div>
+                <div class="title">扫码关注开源实践网微信公众号</div>
                 <div class="item-con">
                   <div class="item">干货分享</div>
                   <div class="item">定期活动</div>

@@ -50,14 +50,14 @@ body {
 }
 
 .app-download-ma {
-  width: 80px;
-  height: 80px;
+  width: 96px;
+  height: 96px;
   text-align: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   margin: 0 auto;
-  background-image: url(https://static3.sycdn.imooc.com/static/img/column/qiqi_wechat_qr2.png);
+  background-image: url(https://img.redskt.com/asset/img/redskt-webchat.jpg);
 }
 
 .app-download-wapma {

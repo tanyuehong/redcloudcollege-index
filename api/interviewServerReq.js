@@ -9,4 +9,11 @@ export default {
       data: parm,
     })
   },
+
+  getInterviewTypeList() {
+    return request({
+      url: '/home/interview/typelist',
+      method: 'get',
+    })
+  },
 }

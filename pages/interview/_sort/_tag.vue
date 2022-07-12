@@ -13,7 +13,7 @@
                     style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513637)"></div>
                   <div class="content___2eWOS cardContent___24wEe">
                     <h5 class="title___1e416 title___2VARs">每日一题</h5>
-                    <p class="desc___3fiGh desc___3Su17">存储单价 0.033元起</p>
+                    <p class="desc___3fiGh desc___3Su17">拳不离手，曲不离口</p>
                   </div>
                 </section>
               </a><a target="_blank" rel="noopener"
@@ -23,7 +23,7 @@
                     style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513787)"></div>
                   <div class="content___2eWOS cardContent___24wEe">
                     <h5 class="title___1e416 title___2VARs">智能出题</h5>
-                    <p class="desc___3fiGh desc___3Su17">多款云产品，永久免费</p>
+                    <p class="desc___3fiGh desc___3Su17">精选名企真题，迅速查漏补缺</p>
                   </div>
                 </section>
               </a><a target="_blank" rel="noopener"
@@ -34,22 +34,21 @@
                     style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513880)"></div>
                   <div class="content___2eWOS cardContent___24wEe">
                     <h5 class="title___1e416 title___2VARs">学习计划</h5>
-                    <p class="desc___3fiGh desc___3Su17">注册即享免费额度</p>
+                    <p class="desc___3fiGh desc___3Su17">步步为营，稳步提升</p>
                   </div>
                 </section>
               </a>
-              <a target="_blank" rel="noopener"
-                href="https://marketing.qiniu.com/activity/2021618-act-cdn#www-homepage_button-4"
-                class="container___1me7f">
+
+               <nuxt-link :to="'/interview/question'"  target="_blank"  class="container___1me7f">
                 <section class="card___2JUgs card___JWlTD">
                   <div class="icon___2NyVK"
                     style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513880)"></div>
                   <div class="content___2eWOS cardContent___24wEe">
-                    <h5 class="title___1e416 title___2VARs">面试题提交</h5>
-                    <p class="desc___3fiGh desc___3Su17">注册即享免费额度</p>
+                    <h5 class="title___1e416 title___2VARs">面试题上传</h5>
+                    <p class="desc___3fiGh desc___3Su17">分享面试真题，爱心传递</p>
                   </div>
                 </section>
-              </a>
+              </nuxt-link>
             </div>
           </div>
 
@@ -60,61 +59,12 @@
             </div>
             <div class="module-body">
               <div class="mock-jobs-list">
-                <a href="/interview/ai/cover?jobTagId=639" class="mock-jobs-item">
+                <a href="/interview/ai/cover?jobTagId=639" class="mock-jobs-item" v-for="item in typeList" :key="item.id">
                   <div class="mock-jobs-info">
-                    <p class="mock-jobs-name">Java工程师</p>
+                    <p class="mock-jobs-name">{{item.name}}</p>
                     <p class="item-mock-tips">115944人已参加</p>
                   </div>
-                  <img class="mock-jobs-img" src="https://static.nowcoder.com/images/interview/java-engineer.png">
-                </a>
-                <a href="/interview/ai/cover?jobTagId=640" class="mock-jobs-item">
-                  <div class="mock-jobs-info">
-                    <p class="mock-jobs-name">C++工程师</p>
-                    <p class="item-mock-tips">44145人已参加</p>
-                  </div>
-                  <img class="mock-jobs-img" src="https://static.nowcoder.com/images/interview/cpp-engineer.png">
-                </a>
-                <a href="/interview/ai/cover?jobTagId=644" class="mock-jobs-item">
-                  <div class="mock-jobs-info">
-                    <p class="mock-jobs-name">前端工程师</p>
-                    <p class="item-mock-tips">49255人已参加</p>
-                  </div>
-                  <img class="mock-jobs-img" src="https://static.nowcoder.com/images/interview/css-engineer.png">
-                </a>
-                <a href="/interview/ai/cover?jobTagId=894" class="mock-jobs-item">
-                  <div class="mock-jobs-info">
-                    <p class="mock-jobs-name">数据分析师</p>
-                    <p class="item-mock-tips">9994人已参加</p>
-                  </div>
-                  <img class="mock-jobs-img" src="https://static.nowcoder.com/images/interview/data-analyst.png">
-                </a>
-                <a href="/interview/ai/cover?jobTagId=645" class="mock-jobs-item">
-                  <div class="mock-jobs-info">
-                    <p class="mock-jobs-name">算法工程师</p>
-                    <p class="item-mock-tips">31321人已参加</p>
-                  </div>
-                  <img class="mock-jobs-img" src="https://static.nowcoder.com/images/interview/algorithm-engineer.png">
-                </a>
-                <a href="/interview/ai/cover?jobTagId=680" class="mock-jobs-item">
-                  <div class="mock-jobs-info">
-                    <p class="mock-jobs-name">测试工程师</p>
-                    <p class="item-mock-tips">35130人已参加</p>
-                  </div>
-                  <img class="mock-jobs-img" src="https://static.nowcoder.com/images/interview/qa-engineer.png">
-                </a>
-                <a href="/interview/ai/cover?jobTagId=891" class="mock-jobs-item">
-                  <div class="mock-jobs-info">
-                    <p class="mock-jobs-name">产品</p>
-                    <p class="item-mock-tips">28800人已参加</p>
-                  </div>
-                  <img class="mock-jobs-img" src="https://static.nowcoder.com/images/interview/product-manager.png">
-                </a>
-                <a href="/interview/ai/cover?jobTagId=892" class="mock-jobs-item">
-                  <div class="mock-jobs-info">
-                    <p class="mock-jobs-name">运营</p>
-                    <p class="item-mock-tips">25555人已参加</p>
-                  </div>
-                  <img class="mock-jobs-img" src="https://static.nowcoder.com/images/interview/operation.png">
+                  <img class="mock-jobs-img" :src="item.img">
                 </a>
               </div>
             </div>

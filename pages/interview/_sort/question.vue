@@ -3,7 +3,7 @@
     <div class="container">
       <div class="ask_content" id="newQuestion">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="breadcrumb red_breadcrumb">
               <a class="section" href="/faquestion">开源实践面试</a>
               <span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
@@ -35,32 +35,30 @@
               <div class="field">
                 <label>选择岗位</label>
                 <input type="hidden" name="catalog" value="1" />
-                    <div class="module-body">
-              <div class="mock-jobs-list">
-                <a href="/interview/ai/cover?jobTagId=639" class="mock-jobs-item" v-for="item in typeList" :key="item.id">
-                  <div class="mock-jobs-info">
-                    <p class="mock-jobs-name">{{item.name}}</p>
-                    <p class="item-mock-tips">115944人已参加</p>
+                <div class="module-body">
+                  <div class="mock-jobs-list">
+                    <a href="/interview/ai/cover?jobTagId=639" class="mock-jobs-item" v-for="item in typeList"
+                      :key="item.id">
+                      <div class="mock-jobs-info">
+                        <p class="mock-jobs-name">{{ item.name }}</p>
+                        <p class="item-mock-tips">115944人已参加</p>
+                      </div>
+                      <img class="mock-jobs-img" :src="item.img">
+                    </a>
                   </div>
-                  <img class="mock-jobs-img" :src="item.img">
-                </a>
-              </div>
-            </div>
-              </div>
-              <div class="required field">
-                <label>标题</label>
-                <div class="ui input focus">
-                  <el-input v-model="asktitle" placeholder="您有什么技术问题，请在此输入" v-on:focus="inputfocuse"></el-input>
                 </div>
               </div>
-              <div class="field">
-                <nuxt-link :to="{ name: 'faquestion-howtoask' }" target="_blank">什么样的问题算是一个好问题？</nuxt-link>
+              <div class="required field">
+                <label>面试题目</label>
+                <div class="interview-input">
+                  <el-input v-model="asktitle" placeholder="请在此输入面试题目" v-on:focus="inputfocuse"></el-input>
+                </div>
               </div>
               <div class="required field mb20">
-                <label>语言 平台 标签</label>
+                <label>面试题标签</label>
                 <div class="search_input">
                   <el-select multiple filterable :multiple-limit="3" v-model="selectTags" popper-class="pop-class"
-                    placeholder="准确的关联语言,平台，或者开源程序，可让更多专家看到这个问题 (最多3个)" :remote-method="searchTagMethod"
+                    placeholder="准确的关联语言,平台，或者开源程序，可以获得更专业的解答 (最多3个)" :remote-method="searchTagMethod"
                     @focus="searchTagFocus" style="width:600px;">
                     <el-option v-for="item in tagList" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
@@ -69,9 +67,9 @@
                   <span class="tips_tag" @click="slectTagClick">
                     <span class="span_add" style="color: rgb(39, 124, 204);">
                       <i class="icon icon_add icon_add_pos"></i>
-                    </span> 选择标签</span>
+                    </span> 按职位选择标签</span>
                   <el-popover placement="bottom" width="600" trigger="hover" v-model="tagsVisible">
-                    <el-tabs tab-position="left" style="height: 260px;" v-model="selectType"
+                    <el-tabs tab-position="left" style="height: 320px;" v-model="selectType"
                       @tab-click="handleTagClick">
                       <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">
                         <div class="group-taglist">
@@ -90,7 +88,7 @@
                 </div>
               </div>
 
-              <div class="required field">
+              <div class="required field input-descrip">
                 <label>
                   描述（请对问题进行详细描述：如软件运行环境、详细错误、异常信息等）
                 </label>
@@ -114,24 +112,15 @@
                 </div>
               </div> -->
               <div class="publish_ask">
-                <el-button type="primary" @click="publishAsk">
-                  发布问题
-                </el-button>
+                <div class="interview-tips">
+                  <el-checkbox v-model="checked">我承诺该内容反法律法规的内容，依法</el-checkbox>
+                </div>
+                <el-button type="primary" @click="publishAsk">提交面试题</el-button>
                 <p class="tips_error_show" v-show="this.errtips.length > 0">
                   {{ errtips }}
                 </p>
               </div>
             </form>
-          </div>
-          <div class="col-md-4">
-            <div class="ui warning small message">
-              <h4 class="header">提问和发帖必读</h4>
-              <ol class="list">
-                <li>请不要发布违反法律法规的内容</li>
-                <li>提问有人回答后不允许修改和删除</li>
-                <li>内容违规，保留问题删除的权利，具体以国家规定为基准</li>
-              </ol>
-            </div>
           </div>
         </div>
       </div>
@@ -198,10 +187,10 @@ export default {
   mounted () {
     this.loginToken = window.localStorage.getItem('redclass_token');
     this.init_wangeditor();
-    this.getUploadImageToken();
     askApi.getAskTagList(1).then((response) => {
       this.tagList = response.data.tagList;
     });
+    this.getUploadImageToken();
   },
 
   methods: {
@@ -246,8 +235,9 @@ export default {
     },
     getUploadImageToken () {
       userApi.getUploadImageToken().then((response) => {
-        window.console.log(response);
-        this.uploadToken = response.data.token;
+        if (response != undefined) {
+          this.uploadToken = response.data.token;
+        }
       });
     },
     beforeUpload (file) {
@@ -313,7 +303,7 @@ export default {
       editor.config.uploadImgMaxLength = 1
       editor.config.uploadImgServer = '/api/ucenter/uploadImage'
       editor.config.uploadFileName = 'file'
-      editor.config.placeholder = '请输入问题'
+      editor.config.placeholder = '请输入面试题详细信息'
       editor.config.zIndex = 100;
       editor.config.uploadImgHeaders = {
         token: this.loginToken
@@ -354,9 +344,31 @@ export default {
 </script>
 
 <style>
+.search_input .el-select .el-tag__close.el-icon-close {
+  background-color: #ecf5ff;
+}
+
+.search_input .el-tag.el-tag--info .el-tag__close:hover {
+  background-color: #409eff;
+}
+
+.search_input .el-tag.el-tag--info {
+  background-color: #ecf5ff;
+  border-color: #d9ecff;
+  display: inline-block;
+  font-size: 12px;
+  color: #409eff;
+}
+</style>>
+
+<style scoped>
+.required.field.input-descrip {
+  padding-right: 20px;
+}
 
 .module-body {
   padding: 20px 0px;
+  margin-left: -20px;
 }
 
 .mock-jobs-list {
@@ -395,24 +407,7 @@ export default {
   height: 86px;
   box-shadow: 0 6px 20px 0 rgb(0 0 0 / 16%);
 }
-.search_input .el-select .el-tag__close.el-icon-close {
-  background-color: #ecf5ff;
-}
 
-.search_input .el-tag.el-tag--info .el-tag__close:hover {
-  background-color: #409eff;
-}
-
-.search_input .el-tag.el-tag--info {
-  background-color: #ecf5ff;
-  border-color: #d9ecff;
-  display: inline-block;
-  font-size: 12px;
-  color: #409eff;
-}
-</style>>
-
-<style scoped>
 .group-taglist .nodata-image-tips {
   width: 150px;
   height: 150px;
@@ -574,8 +569,8 @@ export default {
   color: #db2828;
 }
 
-.ui .input {
-  width: 100%;
+.interview-input {
+  padding-right: 20px;
 }
 
 .ui.form input {

@@ -37,14 +37,14 @@
                 <input type="hidden" name="catalog" value="1" />
                 <div class="module-body">
                   <div class="mock-jobs-list">
-                    <a href="/interview/ai/cover?jobTagId=639" class="mock-jobs-item" v-for="item in typeList"
-                      :key="item.id">
-                      <div class="mock-jobs-info">
+                    <div href="/interview/ai/cover?jobTagId=639" class="mock-jobs-item" v-bind:class="{ active: selectType == item.id }" v-for="item in typeList"
+                      :key="item.id" @click="selectType = item.id">
+                      <div class="mock-jobs-info active">
                         <p class="mock-jobs-name">{{ item.name }}</p>
                         <p class="item-mock-tips">115944人已参加</p>
                       </div>
                       <img class="mock-jobs-img" :src="item.img">
-                    </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -67,53 +67,21 @@
                   <span class="tips_tag" @click="slectTagClick">
                     <span class="span_add" style="color: rgb(39, 124, 204);">
                       <i class="icon icon_add icon_add_pos"></i>
-                    </span> 按职位选择标签</span>
-                  <el-popover placement="bottom" width="600" trigger="hover" v-model="tagsVisible">
-                    <el-tabs tab-position="left" style="height: 320px;" v-model="selectType"
-                      @tab-click="handleTagClick">
-                      <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">
-                        <div class="group-taglist">
-                          <div class="nodata-warper" v-if="groupTagList.length == 0">
-                            <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
-                            <div>
-                              <span>该模块下暂时没有标签哦</span>
-                            </div>
-                          </div>
-                          <el-tag class="tag-list" v-for="tag in groupTagList" @click="groupTagClick(tag)"
-                            :key="tag.id">{{ tag.name }}</el-tag>
-                        </div>
-                      </el-tab-pane>
-                    </el-tabs>
-                  </el-popover>
+                    </span>  没有合适的标签，添加新标签？</span>
                 </div>
               </div>
 
-              <div class="required field input-descrip">
+              <div class="field input-descrip">
                 <label>
-                  描述（请对问题进行详细描述：如软件运行环境、详细错误、异常信息等）
+                  描述（请对面试问题进行详细描述：如问题补充说明、前置条件、提示信息等）
                 </label>
                 <div id="askQustion_content">
                 </div>
 
               </div>
-              <!-- <div class="field">
-                <div class="ui checkbox">
-                  <el-checkbox v-model="tipsme">
-                    有人回答时邮件通知我 (957963898@qq.com)
-                  </el-checkbox>
-                  <a href="https://my.oschina.net/redskt/admin/mail-settings" target="_blank">
-                    更改提醒邮箱？
-                  </a>
-                </div>
-              </div> -->
-              <!-- <div class="field">
-                <div class="ui checkbox">
-                  <el-checkbox v-model="nocomment">此帖不允许评论</el-checkbox>
-                </div>
-              </div> -->
               <div class="publish_ask">
                 <div class="interview-tips">
-                  <el-checkbox v-model="checked">我承诺该内容反法律法规的内容，依法</el-checkbox>
+                  <el-checkbox v-model="checked">我承诺提交的内容符合法律法规，若违反允许依法删除违规内容</el-checkbox>
                 </div>
                 <el-button type="primary" @click="publishAsk">提交面试题</el-button>
                 <p class="tips_error_show" v-show="this.errtips.length > 0">
@@ -150,6 +118,7 @@ export default {
       selectTags: [],
       tagList: [],
       groupTagList: [],
+      checked:false,
     }
   },
 
@@ -362,12 +331,19 @@ export default {
 </style>>
 
 <style scoped>
+
+
+
+.interview-tips {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 .required.field.input-descrip {
   padding-right: 20px;
 }
 
 .module-body {
-  padding: 20px 0px;
+  padding: 15px 0px;
   margin-left: -20px;
 }
 
@@ -376,7 +352,7 @@ export default {
   flex-wrap: wrap;
 }
 
-.mock-jobs-item {
+.mock-jobs-list .mock-jobs-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -388,8 +364,16 @@ export default {
   border-radius: 4px;
   margin-bottom: 14px;
   margin-left: 23px;
+  border: 2px solid #ffff;
 }
 
+.mock-jobs-list .mock-jobs-item.active {
+  border: 2px solid #409eff;
+} 
+.mock-jobs-item .mock-jobs-info  .mock-jobs-name {
+  font-size: 14px;
+  font-weight: 500;
+}
 .mock-jobs-item .mock-jobs-info {
   height: 100%;
   display: flex;
@@ -465,8 +449,8 @@ export default {
 }
 
 .askactive {
-  border-color: #409eff;
-  color: #409eff !important;
+  font-weight: 500;
+  /* color: #409eff !important; */
 }
 
 .checkbox {

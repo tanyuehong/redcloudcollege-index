@@ -39,7 +39,7 @@
                   <div class="mock-jobs-list">
                     <div href="/interview/ai/cover?jobTagId=639" class="mock-jobs-item"
                       v-bind:class="{ active: selectType == item.id }" v-for="item in typeList" :key="item.id"
-                      @click="selectType = item.id">
+                      @click="professionClick(item)">
                       <div class="mock-jobs-info active">
                         <p class="mock-jobs-name">{{ item.name }}</p>
                         <p class="item-mock-tips">115944人已参加</p>
@@ -58,7 +58,7 @@
               <div class="required field mb20">
                 <label>面试题标签</label>
                 <div class="search_input">
-                  <el-select multiple filterable :multiple-limit="3" v-model="selectTags" popper-class="pop-class"
+                  <el-select multiple filterable :multiple-limit="3" v-model="selectTags" popper-class="pop-class" no-data-text="当前没有标签"
                     :loading="tagLoading" placeholder="准确的关联语言,平台，或者开源程序，可以获得更专业的解答 (最多3个)" @focus="searchTagFocus"
                     style="width:600px;">
                     <el-option v-for="item in tagList" :key="item.id" :label="item.name" :value="item.id">
@@ -101,7 +101,6 @@
 import userApi from '@/api/user'
 import interviewApi from '@/api/interviewReq.js'
 import interviewServerApi from "@/api/interviewServerReq";
-import { timingSafeEqual } from 'crypto';
 const qiniu = require('qiniu-js')
 
 export default {
@@ -163,6 +162,10 @@ export default {
   },
 
   methods: {
+    professionClick(item) {
+      this.selectType =  item.id;
+      this.tagLoading = true;
+    },
     groupTagClick (tag) {
       var index = this.selectTags.indexOf(tag.id);
       if (index == -1) {
@@ -225,17 +228,13 @@ export default {
     },
     publishAsk () {
       if (this.asktitle.length < 6) {
-        this.errtips = '问题标题必须六个字符以上哈！'
-        return
-      }
-      if (this.askcontent.length < 12) {
-        this.errtips = '问题内容必须12字符以上哈！'
+        this.errtips = '标题必须六个字符以上哈！'
         return
       }
       var userInfo = JSON.parse(window.localStorage.getItem('redclass_user'))
       if (userInfo) {
-        askApi
-          .submitQuestion({
+        interviewApi
+          .submitInterviewQuestion({
             uid: userInfo.id,
             title: this.asktitle,
             content: this.askcontent,
@@ -248,7 +247,7 @@ export default {
               message: '问题提交成功！',
             })
             this.$router.push({
-              name: 'faquestion',
+              name: 'interview',
               query: {},
             })
           })
@@ -285,7 +284,6 @@ export default {
           region: qiniu.region.z2
         };
         const observable = qiniu.upload(file, null, window.myVueComm.uploadToken, putExtra, config);
-        window.console.log('ddddd');
         const observer = {
           next (res) {
             window.console.log(res);

@@ -37,8 +37,9 @@
                 <input type="hidden" name="catalog" value="1" />
                 <div class="module-body">
                   <div class="mock-jobs-list">
-                    <div href="/interview/ai/cover?jobTagId=639" class="mock-jobs-item" v-bind:class="{ active: selectType == item.id }" v-for="item in typeList"
-                      :key="item.id" @click="selectType = item.id">
+                    <div href="/interview/ai/cover?jobTagId=639" class="mock-jobs-item"
+                      v-bind:class="{ active: selectType == item.id }" v-for="item in typeList" :key="item.id"
+                      @click="selectType = item.id">
                       <div class="mock-jobs-info active">
                         <p class="mock-jobs-name">{{ item.name }}</p>
                         <p class="item-mock-tips">115944人已参加</p>
@@ -58,8 +59,8 @@
                 <label>面试题标签</label>
                 <div class="search_input">
                   <el-select multiple filterable :multiple-limit="3" v-model="selectTags" popper-class="pop-class"
-                    placeholder="准确的关联语言,平台，或者开源程序，可以获得更专业的解答 (最多3个)" :remote-method="searchTagMethod"
-                    @focus="searchTagFocus" style="width:600px;">
+                    :loading="tagLoading" placeholder="准确的关联语言,平台，或者开源程序，可以获得更专业的解答 (最多3个)" @focus="searchTagFocus"
+                    style="width:600px;">
                     <el-option v-for="item in tagList" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
                   </el-select>
@@ -67,7 +68,7 @@
                   <span class="tips_tag" @click="slectTagClick">
                     <span class="span_add" style="color: rgb(39, 124, 204);">
                       <i class="icon icon_add icon_add_pos"></i>
-                    </span>  没有合适的标签，添加新标签？</span>
+                    </span> 没有合适的标签，添加新标签？</span>
                 </div>
               </div>
 
@@ -98,8 +99,9 @@
 
 <script>
 import userApi from '@/api/user'
-import askApi from '@/api/ask'
+import interviewApi from '@/api/interviewReq.js'
 import interviewServerApi from "@/api/interviewServerReq";
+import { timingSafeEqual } from 'crypto';
 const qiniu = require('qiniu-js')
 
 export default {
@@ -118,7 +120,8 @@ export default {
       selectTags: [],
       tagList: [],
       groupTagList: [],
-      checked:false,
+      checked: false,
+      tagLoading: true,
     }
   },
 
@@ -156,9 +159,6 @@ export default {
   mounted () {
     this.loginToken = window.localStorage.getItem('redclass_token');
     this.init_wangeditor();
-    askApi.getAskTagList(1).then((response) => {
-      this.tagList = response.data.tagList;
-    });
     this.getUploadImageToken();
   },
 
@@ -179,26 +179,23 @@ export default {
       }
     },
     searchTagFocus () {
-      this.tagsVisible = false;
+      if (this.tagLoading) {
+        interviewApi.getInterviewTagList(this.selectType).then((response) => {
+          this.tagList = response.data.tagList;
+          this.tagLoading = false;
+        });
+      }
     },
-    searchTagMethod () {
-      this.tagsVisible = false;
+    searchTagMethod (select) {
+      debugger;
     },
 
     slectTagClick () {
-      if (this.tagsVisible) {
-        this.tagsVisible = false;
-      } else {
-        this.tagsVisible = true;
-        askApi.getAskTagList(this.selectType).then((response) => {
-          this.groupTagList = response.data.tagList;
-        });
-      }
-
     },
+
     handleTagClick (tab, event) {
       this.selectType = tab.name;
-      askApi.getAskTagList(this.selectType).then((response) => {
+      interviewApi.getInterviewTagList(this.selectType).then((response) => {
         this.groupTagList = response.data.tagList;
       });
     },
@@ -331,13 +328,11 @@ export default {
 </style>>
 
 <style scoped>
-
-
-
 .interview-tips {
   margin-top: 15px;
   margin-bottom: 15px;
 }
+
 .required.field.input-descrip {
   padding-right: 20px;
 }
@@ -369,11 +364,13 @@ export default {
 
 .mock-jobs-list .mock-jobs-item.active {
   border: 2px solid #409eff;
-} 
-.mock-jobs-item .mock-jobs-info  .mock-jobs-name {
+}
+
+.mock-jobs-item .mock-jobs-info .mock-jobs-name {
   font-size: 14px;
   font-weight: 500;
 }
+
 .mock-jobs-item .mock-jobs-info {
   height: 100%;
   display: flex;

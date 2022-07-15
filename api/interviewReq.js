@@ -8,11 +8,10 @@ export default {
     })
   },
 
-  
   // 问题提交的接口
   submitInterviewQuestion(qData) {
     return request({
-      url: `/eduask/submit`,
+      url: `/interview/submit`,
       method: 'post',
       data: qData,
     })

@@ -58,9 +58,9 @@
               <div class="required field mb20">
                 <label>面试题标签</label>
                 <div class="search_input">
-                  <el-select multiple filterable :multiple-limit="3" v-model="selectTags" popper-class="pop-class" no-data-text="当前没有标签"
-                    :loading="tagLoading" placeholder="准确的关联语言,平台，或者开源程序，可以获得更专业的解答 (最多3个)" @focus="searchTagFocus"
-                    style="width:600px;">
+                  <el-select multiple filterable :multiple-limit="3" v-model="selectTags" popper-class="pop-class"
+                    no-data-text="当前没有标签" :loading="tagLoading" placeholder="准确的关联语言,平台，或者开源程序，可以获得更专业的解答 (最多3个)"
+                    @focus="searchTagFocus" style="width:600px;">
                     <el-option v-for="item in tagList" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
                   </el-select>
@@ -162,8 +162,8 @@ export default {
   },
 
   methods: {
-    professionClick(item) {
-      this.selectType =  item.id;
+    professionClick (item) {
+      this.selectType = item.id;
       this.tagLoading = true;
     },
     groupTagClick (tag) {
@@ -247,7 +247,7 @@ export default {
               message: '问题提交成功！',
             })
             this.$router.push({
-              name: 'interview',
+              path: 'interview',
               query: {},
             })
           })

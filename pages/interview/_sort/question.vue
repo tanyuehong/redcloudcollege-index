@@ -82,7 +82,7 @@
               </div>
               <div class="publish_ask">
                 <div class="interview-tips">
-                  <el-checkbox v-model="checked">我承诺提交的内容符合法律法规，若违反允许依法删除违规内容</el-checkbox>
+                  <el-checkbox v-model="checked" @change="confirmSelected">我确认提交的内容符合法律法规，若违反允许依法删除违规内容</el-checkbox>
                 </div>
                 <el-button type="primary" @click="publishAsk">提交面试题</el-button>
                 <p class="tips_error_show" v-show="this.errtips.length > 0">
@@ -182,6 +182,9 @@ export default {
       }
     },
     searchTagFocus () {
+      if(this.errtips == '至少需要选择一个标签哈！') {
+        this.errtips = '';
+      }
       if (this.tagLoading) {
         interviewApi.getInterviewTagList(this.selectType).then((response) => {
           this.tagList = response.data.tagList;
@@ -189,11 +192,17 @@ export default {
         });
       }
     },
-    searchTagMethod (select) {
-      debugger;
+    confirmSelected() {
+      if(this.checked && this.errtips == '请确认您提交的内容哈！') {
+        this.errtips = '';
+      }
     },
 
     slectTagClick () {
+        this.$message({
+              type: 'info',
+              message: '功能正在紧急开发中，敬请期待',
+            })
     },
 
     handleTagClick (tab, event) {
@@ -231,6 +240,15 @@ export default {
         this.errtips = '标题必须六个字符以上哈！'
         return
       }
+      if(this.selectTags.length<=0) {
+        this.errtips = '至少需要选择一个标签哈！'
+        return
+      }
+      if(!this.checked) {
+        this.errtips  = "请确认您提交的内容哈！";
+        return
+      }
+      
       var userInfo = JSON.parse(window.localStorage.getItem('redclass_user'))
       if (userInfo) {
         interviewApi
@@ -259,7 +277,9 @@ export default {
       }
     },
     inputfocuse () {
-      this.errtips = ''
+      if(this.errtips == '标题必须六个字符以上哈！') {
+        this.errtips = ''
+      }
     },
 
     init_wangeditor () {
@@ -326,6 +346,10 @@ export default {
 </style>>
 
 <style scoped>
+
+.ui.form .field.input-descrip {
+  margin-right: 20px;
+}
 .interview-tips {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -649,11 +673,11 @@ export default {
 
 .tips_error_show {
   position: absolute;
-  top: 10px;
-  left: 110px;
-  color: red;
-  font-size: 12px;
-  width: 100%;
+    top: 43px;
+    left: 130px;
+    color: red;
+    font-size: 12px;
+    width: 100%;
 }
 
 .editor {

@@ -4,154 +4,174 @@
     </div>
     <div class="main_global_bg">
       <section class="container">
-        <div class="interview-content">
-          <div class="interview-function">
-            <div class="content___3CUOk"><a target="_blank" rel="noopener"
-                href="https://marketing.qiniu.com/activity/os_lp#www-homepage_button-1" class="container___1me7f">
-                <section class="card___2JUgs card___JWlTD">
-                  <div class="icon___2NyVK"
-                    style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513637)"></div>
-                  <div class="content___2eWOS cardContent___24wEe">
-                    <h5 class="title___1e416 title___2VARs">每日一题</h5>
-                    <p class="desc___3fiGh desc___3Su17">拳不离手，曲不离口</p>
-                  </div>
-                </section>
-              </a><a target="_blank" rel="noopener"
-                href="https://marketing.qiniu.com/activity/act-free#www-homepage_button-3" class="container___1me7f">
-                <section class="card___2JUgs card___JWlTD">
-                  <div class="icon___2NyVK"
-                    style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513787)"></div>
-                  <div class="content___2eWOS cardContent___24wEe">
-                    <h5 class="title___1e416 title___2VARs">智能出题</h5>
-                    <p class="desc___3fiGh desc___3Su17">精选名企真题，迅速查漏补缺</p>
-                  </div>
-                </section>
-              </a><a target="_blank" rel="noopener"
-                href="https://marketing.qiniu.com/activity/2021618-act-cdn#www-homepage_button-4"
-                class="container___1me7f">
-                <section class="card___2JUgs card___JWlTD">
-                  <div class="icon___2NyVK"
-                    style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513880)"></div>
-                  <div class="content___2eWOS cardContent___24wEe">
-                    <h5 class="title___1e416 title___2VARs">学习计划</h5>
-                    <p class="desc___3fiGh desc___3Su17">步步为营，稳步提升</p>
-                  </div>
-                </section>
-              </a>
-
-               <nuxt-link :to="'/interview/question'"  target="_blank"  class="container___1me7f">
-                <section class="card___2JUgs card___JWlTD">
-                  <div class="icon___2NyVK"
-                    style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513880)"></div>
-                  <div class="content___2eWOS cardContent___24wEe">
-                    <h5 class="title___1e416 title___2VARs">面试题上传</h5>
-                    <p class="desc___3fiGh desc___3Su17">分享面试真题，爱心传递</p>
-                  </div>
-                </section>
-              </nuxt-link>
-            </div>
-          </div>
-
-          <div class="module-box js-scroll-occupation">
-            <div class="module-head clearfix">
-              <h1>按岗位练习</h1>
-              <span class="mock-sub-title">选择目标职位，精选名企面试真题，体验真实现场面试</span>
-            </div>
-            <div class="module-body">
-              <div class="mock-jobs-list">
-                <a href="/interview/ai/cover?jobTagId=639" class="mock-jobs-item" v-for="item in typeList" :key="item.id">
-                  <div class="mock-jobs-info">
-                    <p class="mock-jobs-name">{{item.name}}</p>
-                    <p class="item-mock-tips">115944人已参加</p>
-                  </div>
-                  <img class="mock-jobs-img" :src="item.img">
+        <div class="row mb15">
+          <div class="interview-content">
+            <div class="interview-function">
+              <div class="content___3CUOk"><a target="_blank" rel="noopener"
+                  href="https://marketing.qiniu.com/activity/os_lp#www-homepage_button-1" class="container___1me7f">
+                  <section class="card___2JUgs card___JWlTD">
+                    <div class="icon___2NyVK"
+                      style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513637)"></div>
+                    <div class="content___2eWOS cardContent___24wEe">
+                      <h5 class="title___1e416 title___2VARs">每日一题</h5>
+                      <p class="desc___3fiGh desc___3Su17">拳不离手，曲不离口</p>
+                    </div>
+                  </section>
+                </a><a target="_blank" rel="noopener"
+                  href="https://marketing.qiniu.com/activity/act-free#www-homepage_button-3" class="container___1me7f">
+                  <section class="card___2JUgs card___JWlTD">
+                    <div class="icon___2NyVK"
+                      style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513787)"></div>
+                    <div class="content___2eWOS cardContent___24wEe">
+                      <h5 class="title___1e416 title___2VARs">智能出题</h5>
+                      <p class="desc___3fiGh desc___3Su17">精选名企真题，迅速查漏补缺</p>
+                    </div>
+                  </section>
+                </a><a target="_blank" rel="noopener"
+                  href="https://marketing.qiniu.com/activity/2021618-act-cdn#www-homepage_button-4"
+                  class="container___1me7f">
+                  <section class="card___2JUgs card___JWlTD">
+                    <div class="icon___2NyVK"
+                      style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513880)"></div>
+                    <div class="content___2eWOS cardContent___24wEe">
+                      <h5 class="title___1e416 title___2VARs">学习计划</h5>
+                      <p class="desc___3fiGh desc___3Su17">步步为营，稳步提升</p>
+                    </div>
+                  </section>
                 </a>
+
+                <nuxt-link :to="'/interview/question'" target="_blank" class="container___1me7f">
+                  <section class="card___2JUgs card___JWlTD">
+                    <div class="icon___2NyVK"
+                      style="background-image:url(https://static-file.qiniu.io/thallo/admin/1654513880)"></div>
+                    <div class="content___2eWOS cardContent___24wEe">
+                      <h5 class="title___1e416 title___2VARs">面试题上传</h5>
+                      <p class="desc___3fiGh desc___3Su17">分享面试真题，爱心传递</p>
+                    </div>
+                  </section>
+                </nuxt-link>
               </div>
             </div>
-          </div>
 
-          <div class="interview_content-list">
-            <div class="interview-top-group">
-              <div class="interview-tag-list" v-if="tagList.length > 0">
-                <ul class="tag-warper">
-                  <li class="tag-item" v-for="item in tagList" :key="item.id">
-                    <nuxt-link :to="tagPath(item)" class="tag-link" v-bind:class="{ active: tag == item.id }">{{
-                        item.name
-                    }}
+            <div class="module-box js-scroll-occupation">
+              <div class="module-head clearfix">
+                <h1>按岗位练习</h1>
+                <span class="mock-sub-title">选择目标职位，精选名企面试真题，体验真实现场面试</span>
+              </div>
+              <div class="module-body">
+                <div class="mock-jobs-list">
+                  <a href="/interview/ai/cover?jobTagId=639" class="mock-jobs-item" v-for="item in typeList"
+                    :key="item.id">
+                    <div class="mock-jobs-info">
+                      <p class="mock-jobs-name">{{ item.name }}</p>
+                      <p class="item-mock-tips">115944人已参加</p>
+                    </div>
+                    <img class="mock-jobs-img" :src="item.img">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8 interview_content-list">
+              <div class="interview-top-group">
+                <div class="interview-tag-list" v-if="tagList.length > 0">
+                  <ul class="tag-warper">
+                    <li class="tag-item" v-for="item in tagList" :key="item.id">
+                      <nuxt-link :to="tagPath(item)" class="tag-link" v-bind:class="{ active: tag == item.id }">{{
+                          item.name
+                      }}
+                      </nuxt-link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="interview_detail_con">
+                <div class="nodata-warper" v-if="list.length == 0">
+                  <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                  <div>
+                    <span>暂时没有数据哦，赶紧抢沙发吧</span>
+                  </div>
+                </div>
+                <div class="interview-list-header" v-if="list.length > 0">
+                  <ul class="nav-list">
+                    <li class="blog-item right">
+                      <nuxt-link :to="sortPath('recommand')" class="content-type-item"
+                        v-bind:class="{ active: sort == 'recommand' }">推荐</nuxt-link>
+                    </li>
+                    <li class="blog-item right">
+                      <nuxt-link :to="sortPath('latest')" class="content-type-item"
+                        v-bind:class="{ active: sort == 'latest' }">最新</nuxt-link>
+                    </li>
+                    <li class="blog-item">
+                      <nuxt-link :to="sortPath('hot')" class="content-type-item"
+                        v-bind:class="{ active: sort == 'hot' }">
+                        热榜
+                      </nuxt-link>
+                    </li>
+                  </ul>
+                </div>
+                <div v-for="item in list" :key="item.qid" class="interview_list">
+                  <div class="answer_title">
+                    <nuxt-link :to="'/faquestion/' + item.qid" class="header">
+                      {{ item.title }}
+                      <div class="ui red label horizontal">顶</div>
+                      <div class="ui orange label horizontal" v-if="item.readcount > 300">热</div>
+                      <div class="ui red label horizontal fix" v-if="item.state == 9">已解决</div>
                     </nuxt-link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="questions_tab_con">
-              <ul class="faqustion-subtypelist">
-                <nuxt-link :to="sortPath(item)" v-for="(item, index) in sortList" :key="item.path"
-                  :class="{ comactive: typeIndex == index }" class="faqustion-subtype-item">
-                  <span :title="item.name">
-                    {{ item.name }}
-                  </span>
-                </nuxt-link>
-              </ul>
-            </div>
-            <div class="interview_detail_con">
-              <div class="nodata-warper" v-if="list.length == 0">
-                <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
-                <div>
-                  <span>暂时没有数据哦，赶紧抢沙发吧</span>
-                </div>
-              </div>
-            <div class="interview-list-header" v-if="list.length > 0">
-            <ul class="nav-list">
-              <li class="blog-item right">
-                <nuxt-link :to="sortPath('recommand')" class="content-type-item"
-                  v-bind:class="{ active: sort == 'recommand' }">推荐</nuxt-link>
-              </li>
-              <li class="blog-item right">
-                <nuxt-link :to="sortPath('latest')" class="content-type-item"
-                  v-bind:class="{ active: sort == 'latest' }">最新</nuxt-link>
-              </li>
-              <li class="blog-item">
-                <nuxt-link :to="sortPath('hot')" class="content-type-item" v-bind:class="{ active: sort == 'hot' }">热榜
-                </nuxt-link>
-              </li>
-            </ul>
-          </div>
-              <div v-for="item in list" :key="item.qid" class="interview_list">
-                <div class="answer_title">
-                  <nuxt-link :to="'/faquestion/' + item.qid" class="header">
-                    {{ item.title }}
-                    <div class="ui red label horizontal">顶</div>
-                    <div class="ui orange label horizontal" v-if="item.readcount > 300">热</div>
-                    <div class="ui red label horizontal fix" v-if="item.state == 9">已解决</div>
-                  </nuxt-link>
-                </div>
+                  </div>
 
-                <div class="description" v-html="item.content">
-                </div>
-                <div class="extra question-tags" v-if="item.tags">
-                  <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" target="_blank"
-                    v-for="tag in item.tags" :key="tag.id">
-                    <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
-                  </nuxt-link>
-                </div>
+                  <div class="description" v-html="item.content">
+                  </div>
+                  <div class="extra question-tags" v-if="item.tags">
+                    <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" target="_blank"
+                      v-for="tag in item.tags" :key="tag.id">
+                      <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
+                    </nuxt-link>
+                  </div>
 
-                <div class="q_time">
-                  <span>{{ item.gmtCreate }}来自</span>
-                  <nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name" target="_blank">
-                    {{ item.nickname }}
-                  </nuxt-link>
-                  <b v-if="item.price > 0">
-                    悬赏
-                    <a href="javascript:;" title="个人悬赏">¥{{ item.price }}</a>
-                  </b>
-                  <nuxt-link :to="'/faquestion/' + item.qid" class="answer_num" title="问题回答数量">
-                    <span>{{ item.reply }}</span>
-                    <p class="anser-lable">回答</p>
-                  </nuxt-link>
+                  <div class="q_time">
+                    <span>{{ item.gmtCreate }}来自</span>
+                    <nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name" target="_blank">
+                      {{ item.nickname }}
+                    </nuxt-link>
+                    <b v-if="item.price > 0">
+                      悬赏
+                      <a href="javascript:;" title="个人悬赏">¥{{ item.price }}</a>
+                    </b>
+                    <nuxt-link :to="'/faquestion/' + item.qid" class="answer_num" title="问题回答数量">
+                      <span>{{ item.reply }}</span>
+                      <p class="anser-lable">回答</p>
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+              <div class="clearnfloat"></div>
+            </div>
+            <div class="col-md-4">
+              <div class="wechatma-con js-wechatma-con">
+                <div class="ma-con">
+                  <div class="ma"></div>
+                  <div class="desc">
+                    <div class="title">扫码关注开源实践网微信公众号</div>
+                    <div class="item-con">
+                      <div class="item">干货分享</div>
+                      <div class="item">定期活动</div>
+                      <div class="item">课程优惠</div>
+                      <div class="item">专栏福利</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-con">
+                  官方优惠福利活动一手掌握，关注开源实践官网（ID：www.redskt.com），和1万+客户端程序员一起成长！
+                </div>
+              </div>
+              <div class="download-app clearfix">
+                <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
+                <div class="text fl">
+                  <h4>下载开源实践APP</h4>
+                  <p>更好的体验 学习随处可享</p>
                 </div>
               </div>
             </div>
-            <div class="clearnfloat"></div>
           </div>
         </div>
       </section>
@@ -161,8 +181,8 @@
 
 <script>
 
+import '~/assets/css/appdown.css'
 import '~/assets/css/askindex.css'
-import askServerApi from "@/api/askServerReq";
 import interviewServerApi from "@/api/interviewServerReq";
 
 export default {
@@ -170,6 +190,10 @@ export default {
     return {
       activeIndex: "1",
       tagList: [],
+      typeList: [],
+      tagList: [],
+      sort: 'recommand',
+      tag: 'all',
       typeIndex: 0,
       title: "开源实践面试 - 最用心的面试刷题知识学习网站",
       descrb: "求职之前，先上开源实践网面试频道，专业的面试题库和最走心得面试解答，让你轻轻松松找到互联网工作。互联网IT技术/产品/运营/硬件/汽车机械制造/金融/财务管理/审计/银行/市场营销/地产/快消/管培生等等专业技能学习/备考/求职神器，在线进行企业校招实习笔试面试真题模拟考试练习，全面提升求职竞争力，找到好工作，拿到好offer。"
@@ -203,41 +227,33 @@ export default {
       return {
         list: response.data.list ? response.data.list : [],
         typeList: response.data.typeList,
-        sortList: response.data.sortList,
         tagList: response.data.tagList,
         sort: params.sort ? params.sort : "recommand",
-        type: params.type ? params.type : response.data.typeList[0],
         tag: params.tag ? params.tag : (response.data.tagList.length > 0 ? "all" : "")
       }
     })
   },
 
   mounted () {
-    window.console.log(this.sort);
+    interviewServerApi.getInterviewIndex({ 'sort': '', 'tag': '' }).then((response) => {
+    })
   },
 
   computed: {
-    // 计算属性的 getter
-    typePath () {
-      return function (item, index) {
-        if (index == 0) {
-          return "/interview";
-        }
-        return "/interview/" + item.type;
-      }
-    },
-
     sortPath () {
-      return function (item) {
-        return "/interview/" + this.type + "/" + item.path;
+      return function (sortString) {
+        if (sortString == 'recommand') {
+          return "/interview"
+        }
+        return "/interview/" + sortString;
       }
     },
     tagPath () {
       return function (item) {
         if (item.id == 'all') {
-          return "/interview/" + this.type;
+          return "/interview";
         }
-        return "/interview/" + this.type + "/" + this.sort + "/" + item.id;
+        return "/interview/" + this.sort + "/" + item.id;
       }
     }
   },
@@ -274,15 +290,17 @@ export default {
 </script>
 
 <style scoped>
-
 .interview_list {
   margin-top: 10px;
 }
+
 .interview-top-group {
   border-bottom: solid 1px #e6e6e6;
-  margin-top: 25px;
-  padding-bottom: 10px;
+  margin-top: 20px;
+  padding-bottom: 0px;
+  margin-right: -10px;
 }
+
 .interview-content {
   margin-bottom: 20px;
 }
@@ -294,39 +312,39 @@ export default {
 
 
 .interview-list-header {
-    margin-left: -10px;
-    padding-left: 0;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid hsla(0,0%,59.2%,.1);
+  margin-left: -10px;
+  padding-left: 0;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid hsla(0, 0%, 59.2%, .1);
 }
 
 .interview-list-header .nav-list {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 2px;
 }
 
 .interview-list-header .blog-item .content-type-item.active {
-    color: #409eff;
+  color: #409eff;
 }
 
 .interview-list-header .blog-item {
-    font-size: 14px;
-    border-bottom: none;
-    margin-top: 12px;
-    margin-bottom: 4px;
-    padding-left: 26px;
-    padding-right: 26px;
+  font-size: 14px;
+  border-bottom: none;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  padding-left: 26px;
+  padding-right: 26px;
 }
 
 .interview-list-header .blog-item .content-type-item {
-    color: #666;
-    text-decoration: none;
+  color: #666;
+  text-decoration: none;
 }
 
 .blog-item.right {
-    border-right: 1px solid hsla(0,0%,59.2%,.2);
+  border-right: 1px solid hsla(0, 0%, 59.2%, .2);
 }
 
 .interview-content .interview_detail_con {
@@ -341,19 +359,21 @@ export default {
 
 .interview-tag-list .tag-warper {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .interview-tag-list .tag-warper .tag-item {
   margin-right: 18px;
+  margin-bottom: 15px;
 }
 
 .interview-tag-list .tag-warper .tag-item .tag-link {
-    background: #efefef;
-    border-radius: 14px;
-    padding: 8px 20px;
-    font-size: 14px;
-    text-decoration: none;
-    color: #666;
+  background: #efefef;
+  border-radius: 14px;
+  padding: 5px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #666;
 }
 
 .interview-type-item.active {
@@ -387,7 +407,7 @@ export default {
 }
 
 .content___3CUOk {
-  width: 1110px;
+  width: 1160px;
   position: relative;
   margin-left: auto;
   margin-right: auto;
@@ -404,7 +424,7 @@ export default {
   -ms-flex: 1 1 0px;
   flex: 1 1 0;
   display: block;
-  margin: 0 0 0 20px;
+  margin: 0 15px 0 15px;
 }
 
 .content___3CUOk .container___1me7f .card___JWlTD .cardContent___24wEe .desc___3Su17 {

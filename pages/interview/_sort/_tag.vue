@@ -113,22 +113,22 @@
                   <div class="answer_title">
                     <nuxt-link :to="'/faquestion/' + item.qid" class="header">
                       {{ item.title }}
-                      <div class="ui red label horizontal">顶</div>
-                      <div class="ui orange label horizontal" v-if="item.readcount > 300">热</div>
-                      <div class="ui red label horizontal fix" v-if="item.state == 9">已解决</div>
                     </nuxt-link>
                   </div>
-
                   <div class="description" v-html="item.content">
                   </div>
                   <div class="extra question-tags" v-if="item.tags">
+                    <div class="ui red label top horizontal">精选</div>
+                     <div class="ui orange label horizontal" v-if="item.readcount > 300">热</div>
                     <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" target="_blank"
                       v-for="tag in item.tags" :key="tag.id">
                       <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
                     </nuxt-link>
                   </div>
 
-                  <div class="q_time">
+                  <div class="interview-descrip">
+                    <span class="type">{{item.type}}</span>
+                    <span class="deep">{{item.deep}}</span>
                     <span>{{ item.gmtCreate }}来自</span>
                     <nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name" target="_blank">
                       {{ item.nickname }}
@@ -137,11 +137,12 @@
                       悬赏
                       <a href="javascript:;" title="个人悬赏">¥{{ item.price }}</a>
                     </b>
-                    <nuxt-link :to="'/faquestion/' + item.qid" class="answer_num" title="问题回答数量">
-                      <span>{{ item.reply }}</span>
-                      <p class="anser-lable">回答</p>
-                    </nuxt-link>
                   </div>
+                  <nuxt-link :to="'/faquestion/' + item.qid" class="answer_num" title="问题回答数量">
+                      <img src="https://img.redskt.com/interview/questionlist/interview-tags.png">
+                      <span>{{item.reply}}</span>
+                      <span class="anser-lable">解答</span>
+                    </nuxt-link>
                 </div>
               </div>
               <div class="clearnfloat"></div>
@@ -291,7 +292,50 @@ export default {
 
 <style scoped>
 .interview_list {
+  margin-top: 15px;
+  position: relative;
+}
+
+.interview_list .answer_num {
+  position:absolute;
+  top: 0px;
+  right: 10px;
+  color: #666;
+  font-size: 12px;
+}
+.interview_list .answer_num:hover {
+  text-decoration: none;
+}
+
+.interview_list .answer_num img {
+  width: 30px;
+  height: 30px;
+  vertical-align:middle
+}
+
+.interview_list .answer_title .header {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.interview_list  .question-tags {
   margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.interview_list .ui.label.top {
+  padding: 5px 8px;
+  border-width: 1px;
+  border-color: #b7eb8f !important;
+  background: #f6ffed !important;
+  color: #389e0d !important;
+  margin-right: 6px;
+}
+
+.interview_list .ui.basic.label {
+
 }
 
 .interview-top-group {
@@ -317,6 +361,15 @@ export default {
   padding-top: 4px;
   padding-bottom: 4px;
   border-bottom: 1px solid hsla(0, 0%, 59.2%, .1);
+}
+
+.extra.question-tags img {
+    display: inline-block;
+    vertical-align: baseline;
+    height: 22px !important;
+    border-radius: 0.14285714rem;
+    padding: 2px 0;
+    margin: -0.5833em 0.5em -0.5833em 0;
 }
 
 .interview-list-header .nav-list {
@@ -348,7 +401,7 @@ export default {
 }
 
 .interview-content .interview_detail_con {
-  margin: 10px 20px 20px 20px;
+  margin: 10px 10px 10px 10px;
   padding-bottom: 25px;
 }
 

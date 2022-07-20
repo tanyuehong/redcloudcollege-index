@@ -127,11 +127,11 @@
                   </div>
 
                   <div class="interview-descrip">
-                    <span class="type">{{ item.type }}</span>
-                    <span class="deep">{{ item.deep }}</span>
-                    <span>{{ item.gmtCreate }}来自</span>
+                    <span class="descrip-item right">{{ item.type }}</span>
+                    <span class="descrip-item right">{{ item.deep }}</span>
+                    <span class="descrip-item">{{ item.gmtCreate }}来自</span>
                     <nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name" target="_blank">
-                      {{ item.nickname }}
+                     {{ item.nickname }}
                     </nuxt-link>
                     <b v-if="item.price > 0">
                       悬赏
@@ -327,6 +327,22 @@ export default {
 </script>
 
 <style scoped>
+
+.interview-qustion-info .interview-item {
+  margin-right: 8px;
+}
+.interview-descrip .descrip-item.right {
+  border-right: 1px solid hsla(0, 0%, 59.2%, .2);
+}
+.interview-descrip .user_name {
+  margin-left: -12px;
+}
+.interview-descrip .descrip-item {
+  font-size: 12px;
+  color: #666;
+  padding-right: 6px;
+  margin-right: 6px;
+}
 .interview-qustion-info {
   display: flex;
   flex-flow: row wrap;
@@ -358,7 +374,6 @@ export default {
   position: relative;
   padding-bottom: 6px;
 }
-
 .interview_list:not(:last-child) {
   border-bottom: 1px solid #f0f0f0;
 }
@@ -469,7 +484,7 @@ export default {
 
 .interview-content .interview_detail_con {
   margin: 10px 10px 10px 10px;
-  padding-bottom: 25px;
+  padding-bottom: 15px;
 }
 
 .interview-tag-list {

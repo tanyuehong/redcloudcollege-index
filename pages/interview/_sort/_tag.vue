@@ -124,6 +124,7 @@
                       v-for="tag in item.tags" :key="tag.id">
                       <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
                     </nuxt-link>
+
                   </div>
 
                   <div class="interview-descrip">
@@ -179,6 +180,20 @@
                     <span>{{ item.reply }}</span>
                     <span class="anser-lable">解答</span>
                   </nuxt-link>
+                       <span class="descrip-more">
+                     <el-dropdown>
+                      <el-button type="primary" size="mini" plain>更多操作<i class="el-icon-arrow-down el-icon--right"></i>
+                      </el-button>
+  
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+                    </span>
                 </div>
               </div>
               <div class="clearnfloat"></div>
@@ -296,6 +311,9 @@ export default {
   },
 
   methods: {
+    moreClickCommend() {
+
+    },
     jumpStartQuestion () {
       var token = localStorage.getItem('redclass_token')
       if (!(token && token != 'undefined')) {
@@ -327,6 +345,12 @@ export default {
 </script>
 
 <style scoped>
+
+.descrip-more {
+  position:absolute;
+  bottom: 6px;
+  right: 6px;
+}
 
 .interview-qustion-info .interview-item {
   margin-right: 8px;

@@ -111,7 +111,7 @@
                 </div>
                 <div v-for="item in list" :key="item.qid" class="interview_list">
                   <div class="answer_title">
-                    <nuxt-link :to="'/faquestion/' + item.qid" class="header">
+                    <nuxt-link :to="'/interview/detail/' + item.qid" class="header">
                       {{ item.title }}
                     </nuxt-link>
                   </div>
@@ -175,7 +175,7 @@
                             </path>
                           </svg></span><span>{{item.meet}}</span></button></div>
                   </div>
-                  <nuxt-link :to="'/faquestion/' + item.qid" class="answer_num" title="问题回答数量">
+                  <nuxt-link :to="'/interview/detail/' + item.qid" class="answer_num" title="问题回答数量">
                     <img src="https://img.redskt.com/interview/questionlist/interview-tags.png">
                     <span>{{ item.reply }}</span>
                     <span class="anser-lable">解答</span>

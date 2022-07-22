@@ -146,10 +146,6 @@
                 </ul>
               </div>
               <div class="question_info">
-                <nuxt-link :to="'/user/' + qdetail.uid + '/blog'">
-                  <img class="vam user-head-image" :src="qdetail.avatar" width="30" height="30" alt />
-                  <span class="ml5">{{ qdetail.nickname }}</span>
-                </nuxt-link>
                 <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
                 <span class="glyphicon glyphicon-star-empty qustion-top-item" aria-hidden="true">
                 </span>
@@ -341,9 +337,28 @@
         </div>
 
         <div class="ask-detail-right">
-          <div>
+          <div class="question-info">
             <div class="user_header">
               <span class="qTitle">题目信息</span>
+            </div>
+            <div class="question-info-list">
+              <div class="info-item">
+                浏览: <span>{{qdetail.readcount}}</span>
+              </div>
+              <div class="info-item">
+                发布时间: <span>{{qdetail.gmtCreate}}</span>
+              </div>
+
+              <div class="info-item">
+                上传者:<nuxt-link :to="'/user/' + qdetail.uid + '/blog'">
+                  <img class="vam user-head-image" :src="qdetail.avatar" width="30" height="30" alt />
+                  <span class="ml5">{{ qdetail.nickname }}</span>
+                </nuxt-link>
+              </div>
+
+                <div class="info-item">
+                  遇到人数: <span>{{qdetail.meet}}</span>
+                </div>
             </div>
 
             <div class="user-center-info" v-if="this.isLogin">
@@ -1262,7 +1277,34 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.question-info {
+}
+.question-info .question-info-list {
+  background: #fff;
+  padding-left: 20px;
+  padding-top: 15px;
+  padding-bottom: 8px;
+}
+
+.question-info .question-info-list .info-item {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.question-info .question-info-list .info-item span {
+  margin-left: 6px;
+}
+
+.question-info .question-info-list .info-item a {
+  margin-left:6px;
+}
+
+.question-info .question-info-list .info-item a span {
+  margin-left:3px;
+}
+ 
 .question-header-title {
   font-size: 16px;
   font-weight: 500;

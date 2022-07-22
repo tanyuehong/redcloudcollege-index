@@ -12,53 +12,25 @@
               <div class="active section">面试题详情</div>
             </div>
             <div>
-              <div class="question_info">
-                <nuxt-link :to="'/user/' + qdetail.uid + '/blog'">
-                  <img class="vam user-head-image" :src="qdetail.avatar" width="30" height="30" alt />
-                  <span class="ml5">{{ qdetail.nickname }}</span>
-                </nuxt-link>
-                <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
-                <span class="glyphicon glyphicon-star-empty qustion-top-item" aria-hidden="true">
-                </span>
-                <span class="qustion-good-num">收藏 {{ qdetail.collect }} </span>
-
-                <span class="top-tips" v-if="qdetail.state == 9">已解决</span>
-                <div class="qustion-right-view">
-                  浏览 {{ qdetail.readcount }}
-                </div>
+              <div class="question-header-title">
+                题目标题
               </div>
-              <div>
+              <div class="qustion-content">
                 <h2 class="title_header">{{ qdetail.title }}</h2>
-                <div class="ui red label horizontal" data-tooltip="置顶">
-                  顶
-                </div>
                 <div class="ui orange label horizontal" data-tooltip="热门">
                   热
                 </div>
               </div>
-
               <div class="extra question-tags mt10" v-if="qdetail.tags">
                 <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
                   target="_blank" v-for="tag in qdetail.tags" :key="tag.id">
                   <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
                 </a>
               </div>
-
               <div class="qustion_content" v-html="qdetail.content"></div>
               <div class="qustion_info">
                 <div class="ui_center_button">
-                  <el-button plain type="primary" :icon="collectIcon" @click="collectBtnClick">{{ collectString }}
-                  </el-button>
-                  <div class="ui_group_button">
-                    <el-dropdown class="sort">
-                      <el-button plain type="primary" icon="el-icon-share">分享</el-button>
-                      <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>微博</el-dropdown-item>
-                        <el-dropdown-item>QQ</el-dropdown-item>
-                        <el-dropdown-item>微信</el-dropdown-item>
-                      </el-dropdown-menu>
-                    </el-dropdown>
-                  </div>
+                  <button>查看解析</button>
                 </div>
                 <ul class="ask-issue-tool fbselect">
                   <span class="answer_span" @click="answerBtnClick"><i class="icon ic_question_reply"></i>写回答</span>
@@ -172,6 +144,21 @@
                     </div>
                   </el-dialog>
                 </ul>
+              </div>
+              <div class="question_info">
+                <nuxt-link :to="'/user/' + qdetail.uid + '/blog'">
+                  <img class="vam user-head-image" :src="qdetail.avatar" width="30" height="30" alt />
+                  <span class="ml5">{{ qdetail.nickname }}</span>
+                </nuxt-link>
+                <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
+                <span class="glyphicon glyphicon-star-empty qustion-top-item" aria-hidden="true">
+                </span>
+                <span class="qustion-good-num">收藏 {{ qdetail.collect }} </span>
+
+                <span class="top-tips" v-if="qdetail.state == 9">已解决</span>
+                <div class="qustion-right-view">
+                  浏览 {{ qdetail.readcount }}
+                </div>
               </div>
             </div>
           </div>
@@ -356,10 +343,7 @@
         <div class="ask-detail-right">
           <div>
             <div class="user_header">
-              <span class="addTitle"><i class="icon icon_info"></i>{{ loginTitle }}</span>
-              <nuxt-link :to="{ name: 'faquestion-ask' }" class="addQuestion">
-                提问题
-              </nuxt-link>
+              <span class="qTitle">题目信息</span>
             </div>
 
             <div class="user-center-info" v-if="this.isLogin">
@@ -460,7 +444,7 @@ export default {
       questionDialogVisible: false,
       fixDialogVisible: false,
       goodDialogVisible: false,
-      cgoodDialogVisible:false,
+      cgoodDialogVisible: false,
     };
   },
 
@@ -520,7 +504,7 @@ export default {
     this.getUserQustionCollectState(qId);
     this.getUserGoodReplyState();
     window.gotoPage = {
-      path: `/faquestion/` + qId,
+      path: '/interview/detail/' + qId,
     };
   },
 
@@ -1279,6 +1263,13 @@ export default {
 </script>
 
 <style>
+.question-header-title {
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 8px;
+  border-left: 4px solid #409EFF;
+}
+
 .extra.question-tags img {
   display: inline-block;
   vertical-align: baseline;
@@ -1841,11 +1832,11 @@ h2.accusation-secondary-title {
   margin-top: -1px;
 }
 
-.user_header .addTitle {
+.user_header .qTitle {
   height: 48px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  color: #222226;
+  color: #333;
   line-height: 48px;
 }
 
@@ -2043,8 +2034,14 @@ li.up_down_wrap {
   background: #ffffff;
 }
 
-.title_header {
+.qustion-content {
+  margin-top: 10px;
+}
+
+.qustion-content .title_header {
   display: inline;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .ask_detail_content {

@@ -186,6 +186,121 @@
                 </span>
               </a>
             </ul>
+
+                <div class="comment-list-content">
+              <div class="reply-title">
+                <span><em class="em1">全部评论 {{ commentList.length }}</em></span>
+                <span class="reply_wrap">
+                  <em class="em2" :class="{ cur: answertype }" @click="clickAnserType(true)">按热度排序</em>
+                  <em class="em2" :class="{ cur: answertype == false }" @click="clickAnserType(false)">按时间排序</em>
+                </span>
+
+                <div class="no-commet" v-if="commentList.length == 0">
+                  <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                  <div>
+                    <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
+                  </div>
+                </div>
+              </div>
+
+              <div id="answer-list" class="qustion-answer-list" v-if="commentList.length > 0">
+
+                <div class="qustion-answer-content">
+                  <ul class="qustion-anser-list">
+                    <li class="answer-list-item" v-for="(item, index) in commentList" :key="item.id">
+                      <div class="answer-item-userinfo">
+                        <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
+                        <span class="ml5"> {{ item.username }}</span>
+                        <span class="qustion-top-item"> {{ item.gmtCreate }}</span>
+                      </div>
+
+                      <div class="answer-item-content" v-html="item.content"></div>
+
+                      <div class="reply_content_tool">
+                        <div class="tool-item">
+                          <span v-bind:class="{ like: item.goodreply }" @click="goodReplyClick(item, 1)">
+                            <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{ commentGood(item.good)
+                            }}</em></span>
+                        </div>
+                        <div class="tool-item fbselect" @click="repplaybtnclinck(item, index)">
+                          <svg data-v-d5fd42b8="" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                            xmlns="http://www.w3.org/2000/svg" class="">
+                            <path data-v-d5fd42b8="" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M2.30136 10.1142L2.30019 3.45191C2.30024 2.6778 2.92779 2.05019 3.70191 2.05019H12.3989C13.1731 2.05019 13.8006 2.67785 13.8006 3.452L13.8018 10.1144C13.8017 10.8885 13.1742 11.516 12.4001 11.516H10.1322C9.97329 11.516 9.81862 11.5675 9.69142 11.6629L6.65162 13.9406C6.62173 13.9598 6.58148 13.9444 6.57209 13.91L6.15416 12.0869C6.07758 11.7528 5.78033 11.516 5.43761 11.516H3.70308C2.92893 11.516 2.30136 10.8884 2.30136 10.1142ZM3.70191 1C2.34776 1 1.25 2.09776 1.25 3.45191L1.25117 10.1144C1.25122 11.4685 2.34896 12.5662 3.70308 12.5662H5.18661L5.54953 14.1495L5.55107 14.1558C5.73515 14.9153 6.62879 15.248 7.26458 14.7937L10.2372 12.5662H12.4001C13.7542 12.5662 14.852 11.4684 14.852 10.1142L14.8508 3.45182C14.8508 2.09771 13.753 1 12.3989 1H3.70191ZM4.78612 7.91404C5.35027 7.91404 5.8076 7.45671 5.8076 6.89257C5.8076 6.32842 5.35027 5.87109 4.78612 5.87109C4.22198 5.87109 3.76465 6.32842 3.76465 6.89257C3.76465 7.45671 4.22198 7.91404 4.78612 7.91404ZM8.98631 6.89257C8.98631 7.45671 8.52898 7.91404 7.96483 7.91404C7.40069 7.91404 6.94336 7.45671 6.94336 6.89257C6.94336 6.32842 7.40069 5.87109 7.96483 5.87109C8.52898 5.87109 8.98631 6.32842 8.98631 6.89257ZM11.1484 7.91404C11.7126 7.91404 12.1699 7.45671 12.1699 6.89257C12.1699 6.32842 11.7126 5.87109 11.1484 5.87109C10.5843 5.87109 10.127 6.32842 10.127 6.89257C10.127 7.45671 10.5843 7.91404 11.1484 7.91404Z">
+                            </path>
+                          </svg>
+                          回复
+                        </div>
+                        <div class="tool-item" @click="jubaoBtnClick(item.id, '回答')">
+                          <i class="icon icon_ask_report"></i>
+                          举报
+                        </div>
+
+                      </div>
+
+                      <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter"
+                        v-on:leave="leave" v-bind:css="false">
+                        <div :id="'replayedtor' + index" class="replay-editor" v-if="item.showeditor" :key="item.id">
+                        </div>
+                      </transition>
+                      <div class="editor-submit-tool" v-if="item.showeditor">
+                        <el-button type="primary" round size="small" @click="commentReplySubmit(item, index)">提交
+                        </el-button>
+                        <el-button round size="small" @click="repplaybtnclinck(item, index)">取消</el-button>
+                      </div>
+
+                      <div class="comment-reply-container" v-if="item.comments.length > 0">
+                        <div class="reply-comment-item" v-for="(comment, cindex) in item.comments" :key="comment.id">
+                          <div class="answer-item-userinfo">
+                            <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt />
+                            <span class="ml5"> {{ comment.name }}</span>
+                            <span class="comment-replyment" v-if="comment.toname">回复</span>
+                            <span v-if="comment.toname">{{ comment.toname }}</span>
+                            <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
+                          </div>
+                          <div class="answer-item-content" v-html="comment.content"></div>
+                          <div class="reply_content_tool">
+                            <div class="tool-item">
+                              <span class="comment-reply" v-bind:class="{ like: comment.goodreply }"
+                                @click="goodReplyClick(comment, 2)">
+                                <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{
+                                    commentGood(comment.good)
+                                }}</em></span>
+                            </div>
+                            <div class="tool-item fbselect" @click="replyCommentbtnclick(comment, cindex)">
+                              <svg data-v-d5fd42b8="" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" class="">
+                                <path data-v-d5fd42b8="" fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M2.30136 10.1142L2.30019 3.45191C2.30024 2.6778 2.92779 2.05019 3.70191 2.05019H12.3989C13.1731 2.05019 13.8006 2.67785 13.8006 3.452L13.8018 10.1144C13.8017 10.8885 13.1742 11.516 12.4001 11.516H10.1322C9.97329 11.516 9.81862 11.5675 9.69142 11.6629L6.65162 13.9406C6.62173 13.9598 6.58148 13.9444 6.57209 13.91L6.15416 12.0869C6.07758 11.7528 5.78033 11.516 5.43761 11.516H3.70308C2.92893 11.516 2.30136 10.8884 2.30136 10.1142ZM3.70191 1C2.34776 1 1.25 2.09776 1.25 3.45191L1.25117 10.1144C1.25122 11.4685 2.34896 12.5662 3.70308 12.5662H5.18661L5.54953 14.1495L5.55107 14.1558C5.73515 14.9153 6.62879 15.248 7.26458 14.7937L10.2372 12.5662H12.4001C13.7542 12.5662 14.852 11.4684 14.852 10.1142L14.8508 3.45182C14.8508 2.09771 13.753 1 12.3989 1H3.70191ZM4.78612 7.91404C5.35027 7.91404 5.8076 7.45671 5.8076 6.89257C5.8076 6.32842 5.35027 5.87109 4.78612 5.87109C4.22198 5.87109 3.76465 6.32842 3.76465 6.89257C3.76465 7.45671 4.22198 7.91404 4.78612 7.91404ZM8.98631 6.89257C8.98631 7.45671 8.52898 7.91404 7.96483 7.91404C7.40069 7.91404 6.94336 7.45671 6.94336 6.89257C6.94336 6.32842 7.40069 5.87109 7.96483 5.87109C8.52898 5.87109 8.98631 6.32842 8.98631 6.89257ZM11.1484 7.91404C11.7126 7.91404 12.1699 7.45671 12.1699 6.89257C12.1699 6.32842 11.7126 5.87109 11.1484 5.87109C10.5843 5.87109 10.127 6.32842 10.127 6.89257C10.127 7.45671 10.5843 7.91404 11.1484 7.91404Z">
+                                </path>
+                              </svg>
+                              回复
+                            </div>
+                            <div class="tool-item" @click="jubaoBtnClick(item.id, '回答')">
+                              <i class="icon icon_ask_report"></i>
+                              举报
+                            </div>
+
+                          </div>
+
+                          <transition v-on:before-enter="rbeforeEnter" v-on:enter="renter"
+                            v-on:after-enter="rafterEnter" v-on:leave="rleave" v-bind:css="false">
+                            <div :id="'creplayedtor' + cindex" class="c-replay-editor" v-if="comment.showeditor"
+                              :key="comment.id">
+                            </div>
+                          </transition>
+                          <div class="editor-submit-tool" v-if="comment.showeditor">
+                            <el-button type="primary" round size="small"
+                              @click="commentReplyToSubmit(comment, item, comment.uid, cindex)">提交</el-button>
+                            <el-button round size="small" @click="replyCommentbtnclick(comment, cindex)">取消</el-button>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div id="answer-list" class="qustion-answer-list" v-if="replyList.length">
@@ -292,8 +407,8 @@
                     <div class="comment-btn" @click="replyCommntClick(item, index)">评论</div>
                   </div>
 
-                  <div class="reply-comment-container" v-if="item.comments">
-                    <div class="reply-comment-item" v-for="(comment, cindex) in item.comments" :key="comment.id">
+                  <div class="reply-comment-container" v-if="subType == 2">
+                    <div class="reply-comment-item" v-for="(comment, cindex) in comments" :key="comment.id">
                       <div class="answer-item-userinfo">
                         <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt />
                         <span class="ml5"> {{ comment.name }}</span>

@@ -162,6 +162,7 @@
                     <div class="answer-ediot-detail">
                       <span class="report-common-question" @click="showAnswerditor = !showAnswerditor">取消回答</span>
                       <el-checkbox v-model="checked" class="answer-btn-check">关注问题</el-checkbox>
+                      <el-checkbox v-model="checked" class="answer-btn-check">公开解答</el-checkbox>
                       <el-button type="primary" class="answer-btn-style" @click="submitAnserClick">提交</el-button>
                     </div>
                   </div>
@@ -172,13 +173,15 @@
             </div>
           </div>
 
-          <div class="questions_tab_con">
-            <ul class="faqustion-subtypelist">
-              <a href="/faquestion/category/all/latestq" class="faqustion-subtype-item comactive"><span title="最新提问">
+          <div class="interview-questions-con">
+            <ul class="interview-subtypelist">
+              <a :href="'/interview/detail/'+qdetail.qid +'?subtype=1'" class="faqustion-subtype-item" v-bind:class="{ comactive:subType==1}">
+               <span title="题解">
                   题解
                 </span>
               </a>
-              <a href="/faquestion/category/all/hot" class="faqustion-subtype-item"><span title="热门排行">
+              <a :href="'/interview/detail/' +qdetail.qid +'?subtype=2'" class="faqustion-subtype-item" v-bind:class="{ comactive:subType==2}">
+                <span title="评论">
                   评论
                 </span>
               </a>
@@ -500,17 +503,19 @@ export default {
     }
   },
 
-  asyncData ({ params, error }) {
+  asyncData ({ params, query,error }) {
     return interviewServerApi.getQuestionDetail(params.id).then((response) => {
       return {
         qdetail: response.data.qdetail,
         replyList: response.data.replyList,
+        subType: query.subtype?query.subtype:1,
         descrb: '开源实践问答为您找到 ' + response.data.qdetail.title + ' 等相关问题答案，如果想了解更多关于 ' + response.data.qdetail.title + ' 问题等相关问答，请访问开源实践问答。',
       }
     })
   },
 
   mounted () {
+    window.console.log('===='+this.subType);
     var qId = this.$route.params.id;
     var token = localStorage.getItem("redclass_token");
     var userStr = localStorage.getItem("redclass_user");
@@ -523,9 +528,6 @@ export default {
       this.getUserAskInfo();
     };
     window.myVueComm = this;
-    setTimeout(function () {
-      myVueComm.init_wangeditor();
-    }, 10)
     this.getUploadImageToken(false);
     this.getUserGoodQustionState(qId);
     this.getUserQustionCollectState(qId);
@@ -1240,6 +1242,23 @@ export default {
 </script>
 
 <style scoped>
+
+.interview-questions-con {
+  background: #fff;
+}
+
+.interview-subtypelist .faqustion-subtype-item.comactive {
+    border-bottom: 2px solid #409eff;
+    color: #303133;
+}
+
+.interview-subtypelist .faqustion-subtype-item {
+    line-height: 60px;
+    font-size: 14px;
+    color: #666;
+    padding: 20px 20px;
+    text-decoration: none;
+}
 .element-icon {
   font-size: 16px;
   margin-right: 3px;

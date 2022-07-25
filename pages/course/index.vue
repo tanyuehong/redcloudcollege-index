@@ -1,6 +1,5 @@
 <template>
-  <div id="aCoursesList"
-       class="bg-fa of">
+  <div id="aCoursesList" class="bg-fa of">
     <!-- /课程列表 开始 -->
     <section class="container">
       <div class="course_content">
@@ -14,15 +13,10 @@
             </div>
             <ul class="op_couse_subtag">
               <li>
-                <a title="全部"
-                   href="#">全部</a>
+                <a title="全部" href="#">全部</a>
               </li>
-              <li v-for="(item, index) in subjectNestedList"
-                  :key="index"
-                  :class="{ active: oneIndex == index }">
-                <a :title="item.title"
-                   href="#"
-                   @click="searchOne(item.id, index)">
+              <li v-for="(item, index) in subjectNestedList" :key="index" :class="{ active: oneIndex == index }">
+                <a :title="item.title" href="#" @click="searchOne(item.id, index)">
                   {{ item.title }}
                 </a>
               </li>
@@ -34,25 +28,19 @@
       <section class="fl">
         <ul class="op_course_subtag clearfix">
           <li class="li-course-item">
-            <a title="销量"
-               href="javascript:void(0);"
-               @click="searchBuyCount()">
+            <a title="销量" href="javascript:void(0);" @click="searchBuyCount()">
               销量
               <span :class="{ hide: buyCountSort == '' }">↓</span>
             </a>
           </li>
           <li class="li-course-item">
-            <a title="最新"
-               href="javascript:void(0);"
-               @click="searchGmtCreate()">
+            <a title="最新" href="javascript:void(0);" @click="searchGmtCreate()">
               最新
               <span :class="{ hide: gmtCreateSort == '' }">↓</span>
             </a>
           </li>
           <li class="li-course-item">
-            <a title="价格"
-               href="javascript:void(0);"
-               @click="searchPrice()">
+            <a title="价格" href="javascript:void(0);" @click="searchPrice()">
               价格&nbsp;
               <span :class="{ hide: priceSort == '' }">↓</span>
             </a>
@@ -62,29 +50,22 @@
       <div class="clearfix"></div>
       <div class="course-list-content">
         <!-- /无数据提示 开始-->
-        <section class="no-data-wrap"
-                 v-if="data.total == 0">
+        <section class="no-data-wrap" v-if="data.total == 0">
           <em class="icon30 no-data-ico">&nbsp;</em>
           <span class="c-666 fsize14 ml10 vam">
             没有相关数据，小编正在努力整理中...
           </span>
         </section>
         <!-- /无数据提示 结束-->
-        <div v-if="data.total > 0"
-             class="comm-course-list">
-          <ul class="of"
-              id="bna">
-            <li v-for="course in data.items"
-                :key="course.id">
+        <div v-if="data.total > 0" class="comm-course-list">
+          <ul class="of" id="bna">
+            <li v-for="course in data.items" :key="course.id">
               <div class="cc-l-wrap">
                 <section class="course-img">
-                  <img :src="course.imgUrl"
-                       class="img-responsive"
-                       :alt="course.title" />
+                  <img :src="course.imgUrl" class="img-responsive" :alt="course.title" />
                   <div class="cc-mask">
-                    <nuxt-link title="开始学习"
-                               class="comm-btn c-btn-1"
-                               :to="{name:'course-id',params:{id:course.id}}">开始学习</nuxt-link>
+                    <nuxt-link title="开始学习" class="comm-btn c-btn-1" :to="{ name: 'course-id', params: { id: course.id } }">开始学习
+                    </nuxt-link>
                   </div>
                 </section>
 
@@ -92,28 +73,25 @@
                   <span class="course-index-tag">
                     自研
                   </span>
-                  <nuxt-link :to="{name:'course-id',params:{id:course.id}}"
-                             :title="course.title"
-                             class="course-title-content">
+                  <nuxt-link :to="{ name: 'course-id', params: { id: course.id } }" :title="course.title"
+                    class="course-title-content">
                     {{ course.title }}
                   </nuxt-link>
                 </div>
                 <section class="course-info-detail">
                   <span class="fl jgAttr c-ccc f-fA">
-                    <i class="c-666">{{course.level}}</i>
+                    <i class="c-666">{{ course.level }}</i>
                     |
-                    <i class="c-666">{{course.lessonNum}}课时</i>
+                    <i class="c-666">{{ course.lessonNum }}课时</i>
                   </span>
                 </section>
                 <div class="buy-info">
                   <div class="buy-info_left">
-                    <!----> <span class="buy-count">已有{{course.buyCount}}人学习</span>
+                    <!----> <span class="buy-count">已有{{ course.buyCount }}人学习</span>
                   </div>
                   <div class="buy-info_right">
-                    <!----> <span class="price"
-                          v-if="course.price>0"><span class="yan">￥</span>{{course.price}}</span>
-                    <span class="price"
-                          v-if="course.price==0">免费</span>
+                    <!----> <span class="price" v-if="course.price > 0"><span class="yan">￥</span>{{ course.price }}</span>
+                    <span class="price" v-if="course.price == 0">免费</span>
                   </div>
                 </div>
               </div>
@@ -126,39 +104,22 @@
       <div>
         <div class="paging">
           <!-- undisable这个class是否存在，取决于数据属性hasPrevious -->
-          <a :class="{ undisable: !data.hasPrevious }"
-             href="#"
-             title="首页"
-             @click.prevent="gotoPage(1)">
+          <a :class="{ undisable: !data.hasPrevious }" href="#" title="首页" @click.prevent="gotoPage(1)">
             首
           </a>
-          <a :class="{ undisable: !data.hasPrevious }"
-             href="#"
-             title="前一页"
-             @click.prevent="gotoPage(data.current - 1)">
+          <a :class="{ undisable: !data.hasPrevious }" href="#" title="前一页" @click.prevent="gotoPage(data.current - 1)">
             &lt;
           </a>
-          <a v-for="page in data.pages"
-             :key="page"
-             :class="{
-                  current: data.current == page,
-                  undisable: data.current == page,
-                }"
-             :title="'第' + page + '页'"
-             href="#"
-             @click.prevent="gotoPage(page)">
+          <a v-for="page in data.pages" :key="page" :class="{
+            current: data.current == page,
+            undisable: data.current == page,
+          }" :title="'第' + page + '页'" href="#" @click.prevent="gotoPage(page)">
             {{ page }}
           </a>
-          <a :class="{ undisable: !data.hasNext }"
-             href="#"
-             title="后一页"
-             @click.prevent="gotoPage(data.current + 1)">
+          <a :class="{ undisable: !data.hasNext }" href="#" title="后一页" @click.prevent="gotoPage(data.current + 1)">
             &gt;
           </a>
-          <a :class="{ undisable: !data.hasNext }"
-             href="#"
-             title="末页"
-             @click.prevent="gotoPage(data.pages)">
+          <a :class="{ undisable: !data.hasNext }" href="#" title="末页" @click.prevent="gotoPage(data.pages)">
             末
           </a>
           <div class="clear" />
@@ -196,7 +157,7 @@ export default {
 
   head () {
     return {
-      title: "开源实践课堂",
+      title: "开源实践课堂 - 独立全栈开发者的学习基地",
       meta: [
         {
           hid: 'keywords',
@@ -333,6 +294,7 @@ export default {
   padding-bottom: 15px;
   padding-left: 15px;
 }
+
 .course-class-group {
   margin-top: 10px;
 }
@@ -340,12 +302,15 @@ export default {
 .active {
   background: #bdbdbd;
 }
+
 .hide {
   display: none;
 }
+
 .show {
   display: block;
 }
+
 .course_content {
   background-color: white;
   padding-top: 20px;
@@ -411,6 +376,7 @@ export default {
   height: 32px;
   width: 70px;
 }
+
 .course-list-content {
   background: #ffffff;
   padding-top: 20px;

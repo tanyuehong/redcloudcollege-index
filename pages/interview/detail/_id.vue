@@ -12,21 +12,29 @@
               <div class="active section">面试题详情</div>
             </div>
             <div>
-              <div class="question-header-title">
-                题目标题
+              <div class="question-title-info">
+                <div class="title-info-item right">
+                  {{ qdetail.type }}
+                </div>
+                <div class="title-tag-item">
+                  <div class="ui orange label horizontal" data-tooltip="热门">
+                    {{ qdetail.deep }}
+                  </div>
+                  <div class="ui orange label horizontal" data-tooltip="热门">
+                    热
+                  </div>
+                  <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
+                    target="_blank" v-for="tag in qdetail.tags" :key="tag.id">
+                    <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
+                  </a>
+                </div>
               </div>
               <div class="qustion-content">
                 <h2 class="title_header">{{ qdetail.title }}</h2>
-                <div class="ui orange label horizontal" data-tooltip="热门">
-                  热
-                </div>
               </div>
-              <div class="extra question-tags mt10" v-if="qdetail.tags">
-                <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
-                  target="_blank" v-for="tag in qdetail.tags" :key="tag.id">
-                  <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
-                </a>
-              </div>
+
+
+
               <div class="qustion_content" v-html="qdetail.content"></div>
               <div class="qustion_info">
                 <div class="ui_center_button">
@@ -75,6 +83,9 @@
                         <el-button type="primary" @click="qustionJianYiConfirm">确 定</el-button>
                       </div>
                     </el-dialog>
+                  </li>
+                  <li class="ask-info-item" @click="jubaoBtnClick(qdetail.qid, '问题')">
+                    <i class="icon el-icon-star-off"></i>收藏
                   </li>
                   <li class="ask-info-item" @click="jubaoBtnClick(qdetail.qid, '问题')">
                     <i class="icon icon_vote_jubao"></i>举报
@@ -144,19 +155,34 @@
                     </div>
                   </el-dialog>
                 </ul>
-              </div>
-              <div class="question_info">
-                <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
-                <span class="glyphicon glyphicon-star-empty qustion-top-item" aria-hidden="true">
-                </span>
-                <span class="qustion-good-num">收藏 {{ qdetail.collect }} </span>
+                <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter"
+                  v-on:leave="leave" v-bind:css="false">
+                  <div class="answer-qustion-editor" v-if="showAnswerditor">
+                    <div id="answer-editor"></div>
+                    <div class="answer-ediot-detail">
+                      <span class="report-common-question" @click="showAnswerditor = !showAnswerditor">取消回答</span>
+                      <el-checkbox v-model="checked" class="answer-btn-check">关注问题</el-checkbox>
+                      <el-button type="primary" class="answer-btn-style" @click="submitAnserClick">提交</el-button>
+                    </div>
+                  </div>
 
-                <span class="top-tips" v-if="qdetail.state == 9">已解决</span>
-                <div class="qustion-right-view">
-                  浏览 {{ qdetail.readcount }}
-                </div>
+                </transition>
               </div>
+
             </div>
+          </div>
+
+          <div class="questions_tab_con">
+            <ul class="faqustion-subtypelist">
+              <a href="/faquestion/category/all/latestq" class="faqustion-subtype-item comactive"><span title="最新提问">
+                  题解
+                </span>
+              </a>
+              <a href="/faquestion/category/all/hot" class="faqustion-subtype-item"><span title="热门排行">
+                  评论
+                </span>
+              </a>
+            </ul>
           </div>
 
           <div id="answer-list" class="qustion-answer-list" v-if="replyList.length">
@@ -258,12 +284,6 @@
                     </span>
                   </el-dialog>
 
-                  <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter"
-                    v-on:leave="leave" v-bind:css="false">
-                    <div :id="'replayedtor' + index" class="replay-editor" v-if="item.showeditor" :key="item.id">
-                    </div>
-                  </transition>
-
                   <div class="reply-comment-tool" v-if="item.showeditor">
                     <span @click="repplaybtnclinck(item, index)">取消</span>
                     <div class="comment-btn" @click="replyCommntClick(item, index)">评论</div>
@@ -325,15 +345,6 @@
               </ul>
             </div>
           </div>
-
-          <div class="answer-qustion-editor">
-            <div id="answer-editor"></div>
-            <div class="answer-ediot-detail">
-              <span class="report-common-question">报告相同问题？</span>
-              <el-checkbox v-model="checked" class="answer-btn-check">关注问题</el-checkbox>
-              <el-button type="primary" class="answer-btn-style" @click="submitAnserClick">提交</el-button>
-            </div>
-          </div>
         </div>
 
         <div class="ask-detail-right">
@@ -343,10 +354,10 @@
             </div>
             <div class="question-info-list">
               <div class="info-item">
-                浏览: <span>{{qdetail.readcount}}</span>
+                浏览: <span>{{ qdetail.readcount }}</span>
               </div>
               <div class="info-item">
-                发布时间: <span>{{qdetail.gmtCreate}}</span>
+                发布时间: <span>{{ qdetail.gmtCreate }}</span>
               </div>
 
               <div class="info-item">
@@ -356,9 +367,9 @@
                 </nuxt-link>
               </div>
 
-                <div class="info-item">
-                  遇到人数: <span>{{qdetail.meet}}</span>
-                </div>
+              <div class="info-item">
+                遇到人数: <span>{{ qdetail.meet }}</span>
+              </div>
             </div>
 
             <div class="user-center-info" v-if="this.isLogin">
@@ -435,7 +446,6 @@ export default {
     return {
       checked: true,
       answertype: true,
-      editor: {},
       loginInfo: {},
       userAskInfo: {},
       uploadToken: "",
@@ -460,6 +470,8 @@ export default {
       fixDialogVisible: false,
       goodDialogVisible: false,
       cgoodDialogVisible: false,
+      answerEditor: undefined,
+      showAnswerditor: false
     };
   },
 
@@ -892,17 +904,17 @@ export default {
     },
 
     beforeEnter: function (el) {
-      el.style.width = '706px';
+      el.style.width = '736px';
       el.style.height = '0px'
     },
 
     enter: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '190px' }, 300, function () { done() })
+      Velocity(el, { height: '270px' }, 300, function () { done() })
+      this.init_replyeditor();
     },
 
     afterEnter: function (el) {
-      this.init_replyeditor();
     },
 
     leave: function (el, done) {
@@ -988,10 +1000,11 @@ export default {
     },
 
     answerBtnClick () {
-      document.getElementById("answer-editor").scrollIntoView();
-      this.editor.config.focus = true;
-      this.editor.txt.html("");
-      this.getUploadImageToken(true);
+      if (this.showAnswerditor) {
+        this.showAnswerditor = false;
+      } else {
+        this.showAnswerditor = true;
+      }
     },
 
     creplyCommntClick (item, rItem, cindex) {
@@ -1063,56 +1076,6 @@ export default {
         });
     },
 
-    init_wangeditor () {
-      let editor = this.$wangeditor("#answer-editor");
-      this.editor = editor;
-      editor.config.uploadImgMaxLength = 1;
-      editor.config.uploadImgServer = "/api/ucenter/uploadImage";
-      editor.config.uploadFileName = "file";
-      editor.config.placeholder = "请用专业明晰的语言写出您的回答";
-      editor.config.focus = false;
-      editor.config.zIndex = 100;
-      editor.config.height = 210;
-
-      editor.config.onfocus = function (newHtml) {
-        myVueComm.getUploadImageToken(true);
-      };
-
-      editor.config.customUploadImg = function (files, insertImgFn) {
-        // resultFiles 是 input 中选中的文件列表
-        // insertImgFn 是获取图片 url 后，插入到编辑器的方法
-        var file = files[0];
-        const putExtra = {
-          mimeType: file.type,
-        };
-        const config = {
-          region: qiniu.region.z2,
-        };
-        const observable = qiniu.upload(
-          file,
-          null,
-          window.myVueComm.uploadToken,
-          putExtra,
-          config
-        );
-        const observer = {
-          next (res) {
-            window.console.log(res);
-          },
-          error (err) {
-            window.console.log(err);
-          },
-          complete (res) {
-            window.console.log(res);
-            insertImgFn("https://img.redskt.com/" + res.hash);
-          },
-        };
-        const subscription = observable.subscribe(observer);
-      };
-      // editor.config.onchange = function (newHtml) {};
-      editor.create();
-    },
-
     repplaybtnclinck (item, index) {
       item.commnetId = "#replayedtor" + index;
       window.replyItem = item;
@@ -1139,13 +1102,12 @@ export default {
 
     init_replyeditor () {
       window.myVueComm = this;
-      var item = window.replyItem;
-      let editor = this.$wangeditor(item.commnetId);
-      item.editor = editor;
+      let editor = this.$wangeditor('#answer-editor');
+      this.answerEditor = editor;
       editor.config.uploadImgMaxLength = 1;
       editor.config.uploadImgServer = "/api/ucenter/uploadImage";
       editor.config.uploadFileName = "file";
-      editor.config.placeholder = "请用专业明晰的语言，指出问题，提出建议";
+      editor.config.placeholder = "请用专业明晰的语言,写出您的解答";
       editor.config.height = 150;
       editor.config.zIndex = 100;
 
@@ -1278,8 +1240,40 @@ export default {
 </script>
 
 <style scoped>
-.question-info {
+.element-icon {
+  font-size: 16px;
+  margin-right: 3px;
 }
+
+.question-title-info {
+  display: flex;
+  margin-top: 15px;
+}
+
+.question-title-info .title-info-item.right {
+  border-right: 1px solid hsla(0, 0%, 59.2%, .2);
+}
+
+.question-title-info .title-info-item {
+  margin-right: 12px;
+  font-size: 16px;
+  color: #666;
+  padding-right: 6px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.question-title-info a img {
+  display: inline-block;
+  vertical-align: baseline;
+  height: 22px !important;
+  border-radius: 0.14285714rem;
+  padding: 2px 0;
+  margin: -0.5833em 0.5em -0.5833em 0;
+}
+
+.question-info {}
+
 .question-info .question-info-list {
   background: #fff;
   padding-left: 20px;
@@ -1298,13 +1292,13 @@ export default {
 }
 
 .question-info .question-info-list .info-item a {
-  margin-left:6px;
+  margin-left: 6px;
 }
 
 .question-info .question-info-list .info-item a span {
-  margin-left:3px;
+  margin-left: 3px;
 }
- 
+
 .question-header-title {
   font-size: 16px;
   font-weight: 500;
@@ -1786,6 +1780,8 @@ h2.accusation-secondary-title {
 .report-common-question {
   font-size: 14px;
   color: #666;
+  margin-left: 3px;
+  cursor: pointer;
 }
 
 .qustion-tag-content {
@@ -1883,14 +1879,14 @@ h2.accusation-secondary-title {
 }
 
 .answer-btn-check {
-  margin-left: 470px;
+  margin-left: 473px;
 }
 
 .answer-btn-style {
-  margin-left: 20px;
+  margin-left: 15px;
   height: 40px;
   width: 80px;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .answer-qustion-editor {
@@ -1900,6 +1896,7 @@ h2.accusation-secondary-title {
   padding-right: 10px;
   padding-bottom: 15px;
   background: #ffffff;
+  overflow: hidden;
 }
 
 .top-tips {
@@ -2073,11 +2070,12 @@ li.up_down_wrap {
 
 .ask-detail-lefte {
   padding: 15px;
-  background: #ffffff;
+  background: #fff;
+  margin-bottom: 15px;
 }
 
 .qustion-content {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .qustion-content .title_header {

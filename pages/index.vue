@@ -44,7 +44,8 @@
                     <section class="course-img">
                       <img :src="course.imgUrl" class="img-responsive" :alt="course.title" />
                       <div class="cc-mask">
-                        <nuxt-link title="开始学习" class="comm-btn c-btn-1" :to="{ name: 'course-id', params: { id: course.id } }">
+                        <nuxt-link title="开始学习" class="comm-btn c-btn-1"
+                          :to="{ name: 'course-id', params: { id: course.id } }">
                           开始学习</nuxt-link>
                       </div>
                     </section>
@@ -70,8 +71,8 @@
                         <!----> <span class="buy-count">已有{{ course.buyCount }}人学习</span>
                       </div>
                       <div class="buy-info_right">
-                        <!----> <span class="price" v-if="course.price > 0"><span
-                            class="yan">￥</span>{{ course.price }}</span>
+                        <!----> <span class="price" v-if="course.price > 0"><span class="yan">￥</span>{{ course.price
+                        }}</span>
                         <span class="price" v-if="course.price == 0">免费</span>
                       </div>
                     </div>
@@ -287,7 +288,7 @@ export default {
 
   head () {
     return {
-      title: this.title,
+      title: '开源实践网 - 一个有趣的在线学习网站',
       meta: [
         {
           hid: 'keywords',

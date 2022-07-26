@@ -41,7 +41,7 @@
                   <button>查看解析</button>
                 </div>
                 <ul class="ask-issue-tool fbselect">
-                  <span class="answer_span" @click="answerBtnClick"><i class="icon ic_question_reply"></i>写回答</span>
+                  <span class="answer_span" @click="answerBtnClick"><i class="icon ic_question_reply"></i>写题解</span>
                   <li class="up_down_wrap wrapdisLike ask-info-item">
                     <span class="vote_span disLike" @click="goodQustionClick" v-bind:class="{ like: goodqustion }">
 
@@ -159,11 +159,12 @@
                   v-on:leave="leave" v-bind:css="false">
                   <div class="answer-qustion-editor" v-if="showAnswerditor">
                     <div id="answer-editor"></div>
-                    <div class="answer-ediot-detail">
+                    <div class="interview-ediot-detail">
                       <span class="report-common-question" @click="showAnswerditor = !showAnswerditor">取消回答</span>
-                      <el-checkbox v-model="checked" class="answer-btn-check">关注问题</el-checkbox>
-                      <el-checkbox v-model="checked" class="answer-btn-check">公开解答</el-checkbox>
-                      <el-button type="primary" class="answer-btn-style" @click="submitAnserClick">提交</el-button>
+                      <el-checkbox v-model="checked" class="interview-btn-check">关注问题</el-checkbox>
+                      <el-checkbox v-model="checked" class="answer-open-check">公开</el-checkbox>
+                      <el-button type="primary" class="submit-btn-style" @click="submitAnserClick">提交</el-button>
+                      <div class="clearfloat"></div>
                     </div>
                   </div>
 
@@ -188,128 +189,11 @@
                 </span>
               </a>
             </ul>
-
-            <div class="comment-list-content" v-if="subType == 2">
-              <div class="reply-title">
-                <span><em class="em1">全部评论 {{ dataList.length }}</em></span>
-                <span class="reply_wrap">
-                  <em class="em2" :class="{ cur: answertype }" @click="clickAnserType(true)">按热度排序</em>
-                  <em class="em2" :class="{ cur: answertype == false }" @click="clickAnserType(false)">按时间排序</em>
-                </span>
-
-                <div class="no-commet" v-if="dataList.length == 0">
-                  <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
-                  <div>
-                    <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
-                  </div>
-                </div>
-              </div>
-
-              <div id="answer-list" class="interview-answer-list" v-if="dataList.length > 0">
-
-                <div class="qustion-answer-content">
-                  <ul class="qustion-anser-list">
-                    <li class="answer-list-item" v-for="(item, index) in dataList" :key="item.id">
-                      <div class="answer-item-userinfo">
-                        <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
-                        <span class="ml5"> {{ item.username }}</span>
-                        <span class="qustion-top-item"> {{ item.gmtCreate }}</span>
-                      </div>
-
-                      <div class="answer-item-content" v-html="item.content"></div>
-
-                      <div class="reply_content_tool">
-                        <div class="tool-item">
-                          <span v-bind:class="{ like: item.goodreply }" @click="goodReplyClick(item, 1)">
-                            <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{ commentGood(item.good)
-                            }}</em></span>
-                        </div>
-                        <div class="tool-item fbselect" @click="repplaybtnclinck(item, index)">
-                          <svg data-v-d5fd42b8="" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                            xmlns="http://www.w3.org/2000/svg" class="">
-                            <path data-v-d5fd42b8="" fill-rule="evenodd" clip-rule="evenodd"
-                              d="M2.30136 10.1142L2.30019 3.45191C2.30024 2.6778 2.92779 2.05019 3.70191 2.05019H12.3989C13.1731 2.05019 13.8006 2.67785 13.8006 3.452L13.8018 10.1144C13.8017 10.8885 13.1742 11.516 12.4001 11.516H10.1322C9.97329 11.516 9.81862 11.5675 9.69142 11.6629L6.65162 13.9406C6.62173 13.9598 6.58148 13.9444 6.57209 13.91L6.15416 12.0869C6.07758 11.7528 5.78033 11.516 5.43761 11.516H3.70308C2.92893 11.516 2.30136 10.8884 2.30136 10.1142ZM3.70191 1C2.34776 1 1.25 2.09776 1.25 3.45191L1.25117 10.1144C1.25122 11.4685 2.34896 12.5662 3.70308 12.5662H5.18661L5.54953 14.1495L5.55107 14.1558C5.73515 14.9153 6.62879 15.248 7.26458 14.7937L10.2372 12.5662H12.4001C13.7542 12.5662 14.852 11.4684 14.852 10.1142L14.8508 3.45182C14.8508 2.09771 13.753 1 12.3989 1H3.70191ZM4.78612 7.91404C5.35027 7.91404 5.8076 7.45671 5.8076 6.89257C5.8076 6.32842 5.35027 5.87109 4.78612 5.87109C4.22198 5.87109 3.76465 6.32842 3.76465 6.89257C3.76465 7.45671 4.22198 7.91404 4.78612 7.91404ZM8.98631 6.89257C8.98631 7.45671 8.52898 7.91404 7.96483 7.91404C7.40069 7.91404 6.94336 7.45671 6.94336 6.89257C6.94336 6.32842 7.40069 5.87109 7.96483 5.87109C8.52898 5.87109 8.98631 6.32842 8.98631 6.89257ZM11.1484 7.91404C11.7126 7.91404 12.1699 7.45671 12.1699 6.89257C12.1699 6.32842 11.7126 5.87109 11.1484 5.87109C10.5843 5.87109 10.127 6.32842 10.127 6.89257C10.127 7.45671 10.5843 7.91404 11.1484 7.91404Z">
-                            </path>
-                          </svg>
-                          回复
-                        </div>
-                        <div class="tool-item" @click="jubaoBtnClick(item.id, '回答')">
-                          <i class="icon icon_ask_report"></i>
-                          举报
-                        </div>
-
-                      </div>
-
-                      <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter"
-                        v-on:leave="leave" v-bind:css="false">
-                        <div :id="'replayedtor' + index" class="replay-editor" v-if="item.showeditor" :key="item.id">
-                        </div>
-                      </transition>
-                      <div class="editor-submit-tool" v-if="item.showeditor">
-                        <el-button type="primary" round size="small" @click="commentReplySubmit(item, index)">提交
-                        </el-button>
-                        <el-button round size="small" @click="repplaybtnclinck(item, index)">取消</el-button>
-                      </div>
-
-                      <div class="comment-reply-container">
-                        <div class="reply-comment-item" v-for="(comment, cindex) in dataList" :key="comment.id">
-                          <div class="answer-item-userinfo">
-                            <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt />
-                            <span class="ml5"> {{ comment.name }}</span>
-                            <span class="comment-replyment" v-if="comment.toname">回复</span>
-                            <span v-if="comment.toname">{{ comment.toname }}</span>
-                            <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
-                          </div>
-                          <div class="answer-item-content" v-html="comment.content"></div>
-                          <div class="reply_content_tool">
-                            <div class="tool-item">
-                              <span class="comment-reply" v-bind:class="{ like: comment.goodreply }"
-                                @click="goodReplyClick(comment, 2)">
-                                <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{
-                                    commentGood(comment.good)
-                                }}</em></span>
-                            </div>
-                            <div class="tool-item fbselect" @click="replyCommentbtnclick(comment, cindex)">
-                              <svg data-v-d5fd42b8="" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" class="">
-                                <path data-v-d5fd42b8="" fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M2.30136 10.1142L2.30019 3.45191C2.30024 2.6778 2.92779 2.05019 3.70191 2.05019H12.3989C13.1731 2.05019 13.8006 2.67785 13.8006 3.452L13.8018 10.1144C13.8017 10.8885 13.1742 11.516 12.4001 11.516H10.1322C9.97329 11.516 9.81862 11.5675 9.69142 11.6629L6.65162 13.9406C6.62173 13.9598 6.58148 13.9444 6.57209 13.91L6.15416 12.0869C6.07758 11.7528 5.78033 11.516 5.43761 11.516H3.70308C2.92893 11.516 2.30136 10.8884 2.30136 10.1142ZM3.70191 1C2.34776 1 1.25 2.09776 1.25 3.45191L1.25117 10.1144C1.25122 11.4685 2.34896 12.5662 3.70308 12.5662H5.18661L5.54953 14.1495L5.55107 14.1558C5.73515 14.9153 6.62879 15.248 7.26458 14.7937L10.2372 12.5662H12.4001C13.7542 12.5662 14.852 11.4684 14.852 10.1142L14.8508 3.45182C14.8508 2.09771 13.753 1 12.3989 1H3.70191ZM4.78612 7.91404C5.35027 7.91404 5.8076 7.45671 5.8076 6.89257C5.8076 6.32842 5.35027 5.87109 4.78612 5.87109C4.22198 5.87109 3.76465 6.32842 3.76465 6.89257C3.76465 7.45671 4.22198 7.91404 4.78612 7.91404ZM8.98631 6.89257C8.98631 7.45671 8.52898 7.91404 7.96483 7.91404C7.40069 7.91404 6.94336 7.45671 6.94336 6.89257C6.94336 6.32842 7.40069 5.87109 7.96483 5.87109C8.52898 5.87109 8.98631 6.32842 8.98631 6.89257ZM11.1484 7.91404C11.7126 7.91404 12.1699 7.45671 12.1699 6.89257C12.1699 6.32842 11.7126 5.87109 11.1484 5.87109C10.5843 5.87109 10.127 6.32842 10.127 6.89257C10.127 7.45671 10.5843 7.91404 11.1484 7.91404Z">
-                                </path>
-                              </svg>
-                              回复
-                            </div>
-                            <div class="tool-item" @click="jubaoBtnClick(item.id, '回答')">
-                              <i class="icon icon_ask_report"></i>
-                              举报
-                            </div>
-
-                          </div>
-
-                          <transition v-on:before-enter="rbeforeEnter" v-on:enter="renter"
-                            v-on:after-enter="rafterEnter" v-on:leave="rleave" v-bind:css="false">
-                            <div :id="'creplayedtor' + cindex" class="c-replay-editor" v-if="comment.showeditor"
-                              :key="comment.id">
-                            </div>
-                          </transition>
-                          <div class="editor-submit-tool" v-if="comment.showeditor">
-                            <el-button type="primary" round size="small"
-                              @click="commentReplyToSubmit(comment, item, comment.uid, cindex)">提交</el-button>
-                            <el-button round size="small" @click="replyCommentbtnclick(comment, cindex)">取消</el-button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <div id="answer-list" class="interview-answer-list" v-if="subType == 1">
             <div class="no-commet" v-if="dataList.length == 0">
               <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
               <div>
-                <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
+                <span class="tips">暂时没有公开的题解哦，赶紧写一个公开给大家学习吧</span>
               </div>
             </div>
 
@@ -472,6 +356,137 @@
               </ul>
             </div>
           </div>
+          <div class="interview-comment-list" v-if="subType == 2">
+            <div class="interview-bottom-comment">
+              <div class="comment-blog">
+                <a href="/teacher/1257316155061886977" class="article_title"><img src="https://static.redskt.com/assets/img/yonghutouxiangnan.png" width="30" height="30" alt="" class="vam user-head-image article-avatar"></a>
+               </div> 
+                  <div class="commet-editor-content">
+                <div id="comment-editor"></div>
+
+                <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:leave="cleave" v-bind:css="false">
+                  <div class="editor-submit-tool" v-if="showComment">
+                    <el-button type="primary" round size="small" @click="commentBtnSubmit">发表评论</el-button>
+                    <el-button round size="small" @click="cancleCommentClick">取消</el-button>
+                  </div>
+                </transition>
+
+              </div>
+             </div>
+            
+             <div class="no-commet" v-if="dataList.length == 0">
+                  <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                  <div>
+                    <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
+                  </div>
+                </div>
+              </div>
+              <div id="answer-list" class="interview-answer-list" v-if="dataList.length > 0">
+                      <div class="reply-title">
+                <span class="reply_wrap">
+                  <em class="em2" :class="{ cur: answertype }" @click="clickAnserType(true)">按热度排序</em>
+                  <em class="em2" :class="{ cur: answertype == false }" @click="clickAnserType(false)">按时间排序</em>
+                </span>
+              </div>
+                <div class="qustion-answer-content">
+                  <ul class="qustion-anser-list">
+                    <li class="answer-list-item" v-for="(item, index) in dataList" :key="item.id">
+                      <div class="answer-item-userinfo">
+                        <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
+                        <span class="ml5"> {{ item.username }}</span>
+                        <span class="qustion-top-item"> {{ item.gmtCreate }}</span>
+                      </div>
+
+                      <div class="answer-item-content" v-html="item.content"></div>
+
+                      <div class="reply_content_tool">
+                        <div class="tool-item">
+                          <span v-bind:class="{ like: item.goodreply }" @click="goodReplyClick(item, 1)">
+                            <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{ commentGood(item.good)
+                            }}</em></span>
+                        </div>
+                        <div class="tool-item fbselect" @click="repplaybtnclinck(item, index)">
+                          <svg data-v-d5fd42b8="" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                            xmlns="http://www.w3.org/2000/svg" class="">
+                            <path data-v-d5fd42b8="" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M2.30136 10.1142L2.30019 3.45191C2.30024 2.6778 2.92779 2.05019 3.70191 2.05019H12.3989C13.1731 2.05019 13.8006 2.67785 13.8006 3.452L13.8018 10.1144C13.8017 10.8885 13.1742 11.516 12.4001 11.516H10.1322C9.97329 11.516 9.81862 11.5675 9.69142 11.6629L6.65162 13.9406C6.62173 13.9598 6.58148 13.9444 6.57209 13.91L6.15416 12.0869C6.07758 11.7528 5.78033 11.516 5.43761 11.516H3.70308C2.92893 11.516 2.30136 10.8884 2.30136 10.1142ZM3.70191 1C2.34776 1 1.25 2.09776 1.25 3.45191L1.25117 10.1144C1.25122 11.4685 2.34896 12.5662 3.70308 12.5662H5.18661L5.54953 14.1495L5.55107 14.1558C5.73515 14.9153 6.62879 15.248 7.26458 14.7937L10.2372 12.5662H12.4001C13.7542 12.5662 14.852 11.4684 14.852 10.1142L14.8508 3.45182C14.8508 2.09771 13.753 1 12.3989 1H3.70191ZM4.78612 7.91404C5.35027 7.91404 5.8076 7.45671 5.8076 6.89257C5.8076 6.32842 5.35027 5.87109 4.78612 5.87109C4.22198 5.87109 3.76465 6.32842 3.76465 6.89257C3.76465 7.45671 4.22198 7.91404 4.78612 7.91404ZM8.98631 6.89257C8.98631 7.45671 8.52898 7.91404 7.96483 7.91404C7.40069 7.91404 6.94336 7.45671 6.94336 6.89257C6.94336 6.32842 7.40069 5.87109 7.96483 5.87109C8.52898 5.87109 8.98631 6.32842 8.98631 6.89257ZM11.1484 7.91404C11.7126 7.91404 12.1699 7.45671 12.1699 6.89257C12.1699 6.32842 11.7126 5.87109 11.1484 5.87109C10.5843 5.87109 10.127 6.32842 10.127 6.89257C10.127 7.45671 10.5843 7.91404 11.1484 7.91404Z">
+                            </path>
+                          </svg>
+                          回复
+                        </div>
+                        <div class="tool-item" @click="jubaoBtnClick(item.id, '回答')">
+                          <i class="icon icon_ask_report"></i>
+                          举报
+                        </div>
+
+                      </div>
+
+                      <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter"
+                        v-on:leave="leave" v-bind:css="false">
+                        <div :id="'replayedtor' + index" class="replay-editor" v-if="item.showeditor" :key="item.id">
+                        </div>
+                      </transition>
+                      <div class="editor-submit-tool" v-if="item.showeditor">
+                        <el-button type="primary" round size="small" @click="commentReplySubmit(item, index)">提交
+                        </el-button>
+                        <el-button round size="small" @click="repplaybtnclinck(item, index)">取消</el-button>
+                      </div>
+
+                      <div class="comment-reply-container">
+                        <div class="reply-comment-item" v-for="(comment, cindex) in dataList" :key="comment.id">
+                          <div class="answer-item-userinfo">
+                            <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt />
+                            <span class="ml5"> {{ comment.name }}</span>
+                            <span class="comment-replyment" v-if="comment.toname">回复</span>
+                            <span v-if="comment.toname">{{ comment.toname }}</span>
+                            <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
+                          </div>
+                          <div class="answer-item-content" v-html="comment.content"></div>
+                          <div class="reply_content_tool">
+                            <div class="tool-item">
+                              <span class="comment-reply" v-bind:class="{ like: comment.goodreply }"
+                                @click="goodReplyClick(comment, 2)">
+                                <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{
+                                    commentGood(comment.good)
+                                }}</em></span>
+                            </div>
+                            <div class="tool-item fbselect" @click="replyCommentbtnclick(comment, cindex)">
+                              <svg data-v-d5fd42b8="" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" class="">
+                                <path data-v-d5fd42b8="" fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M2.30136 10.1142L2.30019 3.45191C2.30024 2.6778 2.92779 2.05019 3.70191 2.05019H12.3989C13.1731 2.05019 13.8006 2.67785 13.8006 3.452L13.8018 10.1144C13.8017 10.8885 13.1742 11.516 12.4001 11.516H10.1322C9.97329 11.516 9.81862 11.5675 9.69142 11.6629L6.65162 13.9406C6.62173 13.9598 6.58148 13.9444 6.57209 13.91L6.15416 12.0869C6.07758 11.7528 5.78033 11.516 5.43761 11.516H3.70308C2.92893 11.516 2.30136 10.8884 2.30136 10.1142ZM3.70191 1C2.34776 1 1.25 2.09776 1.25 3.45191L1.25117 10.1144C1.25122 11.4685 2.34896 12.5662 3.70308 12.5662H5.18661L5.54953 14.1495L5.55107 14.1558C5.73515 14.9153 6.62879 15.248 7.26458 14.7937L10.2372 12.5662H12.4001C13.7542 12.5662 14.852 11.4684 14.852 10.1142L14.8508 3.45182C14.8508 2.09771 13.753 1 12.3989 1H3.70191ZM4.78612 7.91404C5.35027 7.91404 5.8076 7.45671 5.8076 6.89257C5.8076 6.32842 5.35027 5.87109 4.78612 5.87109C4.22198 5.87109 3.76465 6.32842 3.76465 6.89257C3.76465 7.45671 4.22198 7.91404 4.78612 7.91404ZM8.98631 6.89257C8.98631 7.45671 8.52898 7.91404 7.96483 7.91404C7.40069 7.91404 6.94336 7.45671 6.94336 6.89257C6.94336 6.32842 7.40069 5.87109 7.96483 5.87109C8.52898 5.87109 8.98631 6.32842 8.98631 6.89257ZM11.1484 7.91404C11.7126 7.91404 12.1699 7.45671 12.1699 6.89257C12.1699 6.32842 11.7126 5.87109 11.1484 5.87109C10.5843 5.87109 10.127 6.32842 10.127 6.89257C10.127 7.45671 10.5843 7.91404 11.1484 7.91404Z">
+                                </path>
+                              </svg>
+                              回复
+                            </div>
+                            <div class="tool-item" @click="jubaoBtnClick(item.id, '回答')">
+                              <i class="icon icon_ask_report"></i>
+                              举报
+                            </div>
+
+                          </div>
+
+                          <transition v-on:before-enter="rbeforeEnter" v-on:enter="renter"
+                            v-on:after-enter="rafterEnter" v-on:leave="rleave" v-bind:css="false">
+                            <div :id="'creplayedtor' + cindex" class="c-replay-editor" v-if="comment.showeditor"
+                              :key="comment.id">
+                            </div>
+                          </transition>
+                          <div class="editor-submit-tool" v-if="comment.showeditor">
+                            <el-button type="primary" round size="small"
+                              @click="commentReplyToSubmit(comment, item, comment.uid, cindex)">提交</el-button>
+                            <el-button round size="small" @click="replyCommentbtnclick(comment, cindex)">取消</el-button>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+  
         </div>
 
         <div class="ask-detail-right">
@@ -631,6 +646,10 @@ export default {
     window.gotoPage = {
       path: '/interview/detail/' + qId,
     };
+
+    setTimeout(function () {
+      myVueComm.initCommentEditor();
+    }, 10)
   },
 
   computed: {
@@ -679,6 +698,69 @@ export default {
   },
 
   methods: {
+     initCommentEditor () {
+      let editor = this.$wangeditor("#comment-editor");
+      this.editor = editor;
+      editor.config.uploadImgMaxLength = 1;
+      editor.config.uploadImgServer = "/api/ucenter/uploadImage";
+      editor.config.uploadFileName = "file";
+      editor.config.placeholder = "写下你的评论...";
+      editor.config.focus = false;
+      editor.config.zIndex = 100;
+      editor.config.height = 120;
+      editor.config.showFullScreen = false;
+
+      editor.config.menus = [
+        'bold',
+        'link',
+        'emoticon',
+        'image'
+      ]
+
+      editor.config.onfocus = function (newHtml) {
+        myVueComm.getUploadImageToken(true);
+        myVueComm.showComment = true;
+      };
+
+      editor.config.onblur = function (newHtml) {
+        myVueComm.cancleCommentClick();
+      };
+
+      editor.config.customUploadImg = function (files, insertImgFn) {
+        // resultFiles 是 input 中选中的文件列表
+        // insertImgFn 是获取图片 url 后，插入到编辑器的方法
+        var file = files[0];
+        const putExtra = {
+          mimeType: file.type,
+        };
+        const config = {
+          region: qiniu.region.z2,
+        };
+        const observable = qiniu.upload(
+          file,
+          null,
+          window.myVueComm.uploadToken,
+          putExtra,
+          config
+        );
+        const observer = {
+          next (res) {
+            window.console.log(res);
+          },
+          error (err) {
+            window.console.log(err);
+          },
+          complete (res) {
+            window.console.log(res);
+            insertImgFn("https://img.redskt.com/" + res.hash);
+          },
+        };
+        const subscription = observable.subscribe(observer);
+      };
+      // editor.config.onchange = function (newHtml) {};
+      editor.create();
+    },
+
     beforeHandleCommand (commd, item) {
       return {
         'command': commd,
@@ -1319,8 +1401,79 @@ export default {
 </script>
 
 <style scoped>
+
+.interview-bottom-comment {
+  background: #fff;
+  padding-bottom: 20px;
+  margin-bottom: 15px;
+  width: 750px;
+}
+
+.interview-bottom-comment .comment-blog {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.interview-bottom-comment .commet-editor-content {
+    width: 690px;
+    padding-top: 20px;
+    float: right;
+    margin-right: 0px;
+    font-size: 12px;
+}
+
+.interview-comment-list {
+  background: #fff;
+  padding-bottom: 10px;
+}
+
+.interview-ediot-detail {
+  margin-top:10px
+}
+
+.interview-ediot-detail .report-common-question {
+  font-size: 14px;
+  color: #666;
+  margin-left: 3px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.interview-ediot-detail .interview-btn-check {
+  margin-left: 390px;
+  margin-top: 10px;
+}
+.interview-ediot-detail .answer-open-check {
+  margin-top: 12px;
+}
+
+.submit-btn-style {
+  height: 40px;
+  width: 80px;
+  float: right;
+}
+
+.no-commet {
+    text-align: center;
+    margin: 20px auto;
+}
+ .no-commet .nocommet-image-tips {
+    width: 230px;
+    margin: 0 auto;
+}
+
+ .no-commet .tips  {
+  font-size: 14px;
+  color: #666;
+ }
+
 .interview-questions-con {
   background: #fff;
+}
+.interview-subtypelist {
   border-bottom: 1px solid #e4e4e4;
 }
 
@@ -1835,12 +1988,6 @@ h2.accusation-secondary-title {
   font-style: normal;
 }
 
-.interview-answer-list h4 .em1 {
-  color: #222226;
-  margin-right: 3px;
-  font-style: normal;
-}
-
 .interview-answer-list h4 .em2 {
   font-style: normal;
   float: left;
@@ -1871,13 +2018,6 @@ h2.accusation-secondary-title {
   height: 32px;
   background: #f0f0f2;
   border-radius: 6px;
-}
-
-.report-common-question {
-  font-size: 14px;
-  color: #666;
-  margin-left: 3px;
-  cursor: pointer;
 }
 
 .qustion-tag-content {
@@ -1972,17 +2112,6 @@ h2.accusation-secondary-title {
   font-weight: 500;
   color: #333;
   line-height: 48px;
-}
-
-.answer-btn-check {
-  margin-left: 473px;
-}
-
-.answer-btn-style {
-  margin-left: 15px;
-  height: 40px;
-  width: 80px;
-  margin-top: 10px;
 }
 
 .answer-qustion-editor {
@@ -2184,6 +2313,7 @@ li.up_down_wrap {
   margin-left: 0px;
   width: 780px;
   float: left;
+  margin-bottom: 15px;
 }
 
 .ask-detail-right {

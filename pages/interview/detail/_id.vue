@@ -175,27 +175,29 @@
 
           <div class="interview-questions-con">
             <ul class="interview-subtypelist">
-              <a :href="'/interview/detail/'+qdetail.qid +'?subtype=1'" class="faqustion-subtype-item" v-bind:class="{ comactive:subType==1}">
-               <span title="题解">
+              <a :href="'/interview/detail/' + qdetail.qid + '?subtype=1'" class="faqustion-subtype-item"
+                v-bind:class="{ comactive: subType == 1 }">
+                <span title="题解">
                   题解
                 </span>
               </a>
-              <a :href="'/interview/detail/' +qdetail.qid +'?subtype=2'" class="faqustion-subtype-item" v-bind:class="{ comactive:subType==2}">
+              <a :href="'/interview/detail/' + qdetail.qid + '?subtype=2'" class="faqustion-subtype-item"
+                v-bind:class="{ comactive: subType == 2 }">
                 <span title="评论">
                   评论
                 </span>
               </a>
             </ul>
 
-                <div class="comment-list-content">
+            <div class="comment-list-content" v-if="subType == 2">
               <div class="reply-title">
-                <span><em class="em1">全部评论 {{ commentList.length }}</em></span>
+                <span><em class="em1">全部评论 {{ dataList.length }}</em></span>
                 <span class="reply_wrap">
                   <em class="em2" :class="{ cur: answertype }" @click="clickAnserType(true)">按热度排序</em>
                   <em class="em2" :class="{ cur: answertype == false }" @click="clickAnserType(false)">按时间排序</em>
                 </span>
 
-                <div class="no-commet" v-if="commentList.length == 0">
+                <div class="no-commet" v-if="dataList.length == 0">
                   <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
                   <div>
                     <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
@@ -203,11 +205,11 @@
                 </div>
               </div>
 
-              <div id="answer-list" class="qustion-answer-list" v-if="commentList.length > 0">
+              <div id="answer-list" class="interview-answer-list" v-if="dataList.length > 0">
 
                 <div class="qustion-answer-content">
                   <ul class="qustion-anser-list">
-                    <li class="answer-list-item" v-for="(item, index) in commentList" :key="item.id">
+                    <li class="answer-list-item" v-for="(item, index) in dataList" :key="item.id">
                       <div class="answer-item-userinfo">
                         <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
                         <span class="ml5"> {{ item.username }}</span>
@@ -249,8 +251,8 @@
                         <el-button round size="small" @click="repplaybtnclinck(item, index)">取消</el-button>
                       </div>
 
-                      <div class="comment-reply-container" v-if="item.comments.length > 0">
-                        <div class="reply-comment-item" v-for="(comment, cindex) in item.comments" :key="comment.id">
+                      <div class="comment-reply-container">
+                        <div class="reply-comment-item" v-for="(comment, cindex) in dataList" :key="comment.id">
                           <div class="answer-item-userinfo">
                             <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt />
                             <span class="ml5"> {{ comment.name }}</span>
@@ -303,9 +305,16 @@
             </div>
           </div>
 
-          <div id="answer-list" class="qustion-answer-list" v-if="replyList.length">
-            <h4 class="reply-title">
-              <span><em class="em1">{{ replyList.length }}</em>条回答</span>
+          <div id="answer-list" class="interview-answer-list" v-if="subType == 1">
+            <div class="no-commet" v-if="dataList.length == 0">
+              <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+              <div>
+                <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
+              </div>
+            </div>
+
+            <h4 class="reply-title" v-if="dataList.length > 0">
+              <span><em class="em1">{{ dataList.length }}</em>条回答</span>
               <span class="reply_wrap">
                 <em class="em2" :class="{ cur: answertype }" @click="clickAnserType(true)">默认</em>
                 <em class="em2" :class="{ cur: answertype == false }" @click="clickAnserType(false)">最新</em>
@@ -314,7 +323,7 @@
 
             <div class="qustion-answer-content">
               <ul class="qustion-anser-list">
-                <li class="answer-list-item" v-for="(item, index) in replyList" :key="item.id">
+                <li class="answer-list-item" v-for="(item, index) in dataList" :key="item.id">
                   <div class="answer-item-userinfo">
                     <nuxt-link :to="'/user/' + item.uid + '/blog'" class="anser-info">
                       <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
@@ -490,35 +499,6 @@
               </div>
             </div>
 
-            <div class="user-center-info" v-if="this.isLogin">
-              <ul class="fa-info-list">
-                <li class="fa-infolist-item">
-                  <span>收益(元)</span>
-                  <em class="fa-num">{{ NumFormat }}</em>
-                </li>
-                <li class="fa-infolist-item">
-                  <span>被采纳</span>
-                  <em class="fa-num">{{ userAskInfo.adopt }}</em>
-                </li>
-                <li class="fa-infolist-item">
-                  <span>提问</span>
-                  <em class="fa-num">{{ userAskInfo.qcount }}</em>
-                </li>
-                <li class="fa-infolist-item">
-                  <span>被点赞</span>
-                  <em class="fa-num">{{ userAskInfo.qgood + userAskInfo.rgood + userAskInfo.cgood }}</em>
-                </li>
-                <li class="fa-infolist-item">
-                  <span>回答</span>
-                  <em class="fa-num">{{ userAskInfo.qanswer }}</em>
-                </li>
-                <li class="fa-infolist-item">
-                  <span>被回复</span>
-                  <em class="fa-num">{{ userAskInfo.ccomment + userAskInfo.crComment }}</em>
-                </li>
-              </ul>
-            </div>
-
             <div class="ask-top-wrap">
               <div class="user_header">
                 <span class="ask-message-tips">问答通知</span>
@@ -618,19 +598,20 @@ export default {
     }
   },
 
-  asyncData ({ params, query,error }) {
-    return interviewServerApi.getQuestionDetail(params.id).then((response) => {
+  asyncData ({ params, query, error }) {
+    var type = query.subtype ? query.subtype : 1;
+    return interviewServerApi.getQuestionDetail(params.id, type).then((response) => {
       return {
         qdetail: response.data.qdetail,
-        replyList: response.data.replyList,
-        subType: query.subtype?query.subtype:1,
+        dataList: response.data.dataList,
+        subType: type,
         descrb: '开源实践问答为您找到 ' + response.data.qdetail.title + ' 等相关问题答案，如果想了解更多关于 ' + response.data.qdetail.title + ' 问题等相关问答，请访问开源实践问答。',
       }
     })
   },
 
   mounted () {
-    window.console.log('===='+this.subType);
+    window.console.log('====' + this.subType);
     var qId = this.$route.params.id;
     var token = localStorage.getItem("redclass_token");
     var userStr = localStorage.getItem("redclass_user");
@@ -754,7 +735,7 @@ export default {
 
     deleteQuestion (qItem) {
       this.questionDialogVisible = false;
-      if (qItem.state == 99 && this.replyList.length > 0) {
+      if (qItem.state == 99 && this.dataList.length > 0) {
         this.$message({
           message: "已经提交删除申请，无需反复提交哈",
           type: "success",
@@ -796,7 +777,7 @@ export default {
     deleteQuestionReply (reply) {
       this.deleteDialogVisible = false;
       askApi.deleteQuestionReply(reply.id).then((response) => {
-        this.replyList = this.replyList.filter(function (item) {
+        this.dataList = this.dataList.filter(function (item) {
           return item.id != response.data.rId;
         });
         this.$message({
@@ -952,12 +933,12 @@ export default {
     },
 
     getUserGoodReplyState () {
-      if (!this.replyList) {
+      if (!this.dataList) {
         return;
       }
       var list = [];
-      for (var j = 0; j < this.replyList.length; j++) {
-        list.push(this.replyList[j].id);
+      for (var j = 0; j < this.dataList.length; j++) {
+        list.push(this.dataList[j].id);
       }
       askApi.getUserGoodReplyState(list).then((response) => {
         var goodList = response.data.goodList;
@@ -1063,33 +1044,14 @@ export default {
         return;
       }
       this.answertype = type;
-      for (var j = 0; j < this.replyList.length; j++) {
-        var item = this.replyList[j];
-        item.showeditor = false;
-        if (item.editor) {
-          item.editor.destroy();
-          item.editor = null;
-        }
-        if (item.comments) {
-          for (var i = 0; i < item.comments.length; i++) {
-            var citem = item.comments[i];
-            citem.showeditor = false;
-            if (citem.editor) {
-              citem.editor.destroy();
-              citem.editor = null;
-            }
-          }
-        }
-      }
-
       if (this.answertype) {
         askApi.getQustionReplyList(this.qdetail.qid, 1).then((response) => {
-          this.replyList = response.data.replyList;
+          this.dataList = response.data.replyList;
           this.getUserGoodReplyState();
         })
       } else {
         askApi.getQustionReplyList(this.qdetail.qid, 2).then((response) => {
-          this.replyList = response.data.replyList;
+          this.dataList = response.data.replyList;
           this.getUserGoodReplyState();
         })
       }
@@ -1184,7 +1146,7 @@ export default {
         })
         .then((response) => {
           this.editor.txt.html("");
-          this.replyList.unshift(response.data.reply);
+          this.dataList.unshift(response.data.reply);
           this.$message({
             message: "问题回答成功哦",
             type: "success",
@@ -1357,23 +1319,24 @@ export default {
 </script>
 
 <style scoped>
-
 .interview-questions-con {
   background: #fff;
+  border-bottom: 1px solid #e4e4e4;
 }
 
 .interview-subtypelist .faqustion-subtype-item.comactive {
-    border-bottom: 2px solid #409eff;
-    color: #303133;
+  border-bottom: 2px solid #409eff;
+  color: #303133;
 }
 
 .interview-subtypelist .faqustion-subtype-item {
-    line-height: 60px;
-    font-size: 14px;
-    color: #666;
-    padding: 20px 20px;
-    text-decoration: none;
+  line-height: 60px;
+  font-size: 14px;
+  color: #666;
+  padding: 20px 20px;
+  text-decoration: none;
 }
+
 .element-icon {
   font-size: 16px;
   margin-right: 3px;
@@ -1849,12 +1812,12 @@ h2.accusation-secondary-title {
   margin-bottom: 6px;
 }
 
-.qustion-answer-list h4 .em2.cur {
+.interview-answer-list h4 .em2.cur {
   color: #222226;
   background: #fff;
 }
 
-.qustion-answer-list .reply-title {
+.interview-answer-list .reply-title {
   padding-right: 24px;
   font-size: 16px;
   font-weight: 400;
@@ -1872,13 +1835,13 @@ h2.accusation-secondary-title {
   font-style: normal;
 }
 
-.qustion-answer-list h4 .em1 {
+.interview-answer-list h4 .em1 {
   color: #222226;
   margin-right: 3px;
   font-style: normal;
 }
 
-.qustion-answer-list h4 .em2 {
+.interview-answer-list h4 .em2 {
   font-style: normal;
   float: left;
   width: 42px;
@@ -1894,15 +1857,14 @@ h2.accusation-secondary-title {
   cursor: pointer;
 }
 
-.qustion-answer-list {
-  margin-top: 10px;
+.interview-answer-list {
   background: #ffffff;
   padding: 15px;
   font-weight: 400;
   font-size: 14px;
 }
 
-.qustion-answer-list h4 .reply_wrap {
+.interview-answer-list h4 .reply_wrap {
   margin-top: 8px;
   display: inline-block;
   width: 92px;
@@ -2205,7 +2167,7 @@ li.up_down_wrap {
 .ask-detail-lefte {
   padding: 15px;
   background: #fff;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .qustion-content {

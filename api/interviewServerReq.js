@@ -2,9 +2,9 @@ import request from '@/utils/serverRq'
 
 export default {
   // 获取问答详情网页
-  getQuestionDetail(id) {
+  getQuestionDetail(id, type) {
     return request({
-      url: '/home/interview/getQuestionDetail/' + id,
+      url: '/home/interview/getQuestionDetail/' + id + '/' + type,
       method: 'get',
     })
   },

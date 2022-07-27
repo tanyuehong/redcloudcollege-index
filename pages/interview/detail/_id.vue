@@ -361,17 +361,21 @@
               <div class="comment-blog">
                 <a href="/teacher/1257316155061886977" class="article_title"><img src="https://static.redskt.com/assets/img/yonghutouxiangnan.png" width="30" height="30" alt="" class="vam user-head-image article-avatar"></a>
                </div> 
-                  <div class="commet-editor-content">
+             <div class="commet-editor-content">
                 <div id="comment-editor"></div>
-
                 <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:leave="cleave" v-bind:css="false">
-                  <div class="editor-submit-tool" v-if="showComment">
+                  <div class="interview-submit-tool" v-if="showComment">
                     <el-button type="primary" round size="small" @click="commentBtnSubmit">发表评论</el-button>
                     <el-button round size="small" @click="cancleCommentClick">取消</el-button>
                   </div>
                 </transition>
-
               </div>
+              <div class="clearfloat"></div>
+             </div>
+
+             <div class="comment-header"> 
+              <span><em class="em1">全部评论 0</em></span>
+              <span class="reply_wrap"><em class="em2 cur">按热度排序</em> <em class="em2">按时间排序</em></span>
              </div>
             
              <div class="no-commet" v-if="dataList.length == 0">
@@ -584,7 +588,8 @@ export default {
       goodDialogVisible: false,
       cgoodDialogVisible: false,
       answerEditor: undefined,
-      showAnswerditor: false
+      showAnswerditor: false,
+      showComment:false,
     };
   },
 
@@ -646,10 +651,11 @@ export default {
     window.gotoPage = {
       path: '/interview/detail/' + qId,
     };
-
-    setTimeout(function () {
+    if(this.subType == 2) {
+       setTimeout(function () {
       myVueComm.initCommentEditor();
     }, 10)
+    }
   },
 
   computed: {
@@ -698,6 +704,33 @@ export default {
   },
 
   methods: {
+    cancleCommentClick () {
+      this.showComment = false;
+    },
+    commentBtnSubmit () {
+      var texxt = this.editor.txt.html();
+      window.console.log(texxt);
+      if (!this.editor || this.editor.txt.html().length < 6) {
+        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        return;
+      }
+      blogApi
+        .submitBlogComment({
+          content: this.editor.txt.html(),
+          bid: this.pitem.id,
+          uid: this.loginInfo.id,
+        })
+        .then((response) => {
+          this.editor.txt.html("");
+          debugger
+          this.commentList.unshift(response.data.comment);
+          this.$message({
+            message: "问题回答成功哦",
+            type: "success",
+            duration: 2000,
+          });
+        });
+    },
      initCommentEditor () {
       let editor = this.$wangeditor("#comment-editor");
       this.editor = editor;
@@ -1103,24 +1136,16 @@ export default {
     },
 
     cbeforeEnter: function (el) {
-      el.style.width = '666px';
       el.style.height = '0px';
     },
-
     center: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '180px' }, 300, function () { done() })
+      Velocity(el, { height: '34px' }, 150, function () { done() })
     },
-
-    cafterEnter: function (el) {
-      this.init_commenteditor();
-    },
-
     cleave: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '0px' }, 300, function () { done() })
+      Velocity(el, { height: '0px' }, 150, function () { done() })
     },
-
     clickAnserType (type) {
       if (type == this.answertype) {
         return;
@@ -1402,10 +1427,44 @@ export default {
 
 <style scoped>
 
+.interview-submit-tool {
+  padding-top: 8px;
+  overflow: hidden;
+}
+
+.interview-submit-tool  .el-button {
+    padding: 6px 12px;
+    font-size: 10px;
+    border-radius: 14px;
+}
+
+.comment-header {
+  margin-left: 20px;
+}
+
+.comment-header .em1 {
+    font-size: 16px;
+    font-weight: 550;
+}
+
+.comment-header .em2 {
+  font-size: 12px;
+  margin-left: 12px;
+  color: #999;
+  cursor: pointer;
+}
+
+.comment-header .em2.cur {
+  color: #409eff;
+}
+
+.comment-header  .reply_wrap {
+  margin-left: 495px;
+}
+
 .interview-bottom-comment {
   background: #fff;
-  padding-bottom: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   width: 750px;
 }
 

@@ -19,7 +19,7 @@ export default {
 
   submitComment(comment) {
     return request({
-      url: `/blog/commet/submit`,
+      url: `/interview/submitComment`,
       method: 'post',
       data: comment,
     })

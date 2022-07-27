@@ -16,4 +16,12 @@ export default {
       data: qData,
     })
   },
+
+  submitComment(comment) {
+    return request({
+      url: `/blog/commet/submit`,
+      method: 'post',
+      data: comment,
+    })
+  },
 }

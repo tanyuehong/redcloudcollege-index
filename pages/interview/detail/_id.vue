@@ -709,7 +709,6 @@ export default {
     },
     commentBtnSubmit () {
       var texxt = this.editor.txt.html();
-      window.console.log(texxt);
       if (!this.editor || this.editor.txt.html().length < 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;

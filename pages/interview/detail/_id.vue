@@ -197,14 +197,6 @@
               </div>
             </div>
 
-            <h4 class="reply-title" v-if="dataList.length > 0">
-              <span><em class="em1">{{ dataList.length }}</em>条回答</span>
-              <span class="reply_wrap">
-                <em class="em2" :class="{ cur: answertype }" @click="clickAnserType(true)">默认</em>
-                <em class="em2" :class="{ cur: answertype == false }" @click="clickAnserType(false)">最新</em>
-              </span>
-            </h4>
-
             <div class="qustion-answer-content">
               <ul class="qustion-anser-list">
                 <li class="answer-list-item" v-for="(item, index) in dataList" :key="item.id">
@@ -374,7 +366,7 @@
              </div>
 
              <div class="comment-header"> 
-              <span><em class="em1">全部评论 0</em></span>
+              <span><em class="em1">全部评论（{{ dataList.length }}）</em></span>
               <span class="reply_wrap"><em class="em2 cur">按热度排序</em> <em class="em2">按时间排序</em></span>
              </div>
             
@@ -386,12 +378,6 @@
                 </div>
               </div>
               <div id="answer-list" class="interview-answer-list" v-if="dataList.length > 0">
-                      <div class="reply-title">
-                <span class="reply_wrap">
-                  <em class="em2" :class="{ cur: answertype }" @click="clickAnserType(true)">按热度排序</em>
-                  <em class="em2" :class="{ cur: answertype == false }" @click="clickAnserType(false)">按时间排序</em>
-                </span>
-              </div>
                 <div class="qustion-answer-content">
                   <ul class="qustion-anser-list">
                     <li class="answer-list-item" v-for="(item, index) in dataList" :key="item.id">
@@ -553,7 +539,8 @@
 <script>
 import userApi from "@/api/user";
 import askApi from "@/api/ask";
-import askServerApi from "@/api/askServerReq";
+
+import interviewApi from "@/api/interviewReq";
 import interviewServerApi from "@/api/interviewServerReq";
 
 const qiniu = require("qiniu-js");
@@ -714,18 +701,16 @@ export default {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
       }
-      blogApi
-        .submitBlogComment({
+      interviewApi.submitComment({
           content: this.editor.txt.html(),
-          bid: this.pitem.id,
+          bid: this.qdetail.qid,
           uid: this.loginInfo.id,
         })
         .then((response) => {
           this.editor.txt.html("");
-          debugger
-          this.commentList.unshift(response.data.comment);
+          this.dataList.unshift(response.data.comment);
           this.$message({
-            message: "问题回答成功哦",
+            message: "问题评论成功哦",
             type: "success",
             duration: 2000,
           });
@@ -2027,24 +2012,6 @@ h2.accusation-secondary-title {
 .interview-answer-list h4 .em2.cur {
   color: #222226;
   background: #fff;
-}
-
-.interview-answer-list .reply-title {
-  padding-right: 24px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #222226;
-  line-height: 48px;
-  height: 48px;
-  background: #fff;
-  margin: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  font-style: normal;
 }
 
 .interview-answer-list h4 .em2 {

@@ -167,7 +167,6 @@
                       <div class="clearfloat"></div>
                     </div>
                   </div>
-
                 </transition>
               </div>
 
@@ -366,7 +365,7 @@
              </div>
 
              <div class="comment-header"> 
-              <span><em class="em1">全部评论（{{ dataList.length }}）</em></span>
+              <span><em class="em1">全部评论 ( {{ dataList.length }} )</em></span>
               <span class="reply_wrap"><em class="em2 cur">按热度排序</em> <em class="em2">按时间排序</em></span>
              </div>
             
@@ -408,9 +407,7 @@
                           <i class="icon icon_ask_report"></i>
                           举报
                         </div>
-
                       </div>
-
                       <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter"
                         v-on:leave="leave" v-bind:css="false">
                         <div :id="'replayedtor' + index" class="replay-editor" v-if="item.showeditor" :key="item.id">
@@ -691,6 +688,29 @@ export default {
   },
 
   methods: {
+    commentReplySubmit (item, index) {
+      if (!item.editor || item.editor.txt.html().length < 6) {
+        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        return;
+      }
+      interviewApi
+        .submitReply({
+          content: item.editor.txt.html(),
+          rid: item.id,
+          uid: this.loginInfo.id
+        })
+        .then((response) => {
+          item.editor.txt.html("");
+          myVueComm.repplaybtnclinck(item, index);
+          item.comments.unshift(response.data.reply);
+          window.console.log(item.comments);
+          this.$message({
+            message: "评论回复成功哦",
+            type: "success",
+            duration: 2000,
+          });
+        });
+    },
     cancleCommentClick () {
       this.showComment = false;
     },
@@ -715,68 +735,6 @@ export default {
             duration: 2000,
           });
         });
-    },
-     initCommentEditor () {
-      let editor = this.$wangeditor("#comment-editor");
-      this.editor = editor;
-      editor.config.uploadImgMaxLength = 1;
-      editor.config.uploadImgServer = "/api/ucenter/uploadImage";
-      editor.config.uploadFileName = "file";
-      editor.config.placeholder = "写下你的评论...";
-      editor.config.focus = false;
-      editor.config.zIndex = 100;
-      editor.config.height = 120;
-      editor.config.showFullScreen = false;
-
-      editor.config.menus = [
-        'bold',
-        'link',
-        'emoticon',
-        'image'
-      ]
-
-      editor.config.onfocus = function (newHtml) {
-        myVueComm.getUploadImageToken(true);
-        myVueComm.showComment = true;
-      };
-
-      editor.config.onblur = function (newHtml) {
-        myVueComm.cancleCommentClick();
-      };
-
-      editor.config.customUploadImg = function (files, insertImgFn) {
-        // resultFiles 是 input 中选中的文件列表
-        // insertImgFn 是获取图片 url 后，插入到编辑器的方法
-        var file = files[0];
-        const putExtra = {
-          mimeType: file.type,
-        };
-        const config = {
-          region: qiniu.region.z2,
-        };
-        const observable = qiniu.upload(
-          file,
-          null,
-          window.myVueComm.uploadToken,
-          putExtra,
-          config
-        );
-        const observer = {
-          next (res) {
-            window.console.log(res);
-          },
-          error (err) {
-            window.console.log(err);
-          },
-          complete (res) {
-            window.console.log(res);
-            insertImgFn("https://img.redskt.com/" + res.hash);
-          },
-        };
-        const subscription = observable.subscribe(observer);
-      };
-      // editor.config.onchange = function (newHtml) {};
-      editor.create();
     },
 
     beforeHandleCommand (commd, item) {
@@ -828,9 +786,7 @@ export default {
             duration: 2000,
           });
         }
-
       });
-
     },
 
     deleteQuestion (qItem) {
@@ -1102,14 +1058,14 @@ export default {
     },
 
     beforeEnter: function (el) {
-      el.style.width = '736px';
+      el.style.width = '540px';
       el.style.height = '0px'
     },
 
     enter: function (el, done) {
+      this.initReplyeditor();
       var Velocity = $.Velocity;
-      Velocity(el, { height: '270px' }, 300, function () { done() })
-      this.init_replyeditor();
+      Velocity(el, { height: '140px' }, 150, function () { done() })
     },
 
     afterEnter: function (el) {
@@ -1117,7 +1073,7 @@ export default {
 
     leave: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '0px' }, 300, function () { done() })
+      Velocity(el, { height: '0px' }, 150, function () { done() })
     },
 
     cbeforeEnter: function (el) {
@@ -1248,7 +1204,7 @@ export default {
     },
 
     repplaybtnclinck (item, index) {
-      item.commnetId = "#replayedtor" + index;
+      item.replyId = "#replayedtor" + index;
       window.replyItem = item;
       if (!item.editor) {
         item.showeditor = true;
@@ -1271,37 +1227,33 @@ export default {
       }
     },
 
-    init_replyeditor () {
-      window.myVueComm = this;
-      let editor = this.$wangeditor('#answer-editor');
-      this.answerEditor = editor;
+     initCommentEditor () {
+      let editor = this.$wangeditor("#comment-editor");
+      this.editor = editor;
       editor.config.uploadImgMaxLength = 1;
       editor.config.uploadImgServer = "/api/ucenter/uploadImage";
       editor.config.uploadFileName = "file";
-      editor.config.placeholder = "请用专业明晰的语言,写出您的解答";
-      editor.config.height = 150;
+      editor.config.placeholder = "写下你的评论...";
+      editor.config.focus = false;
       editor.config.zIndex = 100;
+      editor.config.height = 120;
+      editor.config.showFullScreen = false;
+
+      editor.config.menus = [
+        'bold',
+        'link',
+        'emoticon',
+        'image'
+      ]
 
       editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
+        myVueComm.showComment = true;
       };
-      editor.config.menus = [
-        'bold',
-        'fontSize',
-        'fontName',
-        'italic',
-        'underline',
-        'indent',
-        'foreColor',
-        'link',
-        'list',
-        'todo',
-        'justify',
-        'emoticon',
-        'image',
-        'code',
-        'splitLine',
-      ]
+
+      editor.config.onblur = function (newHtml) {
+        myVueComm.cancleCommentClick();
+      };
 
       editor.config.customUploadImg = function (files, insertImgFn) {
         // resultFiles 是 input 中选中的文件列表
@@ -1334,43 +1286,37 @@ export default {
         };
         const subscription = observable.subscribe(observer);
       };
-      editor.config.onchange = function (newHtml) {
-      };
+      // editor.config.onchange = function (newHtml) {};
       editor.create();
     },
 
-    init_commenteditor () {
-      window.myVueComm = this;
-      var item = window.commentItem;
-      let editor = this.$wangeditor(item.commnetId);
-      item.editor = editor;
+      initReplyeditor () {
+      var item =  window.replyItem.replyId;
+      let editor = this.$wangeditor(window.replyItem.replyId);
+      this.editor = editor;
+      window.replyItem.editor = editor;
       editor.config.uploadImgMaxLength = 1;
       editor.config.uploadImgServer = "/api/ucenter/uploadImage";
       editor.config.uploadFileName = "file";
-      editor.config.placeholder = "请用专业明晰的语言，指出问题，提出建议";
-      editor.config.height = 150;
-      editor.config.zIndex = 100
+      editor.config.placeholder = "写下你的评论...";
+      editor.config.focus = false;
+      editor.config.zIndex = 100;
+      editor.config.height = 100;
+      editor.config.showFullScreen = false;
+
+      editor.config.menus = [
+        'bold',
+        'link',
+        'emoticon',
+        'image'
+      ]
 
       editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
       };
-      editor.config.menus = [
-        'bold',
-        'fontSize',
-        'fontName',
-        'italic',
-        'underline',
-        'indent',
-        'foreColor',
-        'link',
-        'list',
-        'todo',
-        'justify',
-        'emoticon',
-        'image',
-        'code',
-        'splitLine',
-      ]
+
+      editor.config.onblur = function (newHtml) {
+      };
 
       editor.config.customUploadImg = function (files, insertImgFn) {
         // resultFiles 是 input 中选中的文件列表
@@ -1403,9 +1349,9 @@ export default {
         };
         const subscription = observable.subscribe(observer);
       };
-      //editor.config.onchange = function (newHtml) {}};
+      // editor.config.onchange = function (newHtml) {};
       editor.create();
-    },
+    }
   },
 };
 </script>

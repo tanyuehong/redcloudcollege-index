@@ -24,4 +24,11 @@ export default {
       data: comment,
     })
   },
+  submitBlogReply(reply) {
+    return request({
+      url: `/post/reply`,
+      method: 'post',
+      data: reply,
+    })
+  },
 }

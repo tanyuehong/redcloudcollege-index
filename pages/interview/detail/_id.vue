@@ -422,8 +422,8 @@
                         <el-button round size="small" @click="repplaybtnclinck(item, index)">取消</el-button>
                       </div>
 
-                      <div class="comment-reply-container">
-                        <div class="reply-comment-item" v-for="(comment, cindex) in dataList" :key="comment.id">
+                      <div class="comment-reply-container" v-if="item.comments.length>0">
+                        <div class="reply-comment-item" v-for="(comment, cindex) in item.comments" :key="comment.id">
                           <div class="answer-item-userinfo">
                             <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt />
                             <span class="ml5"> {{ comment.name }}</span>

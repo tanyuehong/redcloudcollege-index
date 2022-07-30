@@ -24,9 +24,17 @@ export default {
       data: comment,
     })
   },
-  submitBlogReply(reply) {
+  submitReply(reply) {
     return request({
-      url: `/post/reply`,
+      url: `/interview/reply`,
+      method: 'post',
+      data: reply,
+    })
+  },
+  // 问题回答的提交接口
+  submitQuestionAnswer(reply) {
+    return request({
+      url: `/interview/answer`,
       method: 'post',
       data: reply,
     })

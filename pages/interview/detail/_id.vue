@@ -188,194 +188,198 @@
                 </span>
               </a>
             </ul>
-          <div id="answer-list" class="interview-answer-list" v-if="subType == 1">
-            <div class="no-commet" v-if="dataList.length == 0">
-              <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
-              <div>
-                <span class="tips">暂时没有公开的题解哦，赶紧写一个公开给大家学习吧</span>
-              </div>
-            </div>
-
-            <div class="qustion-answer-content">
-              <ul class="qustion-anser-list">
-                <li class="answer-list-item" v-for="(item, index) in dataList" :key="item.id">
-                  <div class="answer-item-userinfo">
-                    <nuxt-link :to="'/user/' + item.uid + '/blog'" class="anser-info">
-                      <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
-                      <span class="ml5"> {{ item.username }}</span>
-                      <span class="qustion-top-item anser-time"> {{ item.gmtCreate }}</span>
-                    </nuxt-link>
-
-                    <span class="good_answer" v-if="item.state == 9">
-                      <span class="glyphicon glyphicon-heart"></span>
-                      最佳回答
-                    </span>
-
-                  </div>
-
-                  <div class="answer-item-content" v-html="item.content"></div>
-
-                  <div class="reply_content_tool">
-                    <span class="mr20px fbselect" @click="repplaybtnclinck(item, index)">
-                      <i class="icon icon_comment"></i>
-                      评论
-                    </span>
-                    <div class="vote-box vote_like">
-                      <span v-bind:class="{ like: item.goodreply }" @click="goodReplyClick(item)"
-                        class="vote_span vote_spaned">
-                        <i class="icon icon_vote_up"></i>解决<em class="qustion-good-num">{{ item.good }}</em></span>
-                      <span class="vote_span2" @click="badReplyClick(item)" v-bind:class="{ like: item.badreply }"><i
-                          class="icon icon_vote_down"></i>无用<em class="qustion-good-num" v-if="item.bad > 0">{{ item.bad
-                          }}</em>
-                        <!---->
-                      </span>
-                    </div>
-                    <span class="mr20px2">
-                      <i class="icon icon_reward"></i>
-                      打赏
-                    </span>
-                    <!---->
-                    <span>
-                      <i class="icon icon_share2"></i>
-                      分享
-                    </span>
-
-                    <span class="li_more" @click="jubaoBtnClick(item.id, '回答')">
-                      <i class="icon icon_ask_report"></i>
-                      举报
-                    </span>
-
-                    <span v-if="item.uid == loginInfo.id">
-                      <el-dropdown szie="mini" @command="replyClickCommend">
-                        <span class="el-dropdown-link drop-menu">
-                          <i class="icon icon_more"></i>
-                        </span>
-                        <el-dropdown-menu slot="dropdown">
-                          <el-dropdown-item :command="beforeHandleCommand('d', item)">删除</el-dropdown-item>
-                          <el-dropdown-item :command="beforeHandleCommand('g', item)">{{ goodReplyString(item) }}
-                          </el-dropdown-item>
-                        </el-dropdown-menu>
-                      </el-dropdown>
-                    </span>
-                  </div>
-                  <el-dialog title="确认取消最佳回答吗？" :visible.sync="cgoodDialogVisible" width="30%" center>
-                    <div class="tac">
-                      <span>最佳答案能够有更明确的提示，正确的回答将帮助其他有同样问题的同学，并且最佳答案会奖励该问题回答者，请尽量选择正确的回答哈~</span>
-                    </div>
-                    <span slot="footer" class="dialog-footer">
-                      <el-button type="primary" @click="questionGoodReply(item, 2)">确 认</el-button>
-                      <el-button @click="cgoodDialogVisible = false">再等等</el-button>
-                    </span>
-                  </el-dialog>
-                  <el-dialog title="确认设为最佳回答吗？" :visible.sync="goodDialogVisible" width="30%" center>
-                    <div class="tac">
-                      <span>最佳答案能够有更明确的提示，正确的回答将帮助其他有同样问题的同学，并且最佳答案会奖励该问题回答者，请尽量选择正确的回答哈~</span>
-                    </div>
-                    <span slot="footer" class="dialog-footer">
-                      <el-button @click="goodDialogVisible = false">再等等</el-button>
-                      <el-button type="primary" @click="questionGoodReply(item)">确 认</el-button>
-                    </span>
-                  </el-dialog>
-                  <el-dialog title="确认删除回答吗？" :visible.sync="deleteDialogVisible" width="30%" center>
-                    <div class="tac">
-                      <span>删除后您的回答将不会出现在该问题下,请三思哦~</span>
-                    </div>
-                    <span slot="footer" class="dialog-footer">
-                      <el-button @click="deleteQuestionReply(item, 1)">删 除</el-button>
-                      <el-button type="primary" @click="deleteDialogVisible = false">再等等</el-button>
-                    </span>
-                  </el-dialog>
-
-                  <div class="reply-comment-tool" v-if="item.showeditor">
-                    <span @click="repplaybtnclinck(item, index)">取消</span>
-                    <div class="comment-btn" @click="replyCommntClick(item, index)">评论</div>
-                  </div>
-
-                  <div class="reply-comment-container" v-if="subType == 2">
-                    <div class="reply-comment-item" v-for="(comment, cindex) in comments" :key="comment.id">
-                      <div class="answer-item-userinfo">
-                        <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt />
-                        <span class="ml5"> {{ comment.name }}</span>
-                        <span class="comment-replyment" v-if="comment.toname">回复</span>
-                        <span v-if="comment.toname">{{ comment.toname }}</span>
-                        <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
-                      </div>
-                      <div class="answer-item-content" v-html="comment.content"></div>
-                      <div class="comment-tool-bar fbselect">
-                        <span class="mr15" v-bind:class="{ goodcomment: comment.goodcomment }"
-                          @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>{{
-                              commentGood(comment.good)
-                          }}</span>
-                        <span class="mr15" @click="commentbtnclinck(comment, cindex)">回复</span>
-                        <span class="mr15" @click="jubaoBtnClick(comment.id, '评论')">
-                          <i class="icon icon_ask_report"></i>举报
-                        </span>
-                        <span v-if="comment.uid == loginInfo.id">
-                          <el-dropdown szie="mini" @command="commentClickCommend">
-                            <span class="el-dropdown-link drop-menu">
-                              <i class="icon icon_more"></i>
-                            </span>
-                            <el-dropdown-menu slot="dropdown">
-                              <el-dropdown-item :command="beforeHandleCommand('d', comment)">删除</el-dropdown-item>
-                            </el-dropdown-menu>
-                          </el-dropdown>
-                        </span>
-                      </div>
-                      <el-dialog title="确认删除评论吗？" :visible.sync="deleteCommentVisible" width="30%" center>
-                        <div class="tac">
-                          <span>删除后您的评论将不会出现在该回答下,请三思哦~</span>
-                        </div>
-                        <span slot="footer" class="dialog-footer">
-                          <el-button @click="deleteCommentReply(comment, item)">删 除</el-button>
-                          <el-button type="primary" @click="deleteCommentVisible = false">再等等</el-button>
-                        </span>
-                      </el-dialog>
-
-                      <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:after-enter="cafterEnter"
-                        v-on:leave="cleave" v-bind:css="false">
-                        <div :id="'creplayedtor' + cindex" class="c-replay-editor" v-if="comment.showeditor"
-                          :key="comment.id">
-                        </div>
-                      </transition>
-                      <div class="reply-comment-tool r-comment" v-if="comment.showeditor">
-                        <span @click="commentbtnclinck(comment, cindex)">取消</span>
-                        <div class="comment-btn" @click="creplyCommntClick(comment, item, cindex)">提交</div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="interview-comment-list" v-if="subType == 2">
-            <div class="interview-bottom-comment">
-              <div class="comment-blog">
-                <a href="/teacher/1257316155061886977" class="article_title"><img src="https://static.redskt.com/assets/img/yonghutouxiangnan.png" width="30" height="30" alt="" class="vam user-head-image article-avatar"></a>
-               </div> 
-             <div class="commet-editor-content">
-                <div id="comment-editor"></div>
-                <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:leave="cleave" v-bind:css="false">
-                  <div class="interview-submit-tool" v-if="showComment">
-                    <el-button type="primary" round size="small" @click="commentBtnSubmit">发表评论</el-button>
-                    <el-button round size="small" @click="cancleCommentClick">取消</el-button>
-                  </div>
-                </transition>
-              </div>
-              <div class="clearfloat"></div>
-             </div>
-
-             <div class="comment-header"> 
-              <span><em class="em1">全部评论 ( {{ dataList.length }} )</em></span>
-              <span class="reply_wrap"><em class="em2 cur">按热度排序</em> <em class="em2">按时间排序</em></span>
-             </div>
-            
-             <div class="no-commet" v-if="dataList.length == 0">
-                  <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
-                  <div>
-                    <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
-                  </div>
+            <div id="answer-list" class="interview-answer-list" v-if="subType == 1">
+              <div class="no-commet" v-if="dataList.length == 0">
+                <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                <div>
+                  <span class="tips">暂时没有公开的题解哦，赶紧写一个公开给大家学习吧</span>
                 </div>
               </div>
+
+              <div class="qustion-answer-content">
+                <ul class="qustion-anser-list">
+                  <li class="answer-list-item" v-for="(item, index) in dataList" :key="item.id">
+                    <div class="answer-item-userinfo">
+                      <nuxt-link :to="'/user/' + item.uid + '/blog'" class="anser-info">
+                        <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
+                        <span class="ml5"> {{ item.username }}</span>
+                        <span class="qustion-top-item anser-time"> {{ item.gmtCreate }}</span>
+                      </nuxt-link>
+
+                      <span class="good_answer" v-if="item.state == 9">
+                        <span class="glyphicon glyphicon-heart"></span>
+                        最佳回答
+                      </span>
+
+                    </div>
+
+                    <div class="answer-item-content" v-html="item.content"></div>
+
+                    <div class="interview-reply-tool">
+                      <span class="mr20px fbselect" @click="repplaybtnclinck(item, index)">
+                        <i class="icon icon_comment"></i>
+                        评论
+                      </span>
+                      <div class="vote-box vote_like">
+                        <span v-bind:class="{ like: item.goodreply }" @click="goodReplyClick(item)"
+                          class="vote_span vote_spaned">
+                          <i class="icon icon_vote_up"></i>解决<em class="qustion-good-num">{{ item.good }}</em></span>
+                        <span class="vote_span2" @click="badReplyClick(item)" v-bind:class="{ like: item.badreply }"><i
+                            class="icon icon_vote_down"></i>无用<em class="qustion-good-num" v-if="item.bad > 0">{{
+                                item.bad
+                            }}</em>
+                          <!---->
+                        </span>
+                      </div>
+                      <span class="mr20px2">
+                        <i class="icon icon_reward"></i>
+                        打赏
+                      </span>
+                      <!---->
+                      <span>
+                        <i class="icon icon_share2"></i>
+                        分享
+                      </span>
+
+                      <span class="li_more" @click="jubaoBtnClick(item.id, '回答')">
+                        <i class="icon icon_ask_report"></i>
+                        举报
+                      </span>
+
+                      <span v-if="item.uid == loginInfo.id">
+                        <el-dropdown szie="mini" @command="replyClickCommend">
+                          <span class="el-dropdown-link drop-menu">
+                            <i class="icon icon_more"></i>
+                          </span>
+                          <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item :command="beforeHandleCommand('d', item)">删除</el-dropdown-item>
+                            <el-dropdown-item :command="beforeHandleCommand('g', item)">{{ goodReplyString(item) }}
+                            </el-dropdown-item>
+                          </el-dropdown-menu>
+                        </el-dropdown>
+                      </span>
+                    </div>
+                    <el-dialog title="确认取消最佳回答吗？" :visible.sync="cgoodDialogVisible" width="30%" center>
+                      <div class="tac">
+                        <span>最佳答案能够有更明确的提示，正确的回答将帮助其他有同样问题的同学，并且最佳答案会奖励该问题回答者，请尽量选择正确的回答哈~</span>
+                      </div>
+                      <span slot="footer" class="dialog-footer">
+                        <el-button type="primary" @click="questionGoodReply(item, 2)">确 认</el-button>
+                        <el-button @click="cgoodDialogVisible = false">再等等</el-button>
+                      </span>
+                    </el-dialog>
+                    <el-dialog title="确认设为最佳回答吗？" :visible.sync="goodDialogVisible" width="30%" center>
+                      <div class="tac">
+                        <span>最佳答案能够有更明确的提示，正确的回答将帮助其他有同样问题的同学，并且最佳答案会奖励该问题回答者，请尽量选择正确的回答哈~</span>
+                      </div>
+                      <span slot="footer" class="dialog-footer">
+                        <el-button @click="goodDialogVisible = false">再等等</el-button>
+                        <el-button type="primary" @click="questionGoodReply(item)">确 认</el-button>
+                      </span>
+                    </el-dialog>
+                    <el-dialog title="确认删除回答吗？" :visible.sync="deleteDialogVisible" width="30%" center>
+                      <div class="tac">
+                        <span>删除后您的回答将不会出现在该问题下,请三思哦~</span>
+                      </div>
+                      <span slot="footer" class="dialog-footer">
+                        <el-button @click="deleteQuestionReply(item, 1)">删 除</el-button>
+                        <el-button type="primary" @click="deleteDialogVisible = false">再等等</el-button>
+                      </span>
+                    </el-dialog>
+
+                    <div class="reply-comment-tool" v-if="item.showeditor">
+                      <span @click="repplaybtnclinck(item, index)">取消</span>
+                      <div class="comment-btn" @click="replyCommntClick(item, index)">评论</div>
+                    </div>
+
+                    <div class="reply-comment-container" v-if="subType == 2">
+                      <div class="reply-comment-item" v-for="(comment, cindex) in comments" :key="comment.id">
+                        <div class="answer-item-userinfo">
+                          <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt />
+                          <span class="ml5"> {{ comment.name }}</span>
+                          <span class="comment-replyment" v-if="comment.toname">回复</span>
+                          <span v-if="comment.toname">{{ comment.toname }}</span>
+                          <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
+                        </div>
+                        <div class="answer-item-content" v-html="comment.content"></div>
+                        <div class="comment-tool-bar fbselect">
+                          <span class="mr15" v-bind:class="{ goodcomment: comment.goodcomment }"
+                            @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>{{
+                                commentGood(comment.good)
+                            }}</span>
+                          <span class="mr15" @click="commentbtnclinck(comment, cindex)">回复</span>
+                          <span class="mr15" @click="jubaoBtnClick(comment.id, '评论')">
+                            <i class="icon icon_ask_report"></i>举报
+                          </span>
+                          <span v-if="comment.uid == loginInfo.id">
+                            <el-dropdown szie="mini" @command="commentClickCommend">
+                              <span class="el-dropdown-link drop-menu">
+                                <i class="icon icon_more"></i>
+                              </span>
+                              <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item :command="beforeHandleCommand('d', comment)">删除</el-dropdown-item>
+                              </el-dropdown-menu>
+                            </el-dropdown>
+                          </span>
+                        </div>
+                        <el-dialog title="确认删除评论吗？" :visible.sync="deleteCommentVisible" width="30%" center>
+                          <div class="tac">
+                            <span>删除后您的评论将不会出现在该回答下,请三思哦~</span>
+                          </div>
+                          <span slot="footer" class="dialog-footer">
+                            <el-button @click="deleteCommentReply(comment, item)">删 除</el-button>
+                            <el-button type="primary" @click="deleteCommentVisible = false">再等等</el-button>
+                          </span>
+                        </el-dialog>
+
+                        <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:after-enter="cafterEnter"
+                          v-on:leave="cleave" v-bind:css="false">
+                          <div :id="'creplayedtor' + cindex" class="c-replay-editor" v-if="comment.showeditor"
+                            :key="comment.id">
+                          </div>
+                        </transition>
+                        <div class="reply-comment-tool r-comment" v-if="comment.showeditor">
+                          <span @click="commentbtnclinck(comment, cindex)">取消</span>
+                          <div class="comment-btn" @click="creplyCommntClick(comment, item, cindex)">提交</div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="interview-comment-list" v-if="subType == 2">
+              <div class="interview-bottom-comment">
+                <div class="comment-blog">
+                  <a href="/teacher/1257316155061886977" class="article_title"><img
+                      src="https://static.redskt.com/assets/img/yonghutouxiangnan.png" width="30" height="30" alt=""
+                      class="vam user-head-image article-avatar"></a>
+                </div>
+                <div class="commet-editor-content">
+                  <div id="comment-editor"></div>
+                  <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:leave="cleave"
+                    v-bind:css="false">
+                    <div class="interview-submit-tool" v-if="showComment">
+                      <el-button type="primary" round size="small" @click="commentBtnSubmit">发表评论</el-button>
+                      <el-button round size="small" @click="cancleCommentClick">取消</el-button>
+                    </div>
+                  </transition>
+                </div>
+                <div class="clearfloat"></div>
+              </div>
+
+              <div class="comment-header">
+                <span> <em class="em1">全部评论 ( {{ dataList.length }} )</em></span>
+                <span class="reply_wrap"><em class="em2 cur">按热度排序</em> <em class="em2">按时间排序</em></span>
+              </div>
+
+              <div class="no-commet" v-if="dataList.length == 0">
+                <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                <div>
+                  <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
+                </div>
+              </div>
+
               <div id="answer-list" class="interview-answer-list" v-if="dataList.length > 0">
                 <div class="qustion-answer-content">
                   <ul class="qustion-anser-list">
@@ -388,7 +392,7 @@
 
                       <div class="answer-item-content" v-html="item.content"></div>
 
-                      <div class="reply_content_tool">
+                      <div class="interview-reply-tool">
                         <div class="tool-item">
                           <span v-bind:class="{ like: item.goodreply }" @click="goodReplyClick(item, 1)">
                             <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{ commentGood(item.good)
@@ -408,8 +412,8 @@
                           举报
                         </div>
                       </div>
-                      <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter"
-                        v-on:leave="leave" v-bind:css="false">
+                      <transition v-on:before-enter="rbeforeEnter" v-on:enter="renter" v-on:after-enter="rafterEnter"
+                        v-on:leave="rleave" v-bind:css="false">
                         <div :id="'replayedtor' + index" class="replay-editor" v-if="item.showeditor" :key="item.id">
                         </div>
                       </transition>
@@ -419,7 +423,7 @@
                         <el-button round size="small" @click="repplaybtnclinck(item, index)">取消</el-button>
                       </div>
 
-                      <div class="comment-reply-container" v-if="item.comments.length>0">
+                      <div class="comment-reply-container" v-if="item.comments.length > 0">
                         <div class="reply-comment-item" v-for="(comment, cindex) in item.comments" :key="comment.id">
                           <div class="answer-item-userinfo">
                             <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt />
@@ -429,7 +433,7 @@
                             <span class="qustion-top-item">{{ comment.gmtCreate }}</span>
                           </div>
                           <div class="answer-item-content" v-html="comment.content"></div>
-                          <div class="reply_content_tool">
+                          <div class="interview-reply-tool">
                             <div class="tool-item">
                               <span class="comment-reply" v-bind:class="{ like: comment.goodreply }"
                                 @click="goodReplyClick(comment, 2)">
@@ -450,7 +454,6 @@
                               <i class="icon icon_ask_report"></i>
                               举报
                             </div>
-
                           </div>
 
                           <transition v-on:before-enter="rbeforeEnter" v-on:enter="renter"
@@ -471,65 +474,67 @@
                 </div>
               </div>
             </div>
-          </div>
 
-  
-        </div>
-
-        <div class="ask-detail-right">
-          <div class="question-info">
-            <div class="user_header">
-              <span class="qTitle">题目信息</span>
-            </div>
-            <div class="question-info-list">
-              <div class="info-item">
-                浏览: <span>{{ qdetail.readcount }}</span>
-              </div>
-              <div class="info-item">
-                发布时间: <span>{{ qdetail.gmtCreate }}</span>
-              </div>
-
-              <div class="info-item">
-                上传者:<nuxt-link :to="'/user/' + qdetail.uid + '/blog'">
-                  <img class="vam user-head-image" :src="qdetail.avatar" width="30" height="30" alt />
-                  <span class="ml5">{{ qdetail.nickname }}</span>
-                </nuxt-link>
-              </div>
-
-              <div class="info-item">
-                遇到人数: <span>{{ qdetail.meet }}</span>
-              </div>
-            </div>
-
-            <div class="ask-top-wrap">
-              <div class="user_header">
-                <span class="ask-message-tips">问答通知</span>
-                <nuxt-link :to="{ name: 'about-message' }" class="ask-message-more">
-                  查看更多
-                </nuxt-link>
-              </div>
-              <nuxt-link :to="'/faquestion/1481862372760240130'" class="ask-top-warper-item" target="_blank"
-                rel="nofollow noopener noreferrer">◇ 欢迎大家的建议和反馈</nuxt-link>
-              <nuxt-link :to="'/about/detail/1523552231247499265'" class="ask-top-warper-item">◇ 开源实践问答上线</nuxt-link>
-            </div>
-          </div>
-
-          <div class="qustion-type-warper">
-            <div class="qustion-tag-header">
-              <span> {{ qdetail.typeString }}</span>
-              <span> > 前端 </span>
-              <span class="ask-tag-user-fawllow">关注</span>
-            </div>
-
-            <div class="qustion-tag-content">
-              <span>热门标签</span>
-              <div class="qustion-tag-warper"></div>
-            </div>
           </div>
         </div>
-        <div class="clearfloat"></div>
+
+
       </div>
+
+      <div class="ask-detail-right">
+        <div class="question-info">
+          <div class="user_header">
+            <span class="qTitle">题目信息</span>
+          </div>
+          <div class="question-info-list">
+            <div class="info-item">
+              浏览: <span>{{ qdetail.readcount }}</span>
+            </div>
+            <div class="info-item">
+              发布时间: <span>{{ qdetail.gmtCreate }}</span>
+            </div>
+
+            <div class="info-item">
+              上传者:<nuxt-link :to="'/user/' + qdetail.uid + '/blog'">
+                <img class="vam user-head-image" :src="qdetail.avatar" width="30" height="30" alt />
+                <span class="ml5">{{ qdetail.nickname }}</span>
+              </nuxt-link>
+            </div>
+
+            <div class="info-item">
+              遇到人数: <span>{{ qdetail.meet }}</span>
+            </div>
+          </div>
+
+          <div class="ask-top-wrap">
+            <div class="user_header">
+              <span class="ask-message-tips">问答通知</span>
+              <nuxt-link :to="{ name: 'about-message' }" class="ask-message-more">
+                查看更多
+              </nuxt-link>
+            </div>
+            <nuxt-link :to="'/faquestion/1481862372760240130'" class="ask-top-warper-item" target="_blank"
+              rel="nofollow noopener noreferrer">◇ 欢迎大家的建议和反馈</nuxt-link>
+            <nuxt-link :to="'/about/detail/1523552231247499265'" class="ask-top-warper-item">◇ 开源实践问答上线</nuxt-link>
+          </div>
+        </div>
+
+        <div class="qustion-type-warper">
+          <div class="qustion-tag-header">
+            <span> {{ qdetail.typeString }}</span>
+            <span> > 前端 </span>
+            <span class="ask-tag-user-fawllow">关注</span>
+          </div>
+
+          <div class="qustion-tag-content">
+            <span>热门标签</span>
+            <div class="qustion-tag-warper"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfloat"></div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -573,7 +578,7 @@ export default {
       cgoodDialogVisible: false,
       answerEditor: undefined,
       showAnswerditor: false,
-      showComment:false,
+      showComment: false,
     };
   },
 
@@ -625,7 +630,6 @@ export default {
       this.loginTitle = "我的问答";
       this.loginInfo = JSON.parse(userStr)
       this.isLogin = true;
-      this.getUserAskInfo();
     };
     window.myVueComm = this;
     this.getUploadImageToken(false);
@@ -635,10 +639,10 @@ export default {
     window.gotoPage = {
       path: '/interview/detail/' + qId,
     };
-    if(this.subType == 2) {
-       setTimeout(function () {
-      myVueComm.initCommentEditor();
-    }, 10)
+    if (this.subType == 2) {
+      setTimeout(function () {
+        myVueComm.initCommentEditor();
+      }, 10)
     }
   },
 
@@ -722,10 +726,10 @@ export default {
         return;
       }
       interviewApi.submitComment({
-          content: this.editor.txt.html(),
-          bid: this.qdetail.qid,
-          uid: this.loginInfo.id,
-        })
+        content: this.editor.txt.html(),
+        bid: this.qdetail.qid,
+        uid: this.loginInfo.id,
+      })
         .then((response) => {
           this.editor.txt.html("");
           this.dataList.unshift(response.data.comment);
@@ -855,11 +859,6 @@ export default {
           type: "success",
           duration: 2000,
         });
-      });
-    },
-    getUserAskInfo () {
-      askApi.getUserAskInfo().then((response) => {
-        this.userAskInfo = response.data.askInfo;
       });
     },
     jubaoBtnClick (wId, jubaotype) {
@@ -1058,20 +1057,39 @@ export default {
     },
 
     beforeEnter: function (el) {
-      el.style.width = '540px';
+      el.style.width = '736px';
       el.style.height = '0px'
     },
 
     enter: function (el, done) {
-      this.initReplyeditor();
       var Velocity = $.Velocity;
-      Velocity(el, { height: '140px' }, 150, function () { done() })
+      Velocity(el, { height: '270px' }, 300, function () { done() })
+      this.initAnswerEitor();
     },
 
     afterEnter: function (el) {
     },
 
     leave: function (el, done) {
+      var Velocity = $.Velocity;
+      Velocity(el, { height: '0px' }, 300, function () { done() })
+    },
+
+    rbeforeEnter: function (el) {
+      el.style.width = '540px';
+      el.style.height = '0px'
+    },
+
+    renter: function (el, done) {
+      this.initReplyeditor();
+      var Velocity = $.Velocity;
+      Velocity(el, { height: '140px' }, 150, function () { done() })
+    },
+
+    rafterEnter: function (el) {
+    },
+
+    rleave: function (el, done) {
       var Velocity = $.Velocity;
       Velocity(el, { height: '0px' }, 150, function () { done() })
     },
@@ -1087,24 +1105,6 @@ export default {
       var Velocity = $.Velocity;
       Velocity(el, { height: '0px' }, 150, function () { done() })
     },
-    clickAnserType (type) {
-      if (type == this.answertype) {
-        return;
-      }
-      this.answertype = type;
-      if (this.answertype) {
-        askApi.getQustionReplyList(this.qdetail.qid, 1).then((response) => {
-          this.dataList = response.data.replyList;
-          this.getUserGoodReplyState();
-        })
-      } else {
-        askApi.getQustionReplyList(this.qdetail.qid, 2).then((response) => {
-          this.dataList = response.data.replyList;
-          this.getUserGoodReplyState();
-        })
-      }
-    },
-
     getUploadImageToken (isForce) {
       if (!this.isLogin) {
         if (isForce) {
@@ -1181,22 +1181,21 @@ export default {
     },
 
     submitAnserClick () {
-      if (this.editor.txt.html().length <= 6) {
-        this.answerBtnClick();
+      if (this.answerEditor.txt.html().length <= 6) {
         this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
         return;
       }
-      askApi
-        .submitQuestionReply({
-          content: this.editor.txt.html(),
+      interviewApi
+        .submitQuestionAnswer({
+          content: this.answerEditor.txt.html(),
           qid: this.qdetail.qid,
           uid: this.loginInfo.id,
         })
         .then((response) => {
-          this.editor.txt.html("");
+          this.answerEditor.txt.html("");
           this.dataList.unshift(response.data.reply);
           this.$message({
-            message: "问题回答成功哦",
+            message: "提交解答成功哦",
             type: "success",
             duration: 2000,
           });
@@ -1227,7 +1226,74 @@ export default {
       }
     },
 
-     initCommentEditor () {
+    initAnswerEitor () {
+      window.myVueComm = this;
+      let editor = this.$wangeditor('#answer-editor');
+      this.answerEditor = editor;
+      editor.config.uploadImgMaxLength = 1;
+      editor.config.uploadImgServer = "/api/ucenter/uploadImage";
+      editor.config.uploadFileName = "file";
+      editor.config.placeholder = "请用专业明晰的语言,写出您的解答";
+      editor.config.height = 150;
+      editor.config.zIndex = 100;
+
+      editor.config.onfocus = function (newHtml) {
+        myVueComm.getUploadImageToken(true);
+      };
+      editor.config.menus = [
+        'bold',
+        'fontSize',
+        'fontName',
+        'italic',
+        'underline',
+        'indent',
+        'foreColor',
+        'link',
+        'list',
+        'todo',
+        'justify',
+        'emoticon',
+        'image',
+        'code',
+        'splitLine',
+      ]
+
+      editor.config.customUploadImg = function (files, insertImgFn) {
+        // resultFiles 是 input 中选中的文件列表
+        // insertImgFn 是获取图片 url 后，插入到编辑器的方法
+        var file = files[0];
+        const putExtra = {
+          mimeType: file.type,
+        };
+        const config = {
+          region: qiniu.region.z2,
+        };
+        const observable = qiniu.upload(
+          file,
+          null,
+          window.myVueComm.uploadToken,
+          putExtra,
+          config
+        );
+        const observer = {
+          next (res) {
+            window.console.log(res);
+          },
+          error (err) {
+            window.console.log(err);
+          },
+          complete (res) {
+            window.console.log(res);
+            insertImgFn("https://img.redskt.com/" + res.hash);
+          },
+        };
+        const subscription = observable.subscribe(observer);
+      };
+      editor.config.onchange = function (newHtml) { };
+      editor.create();
+    },
+
+    initCommentEditor () {
       let editor = this.$wangeditor("#comment-editor");
       this.editor = editor;
       editor.config.uploadImgMaxLength = 1;
@@ -1290,8 +1356,8 @@ export default {
       editor.create();
     },
 
-      initReplyeditor () {
-      var item =  window.replyItem.replyId;
+    initReplyeditor () {
+      var item = window.replyItem.replyId;
       let editor = this.$wangeditor(window.replyItem.replyId);
       this.editor = editor;
       window.replyItem.editor = editor;
@@ -1357,16 +1423,15 @@ export default {
 </script>
 
 <style scoped>
-
 .interview-submit-tool {
   padding-top: 8px;
   overflow: hidden;
 }
 
-.interview-submit-tool  .el-button {
-    padding: 6px 12px;
-    font-size: 10px;
-    border-radius: 14px;
+.interview-submit-tool .el-button {
+  padding: 6px 12px;
+  font-size: 10px;
+  border-radius: 14px;
 }
 
 .comment-header {
@@ -1374,8 +1439,8 @@ export default {
 }
 
 .comment-header .em1 {
-    font-size: 16px;
-    font-weight: 550;
+  font-size: 16px;
+  font-weight: 550;
 }
 
 .comment-header .em2 {
@@ -1389,7 +1454,7 @@ export default {
   color: #409eff;
 }
 
-.comment-header  .reply_wrap {
+.comment-header .reply_wrap {
   margin-left: 495px;
 }
 
@@ -1400,19 +1465,19 @@ export default {
 }
 
 .interview-bottom-comment .comment-blog {
-    width: 40px;
-    height: 40px;
-    float: left;
-    margin-left: 15px;
-    margin-top: 15px;
+  width: 40px;
+  height: 40px;
+  float: left;
+  margin-left: 15px;
+  margin-top: 15px;
 }
 
 .interview-bottom-comment .commet-editor-content {
-    width: 690px;
-    padding-top: 20px;
-    float: right;
-    margin-right: 0px;
-    font-size: 12px;
+  width: 690px;
+  padding-top: 20px;
+  float: right;
+  margin-right: 0px;
+  font-size: 12px;
 }
 
 .interview-comment-list {
@@ -1421,7 +1486,7 @@ export default {
 }
 
 .interview-ediot-detail {
-  margin-top:10px
+  margin-top: 10px
 }
 
 .interview-ediot-detail .report-common-question {
@@ -1436,6 +1501,7 @@ export default {
   margin-left: 390px;
   margin-top: 10px;
 }
+
 .interview-ediot-detail .answer-open-check {
   margin-top: 12px;
 }
@@ -1447,22 +1513,24 @@ export default {
 }
 
 .no-commet {
-    text-align: center;
-    margin: 20px auto;
-}
- .no-commet .nocommet-image-tips {
-    width: 230px;
-    margin: 0 auto;
+  text-align: center;
+  margin: 20px auto;
 }
 
- .no-commet .tips  {
+.no-commet .nocommet-image-tips {
+  width: 230px;
+  margin: 0 auto;
+}
+
+.no-commet .tips {
   font-size: 14px;
   color: #666;
- }
+}
 
 .interview-questions-con {
   background: #fff;
 }
+
 .interview-subtypelist {
   border-bottom: 1px solid #e4e4e4;
 }
@@ -1804,6 +1872,7 @@ h2.accusation-secondary-title {
 
 .answer-list-item {
   margin-bottom: 16px;
+  padding-bottom: 6px;
   border-bottom: 1px solid rgba(28, 31, 33, 0.1);
 }
 
@@ -1848,7 +1917,7 @@ h2.accusation-secondary-title {
   margin-right: 4px;
 }
 
-.reply_content_tool .vote-box {
+.interview-reply-tool .vote-box {
   line-height: 30px;
   height: 30px;
   display: -webkit-box;
@@ -1867,7 +1936,21 @@ h2.accusation-secondary-title {
   user-select: none;
 }
 
-.reply_content_tool .vote-box span.vote_span {
+.interview-reply-tool .tool-item {
+  margin-right: 16px;
+  line-height: 22px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #8a919f;
+}
+
+.interview-reply-tool svg {
+  fill: #8a919f;
+  margin-right: 2px;
+  vertical-align: middle;
+}
+
+.interview-reply-tool .vote-box span.vote_span {
   text-align: center;
   border: 1px solid #e8e8ed;
   border-left: 0;
@@ -1897,7 +1980,14 @@ h2.accusation-secondary-title {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAcUlEQVRYR2NkGGDAOMD2M4w6YDQERkNgNARGQ2A0BDBCoLyqw5PxP+NMUCX1n/F/emdbxXZsFRa11GE4oKKy89H///9lQZYyMjI+7mgvl8PmAGqpG3wOoFbQwkKNkHmjuWA0BEZDYDQERkNgNARGQwAAtIpgIVBMgJ0AAAAASUVORK5CYII=);
 }
 
-.reply_content_tool .mr20px {
+.comment-reply-container {
+  margin-left: 25px;
+  padding: 10px;
+  background: rgba(247, 248, 250, 0.7);
+  border-radius: 8px;
+}
+
+.interview-reply-tool .mr20px {
   padding: 0 16px;
   text-align: center;
   height: 30px;
@@ -1909,22 +1999,7 @@ h2.accusation-secondary-title {
   margin-right: 16px;
 }
 
-.reply_content_tool span {
-  color: #777888;
-  padding-right: 16px;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.reply_content_tool {
+.interview-reply-tool {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1934,7 +2009,7 @@ h2.accusation-secondary-title {
   flex-direction: row;
   padding: 0;
   margin-top: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   margin-right: 16px;
   margin-left: 36px;
 }

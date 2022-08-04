@@ -213,7 +213,7 @@
 
                     </div>
 
-                    <div class="answer-item-content" v-html="item.content"></div>
+                    <div class="answer-content" v-html="item.content"></div>
 
                     <div class="interview-reply-tool">
 
@@ -224,24 +224,14 @@
                         </button>
                       </div>
 
-                      <div class="css-1fsoot-ReactionWraper e5ckeis0">
-                        <div class="css-17xpmpg-FlexContainer e1o1eox60">
-                        <div class="css-1o10tda-ReactionUpvoteBtnWrapper e5ckeis4">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M7.04 9.11l3.297-7.419a1 1 0 01.914-.594 3.67 3.67 0 013.67 3.671V7.33h4.028a2.78 2.78 0 012.78 3.2l-1.228 8.01a2.778 2.778 0 01-2.769 2.363H5.019a2.78 2.78 0 01-2.78-2.78V11.89a2.78 2.78 0 012.78-2.78H7.04zm-2.02 2a.78.78 0 00-.781.78v6.232c0 .431.35.78.78.78H6.69V11.11H5.02zm12.723 7.793a.781.781 0 00.781-.666l1.228-8.01a.78.78 0 00-.791-.898h-5.04a1 1 0 01-1-1V4.77c0-.712-.444-1.32-1.07-1.56L8.69 10.322v8.58h9.053z" clip-rule="evenodd"></path></svg>
-                          </div>
-                          </div>
+                      <div class="reply-tool-item">
+                
                           <div class="css-17xpmpg-FlexContainer e1o1eox60">
                             <div class="css-1lhs4fb-ReactionSummaryBtnWrapper e5ckeis5">
-                              <div class="css-1vs9wz5-ReactionCountText e5ckeis6">4</div><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" class="css-1kuuymw-Svg ea8ky5j0" style="margin-left: 0px;"><defs><mask id="vote-unique-svg844-clip-mask" fill="#fff"><path d="m8.00128196 0c4.41827804 0 8.00000004 3.581722 8.00000004 8s-3.581722 8-8.00000004 8c-2.38959981 0-4.53449661-1.0476981-6.00039523-2.708799 1.24528193-1.4102108 2.00039523-3.2625228 2.00039523-5.291201s-.7551133-3.88099023-1.99960477-5.29120097c1.46510816-1.66110096 3.61000496-2.70879903 5.99960477-2.70879903z"></path></mask></defs><g fill="none" fill-rule="evenodd"><rect width="16" height="16" fill="#00c36c" rx="8"></rect><path fill="#fff" d="M5.152 6.918c.317 0 .574.257.574.574v3.363a.573.573 0 01-.507.57l-.067.004h-.689a.574.574 0 01-.573-.574V7.492c0-.317.257-.574.573-.574zm4.342-1.66v.979h1.54a1.064 1.064 0 011.064 1.223l-.47 3.064c-.08.525-.533.91-1.059.905H7.053a.574.574 0 01-.57-.507l-.003-.067V6.918L7.74 4.08a.382.382 0 01.35-.227c.776 0 1.404.629 1.404 1.404z"></path></g></svg>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" class="css-1kuuymw-Svg ea8ky5j0" style="margin-left: 0px;"><defs><mask id="vote-unique-svg844-clip-mask" fill="#fff"><path d="m8.00128196 0c4.41827804 0 8.00000004 3.581722 8.00000004 8s-3.581722 8-8.00000004 8c-2.38959981 0-4.53449661-1.0476981-6.00039523-2.708799 1.24528193-1.4102108 2.00039523-3.2625228 2.00039523-5.291201s-.7551133-3.88099023-1.99960477-5.29120097c1.46510816-1.66110096 3.61000496-2.70879903 5.99960477-2.70879903z"></path></mask></defs><g fill="none" fill-rule="evenodd"><rect width="16" height="16" fill="#00c36c" rx="8"></rect><path fill="#fff" d="M5.152 6.918c.317 0 .574.257.574.574v3.363a.573.573 0 01-.507.57l-.067.004h-.689a.574.574 0 01-.573-.574V7.492c0-.317.257-.574.573-.574zm4.342-1.66v.979h1.54a1.064 1.064 0 011.064 1.223l-.47 3.064c-.08.525-.533.91-1.059.905H7.053a.574.574 0 01-.57-.507l-.003-.067V6.918L7.74 4.08a.382.382 0 01.35-.227c.776 0 1.404.629 1.404 1.404z"></path></g></svg>
                               </div>
                             </div>
                           </div>
-
-                      <div class="reply-tool-item">
-                        <span v-bind:class="{ like: item.goodreply }" @click="goodReplyClick(item)"
-                          class="vote_span vote_spaned">
-                          <i class="icon icon_vote_up"></i>解决<em class="qustion-good-num">{{ item.good }}</em></span>
-                      </div>
 
                       <div class="reply-tool-item">
                         <button class="tool-button">
@@ -1945,7 +1935,6 @@ h2.accusation-secondary-title {
   border-radius: 16px;
   border: 1px solid #e8e8ed;
   margin-right: 16px;
-
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -2027,7 +2016,7 @@ h2.accusation-secondary-title {
   margin-top: 16px;
   margin-bottom: 10px;
   margin-right: 16px;
-  margin-left: 36px;
+  margin-left: 6px;
 }
 
 .answer-item-userinfo {
@@ -2035,10 +2024,11 @@ h2.accusation-secondary-title {
   color: #666;
 }
 
-.answer-item-content {
-  margin-top: 8px;
-  margin-left: 38px;
+.answer-content {
+  margin-top: 12px;
+  margin-left: 8px;
   margin-right: 12px;
+  font-size: 14px;
 }
 
 .qustion-answer-content {

@@ -217,21 +217,22 @@
 
                     <div class="interview-reply-tool">
 
+                    <div class="reply-tool-item">
+                       <span class="good-item">
+                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M7.04 9.11l3.297-7.419a1 1 0 01.914-.594 3.67 3.67 0 013.67 3.671V7.33h4.028a2.78 2.78 0 012.78 3.2l-1.228 8.01a2.778 2.778 0 01-2.769 2.363H5.019a2.78 2.78 0 01-2.78-2.78V11.89a2.78 2.78 0 012.78-2.78H7.04zm-2.02 2a.78.78 0 00-.781.78v6.232c0 .431.35.78.78.78H6.69V11.11H5.02zm12.723 7.793a.781.781 0 00.781-.666l1.228-8.01a.78.78 0 00-.791-.898h-5.04a1 1 0 01-1-1V4.77c0-.712-.444-1.32-1.07-1.56L8.69 10.322v8.58h9.053z" clip-rule="evenodd"></path></svg>
+                     </span>
+                    
+                     <span class="gnums">{{item.good}}</span>
+                      </div>
+
                       <div class="reply-tool-item">
                         <button class="tool-button">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M11.997 21.5a9.5 9.5 0 01-8.49-5.251A9.38 9.38 0 012.5 11.997V11.5c.267-4.88 4.12-8.733 8.945-8.999L12 2.5a9.378 9.378 0 014.25 1.007A9.498 9.498 0 0121.5 12a9.378 9.378 0 01-.856 3.937l.838 4.376a1 1 0 01-1.17 1.17l-4.376-.838a9.381 9.381 0 01-3.939.856zm3.99-2.882l3.254.623-.623-3.253a1 1 0 01.09-.64 7.381 7.381 0 00.792-3.346 7.5 7.5 0 00-4.147-6.708 7.385 7.385 0 00-3.35-.794H11.5c-3.752.208-6.792 3.248-7.002 7.055L4.5 12a7.387 7.387 0 00.794 3.353A7.5 7.5 0 0012 19.5a7.384 7.384 0 003.349-.793 1 1 0 01.639-.09z" clip-rule="evenodd"></path></svg>
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M11.997 21.5a9.5 9.5 0 01-8.49-5.251A9.38 9.38 0 012.5 11.997V11.5c.267-4.88 4.12-8.733 8.945-8.999L12 2.5a9.378 9.378 0 014.25 1.007A9.498 9.498 0 0121.5 12a9.378 9.378 0 01-.856 3.937l.838 4.376a1 1 0 01-1.17 1.17l-4.376-.838a9.381 9.381 0 01-3.939.856zm3.99-2.882l3.254.623-.623-3.253a1 1 0 01.09-.64 7.381 7.381 0 00.792-3.346 7.5 7.5 0 00-4.147-6.708 7.385 7.385 0 00-3.35-.794H11.5c-3.752.208-6.792 3.248-7.002 7.055L4.5 12a7.387 7.387 0 00.794 3.353A7.5 7.5 0 0012 19.5a7.384 7.384 0 003.349-.793 1 1 0 01.639-.09z" clip-rule="evenodd"></path></svg>
                           <span>304</span>
                         </button>
                       </div>
 
-                      <div class="reply-tool-item">
-                
-                          <div class="css-17xpmpg-FlexContainer e1o1eox60">
-                            <div class="css-1lhs4fb-ReactionSummaryBtnWrapper e5ckeis5">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" class="css-1kuuymw-Svg ea8ky5j0" style="margin-left: 0px;"><defs><mask id="vote-unique-svg844-clip-mask" fill="#fff"><path d="m8.00128196 0c4.41827804 0 8.00000004 3.581722 8.00000004 8s-3.581722 8-8.00000004 8c-2.38959981 0-4.53449661-1.0476981-6.00039523-2.708799 1.24528193-1.4102108 2.00039523-3.2625228 2.00039523-5.291201s-.7551133-3.88099023-1.99960477-5.29120097c1.46510816-1.66110096 3.61000496-2.70879903 5.99960477-2.70879903z"></path></mask></defs><g fill="none" fill-rule="evenodd"><rect width="16" height="16" fill="#00c36c" rx="8"></rect><path fill="#fff" d="M5.152 6.918c.317 0 .574.257.574.574v3.363a.573.573 0 01-.507.57l-.067.004h-.689a.574.574 0 01-.573-.574V7.492c0-.317.257-.574.573-.574zm4.342-1.66v.979h1.54a1.064 1.064 0 011.064 1.223l-.47 3.064c-.08.525-.533.91-1.059.905H7.053a.574.574 0 01-.57-.507l-.003-.067V6.918L7.74 4.08a.382.382 0 01.35-.227c.776 0 1.404.629 1.404 1.404z"></path></g></svg>
-                              </div>
-                            </div>
-                          </div>
+                    
 
                       <div class="reply-tool-item">
                         <button class="tool-button">
@@ -547,7 +548,7 @@ import interviewServerApi from "@/api/interviewServerReq";
 const qiniu = require("qiniu-js");
 
 export default {
-  data () {
+  data() {
     return {
       checked: true,
       answertype: true,
@@ -581,126 +582,147 @@ export default {
     };
   },
 
-  head () {
+  head() {
     return {
       script: [
-        { src: 'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js', async: true, defer: true }
+        {
+          src: "https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js",
+          async: true,
+          defer: true,
+        },
       ],
       title: this.qdetail.title + "-开源实践问答",
       meta: [
         {
-          hid: 'keywords',
-          name: 'keywords',
+          hid: "keywords",
+          name: "keywords",
           content: "技术问答,技术答疑,生活问题,我问你答，开源实践问答",
         },
         {
-          hid: 'description',
-          name: 'description',
+          hid: "description",
+          name: "description",
           content: this.descrb,
         },
         {
-          hid: 'og:description',
+          hid: "og:description",
           content: this.descrb,
         },
       ],
-    }
+    };
   },
 
-  asyncData ({ params, query, error }) {
+  asyncData({ params, query, error }) {
     var type = query.subtype ? query.subtype : 1;
-    return interviewServerApi.getQuestionDetail(params.id, type).then((response) => {
-      return {
-        qdetail: response.data.qdetail,
-        dataList: response.data.dataList,
-        subType: type,
-        descrb: '开源实践问答为您找到 ' + response.data.qdetail.title + ' 等相关问题答案，如果想了解更多关于 ' + response.data.qdetail.title + ' 问题等相关问答，请访问开源实践问答。',
-      }
-    })
+    return interviewServerApi
+      .getQuestionDetail(params.id, type)
+      .then((response) => {
+        return {
+          qdetail: response.data.qdetail,
+          dataList: response.data.dataList,
+          subType: type,
+          descrb:
+            "开源实践问答为您找到 " +
+            response.data.qdetail.title +
+            " 等相关问题答案，如果想了解更多关于 " +
+            response.data.qdetail.title +
+            " 问题等相关问答，请访问开源实践问答。",
+        };
+      });
   },
 
-  mounted () {
-    window.console.log('====' + this.subType);
+  mounted() {
+    window.console.log("====" + this.subType);
     var qId = this.$route.params.id;
     var token = localStorage.getItem("redclass_token");
     var userStr = localStorage.getItem("redclass_user");
-    if (!(token && token != "undefined") || !(userStr && userStr != "undefined")) {
+    if (
+      !(token && token != "undefined") ||
+      !(userStr && userStr != "undefined")
+    ) {
       this.isLogin = false;
     } else {
       this.loginTitle = "我的问答";
-      this.loginInfo = JSON.parse(userStr)
+      this.loginInfo = JSON.parse(userStr);
       this.isLogin = true;
-    };
+    }
     window.myVueComm = this;
     this.getUploadImageToken(false);
     this.getUserGoodQustionState(qId);
     this.getUserQustionCollectState(qId);
     this.getUserGoodReplyState();
     window.gotoPage = {
-      path: '/interview/detail/' + qId,
+      path: "/interview/detail/" + qId,
     };
     if (this.subType == 2) {
       setTimeout(function () {
         myVueComm.initCommentEditor();
-      }, 10)
+      }, 10);
     }
   },
 
   computed: {
     // 计算属性的 getter
-    commentGood () {
+    commentGood() {
       return function (goodCount) {
         if (goodCount > 0) {
           return goodCount;
         } else {
           return "赞";
         }
-      }
+      };
     },
 
-    goodReplyString () {
+    goodReplyString() {
       return function (item) {
         if (item.state == 9) {
           return "取消最佳";
         } else {
           return "最佳";
         }
-      }
+      };
     },
 
     // 金额显示.00格式
-    NumFormat () {
-      var value = this.userAskInfo.qmoney
-      if (!value) return '0.00'
-      value = value.toFixed(2)
-      var intPart = Math.trunc(value)// 获取整数部分
-      var intPartFormat = intPart.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') // 将整数部分逢三一断
-      var floatPart = '.00' // 预定义小数部分
-      var value2Array = value.split('.')
+    NumFormat() {
+      var value = this.userAskInfo.qmoney;
+      if (!value) return "0.00";
+      value = value.toFixed(2);
+      var intPart = Math.trunc(value); // 获取整数部分
+      var intPartFormat = intPart
+        .toString()
+        .replace(/(\d)(?=(?:\d{3})+$)/g, "$1,"); // 将整数部分逢三一断
+      var floatPart = ".00"; // 预定义小数部分
+      var value2Array = value.split(".");
       // =2表示数据有小数位
       if (value2Array.length === 2) {
-        floatPart = value2Array[1].toString() // 拿到小数部分
-        if (floatPart.length === 1) { // 补0,实际上用不着
-          return intPartFormat + '.' + floatPart + '0'
+        floatPart = value2Array[1].toString(); // 拿到小数部分
+        if (floatPart.length === 1) {
+          // 补0,实际上用不着
+          return intPartFormat + "." + floatPart + "0";
         } else {
-          return intPartFormat + '.' + floatPart
+          return intPartFormat + "." + floatPart;
         }
       } else {
-        return intPartFormat + floatPart
+        return intPartFormat + floatPart;
       }
-    }
+    },
   },
 
   methods: {
-    commentReplySubmit (item, index) {
+    commentReplySubmit(item, index) {
       if (!item.editor || item.editor.txt.html().length < 6) {
-        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        this.$message({
+          message: "输入的内容太短了哦！",
+          type: "error",
+          duration: 2000,
+        });
         return;
       }
       interviewApi
         .submitReply({
           content: item.editor.txt.html(),
           rid: item.id,
-          uid: this.loginInfo.id
+          uid: this.loginInfo.id,
         })
         .then((response) => {
           item.editor.txt.html("");
@@ -714,21 +736,26 @@ export default {
           });
         });
     },
-    cancleCommentClick () {
+    cancleCommentClick() {
       this.showComment = false;
     },
-    commentBtnSubmit () {
+    commentBtnSubmit() {
       var texxt = this.editor.txt.html();
       window.console.log(texxt);
       if (!this.editor || this.editor.txt.html().length < 6) {
-        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        this.$message({
+          message: "输入的内容太短了哦！",
+          type: "error",
+          duration: 2000,
+        });
         return;
       }
-      interviewApi.submitComment({
-        content: this.editor.txt.html(),
-        bid: this.qdetail.qid,
-        uid: this.loginInfo.id,
-      })
+      interviewApi
+        .submitComment({
+          content: this.editor.txt.html(),
+          bid: this.qdetail.qid,
+          uid: this.loginInfo.id,
+        })
         .then((response) => {
           this.editor.txt.html("");
           this.dataList.unshift(response.data.comment);
@@ -740,39 +767,38 @@ export default {
         });
     },
 
-    beforeHandleCommand (commd, item) {
+    beforeHandleCommand(commd, item) {
       return {
-        'command': commd,
-        'item': item
-      }
+        command: commd,
+        item: item,
+      };
     },
 
-    questionClickCommend (command) {
-      if (command.command == 'd') {
+    questionClickCommend(command) {
+      if (command.command == "d") {
         this.questionDialogVisible = true;
       }
-      if (command.command == 'c') {
+      if (command.command == "c") {
         this.fixDialogVisible = true;
       }
-
     },
 
-    replyClickCommend (command) {
-      if (command.command == 'd') {
+    replyClickCommend(command) {
+      if (command.command == "d") {
         this.deleteDialogVisible = true;
       }
-      if (command.command == 'g') {
+      if (command.command == "g") {
         this.goodDialogVisible = true;
       }
     },
 
-    commentClickCommend (command) {
-      if (command.command == 'd') {
+    commentClickCommend(command) {
+      if (command.command == "d") {
         this.deleteCommentVisible = true;
       }
     },
 
-    fixQuestion (qItem) {
+    fixQuestion(qItem) {
       this.fixDialogVisible = false;
       askApi.fixQuestion(qItem.qid).then((response) => {
         if (response.data.sucess) {
@@ -792,7 +818,7 @@ export default {
       });
     },
 
-    deleteQuestion (qItem) {
+    deleteQuestion(qItem) {
       this.questionDialogVisible = false;
       if (qItem.state == 99 && this.dataList.length > 0) {
         this.$message({
@@ -814,15 +840,17 @@ export default {
         }
 
         this.$message({
-          message: "删除问题成功, 即将跳转问题列表页面", type: "success", duration: 2000,
+          message: "删除问题成功, 即将跳转问题列表页面",
+          type: "success",
+          duration: 2000,
           onClose: () => {
             $nuxt.$router.push({ name: "faquestion" });
-          }
+          },
         });
       });
     },
 
-    questionGoodReply (reply) {
+    questionGoodReply(reply) {
       this.goodDialogVisible = false;
       askApi.questionGoodReply(reply.id).then((response) => {
         this.$message({
@@ -833,7 +861,7 @@ export default {
       });
     },
 
-    deleteQuestionReply (reply) {
+    deleteQuestionReply(reply) {
       this.deleteDialogVisible = false;
       askApi.deleteQuestionReply(reply.id).then((response) => {
         this.dataList = this.dataList.filter(function (item) {
@@ -847,7 +875,7 @@ export default {
       });
     },
 
-    deleteCommentReply (comment, citem) {
+    deleteCommentReply(comment, citem) {
       this.deleteCommentReply = false;
       askApi.deleteReplyComment(comment.id).then((response) => {
         citem.comments = citem.comments.filter(function (item) {
@@ -860,38 +888,51 @@ export default {
         });
       });
     },
-    jubaoBtnClick (wId, jubaotype) {
+    jubaoBtnClick(wId, jubaotype) {
       window.console.log(wId);
       this.jubaotype = jubaotype;
       this.jubaoId = wId;
       this.jubiaoDlog = true;
     },
-    jubaoCommitBtnClick () {
-      askApi.submitUserWaring({ "wid": this.jubaoId, "uid": this.loginInfo.id, "type": this.jubaoTypeIndex, "content": this.jubaoContent, "jubaotype": this.jubaotype }).then((response) => {
-        this.$message({
-          message: "举报成功！我们将尽快处理哈",
-          type: "success",
-          duration: 2000,
+    jubaoCommitBtnClick() {
+      askApi
+        .submitUserWaring({
+          wid: this.jubaoId,
+          uid: this.loginInfo.id,
+          type: this.jubaoTypeIndex,
+          content: this.jubaoContent,
+          jubaotype: this.jubaotype,
+        })
+        .then((response) => {
+          this.$message({
+            message: "举报成功！我们将尽快处理哈",
+            type: "success",
+            duration: 2000,
+          });
         });
-      });
       this.jubiaoDlog = false;
-
     },
-    qustionJianYiConfirm () {
-      askApi.submitQuestionAdvise({ "qid": this.qdetail.qid, "uid": this.loginInfo.id, "type": this.jianyilable, "content": this.jianyiContent }).then((response) => {
-        this.$message({
-          message: "提交成功！",
-          type: "success",
-          duration: 2000,
+    qustionJianYiConfirm() {
+      askApi
+        .submitQuestionAdvise({
+          qid: this.qdetail.qid,
+          uid: this.loginInfo.id,
+          type: this.jianyilable,
+          content: this.jianyiContent,
+        })
+        .then((response) => {
+          this.$message({
+            message: "提交成功！",
+            type: "success",
+            duration: 2000,
+          });
         });
-      });
       this.jianyiDlog = false;
     },
-    updateRelpyState (rId, type) {
-      askApi.updateRelpyState(rId, type).then((response) => {
-      })
+    updateRelpyState(rId, type) {
+      askApi.updateRelpyState(rId, type).then((response) => {});
     },
-    goodReplyClick (item) {
+    goodReplyClick(item) {
       if (this.forbiden) {
         this.forbiden = false;
         if (item.goodreply) {
@@ -912,29 +953,29 @@ export default {
       }
       setTimeout(function () {
         window.myVueComm.forbiden = true;
-      }, 500)
+      }, 500);
     },
 
-    goodCommentClick (comment) {
+    goodCommentClick(comment) {
       window.console.log("ffffffffff");
       if (this.forbiden) {
         this.forbiden = false;
         if (comment.goodcomment == 0) {
           comment.goodcomment = 1;
           comment.good++;
-          askApi.addQcommentGood(comment.id).then((response) => { });
+          askApi.addQcommentGood(comment.id).then((response) => {});
         } else {
           comment.goodcomment = 0;
           comment.good--;
-          askApi.cancleQcommentGood(comment.id).then((response) => { });
+          askApi.cancleQcommentGood(comment.id).then((response) => {});
         }
       }
       setTimeout(function () {
         window.myVueComm.forbiden = true;
-      }, 500)
+      }, 500);
     },
 
-    badReplyClick (item) {
+    badReplyClick(item) {
       if (this.forbiden) {
         this.forbiden = false;
         if (item.badreply) {
@@ -954,20 +995,22 @@ export default {
         }
       }
       setTimeout(function () {
-        window.myVueComm.forbiden = true
-      }, 500)
+        window.myVueComm.forbiden = true;
+      }, 500);
     },
-    collectBtnClick () {
+    collectBtnClick() {
       if (this.collectState) {
         this.cancleUserQustionCollect();
       } else {
         this.addUserQustionCollect();
       }
       this.collectState = !this.collectState;
-      this.collectIcon = this.collectState ? "el-icon-star-on" : "el-icon-star-off";
+      this.collectIcon = this.collectState
+        ? "el-icon-star-on"
+        : "el-icon-star-off";
       this.collectString = this.collectState ? "已收藏" : "收藏";
     },
-    goodQustionClick () {
+    goodQustionClick() {
       if (this.goodqustion) {
         this.qdetail.good--;
         this.cancleUserGoodQustion();
@@ -978,15 +1021,17 @@ export default {
       this.goodqustion = !this.goodqustion;
     },
 
-    getUserQustionCollectState (qId) {
+    getUserQustionCollectState(qId) {
       askApi.getUserQustionCollectState(qId).then((response) => {
         this.collectState = response.data.collectState;
-        this.collectIcon = this.collectState ? "el-icon-star-on" : "el-icon-star-off";
+        this.collectIcon = this.collectState
+          ? "el-icon-star-on"
+          : "el-icon-star-off";
         this.collectString = this.collectState ? "已收藏" : "收藏";
-      })
+      });
     },
 
-    getUserGoodReplyState () {
+    getUserGoodReplyState() {
       if (!this.dataList) {
         return;
       }
@@ -1013,10 +1058,10 @@ export default {
             }
           }
         }
-      })
+      });
     },
 
-    addUserQustionCollect () {
+    addUserQustionCollect() {
       askApi.addUserQustionCollect(this.qdetail.qid).then((response) => {
         this.qdetail.collect++;
         this.$message({
@@ -1024,10 +1069,10 @@ export default {
           type: "success",
           duration: 2000,
         });
-      })
+      });
     },
 
-    cancleUserQustionCollect () {
+    cancleUserQustionCollect() {
       askApi.cancleUserQustionCollect(this.qdetail.qid).then((response) => {
         this.qdetail.collect--;
         window.console.log("ddd");
@@ -1036,75 +1081,83 @@ export default {
           type: "success",
           duration: 2000,
         });
-      })
+      });
     },
 
-    getUserGoodQustionState (qId) {
+    getUserGoodQustionState(qId) {
       askApi.getUserGoodQustionState(qId).then((response) => {
         this.goodqustion = response.data.goodqustion;
-      })
+      });
     },
 
-    addUserGoodQustion () {
-      askApi.addUserGoodQustion(this.qdetail.qid).then((response) => {
-      })
+    addUserGoodQustion() {
+      askApi.addUserGoodQustion(this.qdetail.qid).then((response) => {});
     },
 
-    cancleUserGoodQustion () {
-      askApi.cancleUserGoodQustion(this.qdetail.qid).then((response) => {
-      })
+    cancleUserGoodQustion() {
+      askApi.cancleUserGoodQustion(this.qdetail.qid).then((response) => {});
     },
 
     beforeEnter: function (el) {
-      el.style.width = '736px';
-      el.style.height = '0px'
+      el.style.width = "736px";
+      el.style.height = "0px";
     },
 
     enter: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '270px' }, 300, function () { done() })
+      Velocity(el, { height: "270px" }, 300, function () {
+        done();
+      });
       this.initAnswerEitor();
     },
 
-    afterEnter: function (el) {
-    },
+    afterEnter: function (el) {},
 
     leave: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '0px' }, 300, function () { done() })
+      Velocity(el, { height: "0px" }, 300, function () {
+        done();
+      });
     },
 
     rbeforeEnter: function (el) {
-      el.style.width = '540px';
-      el.style.height = '0px'
+      el.style.width = "540px";
+      el.style.height = "0px";
     },
 
     renter: function (el, done) {
       this.initReplyeditor();
       var Velocity = $.Velocity;
-      Velocity(el, { height: '140px' }, 150, function () { done() })
+      Velocity(el, { height: "140px" }, 150, function () {
+        done();
+      });
     },
 
-    rafterEnter: function (el) {
-    },
+    rafterEnter: function (el) {},
 
     rleave: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '0px' }, 150, function () { done() })
+      Velocity(el, { height: "0px" }, 150, function () {
+        done();
+      });
     },
 
     cbeforeEnter: function (el) {
-      el.style.height = '0px';
+      el.style.height = "0px";
     },
     center: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '34px' }, 150, function () { done() })
+      Velocity(el, { height: "34px" }, 150, function () {
+        done();
+      });
     },
     cleave: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: '0px' }, 150, function () { done() })
+      Velocity(el, { height: "0px" }, 150, function () {
+        done();
+      });
     },
-    getUploadImageToken (isForce) {
+    getUploadImageToken(isForce) {
       if (!this.isLogin) {
         if (isForce) {
           this.$message({
@@ -1125,7 +1178,7 @@ export default {
       });
     },
 
-    answerBtnClick () {
+    answerBtnClick() {
       if (this.showAnswerditor) {
         this.showAnswerditor = false;
       } else {
@@ -1133,9 +1186,13 @@ export default {
       }
     },
 
-    creplyCommntClick (item, rItem, cindex) {
+    creplyCommntClick(item, rItem, cindex) {
       if (!item.editor || item.editor.txt.html().length < 6) {
-        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        this.$message({
+          message: "输入的内容太短了哦！",
+          type: "error",
+          duration: 2000,
+        });
         return;
       }
       askApi
@@ -1156,9 +1213,13 @@ export default {
       this.commentbtnclinck(item, cindex);
     },
 
-    replyCommntClick (item, index) {
+    replyCommntClick(item, index) {
       if (!item.editor || item.editor.txt.html().length < 6) {
-        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        this.$message({
+          message: "输入的内容太短了哦！",
+          type: "error",
+          duration: 2000,
+        });
         return;
       }
       askApi
@@ -1179,9 +1240,13 @@ export default {
       this.repplaybtnclinck(item, index);
     },
 
-    submitAnserClick () {
+    submitAnserClick() {
       if (this.answerEditor.txt.html().length <= 6) {
-        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        this.$message({
+          message: "输入的内容太短了哦！",
+          type: "error",
+          duration: 2000,
+        });
         return;
       }
       interviewApi
@@ -1201,7 +1266,7 @@ export default {
         });
     },
 
-    repplaybtnclinck (item, index) {
+    repplaybtnclinck(item, index) {
       item.replyId = "#replayedtor" + index;
       window.replyItem = item;
       if (!item.editor) {
@@ -1213,7 +1278,7 @@ export default {
       }
     },
 
-    commentbtnclinck (item, index) {
+    commentbtnclinck(item, index) {
       item.commnetId = "#creplayedtor" + index;
       window.commentItem = item;
       if (!item.editor) {
@@ -1225,9 +1290,9 @@ export default {
       }
     },
 
-    initAnswerEitor () {
+    initAnswerEitor() {
       window.myVueComm = this;
-      let editor = this.$wangeditor('#answer-editor');
+      let editor = this.$wangeditor("#answer-editor");
       this.answerEditor = editor;
       editor.config.uploadImgMaxLength = 1;
       editor.config.uploadImgServer = "/api/ucenter/uploadImage";
@@ -1240,22 +1305,22 @@ export default {
         myVueComm.getUploadImageToken(true);
       };
       editor.config.menus = [
-        'bold',
-        'fontSize',
-        'fontName',
-        'italic',
-        'underline',
-        'indent',
-        'foreColor',
-        'link',
-        'list',
-        'todo',
-        'justify',
-        'emoticon',
-        'image',
-        'code',
-        'splitLine',
-      ]
+        "bold",
+        "fontSize",
+        "fontName",
+        "italic",
+        "underline",
+        "indent",
+        "foreColor",
+        "link",
+        "list",
+        "todo",
+        "justify",
+        "emoticon",
+        "image",
+        "code",
+        "splitLine",
+      ];
 
       editor.config.customUploadImg = function (files, insertImgFn) {
         // resultFiles 是 input 中选中的文件列表
@@ -1275,24 +1340,24 @@ export default {
           config
         );
         const observer = {
-          next (res) {
+          next(res) {
             window.console.log(res);
           },
-          error (err) {
+          error(err) {
             window.console.log(err);
           },
-          complete (res) {
+          complete(res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
           },
         };
         const subscription = observable.subscribe(observer);
       };
-      editor.config.onchange = function (newHtml) { };
+      editor.config.onchange = function (newHtml) {};
       editor.create();
     },
 
-    initCommentEditor () {
+    initCommentEditor() {
       let editor = this.$wangeditor("#comment-editor");
       this.editor = editor;
       editor.config.uploadImgMaxLength = 1;
@@ -1304,12 +1369,7 @@ export default {
       editor.config.height = 120;
       editor.config.showFullScreen = false;
 
-      editor.config.menus = [
-        'bold',
-        'link',
-        'emoticon',
-        'image'
-      ]
+      editor.config.menus = ["bold", "link", "emoticon", "image"];
 
       editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
@@ -1338,13 +1398,13 @@ export default {
           config
         );
         const observer = {
-          next (res) {
+          next(res) {
             window.console.log(res);
           },
-          error (err) {
+          error(err) {
             window.console.log(err);
           },
-          complete (res) {
+          complete(res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
           },
@@ -1355,7 +1415,7 @@ export default {
       editor.create();
     },
 
-    initReplyeditor () {
+    initReplyeditor() {
       var item = window.replyItem.replyId;
       let editor = this.$wangeditor(window.replyItem.replyId);
       this.editor = editor;
@@ -1369,19 +1429,13 @@ export default {
       editor.config.height = 100;
       editor.config.showFullScreen = false;
 
-      editor.config.menus = [
-        'bold',
-        'link',
-        'emoticon',
-        'image'
-      ]
+      editor.config.menus = ["bold", "link", "emoticon", "image"];
 
       editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
       };
 
-      editor.config.onblur = function (newHtml) {
-      };
+      editor.config.onblur = function (newHtml) {};
 
       editor.config.customUploadImg = function (files, insertImgFn) {
         // resultFiles 是 input 中选中的文件列表
@@ -1401,13 +1455,13 @@ export default {
           config
         );
         const observer = {
-          next (res) {
+          next(res) {
             window.console.log(res);
           },
-          error (err) {
+          error(err) {
             window.console.log(err);
           },
-          complete (res) {
+          complete(res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
           },
@@ -1416,13 +1470,35 @@ export default {
       };
       // editor.config.onchange = function (newHtml) {};
       editor.create();
-    }
+    },
   },
 };
 </script>
 
 <style scoped>
 
+.reply-tool-item {
+  align-items: center;
+  font-size: 14px;
+  color: #666;
+  margin-right: 24px;
+}
+
+.reply-tool-item span {
+  margin-bottom: -6px;
+}
+.reply-tool-item .good-item {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  border-radius: 14px;
+  background-color: rgba(240, 240, 240, 1);
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  cursor: pointer;
+}
 .reply-tool-item button {
   border: none;
   background: #fff;
@@ -1492,7 +1568,7 @@ export default {
 }
 
 .interview-ediot-detail {
-  margin-top: 10px
+  margin-top: 10px;
 }
 
 .interview-ediot-detail .report-common-question {
@@ -1565,7 +1641,7 @@ export default {
 }
 
 .question-title-info .title-info-item.right {
-  border-right: 1px solid hsla(0, 0%, 59.2%, .2);
+  border-right: 1px solid hsla(0, 0%, 59.2%, 0.2);
 }
 
 .question-title-info .title-info-item {
@@ -1586,7 +1662,8 @@ export default {
   margin: -0.5833em 0.5em -0.5833em 0;
 }
 
-.question-info {}
+.question-info {
+}
 
 .question-info .question-info-list {
   background: #fff;
@@ -1617,7 +1694,7 @@ export default {
   font-size: 16px;
   font-weight: 500;
   padding-left: 8px;
-  border-left: 4px solid #409EFF;
+  border-left: 4px solid #409eff;
 }
 
 .extra.question-tags img {
@@ -1702,7 +1779,7 @@ export default {
   margin-top: 10px;
 }
 
-div.accusation-type ul>li {
+div.accusation-type ul > li {
   display: inline-block;
   width: 110px;
   height: 32px;
@@ -1890,8 +1967,7 @@ h2.accusation-secondary-title {
 .fade-enter,
 .fade-leave-to
 
-/* .fade-leave-active, 2.1.8 版本以下 */
-  {
+/* .fade-leave-active, 2.1.8 版本以下 */ {
   height: 10px;
 }
 

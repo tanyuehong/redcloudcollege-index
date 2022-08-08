@@ -198,7 +198,7 @@
 
               <div class="qustion-answer-content">
                 <ul class="qustion-anser-list">
-                  <li class="answer-list-item" v-for="(item, index) in dataList" :key="item.id">
+                  <li class="answer-interview" v-for="(item, index) in dataList" :key="item.id">
                     <div class="answer-item-userinfo">
                       <nuxt-link :to="'/user/' + item.uid + '/blog'" class="anser-info">
                         <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
@@ -218,11 +218,17 @@
                     <div class="interview-reply-tool">
 
                     <div class="reply-tool-item">
-                       <span class="good-item">
-                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M7.04 9.11l3.297-7.419a1 1 0 01.914-.594 3.67 3.67 0 013.67 3.671V7.33h4.028a2.78 2.78 0 012.78 3.2l-1.228 8.01a2.778 2.778 0 01-2.769 2.363H5.019a2.78 2.78 0 01-2.78-2.78V11.89a2.78 2.78 0 012.78-2.78H7.04zm-2.02 2a.78.78 0 00-.781.78v6.232c0 .431.35.78.78.78H6.69V11.11H5.02zm12.723 7.793a.781.781 0 00.781-.666l1.228-8.01a.78.78 0 00-.791-.898h-5.04a1 1 0 01-1-1V4.77c0-.712-.444-1.32-1.07-1.56L8.69 10.322v8.58h9.053z" clip-rule="evenodd"></path></svg>
-                     </span>
-                    
-                     <span class="gnums">{{item.good}}</span>
+                      <button class="tool-button">
+                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M7.04 9.11l3.297-7.419a1 1 0 01.914-.594 3.67 3.67 0 013.67 3.671V7.33h4.028a2.78 2.78 0 012.78 3.2l-1.228 8.01a2.778 2.778 0 01-2.769 2.363H5.019a2.78 2.78 0 01-2.78-2.78V11.89a2.78 2.78 0 012.78-2.78H7.04zm-2.02 2a.78.78 0 00-.781.78v6.232c0 .431.35.78.78.78H6.69V11.11H5.02zm12.723 7.793a.781.781 0 00.781-.666l1.228-8.01a.78.78 0 00-.791-.898h-5.04a1 1 0 01-1-1V4.77c0-.712-.444-1.32-1.07-1.56L8.69 10.322v8.58h9.053z" clip-rule="evenodd"></path></svg>
+                          <span>{{item.good}}</span>
+                        </button>
+                      </div>
+
+                        <div class="reply-tool-item">
+                        <button class="tool-button">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M1.104 12.444a1 1 0 010-.888c.13-.26.37-.693.722-1.241A18.85 18.85 0 013.88 7.652C6.184 5.176 8.896 3.667 12 3.667s5.816 1.509 8.119 3.985c.79.85 1.475 1.756 2.055 2.663.352.548.593.98.722 1.24a1 1 0 010 .89c-.13.26-.37.692-.722 1.24a18.848 18.848 0 01-2.055 2.663c-2.303 2.476-5.015 3.985-8.119 3.985s-5.816-1.509-8.119-3.985a18.846 18.846 0 01-2.055-2.663c-.352-.548-.593-.98-.722-1.24zm2.406.162a16.87 16.87 0 001.836 2.38c1.959 2.106 4.19 3.347 6.654 3.347 2.465 0 4.695-1.24 6.654-3.347A16.87 16.87 0 0020.86 12a16.871 16.871 0 00-2.206-2.986C16.695 6.908 14.464 5.667 12 5.667c-2.465 0-4.695 1.24-6.654 3.347A16.87 16.87 0 003.14 12c.108.188.232.391.37.607zM12 15.75c-2.06 0-3.727-1.68-3.727-3.75 0-2.07 1.667-3.75 3.727-3.75 2.06 0 3.727 1.68 3.727 3.75 0 2.07-1.667 3.75-3.727 3.75zm0-2c.952 0 1.727-.782 1.727-1.75s-.775-1.75-1.727-1.75c-.952 0-1.727.782-1.727 1.75s.775 1.75 1.727 1.75z" clip-rule="evenodd"></path></svg>
+                             <span>482.4k</span>
+                        </button>
                       </div>
 
                       <div class="reply-tool-item">
@@ -232,19 +238,20 @@
                         </button>
                       </div>
 
-                    
-
-                      <div class="reply-tool-item">
+                         <div class="reply-tool-item">
                         <button class="tool-button">
-                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M1.104 12.444a1 1 0 010-.888c.13-.26.37-.693.722-1.241A18.85 18.85 0 013.88 7.652C6.184 5.176 8.896 3.667 12 3.667s5.816 1.509 8.119 3.985c.79.85 1.475 1.756 2.055 2.663.352.548.593.98.722 1.24a1 1 0 010 .89c-.13.26-.37.692-.722 1.24a18.848 18.848 0 01-2.055 2.663c-2.303 2.476-5.015 3.985-8.119 3.985s-5.816-1.509-8.119-3.985a18.846 18.846 0 01-2.055-2.663c-.352-.548-.593-.98-.722-1.24zm2.406.162a16.87 16.87 0 001.836 2.38c1.959 2.106 4.19 3.347 6.654 3.347 2.465 0 4.695-1.24 6.654-3.347A16.87 16.87 0 0020.86 12a16.871 16.871 0 00-2.206-2.986C16.695 6.908 14.464 5.667 12 5.667c-2.465 0-4.695 1.24-6.654 3.347A16.87 16.87 0 003.14 12c.108.188.232.391.37.607zM12 15.75c-2.06 0-3.727-1.68-3.727-3.75 0-2.07 1.667-3.75 3.727-3.75 2.06 0 3.727 1.68 3.727 3.75 0 2.07-1.667 3.75-3.727 3.75zm0-2c.952 0 1.727-.782 1.727-1.75s-.775-1.75-1.727-1.75c-.952 0-1.727.782-1.727 1.75s.775 1.75 1.727 1.75z" clip-rule="evenodd"></path></svg>
-                             <span>482.4k</span>
+                           <i class="icon icon_ask_report"></i>
+                          <span>举报</span>
                         </button>
                       </div>
 
-                      <span class="li_more" @click="jubaoBtnClick(item.id, '回答')">
-                        <i class="icon icon_ask_report"></i>
-                        举报
-                      </span>
+                          <div class="reply-tool-item">
+                        <button class="tool-button">
+                          <i class="icon icon_more"></i>
+                        </button>
+                      </div>
+
+                       
 
                       <span v-if="item.uid == loginInfo.id">
                         <el-dropdown szie="mini" @command="replyClickCommend">
@@ -455,6 +462,8 @@
                               举报
                             </div>
                           </div>
+
+                          
 
                           <transition v-on:before-enter="rbeforeEnter" v-on:enter="renter"
                             v-on:after-enter="rafterEnter" v-on:leave="rleave" v-bind:css="false">
@@ -1481,7 +1490,7 @@ export default {
   align-items: center;
   font-size: 14px;
   color: #666;
-  margin-right: 24px;
+  margin-right: 14px;
 }
 
 .reply-tool-item span {
@@ -1953,10 +1962,13 @@ h2.accusation-secondary-title {
   margin-left: 0px;
 }
 
-.answer-list-item {
+
+.answer-interview:not(:last-child) {
+  border-bottom: 1px solid #f0f0f0;
+}
+.answer-interview {
   margin-bottom: 16px;
   padding-bottom: 6px;
-  border-bottom: 1px solid rgba(28, 31, 33, 0.1);
 }
 
 .fade-enter-active,
@@ -2027,8 +2039,8 @@ h2.accusation-secondary-title {
 
 .interview-reply-tool svg {
   fill: #8a919f;
-  margin-right: 2px;
-  vertical-align: middle;
+  margin-right: 1px;
+  vertical-align: sub;
 }
 
 .interview-reply-tool .vote-box span.vote_span {
@@ -2135,7 +2147,10 @@ h2.accusation-secondary-title {
 
 .interview-answer-list {
   background: #ffffff;
-  padding: 15px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 1px;
   font-weight: 400;
   font-size: 14px;
 }

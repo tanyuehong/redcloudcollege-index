@@ -33,12 +33,14 @@
                 <h2 class="title_header">{{ qdetail.title }}</h2>
               </div>
 
-
-
               <div class="qustion_content" v-html="qdetail.content"></div>
               <div class="qustion_info">
-                <div class="ui_center_button">
-                  <button>查看解析</button>
+                <div class="qustion_describ" v-html="qdetail.answer" v-if="showAnswerDetail"></div>
+                <div class="interview_center_button">
+                  <button v-bind:class="{ checkstyle: showAnswerDetail }" @click="checkAnswerClick">
+                    查看解题思路
+                    <svg  v-if="showAnswerDetail" focusable="false" viewBox="0 0 1024 1024" fill="currentColor" width="16" height="16" aria-hidden="true"><path fill="currentColor" fill-rule="nonzero" d="M195.9553 726.4976c-17.5625 19.8576-47.8974 21.718-67.755 4.1556-19.659-17.3868-21.679-47.292-4.6766-67.156l.521-.5989L452.0745 292.001c29.2708-33.096 79.829-36.1969 112.925-6.9261a80 80 0 0 1 6.1988 6.115l.7272.811 328.0298 370.8974c17.5624 19.8576 15.7019 50.1925-4.1557 67.755-19.659 17.3868-49.5868 15.7371-67.2242-3.5654l-.5307-.5903L512.001 369.1529 195.9553 726.4976z"></path></svg>
+                  </button>
                 </div>
                 <ul class="ask-issue-tool fbselect">
                   <span class="answer_span" @click="answerBtnClick"><i class="icon ic_question_reply"></i>写题解</span>
@@ -226,8 +228,8 @@
 
                         <div class="reply-tool-item">
                         <button class="tool-button">
-                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M1.104 12.444a1 1 0 010-.888c.13-.26.37-.693.722-1.241A18.85 18.85 0 013.88 7.652C6.184 5.176 8.896 3.667 12 3.667s5.816 1.509 8.119 3.985c.79.85 1.475 1.756 2.055 2.663.352.548.593.98.722 1.24a1 1 0 010 .89c-.13.26-.37.692-.722 1.24a18.848 18.848 0 01-2.055 2.663c-2.303 2.476-5.015 3.985-8.119 3.985s-5.816-1.509-8.119-3.985a18.846 18.846 0 01-2.055-2.663c-.352-.548-.593-.98-.722-1.24zm2.406.162a16.87 16.87 0 001.836 2.38c1.959 2.106 4.19 3.347 6.654 3.347 2.465 0 4.695-1.24 6.654-3.347A16.87 16.87 0 0020.86 12a16.871 16.871 0 00-2.206-2.986C16.695 6.908 14.464 5.667 12 5.667c-2.465 0-4.695 1.24-6.654 3.347A16.87 16.87 0 003.14 12c.108.188.232.391.37.607zM12 15.75c-2.06 0-3.727-1.68-3.727-3.75 0-2.07 1.667-3.75 3.727-3.75 2.06 0 3.727 1.68 3.727 3.75 0 2.07-1.667 3.75-3.727 3.75zm0-2c.952 0 1.727-.782 1.727-1.75s-.775-1.75-1.727-1.75c-.952 0-1.727.782-1.727 1.75s.775 1.75 1.727 1.75z" clip-rule="evenodd"></path></svg>
-                             <span>482.4k</span>
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M1.104 12.444a1 1 0 010-.888c.13-.26.37-.693.722-1.241A18.85 18.85 0 013.88 7.652C6.184 5.176 8.896 3.667 12 3.667s5.816 1.509 8.119 3.985c.79.85 1.475 1.756 2.055 2.663.352.548.593.98.722 1.24a1 1 0 010 .89c-.13.26-.37.692-.722 1.24a18.848 18.848 0 01-2.055 2.663c-2.303 2.476-5.015 3.985-8.119 3.985s-5.816-1.509-8.119-3.985a18.846 18.846 0 01-2.055-2.663c-.352-.548-.593-.98-.722-1.24zm2.406.162a16.87 16.87 0 001.836 2.38c1.959 2.106 4.19 3.347 6.654 3.347 2.465 0 4.695-1.24 6.654-3.347A16.87 16.87 0 0020.86 12a16.871 16.871 0 00-2.206-2.986C16.695 6.908 14.464 5.667 12 5.667c-2.465 0-4.695 1.24-6.654 3.347A16.87 16.87 0 003.14 12c.108.188.232.391.37.607zM12 15.75c-2.06 0-3.727-1.68-3.727-3.75 0-2.07 1.667-3.75 3.727-3.75 2.06 0 3.727 1.68 3.727 3.75 0 2.07-1.667 3.75-3.727 3.75zm0-2c.952 0 1.727-.782 1.727-1.75s-.775-1.75-1.727-1.75c-.952 0-1.727.782-1.727 1.75s.775 1.75 1.727 1.75z" clip-rule="evenodd"></path></svg>
+                             <span>{{item.view}}</span>
                         </button>
                       </div>
 
@@ -240,18 +242,17 @@
 
                          <div class="reply-tool-item">
                         <button class="tool-button">
-                           <i class="icon icon_ask_report"></i>
-                          <span>举报</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M15.392 8.23l5.695.832a.942.942 0 01.521 1.607l-4.12 4.013.972 5.67a.942.942 0 01-1.367.993L12 18.667l-5.093 2.678a.942.942 0 01-1.367-.993l.972-5.67-4.12-4.013a.942.942 0 01.52-1.607l5.696-.833 2.547-5.16a.942.942 0 011.69 0l2.547 5.16zm-1.329 1.826L12 5.876l-2.063 4.18-4.615.675 3.34 3.252-.789 4.594L12 16.407l4.127 2.17-.788-4.594 3.34-3.252-4.616-.675z" clip-rule="evenodd"></path></svg>
+                            <span>收藏</span>
                         </button>
                       </div>
 
-                          <div class="reply-tool-item">
+                      <div class="reply-tool-item">
                         <button class="tool-button">
                           <i class="icon icon_more"></i>
                         </button>
+                    
                       </div>
-
-                       
 
                       <span v-if="item.uid == loginInfo.id">
                         <el-dropdown szie="mini" @command="replyClickCommend">
@@ -544,7 +545,6 @@
       <div class="clearfloat"></div>
     </div>
   </div>
-  </div>
 </template>
 
 <script>
@@ -588,6 +588,7 @@ export default {
       answerEditor: undefined,
       showAnswerditor: false,
       showComment: false,
+      showAnswerDetail: false,
     };
   },
 
@@ -718,6 +719,10 @@ export default {
   },
 
   methods: {
+    checkAnswerClick() {
+      this.showAnswerDetail = !this.showAnswerDetail;
+    },
+    
     commentReplySubmit(item, index) {
       if (!item.editor || item.editor.txt.html().length < 6) {
         this.$message({
@@ -1484,13 +1489,30 @@ export default {
 };
 </script>
 
+<style>
+
+.qustion_info .qustion_describ  p{
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+</style>>
+
 <style scoped>
+
+
+.qustion_info .qustion_describ {
+    margin-top: 20px;
+    margin-bottom: 25px;
+    font-size: 14px;
+    padding: 0 15px;
+}
 
 .reply-tool-item {
   align-items: center;
   font-size: 14px;
   color: #666;
-  margin-right: 14px;
+  margin-right: 8px;
 }
 
 .reply-tool-item span {
@@ -2039,7 +2061,7 @@ h2.accusation-secondary-title {
 
 .interview-reply-tool svg {
   fill: #8a919f;
-  margin-right: 1px;
+  margin-right: 0px;
   vertical-align: sub;
 }
 
@@ -2477,9 +2499,24 @@ li.up_down_wrap {
   text-decoration: none;
 }
 
-.ui_center_button {
+.interview_center_button {
   width: 170px;
   margin: 0 auto;
+}
+.interview_center_button  button  svg {
+  vertical-align: middle;
+}
+.interview_center_button  button {
+  background:#fff;
+  color: #fc5533;
+  padding: 6px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  border: 1px solid #fc5533;
+}
+
+.interview_center_button .checkstyle {
+   border: none;
 }
 
 .ui_group_button {

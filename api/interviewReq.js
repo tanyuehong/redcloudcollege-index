@@ -39,4 +39,26 @@ export default {
       data: reply,
     })
   },
+
+    // 问题点赞请求
+    addGoodQustion(qId) {
+      return request({
+        url: `/home/interview/addGood/${qId}`,
+        method: 'get',
+      })
+    },
+
+    cancleGoodQustion(qId) {
+      return request({
+        url: `/home/interview/cancleGood/${qId}`,
+        method: 'get',
+      })
+    },
+
+    getUserStatus(qId) {
+      return request({
+        url: `/home/interview/status/${qId}`,
+        method: 'get',
+      })
+    },
 }

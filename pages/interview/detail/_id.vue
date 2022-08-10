@@ -45,7 +45,7 @@
                 <ul class="ask-issue-tool fbselect">
                   <span class="answer_span" @click="answerBtnClick"><i class="icon ic_question_reply"></i>写题解</span>
                   <li class="up_down_wrap wrapdisLike ask-info-item">
-                    <span class="vote_span disLike" @click="goodQustionClick" v-bind:class="{ like: goodqustion }">
+                    <span class="vote_span disLike" @click="goodQustionClick" v-bind:class="{ like: userState.goodslect }">
 
                       <i class="icon icon_vote_up"></i>好问题<em class="qustion-good-num" v-if="qdetail.good > 0">{{
                           qdetail.good
@@ -87,7 +87,8 @@
                     </el-dialog>
                   </li>
                   <li class="ask-info-item" @click="jubaoBtnClick(qdetail.qid, '问题')">
-                    <i class="icon el-icon-star-off"></i>收藏
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="faversvg-item"><path fill-rule="evenodd" d="M15.392 8.23l5.695.832a.942.942 0 01.521 1.607l-4.12 4.013.972 5.67a.942.942 0 01-1.367.993L12 18.667l-5.093 2.678a.942.942 0 01-1.367-.993l.972-5.67-4.12-4.013a.942.942 0 01.52-1.607l5.696-.833 2.547-5.16a.942.942 0 011.69 0l2.547 5.16zm-1.329 1.826L12 5.876l-2.063 4.18-4.615.675 3.34 3.252-.789 4.594L12 16.407l4.127 2.17-.788-4.594 3.34-3.252-4.616-.675z" clip-rule="evenodd"></path></svg>
+                    收藏
                   </li>
                   <li class="ask-info-item" @click="jubaoBtnClick(qdetail.qid, '问题')">
                     <i class="icon icon_vote_jubao"></i>举报
@@ -564,8 +565,7 @@ export default {
       loginInfo: {},
       userAskInfo: {},
       uploadToken: "",
-      loginTitle: "点击登录",
-      goodqustion: false,
+      userState: {goodslect:false},
       collectState: false,
       forbiden: true,
       isLogin: false,
@@ -645,19 +645,15 @@ export default {
     var qId = this.$route.params.id;
     var token = localStorage.getItem("redclass_token");
     var userStr = localStorage.getItem("redclass_user");
-    if (
-      !(token && token != "undefined") ||
-      !(userStr && userStr != "undefined")
-    ) {
+    if ( !(token && token != "undefined") || !(userStr && userStr != "undefined")) {
       this.isLogin = false;
     } else {
-      this.loginTitle = "我的问答";
       this.loginInfo = JSON.parse(userStr);
       this.isLogin = true;
+      this.getUserQuestionState(qId);
     }
     window.myVueComm = this;
     this.getUploadImageToken(false);
-    this.getUserGoodQustionState(qId);
     this.getUserQustionCollectState(qId);
     this.getUserGoodReplyState();
     window.gotoPage = {
@@ -1025,14 +1021,14 @@ export default {
       this.collectString = this.collectState ? "已收藏" : "收藏";
     },
     goodQustionClick() {
-      if (this.goodqustion) {
+      if (this.userState.goodslect) {
         this.qdetail.good--;
-        this.cancleUserGoodQustion();
+        interviewApi.cancleGoodQustion(this.qdetail.qid).then((response) => {});
       } else {
         this.qdetail.good++;
-        this.addUserGoodQustion();
+        interviewApi.addGoodQustion(this.qdetail.qid).then((response) => {});
       }
-      this.goodqustion = !this.goodqustion;
+      this.userState.goodslect = !this.userState.goodslect;
     },
 
     getUserQustionCollectState(qId) {
@@ -1098,18 +1094,10 @@ export default {
       });
     },
 
-    getUserGoodQustionState(qId) {
-      askApi.getUserGoodQustionState(qId).then((response) => {
-        this.goodqustion = response.data.goodqustion;
+    getUserQuestionState(qId) {
+      interviewApi.getUserStatus(qId).then((response) => {
+        this.userState = response.data.status;
       });
-    },
-
-    addUserGoodQustion() {
-      askApi.addUserGoodQustion(this.qdetail.qid).then((response) => {});
-    },
-
-    cancleUserGoodQustion() {
-      askApi.cancleUserGoodQustion(this.qdetail.qid).then((response) => {});
     },
 
     beforeEnter: function (el) {
@@ -1499,6 +1487,10 @@ export default {
 </style>>
 
 <style scoped>
+
+.faversvg-item {
+  vertical-align: sub;
+}
 
 
 .qustion_info .qustion_describ {

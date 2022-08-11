@@ -55,6 +55,20 @@ export default {
       })
     },
 
+    addCollectQustion(qId) {
+      return request({
+        url: `/home/interview/addCollect/${qId}`,
+        method: 'get',
+      })
+    },
+  
+    cancleCollectQustion(qId) {
+      return request({
+        url: `/home/interview/cancleCollect/${qId}`,
+        method: 'get',
+      })
+    },
+
     getUserStatus(qId) {
       return request({
         url: `/home/interview/status/${qId}`,

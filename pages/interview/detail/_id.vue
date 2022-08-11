@@ -86,9 +86,9 @@
                       </div>
                     </el-dialog>
                   </li>
-                  <li class="ask-info-item" @click="jubaoBtnClick(qdetail.qid, '问题')">
+                  <li class="ask-info-item" @click="collectBtnClick()" v-bind:class="{ collected: userState.isCollect }">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="faversvg-item"><path fill-rule="evenodd" d="M15.392 8.23l5.695.832a.942.942 0 01.521 1.607l-4.12 4.013.972 5.67a.942.942 0 01-1.367.993L12 18.667l-5.093 2.678a.942.942 0 01-1.367-.993l.972-5.67-4.12-4.013a.942.942 0 01.52-1.607l5.696-.833 2.547-5.16a.942.942 0 011.69 0l2.547 5.16zm-1.329 1.826L12 5.876l-2.063 4.18-4.615.675 3.34 3.252-.789 4.594L12 16.407l4.127 2.17-.788-4.594 3.34-3.252-4.616-.675z" clip-rule="evenodd"></path></svg>
-                    收藏
+                    {{userState.isCollect ? "已收藏" : "收藏"}} {{qdetail.collect}}
                   </li>
                   <li class="ask-info-item" @click="jubaoBtnClick(qdetail.qid, '问题')">
                     <i class="icon icon_vote_jubao"></i>举报
@@ -565,12 +565,10 @@ export default {
       loginInfo: {},
       userAskInfo: {},
       uploadToken: "",
-      userState: {goodslect:false},
-      collectState: false,
+      userState: {goodslect:false,isCollect:false},
       forbiden: true,
       isLogin: false,
       collectIcon: "el-icon-star-off",
-      collectString: "收藏",
       jianyilable: "",
       jubiaoDlog: false,
       jianyiDlog: false,
@@ -654,7 +652,6 @@ export default {
     }
     window.myVueComm = this;
     this.getUploadImageToken(false);
-    this.getUserQustionCollectState(qId);
     this.getUserGoodReplyState();
     window.gotoPage = {
       path: "/interview/detail/" + qId,
@@ -1009,16 +1006,26 @@ export default {
       }, 500);
     },
     collectBtnClick() {
-      if (this.collectState) {
-        this.cancleUserQustionCollect();
+      if (this.userState.isCollect) {
+        this.qdetail.collect--;
+        interviewApi.cancleCollectQustion(this.qdetail.qid).then((response) => {
+        this.$message({
+          message: "取消收藏成功！",
+          type: "success",
+          duration: 2000,
+        });
+        });
       } else {
-        this.addUserQustionCollect();
+        this.qdetail.collect++;
+        interviewApi.addCollectQustion(this.qdetail.qid).then((response) => {
+        this.$message({
+          message: "问题收藏成功！",
+          type: "success",
+          duration: 2000,
+        });
+      });
       }
-      this.collectState = !this.collectState;
-      this.collectIcon = this.collectState
-        ? "el-icon-star-on"
-        : "el-icon-star-off";
-      this.collectString = this.collectState ? "已收藏" : "收藏";
+      this.userState.isCollect = ! this.userState.isCollect;
     },
     goodQustionClick() {
       if (this.userState.goodslect) {
@@ -1029,16 +1036,6 @@ export default {
         interviewApi.addGoodQustion(this.qdetail.qid).then((response) => {});
       }
       this.userState.goodslect = !this.userState.goodslect;
-    },
-
-    getUserQustionCollectState(qId) {
-      askApi.getUserQustionCollectState(qId).then((response) => {
-        this.collectState = response.data.collectState;
-        this.collectIcon = this.collectState
-          ? "el-icon-star-on"
-          : "el-icon-star-off";
-        this.collectString = this.collectState ? "已收藏" : "收藏";
-      });
     },
 
     getUserGoodReplyState() {
@@ -1068,29 +1065,6 @@ export default {
             }
           }
         }
-      });
-    },
-
-    addUserQustionCollect() {
-      askApi.addUserQustionCollect(this.qdetail.qid).then((response) => {
-        this.qdetail.collect++;
-        this.$message({
-          message: "问题收藏成功！",
-          type: "success",
-          duration: 2000,
-        });
-      });
-    },
-
-    cancleUserQustionCollect() {
-      askApi.cancleUserQustionCollect(this.qdetail.qid).then((response) => {
-        this.qdetail.collect--;
-        window.console.log("ddd");
-        this.$message({
-          message: "取消收藏成功！",
-          type: "success",
-          duration: 2000,
-        });
       });
     },
 
@@ -1488,10 +1462,15 @@ export default {
 
 <style scoped>
 
+.ask-info-item.collected {
+   color: #fc5533;
+}
+.ask-info-item.collected .faversvg-item {
+  color: #fc5533;
+}
 .faversvg-item {
   vertical-align: sub;
 }
-
 
 .qustion_info .qustion_describ {
     margin-top: 20px;

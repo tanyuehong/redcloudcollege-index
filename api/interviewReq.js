@@ -75,4 +75,18 @@ export default {
         method: 'get',
       })
     },
+
+    deleteQuestion(qId) {
+      return request({
+        url: `/home/interview/deleteQuestion/${qId}`,
+        method: 'get',
+      })
+    },
+
+    deleteQuestionAnswer(qId) {
+      return request({
+        url: `/home/interview/deleteAnswer/${qId}`,
+        method: 'get',
+      })
+    }
 }

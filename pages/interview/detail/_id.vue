@@ -100,7 +100,6 @@
                       </span>
                       <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item :command="beforeHandleCommand('d', qdetail)">删除</el-dropdown-item>
-                        <el-dropdown-item :command="beforeHandleCommand('c', qdetail)">已解决</el-dropdown-item>
                       </el-dropdown-menu>
                     </el-dropdown>
                   </li>
@@ -111,16 +110,6 @@
                     <span slot="footer" class="dialog-footer">
                       <el-button @click="deleteQuestion(qdetail)">删 除</el-button>
                       <el-button type="primary" @click="questionDialogVisible = false">再等等</el-button>
-                    </span>
-                  </el-dialog>
-
-                  <el-dialog title="确认将问题设为已解决吗？" :visible.sync="fixDialogVisible" width="30%" center>
-                    <div class="tac">
-                      <span>为了你的问题能帮助更多的人，请设置或者编写最佳答案，没有最佳答案的问题，将不能设置为已解决哦~</span>
-                    </div>
-                    <span slot="footer" class="dialog-footer">
-                      <el-button @click="fixDialogVisible = false">再等等</el-button>
-                      <el-button type="primary" @click="fixQuestion(qdetail)">设为已解决</el-button>
                     </span>
                   </el-dialog>
 
@@ -248,22 +237,15 @@
                         </button>
                       </div>
 
-                      <div class="reply-tool-item">
-                        <button class="tool-button">
-                          <i class="icon icon_more"></i>
-                        </button>
-                    
-                      </div>
-
-                      <span v-if="item.uid == loginInfo.id">
+                      <span>
                         <el-dropdown szie="mini" @command="replyClickCommend">
                           <span class="el-dropdown-link drop-menu">
                             <i class="icon icon_more"></i>
                           </span>
                           <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item :command="beforeHandleCommand('d', item)">删除</el-dropdown-item>
-                            <el-dropdown-item :command="beforeHandleCommand('g', item)">{{ goodReplyString(item) }}
-                            </el-dropdown-item>
+                            <el-dropdown-item :command="beforeHandleCommand('d', item)" v-if="item.uid == loginInfo.id">删除</el-dropdown-item>
+                            <el-dropdown-item :command="beforeHandleCommand('g', item)">举报</el-dropdown-item>
+                            <el-dropdown-item :command="beforeHandleCommand('c', item)">收藏</el-dropdown-item>
                           </el-dropdown-menu>
                         </el-dropdown>
                       </span>
@@ -286,12 +268,12 @@
                         <el-button type="primary" @click="questionGoodReply(item)">确 认</el-button>
                       </span>
                     </el-dialog>
-                    <el-dialog title="确认删除回答吗？" :visible.sync="deleteDialogVisible" width="30%" center>
+                    <el-dialog title="确认删除题解吗？" :visible.sync="deleteDialogVisible" width="30%" center>
                       <div class="tac">
-                        <span>删除后您的回答将不会出现在该问题下,请三思哦~</span>
+                        <span>删除后您的解答将不会出现在该面试题题下,请三思哦~</span>
                       </div>
                       <span slot="footer" class="dialog-footer">
-                        <el-button @click="deleteQuestionReply(item, 1)">删 除</el-button>
+                        <el-button @click="deleteQuestionAnswer(item, 1)">删 除</el-button>
                         <el-button type="primary" @click="deleteDialogVisible = false">再等等</el-button>
                       </span>
                     </el-dialog>
@@ -580,7 +562,6 @@ export default {
       deleteDialogVisible: false,
       deleteCommentVisible: false,
       questionDialogVisible: false,
-      fixDialogVisible: false,
       goodDialogVisible: false,
       cgoodDialogVisible: false,
       answerEditor: undefined,
@@ -674,17 +655,6 @@ export default {
         }
       };
     },
-
-    goodReplyString() {
-      return function (item) {
-        if (item.state == 9) {
-          return "取消最佳";
-        } else {
-          return "最佳";
-        }
-      };
-    },
-
     // 金额显示.00格式
     NumFormat() {
       var value = this.userAskInfo.qmoney;
@@ -785,9 +755,6 @@ export default {
       if (command.command == "d") {
         this.questionDialogVisible = true;
       }
-      if (command.command == "c") {
-        this.fixDialogVisible = true;
-      }
     },
 
     replyClickCommend(command) {
@@ -797,32 +764,15 @@ export default {
       if (command.command == "g") {
         this.goodDialogVisible = true;
       }
+      if (command.command == "c") {
+        this.goodDialogVisible = true;
+      }
     },
 
     commentClickCommend(command) {
       if (command.command == "d") {
         this.deleteCommentVisible = true;
       }
-    },
-
-    fixQuestion(qItem) {
-      this.fixDialogVisible = false;
-      askApi.fixQuestion(qItem.qid).then((response) => {
-        if (response.data.sucess) {
-          this.qdetail.state = response.data.state;
-          this.$message({
-            message: response.data.tips,
-            type: "success",
-            duration: 2000,
-          });
-        } else {
-          this.$message({
-            message: response.data.tips,
-            type: "info",
-            duration: 2000,
-          });
-        }
-      });
     },
 
     deleteQuestion(qItem) {
@@ -835,7 +785,7 @@ export default {
         });
         return;
       }
-      askApi.deleteQuestion(qItem.qid).then((response) => {
+      interviewApi.deleteQuestion(qItem.qid).then((response) => {
         if (!response.data.sucess) {
           qItem.state = 99;
           this.$message({
@@ -847,11 +797,11 @@ export default {
         }
 
         this.$message({
-          message: "删除问题成功, 即将跳转问题列表页面",
+          message: "删除面试题成功, 即将跳转面试题列表页面",
           type: "success",
           duration: 2000,
           onClose: () => {
-            $nuxt.$router.push({ name: "faquestion" });
+            $nuxt.$router.push({ name: "interview-sort-tag" });
           },
         });
       });
@@ -868,9 +818,9 @@ export default {
       });
     },
 
-    deleteQuestionReply(reply) {
+    deleteQuestionAnswer(reply) {
       this.deleteDialogVisible = false;
-      askApi.deleteQuestionReply(reply.id).then((response) => {
+      interviewApi.deleteQuestionAnswer(reply.id).then((response) => {
         this.dataList = this.dataList.filter(function (item) {
           return item.id != response.data.rId;
         });
@@ -1504,7 +1454,7 @@ export default {
 .reply-tool-item button {
   border: none;
   background: #fff;
-  font-size: 14px;
+  font-size: 12px;
   color: #666;
 }
 .interview-submit-tool {

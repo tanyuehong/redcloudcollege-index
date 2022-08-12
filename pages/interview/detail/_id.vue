@@ -216,7 +216,7 @@
                         </button>
                       </div>
 
-                        <div class="reply-tool-item">
+                      <div class="reply-tool-item">
                         <button class="tool-button">
                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M1.104 12.444a1 1 0 010-.888c.13-.26.37-.693.722-1.241A18.85 18.85 0 013.88 7.652C6.184 5.176 8.896 3.667 12 3.667s5.816 1.509 8.119 3.985c.79.85 1.475 1.756 2.055 2.663.352.548.593.98.722 1.24a1 1 0 010 .89c-.13.26-.37.692-.722 1.24a18.848 18.848 0 01-2.055 2.663c-2.303 2.476-5.015 3.985-8.119 3.985s-5.816-1.509-8.119-3.985a18.846 18.846 0 01-2.055-2.663c-.352-.548-.593-.98-.722-1.24zm2.406.162a16.87 16.87 0 001.836 2.38c1.959 2.106 4.19 3.347 6.654 3.347 2.465 0 4.695-1.24 6.654-3.347A16.87 16.87 0 0020.86 12a16.871 16.871 0 00-2.206-2.986C16.695 6.908 14.464 5.667 12 5.667c-2.465 0-4.695 1.24-6.654 3.347A16.87 16.87 0 003.14 12c.108.188.232.391.37.607zM12 15.75c-2.06 0-3.727-1.68-3.727-3.75 0-2.07 1.667-3.75 3.727-3.75 2.06 0 3.727 1.68 3.727 3.75 0 2.07-1.667 3.75-3.727 3.75zm0-2c.952 0 1.727-.782 1.727-1.75s-.775-1.75-1.727-1.75c-.952 0-1.727.782-1.727 1.75s.775 1.75 1.727 1.75z" clip-rule="evenodd"></path></svg>
                              <span>{{item.view}}</span>
@@ -548,7 +548,6 @@ export default {
       userAskInfo: {},
       uploadToken: "",
       userState: {goodslect:false,isCollect:false},
-      forbiden: true,
       isLogin: false,
       collectIcon: "el-icon-star-off",
       jianyilable: "",
@@ -600,10 +599,11 @@ export default {
     };
   },
 
-  asyncData({ params, query, error }) {
+  asyncData({ params, query,app,error }) {
     var type = query.subtype ? query.subtype : 1;
+    var token = app.$cookies.get("token");
     return interviewServerApi
-      .getQuestionDetail(params.id, type)
+      .getQuestionDetail({"qId":params.id, "type":type,"token":token})
       .then((response) => {
         return {
           qdetail: response.data.qdetail,
@@ -886,9 +886,14 @@ export default {
         });
       this.jianyiDlog = false;
     },
+
     updateRelpyState(rId, type) {
       askApi.updateRelpyState(rId, type).then((response) => {});
     },
+
+    goodAnswerClick(item) {
+    },
+
     goodReplyClick(item) {
       if (this.forbiden) {
         this.forbiden = false;

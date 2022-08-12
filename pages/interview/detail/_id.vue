@@ -892,6 +892,11 @@ export default {
     },
 
     goodAnswerClick(item) {
+      if(item.isgood) {
+
+      } else {
+        
+      }
     },
 
     goodReplyClick(item) {

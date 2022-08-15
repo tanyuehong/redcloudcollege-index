@@ -200,43 +200,38 @@
 
                       <span class="good_answer" v-if="item.state == 9">
                         <span class="glyphicon glyphicon-heart"></span>
-                        最佳回答
+                        最佳题解
                       </span>
-
                     </div>
 
                     <div class="answer-content" v-html="item.content"></div>
 
                     <div class="interview-reply-tool">
-
                     <div class="reply-tool-item">
-                      <button class="tool-button">
-                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M7.04 9.11l3.297-7.419a1 1 0 01.914-.594 3.67 3.67 0 013.67 3.671V7.33h4.028a2.78 2.78 0 012.78 3.2l-1.228 8.01a2.778 2.778 0 01-2.769 2.363H5.019a2.78 2.78 0 01-2.78-2.78V11.89a2.78 2.78 0 012.78-2.78H7.04zm-2.02 2a.78.78 0 00-.781.78v6.232c0 .431.35.78.78.78H6.69V11.11H5.02zm12.723 7.793a.781.781 0 00.781-.666l1.228-8.01a.78.78 0 00-.791-.898h-5.04a1 1 0 01-1-1V4.77c0-.712-.444-1.32-1.07-1.56L8.69 10.322v8.58h9.053z" clip-rule="evenodd"></path></svg>
+                      <button class="tool-button" @click="goodAnswerClick(item)" v-bind:class="{ selected: item.isgood }">
+                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px" fill="currentColor">
+                          <path fill-rule="evenodd" d="M7.04 9.11l3.297-7.419a1 1 0 01.914-.594 3.67 3.67 0 013.67 3.671V7.33h4.028a2.78 2.78 0 012.78 3.2l-1.228 8.01a2.778 2.778 0 01-2.769 2.363H5.019a2.78 2.78 0 01-2.78-2.78V11.89a2.78 2.78 0 012.78-2.78H7.04zm-2.02 2a.78.78 0 00-.781.78v6.232c0 .431.35.78.78.78H6.69V11.11H5.02zm12.723 7.793a.781.781 0 00.781-.666l1.228-8.01a.78.78 0 00-.791-.898h-5.04a1 1 0 01-1-1V4.77c0-.712-.444-1.32-1.07-1.56L8.69 10.322v8.58h9.053z" clip-rule="evenodd"></path></svg>
                           <span>{{item.good}}</span>
                         </button>
                       </div>
-
                       <div class="reply-tool-item">
                         <button class="tool-button">
-                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M1.104 12.444a1 1 0 010-.888c.13-.26.37-.693.722-1.241A18.85 18.85 0 013.88 7.652C6.184 5.176 8.896 3.667 12 3.667s5.816 1.509 8.119 3.985c.79.85 1.475 1.756 2.055 2.663.352.548.593.98.722 1.24a1 1 0 010 .89c-.13.26-.37.692-.722 1.24a18.848 18.848 0 01-2.055 2.663c-2.303 2.476-5.015 3.985-8.119 3.985s-5.816-1.509-8.119-3.985a18.846 18.846 0 01-2.055-2.663c-.352-.548-.593-.98-.722-1.24zm2.406.162a16.87 16.87 0 001.836 2.38c1.959 2.106 4.19 3.347 6.654 3.347 2.465 0 4.695-1.24 6.654-3.347A16.87 16.87 0 0020.86 12a16.871 16.871 0 00-2.206-2.986C16.695 6.908 14.464 5.667 12 5.667c-2.465 0-4.695 1.24-6.654 3.347A16.87 16.87 0 003.14 12c.108.188.232.391.37.607zM12 15.75c-2.06 0-3.727-1.68-3.727-3.75 0-2.07 1.667-3.75 3.727-3.75 2.06 0 3.727 1.68 3.727 3.75 0 2.07-1.667 3.75-3.727 3.75zm0-2c.952 0 1.727-.782 1.727-1.75s-.775-1.75-1.727-1.75c-.952 0-1.727.782-1.727 1.75s.775 1.75 1.727 1.75z" clip-rule="evenodd"></path></svg>
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px" fill="currentColor"><path fill-rule="evenodd" d="M1.104 12.444a1 1 0 010-.888c.13-.26.37-.693.722-1.241A18.85 18.85 0 013.88 7.652C6.184 5.176 8.896 3.667 12 3.667s5.816 1.509 8.119 3.985c.79.85 1.475 1.756 2.055 2.663.352.548.593.98.722 1.24a1 1 0 010 .89c-.13.26-.37.692-.722 1.24a18.848 18.848 0 01-2.055 2.663c-2.303 2.476-5.015 3.985-8.119 3.985s-5.816-1.509-8.119-3.985a18.846 18.846 0 01-2.055-2.663c-.352-.548-.593-.98-.722-1.24zm2.406.162a16.87 16.87 0 001.836 2.38c1.959 2.106 4.19 3.347 6.654 3.347 2.465 0 4.695-1.24 6.654-3.347A16.87 16.87 0 0020.86 12a16.871 16.871 0 00-2.206-2.986C16.695 6.908 14.464 5.667 12 5.667c-2.465 0-4.695 1.24-6.654 3.347A16.87 16.87 0 003.14 12c.108.188.232.391.37.607zM12 15.75c-2.06 0-3.727-1.68-3.727-3.75 0-2.07 1.667-3.75 3.727-3.75 2.06 0 3.727 1.68 3.727 3.75 0 2.07-1.667 3.75-3.727 3.75zm0-2c.952 0 1.727-.782 1.727-1.75s-.775-1.75-1.727-1.75c-.952 0-1.727.782-1.727 1.75s.775 1.75 1.727 1.75z" clip-rule="evenodd"></path></svg>
                              <span>{{item.view}}</span>
                         </button>
                       </div>
-
                       <div class="reply-tool-item">
                         <button class="tool-button">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M11.997 21.5a9.5 9.5 0 01-8.49-5.251A9.38 9.38 0 012.5 11.997V11.5c.267-4.88 4.12-8.733 8.945-8.999L12 2.5a9.378 9.378 0 014.25 1.007A9.498 9.498 0 0121.5 12a9.378 9.378 0 01-.856 3.937l.838 4.376a1 1 0 01-1.17 1.17l-4.376-.838a9.381 9.381 0 01-3.939.856zm3.99-2.882l3.254.623-.623-3.253a1 1 0 01.09-.64 7.381 7.381 0 00.792-3.346 7.5 7.5 0 00-4.147-6.708 7.385 7.385 0 00-3.35-.794H11.5c-3.752.208-6.792 3.248-7.002 7.055L4.5 12a7.387 7.387 0 00.794 3.353A7.5 7.5 0 0012 19.5a7.384 7.384 0 003.349-.793 1 1 0 01.639-.09z" clip-rule="evenodd"></path></svg>
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px" fill="currentColor"><path fill-rule="evenodd" d="M11.997 21.5a9.5 9.5 0 01-8.49-5.251A9.38 9.38 0 012.5 11.997V11.5c.267-4.88 4.12-8.733 8.945-8.999L12 2.5a9.378 9.378 0 014.25 1.007A9.498 9.498 0 0121.5 12a9.378 9.378 0 01-.856 3.937l.838 4.376a1 1 0 01-1.17 1.17l-4.376-.838a9.381 9.381 0 01-3.939.856zm3.99-2.882l3.254.623-.623-3.253a1 1 0 01.09-.64 7.381 7.381 0 00.792-3.346 7.5 7.5 0 00-4.147-6.708 7.385 7.385 0 00-3.35-.794H11.5c-3.752.208-6.792 3.248-7.002 7.055L4.5 12a7.387 7.387 0 00.794 3.353A7.5 7.5 0 0012 19.5a7.384 7.384 0 003.349-.793 1 1 0 01.639-.09z" clip-rule="evenodd"></path></svg>
                           <span>304</span>
                         </button>
                       </div>
-
-                         <div class="reply-tool-item">
+                      <div class="reply-tool-item">
                         <button class="tool-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="css-1rhb60f-Svg ea8ky5j0"><path fill-rule="evenodd" d="M15.392 8.23l5.695.832a.942.942 0 01.521 1.607l-4.12 4.013.972 5.67a.942.942 0 01-1.367.993L12 18.667l-5.093 2.678a.942.942 0 01-1.367-.993l.972-5.67-4.12-4.013a.942.942 0 01.52-1.607l5.696-.833 2.547-5.16a.942.942 0 011.69 0l2.547 5.16zm-1.329 1.826L12 5.876l-2.063 4.18-4.615.675 3.34 3.252-.789 4.594L12 16.407l4.127 2.17-.788-4.594 3.34-3.252-4.616-.675z" clip-rule="evenodd"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path fill-rule="evenodd" d="M15.392 8.23l5.695.832a.942.942 0 01.521 1.607l-4.12 4.013.972 5.67a.942.942 0 01-1.367.993L12 18.667l-5.093 2.678a.942.942 0 01-1.367-.993l.972-5.67-4.12-4.013a.942.942 0 01.52-1.607l5.696-.833 2.547-5.16a.942.942 0 011.69 0l2.547 5.16zm-1.329 1.826L12 5.876l-2.063 4.18-4.615.675 3.34 3.252-.789 4.594L12 16.407l4.127 2.17-.788-4.594 3.34-3.252-4.616-.675z" clip-rule="evenodd"></path></svg>
                             <span>收藏</span>
                         </button>
                       </div>
-
                       <span>
                         <el-dropdown szie="mini" @command="replyClickCommend">
                           <span class="el-dropdown-link drop-menu">
@@ -633,7 +628,6 @@ export default {
     }
     window.myVueComm = this;
     this.getUploadImageToken(false);
-    this.getUserGoodReplyState();
     window.gotoPage = {
       path: "/interview/detail/" + qId,
     };
@@ -887,16 +881,28 @@ export default {
       this.jianyiDlog = false;
     },
 
-    updateRelpyState(rId, type) {
-      askApi.updateRelpyState(rId, type).then((response) => {});
-    },
-
     goodAnswerClick(item) {
       if(item.isgood) {
-
+        interviewApi.updateAnswerGood(item.id,1).then((response) => {
+        item.good--;
+        this.$message({
+          message: "取消点赞成功！",
+          type: "success",
+          duration: 2000,
+        });
+        });
+    
       } else {
-        
+       item.good++;
+       interviewApi.updateAnswerGood(item.id,1).then((response) => {
+        this.$message({
+          message: "题解点赞成功！",
+          type: "success",
+          duration: 2000,
+        });
+        });
       }
+      item.isgood = !item.isgood;
     },
 
     goodReplyClick(item) {
@@ -996,36 +1002,6 @@ export default {
         interviewApi.addGoodQustion(this.qdetail.qid).then((response) => {});
       }
       this.userState.goodslect = !this.userState.goodslect;
-    },
-
-    getUserGoodReplyState() {
-      if (!this.dataList) {
-        return;
-      }
-      var list = [];
-      for (var j = 0; j < this.dataList.length; j++) {
-        list.push(this.dataList[j].id);
-      }
-      askApi.getUserGoodReplyState(list).then((response) => {
-        var goodList = response.data.goodList;
-        if (!goodList) {
-          return;
-        }
-        for (var j = 0; j < this.replyList.length; j++) {
-          var rItem = this.replyList[j];
-          for (var i = 0; i < goodList.length; i++) {
-            if (goodList[i].rid == rItem.id) {
-              if (goodList[i].type == 1) {
-                rItem.goodreply = true;
-              }
-              if (goodList[i].type == 2) {
-                rItem.badreply = true;
-              }
-              break;
-            }
-          }
-        }
-      });
     },
 
     getUserQuestionState(qId) {
@@ -1461,7 +1437,11 @@ export default {
   align-items: center;
   cursor: pointer;
 }
-.reply-tool-item button {
+
+.reply-tool-item .tool-button.selected {
+  color: red;
+}
+.reply-tool-item .tool-button {
   border: none;
   background: #fff;
   font-size: 12px;
@@ -1988,6 +1968,10 @@ h2.accusation-secondary-title {
   font-size: 12px;
   cursor: pointer;
   color: #8a919f;
+}
+
+.interview-reply-tool .tool-button.selected svg{
+  fill: red;
 }
 
 .interview-reply-tool svg {

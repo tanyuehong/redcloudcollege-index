@@ -88,5 +88,12 @@ export default {
         url: `/home/interview/deleteAnswer/${qId}`,
         method: 'get',
       })
-    }
+    },
+
+    updateAnswerGood(aId, type) {
+      return request({
+        url: `/home/interview/updateAnswerGood/${aId}/${type}`,
+        method: 'get',
+      })
+    },
 }

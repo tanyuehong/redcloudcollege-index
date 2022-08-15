@@ -4,7 +4,7 @@ export default {
   // 获取问答详情网页
   getQuestionDetail(parm) {
     return request({
-      url: '/home/interview/getQuestionDetail/' + id + '/' + type,
+      url: '/home/interview/getQuestionDetail/',
       method: 'post',
       data: parm,
     })

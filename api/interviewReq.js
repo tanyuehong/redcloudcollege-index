@@ -69,6 +69,20 @@ export default {
       })
     },
 
+    addCollectAnswer(aId) {
+      return request({
+        url: `/home/interview/addAnswerCollect/${aId}`,
+        method: 'get',
+      })
+    },
+  
+    cancleCollectAnswer(aId) {
+      return request({
+        url: `/home/interview/cancleAnswerCollect/${aId}`,
+        method: 'get',
+      })
+    },
+
     getUserStatus(qId) {
       return request({
         url: `/home/interview/status/${qId}`,

@@ -90,7 +90,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="faversvg-item"><path fill-rule="evenodd" d="M15.392 8.23l5.695.832a.942.942 0 01.521 1.607l-4.12 4.013.972 5.67a.942.942 0 01-1.367.993L12 18.667l-5.093 2.678a.942.942 0 01-1.367-.993l.972-5.67-4.12-4.013a.942.942 0 01.52-1.607l5.696-.833 2.547-5.16a.942.942 0 011.69 0l2.547 5.16zm-1.329 1.826L12 5.876l-2.063 4.18-4.615.675 3.34 3.252-.789 4.594L12 16.407l4.127 2.17-.788-4.594 3.34-3.252-4.616-.675z" clip-rule="evenodd"></path></svg>
                     {{userState.isCollect ? "已收藏" : "收藏"}} {{qdetail.collect}}
                   </li>
-                  <li class="ask-info-item" @click="jubaoBtnClick(qdetail.qid, '问题')">
+                  <li class="ask-info-item" @click="jubaoBtnClick(qdetail.qid, '面试题')">
                     <i class="icon icon_vote_jubao"></i>举报
                   </li>
                   <li class="ask-info-item" v-if="qdetail.uid == loginInfo.id">
@@ -227,9 +227,9 @@
                         </button>
                       </div>
                       <div class="reply-tool-item">
-                        <button class="tool-button">
+                        <button class="tool-button" @click="answerCollectBtnClick(item)" v-bind:class="{ collected: item.iscollect }">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path fill-rule="evenodd" d="M15.392 8.23l5.695.832a.942.942 0 01.521 1.607l-4.12 4.013.972 5.67a.942.942 0 01-1.367.993L12 18.667l-5.093 2.678a.942.942 0 01-1.367-.993l.972-5.67-4.12-4.013a.942.942 0 01.52-1.607l5.696-.833 2.547-5.16a.942.942 0 011.69 0l2.547 5.16zm-1.329 1.826L12 5.876l-2.063 4.18-4.615.675 3.34 3.252-.789 4.594L12 16.407l4.127 2.17-.788-4.594 3.34-3.252-4.616-.675z" clip-rule="evenodd"></path></svg>
-                            <span>收藏</span>
+                            <span>{{item.iscollect ? "已收藏" : "收藏"}}</span>
                         </button>
                       </div>
                       <span>
@@ -615,7 +615,6 @@ export default {
   },
 
   mounted() {
-    window.console.log("====" + this.subType);
     var qId = this.$route.params.id;
     var token = localStorage.getItem("redclass_token");
     var userStr = localStorage.getItem("redclass_user");
@@ -840,7 +839,6 @@ export default {
       });
     },
     jubaoBtnClick(wId, jubaotype) {
-      window.console.log(wId);
       this.jubaotype = jubaotype;
       this.jubaoId = wId;
       this.jubiaoDlog = true;
@@ -970,6 +968,27 @@ export default {
       setTimeout(function () {
         window.myVueComm.forbiden = true;
       }, 500);
+    },
+
+    answerCollectBtnClick (aItem) {
+      if(aItem.iscollect) {
+       interviewApi.cancleCollectAnswer(aItem.id).then((response) => {
+        this.$message({
+          message: "取消收藏题解成功！",
+          type: "success",
+          duration: 2000,
+        });
+        });
+      } else {
+        interviewApi.addCollectAnswer(aItem.id).then((response) => {
+        this.$message({
+          message: "题解收藏成功！",
+          type: "success",
+          duration: 2000,
+        });
+      });
+      }
+      aItem.iscollect = !aItem.iscollect;
     },
     collectBtnClick() {
       if (this.userState.isCollect) {
@@ -1438,9 +1457,14 @@ export default {
   cursor: pointer;
 }
 
-.reply-tool-item .tool-button.selected {
-  color: red;
+.reply-tool-item .tool-button.selected,.reply-tool-item .tool-button.collected span {
+  color: #fc5533;
 }
+
+.reply-tool-item .tool-button.collected svg {
+  fill:#fc5533;
+}
+
 .reply-tool-item .tool-button {
   border: none;
   background: #fff;

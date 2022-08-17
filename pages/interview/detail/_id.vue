@@ -233,14 +233,14 @@
                         </button>
                       </div>
                       <span>
-                        <el-dropdown szie="mini" @command="replyClickCommend">
+                        <el-dropdown szie="mini" @command="answerClickCommend">
                           <span class="el-dropdown-link drop-menu">
                             <i class="icon icon_more"></i>
                           </span>
                           <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item :command="beforeHandleCommand('d', item)" v-if="item.uid == loginInfo.id">删除</el-dropdown-item>
-                            <el-dropdown-item :command="beforeHandleCommand('g', item)">举报</el-dropdown-item>
-                            <el-dropdown-item :command="beforeHandleCommand('c', item)">收藏</el-dropdown-item>
+                            <el-dropdown-item :command="beforeHandleCommand('g', item)">最佳题解</el-dropdown-item>
+                            <el-dropdown-item :command="beforeHandleCommand('j', item)">举报</el-dropdown-item>
                           </el-dropdown-menu>
                         </el-dropdown>
                       </span>
@@ -441,8 +441,6 @@
                               举报
                             </div>
                           </div>
-
-                          
 
                           <transition v-on:before-enter="rbeforeEnter" v-on:enter="renter"
                             v-on:after-enter="rafterEnter" v-on:leave="rleave" v-bind:css="false">
@@ -750,15 +748,15 @@ export default {
       }
     },
 
-    replyClickCommend(command) {
+    answerClickCommend(command) {
       if (command.command == "d") {
         this.deleteDialogVisible = true;
       }
       if (command.command == "g") {
         this.goodDialogVisible = true;
       }
-      if (command.command == "c") {
-        this.goodDialogVisible = true;
+      if (command.command == "j") {
+        this.jubaoCommitBtnClick(command.item.id,"题解");
       }
     },
 
@@ -800,11 +798,11 @@ export default {
       });
     },
 
-    questionGoodReply(reply) {
+    questionGoodReply(answer) {
       this.goodDialogVisible = false;
-      askApi.questionGoodReply(reply.id).then((response) => {
+      interviewApi.questionGoodAnswer(answer.id).then((response) => {
         this.$message({
-          message: "设置最佳回答成功哈！",
+          message: "设置最佳题解成功哈！",
           type: "success",
           duration: 2000,
         });

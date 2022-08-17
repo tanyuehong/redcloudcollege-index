@@ -110,4 +110,11 @@ export default {
         method: 'get',
       })
     },
+
+    questionGoodAnswer(aId) {
+      return request({
+        url: `/interview/goodAnswer/${aId}`,
+        method: 'get',
+      })
+    },
 }

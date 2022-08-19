@@ -369,7 +369,7 @@
               <div id="answer-list" class="interview-answer-list" v-if="dataList.length > 0">
                 <div class="qustion-answer-content">
                   <ul class="qustion-anser-list">
-                    <li class="answer-list-item" v-for="(item, index) in dataList" :key="item.id">
+                    <li class="interview-comment-item" v-for="(item, index) in dataList" :key="item.id">
                       <div class="answer-item-userinfo">
                         <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
                         <span class="ml5"> {{ item.username }}</span>
@@ -536,7 +536,6 @@ export default {
   data() {
     return {
       checked: true,
-      answertype: true,
       loginInfo: {},
       userAskInfo: {},
       uploadToken: "",
@@ -891,6 +890,30 @@ export default {
       } else {
        item.good++;
        interviewApi.updateAnswerGood(item.id,1).then((response) => {
+        this.$message({
+          message: "题解点赞成功！",
+          type: "success",
+          duration: 2000,
+        });
+        });
+      }
+      item.isgood = !item.isgood;
+    },
+
+    goodCommentClick(item) {
+      if(item.isgood) {
+        interviewApi.updateAnswerGood(item.id,1).then((response) => {
+        item.good--;
+        this.$message({
+          message: "取消点赞成功！",
+          type: "success",
+          duration: 2000,
+        });
+        });
+    
+      } else {
+       item.good++;
+       interviewApi.updateAnswerGood(item.id,2).then((response) => {
         this.$message({
           message: "题解点赞成功！",
           type: "success",
@@ -1501,7 +1524,7 @@ export default {
 }
 
 .comment-header .reply_wrap {
-  margin-left: 495px;
+  margin-left: 490px;
 }
 
 .interview-bottom-comment {
@@ -1916,8 +1939,6 @@ h2.accusation-secondary-title {
 .qustion-good-num {
   margin-left: 0px;
 }
-
-
 .answer-interview:not(:last-child) {
   border-bottom: 1px solid #f0f0f0;
 }
@@ -2107,8 +2128,8 @@ h2.accusation-secondary-title {
 .interview-answer-list {
   background: #ffffff;
   padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
   padding-bottom: 1px;
   font-weight: 400;
   font-size: 14px;
@@ -2461,4 +2482,21 @@ li.up_down_wrap {
   width: 60px;
   display: inline-block;
 }
+
+
+/* 评论列表的对应样式 */
+.interview-comment-item {
+  margin-bottom: 10px;
+}
+
+.interview-comment-item:not(:last-child) {
+ border-bottom: 1px solid rgba(28, 31, 33, 0.1);
+}
+
+.answer-item-content {
+  margin-top: 8px;
+  margin-left: 18px;
+  margin-right: 12px;
+}
+
 </style>

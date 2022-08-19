@@ -520,6 +520,15 @@
 
 .answer-list-item {
   margin-bottom: 10px;
+  border-bottom: 1px solid rgba(28, 31, 33, 0.1);
+}
+
+.interview-reply-tool  .tool-item .icon_vote_up {
+  vertical-align: middle;
+}
+
+.interview-reply-tool  .tool-item svg {
+  vertical-align: middle;
 }
 
 .replay-editor {

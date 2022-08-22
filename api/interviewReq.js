@@ -117,4 +117,11 @@ export default {
         method: 'get',
       })
     },
+
+    updateCommentGood(cId, type) {
+      return request({
+        url: `/interview/updateCommentGood/${cId}/${type}`,
+        method: 'get',
+      })
+    },
 }

@@ -289,7 +289,7 @@
                         </div>
                         <div class="answer-item-content" v-html="comment.content"></div>
                         <div class="comment-tool-bar fbselect">
-                          <span class="mr15" v-bind:class="{ goodcomment: comment.goodcomment }"
+                          <span class="mr15" v-bind:class="{ goodcomment: comment.goodreply }"
                             @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>{{
                                 commentGood(comment.good)
                             }}</span>
@@ -380,7 +380,7 @@
 
                       <div class="interview-reply-tool">
                         <div class="tool-item">
-                          <span v-bind:class="{ like: item.goodreply }" @click="goodReplyClick(item, 1)">
+                          <span v-bind:class="{ like: item.goodreply }" @click="goodCommentClick(item)">
                             <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{ commentGood(item.good)
                             }}</em></span>
                         </div>
@@ -878,7 +878,7 @@ export default {
 
     goodAnswerClick(item) {
       if(item.isgood) {
-        interviewApi.updateAnswerGood(item.id,1).then((response) => {
+        interviewApi.updateAnswerGood(item.id,2).then((response) => {
         item.good--;
         this.$message({
           message: "取消点赞成功！",
@@ -901,8 +901,8 @@ export default {
     },
 
     goodCommentClick(item) {
-      if(item.isgood) {
-        interviewApi.updateAnswerGood(item.id,1).then((response) => {
+      if(item.goodreply) {
+        interviewApi.updateCommentGood(item.id,2).then((response) => {
         item.good--;
         this.$message({
           message: "取消点赞成功！",
@@ -913,58 +913,15 @@ export default {
     
       } else {
        item.good++;
-       interviewApi.updateAnswerGood(item.id,2).then((response) => {
+       interviewApi.updateCommentGood(item.id,1).then((response) => {
         this.$message({
-          message: "题解点赞成功！",
+          message: "评论点赞成功！",
           type: "success",
           duration: 2000,
         });
         });
       }
-      item.isgood = !item.isgood;
-    },
-
-    goodReplyClick(item) {
-      if (this.forbiden) {
-        this.forbiden = false;
-        if (item.goodreply) {
-          item.goodreply = false;
-          item.good = item.good - 1;
-          this.updateRelpyState(item.id, 3);
-        } else {
-          item.good = item.good + 1;
-          item.goodreply = true;
-          if (item.badreply) {
-            item.badreply = false;
-            item.bad = item.bad - 1;
-            this.updateRelpyState(item.id, 6);
-          } else {
-            this.updateRelpyState(item.id, 1);
-          }
-        }
-      }
-      setTimeout(function () {
-        window.myVueComm.forbiden = true;
-      }, 500);
-    },
-
-    goodCommentClick(comment) {
-      window.console.log("ffffffffff");
-      if (this.forbiden) {
-        this.forbiden = false;
-        if (comment.goodcomment == 0) {
-          comment.goodcomment = 1;
-          comment.good++;
-          askApi.addQcommentGood(comment.id).then((response) => {});
-        } else {
-          comment.goodcomment = 0;
-          comment.good--;
-          askApi.cancleQcommentGood(comment.id).then((response) => {});
-        }
-      }
-      setTimeout(function () {
-        window.myVueComm.forbiden = true;
-      }, 500);
+      item.goodreply = !item.goodreply;
     },
 
     badReplyClick(item) {
@@ -2015,6 +1972,10 @@ h2.accusation-secondary-title {
 
 .interview-reply-tool .tool-button.selected svg{
   fill: red;
+}
+
+.interview-reply-tool .tool-item svg {
+  vertical-align: middle;
 }
 
 .interview-reply-tool svg {

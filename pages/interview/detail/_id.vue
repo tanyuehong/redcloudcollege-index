@@ -2048,6 +2048,10 @@ h2.accusation-secondary-title {
   margin-left: 6px;
 }
 
+.interview-comment-item .interview-reply-tool {
+  margin-left: 36px;
+}
+
 .answer-item-userinfo {
   font-size: 12px;
   color: #666;

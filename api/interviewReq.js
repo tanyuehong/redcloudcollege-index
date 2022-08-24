@@ -124,4 +124,13 @@ export default {
         method: 'get',
       })
     },
+
+      // 回复评论的提交
+    submitCommentReply(replycomment) {
+     return request({
+      url: `/eduask/submitReplyComment`,
+      method: 'post',
+      data: replycomment,
+    })
+  },
 }

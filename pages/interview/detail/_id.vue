@@ -180,6 +180,8 @@
                 </span>
               </a>
             </ul>
+
+            <!-- 题解 -->
             <div id="answer-list" class="interview-answer-list" v-if="subType == 1">
               <div class="no-commet" v-if="dataList.length == 0">
                 <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
@@ -308,6 +310,7 @@
                             </el-dropdown>
                           </span>
                         </div>
+
                         <el-dialog title="确认删除评论吗？" :visible.sync="deleteCommentVisible" width="30%" center>
                           <div class="tac">
                             <span>删除后您的评论将不会出现在该回答下,请三思哦~</span>
@@ -334,6 +337,10 @@
                 </ul>
               </div>
             </div>
+
+
+
+             <!-- 评论 -->
             <div class="interview-comment-list" v-if="subType == 2">
               <div class="interview-bottom-comment">
                 <div class="comment-blog">
@@ -397,6 +404,28 @@
                           <i class="icon icon_ask_report"></i>
                           举报
                         </div>
+
+                        <div  class="tool-item" v-if="item.uid == loginInfo.id">
+                            <el-dropdown szie="mini" @command="commentClickCommend">
+                              <span class="el-dropdown-link drop-menu">
+                                <i class="icon icon_more"></i>
+                              </span>
+                              <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item :command="beforeHandleCommand('d', comment,1)">删除</el-dropdown-item>
+                              </el-dropdown-menu>
+                            </el-dropdown>
+                         </div>
+
+                        <el-dialog title="确认删除评论吗？" :visible.sync="deleteCommentVisible" width="30%" center>
+                          <div class="tac">
+                            <span>删除后您的评论将不会出现在该回答下,请三思哦~</span>
+                          </div>
+                          <span slot="footer" class="dialog-footer">
+                            <el-button @click="deleteCommentReply(comment, item)">删 除</el-button>
+                            <el-button type="primary" @click="deleteCommentVisible = false">再等等</el-button>
+                          </span>
+                        </el-dialog>
+
                       </div>
                       <transition v-on:before-enter="rbeforeEnter" v-on:enter="renter" v-on:after-enter="rafterEnter"
                         v-on:leave="rleave" v-bind:css="false">
@@ -628,8 +657,8 @@ export default {
       path: "/interview/detail/" + qId,
     };
     if (this.subType == 2) {
+       this.initCommentEditor();
       setTimeout(function () {
-        myVueComm.initCommentEditor();
       }, 10);
     }
   },
@@ -734,10 +763,11 @@ export default {
         });
     },
 
-    beforeHandleCommand(commd, item) {
+    beforeHandleCommand(commd, item, type = 0) {
       return {
         command: commd,
         item: item,
+        type:type
       };
     },
 
@@ -816,6 +846,20 @@ export default {
         });
         this.$message({
           message: "删除回答成功哈！",
+          type: "success",
+          duration: 2000,
+        });
+      });
+    },
+
+    deleteComment(comment) {
+      this.deleteCommentReply = false;
+      askApi.deleteReplyComment(comment.id).then((response) => {
+        citem.comments = citem.comments.filter(function (item) {
+          return item.id != response.data.cId;
+        });
+        this.$message({
+          message: "删除评论成功哈！",
           type: "success",
           duration: 2000,
         });
@@ -1030,7 +1074,7 @@ export default {
     },
 
     rbeforeEnter: function (el) {
-      el.style.width = "540px";
+      el.style.width = "700px";
       el.style.height = "0px";
     },
 
@@ -1963,7 +2007,7 @@ h2.accusation-secondary-title {
 }
 
 .interview-reply-tool .tool-item {
-  margin-right: 16px;
+  margin-right: 18px;
   line-height: 22px;
   font-size: 12px;
   cursor: pointer;
@@ -2019,6 +2063,7 @@ h2.accusation-secondary-title {
   padding: 10px;
   background: rgba(247, 248, 250, 0.7);
   border-radius: 8px;
+  margin-bottom: 15px;
 }
 
 .interview-reply-tool .mr20px {
@@ -2454,13 +2499,20 @@ li.up_down_wrap {
   margin-bottom: 10px;
 }
 
+
+.editor-submit-tool {
+  margin-left: 36px;
+  margin-top: 2px;
+  margin-bottom: 16px;
+}
+
 .interview-comment-item:not(:last-child) {
  border-bottom: 1px solid rgba(28, 31, 33, 0.1);
 }
 
-.answer-item-content {
+.interview-comment-item .answer-item-content {
   margin-top: 8px;
-  margin-left: 18px;
+  margin-left: 36px;
   margin-right: 12px;
 }
 

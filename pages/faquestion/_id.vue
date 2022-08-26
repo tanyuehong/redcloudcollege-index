@@ -1323,10 +1323,6 @@ export default {
   text-decoration: none;
 }
 
-.el-dialog {
-  width: 480px;
-}
-
 .el-dropdown-menu {
   padding-top: 0px;
   padding-bottom: 0px;

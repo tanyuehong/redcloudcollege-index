@@ -13,6 +13,7 @@ body {
   background-color: #f6f6f6;
 }
 
+
 .message-spreate {
   border: 0;
   height: 1px;
@@ -27,6 +28,11 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
+.el-dialog__wrapper .el-dialog {
+  width: 580px;
+}
+
 
 .fix-col-md {
   margin-left: -15px;

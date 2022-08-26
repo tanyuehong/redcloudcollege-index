@@ -881,7 +881,4 @@ input[type='file' i] {
   resize: none;
 }
 
-.el-dialog {
-  width: 610px;
-}
 </style>

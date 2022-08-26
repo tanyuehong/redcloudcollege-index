@@ -124,13 +124,26 @@ export default {
         method: 'get',
       })
     },
+    updateCommentReplyGood(cId, type) {
+      return request({
+        url: `/interview/updateCommentReplyGood/${cId}/${type}`,
+        method: 'get',
+      })
+    },
 
       // 回复评论的提交
     submitCommentReply(replycomment) {
      return request({
-      url: `/eduask/submitReplyComment`,
+      url: `/interview/reply`,
       method: 'post',
       data: replycomment,
-    })
-  },
+      })
+    },
+
+    deleteComment(cId,type) {
+      return request({
+        url: `/interview/deleteComment/${cId}/${type}`,
+        method: 'get',
+      })
+    },
 }

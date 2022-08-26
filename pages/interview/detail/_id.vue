@@ -234,6 +234,14 @@
                             <span>{{item.iscollect ? "已收藏" : "收藏"}}</span>
                         </button>
                       </div>
+
+                      <div class="reply-tool-item">
+                        <button class="tool-button" @click="jubaoBtnClick(qdetail.qid, '面试题题解')" v-bind:class="{ collected: item.iscollect }">
+                            <i class="icon icon_vote_jubao"></i>
+                            <span>举报</span>
+                        </button>
+                      </div>
+
                       <span>
                         <el-dropdown szie="mini" @command="answerClickCommend">
                           <span class="el-dropdown-link drop-menu">
@@ -242,7 +250,6 @@
                           <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item :command="beforeHandleCommand('d', item)" v-if="item.uid == loginInfo.id">删除</el-dropdown-item>
                             <el-dropdown-item :command="beforeHandleCommand('g', item)">最佳题解</el-dropdown-item>
-                            <el-dropdown-item :command="beforeHandleCommand('j', item)">举报</el-dropdown-item>
                           </el-dropdown-menu>
                         </el-dropdown>
                       </span>
@@ -276,7 +283,7 @@
                     </el-dialog>
 
                     <div class="reply-comment-tool" v-if="item.showeditor">
-                      <span @click="repplaybtnclinck(item, index)">取消</span>
+                      <span @click="replybtnclinck(item, index)">取消</span>
                       <div class="comment-btn" @click="replyCommntClick(item, index)">评论</div>
                     </div>
 
@@ -296,7 +303,7 @@
                                 commentGood(comment.good)
                             }}</span>
                           <span class="mr15" @click="commentbtnclinck(comment, cindex)">回复</span>
-                          <span class="mr15" @click="jubaoBtnClick(comment.id, '评论')">
+                          <span class="mr15" @click="jubaoBtnClick(comment.id, '面试题题解')">
                             <i class="icon icon_ask_report"></i>举报
                           </span>
                           <span v-if="comment.uid == loginInfo.id">
@@ -391,7 +398,7 @@
                             <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{ commentGood(item.good)
                             }}</em></span>
                         </div>
-                        <div class="tool-item fbselect" @click="repplaybtnclinck(item, index)">
+                        <div class="tool-item fbselect" @click="replybtnclinck(item, index)">
                           <svg data-v-d5fd42b8="" width="16" height="16" viewBox="0 0 16 16" fill="none"
                             xmlns="http://www.w3.org/2000/svg" class="">
                             <path data-v-d5fd42b8="" fill-rule="evenodd" clip-rule="evenodd"
@@ -400,28 +407,28 @@
                           </svg>
                           回复
                         </div>
-                        <div class="tool-item" @click="jubaoBtnClick(item.id, '回答')">
+                        <div class="tool-item" @click="jubaoBtnClick(item.id, '面试题评论')">
                           <i class="icon icon_ask_report"></i>
                           举报
                         </div>
 
                         <div  class="tool-item" v-if="item.uid == loginInfo.id">
-                            <el-dropdown szie="mini" @command="commentClickCommend">
+                            <el-dropdown szie="mini" @command="deleteCommentVisible=1">
                               <span class="el-dropdown-link drop-menu">
                                 <i class="icon icon_more"></i>
                               </span>
                               <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item :command="beforeHandleCommand('d', comment,1)">删除</el-dropdown-item>
+                                <el-dropdown-item>删除</el-dropdown-item>
                               </el-dropdown-menu>
                             </el-dropdown>
                          </div>
 
                         <el-dialog title="确认删除评论吗？" :visible.sync="deleteCommentVisible" width="30%" center>
                           <div class="tac">
-                            <span>删除后您的评论将不会出现在该回答下,请三思哦~</span>
+                            <span>删除后您的评论将不会出现在该面试题下,请三思哦~</span>
                           </div>
                           <span slot="footer" class="dialog-footer">
-                            <el-button @click="deleteCommentReply(comment, item)">删 除</el-button>
+                            <el-button @click="deleteComment(item)">删 除</el-button>
                             <el-button type="primary" @click="deleteCommentVisible = false">再等等</el-button>
                           </span>
                         </el-dialog>
@@ -451,12 +458,12 @@
                           <div class="interview-reply-tool">
                             <div class="tool-item">
                               <span class="comment-reply" v-bind:class="{ like: comment.goodreply }"
-                                @click="goodReplyClick(comment, 2)">
+                                @click="goodCommentReplyClick(comment)">
                                 <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{
                                     commentGood(comment.good)
                                 }}</em></span>
                             </div>
-                            <div class="tool-item fbselect" @click="replyCommentbtnclick(comment, cindex)">
+                            <div class="tool-item fbselect" @click="rreplyCommentBtnClick(comment, cindex)">
                               <svg data-v-d5fd42b8="" width="16" height="16" viewBox="0 0 16 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" class="">
                                 <path data-v-d5fd42b8="" fill-rule="evenodd" clip-rule="evenodd"
@@ -465,22 +472,41 @@
                               </svg>
                               回复
                             </div>
-                            <div class="tool-item" @click="jubaoBtnClick(item.id, '回答')">
+                            <div class="tool-item" @click="jubaoBtnClick(item.id, '面试题评论回复')">
                               <i class="icon icon_ask_report"></i>
                               举报
                             </div>
-                          </div>
+                           <div  class="tool-item" v-if="item.uid == loginInfo.id">
+                            <el-dropdown szie="mini" @command="deleteCommentReplyVisible=true">
+                              <span class="el-dropdown-link drop-menu">
+                                <i class="icon icon_more"></i>
+                              </span>
+                              <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item>删除</el-dropdown-item>
+                              </el-dropdown-menu>
+                            </el-dropdown>
+                           </div>
 
-                          <transition v-on:before-enter="rbeforeEnter" v-on:enter="renter"
-                            v-on:after-enter="rafterEnter" v-on:leave="rleave" v-bind:css="false">
-                            <div :id="'creplayedtor' + cindex" class="c-replay-editor" v-if="comment.showeditor"
+                        <el-dialog title="确认删除评论回复吗？" :visible.sync="deleteCommentReplyVisible" width="30%" center>
+                          <div class="tac">
+                            <span>删除后您的评论将不会出现在该评论下,请三思哦~</span>
+                          </div>
+                          <span slot="footer" class="dialog-footer">
+                            <el-button @click="deleteCommentReply(comment,item)">删 除</el-button>
+                            <el-button type="primary" @click="deleteCommentReplyVisible = false">再等等</el-button>
+                          </span>
+                        </el-dialog>
+                         </div>
+                            <transition v-on:before-enter="rrbeforeEnter" v-on:enter="rrenter"
+                            v-on:after-enter="rrafterEnter" v-on:leave="rrleave" v-bind:css="false">
+                            <div :id="'rreplayedtor' + cindex" class="rr-replay-editor" v-if="comment.showeditor"
                               :key="comment.id">
                             </div>
                           </transition>
                           <div class="editor-submit-tool" v-if="comment.showeditor">
                             <el-button type="primary" round size="small"
-                              @click="commentReplyToSubmit(comment, item, comment.uid, cindex)">提交</el-button>
-                            <el-button round size="small" @click="replyCommentbtnclick(comment, cindex)">取消</el-button>
+                              @click="commentRReplyToSubmit(comment, item, comment.uid, cindex)">提交</el-button>
+                            <el-button round size="small" @click="rreplyCommentBtnClick(comment, cindex)">取消</el-button>
                           </div>
                         </div>
                       </div>
@@ -579,8 +605,10 @@ export default {
       jubaoTypeIndex: 0,
       jubaoId: "",
       jubaotype: "",
-      deleteDialogVisible: false,
       deleteCommentVisible: false,
+      deleteCommentReplyVisible:false,
+
+      deleteDialogVisible: false,
       questionDialogVisible: false,
       goodDialogVisible: false,
       cgoodDialogVisible: false,
@@ -722,7 +750,7 @@ export default {
         })
         .then((response) => {
           item.editor.txt.html("");
-          myVueComm.repplaybtnclinck(item, index);
+          myVueComm.replybtnclinck(item, index);
           item.comments.unshift(response.data.reply);
           window.console.log(item.comments);
           this.$message({
@@ -784,14 +812,11 @@ export default {
       if (command.command == "g") {
         this.goodDialogVisible = true;
       }
-      if (command.command == "j") {
-        this.jubaoCommitBtnClick(command.item.id,"题解");
-      }
     },
 
     commentClickCommend(command) {
       if (command.command == "d") {
-        this.deleteCommentVisible = true;
+         this.deleteCommentVisible = true;
       }
     },
 
@@ -815,7 +840,6 @@ export default {
           });
           return;
         }
-
         this.$message({
           message: "删除面试题成功, 即将跳转面试题列表页面",
           type: "success",
@@ -853,10 +877,10 @@ export default {
     },
 
     deleteComment(comment) {
-      this.deleteCommentReply = false;
-      askApi.deleteReplyComment(comment.id).then((response) => {
-        citem.comments = citem.comments.filter(function (item) {
-          return item.id != response.data.cId;
+      this.deleteCommentVisible = false;
+      interviewApi.deleteComment(comment.id,1).then((response) => {
+        this.dataList = this.dataList.filter(function (item) {
+          return item.id != response.data.id;
         });
         this.$message({
           message: "删除评论成功哈！",
@@ -867,18 +891,19 @@ export default {
     },
 
     deleteCommentReply(comment, citem) {
-      this.deleteCommentReply = false;
-      askApi.deleteReplyComment(comment.id).then((response) => {
+      this.deleteCommentReplyVisible = false;
+      interviewApi.deleteComment(comment.id,2).then((response) => {
         citem.comments = citem.comments.filter(function (item) {
-          return item.id != response.data.cId;
+          return item.id != response.data.id;
         });
         this.$message({
-          message: "删除评论成功哈！",
+          message: "删除评论回复成功哈！",
           type: "success",
           duration: 2000,
         });
       });
     },
+
     jubaoBtnClick(wId, jubaotype) {
       this.jubaotype = jubaotype;
       this.jubaoId = wId;
@@ -930,7 +955,6 @@ export default {
           duration: 2000,
         });
         });
-    
       } else {
        item.good++;
        interviewApi.updateAnswerGood(item.id,1).then((response) => {
@@ -944,6 +968,29 @@ export default {
       item.isgood = !item.isgood;
     },
 
+    goodCommentReplyClick(item) {
+         if(item.goodreply) {
+        interviewApi.updateCommentReplyGood(item.id,2).then((response) => {
+        item.good--;
+        this.$message({
+          message: "取消点赞成功！",
+          type: "success",
+          duration: 2000,
+        });
+        });
+      } else {
+       item.good++;
+       interviewApi.updateCommentReplyGood(item.id,1).then((response) => {
+        this.$message({
+          message: "评论点赞成功！",
+          type: "success",
+          duration: 2000,
+        });
+        });
+      }
+      item.goodreply = !item.goodreply;
+    },
+
     goodCommentClick(item) {
       if(item.goodreply) {
         interviewApi.updateCommentGood(item.id,2).then((response) => {
@@ -954,7 +1001,6 @@ export default {
           duration: 2000,
         });
         });
-    
       } else {
        item.good++;
        interviewApi.updateCommentGood(item.id,1).then((response) => {
@@ -1072,6 +1118,7 @@ export default {
         done();
       });
     },
+
 
     rbeforeEnter: function (el) {
       el.style.width = "700px";
@@ -1219,7 +1266,7 @@ export default {
         });
     },
 
-    repplaybtnclinck(item, index) {
+    replybtnclinck(item, index) {
       item.replyId = "#replayedtor" + index;
       window.replyItem = item;
       if (!item.editor) {
@@ -1230,6 +1277,114 @@ export default {
         item.editor = null;
       }
     },
+    // 回复的回复编辑器显示逻辑
+    rreplyCommentBtnClick(item, index) {
+      item.rreplyId = "#rreplayedtor" + index;
+      window.rreplyItem = item;
+      if (!item.editor) {
+        item.showeditor = true;
+      } else {
+        item.showeditor = false;
+        item.editor.destroy();
+        item.editor = null;
+      }
+    },
+    rrbeforeEnter: function (el) {
+      el.style.width = "640px";
+      el.style.height = "0px";
+    },
+    rrenter: function (el, done) {
+      this.initRReplyeditor();
+      var Velocity = $.Velocity;
+      Velocity(el, { height: "140px" }, 150, function () {
+        done();
+      });
+    },
+    rrafterEnter: function (el) {},
+    rrleave: function (el, done) {
+      var Velocity = $.Velocity;
+      Velocity(el, { height: "0px" }, 150, function () {
+        done();
+      });
+    },
+    initRReplyeditor() {
+      let editor = this.$wangeditor(window.rreplyItem.rreplyId);
+      window.rreplyItem.editor = editor;
+      editor.config.uploadImgMaxLength = 1;
+      editor.config.uploadImgServer = "/api/ucenter/uploadImage";
+      editor.config.uploadFileName = "file";
+      editor.config.placeholder = "写下你的回复...";
+      editor.config.focus = false;
+      editor.config.zIndex = 100;
+      editor.config.height = 100;
+      editor.config.showFullScreen = false;
+
+      editor.config.menus = ["bold", "link", "emoticon", "image"];
+
+      editor.config.onfocus = function (newHtml) {
+        myVueComm.getUploadImageToken(true);
+      };
+
+      editor.config.onblur = function (newHtml) {};
+
+      editor.config.customUploadImg = function (files, insertImgFn) {
+        // resultFiles 是 input 中选中的文件列表
+        // insertImgFn 是获取图片 url 后，插入到编辑器的方法
+        var file = files[0];
+        const putExtra = {
+          mimeType: file.type,
+        };
+        const config = {
+          region: qiniu.region.z2,
+        };
+        const observable = qiniu.upload(
+          file,
+          null,
+          window.myVueComm.uploadToken,
+          putExtra,
+          config
+        );
+        const observer = {
+          next(res) {
+            window.console.log(res);
+          },
+          error(err) {
+            window.console.log(err);
+          },
+          complete(res) {
+            window.console.log(res);
+            insertImgFn("https://img.redskt.com/" + res.hash);
+          },
+        };
+        const subscription = observable.subscribe(observer);
+      };
+      // editor.config.onchange = function (newHtml) {};
+      editor.create();
+    },
+    commentRReplyToSubmit (comment, item, uid, index) {
+      if (!comment.editor || comment.editor.txt.html().length < 6) {
+        this.$message({ message: "输入的内容太短了哦！", type: "error", duration: 2000 });
+        return;
+      }
+      interviewApi.submitCommentReply({
+          content: comment.editor.txt.html(),
+          rid: item.id,
+          uid: this.loginInfo.id,
+          touid: uid
+        })
+        .then((response) => {
+          comment.editor.txt.html("");
+          item.comments.unshift(response.data.reply);
+          this.rreplyCommentBtnClick(comment, index);
+          this.$message({
+            message: "评论回复成功哦",
+            type: "success",
+            duration: 2000,
+          });
+        });
+    },
+
+
 
     commentbtnclinck(item, index) {
       item.commnetId = "#creplayedtor" + index;
@@ -1729,11 +1884,6 @@ export default {
   margin-right: 0px;
   text-decoration: none;
 }
-
-.el-dialog {
-  width: 480px;
-}
-
 .el-dropdown-menu {
   padding-top: 0px;
   padding-bottom: 0px;
@@ -1804,9 +1954,18 @@ h2.accusation-secondary-title {
 
 .c-replay-editor {
   margin-left: 38px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
+.rr-replay-editor {
+  margin-left: 32px;
+  margin-bottom: 8px;
+}
+
+.reply-comment-item .editor-submit-tool {
+  margin-left: 34px;
+  margin-bottom: 8px;
+}
 .comment-tool-bar {
   display: -webkit-box;
   display: -ms-flexbox;

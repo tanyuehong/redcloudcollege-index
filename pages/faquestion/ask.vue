@@ -232,7 +232,6 @@ export default {
           this.groupTagList = response.data.tagList;
         });
       }
-
     },
     handleTagClick (tab, event) {
       this.selectType = tab.name;

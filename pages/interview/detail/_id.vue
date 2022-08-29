@@ -436,13 +436,13 @@
                       </div>
                       <transition v-on:before-enter="rbeforeEnter" v-on:enter="renter" v-on:after-enter="rafterEnter"
                         v-on:leave="rleave" v-bind:css="false">
-                        <div :id="'replayedtor' + index" class="replay-editor" v-if="item.showeditor" :key="item.id">
+                        <div :id="'replayedtor' + index" class="interview-replay-editor" v-if="item.showeditor" :key="item.id">
                         </div>
                       </transition>
                       <div class="editor-submit-tool" v-if="item.showeditor">
                         <el-button type="primary" round size="small" @click="commentReplySubmit(item, index)">提交
                         </el-button>
-                        <el-button round size="small" @click="repplaybtnclinck(item, index)">取消</el-button>
+                        <el-button round size="small" @click="replybtnclinck(item, index)">取消</el-button>
                       </div>
 
                       <div class="comment-reply-container" v-if="item.comments.length > 0">
@@ -544,7 +544,25 @@
 
             <div class="info-item">
               遇到人数: <span>{{ qdetail.meet }}</span>
+              <span class="common-btn" @click="slectInterviewTypeClick">我遇到过</span>
             </div>
+            <el-popover placement="bottom" width="600" trigger="hover" v-model="tagsVisible">
+                    <el-tabs tab-position="left" style="height: 260px;" v-model="selectType"
+                      @tab-click="handleTagClick">
+                      <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">
+                        <div class="group-taglist">
+                          <div class="nodata-warper" v-if="groupTagList.length == 0">
+                            <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                            <div>
+                              <span>该模块下暂时没有标签哦</span>
+                            </div>
+                          </div>
+                          <el-tag class="tag-list" v-for="tag in groupTagList" @click="groupTagClick(tag)"
+                            :key="tag.id">{{ tag.name }}</el-tag>
+                        </div>
+                      </el-tab-pane>
+                    </el-tabs>
+            </el-popover>
           </div>
 
           <div class="ask-top-wrap">
@@ -563,7 +581,7 @@
         <div class="qustion-type-warper">
           <div class="qustion-tag-header">
             <span> {{ qdetail.typeString }}</span>
-            <span> > 前端 </span>
+            <span> 开源实践面试 > 前端 </span>
             <span class="ask-tag-user-fawllow">关注</span>
           </div>
 
@@ -605,6 +623,7 @@ export default {
       jubaoTypeIndex: 0,
       jubaoId: "",
       jubaotype: "",
+      tagsVisible: true,
       deleteCommentVisible: false,
       deleteCommentReplyVisible:false,
 
@@ -729,6 +748,13 @@ export default {
   },
 
   methods: {
+    slectInterviewTypeClick () {
+      if (this.tagsVisible) {
+        this.tagsVisible = false;
+      } else {
+        this.tagsVisible = true;
+      }
+    },
     checkAnswerClick() {
       this.showAnswerDetail = !this.showAnswerDetail;
     },
@@ -1237,7 +1263,7 @@ export default {
             duration: 2000,
           });
         });
-      this.repplaybtnclinck(item, index);
+      this.replybtnclinck(item, index);
     },
 
     submitAnserClick() {
@@ -1593,6 +1619,14 @@ export default {
 </style>>
 
 <style scoped>
+
+.common-btn {
+  background: #fc5533;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 3px;
+}
 
 .ask-info-item.collected {
    color: #fc5533;
@@ -2119,9 +2153,9 @@ h2.accusation-secondary-title {
   height: 10px;
 }
 
-.replay-editor {
+.interview-replay-editor {
   margin-left: 38px;
-  margin-bottom: 12px;
+  margin-bottom: px;
   position: relative;
 }
 
@@ -2653,16 +2687,16 @@ li.up_down_wrap {
 }
 
 
+
 /* 评论列表的对应样式 */
 .interview-comment-item {
   margin-bottom: 10px;
 }
 
-
-.editor-submit-tool {
+.interview-comment-item .editor-submit-tool {
   margin-left: 36px;
-  margin-top: 2px;
-  margin-bottom: 16px;
+  margin-top: 6px;
+  margin-bottom: 12px;
 }
 
 .interview-comment-item:not(:last-child) {

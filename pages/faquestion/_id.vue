@@ -459,6 +459,7 @@ export default {
       questionDialogVisible: false,
       fixDialogVisible: false,
       goodDialogVisible: false,
+      cgoodDialogVisible:false,
     };
   },
 
@@ -1320,10 +1321,6 @@ export default {
   font-size: 14px;
   margin-right: 0px;
   text-decoration: none;
-}
-
-.el-dialog {
-  width: 480px;
 }
 
 .el-dropdown-menu {

@@ -12,7 +12,7 @@ export default {
     htmlAttrs: {
       lang: 'zh',
     },
-    title: '开源实践网',
+    title: '开源实践网 - 一个有趣的在线学习网站',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

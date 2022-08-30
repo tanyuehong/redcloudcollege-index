@@ -256,7 +256,7 @@
             <div class="ma-con">
               <div class="ma"></div>
               <div class="desc">
-                <div class="title">扫码关注开源实践网服务号</div>
+                <div class="title">扫码关注开源实践网微信公众号</div>
                 <div class="item-con">
                   <div class="item">干货分享</div>
                   <div class="item">定期活动</div>
@@ -520,6 +520,15 @@
 
 .answer-list-item {
   margin-bottom: 10px;
+  border-bottom: 1px solid rgba(28, 31, 33, 0.1);
+}
+
+.interview-reply-tool  .tool-item .icon_vote_up {
+  vertical-align: middle;
+}
+
+.interview-reply-tool  .tool-item svg {
+  vertical-align: middle;
 }
 
 .replay-editor {

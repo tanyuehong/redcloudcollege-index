@@ -13,6 +13,7 @@ body {
   background-color: #f6f6f6;
 }
 
+
 .message-spreate {
   border: 0;
   height: 1px;
@@ -27,6 +28,11 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
+.el-dialog__wrapper .el-dialog {
+  width: 580px;
+}
+
 
 .fix-col-md {
   margin-left: -15px;
@@ -50,14 +56,14 @@ body {
 }
 
 .app-download-ma {
-  width: 80px;
-  height: 80px;
+  width: 96px;
+  height: 96px;
   text-align: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   margin: 0 auto;
-  background-image: url(https://static3.sycdn.imooc.com/static/img/column/qiqi_wechat_qr2.png);
+  background-image: url(https://img.redskt.com/asset/img/redskt-webchat.jpg);
 }
 
 .app-download-wapma {
@@ -113,13 +119,10 @@ body {
 
 .ui.label {
   display: inline-block;
-  line-height: 1;
-  vertical-align: super;
-  margin: 0 0.14285714em;
+  margin: 0 4px;
   background-color: #f2711c;
   background-image: none;
-  padding: 0.5833em 0.833em;
-  color: rgba(0, 0, 0, 0.6);
+  padding: 5px 8px;
   text-transform: none;
   font-weight: 400;
   border: 0 solid transparent;
@@ -127,6 +130,8 @@ body {
   -webkit-transition: background 0.1s ease;
   transition: background 0.1s ease;
   color: #fff;
+  vertical-align: text-bottom;
+  border-radius: 3px;
 }
 
 .ui.basic.label {
@@ -442,6 +447,9 @@ section {
 }
 .ml5 {
   margin-left: 5px;
+}
+.ml3 {
+  margin-left: 3px;
 }
 .mt10 {
   margin-top: 10px;
@@ -1164,7 +1172,7 @@ a.current-2 .lh-p-icon {
 }
 
 .nav {
-  padding: 10px 0 0 50px;
+  padding: 10px 0 0 30px;
 }
 .nav,
 .nav li,
@@ -1232,7 +1240,7 @@ a.current-2 .lh-p-icon {
   text-indent: -9999px;
 }
 .h-r-search {
-  margin: 12px 20px 0 0;
+  margin: 12px 15px 0 0;
 }
 .h-r-s-box {
   display: block;

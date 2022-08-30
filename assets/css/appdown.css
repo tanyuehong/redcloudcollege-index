@@ -13,12 +13,12 @@
   border-bottom: 1px solid rgba(28, 31, 33, 0.06);
 }
 .wechatma-con .ma-con .ma {
-  width: 80px;
-  height: 80px;
+  width: 96px;
+  height: 96px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url(https://static3.sycdn.imooc.com/static/img/column/qiqi_wechat_qr2.png);
+  background-image: url(https://img.redskt.com/asset/img/redskt-webchat.jpg);
 }
 .wechatma-con .ma-con .desc {
   width: 140px;

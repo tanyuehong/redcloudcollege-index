@@ -78,6 +78,19 @@ export default {
     };
   },
 
+    head () {
+    return {
+      title: "登陆 - 开源实践网",
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: "开源实践网,用户登陆,注册,加入",
+        }
+      ],
+    }
+  },
+
   created () {
     if (process.browser) {
       window.addEventListener("keydown", this.handleKeyDown, true);

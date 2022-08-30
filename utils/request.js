@@ -44,16 +44,18 @@ service.interceptors.response.use(
         if (window) {
           window.localStorage.setItem('redclass_token', '')
           window.localStorage.setItem('redclass_user', '')
-          this.$cookies.set('token', '')
+          window.$nuxt.$cookies.set('token', '')
         }
+        window.$nuxt.$router.push({
+          name: 'user-login',
+        })
+        return
         Message({
           message: errorMsg,
           type: 'error',
           duration: tipsShowTime,
           onClose: () => {
-            $nuxt.$router.push({
-              name: 'user-login',
-            })
+            debugger
           },
         })
         return

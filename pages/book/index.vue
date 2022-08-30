@@ -125,7 +125,7 @@
               <div class="ma-con">
                 <div class="ma"></div>
                 <div class="desc">
-                  <div class="title">扫码关注开源实践网服务号</div>
+                  <div class="title">扫码关注开源实践网微信公众号</div>
                   <div class="item-con">
                     <div class="item">干货分享</div>
                     <div class="item">定期活动</div>
@@ -185,7 +185,7 @@ export default {
       buyCountSort: "",
       gmtCreateSort: "",
       priceSort: "",
-      description: "开源实践网推出的开源专题频道，主要是满足用户对文字内容的学习需求，旨在打造系统、完整、高效的专题内容，满足不同用户的学习感受，让每一位用户收获满满的知识。"
+      description: "开源实践网推出专题频道，主要是满足用户对文字内容的学习需求，旨在打造系统、完整、高效的专题内容，满足不同用户的学习感受，让每一位用户收获满满的知识。"
     };
   },
 
@@ -199,7 +199,7 @@ export default {
 
   head () {
     return {
-      title: "开源专题-系统完整高效的技术专题-开源实践网",
+      title: "开源实践专题-系统完整高效的技术专题",
       meta: [
         {
           hid: 'description',

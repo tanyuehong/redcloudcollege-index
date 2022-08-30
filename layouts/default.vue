@@ -21,8 +21,11 @@
             <nuxt-link to="/practice" tag="li" active-class="current">
               <a>实践</a>
             </nuxt-link>
+             <nuxt-link to="/interview" tag="li" active-class="current">
+              <a>面试</a>
+            </nuxt-link>
             <nuxt-link to="/book" tag="li" active-class="current">
-              <a>技术专题</a>
+              <a>专题</a>
             </nuxt-link>
             <nuxt-link to="/faquestion" tag="li" active-class="current">
               <a>问答</a>
@@ -35,17 +38,15 @@
               <li v-if="!loginInfo.id" id="no-login">
                 <nuxt-link :to="{ name: 'user-login' }">
                   <em class="icon18 login-icon">&nbsp;</em>
-                  <span class="vam ml5">登录</span>
-                </nuxt-link>
-                |
-                <nuxt-link :to="{ name: 'user-register' }">
+                  <span class="vam mr5">登录</span>
+                </nuxt-link>|<nuxt-link :to="{ name: 'user-register' }">
                   <span class="vam ml5">注册</span>
                 </nuxt-link>
               </li>
               <li v-if="loginInfo.id" id="is-login-one" class="mr10">
-                <a id="headerMsgCountId" href="#" title="消息">
+               <nuxt-link :to="'/about/message'" title="消息">
                   <em class="icon18 news-icon">&nbsp;</em>
-                </a>
+                </nuxt-link>
                 <q class="red-point" style="display: none;">&nbsp;</q>
               </li>
               <li v-if="loginInfo.id" id="is-login-two" class="h-r-user">

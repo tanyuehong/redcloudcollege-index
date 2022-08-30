@@ -546,7 +546,7 @@
               遇到人数: <span>{{ qdetail.meet }}</span>
               <span class="common-btn" @click="slectInterviewTypeClick">我遇到过</span>
             </div>
-            <el-popover placement="bottom" width="600" trigger="hover" v-model="tagsVisible">
+            <el-popover placement="bottom" width="400" trigger="hover" v-model="tagsVisible">
                     <el-tabs tab-position="left" style="height: 260px;" v-model="selectType"
                       @tab-click="handleTagClick">
                       <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">
@@ -1410,8 +1410,6 @@ export default {
         });
     },
 
-
-
     commentbtnclinck(item, index) {
       item.commnetId = "#creplayedtor" + index;
       window.commentItem = item;
@@ -1614,6 +1612,11 @@ export default {
 .qustion_info .qustion_describ  p{
   margin: 6px 0;
   font-size: 14px;
+}
+
+.question-info-list .el-popover {
+  right: 20px;
+
 }
 
 </style>>
@@ -1847,6 +1850,7 @@ export default {
   padding-left: 20px;
   padding-top: 15px;
   padding-bottom: 8px;
+  position: relative;
 }
 
 .question-info .question-info-list .info-item {

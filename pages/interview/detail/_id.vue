@@ -147,6 +147,9 @@
                     </div>
                   </el-dialog>
                 </ul>
+
+                <div class="question-metting"><div class="css-rrr7do enw8myh0">请问您在哪类招聘中遇到此题？</div><div class="btn-wrapper__PZW-"><button class="metting-btn"><span>社招</span></button></div><div class="btn-wrapper__PZW-"><button class="metting-btn"><span>校招</span></button></div><div class="btn-wrapper__PZW-"><button class="metting-btn"><span>实习</span></button></div><div class="btn-wrapper__PZW-"><button class="metting-btn"><span>未遇到</span></button></div></div>
+
                 <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter"
                   v-on:leave="leave" v-bind:css="false">
                   <div class="answer-qustion-editor" v-if="showAnswerditor">
@@ -544,25 +547,7 @@
 
             <div class="info-item">
               遇到人数: <span>{{ qdetail.meet }}</span>
-              <span class="common-btn" @click="slectInterviewTypeClick">我遇到过</span>
             </div>
-            <el-popover placement="bottom" width="400" trigger="hover" v-model="tagsVisible">
-                    <el-tabs tab-position="left" style="height: 260px;" v-model="selectType"
-                      @tab-click="handleTagClick">
-                      <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">
-                        <div class="group-taglist">
-                          <div class="nodata-warper" v-if="groupTagList.length == 0">
-                            <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
-                            <div>
-                              <span>该模块下暂时没有标签哦</span>
-                            </div>
-                          </div>
-                          <el-tag class="tag-list" v-for="tag in groupTagList" @click="groupTagClick(tag)"
-                            :key="tag.id">{{ tag.name }}</el-tag>
-                        </div>
-                      </el-tab-pane>
-                    </el-tabs>
-            </el-popover>
           </div>
 
           <div class="ask-top-wrap">
@@ -623,7 +608,6 @@ export default {
       jubaoTypeIndex: 0,
       jubaoId: "",
       jubaotype: "",
-      tagsVisible: true,
       deleteCommentVisible: false,
       deleteCommentReplyVisible:false,
 
@@ -748,13 +732,6 @@ export default {
   },
 
   methods: {
-    slectInterviewTypeClick () {
-      if (this.tagsVisible) {
-        this.tagsVisible = false;
-      } else {
-        this.tagsVisible = true;
-      }
-    },
     checkAnswerClick() {
       this.showAnswerDetail = !this.showAnswerDetail;
     },
@@ -1616,13 +1593,57 @@ export default {
 
 .question-info-list .el-popover {
   right: 20px;
-
 }
 
 </style>>
 
 <style scoped>
+.question-metting {
+  display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(var(--grey-2-rgb),1);
+    opacity: 1;
+    -webkit-transition: opacity 1.5s 1.5s;
+    -o-transition: opacity 1.5s 1.5s;
+    transition: opacity 1.5s 1.5s;
+    margin-top: 15px;
+}
 
+.question-metting .metting-btn:hover {
+  background-color: rgba(252, 85, 51, 0.6);
+  border-color: #fc5533;
+  color: #fff;
+}
+.question-metting .metting-btn {
+    border-width: 1px;
+    border-color: #999;
+    color: #999;
+    margin-right: 15px;
+    border-radius: 3px;
+    line-height: 20px;
+    outline: none;
+    user-select: none;
+    text-decoration: none;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    overflow: hidden;
+    min-width: 40px;
+    cursor: pointer;
+    opacity: 1;
+    background: #fff;
+    font-size: 12px;
+    padding: 0px 4px;
+}
 .common-btn {
   background: #fc5533;
   color: #fff;
@@ -1630,7 +1651,6 @@ export default {
   padding: 4px 6px;
   border-radius: 3px;
 }
-
 .ask-info-item.collected {
    color: #fc5533;
 }
@@ -1640,7 +1660,6 @@ export default {
 .faversvg-item {
   vertical-align: sub;
 }
-
 .qustion_info .qustion_describ {
     margin-top: 20px;
     margin-bottom: 25px;

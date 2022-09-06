@@ -148,7 +148,18 @@
                   </el-dialog>
                 </ul>
 
-                <div class="question-metting"><div class="css-rrr7do enw8myh0">请问您在哪类招聘中遇到此题？</div><div class="btn-wrapper__PZW-"><button class="metting-btn"><span>社招</span></button></div><div class="btn-wrapper__PZW-"><button class="metting-btn"><span>校招</span></button></div><div class="btn-wrapper__PZW-"><button class="metting-btn"><span>实习</span></button></div><div class="btn-wrapper__PZW-"><button class="metting-btn"><span>未遇到</span></button></div></div>
+                <div class="question-metting">
+                  <div class="meeting-title">请问您在哪类招聘中遇到此题？</div>
+                  <div class="meeting-items">
+                    <button class="metting-btn"><span>社招</span></button>
+                  </div>
+                  <div class="meeting-items">
+                    <button class="metting-btn"><span>校招</span></button>
+                  </div><div class="meeting-items">
+                    <button class="metting-btn"><span>实习</span></button>
+                  </div><div class="meeting-items"><button class="metting-btn"><span>未遇到</span></button>
+                  </div>
+                </div>
 
                 <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter"
                   v-on:leave="leave" v-bind:css="false">
@@ -1585,6 +1596,12 @@ export default {
 </script>
 
 <style>
+
+.meeting-title {
+  margin-right: 15px;
+  font-size: 12px;
+  color: #333;
+}
 
 .qustion_info .qustion_describ  p{
   margin: 6px 0;

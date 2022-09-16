@@ -106,12 +106,12 @@ export default {
 
     updateAnswerGood(aId, type) {
       return request({
-        url: `/home/interview/updateAnswerGood/${aId}/${type}`,
+        url: `/interview/updateAnswerGood/${aId}/${type}`,
         method: 'get',
       })
     },
 
-    questionGoodAnswer(aId) {
+    questionGoodAnswer(aId) {  // 最佳题解功能
       return request({
         url: `/interview/goodAnswer/${aId}`,
         method: 'get',

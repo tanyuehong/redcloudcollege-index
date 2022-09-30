@@ -146,4 +146,11 @@ export default {
         method: 'get',
       })
     },
+
+    addQuestionMeet(qId,type) {
+      return request({
+        url: `/interview/updateMeetType/${qId}/${type}`,
+        method: 'get',
+      })
+    },
 }

@@ -31,6 +31,10 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response) => {
     const res = response.data
+    if(res.code == 20000 && res.sucessTips != undefined && res.sucessTips.length>0) {
+      Message({ message: res.sucessTips, type: 'success', duration: tipsShowTime });
+      return res;
+    }
     if (res.code !== 20000) {
       var errorMsg = '未知错误，请联系管理员'
       var coustMessage = res.data.message
@@ -46,19 +50,7 @@ service.interceptors.response.use(
           window.localStorage.setItem('redclass_user', '')
           window.$nuxt.$cookies.set('token', '')
         }
-        window.$nuxt.$router.push({
-          name: 'user-login',
-        })
-        return
-        Message({
-          message: errorMsg,
-          type: 'error',
-          duration: tipsShowTime,
-          onClose: () => {
-            debugger
-          },
-        })
-        return
+        window.$nuxt.$router.push({ name: 'user-login' });
       }
       Message({ message: errorMsg, type: 'error', duration: tipsShowTime })
       return Promise.reject(new Error(errorMsg))

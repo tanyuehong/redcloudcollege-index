@@ -319,16 +319,16 @@
                     </button>
                   </div>
                 </div>
-                <div class="info-input">
+                <div class="info-input" id="mytestoo">
                   <el-select
-                    v-model="selectName"
+                    v-model="companyName"
                     filterable
                     remote
                     size="mini"
                     allow-create
-                    placeholder="请输入公司名称"
-                    :remote-method="remoteMethod"
-                    :loading=false
+                    :placeholder="companyPlaceholder"
+                    :remote-method="comPanyMethod"
+                    :loading="companyLoading"
                   >
                     <el-option
                       v-for="item in options"
@@ -1209,11 +1209,12 @@
 </template>
 
 <script>
-import userApi from "@/api/user";
-import askApi from "@/api/ask";
+import userApi from "@/api/user"
+import askApi from "@/api/ask"
+import commonTool from '@/utils/commonUtils'
 
-import interviewApi from "@/api/interviewReq";
-import interviewServerApi from "@/api/interviewServerReq";
+import interviewApi from "@/api/interviewReq"
+import interviewServerApi from "@/api/interviewServerReq"
 
 const qiniu = require("qiniu-js");
 
@@ -1238,6 +1239,9 @@ export default {
       deleteCommentVisible: false,
       deleteCommentReplyVisible: false,
       options:[],
+      companyLoading:false,
+      companyName:'',
+      companyPlaceholder:'请输入公司名称',
 
       deleteDialogVisible: false,
       questionDialogVisible: false,
@@ -1246,8 +1250,7 @@ export default {
       answerEditor: undefined,
       showAnswerditor: false,
       showComment: false,
-      showAnswerDetail: false,
-      selectName:""
+      showAnswerDetail: false
     };
   },
 
@@ -1364,11 +1367,19 @@ export default {
   },
 
   methods: {
-    remoteMethod() {
-      this.options =  [{
-          value: 'DD:HTML',
-          label: 'DD:HTML'
-        }]
+    comPanyMethod() {
+      this.companyLoading = true;
+      interviewApi
+        .getComPanyList()
+        .then(response => {
+          var optionsArr = new Array();
+          optionsArr.push({value: input.value,label:input.value})
+          for(var item of response.data.companyList) {
+            optionsArr.push({value: item.id,label: item.title})
+          }
+          this.options =  optionsArr;
+          this.companyLoading = false;
+        });
     },
     meetingTypeClick(type) {
       interviewApi.addQuestionMeet(this.qdetail.qid, type).then(response => {});
@@ -2237,6 +2248,9 @@ export default {
 
 <style scoped>
 
+.choose-button {
+  opacity: 0.6;
+}
 .qustion_info .qustion_describ p {
   margin: 6px 0;
   font-size: 14px;

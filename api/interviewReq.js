@@ -153,4 +153,11 @@ export default {
         method: 'get',
       })
     },
+
+    getComPanyList() {
+      return request({
+        url: `/interview/comPanyList`,
+        method: 'get',
+      })
+    }
 }

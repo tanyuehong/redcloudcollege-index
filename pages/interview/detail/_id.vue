@@ -296,40 +296,38 @@
                   </el-dialog>
                 </ul>
 
-                <div class="question-metting">
-                  <div class="meeting-title">请问您在哪类招聘中遇到此题？</div>
-                  <div class="meeting-items">
-                    <button class="metting-btn" @click="meetingTypeClick(1)">
-                      <span>社招</span>
-                    </button>
-                  </div>
-                  <div class="meeting-items">
-                    <button class="metting-btn" @click="meetingTypeClick(2)">
-                      <span>校招</span>
-                    </button>
-                  </div>
-                  <div class="meeting-items">
-                    <button class="metting-btn" @click="meetingTypeClick(3)">
-                      <span>实习</span>
-                    </button>
-                  </div>
-                  <div class="meeting-items">
-                    <button class="metting-btn" @click="meetingTypeClick(4)">
-                      <span>未遇到</span>
-                    </button>
-                  </div>
+                <div class="question-metting-head">
+                  <div class="meeting-title">{{this.meetingTitle}}</div>
+                  <div class="info-step">{{infoStep}}/3</div>
                 </div>
-                <div class="info-input" id="mytestoo">
+                <div class="question-metting-content">
+                <div class="meeting-items" v-for="infoItem in qustionInfos"
+                    :key="infoItem.id">
+                    <button class="metting-btn" @click="meetingTypeClick(infoItem)">
+                      <span>{{infoItem.name}}</span>
+                    </button>
+                  </div>
+                </div>  
+                <div class="info-input" v-if="infoStep == 2">
                   <el-select
                     v-model="companyName"
                     filterable
                     remote
                     size="mini"
                     allow-create
-                    :placeholder="companyPlaceholder"
+                    id="elenet-idex"
+                    placeholder="请输入公司名称"
                     :remote-method="comPanyMethod"
+                    @visible-change="tagListShow"
                     :loading="companyLoading"
                   >
+                    <el-option
+                      :key="optionOne.value"
+                      :label="optionOne.label"
+                      :value="optionOne.value"
+                      id="mytestoo"
+                    >
+                    </el-option>
                     <el-option
                       v-for="item in options"
                       :key="item.value"
@@ -338,7 +336,9 @@
                     >
                     </el-option>
                   </el-select>
-                  <el-button type="success" class="choose-button" size="mini">选择公司</el-button>
+                  <el-button type="success" class="choose-button" size="mini"
+                    >选择公司</el-button
+                  >
                 </div>
 
                 <transition
@@ -383,18 +383,14 @@
                 class="faqustion-subtype-item"
                 v-bind:class="{ comactive: subType == 1 }"
               >
-                <span title="题解">
-                  题解
-                </span>
+                <span title="题解"> 题解 </span>
               </a>
               <a
                 :href="'/interview/detail/' + qdetail.qid + '?subtype=2'"
                 class="faqustion-subtype-item"
                 v-bind:class="{ comactive: subType == 2 }"
               >
-                <span title="评论">
-                  评论
-                </span>
+                <span title="评论"> 评论 </span>
               </a>
             </ul>
 
@@ -458,7 +454,7 @@
                           class="tool-button votebutton-good"
                         >
                           <span
-                            style="display: inline-flex; align-items: center;"
+                            style="display: inline-flex; align-items: center"
                           >
                             ​<svg
                               width="10"
@@ -1209,12 +1205,12 @@
 </template>
 
 <script>
-import userApi from "@/api/user"
-import askApi from "@/api/ask"
-import commonTool from '@/utils/commonUtils'
+import userApi from "@/api/user";
+import askApi from "@/api/ask";
+import commonTool from "@/utils/commonUtils";
 
-import interviewApi from "@/api/interviewReq"
-import interviewServerApi from "@/api/interviewServerReq"
+import interviewApi from "@/api/interviewReq";
+import interviewServerApi from "@/api/interviewServerReq";
 
 const qiniu = require("qiniu-js");
 
@@ -1238,10 +1234,13 @@ export default {
       jubaotype: "",
       deleteCommentVisible: false,
       deleteCommentReplyVisible: false,
-      options:[],
-      companyLoading:false,
-      companyName:'',
-      companyPlaceholder:'请输入公司名称',
+      options: [],
+      optionOne: {},
+      companyLoading: false,
+      companyName: "",
+      meetingTitle:"请问您在哪类招聘中遇到此题？",
+      infoStep:1,
+      qustionInfos:[{"name":"社招","key":1},{"name":"校招","key":2},{"name":"实习","key":3},{"name":"未遇到","key":3}],
 
       deleteDialogVisible: false,
       questionDialogVisible: false,
@@ -1250,7 +1249,7 @@ export default {
       answerEditor: undefined,
       showAnswerditor: false,
       showComment: false,
-      showAnswerDetail: false
+      showAnswerDetail: false,
     };
   },
 
@@ -1258,29 +1257,28 @@ export default {
     return {
       script: [
         {
-          src:
-            "https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js",
+          src: "https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js",
           async: true,
-          defer: true
-        }
+          defer: true,
+        },
       ],
       title: this.qdetail.title + "-开源实践问答",
       meta: [
         {
           hid: "keywords",
           name: "keywords",
-          content: "技术问答,技术答疑,生活问题,我问你答，开源实践问答"
+          content: "技术问答,技术答疑,生活问题,我问你答，开源实践问答",
         },
         {
           hid: "description",
           name: "description",
-          content: this.descrb
+          content: this.descrb,
         },
         {
           hid: "og:description",
-          content: this.descrb
-        }
-      ]
+          content: this.descrb,
+        },
+      ],
     };
   },
 
@@ -1289,7 +1287,7 @@ export default {
     var token = app.$cookies.get("token");
     return interviewServerApi
       .getQuestionDetail({ qId: params.id, type: type, token: token })
-      .then(response => {
+      .then((response) => {
         return {
           qdetail: response.data.qdetail,
           dataList: response.data.dataList,
@@ -1299,7 +1297,7 @@ export default {
             response.data.qdetail.title +
             " 等相关问题答案，如果想了解更多关于 " +
             response.data.qdetail.title +
-            " 问题等相关问答，请访问开源实践问答。"
+            " 问题等相关问答，请访问开源实践问答。",
         };
       });
   },
@@ -1321,18 +1319,18 @@ export default {
     window.myVueComm = this;
     this.getUploadImageToken(false);
     window.gotoPage = {
-      path: "/interview/detail/" + qId
+      path: "/interview/detail/" + qId,
     };
     if (this.subType == 2) {
       this.initCommentEditor();
-      setTimeout(function() {}, 10);
+      setTimeout(function () {}, 10);
     }
   },
 
   computed: {
     // 计算属性的 getter
     commentGood() {
-      return function(goodCount) {
+      return function (goodCount) {
         if (goodCount > 0) {
           return goodCount;
         } else {
@@ -1363,26 +1361,81 @@ export default {
       } else {
         return intPartFormat + floatPart;
       }
-    }
+    },
   },
 
   methods: {
     comPanyMethod() {
+      if (this.options.length > 0) {
+        setTimeout(function () {
+          window.myVueComm.addNewOptions();
+      }, 10);
+        return;
+      }
       this.companyLoading = true;
-      interviewApi
-        .getComPanyList()
-        .then(response => {
-          var optionsArr = new Array();
-          optionsArr.push({value: input.value,label:input.value})
-          for(var item of response.data.companyList) {
-            optionsArr.push({value: item.id,label: item.title})
+      interviewApi.getComPanyList().then((response) => {
+        var optionsArr = new Array();
+        for (var i = 0; i < response.data.companyList.length; i++) {
+          var item = response.data.companyList[i];
+          if (i == 0) {
+            this.optionOne = { value: item.id, label: item.title };
+          } else {
+            optionsArr.push({ value: item.id, label: item.title });
           }
-          this.options =  optionsArr;
-          this.companyLoading = false;
-        });
+        }
+        this.options = optionsArr;
+        this.companyLoading = false;
+        this.addNewOptions();
+      });
     },
-    meetingTypeClick(type) {
-      interviewApi.addQuestionMeet(this.qdetail.qid, type).then(response => {});
+    addNewOptions() {
+      var listItem = document.getElementById("mytestoo");
+      var subti = listItem.previousSibling.childNodes;
+      if (subti.length == 0) {
+        return;
+      }
+      var listItem = document.getElementById("elenet-idex");
+      subti[0].innerText = "新增:" + listItem.value;
+    },
+
+    tagListShow(isShow) {
+      if (!isShow || this.options.length > 0) {
+        return;
+      }
+      this.companyLoading = true;
+      interviewApi.getComPanyList().then((response) => {
+        var optionsArr = new Array();
+        for (var i = 0; i < response.data.companyList.length; i++) {
+          var item = response.data.companyList[i];
+          if (i == 0) {
+            this.optionOne = { value: item.id, label: item.title };
+          } else {
+            optionsArr.push({ value: item.id, label: item.title });
+          }
+        }
+        this.options = optionsArr;
+        this.companyLoading = false;
+      });
+    },
+
+    meetingTypeClick(item) {
+      interviewApi
+        .addQuestionMeet(this.qdetail.qid, item.key)
+        .then((response) => {});
+      this.infoStep = 2;
+      var qustionInfos = new Array();
+      if(this.optionOne || this.optionOne == undefined) {
+        qustionInfos.push({ name: this.optionOne.title, key: this.optionOne.id });
+      }
+      for (var i = 0; i <this.options.length; i++) {
+        if(i<5) {
+          var optionOne = this.options[i];
+          qustionInfos.push({ "name":"社招","key":1});
+        }
+      }
+      debugger;
+      this.qustionInfos = qustionInfos;
+      this.meetingTitle = "请问您应聘的哪家公司？";
     },
     checkAnswerClick() {
       this.showAnswerDetail = !this.showAnswerDetail;
@@ -1393,7 +1446,7 @@ export default {
         this.$message({
           message: "输入的内容太短了哦！",
           type: "error",
-          duration: 2000
+          duration: 2000,
         });
         return;
       }
@@ -1401,9 +1454,9 @@ export default {
         .submitReply({
           content: item.editor.txt.html(),
           rid: item.id,
-          uid: this.loginInfo.id
+          uid: this.loginInfo.id,
         })
-        .then(response => {
+        .then((response) => {
           item.editor.txt.html("");
           myVueComm.replybtnclinck(item, index);
           item.comments.unshift(response.data.reply);
@@ -1411,7 +1464,7 @@ export default {
           this.$message({
             message: "评论回复成功哦",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
     },
@@ -1425,7 +1478,7 @@ export default {
         this.$message({
           message: "输入的内容太短了哦！",
           type: "error",
-          duration: 2000
+          duration: 2000,
         });
         return;
       }
@@ -1433,15 +1486,15 @@ export default {
         .submitComment({
           content: this.editor.txt.html(),
           bid: this.qdetail.qid,
-          uid: this.loginInfo.id
+          uid: this.loginInfo.id,
         })
-        .then(response => {
+        .then((response) => {
           this.editor.txt.html("");
           this.dataList.unshift(response.data.comment);
           this.$message({
             message: "问题评论成功哦",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
     },
@@ -1450,7 +1503,7 @@ export default {
       return {
         command: commd,
         item: item,
-        type: type
+        type: type,
       };
     },
 
@@ -1481,17 +1534,17 @@ export default {
         this.$message({
           message: "已经提交删除申请，无需反复提交哈",
           type: "success",
-          duration: 2000
+          duration: 2000,
         });
         return;
       }
-      interviewApi.deleteQuestion(qItem.qid).then(response => {
+      interviewApi.deleteQuestion(qItem.qid).then((response) => {
         if (!response.data.sucess) {
           qItem.state = 99;
           this.$message({
             message: response.data.tips,
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
           return;
         }
@@ -1501,60 +1554,60 @@ export default {
           duration: 2000,
           onClose: () => {
             $nuxt.$router.push({ name: "interview-sort-tag" });
-          }
+          },
         });
       });
     },
 
     questionGoodReply(answer) {
       this.goodDialogVisible = false;
-      interviewApi.questionGoodAnswer(answer.id).then(response => {
+      interviewApi.questionGoodAnswer(answer.id).then((response) => {
         this.$message({
           message: "设置最佳题解成功哈！",
           type: "success",
-          duration: 2000
+          duration: 2000,
         });
       });
     },
 
     deleteQuestionAnswer(reply) {
       this.deleteDialogVisible = false;
-      interviewApi.deleteQuestionAnswer(reply.id).then(response => {
-        this.dataList = this.dataList.filter(function(item) {
+      interviewApi.deleteQuestionAnswer(reply.id).then((response) => {
+        this.dataList = this.dataList.filter(function (item) {
           return item.id != response.data.rId;
         });
         this.$message({
           message: "删除回答成功哈！",
           type: "success",
-          duration: 2000
+          duration: 2000,
         });
       });
     },
 
     deleteComment(comment) {
       this.deleteCommentVisible = false;
-      interviewApi.deleteComment(comment.id, 1).then(response => {
-        this.dataList = this.dataList.filter(function(item) {
+      interviewApi.deleteComment(comment.id, 1).then((response) => {
+        this.dataList = this.dataList.filter(function (item) {
           return item.id != response.data.id;
         });
         this.$message({
           message: "删除评论成功哈！",
           type: "success",
-          duration: 2000
+          duration: 2000,
         });
       });
     },
 
     deleteCommentReply(comment, citem) {
       this.deleteCommentReplyVisible = false;
-      interviewApi.deleteComment(comment.id, 2).then(response => {
-        citem.comments = citem.comments.filter(function(item) {
+      interviewApi.deleteComment(comment.id, 2).then((response) => {
+        citem.comments = citem.comments.filter(function (item) {
           return item.id != response.data.id;
         });
         this.$message({
           message: "删除评论回复成功哈！",
           type: "success",
-          duration: 2000
+          duration: 2000,
         });
       });
     },
@@ -1571,13 +1624,13 @@ export default {
           uid: this.loginInfo.id,
           type: this.jubaoTypeIndex,
           content: this.jubaoContent,
-          jubaotype: this.jubaotype
+          jubaotype: this.jubaotype,
         })
-        .then(response => {
+        .then((response) => {
           this.$message({
             message: "举报成功！我们将尽快处理哈",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       this.jubiaoDlog = false;
@@ -1588,13 +1641,13 @@ export default {
           qid: this.qdetail.qid,
           uid: this.loginInfo.id,
           type: this.jianyilable,
-          content: this.jianyiContent
+          content: this.jianyiContent,
         })
-        .then(response => {
+        .then((response) => {
           this.$message({
             message: "提交成功！",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       this.jianyiDlog = false;
@@ -1602,21 +1655,21 @@ export default {
 
     goodAnswerClick(item) {
       if (item.isgood) {
-        interviewApi.updateAnswerGood(item.id, 2).then(response => {
+        interviewApi.updateAnswerGood(item.id, 2).then((response) => {
           item.good--;
           this.$message({
             message: "取消点赞成功！",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       } else {
         item.good++;
-        interviewApi.updateAnswerGood(item.id, 1).then(response => {
+        interviewApi.updateAnswerGood(item.id, 1).then((response) => {
           this.$message({
             message: "题解点赞成功！",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       }
@@ -1625,21 +1678,21 @@ export default {
 
     goodCommentReplyClick(item) {
       if (item.goodreply) {
-        interviewApi.updateCommentReplyGood(item.id, 2).then(response => {
+        interviewApi.updateCommentReplyGood(item.id, 2).then((response) => {
           item.good--;
           this.$message({
             message: "取消点赞成功！",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       } else {
         item.good++;
-        interviewApi.updateCommentReplyGood(item.id, 1).then(response => {
+        interviewApi.updateCommentReplyGood(item.id, 1).then((response) => {
           this.$message({
             message: "评论点赞成功！",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       }
@@ -1648,21 +1701,21 @@ export default {
 
     goodCommentClick(item) {
       if (item.goodreply) {
-        interviewApi.updateCommentGood(item.id, 2).then(response => {
+        interviewApi.updateCommentGood(item.id, 2).then((response) => {
           item.good--;
           this.$message({
             message: "取消点赞成功！",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       } else {
         item.good++;
-        interviewApi.updateCommentGood(item.id, 1).then(response => {
+        interviewApi.updateCommentGood(item.id, 1).then((response) => {
           this.$message({
             message: "评论点赞成功！",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       }
@@ -1688,26 +1741,26 @@ export default {
           }
         }
       }
-      setTimeout(function() {
+      setTimeout(function () {
         window.myVueComm.forbiden = true;
       }, 500);
     },
 
     answerCollectBtnClick(aItem) {
       if (aItem.iscollect) {
-        interviewApi.cancleCollectAnswer(aItem.id).then(response => {
+        interviewApi.cancleCollectAnswer(aItem.id).then((response) => {
           this.$message({
             message: "取消收藏题解成功！",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       } else {
-        interviewApi.addCollectAnswer(aItem.id).then(response => {
+        interviewApi.addCollectAnswer(aItem.id).then((response) => {
           this.$message({
             message: "题解收藏成功！",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       }
@@ -1716,20 +1769,20 @@ export default {
     collectBtnClick() {
       if (this.userState.isCollect) {
         this.qdetail.collect--;
-        interviewApi.cancleCollectQustion(this.qdetail.qid).then(response => {
+        interviewApi.cancleCollectQustion(this.qdetail.qid).then((response) => {
           this.$message({
             message: "取消收藏成功！",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       } else {
         this.qdetail.collect++;
-        interviewApi.addCollectQustion(this.qdetail.qid).then(response => {
+        interviewApi.addCollectQustion(this.qdetail.qid).then((response) => {
           this.$message({
             message: "问题收藏成功！",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       }
@@ -1738,76 +1791,76 @@ export default {
     goodQustionClick() {
       if (this.userState.goodslect) {
         this.qdetail.good--;
-        interviewApi.cancleGoodQustion(this.qdetail.qid).then(response => {});
+        interviewApi.cancleGoodQustion(this.qdetail.qid).then((response) => {});
       } else {
         this.qdetail.good++;
-        interviewApi.addGoodQustion(this.qdetail.qid).then(response => {});
+        interviewApi.addGoodQustion(this.qdetail.qid).then((response) => {});
       }
       this.userState.goodslect = !this.userState.goodslect;
     },
 
     getUserQuestionState(qId) {
-      interviewApi.getUserStatus(qId).then(response => {
+      interviewApi.getUserStatus(qId).then((response) => {
         this.userState = response.data.status;
       });
     },
 
-    beforeEnter: function(el) {
+    beforeEnter: function (el) {
       el.style.width = "736px";
       el.style.height = "0px";
     },
 
-    enter: function(el, done) {
+    enter: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: "270px" }, 300, function() {
+      Velocity(el, { height: "270px" }, 300, function () {
         done();
       });
       this.initAnswerEitor();
     },
 
-    afterEnter: function(el) {},
+    afterEnter: function (el) {},
 
-    leave: function(el, done) {
+    leave: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: "0px" }, 300, function() {
+      Velocity(el, { height: "0px" }, 300, function () {
         done();
       });
     },
 
-    rbeforeEnter: function(el) {
+    rbeforeEnter: function (el) {
       el.style.width = "700px";
       el.style.height = "0px";
     },
 
-    renter: function(el, done) {
+    renter: function (el, done) {
       this.initReplyeditor();
       var Velocity = $.Velocity;
-      Velocity(el, { height: "140px" }, 150, function() {
+      Velocity(el, { height: "140px" }, 150, function () {
         done();
       });
     },
 
-    rafterEnter: function(el) {},
+    rafterEnter: function (el) {},
 
-    rleave: function(el, done) {
+    rleave: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: "0px" }, 150, function() {
+      Velocity(el, { height: "0px" }, 150, function () {
         done();
       });
     },
 
-    cbeforeEnter: function(el) {
+    cbeforeEnter: function (el) {
       el.style.height = "0px";
     },
-    center: function(el, done) {
+    center: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: "34px" }, 150, function() {
+      Velocity(el, { height: "34px" }, 150, function () {
         done();
       });
     },
-    cleave: function(el, done) {
+    cleave: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: "0px" }, 150, function() {
+      Velocity(el, { height: "0px" }, 150, function () {
         done();
       });
     },
@@ -1820,14 +1873,14 @@ export default {
             duration: 2000,
             onClose: () => {
               $nuxt.$router.push({
-                name: "user-login"
+                name: "user-login",
               });
-            }
+            },
           });
         }
         return;
       }
-      userApi.getUploadImageToken().then(response => {
+      userApi.getUploadImageToken().then((response) => {
         this.uploadToken = response.data.token;
       });
     },
@@ -1845,7 +1898,7 @@ export default {
         this.$message({
           message: "输入的内容太短了哦！",
           type: "error",
-          duration: 2000
+          duration: 2000,
         });
         return;
       }
@@ -1854,14 +1907,14 @@ export default {
           content: item.editor.txt.html(),
           rid: rItem.id,
           uid: this.loginInfo.id,
-          touid: item.uid
+          touid: item.uid,
         })
-        .then(response => {
+        .then((response) => {
           rItem.comments.unshift(response.data.comment);
           this.$message({
             message: "问题回答成功哦",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       this.commentbtnclinck(item, cindex);
@@ -1872,7 +1925,7 @@ export default {
         this.$message({
           message: "输入的内容太短了哦！",
           type: "error",
-          duration: 2000
+          duration: 2000,
         });
         return;
       }
@@ -1880,15 +1933,15 @@ export default {
         .submitQuestionReplyComment({
           content: item.editor.txt.html(),
           rid: item.id,
-          uid: this.loginInfo.id
+          uid: this.loginInfo.id,
         })
-        .then(response => {
+        .then((response) => {
           item.comments.unshift(response.data.comment);
           item.editor.txt.html("");
           this.$message({
             message: "问题回答成功哦",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
       this.replybtnclinck(item, index);
@@ -1899,7 +1952,7 @@ export default {
         this.$message({
           message: "输入的内容太短了哦！",
           type: "error",
-          duration: 2000
+          duration: 2000,
         });
         return;
       }
@@ -1907,15 +1960,15 @@ export default {
         .submitQuestionAnswer({
           content: this.answerEditor.txt.html(),
           qid: this.qdetail.qid,
-          uid: this.loginInfo.id
+          uid: this.loginInfo.id,
         })
-        .then(response => {
+        .then((response) => {
           this.answerEditor.txt.html("");
           this.dataList.unshift(response.data.reply);
           this.$message({
             message: "提交解答成功哦",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
     },
@@ -1943,21 +1996,21 @@ export default {
         item.editor = null;
       }
     },
-    rrbeforeEnter: function(el) {
+    rrbeforeEnter: function (el) {
       el.style.width = "640px";
       el.style.height = "0px";
     },
-    rrenter: function(el, done) {
+    rrenter: function (el, done) {
       this.initRReplyeditor();
       var Velocity = $.Velocity;
-      Velocity(el, { height: "140px" }, 150, function() {
+      Velocity(el, { height: "140px" }, 150, function () {
         done();
       });
     },
-    rrafterEnter: function(el) {},
-    rrleave: function(el, done) {
+    rrafterEnter: function (el) {},
+    rrleave: function (el, done) {
       var Velocity = $.Velocity;
-      Velocity(el, { height: "0px" }, 150, function() {
+      Velocity(el, { height: "0px" }, 150, function () {
         done();
       });
     },
@@ -1975,21 +2028,21 @@ export default {
 
       editor.config.menus = ["bold", "link", "emoticon", "image"];
 
-      editor.config.onfocus = function(newHtml) {
+      editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
       };
 
-      editor.config.onblur = function(newHtml) {};
+      editor.config.onblur = function (newHtml) {};
 
-      editor.config.customUploadImg = function(files, insertImgFn) {
+      editor.config.customUploadImg = function (files, insertImgFn) {
         // resultFiles 是 input 中选中的文件列表
         // insertImgFn 是获取图片 url 后，插入到编辑器的方法
         var file = files[0];
         const putExtra = {
-          mimeType: file.type
+          mimeType: file.type,
         };
         const config = {
-          region: qiniu.region.z2
+          region: qiniu.region.z2,
         };
         const observable = qiniu.upload(
           file,
@@ -2008,7 +2061,7 @@ export default {
           complete(res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
-          }
+          },
         };
         const subscription = observable.subscribe(observer);
       };
@@ -2020,7 +2073,7 @@ export default {
         this.$message({
           message: "输入的内容太短了哦！",
           type: "error",
-          duration: 2000
+          duration: 2000,
         });
         return;
       }
@@ -2029,16 +2082,16 @@ export default {
           content: comment.editor.txt.html(),
           rid: item.id,
           uid: this.loginInfo.id,
-          touid: uid
+          touid: uid,
         })
-        .then(response => {
+        .then((response) => {
           comment.editor.txt.html("");
           item.comments.unshift(response.data.reply);
           this.rreplyCommentBtnClick(comment, index);
           this.$message({
             message: "评论回复成功哦",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
         });
     },
@@ -2066,7 +2119,7 @@ export default {
       editor.config.height = 150;
       editor.config.zIndex = 100;
 
-      editor.config.onfocus = function(newHtml) {
+      editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
       };
       editor.config.menus = [
@@ -2084,18 +2137,18 @@ export default {
         "emoticon",
         "image",
         "code",
-        "splitLine"
+        "splitLine",
       ];
 
-      editor.config.customUploadImg = function(files, insertImgFn) {
+      editor.config.customUploadImg = function (files, insertImgFn) {
         // resultFiles 是 input 中选中的文件列表
         // insertImgFn 是获取图片 url 后，插入到编辑器的方法
         var file = files[0];
         const putExtra = {
-          mimeType: file.type
+          mimeType: file.type,
         };
         const config = {
-          region: qiniu.region.z2
+          region: qiniu.region.z2,
         };
         const observable = qiniu.upload(
           file,
@@ -2114,11 +2167,11 @@ export default {
           complete(res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
-          }
+          },
         };
         const subscription = observable.subscribe(observer);
       };
-      editor.config.onchange = function(newHtml) {};
+      editor.config.onchange = function (newHtml) {};
       editor.create();
     },
 
@@ -2136,24 +2189,24 @@ export default {
 
       editor.config.menus = ["bold", "link", "emoticon", "image"];
 
-      editor.config.onfocus = function(newHtml) {
+      editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
         myVueComm.showComment = true;
       };
 
-      editor.config.onblur = function(newHtml) {
+      editor.config.onblur = function (newHtml) {
         myVueComm.cancleCommentClick();
       };
 
-      editor.config.customUploadImg = function(files, insertImgFn) {
+      editor.config.customUploadImg = function (files, insertImgFn) {
         // resultFiles 是 input 中选中的文件列表
         // insertImgFn 是获取图片 url 后，插入到编辑器的方法
         var file = files[0];
         const putExtra = {
-          mimeType: file.type
+          mimeType: file.type,
         };
         const config = {
-          region: qiniu.region.z2
+          region: qiniu.region.z2,
         };
         const observable = qiniu.upload(
           file,
@@ -2172,7 +2225,7 @@ export default {
           complete(res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
-          }
+          },
         };
         const subscription = observable.subscribe(observer);
       };
@@ -2196,21 +2249,21 @@ export default {
 
       editor.config.menus = ["bold", "link", "emoticon", "image"];
 
-      editor.config.onfocus = function(newHtml) {
+      editor.config.onfocus = function (newHtml) {
         myVueComm.getUploadImageToken(true);
       };
 
-      editor.config.onblur = function(newHtml) {};
+      editor.config.onblur = function (newHtml) {};
 
-      editor.config.customUploadImg = function(files, insertImgFn) {
+      editor.config.customUploadImg = function (files, insertImgFn) {
         // resultFiles 是 input 中选中的文件列表
         // insertImgFn 是获取图片 url 后，插入到编辑器的方法
         var file = files[0];
         const putExtra = {
-          mimeType: file.type
+          mimeType: file.type,
         };
         const config = {
-          region: qiniu.region.z2
+          region: qiniu.region.z2,
         };
         const observable = qiniu.upload(
           file,
@@ -2229,14 +2282,14 @@ export default {
           complete(res) {
             window.console.log(res);
             insertImgFn("https://img.redskt.com/" + res.hash);
-          }
+          },
         };
         const subscription = observable.subscribe(observer);
       };
       // editor.config.onchange = function (newHtml) {};
       editor.create();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -2247,7 +2300,6 @@ export default {
 </style>
 
 <style scoped>
-
 .choose-button {
   opacity: 0.6;
 }
@@ -2256,20 +2308,14 @@ export default {
   font-size: 14px;
 }
 
-.meeting-title {
-  margin-right: 15px;
-  font-size: 12px;
-  color: #333;
-}
-
- .info-input {
+.info-input {
   margin-top: 6px;
 }
 
 .info-input .choose-button {
   margin-left: 6px;
 }
-.question-metting {
+.question-metting-head {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2279,20 +2325,42 @@ export default {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   padding: 4px 0;
-  border-bottom: 1px solid rgba(var(--grey-2-rgb), 1);
-  opacity: 1;
-  -webkit-transition: opacity 1.5s 1.5s;
-  -o-transition: opacity 1.5s 1.5s;
-  transition: opacity 1.5s 1.5s;
   margin-top: 15px;
 }
 
-.question-metting .metting-btn:hover {
+.question-metting-head .meeting-title {
+  margin-right: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+.question-metting-head .info-step {
+  font-size: 14px;
+  color: #666;
+}
+
+
+.question-metting-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 4px 0;
+  margin-top: 0px;
+}
+
+
+
+.question-metting-content .metting-btn:hover {
   background-color: rgba(252, 85, 51, 0.6);
   border-color: #fc5533;
   color: #fff;
 }
-.question-metting .metting-btn {
+.question-metting-content .metting-btn {
   border-width: 1px;
   border-color: #999;
   color: #999;

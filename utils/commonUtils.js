@@ -1,5 +1,3 @@
-
-
 export default {
   getClass(oParent,clsName){
       var oParent = document.getElementById(oParent);

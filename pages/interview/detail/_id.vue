@@ -1236,6 +1236,7 @@ export default {
       deleteCommentReplyVisible: false,
       options: [],
       optionOne: {},
+      companyArr:[],
       companyLoading: false,
       companyName: "",
       meetingTitle:"请问您在哪类招聘中遇到此题？",
@@ -1365,14 +1366,15 @@ export default {
   },
 
   methods: {
-    comPanyMethod() {
-      if (this.options.length > 0) {
-        setTimeout(function () {
-          window.myVueComm.addNewOptions();
-      }, 10);
-        return;
+    addCompanyArr(item) {
+      if(companyArr.length>0) {
+
+        return true;
+
+      } else {
+
       }
-      this.companyLoading = true;
+
       interviewApi.getComPanyList().then((response) => {
         var optionsArr = new Array();
         for (var i = 0; i < response.data.companyList.length; i++) {
@@ -1387,6 +1389,26 @@ export default {
         this.companyLoading = false;
         this.addNewOptions();
       });
+
+    },
+    comPanyMethod(query) {
+      if(query != '') {
+
+        setTimeout(function () {
+          window.myVueComm.addNewOptions();
+         }, 10);
+      } else {
+
+      }
+
+
+
+      if (this.companyArr.length > 0) {
+        
+        return;
+      }
+      this.companyLoading = true;
+      i
     },
     addNewOptions() {
       var listItem = document.getElementById("mytestoo");
@@ -1423,22 +1445,44 @@ export default {
         .addQuestionMeet(this.qdetail.qid, item.key)
         .then((response) => {});
       this.infoStep = 2;
+      if(this.options.length>0) {
+        this.showChoiceCompany();
+      } else {
+      interviewApi.getComPanyList().then((response) => {
+        var optionsArr = new Array();
+        for (var i = 0; i < response.data.companyList.length; i++) {
+          var item = response.data.companyList[i];
+          if (i == 0) {
+            this.optionOne = { value: item.id, label: item.title };
+          } else {
+            optionsArr.push({ value: item.id, label: item.title });
+          }
+        }
+        this.options = optionsArr;
+        this.showChoiceCompany();
+      });
+    }
+      this.meetingTitle = "请问您应聘的哪家公司？";
+    },
+
+    checkAnswerClick() {
+      this.showAnswerDetail = !this.showAnswerDetail;
+    },
+
+    showChoiceCompany() {
       var qustionInfos = new Array();
       if(this.optionOne || this.optionOne == undefined) {
-        qustionInfos.push({ name: this.optionOne.title, key: this.optionOne.id });
+        qustionInfos.push({ "name":this.optionOne.label,"key":this.optionOne.value});
       }
       for (var i = 0; i <this.options.length; i++) {
         if(i<5) {
           var optionOne = this.options[i];
-          qustionInfos.push({ "name":"社招","key":1});
+          qustionInfos.push({ "name":optionOne.label,"key":optionOne.vue});
+        } else {
+          break;
         }
       }
-      debugger;
       this.qustionInfos = qustionInfos;
-      this.meetingTitle = "请问您应聘的哪家公司？";
-    },
-    checkAnswerClick() {
-      this.showAnswerDetail = !this.showAnswerDetail;
     },
 
     commentReplySubmit(item, index) {

@@ -308,7 +308,7 @@
                     </button>
                   </div>
                 </div>  
-                <div class="info-input" v-if="infoStep == 2">
+                <div class="info-input" v-if="infoStep != 1 ">
                   <el-select
                     v-model="companyName"
                     filterable
@@ -336,9 +336,7 @@
                     >
                     </el-option>
                   </el-select>
-                  <el-button type="success" class="choose-button" size="mini"
-                    >选择公司</el-button
-                  >
+                  <el-button type="success" class="choose-button" size="mini">选择公司</el-button>
                 </div>
 
                 <transition
@@ -1366,50 +1364,76 @@ export default {
   },
 
   methods: {
-    addCompanyArr(item) {
-      if(companyArr.length>0) {
+    requstCompanyList(text,next) {
+      window.console.log(this.infoStep);
+      if(this.infoStep == 2) {
+        interviewApi.getComPanyList().then((response) => {
+        this.companyArr = response.data.companyList;
+        if(next == 1) {
+          this.companyLoading = false;
+          this.comPanyMethod(text,false);
+        }
+        if(next == 2) {
+          window.console.log(this.companyArr);
+          this.showChoiceCompany();
+        }
+      });
+      } 
+      if(this.infoStep == 3) {
+        interviewApi.getPositionList().then((response) => {
+        this.companyArr = response.data.positionList;
+        if(next == 1) {
+          this.companyLoading = false;
+          this.comPanyMethod(text,false);
+        }
+        if(next == 2) {
+          this.showChoicePosition();
+        }
+      });
+    }
+    },
 
-        return true;
-
-      } else {
-
-      }
-
-      interviewApi.getComPanyList().then((response) => {
+    comPanyMethod(query) {
+      if(this.companyArr.length>0) {
         var optionsArr = new Array();
-        for (var i = 0; i < response.data.companyList.length; i++) {
-          var item = response.data.companyList[i];
+        var addOtherArr = new Array();
+        for (var i = 0; i < this.companyArr.length; i++) {
+          var item = this.companyArr[i];
+          if(item.title.indexOf(query) != -1) {
+            optionsArr.push(item);
+          } else {
+            addOtherArr.push(item);
+          }
+        }
+        if(optionsArr.length<4) {
+          for (var i = 0; i < addOtherArr.length; i++) {
+            var item = addOtherArr[i];
+            if(i<4-optionsArr.length) {
+              optionsArr.push(item);
+            } else {
+              break;
+            }
+          }
+        }
+        var resultArr = new Array();
+        for (var i = 0; i < optionsArr.length; i++) {
+          var item = optionsArr[i];
           if (i == 0) {
             this.optionOne = { value: item.id, label: item.title };
           } else {
-            optionsArr.push({ value: item.id, label: item.title });
+            resultArr.push({ value: item.id, label: item.title });
           }
         }
-        this.options = optionsArr;
-        this.companyLoading = false;
-        this.addNewOptions();
-      });
-
-    },
-    comPanyMethod(query) {
-      if(query != '') {
-
+        this.options = resultArr;
         setTimeout(function () {
           window.myVueComm.addNewOptions();
-         }, 10);
+        }, 10);
       } else {
-
+        this.companyLoading = true;
+        this.requstCompanyList(query,1);
       }
-
-
-
-      if (this.companyArr.length > 0) {
-        
-        return;
-      }
-      this.companyLoading = true;
-      i
     },
+
     addNewOptions() {
       var listItem = document.getElementById("mytestoo");
       var subti = listItem.previousSibling.childNodes;
@@ -1421,48 +1445,28 @@ export default {
     },
 
     tagListShow(isShow) {
-      if (!isShow || this.options.length > 0) {
-        return;
+      if(isShow) {
+        this.comPanyMethod('');
       }
-      this.companyLoading = true;
-      interviewApi.getComPanyList().then((response) => {
-        var optionsArr = new Array();
-        for (var i = 0; i < response.data.companyList.length; i++) {
-          var item = response.data.companyList[i];
-          if (i == 0) {
-            this.optionOne = { value: item.id, label: item.title };
-          } else {
-            optionsArr.push({ value: item.id, label: item.title });
-          }
-        }
-        this.options = optionsArr;
-        this.companyLoading = false;
-      });
     },
 
     meetingTypeClick(item) {
+    if(this.infoStep == 1) {
       interviewApi
         .addQuestionMeet(this.qdetail.qid, item.key)
         .then((response) => {});
       this.infoStep = 2;
-      if(this.options.length>0) {
-        this.showChoiceCompany();
-      } else {
-      interviewApi.getComPanyList().then((response) => {
-        var optionsArr = new Array();
-        for (var i = 0; i < response.data.companyList.length; i++) {
-          var item = response.data.companyList[i];
-          if (i == 0) {
-            this.optionOne = { value: item.id, label: item.title };
-          } else {
-            optionsArr.push({ value: item.id, label: item.title });
-          }
-        }
-        this.options = optionsArr;
-        this.showChoiceCompany();
-      });
-    }
+      this.companyArr = new Array();
+      this.requstCompanyList('',2);
       this.meetingTitle = "请问您应聘的哪家公司？";
+  } else if(this.infoStep == 2) {
+    interviewApi
+        .addQuestionCompanyMeet(this.qdetail.qid, item.id)
+        .then((response) => {});
+    this.meetingTitle = "请问您应聘的岗位类型？";
+    this.infoStep = 3;
+    this.requstCompanyList('',2);
+  }
     },
 
     checkAnswerClick() {
@@ -1471,13 +1475,24 @@ export default {
 
     showChoiceCompany() {
       var qustionInfos = new Array();
-      if(this.optionOne || this.optionOne == undefined) {
-        qustionInfos.push({ "name":this.optionOne.label,"key":this.optionOne.value});
-      }
-      for (var i = 0; i <this.options.length; i++) {
+      for (var i = 0; i <this.companyArr.length; i++) {
         if(i<5) {
-          var optionOne = this.options[i];
-          qustionInfos.push({ "name":optionOne.label,"key":optionOne.vue});
+          var  item = this.companyArr[i];
+          window.console.log(item);
+          qustionInfos.push({ "name":item.title,"key":item.id});
+        } else {
+          break;
+        }
+      }
+      this.qustionInfos = qustionInfos;
+    },
+
+    showChoicePosition() {
+      var qustionInfos = new Array();
+      for (var i = 0; i <this.companyArr.length; i++) {
+        if(i<5) {
+          var  item = this.companyArr[i];
+          qustionInfos.push({ "name":item.title,"key":item.id});
         } else {
           break;
         }

@@ -154,6 +154,20 @@ export default {
       })
     },
 
+    addQuestionCompanyMeet(qId,cId) {
+      return request({
+        url: `/interview/commitMeetCompany/${qId}/${cId}`,
+        method: 'get',
+      })
+    },
+
+    getPositionList() {
+      return request({
+        url: `/interview/positionList`,
+        method: 'get',
+      })
+    },
+
     getComPanyList() {
       return request({
         url: `/interview/comPanyList`,

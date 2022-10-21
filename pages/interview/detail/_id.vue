@@ -297,18 +297,24 @@
                 </ul>
 
                 <div class="question-metting-head" v-if="infoStep != 4">
-                  <div class="meeting-title">{{this.meetingTitle}}</div>
-                  <div class="info-step">{{infoStep}}/3</div>
+                  <div class="meeting-title">{{ this.meetingTitle }}</div>
+                  <div class="info-step">{{ infoStep }}/3</div>
                 </div>
                 <div class="question-metting-content" v-if="infoStep != 4">
-                <div class="meeting-items" v-for="infoItem in qustionInfos"
-                    :key="infoItem.id">
-                    <button class="metting-btn" @click="meetingTypeClick(infoItem)">
-                      <span>{{infoItem.name}}</span>
+                  <div
+                    class="meeting-items"
+                    v-for="infoItem in qustionInfos"
+                    :key="infoItem.id"
+                  >
+                    <button
+                      class="metting-btn"
+                      @click="meetingTypeClick(infoItem)"
+                    >
+                      <span>{{ infoItem.name }}</span>
                     </button>
                   </div>
-                </div>  
-                <div class="info-input" v-if="infoStep == 2 || infoStep == 3 ">
+                </div>
+                <div class="info-input" v-if="infoStep == 2 || infoStep == 3">
                   <el-select
                     v-model="companyName"
                     filterable
@@ -337,7 +343,14 @@
                     >
                     </el-option>
                   </el-select>
-                  <el-button type="success" class="choose-button" size="mini" :disabled="submitBtnDisable" @click="submitBtnClick">{{submitTitle}}</el-button>
+                  <el-button
+                    type="success"
+                    class="choose-button"
+                    size="mini"
+                    :disabled="submitBtnDisable"
+                    @click="submitBtnClick"
+                    >{{ submitTitle }}</el-button
+                  >
                 </div>
 
                 <transition
@@ -1235,15 +1248,20 @@ export default {
       deleteCommentReplyVisible: false,
       options: [],
       optionOne: {},
-      companyArr:[],
+      companyArr: [],
       companyLoading: false,
       companyName: "",
-      inputPlaceholder:"请输入公司名称",
-      submitTitle:"选择公司",
-      meetingTitle:"请问您在哪类招聘中遇到此题？",
-      submitBtnDisable:true,
-      infoStep:1,
-      qustionInfos:[{"name":"社招","key":1},{"name":"校招","key":2},{"name":"实习","key":3},{"name":"未遇到","key":3}],
+      inputPlaceholder: "请输入公司名称",
+      submitTitle: "选择公司",
+      meetingTitle: "请问您在哪类招聘中遇到此题？",
+      submitBtnDisable: true,
+      infoStep: 1,
+      qustionInfos: [
+        { name: "社招", key: 1 },
+        { name: "校招", key: 2 },
+        { name: "实习", key: 3 },
+        { name: "未遇到", key: 3 },
+      ],
 
       deleteDialogVisible: false,
       questionDialogVisible: false,
@@ -1328,6 +1346,10 @@ export default {
       this.initCommentEditor();
       setTimeout(function () {}, 10);
     }
+
+    interviewServerApi
+      .getQuestionDetail({ qId: this.qdetail.qid, type: 1, token: '' })
+      .then((response) => {});
   },
 
   computed: {
@@ -1368,51 +1390,50 @@ export default {
   },
 
   methods: {
-    requstCompanyList(text,next) {
+    requstCompanyList(text, next) {
       window.console.log(this.infoStep);
-      if(this.infoStep == 2) {
+      if (this.infoStep == 2) {
         interviewApi.getComPanyList().then((response) => {
-        this.companyArr = response.data.companyList;
-        if(next == 1) {
-          this.companyLoading = false;
-          this.comPanyMethod(text,false);
-        }
-        if(next == 2) {
-          window.console.log(this.companyArr);
-          this.showChoiceCompany();
-        }
-      });
-      } 
-      if(this.infoStep == 3) {
+          this.companyArr = response.data.companyList;
+          if (next == 1) {
+            this.companyLoading = false;
+            this.comPanyMethod(text, false);
+          }
+          if (next == 2) {
+            this.showChoiceCompany();
+          }
+        });
+      }
+      if (this.infoStep == 3) {
         interviewApi.getPositionList().then((response) => {
-        this.companyArr = response.data.positionList;
-        if(next == 1) {
-          this.companyLoading = false;
-          this.comPanyMethod(text,false);
-        }
-        if(next == 2) {
-          this.showChoicePosition();
-        }
-      });
-    }
+          this.companyArr = response.data.positionList;
+          if (next == 1) {
+            this.companyLoading = false;
+            this.comPanyMethod(text, false);
+          }
+          if (next == 2) {
+            this.showChoicePosition();
+          }
+        });
+      }
     },
 
     comPanyMethod(query) {
-      if(this.companyArr.length>0) {
+      if (this.companyArr.length > 0) {
         var optionsArr = new Array();
         var addOtherArr = new Array();
         for (var i = 0; i < this.companyArr.length; i++) {
           var item = this.companyArr[i];
-          if(item.title.indexOf(query) != -1) {
+          if (item.title.indexOf(query) != -1) {
             optionsArr.push(item);
           } else {
             addOtherArr.push(item);
           }
         }
-        if(optionsArr.length<4) {
+        if (optionsArr.length < 4) {
           for (var i = 0; i < addOtherArr.length; i++) {
             var item = addOtherArr[i];
-            if(i<4-optionsArr.length) {
+            if (i < 4 - optionsArr.length) {
               optionsArr.push(item);
             } else {
               break;
@@ -1434,7 +1455,7 @@ export default {
         }, 300);
       } else {
         this.companyLoading = true;
-        this.requstCompanyList(query,1);
+        this.requstCompanyList(query, 1);
       }
     },
 
@@ -1449,56 +1470,86 @@ export default {
     },
 
     tagListShow(isShow) {
-      if(isShow) {
-        this.comPanyMethod('');
+      if (isShow) {
+        this.comPanyMethod("");
       }
     },
 
     meetingTypeClick(item) {
-    if(this.infoStep == 1) {
-      interviewApi
-        .addQuestionMeet(this.qdetail.qid, item.key)
-        .then((response) => {});
-      this.infoStep = 2;
-      this.companyName = '';
-      this.companyArr = new Array();
-      this.requstCompanyList('',2);
-      this.meetingTitle = "请问您应聘的哪家公司？";
-  } else if(this.infoStep == 2) {
-    interviewApi
-        .addQuestionCompanyMeet(this.qdetail.qid, item.id)
-        .then((response) => {});
-    this.companyName = '';
-    this.meetingTitle = "请问您应聘的岗位类型？";
-    this.inputPlaceholder = "请输入职位名称";
-    this.submitTitle = "选择职位";
-    this.infoStep = 3;
-
-    this.requstCompanyList('',2);
-  } else if(this.infoStep == 3) {
-    interviewApi
-        .addQuestionPosition(this.qdetail.qid, item.id)
-        .then((response) => {});
-    this.infoStep = 4;
-
-  }
+      console.log(item);
+      if (this.infoStep == 1) {
+        this.submitBtnDisable = true;
+        interviewApi
+          .addQuestionMeet(this.qdetail.qid, item.key)
+          .then((response) => {});
+        this.infoStep = 2;
+        this.companyName = "";
+        this.companyArr = new Array();
+        this.requstCompanyList("", 2);
+        this.meetingTitle = "请问您应聘的哪家公司？";
+      } else if (this.infoStep == 2) {
+        this.submitBtnDisable = true;
+        interviewApi
+          .addQuestionCompanyMeet(this.qdetail.qid, item.key)
+          .then((response) => {});
+        this.companyName = "";
+        this.meetingTitle = "请问您应聘的岗位类型？";
+        this.inputPlaceholder = "请输入职位名称";
+        this.submitTitle = "选择职位";
+        this.infoStep = 3;
+        this.requstCompanyList("", 2);
+      } else if (this.infoStep == 3) {
+        this.submitBtnDisable = true;
+        interviewApi
+          .addQuestionPosition(this.qdetail.qid, item.id)
+          .then((response) => {});
+        this.infoStep = 4;
+      }
     },
 
     inputSelect(item) {
-      this.submitBtnDisable = (!item.length>0);
+      this.submitBtnDisable = !item.length > 0;
     },
 
     submitBtnClick() {
       var isAdd = true;
+      var cItem = {};
       for (var i = 0; i < this.companyArr.length; i++) {
-          var item = this.companyArr[i];
-          if(item.id === this.companyName) {
-            isAdd  = false;
-          }
+        var item = this.companyArr[i];
+        if (item.id === this.companyName) {
+          isAdd = false;
+           cItem = item;
+           break;
+        }
       }
-      window.console.log(isAdd);
-      var sumitItem = this.companyName;
-
+      if (isAdd) {
+        if (this.infoStep == 2) {
+          this.submitBtnDisable = true;
+          interviewApi
+            .addAndSubmitCompany({
+              title: this.companyName,
+              qId: this.qdetail.qid,
+            })
+            .then((response) => {});
+          this.companyName = "";
+          this.meetingTitle = "请问您应聘的岗位类型？";
+          this.inputPlaceholder = "请输入职位名称";
+          this.submitTitle = "选择职位";
+          this.infoStep = 3;
+          this.requstCompanyList("", 2);
+        } else if (this.infoStep == 3) {
+          this.submitBtnDisable = true;
+          interviewApi
+              .addAndSubmitPosition({
+                title: this.companyName,
+                qId: this.qdetail.qid,
+              })
+              .then((response) => {});
+            this.companyName = "";
+            this.infoStep = 4;
+        }
+      } else {
+      }
     },
 
     checkAnswerClick() {
@@ -1507,11 +1558,10 @@ export default {
 
     showChoiceCompany() {
       var qustionInfos = new Array();
-      for (var i = 0; i <this.companyArr.length; i++) {
-        if(i<5) {
-          var  item = this.companyArr[i];
-          window.console.log(item);
-          qustionInfos.push({ "name":item.title,"key":item.id});
+      for (var i = 0; i < this.companyArr.length; i++) {
+        if (i < 5) {
+          var item = this.companyArr[i];
+          qustionInfos.push({ name: item.title, key: item.id });
         } else {
           break;
         }
@@ -1521,10 +1571,10 @@ export default {
 
     showChoicePosition() {
       var qustionInfos = new Array();
-      for (var i = 0; i <this.companyArr.length; i++) {
-        if(i<5) {
-          var  item = this.companyArr[i];
-          qustionInfos.push({ "name":item.title,"key":item.id});
+      for (var i = 0; i < this.companyArr.length; i++) {
+        if (i < 5) {
+          var item = this.companyArr[i];
+          qustionInfos.push({ name: item.title, key: item.id });
         } else {
           break;
         }
@@ -1551,7 +1601,6 @@ export default {
           item.editor.txt.html("");
           myVueComm.replybtnclinck(item, index);
           item.comments.unshift(response.data.reply);
-          window.console.log(item.comments);
           this.$message({
             message: "评论回复成功哦",
             type: "success",
@@ -1564,7 +1613,6 @@ export default {
     },
     commentBtnSubmit() {
       var texxt = this.editor.txt.html();
-      window.console.log(texxt);
       if (!this.editor || this.editor.txt.html().length < 6) {
         this.$message({
           message: "输入的内容太短了哦！",
@@ -2430,7 +2478,6 @@ export default {
   color: #666;
 }
 
-
 .question-metting-content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2443,8 +2490,6 @@ export default {
   padding: 4px 0;
   margin-top: 0px;
 }
-
-
 
 .question-metting-content .metting-btn:hover {
   background-color: rgba(252, 85, 51, 0.6);

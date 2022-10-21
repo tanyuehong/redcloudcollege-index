@@ -168,6 +168,23 @@ export default {
       })
     },
 
+    addAndSubmitCompany(parm) {
+      return request({
+        url: `/interview/addAndSubmitCompany`,
+        method: 'post',
+        data: parm,
+      })
+    },
+
+    addAndSubmitPosition(parm) {
+      return request({
+        url: `/interview/addAndSubmitPosition`,
+        method: 'post',
+        data: parm,
+      })
+
+    },
+
     getPositionList() {
       return request({
         url: `/interview/positionList`,

@@ -296,11 +296,11 @@
                   </el-dialog>
                 </ul>
 
-                <div class="question-metting-head">
+                <div class="question-metting-head" v-if="infoStep != 4">
                   <div class="meeting-title">{{this.meetingTitle}}</div>
                   <div class="info-step">{{infoStep}}/3</div>
                 </div>
-                <div class="question-metting-content">
+                <div class="question-metting-content" v-if="infoStep != 4">
                 <div class="meeting-items" v-for="infoItem in qustionInfos"
                     :key="infoItem.id">
                     <button class="metting-btn" @click="meetingTypeClick(infoItem)">
@@ -308,7 +308,7 @@
                     </button>
                   </div>
                 </div>  
-                <div class="info-input" v-if="infoStep != 1 ">
+                <div class="info-input" v-if="infoStep == 2 || infoStep == 3 ">
                   <el-select
                     v-model="companyName"
                     filterable
@@ -316,9 +316,10 @@
                     size="mini"
                     allow-create
                     id="elenet-idex"
-                    placeholder="请输入公司名称"
+                    :placeholder="inputPlaceholder"
                     :remote-method="comPanyMethod"
                     @visible-change="tagListShow"
+                    @change="inputSelect"
                     :loading="companyLoading"
                   >
                     <el-option
@@ -336,7 +337,7 @@
                     >
                     </el-option>
                   </el-select>
-                  <el-button type="success" class="choose-button" size="mini">选择公司</el-button>
+                  <el-button type="success" class="choose-button" size="mini" :disabled="submitBtnDisable" @click="submitBtnClick">{{submitTitle}}</el-button>
                 </div>
 
                 <transition
@@ -1237,7 +1238,10 @@ export default {
       companyArr:[],
       companyLoading: false,
       companyName: "",
+      inputPlaceholder:"请输入公司名称",
+      submitTitle:"选择公司",
       meetingTitle:"请问您在哪类招聘中遇到此题？",
+      submitBtnDisable:true,
       infoStep:1,
       qustionInfos:[{"name":"社招","key":1},{"name":"校招","key":2},{"name":"实习","key":3},{"name":"未遇到","key":3}],
 
@@ -1427,7 +1431,7 @@ export default {
         this.options = resultArr;
         setTimeout(function () {
           window.myVueComm.addNewOptions();
-        }, 10);
+        }, 300);
       } else {
         this.companyLoading = true;
         this.requstCompanyList(query,1);
@@ -1456,6 +1460,7 @@ export default {
         .addQuestionMeet(this.qdetail.qid, item.key)
         .then((response) => {});
       this.infoStep = 2;
+      this.companyName = '';
       this.companyArr = new Array();
       this.requstCompanyList('',2);
       this.meetingTitle = "请问您应聘的哪家公司？";
@@ -1463,10 +1468,37 @@ export default {
     interviewApi
         .addQuestionCompanyMeet(this.qdetail.qid, item.id)
         .then((response) => {});
+    this.companyName = '';
     this.meetingTitle = "请问您应聘的岗位类型？";
+    this.inputPlaceholder = "请输入职位名称";
+    this.submitTitle = "选择职位";
     this.infoStep = 3;
+
     this.requstCompanyList('',2);
+  } else if(this.infoStep == 3) {
+    interviewApi
+        .addQuestionPosition(this.qdetail.qid, item.id)
+        .then((response) => {});
+    this.infoStep = 4;
+
   }
+    },
+
+    inputSelect(item) {
+      this.submitBtnDisable = (!item.length>0);
+    },
+
+    submitBtnClick() {
+      var isAdd = true;
+      for (var i = 0; i < this.companyArr.length; i++) {
+          var item = this.companyArr[i];
+          if(item.id === this.companyName) {
+            isAdd  = false;
+          }
+      }
+      window.console.log(isAdd);
+      var sumitItem = this.companyName;
+
     },
 
     checkAnswerClick() {

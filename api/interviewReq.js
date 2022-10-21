@@ -161,6 +161,13 @@ export default {
       })
     },
 
+    addQuestionPosition(qId,pId) {
+      return request({
+        url: `/interview/commitMeetPosition/${qId}/${pId}`,
+        method: 'get',
+      })
+    },
+
     getPositionList() {
       return request({
         url: `/interview/positionList`,

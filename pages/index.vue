@@ -13,7 +13,7 @@
       <section class="container">
         <div class="every_qustion">
           <div class="left_title fl">
-            <img src="~/assets/img/erery_qustion.png" alt="" />
+            <img src="~/assets/img/erery_qustion.png" alt="每日一题" />
           </div>
           <div class="right_content fl">
             面向对象设计的准则？
@@ -22,11 +22,11 @@
 
         <div class="home_function">
           <a class="function_btn ml180 mt20 fl">
-            <img src="~/assets/img/home_study_progress.png" alt="" />
+            <img src="~/assets/img/home_study_progress.png" alt="学习进度" />
             <div class="btn_title">学习进度</div>
           </a>
           <a class="function_btn mr180 mt20 fr">
-            <img src="~/assets/img/home_my_faveriter.png" alt="" />
+            <img src="~/assets/img/home_my_faveriter.png" alt="我的收藏" />
             <div class="btn_title">我的收藏</div>
           </a>
         </div>
@@ -115,9 +115,9 @@
                       </nuxt-link>
                       <p class="desc">{{ item.content }}</p>
                       <div class="info">
-                        <img src="~/assets/img/article_point.png" class="img_point">
+                        <img src="~/assets/img/article_point.png" class="img_point" alt="icon">
                         <span>共{{ item.contentCount }}节</span>
-                        <img src="~/assets/img/article_point.png" class="img_point">
+                        <img src="~/assets/img/article_point.png" class="img_point" alt="icon">
                         <span>{{ item.buyCount }}人已学习</span>
                       </div>
                       <div class="clearfloat"></div>
@@ -188,9 +188,9 @@
                       </div>
 
                       <div class="info">
-                        <img src="~/assets/img/article_point.png" class="img_point">
+                        <img src="~/assets/img/article_point.png" class="img_point" alt="icon">
                         <span>共{{ item.contentCount }}节</span>
-                        <img src="~/assets/img/article_point.png" class="img_point">
+                        <img src="~/assets/img/article_point.png" class="img_point" alt="icon">
                         <span>{{ item.buyCount }}人已购买</span>
                       </div>
                       <div class="clearfix"> </div>
@@ -248,7 +248,7 @@
               </div>
             </div>
             <div class="download-app clearfix">
-              <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
+              <img src="~/assets/img/appLogo.png" alt="app图标" class="logo-icon fl" />
               <div class="text fl">
                 <h4>下载开源实践APP</h4>
                 <p>更好的体验 学习随处可享</p>

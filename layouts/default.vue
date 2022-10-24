@@ -6,7 +6,7 @@
         <h1 id="logo">
           <nuxt-link to="/" title="开源实践网">
             <img src="~/assets/img/logo.png" class="logo_index" alt="开源实践网" />
-            <img src="~/assets/img/logo_descrb.png" class="logo_decrb" alt="" />
+            <img src="~/assets/img/logo_descrb.png" class="logo_decrb" alt="logo图标" />
           </nuxt-link>
         </h1>
 
@@ -144,12 +144,12 @@
           <aside class="fl col-3 tac mt15">
             <section class="gf-tx">
               <span>
-                <img src="~/assets/img/wx-icon.png" alt />
+                <img src="~/assets/img/wx-icon.png" alt="微信" />
               </span>
             </section>
             <section class="gf-tx">
               <span>
-                <img src="~/assets/img/wb-icon.png" alt />
+                <img src="~/assets/img/wb-icon.png" alt="微博" />
               </span>
             </section>
           </aside>

@@ -373,6 +373,12 @@ export default {
   right: 6px;
 }
 
+.interview_list .description {
+   margin-top: 15px;
+   font-size: 12px;
+   color: #333;
+}
+
 .interview-qustion-info .interview-item {
   margin-right: 8px;
 }

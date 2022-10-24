@@ -106,12 +106,12 @@ export default {
 
     updateAnswerGood(aId, type) {
       return request({
-        url: `/home/interview/updateAnswerGood/${aId}/${type}`,
+        url: `/interview/updateAnswerGood/${aId}/${type}`,
         method: 'get',
       })
     },
 
-    questionGoodAnswer(aId) {
+    questionGoodAnswer(aId) {  // 最佳题解功能
       return request({
         url: `/interview/goodAnswer/${aId}`,
         method: 'get',
@@ -146,4 +146,56 @@ export default {
         method: 'get',
       })
     },
+
+    addQuestionMeet(qId,type) {
+      return request({
+        url: `/interview/updateMeetType/${qId}/${type}`,
+        method: 'get',
+      })
+    },
+
+    addQuestionCompanyMeet(qId,cId) {
+      return request({
+        url: `/interview/commitMeetCompany/${qId}/${cId}`,
+        method: 'get',
+      })
+    },
+
+    addQuestionPosition(qId,pId) {
+      return request({
+        url: `/interview/commitMeetPosition/${qId}/${pId}`,
+        method: 'get',
+      })
+    },
+
+    addAndSubmitCompany(parm) {
+      return request({
+        url: `/interview/addAndSubmitCompany`,
+        method: 'post',
+        data: parm,
+      })
+    },
+
+    addAndSubmitPosition(parm) {
+      return request({
+        url: `/interview/addAndSubmitPosition`,
+        method: 'post',
+        data: parm,
+      })
+
+    },
+
+    getPositionList() {
+      return request({
+        url: `/interview/positionList`,
+        method: 'get',
+      })
+    },
+
+    getComPanyList() {
+      return request({
+        url: `/interview/comPanyList`,
+        method: 'get',
+      })
+    }
 }

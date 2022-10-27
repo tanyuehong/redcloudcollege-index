@@ -1172,30 +1172,6 @@
               遇到人数: <span>{{ qdetail.meet }}</span>
             </div>
           </div>
-
-          <div class="ask-top-wrap">
-            <div class="user_header">
-              <span class="ask-message-tips">问答通知</span>
-              <nuxt-link
-                :to="{ name: 'about-message' }"
-                class="ask-message-more"
-              >
-                查看更多
-              </nuxt-link>
-            </div>
-            <nuxt-link
-              :to="'/faquestion/1481862372760240130'"
-              class="ask-top-warper-item"
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-              >◇ 欢迎大家的建议和反馈</nuxt-link
-            >
-            <nuxt-link
-              :to="'/about/detail/1523552231247499265'"
-              class="ask-top-warper-item"
-              >◇ 开源实践问答上线</nuxt-link
-            >
-          </div>
         </div>
 
         <div class="qustion-type-warper">
@@ -1945,7 +1921,7 @@ export default {
     },
 
     beforeEnter: function (el) {
-      el.style.width = "736px";
+      el.style.width = "745px";
       el.style.height = "0px";
     },
 
@@ -2820,17 +2796,6 @@ export default {
   text-decoration: none;
 }
 
-.ask-top-wrap .ask-message-tips {
-  font-weight: 500;
-  color: #222226;
-  font-size: 14px;
-}
-
-.ask-top-wrap .ask-message-more {
-  font-size: 14px;
-  margin-right: 0px;
-  text-decoration: none;
-}
 .el-dropdown-menu {
   padding-top: 0px;
   padding-bottom: 0px;
@@ -3286,20 +3251,6 @@ h2.accusation-secondary-title {
   background: #ffffff;
 }
 
-.ask-top-wrap .ask-top-warper-item {
-  display: block;
-  margin-top: 12px;
-  text-decoration: none;
-  margin-left: 20px;
-}
-
-.ask-top-wrap {
-  padding: 10px 20px 20px 0px;
-  color: #507999;
-  background: #ffffff;
-  font-size: 14px;
-}
-
 .user_header {
   line-height: 48px;
   z-index: 999999;
@@ -3357,7 +3308,7 @@ h2.accusation-secondary-title {
 .answer-qustion-editor {
   margin-top: 10px;
   padding-top: 15px;
-  padding-left: 10px;
+  padding-left: 5px;
   padding-right: 10px;
   padding-bottom: 15px;
   background: #ffffff;

@@ -837,7 +837,7 @@ input[type='file' i] {
   font-weight: 600;
 }
 
-.el-form-item .el-form-item__content {
+.pwchang-form .el-form-item .el-form-item__content {
   float: right;
   margin-right: 105px;
   position: relative;

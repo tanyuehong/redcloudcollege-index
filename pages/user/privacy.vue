@@ -7,7 +7,7 @@
       <p><span style="font-size:14px"><span style="line-height:2">更新日期：2021年【11】月【1】日 </span></span></p>
       <p><span style="font-size:14px"><span style="line-height:2">生效日期：2021年【11】月【1】日 </span></span></p>
       <p></p>
-      <p><span style="line-height:2"><span style="font-size:14px">“开源实践”及相关服务，系指北京北比信息技术有限公司（以下简称“我们”）合法拥有并运营的、标注名称为“开源实践”的客户端应用程序、redskt.com网站以及浏览器插件。我们作为开源实践的运营者，深知个人信息对您的重要性，您的信任对我们非常重要，我们将按照法律法规的规定并参照行业最佳实践保护您的个人信息及隐私安全。我们制定本"隐私政策"并特别提示：希望您在使用开源实践及相关服务前仔细阅读并理解本隐私政策，以便做出适当的选择。</span></span></p>
+      <p><span style="line-height:2"><span style="font-size:14px">“开源实践”及相关服务，系指重庆红云信息技术有限公司（以下简称“我们”）合法拥有并运营的、标注名称为“开源实践”的客户端应用程序、redskt.com网站以及浏览器插件。我们作为开源实践的运营者，深知个人信息对您的重要性，您的信任对我们非常重要，我们将按照法律法规的规定并参照行业最佳实践保护您的个人信息及隐私安全。我们制定本"隐私政策"并特别提示：希望您在使用开源实践及相关服务前仔细阅读并理解本隐私政策，以便做出适当的选择。</span></span></p>
       <p></p>
       <p><span style="font-size:14px"><span style="line-height:2"><strong>本隐私政策将帮助您了解：</strong> </span></span></p>
       <ul>

@@ -30,13 +30,13 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response) => {
-    const res = response.data
+    const res = response.data;
     if(res.code == 200 && res.sucessTips != undefined && res.sucessTips.length>0) {
       Message({ message: res.sucessTips, type: 'success', duration: tipsShowTime });
       return res;
     }
     if(res.code == 210) {
-      return Promise.reject();
+      return Promise.reject(new Error('no tips'));
     }
     if (res.code !== 200) {
       var errorMsg = '未知错误，请联系管理员'

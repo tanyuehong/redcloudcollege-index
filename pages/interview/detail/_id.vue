@@ -519,7 +519,7 @@
                               clip-rule="evenodd"
                             ></path>
                           </svg>
-                          <span>304 条评论</span>
+                          <span>{{item.allcomment}} 条评论</span>
                         </button>
                       </div>
                       <div class="reply-tool-item">
@@ -549,7 +549,6 @@
                         <button
                           class="tool-button"
                           @click="jubaoBtnClick(qdetail.qid, '面试题题解')"
-                          v-bind:class="{ collected: item.iscollect }"
                         >
                           <i class="icon icon_vote_jubao"></i>
                           <span>举报</span>
@@ -1770,8 +1769,8 @@ export default {
 
     goodAnswerClick(item) {
       if (item.isgood) {
+        item.good--;
         interviewApi.updateAnswerGood(item.id, 2).then((response) => {
-          item.good--;
           this.$message({
             message: "取消点赞成功！",
             type: "success",
@@ -2558,6 +2557,12 @@ export default {
   color: #056de8;
   background: rgba(5, 109, 232, 0.1);
   padding: 0 14px;
+  border-radius: 5px;
+}
+
+.reply-tool-item .tool-button.votebutton-good.selected {
+  color: #fff;
+  background: rgba(5, 109, 232, 0.8);
 }
 .interview-reply-tool .tool-button.votebutton-good svg {
   fill: #056de8;

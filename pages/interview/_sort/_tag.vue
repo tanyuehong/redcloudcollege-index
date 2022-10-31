@@ -367,10 +367,14 @@ export default {
 </script>
 
 <style scoped>
+
+.answer_title {
+  margin-right: 60px;
+}
 .descrip-more {
   position: absolute;
-  bottom: 6px;
-  right: 6px;
+  bottom: 8px;
+  right: 2px;
 }
 
 .interview_list .description {

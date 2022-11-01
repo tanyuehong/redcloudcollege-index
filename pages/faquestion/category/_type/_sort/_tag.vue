@@ -7,7 +7,7 @@
           <p class="desc">每一个问题，我们都会选择一个最优的答案。并且通过人工分类和技术专家维护问题列表，方便查找，为大家在学习路上解疑答惑。</p>
         </div>
 
-        <img src="https://image.boxueio.com/swift-wtf-to-omg-avatar@2x.jpg" alt="Image Description"
+        <img src="https://image.boxueio.com/swift-wtf-to-omg-avatar@2x.jpg" alt="描述信息"
           class="rounded-circle" />
         <div class="clear"></div>
       </div>
@@ -62,7 +62,7 @@
             </div>
             <div class="questions_detail_con">
               <div class="nodata-warper" v-if="list.length == 0">
-                <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
                 <div>
                   <span>暂时没有数据哦，赶紧抢沙发吧</span>
                 </div>
@@ -83,7 +83,7 @@
                  <div class="extra question-tags" v-if="item.tags">
                   <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag"
                     target="_blank" v-for="tag in item.tags" :key="tag.id">
-                    <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
+                    <img :src="tag.img" v-if="tag.img" alt="标签图标"/>{{ tag.name }}
                   </nuxt-link>
                 </div>
 

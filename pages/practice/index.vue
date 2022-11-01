@@ -23,7 +23,7 @@
 
         <div class="op_pratice_content fl">
           <div class="nodata-warper" v-if="blogList.length == 0">
-            <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+            <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
             <div>
               <span class="nodata-title">该分类下暂时没有文章哦！</span>
             </div>
@@ -84,7 +84,7 @@
               </div>
             </div>
             <div class="download-app clearfix">
-              <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
+              <img src="~/assets/img/appLogo.png" alt="app图标" class="logo-icon fl" />
               <div class="text fl">
                 <h4>下载开源实践APP</h4>
                 <p>更好的体验 学习随处可享</p>

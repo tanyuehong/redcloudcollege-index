@@ -33,7 +33,7 @@
                     v-for="tag in qdetail.tags"
                     :key="tag.id"
                   >
-                    <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
+                    <img :src="tag.img" v-if="tag.img" alt="标签图标"/>{{ tag.name }}
                   </a>
                 </div>
               </div>
@@ -416,6 +416,7 @@
                 <img
                   class="nocommet-image-tips"
                   src="https://img.redskt.com/asset/img/nodata.png"
+                  alt="空数据提示"
                 />
                 <div>
                   <span class="tips"
@@ -441,7 +442,7 @@
                           :src="item.avatar"
                           width="30"
                           height="30"
-                          alt
+                          alt="用户头像"
                         />
                         <span class="ml5"> {{ item.username }}</span>
                         <span class="qustion-top-item anser-time">
@@ -663,7 +664,7 @@
                             :src="comment.avatar"
                             width="30"
                             height="30"
-                            alt
+                            alt="用户头像"
                           />
                           <span class="ml5"> {{ comment.name }}</span>
                           <span class="comment-replyment" v-if="comment.toname"
@@ -785,7 +786,7 @@
                       src="https://static.redskt.com/assets/img/yonghutouxiangnan.png"
                       width="30"
                       height="30"
-                      alt=""
+                      alt="用户头像"
                       class="vam user-head-image article-avatar"
                   /></a>
                 </div>
@@ -828,6 +829,7 @@
                 <img
                   class="nocommet-image-tips"
                   src="https://img.redskt.com/asset/img/nodata.png"
+                  alt="空数据提示"
                 />
                 <div>
                   <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
@@ -852,7 +854,7 @@
                           :src="item.avatar"
                           width="30"
                           height="30"
-                          alt
+                          alt="用户头像"
                         />
                         <span class="ml5"> {{ item.username }}</span>
                         <span class="qustion-top-item">
@@ -989,7 +991,7 @@
                               :src="comment.avatar"
                               width="30"
                               height="30"
-                              alt
+                              alt="用户头像"
                             />
                             <span class="ml5"> {{ comment.name }}</span>
                             <span
@@ -1161,7 +1163,7 @@
                   :src="qdetail.avatar"
                   width="30"
                   height="30"
-                  alt
+                  alt="用户头像"
                 />
                 <span class="ml5">{{ qdetail.nickname }}</span>
               </nuxt-link>

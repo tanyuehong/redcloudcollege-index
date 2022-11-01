@@ -64,7 +64,7 @@
                       <!-- 0人已参加 -->
                       <p class="item-mock-tips">功能开发中</p>
                     </div>
-                    <img class="mock-jobs-img" :src="item.img" />
+                    <img class="mock-jobs-img" :src="item.img" alt="图标"/>
                   </a>
                 </div>
               </div>
@@ -83,7 +83,7 @@
               </div>
               <div class="interview_detail_con">
                 <div class="nodata-warper" v-if="list.length == 0">
-                  <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                  <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
                   <div>
                     <span>暂时没有数据哦，赶紧抢沙发吧</span>
                   </div>
@@ -120,7 +120,7 @@
                     </div>
                     <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" target="_blank"
                       v-for="tag in item.tags" :key="tag.id">
-                      <img :src="tag.img" v-if="tag.img" />{{  tag.name  }}
+                      <img :src="tag.img" v-if="tag.img" alt="标签图标"/>{{  tag.name  }}
                     </nuxt-link>
                   </div>
 
@@ -187,7 +187,7 @@
                     </div>
                   </div>
                   <nuxt-link :to="'/interview/detail/' + item.qid" class="answer_num" title="问题回答数量">
-                    <img src="https://img.redskt.com/interview/questionlist/interview-tags.png" />
+                    <img src="https://img.redskt.com/interview/questionlist/interview-tags.png" alt="图标"/>
                     <span>{{  item.reply  }}</span>
                     <span class="anser-lable">解答</span>
                   </nuxt-link>
@@ -226,7 +226,7 @@
                 </div>
               </div>
               <div class="download-app clearfix">
-                <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
+                <img src="~/assets/img/appLogo.png" alt="app图标" class="logo-icon fl" />
                 <div class="text fl">
                   <h4>下载开源实践APP</h4>
                   <p>更好的体验 学习随处可享</p>

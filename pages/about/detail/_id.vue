@@ -62,7 +62,7 @@
           <div class="bottom-comment">
             <div class="comment-header">
               <nuxt-link :to="'/user/' + pitem.authorUid + '/blog'" class="article_title" title="个人详细信息">
-                <img class="vam user-head-image article-avatar" :src="pitem.authorAvatar" width="30" height="30" alt />
+                <img class="vam user-head-image article-avatar" :src="pitem.authorAvatar" width="30" height="30" alt="用户头像" />
               </nuxt-link>
             </div>
             <div class="message-editor-content">
@@ -87,7 +87,7 @@
               </span>
 
               <div class="no-commet" v-if="commentList.length == 0">
-                <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
                 <div>
                   <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
                 </div>
@@ -99,7 +99,7 @@
                 <ul class="qustion-anser-list">
                   <li class="answer-list-item" v-for="(item, index) in commentList" :key="item.id">
                     <div class="answer-item-userinfo">
-                      <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
+                      <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt="用户头像" />
                       <span class="ml5"> {{ item.username }}</span>
                       <span class="qustion-top-item">
                         {{ item.gmtCreate }}</span>
@@ -143,7 +143,7 @@
                     <div class="comment-reply-container" v-if="item.comments.length > 0">
                       <div class="reply-comment-item" v-for="(comment, cindex) in item.comments" :key="comment.id">
                         <div class="answer-item-userinfo">
-                          <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt />
+                          <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt="用户头像" />
                           <span class="ml5"> {{ comment.name }}</span>
                           <span class="comment-replyment" v-if="comment.toname">回复</span>
                           <span v-if="comment.toname">{{
@@ -209,7 +209,7 @@
             <div class="s-top-bar clearfix" id="authorInfo">
               <div class="c-por-bg">
                 <a href="javascript:" class="name">
-                  <img :src="pitem.authorAvatar" />
+                  <img :src="pitem.authorAvatar" alt="作者头像"/>
                 </a>
               </div>
               <div class="con-top-bar">
@@ -233,7 +233,7 @@
               <li class="clearfix" v-for="item in messageList" :key="item.id">
                 <div class="push-lf">
                   <nuxt-link :to="'/about/detail/' + item.id" target="_blank">
-                    <img :src="item.cover" />
+                    <img :src="item.cover" alt="文章封面"/>
                   </nuxt-link>
                 </div>
 
@@ -270,7 +270,7 @@
             </div>
           </div>
           <div class="download-app clearfix">
-            <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
+            <img src="~/assets/img/appLogo.png" alt="app图标" class="logo-icon fl" />
             <div class="text fl">
               <h4>下载开源实践APP</h4>
               <p>更好的体验 学习随处可享</p>

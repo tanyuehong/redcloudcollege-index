@@ -11,7 +11,7 @@
             <div class="grid-content">
               <el-col :md="12">
                 <div class="topic_carousel">
-                  <img :src="item.src" />
+                  <img :src="item.src" alt="专题封面"/>
                 </div>
               </el-col>
             </div>
@@ -69,10 +69,10 @@
                   </div>
                   <div class="info">
                     <img src="~/assets/img/article_point.png"
-                         class="img_point">
+                         class="img_point" alt="点">
                     <span>共32节</span>
                     <img src="~/assets/img/article_point.png"
-                         class="img_point">
+                         class="img_point" alt="点">
                     <span>{{ item.buyCount }}人已购买</span>
                   </div>
                   <div class="clearfloat"></div>
@@ -140,7 +140,7 @@
             </div>
             <div class="download-app clearfix">
               <img src="~/assets/img/appLogo.png"
-                   alt=""
+                   alt="app图标"
                    class="logo-icon fl" />
               <div class="text fl">
                 <h4>下载开源实践APP</h4>

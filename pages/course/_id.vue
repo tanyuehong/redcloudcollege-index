@@ -22,7 +22,7 @@
             <img width="600px"
                  :src="courseWebVo.adimage"
                  :alt="courseWebVo.title"
-                 class="dis c-v-pic" />
+                 class="dis c-v-pic"/>
           </div>
 
           <div class="course_right_info fr">
@@ -36,7 +36,7 @@
               </span>
               <i class="icon-sep"></i>
               <img src="~/assets/img/course-faver.png"
-                   class="fl" />
+                   class="fl" alt="收藏"/>
               <span class="course_info_faver">
                 收藏
               </span>
@@ -147,7 +147,7 @@
           </div>
           <div class="download-app clearfix">
             <img src="~/assets/img/appLogo.png"
-                 alt=""
+                 alt="app图标"
                  class="logo-icon fl" />
             <div class="text fl">
               <h4>下载开源实践APP</h4>

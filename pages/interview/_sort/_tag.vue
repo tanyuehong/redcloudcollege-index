@@ -373,7 +373,7 @@ export default {
 }
 .descrip-more {
   position: absolute;
-  bottom: 8px;
+  bottom: 10px;
   right: 2px;
 }
 
@@ -543,7 +543,7 @@ export default {
 
 .interview-content .interview_detail_con {
   margin: 10px 10px 10px 10px;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
 }
 
 .interview-tag-list {

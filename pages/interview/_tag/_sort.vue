@@ -297,7 +297,8 @@ export default {
           typeList: response.data.typeList,
           tagList: response.data.tagList,
           sort: params.sort ? params.sort : "recommand",
-          tag: params.tag
+
+          tag: (params.tag && (params.tag != 'recommand' || params.tag != 'latest' || params.tag != 'hot'))
             ? params.tag
             : response.data.tagList.length > 0
               ? "all"

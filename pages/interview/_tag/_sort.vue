@@ -92,15 +92,15 @@
                   <ul class="nav-list">
                     <li class="blog-item right">
                       <nuxt-link :to="sortPath('recommand')" class="content-type-item"
-                        v-bind:class="{ active: sort == 'recommand' }">推荐</nuxt-link>
+                        v-bind:class="{ active: sort == 'recommand'}">推荐</nuxt-link>
                     </li>
                     <li class="blog-item right">
                       <nuxt-link :to="sortPath('latest')" class="content-type-item"
-                        v-bind:class="{ active: sort == 'latest' }">最新</nuxt-link>
+                        v-bind:class="{ active: sort == 'latest' ||  tag == 'latest' }">最新</nuxt-link>
                     </li>
                     <li class="blog-item">
                       <nuxt-link :to="sortPath('hot')" class="content-type-item"
-                        v-bind:class="{ active: sort == 'hot' }">
+                        v-bind:class="{ active: sort == 'hot'||  tag == 'hot' }">
                         热榜
                       </nuxt-link>
                     </li>
@@ -296,13 +296,10 @@ export default {
           list: response.data.list ? response.data.list : [],
           typeList: response.data.typeList,
           tagList: response.data.tagList,
-          sort: params.sort ? params.sort : "recommand",
+          sort: (params.tag =="latest" || params.tag =="hot") ?  params.tag : ( params.sort ? params.sort : "recommand") ,
 
-          tag: (params.tag && (params.tag != 'recommand' || params.tag != 'latest' || params.tag != 'hot'))
-            ? params.tag
-            : response.data.tagList.length > 0
-              ? "all"
-              : "",
+          tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
+            ? params.tag: "all"
         };
       });
   },
@@ -336,6 +333,12 @@ export default {
   },
 
   methods: {
+    sortParmString(tag,sort) {
+      if(tag == "recommand" ||tag == "latest" || tag == "hot" ) {
+        return tag;
+      }
+      return sort;
+    },
     moreClickCommend() { },
     jumpStartQuestion() {
       var token = localStorage.getItem("redclass_token");

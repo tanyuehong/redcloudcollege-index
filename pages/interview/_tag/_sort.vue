@@ -288,8 +288,9 @@ export default {
     return interviewServerApi
       .getInterviewIndex({
         type: params.type ? params.type : "",
-        sort: "",
-        tag: "",
+        sort: (params.tag =="latest" || params.tag =="hot") ?  params.tag : ( params.sort ? params.sort : "recommand"),
+        tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
+            ? params.tag: "",
       })
       .then((response) => {
         return {

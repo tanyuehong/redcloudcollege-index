@@ -33,7 +33,7 @@
                     v-for="tag in qdetail.tags"
                     :key="tag.id"
                   >
-                    <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
+                    <img :src="tag.img" v-if="tag.img" alt="标签图标"/>{{ tag.name }}
                   </a>
                 </div>
               </div>
@@ -416,6 +416,7 @@
                 <img
                   class="nocommet-image-tips"
                   src="https://img.redskt.com/asset/img/nodata.png"
+                  alt="空数据提示"
                 />
                 <div>
                   <span class="tips"
@@ -441,7 +442,7 @@
                           :src="item.avatar"
                           width="30"
                           height="30"
-                          alt
+                          alt="用户头像"
                         />
                         <span class="ml5"> {{ item.username }}</span>
                         <span class="qustion-top-item anser-time">
@@ -519,7 +520,7 @@
                               clip-rule="evenodd"
                             ></path>
                           </svg>
-                          <span>304 条评论</span>
+                          <span>{{item.allcomment}} 条评论</span>
                         </button>
                       </div>
                       <div class="reply-tool-item">
@@ -549,7 +550,6 @@
                         <button
                           class="tool-button"
                           @click="jubaoBtnClick(qdetail.qid, '面试题题解')"
-                          v-bind:class="{ collected: item.iscollect }"
                         >
                           <i class="icon icon_vote_jubao"></i>
                           <span>举报</span>
@@ -664,7 +664,7 @@
                             :src="comment.avatar"
                             width="30"
                             height="30"
-                            alt
+                            alt="用户头像"
                           />
                           <span class="ml5"> {{ comment.name }}</span>
                           <span class="comment-replyment" v-if="comment.toname"
@@ -786,7 +786,7 @@
                       src="https://static.redskt.com/assets/img/yonghutouxiangnan.png"
                       width="30"
                       height="30"
-                      alt=""
+                      alt="用户头像"
                       class="vam user-head-image article-avatar"
                   /></a>
                 </div>
@@ -829,6 +829,7 @@
                 <img
                   class="nocommet-image-tips"
                   src="https://img.redskt.com/asset/img/nodata.png"
+                  alt="空数据提示"
                 />
                 <div>
                   <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
@@ -853,7 +854,7 @@
                           :src="item.avatar"
                           width="30"
                           height="30"
-                          alt
+                          alt="用户头像"
                         />
                         <span class="ml5"> {{ item.username }}</span>
                         <span class="qustion-top-item">
@@ -990,7 +991,7 @@
                               :src="comment.avatar"
                               width="30"
                               height="30"
-                              alt
+                              alt="用户头像"
                             />
                             <span class="ml5"> {{ comment.name }}</span>
                             <span
@@ -1162,7 +1163,7 @@
                   :src="qdetail.avatar"
                   width="30"
                   height="30"
-                  alt
+                  alt="用户头像"
                 />
                 <span class="ml5">{{ qdetail.nickname }}</span>
               </nuxt-link>
@@ -1770,8 +1771,8 @@ export default {
 
     goodAnswerClick(item) {
       if (item.isgood) {
+        item.good--;
         interviewApi.updateAnswerGood(item.id, 2).then((response) => {
-          item.good--;
           this.$message({
             message: "取消点赞成功！",
             type: "success",
@@ -2558,6 +2559,12 @@ export default {
   color: #056de8;
   background: rgba(5, 109, 232, 0.1);
   padding: 0 14px;
+  border-radius: 5px;
+}
+
+.reply-tool-item .tool-button.votebutton-good.selected {
+  color: #fff;
+  background: rgba(5, 109, 232, 0.8);
 }
 .interview-reply-tool .tool-button.votebutton-good svg {
   fill: #056de8;

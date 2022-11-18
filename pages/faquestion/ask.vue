@@ -72,7 +72,7 @@
                       <el-tab-pane :label="item.name" :name="item.id" v-for="item in typeList" :key="item.id">
                         <div class="group-taglist">
                           <div class="nodata-warper" v-if="groupTagList.length == 0">
-                            <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                            <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
                             <div>
                               <span>该模块下暂时没有标签哦</span>
                             </div>

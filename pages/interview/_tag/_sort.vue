@@ -64,7 +64,7 @@
                       <!-- 0人已参加 -->
                       <p class="item-mock-tips">功能开发中</p>
                     </div>
-                    <img class="mock-jobs-img" :src="item.img" />
+                    <img class="mock-jobs-img" :src="item.img" alt="图标"/>
                   </a>
                 </div>
               </div>
@@ -74,7 +74,7 @@
                 <div class="interview-tag-list" v-if="tagList.length > 0">
                   <ul class="tag-warper">
                     <li class="tag-item" v-for="item in tagList" :key="item.id">
-                      <nuxt-link :to="tagPath(item)" class="tag-link" v-bind:class="{ active: tag == item.id }">{{
+                      <nuxt-link :to="tagPath(item)" class="tag-link" v-bind:class="{ active: tag == item.path }">{{
                          item.name  }}
                       </nuxt-link>
                     </li>
@@ -83,7 +83,7 @@
               </div>
               <div class="interview_detail_con">
                 <div class="nodata-warper" v-if="list.length == 0">
-                  <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                  <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
                   <div>
                     <span>暂时没有数据哦，赶紧抢沙发吧</span>
                   </div>
@@ -92,15 +92,15 @@
                   <ul class="nav-list">
                     <li class="blog-item right">
                       <nuxt-link :to="sortPath('recommand')" class="content-type-item"
-                        v-bind:class="{ active: sort == 'recommand' }">推荐</nuxt-link>
+                        v-bind:class="{ active: sort == 'recommand'}">推荐</nuxt-link>
                     </li>
                     <li class="blog-item right">
                       <nuxt-link :to="sortPath('latest')" class="content-type-item"
-                        v-bind:class="{ active: sort == 'latest' }">最新</nuxt-link>
+                        v-bind:class="{ active: sort == 'latest' ||  tag == 'latest' }">最新</nuxt-link>
                     </li>
                     <li class="blog-item">
                       <nuxt-link :to="sortPath('hot')" class="content-type-item"
-                        v-bind:class="{ active: sort == 'hot' }">
+                        v-bind:class="{ active: sort == 'hot'||  tag == 'hot' }">
                         热榜
                       </nuxt-link>
                     </li>
@@ -120,7 +120,7 @@
                     </div>
                     <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" target="_blank"
                       v-for="tag in item.tags" :key="tag.id">
-                      <img :src="tag.img" v-if="tag.img" />{{  tag.name  }}
+                      <img :src="tag.img" v-if="tag.img" alt="标签图标"/>{{  tag.name  }}
                     </nuxt-link>
                   </div>
 
@@ -187,7 +187,7 @@
                     </div>
                   </div>
                   <nuxt-link :to="'/interview/detail/' + item.qid" class="answer_num" title="问题回答数量">
-                    <img src="https://img.redskt.com/interview/questionlist/interview-tags.png" />
+                    <img src="https://img.redskt.com/interview/questionlist/interview-tags.png" alt="图标"/>
                     <span>{{  item.reply  }}</span>
                     <span class="anser-lable">解答</span>
                   </nuxt-link>
@@ -226,7 +226,7 @@
                 </div>
               </div>
               <div class="download-app clearfix">
-                <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
+                <img src="~/assets/img/appLogo.png" alt="app图标" class="logo-icon fl" />
                 <div class="text fl">
                   <h4>下载开源实践APP</h4>
                   <p>更好的体验 学习随处可享</p>
@@ -288,20 +288,19 @@ export default {
     return interviewServerApi
       .getInterviewIndex({
         type: params.type ? params.type : "",
-        sort: "",
-        tag: "",
+        sort: (params.tag =="latest" || params.tag =="hot") ?  params.tag : ( params.sort ? params.sort : "recommand"),
+        tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
+            ? params.tag: "",
       })
       .then((response) => {
         return {
           list: response.data.list ? response.data.list : [],
           typeList: response.data.typeList,
           tagList: response.data.tagList,
-          sort: params.sort ? params.sort : "recommand",
-          tag: params.tag
-            ? params.tag
-            : response.data.tagList.length > 0
-              ? "all"
-              : "",
+          sort: (params.tag =="latest" || params.tag =="hot") ?  params.tag : ( params.sort ? params.sort : "recommand") ,
+
+          tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
+            ? params.tag: "all"
         };
       });
   },
@@ -315,10 +314,13 @@ export default {
   computed: {
     sortPath() {
       return function (sortString) {
-        if (sortString == "recommand") {
-          return "/interview";
+        if (this.tag == 'all') {
+          if(sortString == 'recommand') {
+            return "/interview";
+          }
+          return "/interview/" + sortString;
         }
-        return "/interview/" + sortString;
+        return "/interview/" + this.tag + "/" + sortString;
       };
     },
     tagPath() {
@@ -326,12 +328,18 @@ export default {
         if (item.id == "all") {
           return "/interview";
         }
-        return "/interview/" + this.sort + "/" + item.id;
+        return "/interview/" + item.path;
       };
     },
   },
 
   methods: {
+    sortParmString(tag,sort) {
+      if(tag == "recommand" ||tag == "latest" || tag == "hot" ) {
+        return tag;
+      }
+      return sort;
+    },
     moreClickCommend() { },
     jumpStartQuestion() {
       var token = localStorage.getItem("redclass_token");
@@ -367,10 +375,14 @@ export default {
 </script>
 
 <style scoped>
+
+.answer_title {
+  margin-right: 60px;
+}
 .descrip-more {
   position: absolute;
-  bottom: 6px;
-  right: 6px;
+  bottom: 10px;
+  right: 2px;
 }
 
 .interview_list .description {
@@ -539,7 +551,7 @@ export default {
 
 .interview-content .interview_detail_con {
   margin: 10px 10px 10px 10px;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
 }
 
 .interview-tag-list {

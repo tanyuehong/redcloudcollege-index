@@ -5,7 +5,7 @@
         <div class="col-md-3">
           <div class="book_top_img">
             <img :src="bookItem.imgUrl"
-                 class="book_top_lefte_img" />
+                 class="book_top_lefte_img" alt="书籍封面"/>
           </div>
         </div>
         <div class="col-md-9">
@@ -35,10 +35,10 @@
                 </span>
               </nuxt-link>
               <img src="~/assets/img/article_point.png"
-                   class="img_point" />
+                   class="img_point" alt="点"/>
               <span>共32节</span>
               <img src="~/assets/img/article_point.png"
-                   class="img_point" />
+                   class="img_point" alt="点"/>
               <span>67人已购买</span>
             </div>
             <div class="book_price">
@@ -110,7 +110,7 @@
                              :key="item.id">
                           <div class="comment_label">
                             <a href="https://learnku.com/users/49196">
-                              <img src="https://cdn.learnku.com/uploads/avatars/49196_1568765806.jpeg!/both/100x100" />
+                              <img src="https://cdn.learnku.com/uploads/avatars/49196_1568765806.jpeg!/both/100x100" alt="用户头像"/>
                             </a>
                           </div>
                           <div class="comment_content">
@@ -151,7 +151,7 @@
                              :key="item.id">
                           <div class="comment_label">
                             <a href="https://learnku.com/users/49196">
-                              <img src="https://cdn.learnku.com/uploads/avatars/49196_1568765806.jpeg!/both/100x100" />
+                              <img src="https://cdn.learnku.com/uploads/avatars/49196_1568765806.jpeg!/both/100x100" alt="用户头像"/>
                             </a>
                           </div>
                           <div class="comment_content">
@@ -192,7 +192,7 @@
                              :key="item.id">
                           <div class="comment_label">
                             <a href="https://learnku.com/users/49196">
-                              <img src="https://cdn.learnku.com/uploads/avatars/49196_1568765806.jpeg!/both/100x100" />
+                              <img src="https://cdn.learnku.com/uploads/avatars/49196_1568765806.jpeg!/both/100x100" alt="用户头像"/>
                             </a>
                           </div>
                           <div class="comment_content">
@@ -233,7 +233,7 @@
                              :key="item.id">
                           <div class="comment_label">
                             <a href="https://learnku.com/users/49196">
-                              <img src="https://cdn.learnku.com/uploads/avatars/49196_1568765806.jpeg!/both/100x100" />
+                              <img src="https://cdn.learnku.com/uploads/avatars/49196_1568765806.jpeg!/both/100x100" alt="用户头像"/>
                             </a>
                           </div>
                           <div class="comment_content">

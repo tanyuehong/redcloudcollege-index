@@ -12,13 +12,13 @@
                    alt="开源实践网" />
               <img src="~/assets/img/logo_descrb.png"
                    class="logo_decrb"
-                   alt="" />
+                   alt="logo描述" />
             </nuxt-link>
           </h1>
           <div class="app-xuan-down">
             <div class="sin-cover">
               <img height=450px;
-                   src="https://static.redskt.com/assets/img/appadimage.jpg" />
+                   src="https://static.redskt.com/assets/img/appadimage.jpg" alt="app推广"/>
             </div>
             <div class="sign-down-app">
               <el-button type="primary">下载开源实践app</el-button>

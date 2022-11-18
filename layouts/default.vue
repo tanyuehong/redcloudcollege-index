@@ -53,7 +53,7 @@
                 <nuxt-link :to="{ name: 'user-id-type', params: { id: this.loginInfo.id, type: 'blog' } }">
                   <el-dropdown @command="handleCommand">
                     <span class="el-dropdown-link">
-                      <img class="vam user-head-image" :src="loginInfo.avatar" width="30" height="30" alt />
+                      <img class="vam user-head-image" :src="loginInfo.avatar" width="30" height="30" alt="用户头像"/>
                       <i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">

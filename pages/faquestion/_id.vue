@@ -14,7 +14,7 @@
             <div>
               <div class="question_info">
                 <nuxt-link :to="'/user/' + qdetail.uid + '/blog'">
-                  <img class="vam user-head-image" :src="qdetail.avatar" width="30" height="30" alt />
+                  <img class="vam user-head-image" :src="qdetail.avatar" width="30" height="30" alt="用户头像" />
                   <span class="ml5">{{ qdetail.nickname }}</span>
                 </nuxt-link>
                 <span class="qustion-top-item">发布于 {{ qdetail.gmtCreate }}</span>
@@ -40,7 +40,7 @@
               <div class="extra question-tags mt10" v-if="qdetail.tags">
                 <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
                   target="_blank" v-for="tag in qdetail.tags" :key="tag.id">
-                  <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
+                  <img :src="tag.img" v-if="tag.img" alt="标签图片"/>{{ tag.name }}
                 </a>
               </div>
 
@@ -190,7 +190,7 @@
                 <li class="answer-list-item" v-for="(item, index) in replyList" :key="item.id">
                   <div class="answer-item-userinfo">
                     <nuxt-link :to="'/user/' + item.uid + '/blog'" class="anser-info">
-                      <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
+                      <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt="用户头像" />
                       <span class="ml5"> {{ item.username }}</span>
                       <span class="qustion-top-item anser-time"> {{ item.gmtCreate }}</span>
                     </nuxt-link>
@@ -289,7 +289,7 @@
                   <div class="reply-comment-container" v-if="item.comments">
                     <div class="reply-comment-item" v-for="(comment, cindex) in item.comments" :key="comment.id">
                       <div class="answer-item-userinfo">
-                        <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt />
+                        <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt="用户头像" />
                         <span class="ml5"> {{ comment.name }}</span>
                         <span class="comment-replyment" v-if="comment.toname">回复</span>
                         <span v-if="comment.toname">{{ comment.toname }}</span>

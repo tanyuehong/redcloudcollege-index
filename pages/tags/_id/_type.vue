@@ -16,7 +16,7 @@
           <div class="ui items">
             <div class="item">
               <div class="ui image">
-                <img :src="tag.img" />
+                <img :src="tag.img" alt="标签图片"/>
               </div>
               <div class="content">
                 <div class="header-wrap clearfix">
@@ -43,7 +43,7 @@
           <div class="content-list">
             <div class="questions_detail_con" v-if="parmType == 'ask' || !parmType">
               <div class="nodata-warper" v-if="qustionList.length == 0">
-                <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
                 <div>
                   <span>暂时没有数据哦，赶紧抢沙发吧</span>
                 </div>
@@ -63,7 +63,7 @@
                 <div class="extra question-tags" v-if="item.tags">
                  <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" 
                     target="_blank" v-for="tag in item.tags" :key="tag.id">
-                    <img :src="tag.img" v-if="tag.img" />{{ tag.name }}
+                    <img :src="tag.img" v-if="tag.img" alt="图片标签"/>{{ tag.name }}
                   </nuxt-link>
                 </div>
 

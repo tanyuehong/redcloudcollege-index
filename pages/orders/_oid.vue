@@ -3,7 +3,7 @@
     <div class="Title">
       <h1 class="fl f18">订单确认</h1>
       <img src="~/assets/img/cart_setp2.png"
-           class="fr" />
+           class="fr" alt="购物车步骤"/>
       <div class="clear"></div>
     </div>
     <form name="flowForm"
@@ -30,7 +30,7 @@
             <td class="name First">
               <a target="_blank"
                  :href="'https://localhost:3000/course/' + order.courseId">
-                <img :src="order.courseCover" />
+                <img :src="order.courseCover" alt="课程封面"/>
               </a>
 
               <div class="goodInfo">

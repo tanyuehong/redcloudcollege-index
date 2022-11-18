@@ -62,7 +62,7 @@
             <li v-for="course in data.items" :key="course.id">
               <div class="cc-l-wrap">
                 <section class="course-img">
-                  <img :src="course.imgUrl" class="img-responsive" :alt="course.title" />
+                  <img :src="course.imgUrl" class="img-responsive" :alt="course.title"/>
                   <div class="cc-mask">
                     <nuxt-link title="开始学习" class="comm-btn c-btn-1" :to="{ name: 'course-id', params: { id: course.id } }">开始学习
                     </nuxt-link>

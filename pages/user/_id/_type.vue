@@ -6,7 +6,7 @@
 					<div class="user-info">
 						<div class="user-pic">
 							<div class="user-pic-bg">
-								<img class="user-header-img" :src="userInfo.avatar" />
+								<img class="user-header-img" :src="userInfo.avatar" alt="用户头像"/>
 							</div>
 						</div>
 					</div>
@@ -60,7 +60,7 @@
 					<div class="list-body">
 						<div class="user_article_content book_item" v-if="parmType == 'blog' || parmType == ''">
 							<div class="nodata-warper" v-if="dataList.length == 0">
-								<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+								<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
 								<div>
 									<span>该用户暂时还没有发表文章哦</span>
 								</div>
@@ -84,7 +84,7 @@
 									<div class="op_message_content" v-else>
 										<div class="push-lf">
 											<nuxt-link :to="'/about/detail/' + bitem.id">
-												<img :src="bitem.cover" />
+												<img :src="bitem.cover" alt="封面图片"/>
 											</nuxt-link>
 										</div>
 
@@ -121,7 +121,7 @@
 							</div>
 							<div class="collect-content-list book_item" v-if="parmType.substring(8, 12) == 'blog'">
 								<div class="nodata-warper" v-if="dataList.length == 0">
-									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
 									<div>
 										<span>该用户暂时还没有收藏文章哦</span>
 									</div>
@@ -145,7 +145,7 @@
 										<div class="op_message_content" v-else>
 											<div class="push-lf">
 												<nuxt-link :to="'/about/detail/' + bitem.id">
-													<img :src="bitem.cover" />
+													<img :src="bitem.cover" alt="封面图片"/>
 												</nuxt-link>
 											</div>
 
@@ -169,7 +169,7 @@
 
 							<div class="collect-content-list ask-item" v-if="parmType.substring(8, 11) == 'ask'">
 								<div class="nodata-warper" v-if="dataList.length == 0">
-									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
 									<div>
 										<span>该用户暂时还没有收藏问题哦</span>
 									</div>
@@ -190,7 +190,7 @@
 										<div class="extra question-tags mt10" v-if="item.tags">
                 <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
                   target="_blank" v-for="tag in item.tags" :key="tag.id">
-                  <img :src="tag.img" v-if="tag.img" />{{ tag.name }}</a>
+                  <img :src="tag.img" v-if="tag.img" alt="标签图片"/>{{ tag.name }}</a>
               </div>
 								
 
@@ -275,7 +275,7 @@
 							</div>
 							<div class="good-content-list book_item" v-if="parmType.substring(5, 9) == 'blog'">
 								<div class="nodata-warper" v-if="dataList.length == 0">
-									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
 									<div>
 										<span>该用户暂时还没有点赞文章哦</span>
 									</div>
@@ -299,7 +299,7 @@
 										<div class="op_message_content" v-else>
 											<div class="push-lf">
 												<nuxt-link :to="'/about/detail/' + bitem.id">
-													<img :src="bitem.cover" />
+													<img :src="bitem.cover" alt="封面图片"/>
 												</nuxt-link>
 											</div>
 
@@ -322,7 +322,7 @@
 							</div>
 							<div class="collect-content-list ask-item" v-if="parmType.substring(5, 8) == 'ask'">
 								<div class="nodata-warper" v-if="dataList.length == 0">
-									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
 									<div>
 										<span>该用户暂时还没有点赞问题哦</span>
 									</div>
@@ -343,7 +343,7 @@
 										<div class="extra question-tags mt10" v-if="item.tags">
                 <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
                   target="_blank" v-for="tag in item.tags" :key="tag.id">
-                  <img :src="tag.img" v-if="tag.img" />{{ tag.name }}</a>
+                  <img :src="tag.img" v-if="tag.img" alt="标签图标"/>{{ tag.name }}</a>
               </div>
 
 										<div class="q_time">

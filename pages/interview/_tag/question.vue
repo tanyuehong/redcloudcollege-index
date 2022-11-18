@@ -44,7 +44,7 @@
                         <p class="mock-jobs-name">{{ item.name }}</p>
                         <p class="item-mock-tips">115944人已参加</p>
                       </div>
-                      <img class="mock-jobs-img" :src="item.img">
+                      <img class="mock-jobs-img" :src="item.img" alt="图标">
                     </div>
                   </div>
                 </div>

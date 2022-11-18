@@ -10,7 +10,7 @@
               <div class="audth-user-image">
                 <nuxt-link class="article_title" :to="'/teacher/' + pitem.authorUid">
                   <img class="vam user-head-image article-avatar" :src="pitem.authorAvatar" width="30" height="30"
-                    alt />
+                    alt="文章作者"/>
                 </nuxt-link>
               </div>
 
@@ -64,7 +64,7 @@
               <div class="comment-blog">
                 <nuxt-link class="article_title" :to="'/teacher/' + pitem.authorUid">
                   <img class="vam user-head-image article-avatar" :src="pitem.authorAvatar" width="30" height="30"
-                    alt />
+                    alt="作者头像"/>
                 </nuxt-link>
               </div>
               <div class="commet-editor-content">
@@ -90,7 +90,7 @@
                 </span>
 
                 <div class="no-commet" v-if="commentList.length == 0">
-                  <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" />
+                  <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
                   <div>
                     <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
                   </div>
@@ -103,7 +103,7 @@
                   <ul class="qustion-anser-list">
                     <li class="answer-list-item" v-for="(item, index) in commentList" :key="item.id">
                       <div class="answer-item-userinfo">
-                        <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt />
+                        <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt="用户头像"/>
                         <span class="ml5"> {{ item.username }}</span>
                         <span class="qustion-top-item"> {{ item.gmtCreate }}</span>
                       </div>
@@ -146,7 +146,7 @@
                       <div class="comment-reply-container" v-if="item.comments.length > 0">
                         <div class="reply-comment-item" v-for="(comment, cindex) in item.comments" :key="comment.id">
                           <div class="answer-item-userinfo">
-                            <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt />
+                            <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt="用户头像"/>
                             <span class="ml5"> {{ comment.name }}</span>
                             <span class="comment-replyment" v-if="comment.toname">回复</span>
                             <span v-if="comment.toname">{{ comment.toname }}</span>
@@ -198,7 +198,7 @@
           </div>
           <div class="col-md-4">
             <div class="download-app clearfix">
-              <img src="~/assets/img/appLogo.png" alt="" class="logo-icon fl" />
+              <img src="~/assets/img/appLogo.png" alt="app图标" class="logo-icon fl" />
               <div class="text fl">
                 <h4>下载开源实践APP</h4>
                 <p>更好的体验 学习随处可享</p>
@@ -256,7 +256,7 @@
           <div class="tool_item">
             <div class="tool_crcle" role="button" tabindex="-1" aria-label="赞赏作者">
               <i aria-label="ic-shang" class="anticon">
-                <img src="~/assets/img/dashang.png" class="tool_item_image" />
+                <img src="~/assets/img/dashang.png" class="tool_item_image" alt="赞赏"/>
               </i>
             </div>
             <div class="P63n6G" role="button" tabindex="-1" aria-label="查看赞赏列表">
@@ -265,7 +265,7 @@
           </div>
           <div class="tool_item">
             <div class="tool_crcle">
-              <img src="~/assets/img/gengduo.png" class="tool_item_image" />
+              <img src="~/assets/img/gengduo.png" class="tool_item_image" alt="更多"/>
             </div>
 
             <div class="P63n6G">更多好文</div>

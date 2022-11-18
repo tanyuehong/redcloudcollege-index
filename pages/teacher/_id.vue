@@ -27,7 +27,7 @@
             <!-- <img class="tea-header" src="//img1.sycdn.imooc.com/5afe3d350001596a02430243-200-200.jpg" alt=""> -->
             <img class="tea-header"
                  src="//img4.sycdn.imooc.com/5afe3d350001596a02430243-160-160.jpg"
-                 alt="" />
+                 alt="老师头像" />
             <div class="tea-title">
               <p>{{teacherTypeString}}</p>
               <span>{{teacher.tposition}}</span>
@@ -115,7 +115,7 @@
 
                 <div class="book-cover">
                   <img :src="book.imgUrl"
-                       class="book-cover-img">
+                       class="book-cover-img" alt="图书封面">
                 </div>
                 <div class="book-info">
                   <p class="shizhan-title"

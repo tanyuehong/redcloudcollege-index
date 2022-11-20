@@ -77,8 +77,8 @@
                   </nuxt-link>
                 </div>
 
-                <div class="description" v-html="item.content">
-                </div>
+                <nuxt-link :to="'/faquestion/' + item.qid" class="description" v-html="item.content">
+                </nuxt-link>
                 <div class="extra question-tags" v-if="item.tags">
                   <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" target="_blank"
                     v-for="tag in item.tags" :key="tag.id">

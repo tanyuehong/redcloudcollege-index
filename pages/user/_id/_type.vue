@@ -730,7 +730,7 @@ export default {
 }
 
 .answer_num .anser-lable {
-	margin-top: 0px;
+	margin-top: -4px;
 }
 
 .questions_collect_con .q_time {

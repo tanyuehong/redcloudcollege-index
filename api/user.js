@@ -91,4 +91,11 @@ export default {
       method: 'post',
     })
   },
+
+  getRegisterPage() {
+    return request({
+      url: `/home/ucenter/getRegisterPage`,
+      method: 'get',
+    })
+  },
 }

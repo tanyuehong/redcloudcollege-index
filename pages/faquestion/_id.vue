@@ -406,13 +406,13 @@
 
           <div class="qustion-type-warper">
             <div class="qustion-tag-header">
-              <span> {{ qdetail.typeString }}</span>
+              <span> 技术圈子 </span>
               <span> > 前端 </span>
               <span class="ask-tag-user-fawllow">关注</span>
             </div>
 
             <div class="qustion-tag-content">
-              <span>热门标签</span>
+              <span>热门圈子</span>
               <div class="qustion-tag-warper"></div>
             </div>
           </div>

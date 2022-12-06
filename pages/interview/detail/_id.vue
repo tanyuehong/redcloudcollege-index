@@ -1177,9 +1177,9 @@
 
         <div class="qustion-type-warper">
           <div class="qustion-tag-header">
-            <span> {{ qdetail.typeString }}</span>
-            <span> 开源实践面试 > 前端 </span>
-            <span class="ask-tag-user-fawllow">关注</span>
+            <img src="~/assets/img/quanzi.png" alt="技术圈子" class="technical-circle-item" style="width: 25px;height: 25px;"/>
+            <span class="technical-circle-item">技术圈子</span>
+            <span class="ask-tag-user-fawllow technical-circle-item">关注</span>
           </div>
 
           <div class="qustion-tag-content">
@@ -2416,6 +2416,12 @@ export default {
 </style>
 
 <style scoped>
+
+.technical-circle-item {
+  vertical-align:middle;
+  font-size: 14px;
+  font-weight: 550;
+}
 .choose-button {
   opacity: 0.6;
 }

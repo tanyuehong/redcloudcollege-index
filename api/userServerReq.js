@@ -7,5 +7,12 @@ export default {
       url: `/home/ucenter/getShowUserInfo/${uId}/${type}`,
       method: "get"
     });
+  },
+
+  getRegisterPage() {
+    return request({
+      url: `/home/ucenter/getRegisterPage`,
+      method: 'get',
+    })
   }
 };

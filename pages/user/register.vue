@@ -42,7 +42,7 @@
             <div style="width: 100%;display: block;float: left;position: relative">
               <el-input type="password"
                         placeholder="设置密码"
-                        v-model="params.code" />
+                        v-model="params.password" />
               <i class="iconfont icon-password" />
             </div>
             <!--
@@ -52,15 +52,29 @@
           -->
           </el-form-item>
 
-          <el-form-item class="input-prepend"
+          <el-form-item class="input-prepend restyle"
                         prop="password"
                         :rules="[{ required: true, message: '请确认密码', trigger: 'blur' }]">
             <div>
               <el-input type="password"
                         placeholder="确认密码"
                         v-on:focus="formfocuse"
-                        v-model="params.password" />
+                        v-model="params.confirmpwd" />
               <i class="iconfont icon-password" />
+            </div>
+          </el-form-item>
+
+          <el-form-item class="input-prepend"
+                        :rules="[{ required: true, message: '请输入验证码', trigger: 'blur' }]">
+            <div>
+              <el-input type="text"
+                        class="vercode"
+                        maxlength ="6"
+                        minlength ="6"
+                        placeholder="验证码"
+                        v-on:focus="formfocuse"
+                        v-model="params.verCode" />
+                        <img src="http://localhost/api/home/ucenter/captcha?pageKey" class="vercode_img" alt="验证码"/>
             </div>
           </el-form-item>
 
@@ -120,6 +134,7 @@ import "~/assets/css/sign.css";
 import "~/assets/css/iconfont.css";
 
 import registerApi from "@/api/user";
+import registerApiServer from "@/api/userServerReq";
 
 export default {
   layout: "sign",
@@ -130,7 +145,9 @@ export default {
         mobile: "",
         code: "", //验证码
         nickname: "",
-        password: ""
+        password: "",
+        confirmpwd:"",
+        verCode:""
       },
       isShowTips: false,
       sending: true, //是否发送验证码
@@ -153,6 +170,17 @@ export default {
     }
   },
 
+  asyncData ({ params, error }) {
+    return registerApiServer.getRegisterPage().then((response) => {
+      return {
+        pagekey: response.data.pagekey
+      }
+    })
+  },
+  mounted() {
+    window.console.log(process.env.NODE_ENV);
+  },
+  
   methods: {
     //注册提交的方法
     submitRegister (formName) {
@@ -188,7 +216,6 @@ export default {
             this.$router.push({ path: "/user/login" });
           });
         } else {
-          this.errtips = "数据格式验证失败！";
           return false;
         }
       });
@@ -243,4 +270,4 @@ export default {
   font-size: 12px;
   width: 100%;
 }
-</style>>
+</style>

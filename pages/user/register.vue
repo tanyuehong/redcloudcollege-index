@@ -74,7 +74,7 @@
                         placeholder="验证码"
                         v-on:focus="formfocuse"
                         v-model="params.verCode" />
-                        <img src="http://localhost/api/home/ucenter/captcha?pageKey" class="vercode_img" alt="验证码"/>
+                        <img :src="vercodeurl" class="vercode_img" @click="refleshVercode" alt="验证码"/>
             </div>
           </el-form-item>
 
@@ -153,7 +153,8 @@ export default {
       sending: true, //是否发送验证码
       second: 60, //倒计时间
       codeTest: "获取验证码",
-      errtips: ""
+      errtips: "",
+      vercodeurl:""
     };
   },
 
@@ -178,10 +179,15 @@ export default {
     })
   },
   mounted() {
-    window.console.log(process.env.NODE_ENV);
+    var baseUrl = process.env.NODE_ENV == 'development' ? 'http://localhost/api':'https://www.redskt.com/api';
+    this.vercodeurl = baseUrl + "/home/ucenter/captcha" + "?pageKey=" + this.pagekey;
   },
   
   methods: {
+    refleshVercode() {
+      var baseUrl = process.env.NODE_ENV == 'development' ? 'http://localhost/api':'https://www.redskt.com/api';
+      this.vercodeurl = baseUrl + "/home/ucenter/captcha" + "?pageKey=" + this.pagekey+"&timemap="+ new Date().getTime();
+    },
     //注册提交的方法
     submitRegister (formName) {
       this.$refs[formName].validate(valid => {

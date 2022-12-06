@@ -134,20 +134,20 @@ a:hover {
 }
 
 .sign form .input-prepend .vercode input {
-  height: 40px;
-  width: 110px;
+  height: 35px;
+  width: 100px;
   position: absolute;
-  padding: 4px 30px 4px 30px;
+  padding: 4px 30px 4px 20px;
   left: 0px;
   top: -30px;
 }
 
 .sign form .input-prepend .vercode_img {
-  height: 40px;
-  width: 150px;
+  height: 35px;
+  width: 135px;
   position: absolute;
   padding: 0px 0px 0px 0px;
-  left: 120px;
+  left: 165px;
   top: 20px;
 }
 

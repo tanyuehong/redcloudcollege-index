@@ -493,12 +493,14 @@ export default {
       return {
         qdetail: response.data.qdetail,
         replyList: response.data.replyList,
+        pageKey:response.data.pageKey,
         descrb: '开源实践问答为您找到 ' + response.data.qdetail.title + ' 等相关问题答案，如果想了解更多关于 ' + response.data.qdetail.title + ' 问题等相关问答，请访问开源实践问答。',
       }
     })
   },
 
   mounted () {
+    window.console.log(this.pageKey);
     var qId = this.$route.params.id;
     var token = localStorage.getItem("redclass_token");
     var userStr = localStorage.getItem("redclass_user");
@@ -1005,6 +1007,7 @@ export default {
           rid: rItem.id,
           uid: this.loginInfo.id,
           touid: item.uid,
+          pageKey:this.pageKey
         })
         .then((response) => {
           rItem.comments.unshift(response.data.comment);
@@ -1051,6 +1054,7 @@ export default {
           content: this.editor.txt.html(),
           qid: this.qdetail.qid,
           uid: this.loginInfo.id,
+          pageKey:this.pageKey
         })
         .then((response) => {
           this.editor.txt.html("");

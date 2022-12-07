@@ -163,6 +163,7 @@ export default {
   asyncData ({ params, error }) {
     return askServerApi.getQuestionTypeList(params.id).then((response) => {
       return {
+        pageKey:response.data.pageKey,
         typeList: response.data.typeList,
         selectType: response.data.typeList[0].id,
       }
@@ -192,6 +193,7 @@ export default {
   },
 
   mounted () {
+    window.console.log(this.pageKey);
     this.loginToken = window.localStorage.getItem('redclass_token');
     this.init_wangeditor();
     this.getUploadImageToken();
@@ -241,7 +243,6 @@ export default {
     },
     getUploadImageToken () {
       userApi.getUploadImageToken().then((response) => {
-        window.console.log(response);
         this.uploadToken = response.data.token;
       });
     },
@@ -279,7 +280,8 @@ export default {
             title: this.asktitle,
             content: this.askcontent,
             qustype: this.typeList[this.askType].id,
-            tagList: this.selectTags
+            tagList: this.selectTags,
+            pageKey: this.pageKey
           })
           .then((response) => {
             this.$message({

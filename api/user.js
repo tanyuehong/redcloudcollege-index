@@ -90,12 +90,5 @@ export default {
       url: `/eduask/uploadqiniutoken`,
       method: 'post',
     })
-  },
-
-  getRegisterPage() {
-    return request({
-      url: `/home/ucenter/getRegisterPage`,
-      method: 'get',
-    })
-  },
+  }
 }

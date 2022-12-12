@@ -1177,13 +1177,20 @@
 
         <div class="qustion-type-warper">
           <div class="qustion-tag-header">
-            <img src="~/assets/img/quanzi.png" alt="技术圈子" class="technical-circle-item" style="width: 25px;height: 25px;"/>
+            <img src="~/assets/img/quanzi.png" alt="技术圈子" class="technical-circle-item"/>
             <span class="technical-circle-item">技术圈子</span>
-            <span class="ask-tag-user-fawllow technical-circle-item">关注</span>
+            <img src="~/assets/img/more.png" alt="更多" class="technical-circle-item more-item first"/>
+            <span class="technical-circle-item more-item">查看更多</span>
+          </div>
+
+          <div class="qustion-tag-subitem">
+            <img src="https://img.redskt.com/ask/tag/ios.png" alt="iOS标签" class="technical-circle-item sub-item" />
+            <span class="technical-circle-item sub-item">iOS圈子</span>
+            <span class="ask-tag-user-fawllow technical-circle-item first">关注</span>
           </div>
 
           <div class="qustion-tag-content">
-            <span>热门标签</span>
+            <span class="content-title">热门圈子</span>
             <div class="qustion-tag-warper"></div>
           </div>
         </div>
@@ -1196,7 +1203,6 @@
 <script>
 import userApi from "@/api/user";
 import askApi from "@/api/ask";
-import commonTool from "@/utils/commonUtils";
 
 import interviewApi from "@/api/interviewReq";
 import interviewServerApi from "@/api/interviewServerReq";
@@ -2417,10 +2423,43 @@ export default {
 
 <style scoped>
 
+.qustion-tag-content {
+  margin-top: 25px;
+} 
+.qustion-tag-content .content-title {
+  font-size: 12px;
+  font-weight: 550;
+}
+
+.qustion-tag-subitem {
+  margin-left: 20px;
+  margin-top: 15px;
+}
+
+.technical-circle-item.more-item {
+  vertical-align:middle;
+  font-size: 12px;
+  font-weight: 500;
+  width: 18px;
+  width: 18px;
+}
+
+.technical-circle-item.first {
+  margin-left: 140px;
+}
+.technical-circle-item.sub-item {
+  vertical-align:middle;
+  font-size: 12px;
+  font-weight: 550;
+  width: 18px;
+  width: 18px;
+}
 .technical-circle-item {
   vertical-align:middle;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 550;
+  width: 25px;
+  width: 25px;
 }
 .choose-button {
   opacity: 0.6;
@@ -3245,17 +3284,15 @@ h2.accusation-secondary-title {
 .ask-tag-user-fawllow {
   display: inline-block;
   text-align: center;
-  width: 60px;
-  height: 24px;
+  width: 56px;
+  height: 20px;
   border-radius: 18px;
   border: 1px solid #fc5531;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   color: #fc5531;
-  line-height: 22px;
+  line-height: 18px;
   cursor: pointer;
-  margin-left: 130px;
-  margin-top: 3px;
 }
 
 .qustion-type-warper {

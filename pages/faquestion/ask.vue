@@ -193,7 +193,6 @@ export default {
   },
 
   mounted () {
-    window.console.log(this.pageKey);
     this.loginToken = window.localStorage.getItem('redclass_token');
     this.init_wangeditor();
     this.getUploadImageToken();

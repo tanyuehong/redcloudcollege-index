@@ -285,9 +285,6 @@
 </template>
 
 <style>
-.bottom-list .bottom-hot-list {
-  padding: 20px;
-}
 
 .entry-list .entry-meta-box {
   margin-top: 4px;
@@ -301,38 +298,6 @@
   font-weight: 400;
 }
 
-.bottom-list .bottom-hot-list .entry-list {
-  margin-top: 10px;
-}
-
-.bottom-list .bottom-hot-list .entry-list .item {
-  display: block;
-  text-decoration: none;
-  padding: 8px 0px;
-}
-
-.bottom-list .bottom-hot-list .entry-list .item:hover .entry-title {
-  color: #1171ee;
-}
-
-.bottom-list .bottom-hot-list .entry-list .entry-title {
-  line-height: 22px;
-  font-size: 14px;
-  font-weight: 400;
-  color: #252933;
-}
-
-.bottom-list .bottom-hot-list .block-title {
-  padding-top: 10px;
-  padding-bottom: 15px;
-  margin: 0px;
-  font-size: 18px;
-  line-height: 2rem;
-  color: #1d2129;
-  font-weight: 550;
-  border-bottom: 1px solid #e4e6eb;
-}
-
 .practice_detail .download-app {
   margin-top: 0px;
   margin-right: -15px;
@@ -343,11 +308,7 @@
   margin-left: -15px;
 }
 
-.bottom-list {
-  background: #fff;
-  margin-right: -15px;
-  margin-bottom: 15px;
-}
+
 
 .bottom-tool_item .tool_crcle {
   width: 38px;
@@ -679,6 +640,7 @@
 <script>
 import "~/assets/css/markdown.css";
 import "~/assets/css/appdown.css";
+import "~/assets/css/hotlist.css";
 import showdown from "showdown";
 import blogServerApi from "@/api/blogServerReq";
 import blogApi from '@/api/blog'

@@ -1,17 +1,14 @@
 <template>
   <div class="main_global_bg">
     <div class="container">
-      <div class="qustin_detall_content">
+      <div class="qustin_detall_content col-md-8">
         <div class="ask_detail_content">
           <div class="ask-detail-lefte">
             <div class="ui breadcrumb red_breadcrumb">
               <nuxt-link :to="{ name: 'faquestion' }" class="section">
                 开源实践面试
               </nuxt-link>
-              <span
-                class="glyphicon glyphicon glyphicon-menu-right"
-                aria-hidden="true"
-              ></span>
+              <span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
               <div class="active section">面试题详情</div>
             </div>
             <div>
@@ -26,14 +23,9 @@
                   <div class="ui orange label horizontal" data-tooltip="热门">
                     热
                   </div>
-                  <a
-                    class="ui horizontal basic label popup-tag"
-                    href="https://www.oschina.net/question/tag/ruby"
-                    target="_blank"
-                    v-for="tag in qdetail.tags"
-                    :key="tag.id"
-                  >
-                    <img :src="tag.img" v-if="tag.img" alt="标签图标"/>{{ tag.name }}
+                  <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
+                    target="_blank" v-for="tag in qdetail.tags" :key="tag.id">
+                    <img :src="tag.img" v-if="tag.img" alt="标签图标" />{{ tag.name }}
                   </a>
                 </div>
               </div>
@@ -43,85 +35,44 @@
 
               <div class="qustion_content" v-html="qdetail.content"></div>
               <div class="qustion_info">
-                <div
-                  class="qustion_describ"
-                  v-html="qdetail.answer"
-                  v-if="showAnswerDetail"
-                ></div>
+                <div class="qustion_describ" v-html="qdetail.answer" v-if="showAnswerDetail"></div>
                 <div class="interview_center_button">
-                  <button
-                    v-bind:class="{ checkstyle: showAnswerDetail }"
-                    @click="checkAnswerClick"
-                  >
+                  <button v-bind:class="{ checkstyle: showAnswerDetail }" @click="checkAnswerClick">
                     查看解题思路
-                    <svg
-                      v-if="showAnswerDetail"
-                      focusable="false"
-                      viewBox="0 0 1024 1024"
-                      fill="currentColor"
-                      width="16"
-                      height="16"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fill="currentColor"
-                        fill-rule="nonzero"
-                        d="M195.9553 726.4976c-17.5625 19.8576-47.8974 21.718-67.755 4.1556-19.659-17.3868-21.679-47.292-4.6766-67.156l.521-.5989L452.0745 292.001c29.2708-33.096 79.829-36.1969 112.925-6.9261a80 80 0 0 1 6.1988 6.115l.7272.811 328.0298 370.8974c17.5624 19.8576 15.7019 50.1925-4.1557 67.755-19.659 17.3868-49.5868 15.7371-67.2242-3.5654l-.5307-.5903L512.001 369.1529 195.9553 726.4976z"
-                      ></path>
+                    <svg v-if="showAnswerDetail" focusable="false" viewBox="0 0 1024 1024" fill="currentColor"
+                      width="16" height="16" aria-hidden="true">
+                      <path fill="currentColor" fill-rule="nonzero"
+                        d="M195.9553 726.4976c-17.5625 19.8576-47.8974 21.718-67.755 4.1556-19.659-17.3868-21.679-47.292-4.6766-67.156l.521-.5989L452.0745 292.001c29.2708-33.096 79.829-36.1969 112.925-6.9261a80 80 0 0 1 6.1988 6.115l.7272.811 328.0298 370.8974c17.5624 19.8576 15.7019 50.1925-4.1557 67.755-19.659 17.3868-49.5868 15.7371-67.2242-3.5654l-.5307-.5903L512.001 369.1529 195.9553 726.4976z">
+                      </path>
                     </svg>
                   </button>
                 </div>
                 <ul class="ask-issue-tool fbselect">
-                  <span class="answer_span" @click="answerBtnClick"
-                    ><i class="icon ic_question_reply"></i>写题解</span
-                  >
+                  <span class="answer_span" @click="answerBtnClick"><i class="icon ic_question_reply"></i>写题解</span>
                   <li class="up_down_wrap wrapdisLike ask-info-item">
-                    <span
-                      class="vote_span disLike"
-                      @click="goodQustionClick"
-                      v-bind:class="{ like: userState.goodslect }"
-                    >
-                      <i class="icon icon_vote_up"></i>好问题<em
-                        class="qustion-good-num"
-                        v-if="qdetail.good > 0"
-                        >{{ qdetail.good }}</em
-                      >
+                    <span class="vote_span disLike" @click="goodQustionClick"
+                      v-bind:class="{ like: userState.goodslect }">
+                      <i class="icon icon_vote_up"></i>好问题<em class="qustion-good-num" v-if="qdetail.good > 0">{{
+                          qdetail.good
+                      }}</em>
                       <!---->
                     </span>
-                    <span class="vote_span2" @click="jianyiDlog = true"
-                      ><i class="icon icon_vote_down"></i>提建议
+                    <span class="vote_span2" @click="jianyiDlog = true"><i class="icon icon_vote_down"></i>提建议
                     </span>
-                    <el-dialog
-                      title="哪些方面需要改进"
-                      :visible.sync="jianyiDlog"
-                      :close-on-click-modal="false"
-                      center
-                    >
+                    <el-dialog title="哪些方面需要改进" :visible.sync="jianyiDlog" :close-on-click-modal="false" center>
                       <div class="jubao-content">
                         <el-radio-group v-model="jianyilable">
                           <div class="jubao-radio-content">
                             <div class="jubao-lefte-items">
-                              <el-radio :label="1" class="jubao-radio-item"
-                                >提问应符合社区要求</el-radio
-                              >
-                              <el-radio :label="2" class="jubao-radio-item"
-                                >请选择合适的标签</el-radio
-                              >
-                              <el-radio :label="3" class="jubao-radio-item"
-                                >请详细说明问题背景</el-radio
-                              >
+                              <el-radio :label="1" class="jubao-radio-item">提问应符合社区要求</el-radio>
+                              <el-radio :label="2" class="jubao-radio-item">请选择合适的标签</el-radio>
+                              <el-radio :label="3" class="jubao-radio-item">请详细说明问题背景</el-radio>
                             </div>
 
                             <div class="jubao-right-items">
-                              <el-radio :label="4" class="jubao-radio-item"
-                                >请采纳用户回复</el-radio
-                              >
-                              <el-radio :label="5" class="jubao-radio-item"
-                                >请回答用户的提问</el-radio
-                              >
-                              <el-radio :label="6" class="jubao-radio-item"
-                                >请提交代码</el-radio
-                              >
+                              <el-radio :label="4" class="jubao-radio-item">请采纳用户回复</el-radio>
+                              <el-radio :label="5" class="jubao-radio-item">请回答用户的提问</el-radio>
+                              <el-radio :label="6" class="jubao-radio-item">请提交代码</el-radio>
                             </div>
                           </div>
                         </el-radio-group>
@@ -130,52 +81,30 @@
                             建议详情（选填）
                           </h2>
                           <div class="accusation-input mt10">
-                            <el-input
-                              type="textarea"
-                              v-model="jianyiContent"
-                              placeholder="请详细描述您的建议，以便帮助更多的人"
-                              maxlength="200"
-                              :rows="6"
-                              show-word-limit
-                            >
+                            <el-input type="textarea" v-model="jianyiContent" placeholder="请详细描述您的建议，以便帮助更多的人"
+                              maxlength="200" :rows="6" show-word-limit>
                             </el-input>
                           </div>
                         </div>
                       </div>
                       <div slot="footer" class="dialog-footer">
                         <el-button @click="jianyiDlog = false">取 消</el-button>
-                        <el-button type="primary" @click="qustionJianYiConfirm"
-                          >确 定</el-button
-                        >
+                        <el-button type="primary" @click="qustionJianYiConfirm">确 定</el-button>
                       </div>
                     </el-dialog>
                   </li>
-                  <li
-                    class="ask-info-item"
-                    @click="collectBtnClick()"
-                    v-bind:class="{ collected: userState.isCollect }"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="faversvg-item"
-                    >
-                      <path
-                        fill-rule="evenodd"
+                  <li class="ask-info-item" @click="collectBtnClick()"
+                    v-bind:class="{ collected: userState.isCollect }">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+                      fill="currentColor" class="faversvg-item">
+                      <path fill-rule="evenodd"
                         d="M15.392 8.23l5.695.832a.942.942 0 01.521 1.607l-4.12 4.013.972 5.67a.942.942 0 01-1.367.993L12 18.667l-5.093 2.678a.942.942 0 01-1.367-.993l.972-5.67-4.12-4.013a.942.942 0 01.52-1.607l5.696-.833 2.547-5.16a.942.942 0 011.69 0l2.547 5.16zm-1.329 1.826L12 5.876l-2.063 4.18-4.615.675 3.34 3.252-.789 4.594L12 16.407l4.127 2.17-.788-4.594 3.34-3.252-4.616-.675z"
-                        clip-rule="evenodd"
-                      ></path>
+                        clip-rule="evenodd"></path>
                     </svg>
                     {{ userState.isCollect ? "已收藏" : "收藏" }}
                     {{ qdetail.collect }}
                   </li>
-                  <li
-                    class="ask-info-item"
-                    @click="jubaoBtnClick(qdetail.qid, '面试题')"
-                  >
+                  <li class="ask-info-item" @click="jubaoBtnClick(qdetail.qid, '面试题')">
                     <i class="icon icon_vote_jubao"></i>举报
                   </li>
                   <li class="ask-info-item" v-if="qdetail.uid == loginInfo.id">
@@ -184,88 +113,49 @@
                         <i class="icon icon_more"></i>
                       </span>
                       <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item
-                          :command="beforeHandleCommand('d', qdetail)"
-                          >删除</el-dropdown-item
-                        >
+                        <el-dropdown-item :command="beforeHandleCommand('d', qdetail)">删除</el-dropdown-item>
                       </el-dropdown-menu>
                     </el-dropdown>
                   </li>
-                  <el-dialog
-                    title="确认删除问题吗？"
-                    :visible.sync="questionDialogVisible"
-                    width="30%"
-                    center
-                  >
+                  <el-dialog title="确认删除问题吗？" :visible.sync="questionDialogVisible" width="30%" center>
                     <div class="tac">
-                      <span
-                        >删除后您的问题将不会出现在问题列表中，你将不能获得别人的帮助，请三思哦~</span
-                      >
+                      <span>删除后您的问题将不会出现在问题列表中，你将不能获得别人的帮助，请三思哦~</span>
                     </div>
                     <span slot="footer" class="dialog-footer">
-                      <el-button @click="deleteQuestion(qdetail)"
-                        >删 除</el-button
-                      >
-                      <el-button
-                        type="primary"
-                        @click="questionDialogVisible = false"
-                        >再等等</el-button
-                      >
+                      <el-button @click="deleteQuestion(qdetail)">删 除</el-button>
+                      <el-button type="primary" @click="questionDialogVisible = false">再等等</el-button>
                     </span>
                   </el-dialog>
 
-                  <el-dialog
-                    title="举报反馈"
-                    :visible.sync="jubiaoDlog"
-                    :close-on-click-modal="false"
-                    center
-                  >
+                  <el-dialog title="举报反馈" :visible.sync="jubiaoDlog" :close-on-click-modal="false" center>
                     <div class="jubao-content">
                       <div class="accusation-type">
                         <h2 class="accusation-secondary-title mb10">
                           举报类型（必选）
                         </h2>
                         <ul>
-                          <li
-                            class="accusation-item"
-                            v-bind:class="{ jubaoSlect: jubaoTypeIndex == 1 }"
-                            @click="jubaoTypeIndex = 1"
-                          >
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect: jubaoTypeIndex == 1 }"
+                            @click="jubaoTypeIndex = 1">
                             诱导点赞、关注
                           </li>
-                          <li
-                            class="accusation-item"
-                            v-bind:class="{ jubaoSlect: jubaoTypeIndex == 2 }"
-                            @click="jubaoTypeIndex = 2"
-                          >
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect: jubaoTypeIndex == 2 }"
+                            @click="jubaoTypeIndex = 2">
                             抄袭、刷量作弊
                           </li>
-                          <li
-                            class="accusation-item"
-                            v-bind:class="{ jubaoSlect: jubaoTypeIndex == 3 }"
-                            @click="jubaoTypeIndex = 3"
-                          >
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect: jubaoTypeIndex == 3 }"
+                            @click="jubaoTypeIndex = 3">
                             有害信息
                           </li>
-                          <li
-                            class="accusation-item"
-                            v-bind:class="{ jubaoSlect: jubaoTypeIndex == 4 }"
-                            @click="jubaoTypeIndex = 4"
-                          >
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect: jubaoTypeIndex == 4 }"
+                            @click="jubaoTypeIndex = 4">
                             不友善内容
                           </li>
-                          <li
-                            class="accusation-item"
-                            v-bind:class="{ jubaoSlect: jubaoTypeIndex == 5 }"
-                            @click="jubaoTypeIndex = 5"
-                          >
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect: jubaoTypeIndex == 5 }"
+                            @click="jubaoTypeIndex = 5">
                             垃圾广告信息
                           </li>
-                          <li
-                            class="accusation-item"
-                            v-bind:class="{ jubaoSlect: jubaoTypeIndex == 6 }"
-                            @click="jubaoTypeIndex = 6"
-                          >
+                          <li class="accusation-item" v-bind:class="{ jubaoSlect: jubaoTypeIndex == 6 }"
+                            @click="jubaoTypeIndex = 6">
                             低质内容
                           </li>
                         </ul>
@@ -275,23 +165,15 @@
                           举报详情（选填）
                         </h2>
                         <div class="accusation-input">
-                          <el-input
-                            type="textarea"
-                            v-model="jubaoContent"
-                            placeholder="请详细描述举报原因，我们将第一时间核实处理"
-                            maxlength="200"
-                            :rows="6"
-                            show-word-limit
-                          >
+                          <el-input type="textarea" v-model="jubaoContent" placeholder="请详细描述举报原因，我们将第一时间核实处理"
+                            maxlength="200" :rows="6" show-word-limit>
                           </el-input>
                         </div>
                       </div>
                     </div>
                     <div slot="footer" class="dialog-footer">
                       <el-button @click="jubiaoDlog = false">取 消</el-button>
-                      <el-button type="primary" @click="jubaoCommitBtnClick"
-                        >确 定</el-button
-                      >
+                      <el-button type="primary" @click="jubaoCommitBtnClick">确 定</el-button>
                     </div>
                   </el-dialog>
                 </ul>
@@ -301,85 +183,34 @@
                   <div class="info-step">{{ infoStep }}/3</div>
                 </div>
                 <div class="question-metting-content" v-if="infoStep != 4">
-                  <div
-                    class="meeting-items"
-                    v-for="infoItem in qustionInfos"
-                    :key="infoItem.id"
-                  >
-                    <button
-                      class="metting-btn"
-                      @click="meetingTypeClick(infoItem)"
-                    >
+                  <div class="meeting-items" v-for="infoItem in qustionInfos" :key="infoItem.id">
+                    <button class="metting-btn" @click="meetingTypeClick(infoItem)">
                       <span>{{ infoItem.name }}</span>
                     </button>
                   </div>
                 </div>
                 <div class="info-input" v-if="infoStep == 2 || infoStep == 3">
-                  <el-select
-                    v-model="companyName"
-                    filterable
-                    remote
-                    size="mini"
-                    allow-create
-                    id="elenet-idex"
-                    :placeholder="inputPlaceholder"
-                    :remote-method="comPanyMethod"
-                    @visible-change="tagListShow"
-                    @change="inputSelect"
-                    :loading="companyLoading"
-                  >
-                    <el-option
-                      :key="optionOne.value"
-                      :label="optionOne.label"
-                      :value="optionOne.value"
-                      id="mytestoo"
-                    >
+                  <el-select v-model="companyName" filterable remote size="mini" allow-create id="elenet-idex"
+                    :placeholder="inputPlaceholder" :remote-method="comPanyMethod" @visible-change="tagListShow"
+                    @change="inputSelect" :loading="companyLoading">
+                    <el-option :key="optionOne.value" :label="optionOne.label" :value="optionOne.value" id="mytestoo">
                     </el-option>
-                    <el-option
-                      v-for="item in options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    >
+                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                   </el-select>
-                  <el-button
-                    type="success"
-                    class="choose-button"
-                    size="mini"
-                    :disabled="submitBtnDisable"
-                    @click="submitBtnClick"
-                    >{{ submitTitle }}</el-button
-                  >
+                  <el-button type="success" class="choose-button" size="mini" :disabled="submitBtnDisable"
+                    @click="submitBtnClick">{{ submitTitle }}</el-button>
                 </div>
 
-                <transition
-                  v-on:before-enter="beforeEnter"
-                  v-on:enter="enter"
-                  v-on:after-enter="afterEnter"
-                  v-on:leave="leave"
-                  v-bind:css="false"
-                >
+                <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter"
+                  v-on:leave="leave" v-bind:css="false">
                   <div class="answer-qustion-editor" v-if="showAnswerditor">
                     <div id="answer-editor"></div>
                     <div class="interview-ediot-detail">
-                      <span
-                        class="report-common-question"
-                        @click="showAnswerditor = !showAnswerditor"
-                        >取消回答</span
-                      >
-                      <el-checkbox v-model="checked" class="interview-btn-check"
-                        >关注问题</el-checkbox
-                      >
-                      <el-checkbox v-model="checked" class="answer-open-check"
-                        >公开</el-checkbox
-                      >
-                      <el-button
-                        type="primary"
-                        class="submit-btn-style"
-                        @click="submitAnserClick"
-                        >提交</el-button
-                      >
+                      <span class="report-common-question" @click="showAnswerditor = !showAnswerditor">取消回答</span>
+                      <el-checkbox v-model="checked" class="interview-btn-check">关注问题</el-checkbox>
+                      <el-checkbox v-model="checked" class="answer-open-check">公开</el-checkbox>
+                      <el-button type="primary" class="submit-btn-style" @click="submitAnserClick">提交</el-button>
                       <div class="clearfloat"></div>
                     </div>
                   </div>
@@ -390,64 +221,34 @@
 
           <div class="interview-questions-con">
             <ul class="interview-subtypelist">
-              <a
-                :href="'/interview/detail/' + qdetail.qid + '?subtype=1'"
-                class="faqustion-subtype-item"
-                v-bind:class="{ comactive: subType == 1 }"
-              >
+              <a :href="'/interview/detail/' + qdetail.qid + '?subtype=1'" class="faqustion-subtype-item"
+                v-bind:class="{ comactive: subType == 1 }">
                 <span title="题解"> 题解 </span>
               </a>
-              <a
-                :href="'/interview/detail/' + qdetail.qid + '?subtype=2'"
-                class="faqustion-subtype-item"
-                v-bind:class="{ comactive: subType == 2 }"
-              >
+              <a :href="'/interview/detail/' + qdetail.qid + '?subtype=2'" class="faqustion-subtype-item"
+                v-bind:class="{ comactive: subType == 2 }">
                 <span title="评论"> 评论 </span>
               </a>
             </ul>
 
             <!-- 题解 -->
-            <div
-              id="answer-list"
-              class="interview-answer-list"
-              v-if="subType == 1"
-            >
+            <div id="answer-list" class="interview-answer-list" v-if="subType == 1">
               <div class="no-commet" v-if="dataList.length == 0">
-                <img
-                  class="nocommet-image-tips"
-                  src="https://img.redskt.com/asset/img/nodata.png"
-                  alt="空数据提示"
-                />
+                <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示" />
                 <div>
-                  <span class="tips"
-                    >暂时没有公开的题解哦，赶紧写一个公开给大家学习吧</span
-                  >
+                  <span class="tips">暂时没有公开的题解哦，赶紧写一个公开给大家学习吧</span>
                 </div>
               </div>
 
               <div class="qustion-answer-content">
                 <ul class="qustion-anser-list">
-                  <li
-                    class="answer-interview"
-                    v-for="(item, index) in dataList"
-                    :key="item.id"
-                  >
+                  <li class="answer-interview" v-for="(item, index) in dataList" :key="item.id">
                     <div class="answer-item-userinfo">
-                      <nuxt-link
-                        :to="'/user/' + item.uid + '/blog'"
-                        class="anser-info"
-                      >
-                        <img
-                          class="vam user-head-image"
-                          :src="item.avatar"
-                          width="30"
-                          height="30"
-                          alt="用户头像"
-                        />
+                      <nuxt-link :to="'/user/' + item.uid + '/blog'" class="anser-info">
+                        <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt="用户头像" />
                         <span class="ml5"> {{ item.username }}</span>
                         <span class="qustion-top-item anser-time">
-                          {{ item.gmtCreate }}</span
-                        >
+                          {{ item.gmtCreate }}</span>
                       </nuxt-link>
 
                       <span class="good_answer" v-if="item.state == 9">
@@ -460,97 +261,55 @@
 
                     <div class="interview-reply-tool">
                       <div class="reply-tool-item">
-                        <button
-                          @click="goodAnswerClick(item)"
-                          v-bind:class="{ selected: item.isgood }"
-                          type="button"
-                          class="tool-button votebutton-good"
-                        >
-                          <span
-                            style="display: inline-flex; align-items: center"
-                          >
-                            ​<svg
-                              width="10"
-                              height="10"
-                              viewBox="0 0 24 24"
-                              data-new-api="AgreeFill24"
-                              data-old-api="TriangleUp"
-                              class="Zi Zi--TriangleUp VoteButton-TriangleUp"
-                              fill="currentColor"
-                            >
+                        <button @click="goodAnswerClick(item)" v-bind:class="{ selected: item.isgood }" type="button"
+                          class="tool-button votebutton-good">
+                          <span style="display: inline-flex; align-items: center">
+                            ​<svg width="10" height="10" viewBox="0 0 24 24" data-new-api="AgreeFill24"
+                              data-old-api="TriangleUp" class="Zi Zi--TriangleUp VoteButton-TriangleUp"
+                              fill="currentColor">
                               <path
                                 d="M13.792 3.681c-.781-1.406-2.803-1.406-3.584 0l-7.79 14.023c-.76 1.367.228 3.046 1.791 3.046h15.582c1.563 0 2.55-1.68 1.791-3.046l-7.79-14.023z"
-                                fill-rule="evenodd"
-                                clip-rule="evenodd"
-                              ></path>
-                            </svg> </span
-                          >赞同 {{ item.good }}
+                                fill-rule="evenodd" clip-rule="evenodd"></path>
+                            </svg> </span>赞同 {{ item.good }}
                         </button>
                       </div>
                       <div class="reply-tool-item">
                         <button class="tool-button">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            width="16px"
-                            height="16px"
-                            fill="currentColor"
-                          >
-                            <path
-                              fill-rule="evenodd"
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
                               d="M1.104 12.444a1 1 0 010-.888c.13-.26.37-.693.722-1.241A18.85 18.85 0 013.88 7.652C6.184 5.176 8.896 3.667 12 3.667s5.816 1.509 8.119 3.985c.79.85 1.475 1.756 2.055 2.663.352.548.593.98.722 1.24a1 1 0 010 .89c-.13.26-.37.692-.722 1.24a18.848 18.848 0 01-2.055 2.663c-2.303 2.476-5.015 3.985-8.119 3.985s-5.816-1.509-8.119-3.985a18.846 18.846 0 01-2.055-2.663c-.352-.548-.593-.98-.722-1.24zm2.406.162a16.87 16.87 0 001.836 2.38c1.959 2.106 4.19 3.347 6.654 3.347 2.465 0 4.695-1.24 6.654-3.347A16.87 16.87 0 0020.86 12a16.871 16.871 0 00-2.206-2.986C16.695 6.908 14.464 5.667 12 5.667c-2.465 0-4.695 1.24-6.654 3.347A16.87 16.87 0 003.14 12c.108.188.232.391.37.607zM12 15.75c-2.06 0-3.727-1.68-3.727-3.75 0-2.07 1.667-3.75 3.727-3.75 2.06 0 3.727 1.68 3.727 3.75 0 2.07-1.667 3.75-3.727 3.75zm0-2c.952 0 1.727-.782 1.727-1.75s-.775-1.75-1.727-1.75c-.952 0-1.727.782-1.727 1.75s.775 1.75 1.727 1.75z"
-                              clip-rule="evenodd"
-                            ></path>
+                              clip-rule="evenodd"></path>
                           </svg>
                           <span> {{ item.view }} 已学习 </span>
                         </button>
                       </div>
                       <div class="reply-tool-item">
                         <button class="tool-button">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            width="16px"
-                            height="16px"
-                            fill="currentColor"
-                          >
-                            <path
-                              fill-rule="evenodd"
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
                               d="M11.997 21.5a9.5 9.5 0 01-8.49-5.251A9.38 9.38 0 012.5 11.997V11.5c.267-4.88 4.12-8.733 8.945-8.999L12 2.5a9.378 9.378 0 014.25 1.007A9.498 9.498 0 0121.5 12a9.378 9.378 0 01-.856 3.937l.838 4.376a1 1 0 01-1.17 1.17l-4.376-.838a9.381 9.381 0 01-3.939.856zm3.99-2.882l3.254.623-.623-3.253a1 1 0 01.09-.64 7.381 7.381 0 00.792-3.346 7.5 7.5 0 00-4.147-6.708 7.385 7.385 0 00-3.35-.794H11.5c-3.752.208-6.792 3.248-7.002 7.055L4.5 12a7.387 7.387 0 00.794 3.353A7.5 7.5 0 0012 19.5a7.384 7.384 0 003.349-.793 1 1 0 01.639-.09z"
-                              clip-rule="evenodd"
-                            ></path>
+                              clip-rule="evenodd"></path>
                           </svg>
-                          <span>{{item.allcomment}} 条评论</span>
+                          <span>{{ item.allcomment }} 条评论</span>
                         </button>
                       </div>
                       <div class="reply-tool-item">
-                        <button
-                          class="tool-button"
-                          @click="answerCollectBtnClick(item)"
-                          v-bind:class="{ collected: item.iscollect }"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                          >
-                            <path
-                              fill-rule="evenodd"
+                        <button class="tool-button" @click="answerCollectBtnClick(item)"
+                          v-bind:class="{ collected: item.iscollect }">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
                               d="M15.392 8.23l5.695.832a.942.942 0 01.521 1.607l-4.12 4.013.972 5.67a.942.942 0 01-1.367.993L12 18.667l-5.093 2.678a.942.942 0 01-1.367-.993l.972-5.67-4.12-4.013a.942.942 0 01.52-1.607l5.696-.833 2.547-5.16a.942.942 0 011.69 0l2.547 5.16zm-1.329 1.826L12 5.876l-2.063 4.18-4.615.675 3.34 3.252-.789 4.594L12 16.407l4.127 2.17-.788-4.594 3.34-3.252-4.616-.675z"
-                              clip-rule="evenodd"
-                            ></path>
+                              clip-rule="evenodd"></path>
                           </svg>
                           <span>{{ item.iscollect ? "已收藏" : "收藏" }}</span>
                         </button>
                       </div>
 
                       <div class="reply-tool-item">
-                        <button
-                          class="tool-button"
-                          @click="jubaoBtnClick(qdetail.qid, '面试题题解')"
-                        >
+                        <button class="tool-button" @click="jubaoBtnClick(qdetail.qid, '面试题题解')">
                           <i class="icon icon_vote_jubao"></i>
                           <span>举报</span>
                         </button>
@@ -562,211 +321,101 @@
                             <i class="icon icon_more"></i>
                           </span>
                           <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item
-                              :command="beforeHandleCommand('d', item)"
-                              v-if="item.uid == loginInfo.id"
-                              >删除</el-dropdown-item
-                            >
-                            <el-dropdown-item
-                              :command="beforeHandleCommand('g', item)"
-                              >最佳题解</el-dropdown-item
-                            >
+                            <el-dropdown-item :command="beforeHandleCommand('d', item)"
+                              v-if="item.uid == loginInfo.id">删除</el-dropdown-item>
+                            <el-dropdown-item :command="beforeHandleCommand('g', item)">最佳题解</el-dropdown-item>
                           </el-dropdown-menu>
                         </el-dropdown>
                       </span>
                     </div>
-                    <el-dialog
-                      title="确认取消最佳回答吗？"
-                      :visible.sync="cgoodDialogVisible"
-                      width="30%"
-                      center
-                    >
+                    <el-dialog title="确认取消最佳回答吗？" :visible.sync="cgoodDialogVisible" width="30%" center>
                       <div class="tac">
-                        <span
-                          >最佳答案能够有更明确的提示，正确的回答将帮助其他有同样问题的同学，并且最佳答案会奖励该问题回答者，请尽量选择正确的回答哈~</span
-                        >
+                        <span>最佳答案能够有更明确的提示，正确的回答将帮助其他有同样问题的同学，并且最佳答案会奖励该问题回答者，请尽量选择正确的回答哈~</span>
                       </div>
                       <span slot="footer" class="dialog-footer">
-                        <el-button
-                          type="primary"
-                          @click="questionGoodReply(item, 2)"
-                          >确 认</el-button
-                        >
-                        <el-button @click="cgoodDialogVisible = false"
-                          >再等等</el-button
-                        >
+                        <el-button type="primary" @click="questionGoodReply(item, 2)">确 认</el-button>
+                        <el-button @click="cgoodDialogVisible = false">再等等</el-button>
                       </span>
                     </el-dialog>
-                    <el-dialog
-                      title="确认设为最佳回答吗？"
-                      :visible.sync="goodDialogVisible"
-                      width="30%"
-                      center
-                    >
+                    <el-dialog title="确认设为最佳回答吗？" :visible.sync="goodDialogVisible" width="30%" center>
                       <div class="tac">
-                        <span
-                          >最佳答案能够有更明确的提示，正确的回答将帮助其他有同样问题的同学，并且最佳答案会奖励该问题回答者，请尽量选择正确的回答哈~</span
-                        >
+                        <span>最佳答案能够有更明确的提示，正确的回答将帮助其他有同样问题的同学，并且最佳答案会奖励该问题回答者，请尽量选择正确的回答哈~</span>
                       </div>
                       <span slot="footer" class="dialog-footer">
-                        <el-button @click="goodDialogVisible = false"
-                          >再等等</el-button
-                        >
-                        <el-button
-                          type="primary"
-                          @click="questionGoodReply(item)"
-                          >确 认</el-button
-                        >
+                        <el-button @click="goodDialogVisible = false">再等等</el-button>
+                        <el-button type="primary" @click="questionGoodReply(item)">确 认</el-button>
                       </span>
                     </el-dialog>
-                    <el-dialog
-                      title="确认删除题解吗？"
-                      :visible.sync="deleteDialogVisible"
-                      width="30%"
-                      center
-                    >
+                    <el-dialog title="确认删除题解吗？" :visible.sync="deleteDialogVisible" width="30%" center>
                       <div class="tac">
-                        <span
-                          >删除后您的解答将不会出现在该面试题题下,请三思哦~</span
-                        >
+                        <span>删除后您的解答将不会出现在该面试题题下,请三思哦~</span>
                       </div>
                       <span slot="footer" class="dialog-footer">
-                        <el-button @click="deleteQuestionAnswer(item, 1)"
-                          >删 除</el-button
-                        >
-                        <el-button
-                          type="primary"
-                          @click="deleteDialogVisible = false"
-                          >再等等</el-button
-                        >
+                        <el-button @click="deleteQuestionAnswer(item, 1)">删 除</el-button>
+                        <el-button type="primary" @click="deleteDialogVisible = false">再等等</el-button>
                       </span>
                     </el-dialog>
 
                     <div class="reply-comment-tool" v-if="item.showeditor">
                       <span @click="replybtnclinck(item, index)">取消</span>
-                      <div
-                        class="comment-btn"
-                        @click="replyCommntClick(item, index)"
-                      >
+                      <div class="comment-btn" @click="replyCommntClick(item, index)">
                         评论
                       </div>
                     </div>
 
                     <div class="reply-comment-container" v-if="subType == 2">
-                      <div
-                        class="reply-comment-item"
-                        v-for="(comment, cindex) in comments"
-                        :key="comment.id"
-                      >
+                      <div class="reply-comment-item" v-for="(comment, cindex) in comments" :key="comment.id">
                         <div class="answer-item-userinfo">
-                          <img
-                            class="vam user-head-image"
-                            :src="comment.avatar"
-                            width="30"
-                            height="30"
-                            alt="用户头像"
-                          />
+                          <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt="用户头像" />
                           <span class="ml5"> {{ comment.name }}</span>
-                          <span class="comment-replyment" v-if="comment.toname"
-                            >回复</span
-                          >
+                          <span class="comment-replyment" v-if="comment.toname">回复</span>
                           <span v-if="comment.toname">{{
-                            comment.toname
+                              comment.toname
                           }}</span>
                           <span class="qustion-top-item">{{
-                            comment.gmtCreate
+                              comment.gmtCreate
                           }}</span>
                         </div>
-                        <div
-                          class="answer-item-content"
-                          v-html="comment.content"
-                        ></div>
+                        <div class="answer-item-content" v-html="comment.content"></div>
                         <div class="comment-tool-bar fbselect">
-                          <span
-                            class="mr15"
-                            v-bind:class="{ goodcomment: comment.goodreply }"
-                            @click="goodCommentClick(comment)"
-                            ><i class="icon icon_vote_up"></i
-                            >{{ commentGood(comment.good) }}</span
-                          >
-                          <span
-                            class="mr15"
-                            @click="commentbtnclinck(comment, cindex)"
-                            >回复</span
-                          >
-                          <span
-                            class="mr15"
-                            @click="jubaoBtnClick(comment.id, '面试题题解')"
-                          >
+                          <span class="mr15" v-bind:class="{ goodcomment: comment.goodreply }"
+                            @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>{{
+                                commentGood(comment.good)
+                            }}</span>
+                          <span class="mr15" @click="commentbtnclinck(comment, cindex)">回复</span>
+                          <span class="mr15" @click="jubaoBtnClick(comment.id, '面试题题解')">
                             <i class="icon icon_ask_report"></i>举报
                           </span>
                           <span v-if="comment.uid == loginInfo.id">
-                            <el-dropdown
-                              szie="mini"
-                              @command="commentClickCommend"
-                            >
+                            <el-dropdown szie="mini" @command="commentClickCommend">
                               <span class="el-dropdown-link drop-menu">
                                 <i class="icon icon_more"></i>
                               </span>
                               <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item
-                                  :command="beforeHandleCommand('d', comment)"
-                                  >删除</el-dropdown-item
-                                >
+                                <el-dropdown-item :command="beforeHandleCommand('d', comment)">删除</el-dropdown-item>
                               </el-dropdown-menu>
                             </el-dropdown>
                           </span>
                         </div>
 
-                        <el-dialog
-                          title="确认删除评论吗？"
-                          :visible.sync="deleteCommentVisible"
-                          width="30%"
-                          center
-                        >
+                        <el-dialog title="确认删除评论吗？" :visible.sync="deleteCommentVisible" width="30%" center>
                           <div class="tac">
-                            <span
-                              >删除后您的评论将不会出现在该回答下,请三思哦~</span
-                            >
+                            <span>删除后您的评论将不会出现在该回答下,请三思哦~</span>
                           </div>
                           <span slot="footer" class="dialog-footer">
-                            <el-button
-                              @click="deleteCommentReply(comment, item)"
-                              >删 除</el-button
-                            >
-                            <el-button
-                              type="primary"
-                              @click="deleteCommentVisible = false"
-                              >再等等</el-button
-                            >
+                            <el-button @click="deleteCommentReply(comment, item)">删 除</el-button>
+                            <el-button type="primary" @click="deleteCommentVisible = false">再等等</el-button>
                           </span>
                         </el-dialog>
 
-                        <transition
-                          v-on:before-enter="cbeforeEnter"
-                          v-on:enter="center"
-                          v-on:after-enter="cafterEnter"
-                          v-on:leave="cleave"
-                          v-bind:css="false"
-                        >
-                          <div
-                            :id="'creplayedtor' + cindex"
-                            class="c-replay-editor"
-                            v-if="comment.showeditor"
-                            :key="comment.id"
-                          ></div>
+                        <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:after-enter="cafterEnter"
+                          v-on:leave="cleave" v-bind:css="false">
+                          <div :id="'creplayedtor' + cindex" class="c-replay-editor" v-if="comment.showeditor"
+                            :key="comment.id"></div>
                         </transition>
-                        <div
-                          class="reply-comment-tool r-comment"
-                          v-if="comment.showeditor"
-                        >
-                          <span @click="commentbtnclinck(comment, cindex)"
-                            >取消</span
-                          >
-                          <div
-                            class="comment-btn"
-                            @click="creplyCommntClick(comment, item, cindex)"
-                          >
+                        <div class="reply-comment-tool r-comment" v-if="comment.showeditor">
+                          <span @click="commentbtnclinck(comment, cindex)">取消</span>
+                          <div class="comment-btn" @click="creplyCommntClick(comment, item, cindex)">
                             提交
                           </div>
                         </div>
@@ -781,34 +430,17 @@
             <div class="interview-comment-list" v-if="subType == 2">
               <div class="interview-bottom-comment">
                 <div class="comment-blog">
-                  <a href="/teacher/1257316155061886977" class="article_title"
-                    ><img
-                      src="https://static.redskt.com/assets/img/yonghutouxiangnan.png"
-                      width="30"
-                      height="30"
-                      alt="用户头像"
-                      class="vam user-head-image article-avatar"
-                  /></a>
+                  <a href="/teacher/1257316155061886977" class="article_title"><img
+                      src="https://static.redskt.com/assets/img/yonghutouxiangnan.png" width="30" height="30" alt="用户头像"
+                      class="vam user-head-image article-avatar" /></a>
                 </div>
                 <div class="commet-editor-content">
                   <div id="comment-editor"></div>
-                  <transition
-                    v-on:before-enter="cbeforeEnter"
-                    v-on:enter="center"
-                    v-on:leave="cleave"
-                    v-bind:css="false"
-                  >
+                  <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:leave="cleave"
+                    v-bind:css="false">
                     <div class="interview-submit-tool" v-if="showComment">
-                      <el-button
-                        type="primary"
-                        round
-                        size="small"
-                        @click="commentBtnSubmit"
-                        >发表评论</el-button
-                      >
-                      <el-button round size="small" @click="cancleCommentClick"
-                        >取消</el-button
-                      >
+                      <el-button type="primary" round size="small" @click="commentBtnSubmit">发表评论</el-button>
+                      <el-button round size="small" @click="cancleCommentClick">取消</el-button>
                     </div>
                   </transition>
                 </div>
@@ -817,103 +449,54 @@
 
               <div class="comment-header">
                 <span>
-                  <em class="em1">全部评论 ( {{ dataList.length }} )</em></span
-                >
-                <span class="reply_wrap"
-                  ><em class="em2 cur">按热度排序</em>
-                  <em class="em2">按时间排序</em></span
-                >
+                  <em class="em1">全部评论 ( {{ dataList.length }} )</em></span>
+                <span class="reply_wrap"><em class="em2 cur">按热度排序</em>
+                  <em class="em2">按时间排序</em></span>
               </div>
 
               <div class="no-commet" v-if="dataList.length == 0">
-                <img
-                  class="nocommet-image-tips"
-                  src="https://img.redskt.com/asset/img/nodata.png"
-                  alt="空数据提示"
-                />
+                <img class="nocommet-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示" />
                 <div>
                   <span class="tips">暂时没有评论哦，赶紧抢沙发吧</span>
                 </div>
               </div>
 
-              <div
-                id="answer-list"
-                class="interview-answer-list"
-                v-if="dataList.length > 0"
-              >
+              <div id="answer-list" class="interview-answer-list" v-if="dataList.length > 0">
                 <div class="qustion-answer-content">
                   <ul class="qustion-anser-list">
-                    <li
-                      class="interview-comment-item"
-                      v-for="(item, index) in dataList"
-                      :key="item.id"
-                    >
+                    <li class="interview-comment-item" v-for="(item, index) in dataList" :key="item.id">
                       <div class="answer-item-userinfo">
-                        <img
-                          class="vam user-head-image"
-                          :src="item.avatar"
-                          width="30"
-                          height="30"
-                          alt="用户头像"
-                        />
+                        <img class="vam user-head-image" :src="item.avatar" width="30" height="30" alt="用户头像" />
                         <span class="ml5"> {{ item.username }}</span>
                         <span class="qustion-top-item">
-                          {{ item.gmtCreate }}</span
-                        >
+                          {{ item.gmtCreate }}</span>
                       </div>
 
-                      <div
-                        class="answer-item-content"
-                        v-html="item.content"
-                      ></div>
+                      <div class="answer-item-content" v-html="item.content"></div>
 
                       <div class="interview-reply-tool">
                         <div class="tool-item">
-                          <span
-                            v-bind:class="{ like: item.goodreply }"
-                            @click="goodCommentClick(item)"
-                          >
-                            <i class="icon icon_vote_up"></i
-                            ><em class="qustion-good-num">{{
-                              commentGood(item.good)
-                            }}</em></span
-                          >
+                          <span v-bind:class="{ like: item.goodreply }" @click="goodCommentClick(item)">
+                            <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{
+                                commentGood(item.good)
+                            }}</em></span>
                         </div>
-                        <div
-                          class="tool-item fbselect"
-                          @click="replybtnclinck(item, index)"
-                        >
-                          <svg
-                            data-v-d5fd42b8=""
-                            width="16"
-                            height="16"
-                            viewBox="0 0 16 16"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class=""
-                          >
-                            <path
-                              data-v-d5fd42b8=""
-                              fill-rule="evenodd"
-                              clip-rule="evenodd"
-                              d="M2.30136 10.1142L2.30019 3.45191C2.30024 2.6778 2.92779 2.05019 3.70191 2.05019H12.3989C13.1731 2.05019 13.8006 2.67785 13.8006 3.452L13.8018 10.1144C13.8017 10.8885 13.1742 11.516 12.4001 11.516H10.1322C9.97329 11.516 9.81862 11.5675 9.69142 11.6629L6.65162 13.9406C6.62173 13.9598 6.58148 13.9444 6.57209 13.91L6.15416 12.0869C6.07758 11.7528 5.78033 11.516 5.43761 11.516H3.70308C2.92893 11.516 2.30136 10.8884 2.30136 10.1142ZM3.70191 1C2.34776 1 1.25 2.09776 1.25 3.45191L1.25117 10.1144C1.25122 11.4685 2.34896 12.5662 3.70308 12.5662H5.18661L5.54953 14.1495L5.55107 14.1558C5.73515 14.9153 6.62879 15.248 7.26458 14.7937L10.2372 12.5662H12.4001C13.7542 12.5662 14.852 11.4684 14.852 10.1142L14.8508 3.45182C14.8508 2.09771 13.753 1 12.3989 1H3.70191ZM4.78612 7.91404C5.35027 7.91404 5.8076 7.45671 5.8076 6.89257C5.8076 6.32842 5.35027 5.87109 4.78612 5.87109C4.22198 5.87109 3.76465 6.32842 3.76465 6.89257C3.76465 7.45671 4.22198 7.91404 4.78612 7.91404ZM8.98631 6.89257C8.98631 7.45671 8.52898 7.91404 7.96483 7.91404C7.40069 7.91404 6.94336 7.45671 6.94336 6.89257C6.94336 6.32842 7.40069 5.87109 7.96483 5.87109C8.52898 5.87109 8.98631 6.32842 8.98631 6.89257ZM11.1484 7.91404C11.7126 7.91404 12.1699 7.45671 12.1699 6.89257C12.1699 6.32842 11.7126 5.87109 11.1484 5.87109C10.5843 5.87109 10.127 6.32842 10.127 6.89257C10.127 7.45671 10.5843 7.91404 11.1484 7.91404Z"
-                            ></path>
+                        <div class="tool-item fbselect" @click="replybtnclinck(item, index)">
+                          <svg data-v-d5fd42b8="" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                            xmlns="http://www.w3.org/2000/svg" class="">
+                            <path data-v-d5fd42b8="" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M2.30136 10.1142L2.30019 3.45191C2.30024 2.6778 2.92779 2.05019 3.70191 2.05019H12.3989C13.1731 2.05019 13.8006 2.67785 13.8006 3.452L13.8018 10.1144C13.8017 10.8885 13.1742 11.516 12.4001 11.516H10.1322C9.97329 11.516 9.81862 11.5675 9.69142 11.6629L6.65162 13.9406C6.62173 13.9598 6.58148 13.9444 6.57209 13.91L6.15416 12.0869C6.07758 11.7528 5.78033 11.516 5.43761 11.516H3.70308C2.92893 11.516 2.30136 10.8884 2.30136 10.1142ZM3.70191 1C2.34776 1 1.25 2.09776 1.25 3.45191L1.25117 10.1144C1.25122 11.4685 2.34896 12.5662 3.70308 12.5662H5.18661L5.54953 14.1495L5.55107 14.1558C5.73515 14.9153 6.62879 15.248 7.26458 14.7937L10.2372 12.5662H12.4001C13.7542 12.5662 14.852 11.4684 14.852 10.1142L14.8508 3.45182C14.8508 2.09771 13.753 1 12.3989 1H3.70191ZM4.78612 7.91404C5.35027 7.91404 5.8076 7.45671 5.8076 6.89257C5.8076 6.32842 5.35027 5.87109 4.78612 5.87109C4.22198 5.87109 3.76465 6.32842 3.76465 6.89257C3.76465 7.45671 4.22198 7.91404 4.78612 7.91404ZM8.98631 6.89257C8.98631 7.45671 8.52898 7.91404 7.96483 7.91404C7.40069 7.91404 6.94336 7.45671 6.94336 6.89257C6.94336 6.32842 7.40069 5.87109 7.96483 5.87109C8.52898 5.87109 8.98631 6.32842 8.98631 6.89257ZM11.1484 7.91404C11.7126 7.91404 12.1699 7.45671 12.1699 6.89257C12.1699 6.32842 11.7126 5.87109 11.1484 5.87109C10.5843 5.87109 10.127 6.32842 10.127 6.89257C10.127 7.45671 10.5843 7.91404 11.1484 7.91404Z">
+                            </path>
                           </svg>
                           回复
                         </div>
-                        <div
-                          class="tool-item"
-                          @click="jubaoBtnClick(item.id, '面试题评论')"
-                        >
+                        <div class="tool-item" @click="jubaoBtnClick(item.id, '面试题评论')">
                           <i class="icon icon_ask_report"></i>
                           举报
                         </div>
 
                         <div class="tool-item" v-if="item.uid == loginInfo.id">
-                          <el-dropdown
-                            szie="mini"
-                            @command="deleteCommentVisible = 1"
-                          >
+                          <el-dropdown szie="mini" @command="deleteCommentVisible = 1">
                             <span class="el-dropdown-link drop-menu">
                               <i class="icon icon_more"></i>
                             </span>
@@ -923,143 +506,64 @@
                           </el-dropdown>
                         </div>
 
-                        <el-dialog
-                          title="确认删除评论吗？"
-                          :visible.sync="deleteCommentVisible"
-                          width="30%"
-                          center
-                        >
+                        <el-dialog title="确认删除评论吗？" :visible.sync="deleteCommentVisible" width="30%" center>
                           <div class="tac">
-                            <span
-                              >删除后您的评论将不会出现在该面试题下,请三思哦~</span
-                            >
+                            <span>删除后您的评论将不会出现在该面试题下,请三思哦~</span>
                           </div>
                           <span slot="footer" class="dialog-footer">
-                            <el-button @click="deleteComment(item)"
-                              >删 除</el-button
-                            >
-                            <el-button
-                              type="primary"
-                              @click="deleteCommentVisible = false"
-                              >再等等</el-button
-                            >
+                            <el-button @click="deleteComment(item)">删 除</el-button>
+                            <el-button type="primary" @click="deleteCommentVisible = false">再等等</el-button>
                           </span>
                         </el-dialog>
                       </div>
-                      <transition
-                        v-on:before-enter="rbeforeEnter"
-                        v-on:enter="renter"
-                        v-on:after-enter="rafterEnter"
-                        v-on:leave="rleave"
-                        v-bind:css="false"
-                      >
-                        <div
-                          :id="'replayedtor' + index"
-                          class="interview-replay-editor"
-                          v-if="item.showeditor"
-                          :key="item.id"
-                        ></div>
+                      <transition v-on:before-enter="rbeforeEnter" v-on:enter="renter" v-on:after-enter="rafterEnter"
+                        v-on:leave="rleave" v-bind:css="false">
+                        <div :id="'replayedtor' + index" class="interview-replay-editor" v-if="item.showeditor"
+                          :key="item.id"></div>
                       </transition>
                       <div class="editor-submit-tool" v-if="item.showeditor">
-                        <el-button
-                          type="primary"
-                          round
-                          size="small"
-                          @click="commentReplySubmit(item, index)"
-                          >提交
+                        <el-button type="primary" round size="small" @click="commentReplySubmit(item, index)">提交
                         </el-button>
-                        <el-button
-                          round
-                          size="small"
-                          @click="replybtnclinck(item, index)"
-                          >取消</el-button
-                        >
+                        <el-button round size="small" @click="replybtnclinck(item, index)">取消</el-button>
                       </div>
 
-                      <div
-                        class="comment-reply-container"
-                        v-if="item.comments.length > 0"
-                      >
-                        <div
-                          class="reply-comment-item"
-                          v-for="(comment, cindex) in item.comments"
-                          :key="comment.id"
-                        >
+                      <div class="comment-reply-container" v-if="item.comments.length > 0">
+                        <div class="reply-comment-item" v-for="(comment, cindex) in item.comments" :key="comment.id">
                           <div class="answer-item-userinfo">
-                            <img
-                              class="vam user-head-image"
-                              :src="comment.avatar"
-                              width="30"
-                              height="30"
-                              alt="用户头像"
-                            />
+                            <img class="vam user-head-image" :src="comment.avatar" width="30" height="30" alt="用户头像" />
                             <span class="ml5"> {{ comment.name }}</span>
-                            <span
-                              class="comment-replyment"
-                              v-if="comment.toname"
-                              >回复</span
-                            >
+                            <span class="comment-replyment" v-if="comment.toname">回复</span>
                             <span v-if="comment.toname">{{
-                              comment.toname
+                                comment.toname
                             }}</span>
                             <span class="qustion-top-item">{{
-                              comment.gmtCreate
+                                comment.gmtCreate
                             }}</span>
                           </div>
-                          <div
-                            class="answer-item-content"
-                            v-html="comment.content"
-                          ></div>
+                          <div class="answer-item-content" v-html="comment.content"></div>
                           <div class="interview-reply-tool">
                             <div class="tool-item">
-                              <span
-                                class="comment-reply"
-                                v-bind:class="{ like: comment.goodreply }"
-                                @click="goodCommentReplyClick(comment)"
-                              >
-                                <i class="icon icon_vote_up"></i
-                                ><em class="qustion-good-num">{{
-                                  commentGood(comment.good)
-                                }}</em></span
-                              >
+                              <span class="comment-reply" v-bind:class="{ like: comment.goodreply }"
+                                @click="goodCommentReplyClick(comment)">
+                                <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{
+                                    commentGood(comment.good)
+                                }}</em></span>
                             </div>
-                            <div
-                              class="tool-item fbselect"
-                              @click="rreplyCommentBtnClick(comment, cindex)"
-                            >
-                              <svg
-                                data-v-d5fd42b8=""
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                class=""
-                              >
-                                <path
-                                  data-v-d5fd42b8=""
-                                  fill-rule="evenodd"
-                                  clip-rule="evenodd"
-                                  d="M2.30136 10.1142L2.30019 3.45191C2.30024 2.6778 2.92779 2.05019 3.70191 2.05019H12.3989C13.1731 2.05019 13.8006 2.67785 13.8006 3.452L13.8018 10.1144C13.8017 10.8885 13.1742 11.516 12.4001 11.516H10.1322C9.97329 11.516 9.81862 11.5675 9.69142 11.6629L6.65162 13.9406C6.62173 13.9598 6.58148 13.9444 6.57209 13.91L6.15416 12.0869C6.07758 11.7528 5.78033 11.516 5.43761 11.516H3.70308C2.92893 11.516 2.30136 10.8884 2.30136 10.1142ZM3.70191 1C2.34776 1 1.25 2.09776 1.25 3.45191L1.25117 10.1144C1.25122 11.4685 2.34896 12.5662 3.70308 12.5662H5.18661L5.54953 14.1495L5.55107 14.1558C5.73515 14.9153 6.62879 15.248 7.26458 14.7937L10.2372 12.5662H12.4001C13.7542 12.5662 14.852 11.4684 14.852 10.1142L14.8508 3.45182C14.8508 2.09771 13.753 1 12.3989 1H3.70191ZM4.78612 7.91404C5.35027 7.91404 5.8076 7.45671 5.8076 6.89257C5.8076 6.32842 5.35027 5.87109 4.78612 5.87109C4.22198 5.87109 3.76465 6.32842 3.76465 6.89257C3.76465 7.45671 4.22198 7.91404 4.78612 7.91404ZM8.98631 6.89257C8.98631 7.45671 8.52898 7.91404 7.96483 7.91404C7.40069 7.91404 6.94336 7.45671 6.94336 6.89257C6.94336 6.32842 7.40069 5.87109 7.96483 5.87109C8.52898 5.87109 8.98631 6.32842 8.98631 6.89257ZM11.1484 7.91404C11.7126 7.91404 12.1699 7.45671 12.1699 6.89257C12.1699 6.32842 11.7126 5.87109 11.1484 5.87109C10.5843 5.87109 10.127 6.32842 10.127 6.89257C10.127 7.45671 10.5843 7.91404 11.1484 7.91404Z"
-                                ></path>
+                            <div class="tool-item fbselect" @click="rreplyCommentBtnClick(comment, cindex)">
+                              <svg data-v-d5fd42b8="" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" class="">
+                                <path data-v-d5fd42b8="" fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M2.30136 10.1142L2.30019 3.45191C2.30024 2.6778 2.92779 2.05019 3.70191 2.05019H12.3989C13.1731 2.05019 13.8006 2.67785 13.8006 3.452L13.8018 10.1144C13.8017 10.8885 13.1742 11.516 12.4001 11.516H10.1322C9.97329 11.516 9.81862 11.5675 9.69142 11.6629L6.65162 13.9406C6.62173 13.9598 6.58148 13.9444 6.57209 13.91L6.15416 12.0869C6.07758 11.7528 5.78033 11.516 5.43761 11.516H3.70308C2.92893 11.516 2.30136 10.8884 2.30136 10.1142ZM3.70191 1C2.34776 1 1.25 2.09776 1.25 3.45191L1.25117 10.1144C1.25122 11.4685 2.34896 12.5662 3.70308 12.5662H5.18661L5.54953 14.1495L5.55107 14.1558C5.73515 14.9153 6.62879 15.248 7.26458 14.7937L10.2372 12.5662H12.4001C13.7542 12.5662 14.852 11.4684 14.852 10.1142L14.8508 3.45182C14.8508 2.09771 13.753 1 12.3989 1H3.70191ZM4.78612 7.91404C5.35027 7.91404 5.8076 7.45671 5.8076 6.89257C5.8076 6.32842 5.35027 5.87109 4.78612 5.87109C4.22198 5.87109 3.76465 6.32842 3.76465 6.89257C3.76465 7.45671 4.22198 7.91404 4.78612 7.91404ZM8.98631 6.89257C8.98631 7.45671 8.52898 7.91404 7.96483 7.91404C7.40069 7.91404 6.94336 7.45671 6.94336 6.89257C6.94336 6.32842 7.40069 5.87109 7.96483 5.87109C8.52898 5.87109 8.98631 6.32842 8.98631 6.89257ZM11.1484 7.91404C11.7126 7.91404 12.1699 7.45671 12.1699 6.89257C12.1699 6.32842 11.7126 5.87109 11.1484 5.87109C10.5843 5.87109 10.127 6.32842 10.127 6.89257C10.127 7.45671 10.5843 7.91404 11.1484 7.91404Z">
+                                </path>
                               </svg>
                               回复
                             </div>
-                            <div
-                              class="tool-item"
-                              @click="jubaoBtnClick(item.id, '面试题评论回复')"
-                            >
+                            <div class="tool-item" @click="jubaoBtnClick(item.id, '面试题评论回复')">
                               <i class="icon icon_ask_report"></i>
                               举报
                             </div>
-                            <div
-                              class="tool-item"
-                              v-if="item.uid == loginInfo.id"
-                            >
-                              <el-dropdown
-                                szie="mini"
-                                @command="deleteCommentReplyVisible = true"
-                              >
+                            <div class="tool-item" v-if="item.uid == loginInfo.id">
+                              <el-dropdown szie="mini" @command="deleteCommentReplyVisible = true">
                                 <span class="el-dropdown-link drop-menu">
                                   <i class="icon icon_more"></i>
                                 </span>
@@ -1069,68 +573,31 @@
                               </el-dropdown>
                             </div>
 
-                            <el-dialog
-                              title="确认删除评论回复吗？"
-                              :visible.sync="deleteCommentReplyVisible"
-                              width="30%"
-                              center
-                            >
+                            <el-dialog title="确认删除评论回复吗？" :visible.sync="deleteCommentReplyVisible" width="30%" center>
                               <div class="tac">
-                                <span
-                                  >删除后您的评论将不会出现在该评论下,请三思哦~</span
-                                >
+                                <span>删除后您的评论将不会出现在该评论下,请三思哦~</span>
                               </div>
                               <span slot="footer" class="dialog-footer">
-                                <el-button
-                                  @click="deleteCommentReply(comment, item)"
-                                  >删 除</el-button
-                                >
-                                <el-button
-                                  type="primary"
-                                  @click="deleteCommentReplyVisible = false"
-                                  >再等等</el-button
-                                >
+                                <el-button @click="deleteCommentReply(comment, item)">删 除</el-button>
+                                <el-button type="primary" @click="deleteCommentReplyVisible = false">再等等</el-button>
                               </span>
                             </el-dialog>
                           </div>
-                          <transition
-                            v-on:before-enter="rrbeforeEnter"
-                            v-on:enter="rrenter"
-                            v-on:after-enter="rrafterEnter"
-                            v-on:leave="rrleave"
-                            v-bind:css="false"
-                          >
-                            <div
-                              :id="'rreplayedtor' + cindex"
-                              class="rr-replay-editor"
-                              v-if="comment.showeditor"
-                              :key="comment.id"
-                            ></div>
+                          <transition v-on:before-enter="rrbeforeEnter" v-on:enter="rrenter"
+                            v-on:after-enter="rrafterEnter" v-on:leave="rrleave" v-bind:css="false">
+                            <div :id="'rreplayedtor' + cindex" class="rr-replay-editor" v-if="comment.showeditor"
+                              :key="comment.id"></div>
                           </transition>
-                          <div
-                            class="editor-submit-tool"
-                            v-if="comment.showeditor"
-                          >
-                            <el-button
-                              type="primary"
-                              round
-                              size="small"
-                              @click="
-                                commentRReplyToSubmit(
-                                  comment,
-                                  item,
-                                  comment.uid,
-                                  cindex
-                                )
-                              "
-                              >提交</el-button
-                            >
-                            <el-button
-                              round
-                              size="small"
-                              @click="rreplyCommentBtnClick(comment, cindex)"
-                              >取消</el-button
-                            >
+                          <div class="editor-submit-tool" v-if="comment.showeditor">
+                            <el-button type="primary" round size="small" @click="
+                              commentRReplyToSubmit(
+                                comment,
+                                item,
+                                comment.uid,
+                                cindex
+                              )
+                            ">提交</el-button>
+                            <el-button round size="small" @click="rreplyCommentBtnClick(comment, cindex)">取消</el-button>
                           </div>
                         </div>
                       </div>
@@ -1143,7 +610,7 @@
         </div>
       </div>
 
-      <div class="ask-detail-right">
+      <div class="col-md-4">
         <div class="question-info">
           <div class="user_header">
             <span class="qTitle">题目信息</span>
@@ -1158,13 +625,7 @@
 
             <div class="info-item">
               上传者:<nuxt-link :to="'/user/' + qdetail.uid + '/blog'">
-                <img
-                  class="vam user-head-image"
-                  :src="qdetail.avatar"
-                  width="30"
-                  height="30"
-                  alt="用户头像"
-                />
+                <img class="vam user-head-image" :src="qdetail.avatar" width="30" height="30" alt="用户头像" />
                 <span class="ml5">{{ qdetail.nickname }}</span>
               </nuxt-link>
             </div>
@@ -1177,21 +638,49 @@
 
         <div class="qustion-type-warper">
           <div class="qustion-tag-header">
-            <img src="~/assets/img/quanzi.png" alt="技术圈子" class="technical-circle-item"/>
-            <span class="technical-circle-item">技术圈子</span>
-            <img src="~/assets/img/more.png" alt="更多" class="technical-circle-item more-item first"/>
+            <img src="~/assets/img/quanzi.png" alt="技术圈子" class="technical-circle-item" />
+            <span class="technical-circle-item">面试职位</span>
+            <img src="~/assets/img/more.png" alt="更多" class="technical-circle-item more-item first" />
             <span class="technical-circle-item more-item">查看更多</span>
           </div>
 
           <div class="qustion-tag-subitem">
-            <img src="https://img.redskt.com/ask/tag/ios.png" alt="iOS标签" class="technical-circle-item sub-item" />
-            <span class="technical-circle-item sub-item">iOS圈子</span>
+            <img :src="currentPosition.img" alt="iOS标签" class="technical-circle-item sub-item" />
+            <span class="technical-circle-item sub-item">{{ currentPosition.name }}</span>
             <span class="ask-tag-user-fawllow technical-circle-item first">关注</span>
           </div>
 
           <div class="qustion-tag-content">
-            <span class="content-title">热门圈子</span>
-            <div class="qustion-tag-warper"></div>
+            <span class="content-title">热门职位</span>
+            <div class="qustion-tag-warper">
+              <div class="circle-item" v-for="circleItem in positionList">
+                <img :src="circleItem.img" alt="circleItem.name" class="circle-img" />
+                <span class="item-title">{{ circleItem.name }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-list">
+          <div class="bottom-hot-list shadow">
+            <div class="block-title">热门面试题</div>
+            <div class="block-body">
+              <div class="entry-list">
+                <nuxt-link class="item" :to="'/interview/detail/' + item.qid" target="_blank" :title="item.title"
+                  v-for="item in hotList" :key="item.id">
+                  <div class="entry-title">{{ item.title }}</div>
+                  <div class="entry-meta-box">
+                    <div class="entry-meta">{{ item.good }} 点赞</div>
+                    <div class="entry-meta">&nbsp;·&nbsp;</div>
+                    <div class="entry-meta">{{ item.reply }} 作答</div>
+                    <div class="entry-meta">&nbsp;·&nbsp;</div>
+                    <div class="entry-meta">{{ item.readcount }} 阅读</div>
+                    <div class="entry-meta">&nbsp;·&nbsp;</div>
+                    <div class="entry-meta">{{ item.meet }} 遇到</div>
+                  </div>
+                </nuxt-link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1201,9 +690,11 @@
 </template>
 
 <script>
+
+import "~/assets/css/hotlist.css";
+
 import userApi from "@/api/user";
 import askApi from "@/api/ask";
-
 import interviewApi from "@/api/interviewReq";
 import interviewServerApi from "@/api/interviewServerReq";
 
@@ -1295,6 +786,9 @@ export default {
         return {
           qdetail: response.data.qdetail,
           dataList: response.data.dataList,
+          hotList:response.data.hotList,
+          currentPosition:response.data.currentPosition,
+          positionList: response.data.positionList,
           subType: type,
           descrb:
             "开源实践问答为您找到 " +
@@ -1327,12 +821,12 @@ export default {
     };
     if (this.subType == 2) {
       this.initCommentEditor();
-      setTimeout(function () {}, 10);
+      setTimeout(function () { }, 10);
     }
 
     interviewServerApi
       .getQuestionDetail({ qId: this.qdetail.qid, type: 1, token: '' })
-      .then((response) => {});
+      .then((response) => { });
   },
 
   computed: {
@@ -1464,7 +958,7 @@ export default {
         this.submitBtnDisable = true;
         interviewApi
           .addQuestionMeet(this.qdetail.qid, item.key)
-          .then((response) => {});
+          .then((response) => { });
         this.infoStep = 2;
         this.companyName = "";
         this.companyArr = new Array();
@@ -1474,7 +968,7 @@ export default {
         this.submitBtnDisable = true;
         interviewApi
           .addQuestionCompanyMeet(this.qdetail.qid, item.key)
-          .then((response) => {});
+          .then((response) => { });
         this.companyName = "";
         this.meetingTitle = "请问您应聘的岗位类型？";
         this.inputPlaceholder = "请输入职位名称";
@@ -1485,7 +979,7 @@ export default {
         this.submitBtnDisable = true;
         interviewApi
           .addQuestionPosition(this.qdetail.qid, item.id)
-          .then((response) => {});
+          .then((response) => { });
         this.infoStep = 4;
       }
     },
@@ -1501,8 +995,8 @@ export default {
         var item = this.companyArr[i];
         if (item.id === this.companyName) {
           isAdd = false;
-           cItem = item;
-           break;
+          cItem = item;
+          break;
         }
       }
       if (isAdd) {
@@ -1513,7 +1007,7 @@ export default {
               title: this.companyName,
               qId: this.qdetail.qid,
             })
-            .then((response) => {});
+            .then((response) => { });
           this.companyName = "";
           this.meetingTitle = "请问您应聘的岗位类型？";
           this.inputPlaceholder = "请输入职位名称";
@@ -1523,13 +1017,13 @@ export default {
         } else if (this.infoStep == 3) {
           this.submitBtnDisable = true;
           interviewApi
-              .addAndSubmitPosition({
-                title: this.companyName,
-                qId: this.qdetail.qid,
-              })
-              .then((response) => {});
-            this.companyName = "";
-            this.infoStep = 4;
+            .addAndSubmitPosition({
+              title: this.companyName,
+              qId: this.qdetail.qid,
+            })
+            .then((response) => { });
+          this.companyName = "";
+          this.infoStep = 4;
         }
       } else {
       }
@@ -1913,10 +1407,10 @@ export default {
     goodQustionClick() {
       if (this.userState.goodslect) {
         this.qdetail.good--;
-        interviewApi.cancleGoodQustion(this.qdetail.qid).then((response) => {});
+        interviewApi.cancleGoodQustion(this.qdetail.qid).then((response) => { });
       } else {
         this.qdetail.good++;
-        interviewApi.addGoodQustion(this.qdetail.qid).then((response) => {});
+        interviewApi.addGoodQustion(this.qdetail.qid).then((response) => { });
       }
       this.userState.goodslect = !this.userState.goodslect;
     },
@@ -1940,7 +1434,7 @@ export default {
       this.initAnswerEitor();
     },
 
-    afterEnter: function (el) {},
+    afterEnter: function (el) { },
 
     leave: function (el, done) {
       var Velocity = $.Velocity;
@@ -1962,7 +1456,7 @@ export default {
       });
     },
 
-    rafterEnter: function (el) {},
+    rafterEnter: function (el) { },
 
     rleave: function (el, done) {
       var Velocity = $.Velocity;
@@ -2129,7 +1623,7 @@ export default {
         done();
       });
     },
-    rrafterEnter: function (el) {},
+    rrafterEnter: function (el) { },
     rrleave: function (el, done) {
       var Velocity = $.Velocity;
       Velocity(el, { height: "0px" }, 150, function () {
@@ -2154,7 +1648,7 @@ export default {
         myVueComm.getUploadImageToken(true);
       };
 
-      editor.config.onblur = function (newHtml) {};
+      editor.config.onblur = function (newHtml) { };
 
       editor.config.customUploadImg = function (files, insertImgFn) {
         // resultFiles 是 input 中选中的文件列表
@@ -2293,7 +1787,7 @@ export default {
         };
         const subscription = observable.subscribe(observer);
       };
-      editor.config.onchange = function (newHtml) {};
+      editor.config.onchange = function (newHtml) { };
       editor.create();
     },
 
@@ -2375,7 +1869,7 @@ export default {
         myVueComm.getUploadImageToken(true);
       };
 
-      editor.config.onblur = function (newHtml) {};
+      editor.config.onblur = function (newHtml) { };
 
       editor.config.customUploadImg = function (files, insertImgFn) {
         // resultFiles 是 input 中选中的文件列表
@@ -2422,10 +1916,34 @@ export default {
 </style>
 
 <style scoped>
+.qustion-tag-warper {
+  display: flex;
+  margin-top: 5px;
+  flex-wrap: wrap;
+  margin-left: 15px;
+}
+
+.qustion-tag-warper .circle-item {
+  width: 140px;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.qustion-tag-warper .circle-item .circle-img {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.qustion-tag-warper .circle-item .item-title {
+  font-size: 12px;
+  vertical-align: middle;
+}
 
 .qustion-tag-content {
-  margin-top: 25px;
-} 
+  margin-top: 20px;
+}
+
 .qustion-tag-content .content-title {
   font-size: 12px;
   font-weight: 550;
@@ -2437,7 +1955,7 @@ export default {
 }
 
 .technical-circle-item.more-item {
-  vertical-align:middle;
+  vertical-align: middle;
   font-size: 12px;
   font-weight: 500;
   width: 18px;
@@ -2447,23 +1965,27 @@ export default {
 .technical-circle-item.first {
   margin-left: 140px;
 }
+
 .technical-circle-item.sub-item {
-  vertical-align:middle;
+  vertical-align: middle;
   font-size: 12px;
   font-weight: 550;
   width: 18px;
   width: 18px;
 }
+
 .technical-circle-item {
-  vertical-align:middle;
+  vertical-align: middle;
   font-size: 12px;
   font-weight: 550;
   width: 25px;
   width: 25px;
 }
+
 .choose-button {
   opacity: 0.6;
 }
+
 .qustion_info .qustion_describ p {
   margin: 6px 0;
   font-size: 14px;
@@ -2476,6 +1998,7 @@ export default {
 .info-input .choose-button {
   margin-left: 6px;
 }
+
 .question-metting-head {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2518,6 +2041,7 @@ export default {
   border-color: #fc5533;
   color: #fff;
 }
+
 .question-metting-content .metting-btn {
   border-width: 1px;
   border-color: #999;
@@ -2541,6 +2065,7 @@ export default {
   font-size: 12px;
   padding: 0px 4px;
 }
+
 .common-btn {
   background: #fc5533;
   color: #fff;
@@ -2548,15 +2073,19 @@ export default {
   padding: 4px 6px;
   border-radius: 3px;
 }
+
 .ask-info-item.collected {
   color: #fc5533;
 }
+
 .ask-info-item.collected .faversvg-item {
   color: #fc5533;
 }
+
 .faversvg-item {
   vertical-align: sub;
 }
+
 .qustion_info .qustion_describ {
   margin-top: 20px;
   margin-bottom: 25px;
@@ -2574,6 +2103,7 @@ export default {
 .reply-tool-item span {
   margin-bottom: -6px;
 }
+
 .reply-tool-item .good-item {
   display: inline-flex;
   width: 24px;
@@ -2611,6 +2141,7 @@ export default {
   color: #fff;
   background: rgba(5, 109, 232, 0.8);
 }
+
 .interview-reply-tool .tool-button.votebutton-good svg {
   fill: #056de8;
 }
@@ -2622,6 +2153,7 @@ export default {
   color: #666;
   line-height: 28px;
 }
+
 .interview-submit-tool {
   padding-top: 8px;
   overflow: hidden;
@@ -2780,6 +2312,10 @@ export default {
 }
 
 .question-info {
+  background: #fff;
+  margin-right: -15px;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .question-info .question-info-list {
@@ -2881,7 +2417,7 @@ export default {
   margin-top: 10px;
 }
 
-div.accusation-type ul > li {
+div.accusation-type ul>li {
   display: inline-block;
   width: 110px;
   height: 32px;
@@ -2930,6 +2466,7 @@ h2.accusation-secondary-title {
   margin-left: 34px;
   margin-bottom: 8px;
 }
+
 .comment-tool-bar {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3063,9 +2600,11 @@ h2.accusation-secondary-title {
 .qustion-good-num {
   margin-left: 0px;
 }
+
 .answer-interview:not(:last-child) {
   border-bottom: 1px solid #f0f0f0;
 }
+
 .answer-interview {
   margin-bottom: 16px;
   padding-bottom: 6px;
@@ -3079,7 +2618,8 @@ h2.accusation-secondary-title {
 .fade-enter,
 .fade-leave-to
 
-/* .fade-leave-active, 2.1.8 版本以下 */ {
+/* .fade-leave-active, 2.1.8 版本以下 */
+  {
   height: 10px;
 }
 
@@ -3277,10 +2817,6 @@ h2.accusation-secondary-title {
   border-radius: 6px;
 }
 
-.qustion-tag-content {
-  margin-top: 10px;
-}
-
 .ask-tag-user-fawllow {
   display: inline-block;
   text-align: center;
@@ -3296,9 +2832,11 @@ h2.accusation-secondary-title {
 }
 
 .qustion-type-warper {
+  background: #fff;
+  margin-right: -15px;
+  margin-bottom: 15px;
   margin-top: 15px;
   padding: 15px;
-  background: #ffffff;
 }
 
 .user_header {
@@ -3532,6 +3070,8 @@ li.up_down_wrap {
 
 .qustin_detall_content {
   margin-top: 15px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .ask-detail-lefte {
@@ -3552,15 +3092,7 @@ li.up_down_wrap {
 
 .ask_detail_content {
   margin-left: 0px;
-  width: 780px;
-  float: left;
   margin-bottom: 15px;
-}
-
-.ask-detail-right {
-  float: right;
-  height: 500px;
-  width: 335px;
 }
 
 .question_info {
@@ -3578,9 +3110,11 @@ li.up_down_wrap {
   width: 170px;
   margin: 0 auto;
 }
+
 .interview_center_button button svg {
   vertical-align: middle;
 }
+
 .interview_center_button button {
   background: #fff;
   color: #fc5533;

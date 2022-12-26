@@ -58,14 +58,14 @@
               </div>
               <div class="module-body">
                 <div class="mock-jobs-list">
-                  <a href="#" class="mock-jobs-item" v-for="item in typeList" :key="item.id">
+                  <nuxt-link :to="'/interview/position/' + item.id" class="mock-jobs-item" v-for="item in typeList" :key="item.id">
                     <div class="mock-jobs-info">
                       <p class="mock-jobs-name">{{  item.name  }}</p>
                       <!-- 0人已参加 -->
                       <p class="item-mock-tips">功能开发中</p>
                     </div>
                     <img class="mock-jobs-img" :src="item.img" alt="图标"/>
-                  </a>
+                  </nuxt-link>
                 </div>
               </div>
             </div>

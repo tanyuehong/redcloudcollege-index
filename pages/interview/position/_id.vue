@@ -6,30 +6,22 @@
                     <div class="position-header">
                         <h1 class="positionTitle">iOS工程师</h1>
                         <div class="position-decrib">
-
                             <dl class="wow fadeInLeft  animated" data-wow-delay="0.5s"
                                 style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
                                 <dt><img src="https://static.redskt.com/assets/img/iOS_03_02.jpg"></dt>
-                                <dd>紧跟苹果公司技术的脚步<br>
-                                    技术新、人时尚的iOS工程师<br>
-                                </dd>
+                                <dd>紧跟苹果公司技术的脚步,技术新、人时尚的iOS工程师</dd>
                             </dl>
 
                             <dl class="wow fadeInUp  animated" data-wow-delay="0.6s"
                                 style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
                                 <dt><img src="https://static.redskt.com/assets/img/iOS_03_03.jpg"></dt>
-                                <dd>自己编写核心架构代码<br>
-                                    让其他人编写“外围”代码<br>
-                                    的iOS工程师<br>
-                                </dd>
+                                <dd>自己编写核心架构代码,让其他人编写“外围”代码,的iOS工程师</dd>
                             </dl>
 
                             <dl class="wow fadeInRight  animated" data-wow-delay="0.5s"
                                 style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
                                 <dt><img src="https://static.redskt.com/assets/img/iOS_03_04.jpg"></dt>
-                                <dd>微信小程序目前比较火爆，<br>
-                                    会微信小程序的程序员更抢手<br>
-                                </dd>
+                                <dd>微信小程序目前比较火爆，会微信小程序的程序员更抢手</dd>
                             </dl>
                             <div class="clearfloat"></div>
                         </div>
@@ -58,12 +50,22 @@
     padding-top: 15px;
 }
 
+.position-decrib {
+ display: flex;
+ margin-left: 20px;
+ margin-right: 20px;
+ padding-bottom: 50px;
+}
+
 .position-decrib dl {
-    width: 248px;
+    width: 228px;
     height: 260px;
-    float: left;
-    margin-left: 50px;
-    margin-top: 50px;
+    margin-right: 10px;
+    margin-top: 30px;
+}
+
+.position-decrib dl img {
+    width: 228px;
 }
 
 .position-decrib dd {

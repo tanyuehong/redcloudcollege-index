@@ -72,6 +72,7 @@
     color: #8c8c8c;
     font: 18px/28px 'Microsoft YaHei';
     padding-top: 15px;
+    font-size: 14px;
     text-align: center;
 }
 

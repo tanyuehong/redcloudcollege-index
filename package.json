@@ -21,6 +21,7 @@
     "qiniu-js": "^3.4.0",
     "showdown": "^1.9.1",
     "swiper": "^5.4.5",
+    "vue-calendar-component": "^2.8.2",
     "vue-qriously": "^1.1.1",
     "wangeditor": "^4.7.11"
   },

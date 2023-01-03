@@ -57,6 +57,7 @@ export default {
   plugins: [
     { src: '@/plugins/element-ui' },
     { src: '@/plugins/wangEditor', ssr: false },
+    { src: '@/plugins/vue-calendar', ssr: false },
   ],
 
   /*

@@ -53,7 +53,7 @@
 
             <div class="module-box js-scroll-occupation">
               <div class="module-head clearfix">
-                <h1>按岗位练习</h1>
+                <h1>按岗位学习</h1>
                 <span class="mock-sub-title">选择目标职位，精选名企面试真题，体验真实现场面试</span>
               </div>
               <div class="module-body">

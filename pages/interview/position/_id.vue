@@ -4,48 +4,14 @@
       <div class="row">
         <div class="col-md-8">
           <div class="position-header">
-            <h1 class="positionTitle">iOS工程师</h1>
-            <div class="position-decrib">
-              <dl
-                class="wow fadeInLeft  animated"
-                data-wow-delay="0.5s"
-                style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;"
-              >
-                <dt>
-                  <img
-                    src="https://static.redskt.com/assets/img/iOS_03_02.jpg"
-                  />
-                </dt>
-                <dd>紧跟苹果公司技术的脚步,技术新、人时尚的iOS工程师</dd>
-              </dl>
-
-              <dl
-                class="wow fadeInUp  animated"
-                data-wow-delay="0.6s"
-                style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;"
-              >
-                <dt>
-                  <img
-                    src="https://static.redskt.com/assets/img/iOS_03_03.jpg"
-                  />
-                </dt>
-                <dd>自己编写核心架构代码,让其他人编写“外围”代码,的iOS工程师</dd>
-              </dl>
-
-              <dl
-                class="wow fadeInRight  animated"
-                data-wow-delay="0.5s"
-                style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;"
-              >
-                <dt>
-                  <img
-                    src="https://static.redskt.com/assets/img/iOS_03_04.jpg"
-                  />
-                </dt>
-                <dd>微信小程序目前比较火爆，会微信小程序的程序员更抢手</dd>
-              </dl>
-              <div class="clearfloat"></div>
+            <div class="ui breadcrumb red_breadcrumb">
+              <nuxt-link :to="{ name: 'faquestion' }" class="section">
+              开源实践面试
+              </nuxt-link>
+              <span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+              <div class="active section">iOS工程师</div>
             </div>
+            <h1 class="positionTitle">iOS工程师</h1>
           </div>
         </div>
 
@@ -91,7 +57,7 @@ export default {
 <style scoped>
 
 .user-sign {
-  margin-top: 15px;
+  margin-top: 10px;
   background:#fff;
 }
 
@@ -102,7 +68,9 @@ export default {
 }
 
 .position-header {
-  margin-top: 15px;
+  margin-top: 10px;
+  padding-top: 15px;
+  padding-left: 15px;
   background: #fff;
 }
 
@@ -143,4 +111,5 @@ export default {
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
+
 </style>

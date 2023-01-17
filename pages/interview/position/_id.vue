@@ -37,23 +37,244 @@
               <div class="filter-btns">
 
                 <div class="filter-btn">
-                  <svg t="1673596319193" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2936" width="64" height="64"><path d="M0 0h1024v1024H0V0z" fill="#202425" opacity=".01" p-id="2937"></path><path d="M102.4 238.933333a136.533333 136.533333 0 0 1 136.533333-136.533333h102.4a136.533333 136.533333 0 0 1 136.533334 136.533333v102.4a136.533333 136.533333 0 0 1-136.533334 136.533334H238.933333a136.533333 136.533333 0 0 1-136.533333-136.533334V238.933333z m0 443.733334a136.533333 136.533333 0 0 1 136.533333-136.533334h102.4a136.533333 136.533333 0 0 1 136.533334 136.533334v102.4a136.533333 136.533333 0 0 1-136.533334 136.533333H238.933333a136.533333 136.533333 0 0 1-136.533333-136.533333v-102.4z m580.266667-136.533334a136.533333 136.533333 0 0 0-136.533334 136.533334v102.4a136.533333 136.533333 0 0 0 136.533334 136.533333h102.4a136.533333 136.533333 0 0 0 136.533333-136.533333v-102.4a136.533333 136.533333 0 0 0-136.533333-136.533334h-102.4z" fill="#FF7744" p-id="2938"></path><path d="M546.133333 238.933333a136.533333 136.533333 0 0 1 136.533334-136.533333h102.4a136.533333 136.533333 0 0 1 136.533333 136.533333v102.4a136.533333 136.533333 0 0 1-136.533333 136.533334h-102.4a136.533333 136.533333 0 0 1-136.533334-136.533334V238.933333z" fill="#FFAA44" p-id="2939"></path></svg>
+                  <svg t="1673596319193" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2936" width="64" height="64">
+                    <path d="M0 0h1024v1024H0V0z" fill="#202425" opacity=".01" p-id="2937"></path>
+                    <path
+                      d="M102.4 238.933333a136.533333 136.533333 0 0 1 136.533333-136.533333h102.4a136.533333 136.533333 0 0 1 136.533334 136.533333v102.4a136.533333 136.533333 0 0 1-136.533334 136.533334H238.933333a136.533333 136.533333 0 0 1-136.533333-136.533334V238.933333z m0 443.733334a136.533333 136.533333 0 0 1 136.533333-136.533334h102.4a136.533333 136.533333 0 0 1 136.533334 136.533334v102.4a136.533333 136.533333 0 0 1-136.533334 136.533333H238.933333a136.533333 136.533333 0 0 1-136.533333-136.533333v-102.4z m580.266667-136.533334a136.533333 136.533333 0 0 0-136.533334 136.533334v102.4a136.533333 136.533333 0 0 0 136.533334 136.533333h102.4a136.533333 136.533333 0 0 0 136.533333-136.533333v-102.4a136.533333 136.533333 0 0 0-136.533333-136.533334h-102.4z"
+                      fill="#FF7744" p-id="2938"></path>
+                    <path
+                      d="M546.133333 238.933333a136.533333 136.533333 0 0 1 136.533334-136.533333h102.4a136.533333 136.533333 0 0 1 136.533333 136.533333v102.4a136.533333 136.533333 0 0 1-136.533333 136.533334h-102.4a136.533333 136.533333 0 0 1-136.533334-136.533334V238.933333z"
+                      fill="#FFAA44" p-id="2939"></path>
+                  </svg>
                   全部题目
                 </div>
                 <div class="filter-btn">
-                  <svg t="1673605999758" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11448" width="64" height="64"><path d="M775.111111 715.377778H311.466667c-52.622222 0-95.288889-42.666667-95.288889-95.288889V334.222222c0-52.622222 42.666667-95.288889 95.288889-95.288889h463.644444c52.622222 0 95.288889 42.666667 95.288889 95.288889v285.866667c0 52.622222-42.666667 95.288889-95.288889 95.288889zM311.466667 295.822222c-21.333333 0-38.4 17.066667-38.4 38.4v285.866667c0 21.333333 17.066667 38.4 38.4 38.4h463.644444c21.333333 0 38.4-17.066667 38.4-38.4V334.222222c0-21.333333-17.066667-38.4-38.4-38.4H311.466667z" fill="#3FA6AD" p-id="11449"></path><path d="M543.288889 856.177778c-15.644444 0-28.444444-12.8-28.444445-28.444445v-140.8c0-15.644444 12.8-28.444444 28.444445-28.444444s28.444444 12.8 28.444444 28.444444v140.8c0 15.644444-12.8 28.444444-28.444444 28.444445z" fill="#3FA6AD" p-id="11450"></path><path d="M732.444444 874.666667H354.133333c-15.644444 0-28.444444-12.8-28.444444-28.444445s12.8-28.444444 28.444444-28.444444h378.311111c15.644444 0 28.444444 12.8 28.444445 28.444444s-12.8 28.444444-28.444445 28.444445z" fill="#3FA6AD" p-id="11451"></path><path d="M466.488889 435.2h-81.066667c-15.644444 0-28.444444-12.8-28.444444-28.444444s12.8-28.444444 28.444444-28.444445h81.066667c15.644444 0 28.444444 12.8 28.444444 28.444445s-12.8 28.444444-28.444444 28.444444zM702.577778 576H385.422222c-15.644444 0-28.444444-12.8-28.444444-28.444444s12.8-28.444444 28.444444-28.444445h318.577778c15.644444 0 28.444444 12.8 28.444444 28.444445s-14.222222 28.444444-29.866666 28.444444z" fill="#DC4569" p-id="11452"></path></svg>
+                  <svg t="1673605999758" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="11448" width="64" height="64">
+                    <path
+                      d="M775.111111 715.377778H311.466667c-52.622222 0-95.288889-42.666667-95.288889-95.288889V334.222222c0-52.622222 42.666667-95.288889 95.288889-95.288889h463.644444c52.622222 0 95.288889 42.666667 95.288889 95.288889v285.866667c0 52.622222-42.666667 95.288889-95.288889 95.288889zM311.466667 295.822222c-21.333333 0-38.4 17.066667-38.4 38.4v285.866667c0 21.333333 17.066667 38.4 38.4 38.4h463.644444c21.333333 0 38.4-17.066667 38.4-38.4V334.222222c0-21.333333-17.066667-38.4-38.4-38.4H311.466667z"
+                      fill="#3FA6AD" p-id="11449"></path>
+                    <path
+                      d="M543.288889 856.177778c-15.644444 0-28.444444-12.8-28.444445-28.444445v-140.8c0-15.644444 12.8-28.444444 28.444445-28.444444s28.444444 12.8 28.444444 28.444444v140.8c0 15.644444-12.8 28.444444-28.444444 28.444445z"
+                      fill="#3FA6AD" p-id="11450"></path>
+                    <path
+                      d="M732.444444 874.666667H354.133333c-15.644444 0-28.444444-12.8-28.444444-28.444445s12.8-28.444444 28.444444-28.444444h378.311111c15.644444 0 28.444444 12.8 28.444445 28.444444s-12.8 28.444444-28.444445 28.444445z"
+                      fill="#3FA6AD" p-id="11451"></path>
+                    <path
+                      d="M466.488889 435.2h-81.066667c-15.644444 0-28.444444-12.8-28.444444-28.444444s12.8-28.444444 28.444444-28.444445h81.066667c15.644444 0 28.444444 12.8 28.444444 28.444445s-12.8 28.444444-28.444444 28.444444zM702.577778 576H385.422222c-15.644444 0-28.444444-12.8-28.444444-28.444444s12.8-28.444444 28.444444-28.444445h318.577778c15.644444 0 28.444444 12.8 28.444444 28.444445s-14.222222 28.444444-29.866666 28.444444z"
+                      fill="#DC4569" p-id="11452"></path>
+                  </svg>
                   计算机基础
                 </div>
                 <div class="filter-btn">
-                  <svg t="1673606053385" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13250" width="64" height="64"><path d="M628.01427 125.801171c-2.312672 26.25906-16.610306 47.514153-23.671119 56.564273-13.511735 17.336854-33.846876 30.103622-53.725622 34.441417 1.865487-26.391067 18.569938-48.873104 24.449855-56.018851C588.064396 145.086399 608.408747 131.955334 628.01427 125.801171L628.01427 125.801171zM680.887478 330.603627c40.271192 0 69.15094 8.970302 103.062284 41.282219-54.171784 41.389666-76.458369 114.270557-71.53729 184.253444 5.081739 72.621994 42.207287 147.851373 104.108103 181.330882-12.411681 26.452465-18.438954 36.84721-36.924981 64.883753-32.205493 49.197492-68.601424 99.272981-114.462938 99.740632l-0.801249 0c-18.379603 0-30.125111-5.39487-46.3834-12.836353-20.973684-9.616008-47.110971-21.594831-91.118254-21.594831l-1.334391 0c-44.268226 0.265036-70.862931 12.104689-92.234681 21.629623-16.72901 7.457856-28.822442 12.850679-47.409776 12.850679l-1.136893 0c-47.174416-0.356111-88.069825-53.506635-118.434389-99.785657-96.060823-146.272411-95.90835-305.381176-47.009663-380.786563 36.523845-56.087413 93.677543-90.909499 149.141762-90.909499 28.841885 0 52.252061 8.343015 77.054957 17.178241 24.484647 8.715499 49.803289 17.744129 79.434144 17.744129 28.110221 0 50.741661-8.555863 72.623018-16.826224 23.592324-8.924253 48.02069-18.154475 83.365686-18.154475L680.887478 330.603627zM680.893618 61.494563c-48.249911 3.269463-104.547101 34.014698-137.524167 73.884754-29.903054 36.346813-54.594409 90.173742-44.907793 142.480039 1.277086 0.045025 2.526543 0.057305 3.789303 0.057305 51.361785 0 103.963817-30.838356 134.830825-70.441329 29.589922-37.904285 51.965535-91.305519 43.812855-145.981792L680.893618 61.494563zM698.744171 272.016277c-81.283258 0-115.546619 38.566364-171.972746 38.566364-58.000995 0-102.195543-38.501896-172.520215-38.501896-69.034283 0-142.327566 41.900296-188.969862 113.541963-65.331961 100.752682-54.258765 290.248524 51.882648 451.871551 37.851073 57.70219 88.615247 122.713856 154.848741 123.230626 0.50142 0 0.984421 0 1.470491 0 57.815777 0 74.80573-37.546128 154.122193-38.019918 0.445138 0 0.858554 0 1.299599 0 78.304414 0 93.88732 37.95852 151.591557 37.95852 0.372483 0 0.74292 0 1.143033 0 66.288752-0.687662 119.788224-72.602551 157.581991-130.337487 27.28646-41.35385 37.419238-62.282508 58.57507-109.11207C744.366232 663.229307 719.613478 446.453145 871.499747 363.205139c-46.299489-57.778938-111.345947-91.189885-172.754552-91.189885L698.744171 272.016277" fill="#d81e06" p-id="13251"></path></svg>
+                  <svg t="1673606053385" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="13250" width="64" height="64">
+                    <path
+                      d="M628.01427 125.801171c-2.312672 26.25906-16.610306 47.514153-23.671119 56.564273-13.511735 17.336854-33.846876 30.103622-53.725622 34.441417 1.865487-26.391067 18.569938-48.873104 24.449855-56.018851C588.064396 145.086399 608.408747 131.955334 628.01427 125.801171L628.01427 125.801171zM680.887478 330.603627c40.271192 0 69.15094 8.970302 103.062284 41.282219-54.171784 41.389666-76.458369 114.270557-71.53729 184.253444 5.081739 72.621994 42.207287 147.851373 104.108103 181.330882-12.411681 26.452465-18.438954 36.84721-36.924981 64.883753-32.205493 49.197492-68.601424 99.272981-114.462938 99.740632l-0.801249 0c-18.379603 0-30.125111-5.39487-46.3834-12.836353-20.973684-9.616008-47.110971-21.594831-91.118254-21.594831l-1.334391 0c-44.268226 0.265036-70.862931 12.104689-92.234681 21.629623-16.72901 7.457856-28.822442 12.850679-47.409776 12.850679l-1.136893 0c-47.174416-0.356111-88.069825-53.506635-118.434389-99.785657-96.060823-146.272411-95.90835-305.381176-47.009663-380.786563 36.523845-56.087413 93.677543-90.909499 149.141762-90.909499 28.841885 0 52.252061 8.343015 77.054957 17.178241 24.484647 8.715499 49.803289 17.744129 79.434144 17.744129 28.110221 0 50.741661-8.555863 72.623018-16.826224 23.592324-8.924253 48.02069-18.154475 83.365686-18.154475L680.887478 330.603627zM680.893618 61.494563c-48.249911 3.269463-104.547101 34.014698-137.524167 73.884754-29.903054 36.346813-54.594409 90.173742-44.907793 142.480039 1.277086 0.045025 2.526543 0.057305 3.789303 0.057305 51.361785 0 103.963817-30.838356 134.830825-70.441329 29.589922-37.904285 51.965535-91.305519 43.812855-145.981792L680.893618 61.494563zM698.744171 272.016277c-81.283258 0-115.546619 38.566364-171.972746 38.566364-58.000995 0-102.195543-38.501896-172.520215-38.501896-69.034283 0-142.327566 41.900296-188.969862 113.541963-65.331961 100.752682-54.258765 290.248524 51.882648 451.871551 37.851073 57.70219 88.615247 122.713856 154.848741 123.230626 0.50142 0 0.984421 0 1.470491 0 57.815777 0 74.80573-37.546128 154.122193-38.019918 0.445138 0 0.858554 0 1.299599 0 78.304414 0 93.88732 37.95852 151.591557 37.95852 0.372483 0 0.74292 0 1.143033 0 66.288752-0.687662 119.788224-72.602551 157.581991-130.337487 27.28646-41.35385 37.419238-62.282508 58.57507-109.11207C744.366232 663.229307 719.613478 446.453145 871.499747 363.205139c-46.299489-57.778938-111.345947-91.189885-172.754552-91.189885L698.744171 272.016277"
+                      fill="#d81e06" p-id="13251"></path>
+                  </svg>
                   iOS平台
                 </div>
                 <div class="filter-btn">
                   Objective-C
                 </div>
                 <div class="filter-btn">
-                  <svg t="1673606186910" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13682" width="64" height="64"><path d="M729.045333 841.429333c-100.693333 58.026667-238.506667 64-378.026666 4.266667a589.098667 589.098667 0 0 1-265.813334-226.986667c28.586667 23.466667 62.293333 42.666667 98.133334 59.733334 143.786667 66.986667 287.146667 62.293333 388.266666 0-143.786667-110.506667-266.24-254.293333-357.12-371.626667-19.2-19.2-33.28-43.093333-47.786666-64.426667 353.28 258.133333 337.92 323.84 102.826666-43.093333 208.64 210.773333 402.346667 330.24 402.346667 330.24 6.826667 3.84 10.666667 6.826667 15.36 9.386667 4.266667-10.666667 8.106667-21.76 11.093333-33.28 33.706667-121.6-4.693333-261.12-88.746666-375.893334 194.133333 117.333333 309.333333 337.493333 261.12 522.24-1.28 4.693333-2.56 9.386667-2.133334 16.64 95.573333 120.746667 69.973333 246.613333 57.6 222.72-51.626667-101.973333-148.48-70.4-197.12-49.92z" fill="#FE5E2F" p-id="13683"></path></svg>
+                  <svg t="1673606186910" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="13682" width="64" height="64">
+                    <path
+                      d="M729.045333 841.429333c-100.693333 58.026667-238.506667 64-378.026666 4.266667a589.098667 589.098667 0 0 1-265.813334-226.986667c28.586667 23.466667 62.293333 42.666667 98.133334 59.733334 143.786667 66.986667 287.146667 62.293333 388.266666 0-143.786667-110.506667-266.24-254.293333-357.12-371.626667-19.2-19.2-33.28-43.093333-47.786666-64.426667 353.28 258.133333 337.92 323.84 102.826666-43.093333 208.64 210.773333 402.346667 330.24 402.346667 330.24 6.826667 3.84 10.666667 6.826667 15.36 9.386667 4.266667-10.666667 8.106667-21.76 11.093333-33.28 33.706667-121.6-4.693333-261.12-88.746666-375.893334 194.133333 117.333333 309.333333 337.493333 261.12 522.24-1.28 4.693333-2.56 9.386667-2.133334 16.64 95.573333 120.746667 69.973333 246.613333 57.6 222.72-51.626667-101.973333-148.48-70.4-197.12-49.92z"
+                      fill="#FE5E2F" p-id="13683"></path>
+                  </svg>
                   Swift
+                </div>
+              </div>
+              <div class="job-question-list">
+                <div class="border-b border-divider-border-2 dark:border-dark-divider-border-2">
+                  <div role="row" style="display: flex; flex: 1 0 auto; min-width: 0px;">
+                    <div colspan="1" role="columnheader"
+                      class="mx-2 py-[11px] font-normal text-label-3 dark:text-dark-label-3 group hover:text-gray-7 dark:hover:text-dark-gray-7"
+                      style="box-sizing: border-box; flex: 160 0 auto; min-width: 0px; width: 160px; cursor: pointer;">
+                      <div class="flex items-center justify-between">
+                        <div class="overflow-hidden text-ellipsis">题目</div><span
+                          class="ml-2 h-3.5 w-3.5 text-gray-5 dark:text-dark-gray-5 group-hover:text-gray-7 dark:group-hover:text-dark-gray-7"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
+                            fill="currentColor">
+                            <path
+                              d="M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z">
+                            </path>
+                          </svg></span>
+                      </div>
+                    </div>
+                    <div colspan="1" role="columnheader"
+                      class="mx-2 py-[11px] font-normal text-label-3 dark:text-dark-label-3 group hover:text-gray-7 dark:hover:text-dark-gray-7"
+                      style="box-sizing: border-box; flex: 96 0 auto; min-width: 0px; width: 96px; cursor: pointer;">
+                      <div class="flex items-center justify-between">
+                        <div class="overflow-hidden text-ellipsis">题解</div><span
+                          class="ml-2 h-3.5 w-3.5 text-gray-5 dark:text-dark-gray-5 group-hover:text-gray-7 dark:group-hover:text-dark-gray-7"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
+                            fill="currentColor">
+                            <path
+                              d="M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z">
+                            </path>
+                          </svg></span>
+                      </div>
+                    </div>
+                    <div colspan="1" role="columnheader"
+                      class="mx-2 py-[11px] font-normal text-label-3 dark:text-dark-label-3 group hover:text-gray-7 dark:hover:text-dark-gray-7"
+                      style="box-sizing: border-box; flex: 82 0 auto; min-width: 0px; width: 82px; cursor: pointer;">
+                      <div class="flex items-center justify-between">
+                        <div class="overflow-hidden text-ellipsis">通过率</div><span
+                          class="ml-2 h-3.5 w-3.5 text-gray-5 dark:text-dark-gray-5 group-hover:text-gray-7 dark:group-hover:text-dark-gray-7"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" width="1em" height="1em"
+                            fill="currentColor">
+                            <path
+                              d="M10.9052 5.47044L7.48504 2.19872C7.47354 2.18772 7.46161 2.1771 7.44926 2.16687C7.16479 1.93123 6.72125 1.94709 6.45859 2.20229L3.09299 5.47222C3.0332 5.53031 3 5.60648 3 5.68555C3 5.85922 3.15694 6.00001 3.35053 6.00001H10.6495C10.7385 6.00001 10.8243 5.96959 10.8893 5.91493C11.0305 5.79613 11.0376 5.59712 10.9052 5.47044Z">
+                            </path>
+                          </svg></span>
+                      </div>
+                    </div>
+                    <div colspan="1" role="columnheader"
+                      class="mx-2 py-[11px] font-normal text-label-3 dark:text-dark-label-3 group hover:text-gray-7 dark:hover:text-dark-gray-7"
+                      style="box-sizing: border-box; flex: 60 0 auto; min-width: 0px; width: 60px; cursor: pointer;">
+                      <div class="flex items-center justify-between">
+                        <div class="overflow-hidden text-ellipsis">难度</div><span
+                          class="ml-2 h-3.5 w-3.5 text-gray-5 dark:text-dark-gray-5 group-hover:text-gray-7 dark:group-hover:text-dark-gray-7"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
+                            fill="currentColor">
+                            <path
+                              d="M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z">
+                            </path>
+                          </svg></span>
+                      </div>
+                    </div>
+                    <div colspan="1" role="columnheader"
+                      class="mx-2 py-[11px] font-normal text-label-3 dark:text-dark-label-3"
+                      style="box-sizing: border-box; flex: 88 0 auto; min-width: 0px; width: 88px;">
+                      <div class="flex items-center justify-between">
+                        <div class="overflow-hidden text-ellipsis">出现频率</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div role="rowgroup">
+                  <div role="row"
+                    class="odd:bg-layer-1 even:bg-overlay-1 dark:odd:bg-dark-layer-bg dark:even:bg-dark-fill-4"
+                    style="display: flex; flex: 1 0 auto; min-width: 0px;">
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 160 0 auto; min-width: 0px; width: 160px;">
+                      <div class="max-w-[302px] flex items-center">
+                        <div class="overflow-hidden">
+                          <div class="flex items-center">
+                            <div class="truncate"><a href="/problems/sentence-similarity-iii/"
+                                class="h-5 hover:text-blue-s dark:hover:text-dark-blue-s">1813. 句子相似性 III</a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 96 0 auto; min-width: 0px; width: 96px;"><span
+                        class="flex items-center space-x-2 text-label-1 dark:text-dark-label-1"><a
+                          href="/problems/sentence-similarity-iii/solution" class="truncate"
+                          aria-label="solution">225</a></span></div>
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 82 0 auto; min-width: 0px; width: 82px;"><span>42.5%</span>
+                    </div>
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 60 0 auto; min-width: 0px; width: 60px;"><span
+                        class="text-yellow dark:text-dark-yellow">中等</span></div>
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 88 0 auto; min-width: 0px; width: 88px;">
+                      <div class="w-fill flex h-full flex-row items-center"><span
+                          class="h-2 flex-1 rounded-l-lg bg-fill-3 dark:bg-dark-fill-3"></span>
+                        <div data-options="[object Object]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            width="1em" height="1em" fill="currentColor"
+                            class="flex-0 -mt-1.5 h-5 w-5 text-gray-5 dark:text-gray-7">
+                            <path fill-rule="evenodd"
+                              d="M7 8v2H6a3 3 0 00-3 3v6a3 3 0 003 3h12a3 3 0 003-3v-6a3 3 0 00-3-3h-1V8A5 5 0 007 8zm8 0v2H9V8a3 3 0 116 0zm-3 6a2 2 0 100 4 2 2 0 000-4z"
+                              clip-rule="evenodd"></path>
+                          </svg></div><span class="h-2 flex-1 rounded-r-lg bg-fill-3 dark:bg-dark-fill-3"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div role="row"
+                    class="odd:bg-layer-1 even:bg-overlay-1 dark:odd:bg-dark-layer-bg dark:even:bg-dark-fill-4"
+                    style="display: flex; flex: 1 0 auto; min-width: 0px;">
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 160 0 auto; min-width: 0px; width: 160px;">
+                      <div class="max-w-[302px] flex items-center">
+                        <div class="overflow-hidden">
+                          <div class="flex items-center">
+                            <div class="truncate"><a href="/problems/fancy-sequence/"
+                                class="h-5 hover:text-blue-s dark:hover:text-dark-blue-s">1622. 奇妙序列</a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 96 0 auto; min-width: 0px; width: 96px;"><span
+                        class="flex items-center space-x-2 text-label-1 dark:text-dark-label-1"><a
+                          href="/problems/fancy-sequence/solution" class="truncate" aria-label="solution">95</a></span>
+                    </div>
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 82 0 auto; min-width: 0px; width: 82px;"><span>16.6%</span>
+                    </div>
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 60 0 auto; min-width: 0px; width: 60px;"><span
+                        class="text-pink dark:text-dark-pink">困难</span></div>
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 88 0 auto; min-width: 0px; width: 88px;">
+                      <div class="w-fill flex h-full flex-row items-center"><span
+                          class="h-2 flex-1 rounded-l-lg bg-fill-3 dark:bg-dark-fill-3"></span>
+                        <div data-options="[object Object]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            width="1em" height="1em" fill="currentColor"
+                            class="flex-0 -mt-1.5 h-5 w-5 text-gray-5 dark:text-gray-7">
+                            <path fill-rule="evenodd"
+                              d="M7 8v2H6a3 3 0 00-3 3v6a3 3 0 003 3h12a3 3 0 003-3v-6a3 3 0 00-3-3h-1V8A5 5 0 007 8zm8 0v2H9V8a3 3 0 116 0zm-3 6a2 2 0 100 4 2 2 0 000-4z"
+                              clip-rule="evenodd"></path>
+                          </svg></div><span class="h-2 flex-1 rounded-r-lg bg-fill-3 dark:bg-dark-fill-3"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div role="row"
+                    class="odd:bg-layer-1 even:bg-overlay-1 dark:odd:bg-dark-layer-bg dark:even:bg-dark-fill-4"
+                    style="display: flex; flex: 1 0 auto; min-width: 0px;">
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 160 0 auto; min-width: 0px; width: 160px;">
+                      <div class="max-w-[302px] flex items-center">
+                        <div class="overflow-hidden">
+                          <div class="flex items-center">
+                            <div class="truncate"><a href="/problems/remove-letter-to-equalize-frequency/"
+                                class="h-5 hover:text-blue-s dark:hover:text-dark-blue-s">2423. 删除字符使频率相同</a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 96 0 auto; min-width: 0px; width: 96px;"><span
+                        class="flex items-center space-x-2 text-label-1 dark:text-dark-label-1"><a
+                          href="/problems/remove-letter-to-equalize-frequency/solution" class="truncate"
+                          aria-label="solution">116</a></span></div>
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 82 0 auto; min-width: 0px; width: 82px;"><span>19.4%</span>
+                    </div>
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 60 0 auto; min-width: 0px; width: 60px;"><span
+                        class="text-olive dark:text-dark-olive">简单</span></div>
+                    <div role="cell" class="mx-2 py-[11px]"
+                      style="box-sizing: border-box; flex: 88 0 auto; min-width: 0px; width: 88px;">
+                      <div class="w-fill flex h-full flex-row items-center"><span
+                          class="h-2 flex-1 rounded-l-lg bg-fill-3 dark:bg-dark-fill-3"></span>
+                        <div data-options="[object Object]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            width="1em" height="1em" fill="currentColor"
+                            class="flex-0 -mt-1.5 h-5 w-5 text-gray-5 dark:text-gray-7">
+                            <path fill-rule="evenodd"
+                              d="M7 8v2H6a3 3 0 00-3 3v6a3 3 0 003 3h12a3 3 0 003-3v-6a3 3 0 00-3-3h-1V8A5 5 0 007 8zm8 0v2H9V8a3 3 0 116 0zm-3 6a2 2 0 100 4 2 2 0 000-4z"
+                              clip-rule="evenodd"></path>
+                          </svg></div><span class="h-2 flex-1 rounded-r-lg bg-fill-3 dark:bg-dark-fill-3"></span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -94,31 +315,39 @@ export default {
 
 <style scoped>
 
+.job-question-list {
+  margin-top: 15px;
+  margin-left: 15px;
+}
 .question-content {
   margin-top: 20px;
 }
+
 .filter-btns {
   display: flex;
   margin-left: 15px;
 }
 
 .filter-btns .filter-btn {
-  background-color: rgba(0,10,32,.05);
-  height: 40px;
+  background-color: rgba(0, 10, 32, .05);
+  height: 36px;
   margin-right: 25px;
   border-radius: 12px;
   color: #666;
-  font-size: 16px;
-  line-height: 40px;
+  font-size: 14px;
+  line-height: 36px;
   padding-left: 10px;
   padding-right: 10px;
+  cursor: pointer;
 }
+
 .filter-btns .filter-btn:hover {
-  background-color: rgba(0,10,32,.1);
+  background-color: rgba(0, 10, 32, .1);
 }
+
 .filter-btns .filter-btn svg {
-  height: 26px;
-  width: 26px;
+  height: 23px;
+  width: 23px;
   margin-top: -3px;
 }
 
@@ -127,7 +356,6 @@ export default {
   margin-left: -15px;
   margin-right: -15px;
   border-radius: 10px;
-
 }
 
 .command {
@@ -140,11 +368,7 @@ export default {
 
 }
 
-.command .recommand-content .recommand-item {
-
-
-
-}
+.command .recommand-content .recommand-item {}
 
 .command .recommand-content .recommand-item img {
   width: 270px;

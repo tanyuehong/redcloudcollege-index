@@ -12,6 +12,9 @@ body {
 .golobal_content {
   background-color: #f6f6f6;
 }
+.flex {
+  display: flex;
+}
 
 /* 日历组件的样式 */
 .user-sign .wh_container .wh_content_all {

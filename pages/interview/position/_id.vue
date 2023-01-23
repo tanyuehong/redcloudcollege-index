@@ -277,7 +277,48 @@
                   </div>
                 </div>
 
-                <div class="mt-4 flex flex-col-reverse items-center md:flex-row md:justify-between"><div class="relative"><button class="flex cursor-pointer items-center rounded px-3 py-1.5 text-left focus:outline-none whitespace-nowrap bg-fill-3 dark:bg-dark-fill-3 text-label-2 dark:text-dark-label-2 hover:bg-fill-2 dark:hover:bg-dark-fill-2 active:bg-fill-3 dark:active:bg-dark-fill-3" id="headlessui-listbox-button-:Rcvl955t6:" type="button" aria-haspopup="true" aria-expanded="false" data-headlessui-state="">50  条/页<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" class="pointer-events-none ml-3" aria-hidden="true"><path fill-rule="evenodd" d="M4.929 7.913l7.078 7.057 7.064-7.057a1 1 0 111.414 1.414l-7.77 7.764a1 1 0 01-1.415 0L3.515 9.328a1 1 0 011.414-1.414z" clip-rule="evenodd"></path></svg></button></div><nav role="navigation" class="mb-6 md:mb-0 flex flex-nowrap items-center space-x-2"><button class="flex items-center justify-center px-3 h-8 rounded select-none focus:outline-none bg-fill-3 dark:bg-dark-fill-3 text-label-2 dark:text-dark-label-2 hover:bg-fill-2 dark:hover:bg-dark-fill-2 disabled:opacity-40 disabled:pointer-events-none" aria-label="prev" disabled=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" class="text-label-2 dark:text-dark-label-2"><path fill-rule="evenodd" d="M16.091 4.929l-7.057 7.078 7.057 7.064a1 1 0 01-1.414 1.414l-7.764-7.77a1 1 0 010-1.415l7.764-7.785a1 1 0 111.415 1.414z" clip-rule="evenodd"></path></svg></button><button class="flex items-center justify-center px-3 h-8 rounded select-none focus:outline-none pointer-events-none bg-paper dark:bg-dark-gray-5 text-label-1 dark:text-dark-label-1 shadow-level1 dark:shadow-dark-level1">1</button><button class="flex items-center justify-center px-3 h-8 rounded select-none focus:outline-none bg-fill-3 dark:bg-dark-fill-3 text-label-2 dark:text-dark-label-2 hover:bg-fill-2 dark:hover:bg-dark-fill-2">2</button><button class="flex items-center justify-center px-3 h-8 rounded select-none focus:outline-none bg-fill-3 dark:bg-dark-fill-3 text-label-2 dark:text-dark-label-2 hover:bg-fill-2 dark:hover:bg-dark-fill-2">3</button><button class="flex items-center justify-center px-3 h-8 rounded select-none focus:outline-none bg-fill-3 dark:bg-dark-fill-3 text-label-2 dark:text-dark-label-2 hover:bg-fill-2 dark:hover:bg-dark-fill-2">4</button><button class="flex items-center justify-center px-3 h-8 rounded select-none focus:outline-none bg-fill-3 dark:bg-dark-fill-3 text-label-2 dark:text-dark-label-2 hover:bg-fill-2 dark:hover:bg-dark-fill-2">5</button><button class="flex items-center justify-center px-3 h-8 rounded select-none focus:outline-none bg-fill-3 dark:bg-dark-fill-3 text-label-2 dark:text-dark-label-2 hover:bg-fill-2 dark:hover:bg-dark-fill-2">6</button><button class="flex items-center justify-center px-3 h-8 rounded select-none focus:outline-none bg-fill-3 dark:bg-dark-fill-3 text-label-2 dark:text-dark-label-2 hover:bg-fill-2 dark:hover:bg-dark-fill-2 disabled:opacity-40 disabled:pointer-events-none" aria-label="gap" disabled=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" class="text-label-2 dark:text-dark-label-2"><path fill-rule="evenodd" d="M4.4 14a2 2 0 100-4 2 2 0 000 4zm9.6-2a2 2 0 11-4 0 2 2 0 014 0zm7.6 0a2 2 0 11-4 0 2 2 0 014 0z" clip-rule="evenodd"></path></svg></button><button class="flex items-center justify-center px-3 h-8 rounded select-none focus:outline-none bg-fill-3 dark:bg-dark-fill-3 text-label-2 dark:text-dark-label-2 hover:bg-fill-2 dark:hover:bg-dark-fill-2">59</button><button class="flex items-center justify-center px-3 h-8 rounded select-none focus:outline-none bg-fill-3 dark:bg-dark-fill-3 text-label-2 dark:text-dark-label-2 hover:bg-fill-2 dark:hover:bg-dark-fill-2" aria-label="next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" class="text-label-2 dark:text-dark-label-2"><path fill-rule="evenodd" d="M7.913 19.071l7.057-7.078-7.057-7.064a1 1 0 011.414-1.414l7.764 7.77a1 1 0 010 1.415l-7.764 7.785a1 1 0 01-1.414-1.414z" clip-rule="evenodd"></path></svg></button></nav></div>
+                <div class="page-content">
+                  <div class="relative"><button
+                      class="flex page-numbers" type="button" aria-haspopup="true"
+                      aria-expanded="false" data-headlessui-state="">50 条/页<svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"
+                        class="pointer-events-none ml-3" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                          d="M4.929 7.913l7.078 7.057 7.064-7.057a1 1 0 111.414 1.414l-7.77 7.764a1 1 0 01-1.415 0L3.515 9.328a1 1 0 011.414-1.414z"
+                          clip-rule="evenodd"></path>
+                      </svg></button></div>
+                  <nav role="navigation" class="flex page-items">
+                    <button class="flex items-center justify-center px-3 h-8 rounded select-none focus:outline-none bg-fill-3 dark:bg-dark-fill-3 text-label-2 dark:text-dark-label-2 hover:bg-fill-2 dark:hover:bg-dark-fill-2 disabled:opacity-40 disabled:pointer-events-none"
+                      aria-label="prev" disabled=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        width="1em" height="1em" fill="currentColor" class="text-label-2 dark:text-dark-label-2">
+                        <path fill-rule="evenodd"
+                          d="M16.091 4.929l-7.057 7.078 7.057 7.064a1 1 0 01-1.414 1.414l-7.764-7.77a1 1 0 010-1.415l7.764-7.785a1 1 0 111.415 1.414z"
+                          clip-rule="evenodd"></path>
+                      </svg></button><button
+                      class="flex items-center page-button">1</button><button
+                      class="flex page-button">2</button><button
+                      class="flex page-button">3</button><button
+                      class="flex page-button">4</button><button
+                      class="flex page-button">5</button><button
+                      class="flex page-button">6</button><button
+                      class="flex page-button"
+                      aria-label="gap" disabled=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        width="1em" height="1em" fill="currentColor" class="text-label-2 dark:text-dark-label-2">
+                        <path fill-rule="evenodd"
+                          d="M4.4 14a2 2 0 100-4 2 2 0 000 4zm9.6-2a2 2 0 11-4 0 2 2 0 014 0zm7.6 0a2 2 0 11-4 0 2 2 0 014 0z"
+                          clip-rule="evenodd"></path>
+                      </svg></button><button
+                      class="flex page-button">59</button><button
+                      class="flex page-button"
+                      aria-label="next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"
+                        height="1em" fill="currentColor" class="text-label-2 dark:text-dark-label-2">
+                        <path fill-rule="evenodd"
+                          d="M7.913 19.071l7.057-7.078-7.057-7.064a1 1 0 011.414-1.414l7.764 7.77a1 1 0 010 1.415l-7.764 7.785a1 1 0 01-1.414-1.414z"
+                          clip-rule="evenodd"></path>
+                      </svg></button>
+                  </nav>
+                  <div class="clearfloat"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -317,6 +358,23 @@ export default {
 
 <style scoped>
 
+.page-content {
+  margin-top: 15px;
+  padding-bottom: 15px;
+}
+.page-content .page-items {
+   margin-right: 10px;
+   float:right;
+}
+
+.page-content .page-numbers {
+  float: left;
+}
+
+.page-content .page-button {
+  margin-left: 6px;
+}
+
 .sub-question-list {
   margin-top: 15px;
 }
@@ -330,6 +388,7 @@ export default {
   margin-top: 15px;
   margin-left: 15px;
 }
+
 .question-content {
   margin-top: 20px;
 }

@@ -162,9 +162,6 @@
 </template>
 
 <script>
-import '~/assets/css/theme.css'
-import '~/assets/css/global.css'
-
 import loginApi from '@/api/user'
 
 export default {

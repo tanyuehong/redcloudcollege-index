@@ -13,8 +13,6 @@
                 <div class="active section">iOS工程师</div>
               </div>
             </div>
-
-
             <div class="command">
               <h3 class="positionTitle">推荐</h3>
               <div class="recommand-content">
@@ -34,7 +32,7 @@
             </div>
 
             <div class="question-content">
-              <div class="filter-btns">
+              <div class="filter-btns row">
 
                 <div class="filter-btn">
                   <svg t="1673596319193" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -90,11 +88,9 @@
                 </div>
               </div>
               <div class="job-question-list">
-                <div class="border-b border-divider-border-2 dark:border-dark-divider-border-2">
-                  <div role="row" style="display: flex; flex: 1 0 auto; min-width: 0px;">
-                    <div colspan="1" role="columnheader"
-                      class="mx-2 py-[11px] font-normal text-label-3 dark:text-dark-label-3 group hover:text-gray-7 dark:hover:text-dark-gray-7"
-                      style="box-sizing: border-box; flex: 160 0 auto; min-width: 0px; width: 160px; cursor: pointer;">
+                <div class="row">
+                  <div class="question-header">
+                    <div class="question-header-title col-md-4">
                       <div class="flex items-center justify-between">
                         <div class="overflow-hidden text-ellipsis">题目</div><span
                           class="ml-2 h-3.5 w-3.5 text-gray-5 dark:text-dark-gray-5 group-hover:text-gray-7 dark:group-hover:text-dark-gray-7"><svg
@@ -103,11 +99,11 @@
                             <path
                               d="M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z">
                             </path>
-                          </svg></span>
+                          </svg>
+                        </span>
                       </div>
                     </div>
-                    <div colspan="1" role="columnheader"
-                      class="mx-2 py-[11px] font-normal text-label-3 dark:text-dark-label-3 group hover:text-gray-7 dark:hover:text-dark-gray-7"
+                    <div class="question-header-title col-md-2"
                       style="box-sizing: border-box; flex: 96 0 auto; min-width: 0px; width: 96px; cursor: pointer;">
                       <div class="flex items-center justify-between">
                         <div class="overflow-hidden text-ellipsis">题解</div><span
@@ -120,9 +116,7 @@
                           </svg></span>
                       </div>
                     </div>
-                    <div colspan="1" role="columnheader"
-                      class="mx-2 py-[11px] font-normal text-label-3 dark:text-dark-label-3 group hover:text-gray-7 dark:hover:text-dark-gray-7"
-                      style="box-sizing: border-box; flex: 82 0 auto; min-width: 0px; width: 82px; cursor: pointer;">
+                    <div class="question-header-title col-md-2">
                       <div class="flex items-center justify-between">
                         <div class="overflow-hidden text-ellipsis">通过率</div><span
                           class="ml-2 h-3.5 w-3.5 text-gray-5 dark:text-dark-gray-5 group-hover:text-gray-7 dark:group-hover:text-dark-gray-7"><svg
@@ -134,9 +128,7 @@
                           </svg></span>
                       </div>
                     </div>
-                    <div colspan="1" role="columnheader"
-                      class="mx-2 py-[11px] font-normal text-label-3 dark:text-dark-label-3 group hover:text-gray-7 dark:hover:text-dark-gray-7"
-                      style="box-sizing: border-box; flex: 60 0 auto; min-width: 0px; width: 60px; cursor: pointer;">
+                    <div class="question-header-title col-md-2">
                       <div class="flex items-center justify-between">
                         <div class="overflow-hidden text-ellipsis">难度</div><span
                           class="ml-2 h-3.5 w-3.5 text-gray-5 dark:text-dark-gray-5 group-hover:text-gray-7 dark:group-hover:text-dark-gray-7"><svg
@@ -148,8 +140,7 @@
                           </svg></span>
                       </div>
                     </div>
-                    <div colspan="1" role="columnheader"
-                      class="mx-2 py-[11px] font-normal text-label-3 dark:text-dark-label-3"
+                    <div colspan="1" role="columnheader" class="question-header-title col-md-2"
                       style="box-sizing: border-box; flex: 88 0 auto; min-width: 0px; width: 88px;">
                       <div class="flex items-center justify-between">
                         <div class="overflow-hidden text-ellipsis">出现频率</div>
@@ -157,129 +148,42 @@
                     </div>
                   </div>
                 </div>
-                <div role="rowgroup" class="sub-question-list">
-                  <div role="row"
-                    class="odd:bg-layer-1 even:bg-overlay-1 dark:odd:bg-dark-layer-bg dark:even:bg-dark-fill-4"
-                    style="display: flex; flex: 1 0 auto; min-width: 0px;">
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 160 0 auto; min-width: 0px; width: 160px;">
-                      <div class="max-w-[302px] flex items-center">
-                        <div class="overflow-hidden">
-                          <div class="flex items-center">
-                            <div class="truncate"><a href="/problems/sentence-similarity-iii/"
-                                class="h-5 hover:text-blue-s dark:hover:text-dark-blue-s">1813. 句子相似性 III</a></div>
-                          </div>
-                        </div>
+                <div class="row qustion-list">
+                  <div class="qustion-list-item" v-for="item in list" :key="item.id">
+                    <div role="cell" class="qustion-title col-md-4">
+
+                      <div class="flex items-center">
+                        <div class="truncate"><a href="/problems/sentence-similarity-iii/"
+                            class="h-5 hover:text-blue-s dark:hover:text-dark-blue-s">{{ item.title }}</a></div>
                       </div>
                     </div>
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 96 0 auto; min-width: 0px; width: 96px;"><span
+                    <div role="cell" class="qustion-title col-md-2"><span
                         class="flex items-center space-x-2 text-label-1 dark:text-dark-label-1"><a
-                          href="/problems/sentence-similarity-iii/solution" class="truncate"
-                          aria-label="solution">225</a></span></div>
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 82 0 auto; min-width: 0px; width: 82px;"><span>42.5%</span>
+                          href="/problems/sentence-similarity-iii/solution" class="truncate" aria-label="solution">{{
+                            item.reply
+                          }}</a></span></div>
+                    <div role="cell" class="qustion-title col-md-2">
+                      <span>42.5%</span>
                     </div>
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 60 0 auto; min-width: 0px; width: 60px;"><span
-                        class="text-yellow dark:text-dark-yellow">中等</span></div>
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 88 0 auto; min-width: 0px; width: 88px;">
-                      <div class="w-fill flex h-full flex-row items-center"><span
-                          class="h-2 flex-1 rounded-l-lg bg-fill-3 dark:bg-dark-fill-3"></span>
-                        <div data-options="[object Object]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    <div role="cell" class="qustion-title col-md-2"><span class="text-yellow dark:text-dark-yellow">{{
+                      item.deep
+                    }}</span></div>
+                    <div role="cell" class="qustion-title col-md-2">
+                      <div class="w-fill flex h-full flex-row items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                             width="1em" height="1em" fill="currentColor"
                             class="flex-0 -mt-1.5 h-5 w-5 text-gray-5 dark:text-gray-7">
                             <path fill-rule="evenodd"
                               d="M7 8v2H6a3 3 0 00-3 3v6a3 3 0 003 3h12a3 3 0 003-3v-6a3 3 0 00-3-3h-1V8A5 5 0 007 8zm8 0v2H9V8a3 3 0 116 0zm-3 6a2 2 0 100 4 2 2 0 000-4z"
                               clip-rule="evenodd"></path>
-                          </svg></div><span class="h-2 flex-1 rounded-r-lg bg-fill-3 dark:bg-dark-fill-3"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div role="row"
-                    class="odd:bg-layer-1 even:bg-overlay-1 dark:odd:bg-dark-layer-bg dark:even:bg-dark-fill-4"
-                    style="display: flex; flex: 1 0 auto; min-width: 0px;">
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 160 0 auto; min-width: 0px; width: 160px;">
-                      <div class="max-w-[302px] flex items-center">
-                        <div class="overflow-hidden">
-                          <div class="flex items-center">
-                            <div class="truncate"><a href="/problems/fancy-sequence/"
-                                class="h-5 hover:text-blue-s dark:hover:text-dark-blue-s">1622. 奇妙序列</a></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 96 0 auto; min-width: 0px; width: 96px;"><span
-                        class="flex items-center space-x-2 text-label-1 dark:text-dark-label-1"><a
-                          href="/problems/fancy-sequence/solution" class="truncate" aria-label="solution">95</a></span>
-                    </div>
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 82 0 auto; min-width: 0px; width: 82px;"><span>16.6%</span>
-                    </div>
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 60 0 auto; min-width: 0px; width: 60px;"><span
-                        class="text-pink dark:text-dark-pink">困难</span></div>
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 88 0 auto; min-width: 0px; width: 88px;">
-                      <div class="w-fill flex h-full flex-row items-center"><span
-                          class="h-2 flex-1 rounded-l-lg bg-fill-3 dark:bg-dark-fill-3"></span>
-                        <div data-options="[object Object]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                            width="1em" height="1em" fill="currentColor"
-                            class="flex-0 -mt-1.5 h-5 w-5 text-gray-5 dark:text-gray-7">
-                            <path fill-rule="evenodd"
-                              d="M7 8v2H6a3 3 0 00-3 3v6a3 3 0 003 3h12a3 3 0 003-3v-6a3 3 0 00-3-3h-1V8A5 5 0 007 8zm8 0v2H9V8a3 3 0 116 0zm-3 6a2 2 0 100 4 2 2 0 000-4z"
-                              clip-rule="evenodd"></path>
-                          </svg></div><span class="h-2 flex-1 rounded-r-lg bg-fill-3 dark:bg-dark-fill-3"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div role="row"
-                    class="odd:bg-layer-1 even:bg-overlay-1 dark:odd:bg-dark-layer-bg dark:even:bg-dark-fill-4"
-                    style="display: flex; flex: 1 0 auto; min-width: 0px;">
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 160 0 auto; min-width: 0px; width: 160px;">
-                      <div class="max-w-[302px] flex items-center">
-                        <div class="overflow-hidden">
-                          <div class="flex items-center">
-                            <div class="truncate"><a href="/problems/remove-letter-to-equalize-frequency/"
-                                class="h-5 hover:text-blue-s dark:hover:text-dark-blue-s">2423. 删除字符使频率相同</a></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 96 0 auto; min-width: 0px; width: 96px;"><span
-                        class="flex items-center space-x-2 text-label-1 dark:text-dark-label-1"><a
-                          href="/problems/remove-letter-to-equalize-frequency/solution" class="truncate"
-                          aria-label="solution">116</a></span></div>
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 82 0 auto; min-width: 0px; width: 82px;"><span>19.4%</span>
-                    </div>
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 60 0 auto; min-width: 0px; width: 60px;"><span
-                        class="text-olive dark:text-dark-olive">简单</span></div>
-                    <div role="cell" class="mx-2 py-[11px]"
-                      style="box-sizing: border-box; flex: 88 0 auto; min-width: 0px; width: 88px;">
-                      <div class="w-fill flex h-full flex-row items-center"><span
-                          class="h-2 flex-1 rounded-l-lg bg-fill-3 dark:bg-dark-fill-3"></span>
-                        <div data-options="[object Object]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                            width="1em" height="1em" fill="currentColor"
-                            class="flex-0 -mt-1.5 h-5 w-5 text-gray-5 dark:text-gray-7">
-                            <path fill-rule="evenodd"
-                              d="M7 8v2H6a3 3 0 00-3 3v6a3 3 0 003 3h12a3 3 0 003-3v-6a3 3 0 00-3-3h-1V8A5 5 0 007 8zm8 0v2H9V8a3 3 0 116 0zm-3 6a2 2 0 100 4 2 2 0 000-4z"
-                              clip-rule="evenodd"></path>
-                          </svg></div><span class="h-2 flex-1 rounded-r-lg bg-fill-3 dark:bg-dark-fill-3"></span>
+                          </svg>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div class="page-content">
-                  <div class="relative"><button
-                      class="flex page-numbers" type="button" aria-haspopup="true"
+                  <div class="relative"><button class="flex page-numbers" type="button" aria-haspopup="true"
                       aria-expanded="false" data-headlessui-state="">50 条/页<svg xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"
                         class="pointer-events-none ml-3" aria-hidden="true">
@@ -288,28 +192,22 @@
                           clip-rule="evenodd"></path>
                       </svg></button></div>
                   <nav role="navigation" class="flex page-items">
-                    <button class="flex items-center justify-center px-3 h-8 rounded select-none focus:outline-none bg-fill-3 dark:bg-dark-fill-3 text-label-2 dark:text-dark-label-2 hover:bg-fill-2 dark:hover:bg-dark-fill-2 disabled:opacity-40 disabled:pointer-events-none"
-                      aria-label="prev" disabled=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                        width="1em" height="1em" fill="currentColor" class="text-label-2 dark:text-dark-label-2">
+                    <button class="flex page-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
+                        fill="currentColor" class="text-label-2 dark:text-dark-label-2">
                         <path fill-rule="evenodd"
                           d="M16.091 4.929l-7.057 7.078 7.057 7.064a1 1 0 01-1.414 1.414l-7.764-7.77a1 1 0 010-1.415l7.764-7.785a1 1 0 111.415 1.414z"
                           clip-rule="evenodd"></path>
-                      </svg></button><button
-                      class="flex items-center page-button">1</button><button
-                      class="flex page-button">2</button><button
-                      class="flex page-button">3</button><button
-                      class="flex page-button">4</button><button
-                      class="flex page-button">5</button><button
-                      class="flex page-button">6</button><button
-                      class="flex page-button"
-                      aria-label="gap" disabled=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                        width="1em" height="1em" fill="currentColor" class="text-label-2 dark:text-dark-label-2">
+                      </svg></button><button class="flex items-center page-button">1</button><button
+                      class="flex page-button">2</button><button class="flex page-button">3</button><button
+                      class="flex page-button">4</button><button class="flex page-button">5</button><button
+                      class="flex page-button">6</button><button class="flex page-button" aria-label="gap"
+                      disabled=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
+                        fill="currentColor" class="text-label-2 dark:text-dark-label-2">
                         <path fill-rule="evenodd"
                           d="M4.4 14a2 2 0 100-4 2 2 0 000 4zm9.6-2a2 2 0 11-4 0 2 2 0 014 0zm7.6 0a2 2 0 11-4 0 2 2 0 014 0z"
                           clip-rule="evenodd"></path>
-                      </svg></button><button
-                      class="flex page-button">59</button><button
-                      class="flex page-button"
+                      </svg></button><button class="flex page-button">59</button><button class="flex page-button"
                       aria-label="next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"
                         height="1em" fill="currentColor" class="text-label-2 dark:text-dark-label-2">
                         <path fill-rule="evenodd"
@@ -336,6 +234,9 @@
 </template>
 
 <script>
+
+import interviewServerApi from "@/api/interviewServerReq";
+
 export default {
   data() {
     return {
@@ -346,7 +247,26 @@ export default {
 
   head() { },
 
-  asyncData({ params, error }) { },
+  asyncData({ params, error }) {
+    return interviewServerApi
+      .getInterviewIndex({
+        type: params.type ? params.type : "",
+        sort: (params.tag == "latest" || params.tag == "hot") ? params.tag : (params.sort ? params.sort : "recommand"),
+        tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
+          ? params.tag : "",
+      })
+      .then((response) => {
+        return {
+          list: response.data.list ? response.data.list : [],
+          typeList: response.data.typeList,
+          tagList: response.data.tagList,
+          sort: (params.tag == "latest" || params.tag == "hot") ? params.tag : (params.sort ? params.sort : "recommand"),
+
+          tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
+            ? params.tag : "all"
+        };
+      });
+  },
 
   mounted() { },
 
@@ -357,18 +277,56 @@ export default {
 </script>
 
 <style scoped>
+.job-question-list .question-header {
+  display: flex;
+  flex: 1 0 auto;
+  min-width: 0px;
+}
 
+.job-question-list .question-header .question-header-title {
+  cursor: pointer;
+}
+
+.job-question-list .qustion-list {
+  margin-top: 10px;
+}
+.job-question-list .qustion-list-item {
+  display: flex;
+  flex: 1 0 auto;
+  min-width: 0px;
+}
+
+.job-question-list .qustion-list-item .qustion-title {
+  box-sizing: border-box;
+  min-width: 0px;
+}
+
+.job-question-list .qustion-list-item .qustion-title a {
+  color: #333;
+}
+
+.job-question-list .qustion-list-item .qustion-title a:hover {
+  color: red;
+}
 .page-content {
   margin-top: 15px;
   padding-bottom: 15px;
 }
+
 .page-content .page-items {
-   margin-right: 10px;
-   float:right;
+  margin-right: 20px;
+  float: right;
 }
 
 .page-content .page-numbers {
   float: left;
+  font-size: 12px;
+}
+
+.page-content .page-numbers svg,
+.page-content .page-button svg {
+  margin-top: 4px;
+  margin-left: 2px;
 }
 
 .page-content .page-button {
@@ -387,6 +345,7 @@ export default {
 .job-question-list {
   margin-top: 15px;
   margin-left: 15px;
+  margin-right: 15px;
 }
 
 .question-content {

@@ -47,6 +47,11 @@ export default {
       },
     ],
   },
+
+  css: [
+    '@/assets/css/theme.css',
+    '@/assets/css/global.css'
+  ],
   /*
    ** Customize the progress-bar color
    */

@@ -68,6 +68,9 @@
   </template>
   
   <script>
+
+import interviewServerApi from "@/api/interviewServerReq";
+
   export default {
     data() {
       return {
@@ -78,7 +81,6 @@
   
     head() {},
   
-    asyncData({ params, error }) {},
   
     mounted() {},
   

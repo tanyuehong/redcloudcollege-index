@@ -90,10 +90,11 @@
               <div class="job-question-list">
                 <div class="row">
                   <div class="question-header">
-                    <div class="question-header-title col-md-4">
+                    <div class="question-header-title col-md-5">
                       <div class="flex items-center justify-between">
-                        <div class="overflow-hidden text-ellipsis">题目</div><span
-                          class="ml-2 h-3.5 w-3.5 text-gray-5 dark:text-dark-gray-5 group-hover:text-gray-7 dark:group-hover:text-dark-gray-7"><svg
+                        <div class="overflow-hidden text-ellipsis">题目</div>
+                        <span>
+                          <svg
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
                             fill="currentColor">
                             <path
@@ -103,8 +104,7 @@
                         </span>
                       </div>
                     </div>
-                    <div class="question-header-title col-md-2"
-                      style="box-sizing: border-box; flex: 96 0 auto; min-width: 0px; width: 96px; cursor: pointer;">
+                    <div class="question-header-title col-md-1">
                       <div class="flex items-center justify-between">
                         <div class="overflow-hidden text-ellipsis">题解</div><span
                           class="ml-2 h-3.5 w-3.5 text-gray-5 dark:text-dark-gray-5 group-hover:text-gray-7 dark:group-hover:text-dark-gray-7"><svg
@@ -150,18 +150,18 @@
                 </div>
                 <div class="row qustion-list">
                   <div class="qustion-list-item" v-for="item in list" :key="item.id">
-                    <div role="cell" class="qustion-title col-md-4">
-
-                      <div class="flex items-center">
-                        <div class="truncate"><a href="/problems/sentence-similarity-iii/"
-                            class="h-5 hover:text-blue-s dark:hover:text-dark-blue-s">{{ item.title }}</a></div>
-                      </div>
+                    <div role="cell" class="qustion-title col-md-5">
+                        <span class="truncate">
+                          <a href="/problems/sentence-similarity-iii/"
+                            class="item-title">{{ item.title }}</a></span>
                     </div>
-                    <div role="cell" class="qustion-title col-md-2"><span
-                        class="flex items-center space-x-2 text-label-1 dark:text-dark-label-1"><a
-                          href="/problems/sentence-similarity-iii/solution" class="truncate" aria-label="solution">{{
-                            item.reply
-                          }}</a></span></div>
+                    <div role="cell" class="qustion-title pl10 col-md-1">
+                      <span class="q-item-title">
+                        <a href="/problems/sentence-similarity-iii/solution" class="truncate" aria-label="solution">
+                          {{ item.reply}}
+                        </a>
+                      </span>
+                    </div>
                     <div role="cell" class="qustion-title col-md-2">
                       <span>42.5%</span>
                     </div>
@@ -281,10 +281,14 @@ export default {
   display: flex;
   flex: 1 0 auto;
   min-width: 0px;
+  margin-left: 15px;
 }
 
 .job-question-list .question-header .question-header-title {
   cursor: pointer;
+  padding: 0px;
+  font-size: 14px;
+  color: #666;
 }
 
 .job-question-list .qustion-list {
@@ -294,11 +298,38 @@ export default {
   display: flex;
   flex: 1 0 auto;
   min-width: 0px;
+  margin-left: 15px;
+}
+.job-question-list .qustion-list-item .qustion-title .item-title  {
+  display: inline-block;
+  white-space: nowrap; 
+  width: 100%; 
+  overflow: hidden;
+  text-overflow:ellipsis;
+  font-size: 14px;
+  color: #333;
 }
 
 .job-question-list .qustion-list-item .qustion-title {
   box-sizing: border-box;
   min-width: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 14px;
+}
+
+.job-question-list .qustion-list-item:nth-child(even) {
+  background: rgba(247, 248, 250, 1);
+}
+
+.job-question-list .qustion-list-item .qustion-title  .q-item-title {
+  text-align: center;
+}
+
+.job-question-list .qustion-list-item .qustion-title  .q-item-title  a {
+  text-align: center;
 }
 
 .job-question-list .qustion-list-item .qustion-title a {

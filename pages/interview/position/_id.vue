@@ -88,9 +88,8 @@
                 </div>
               </div>
               <div class="job-question-list">
-                <div class="row">
                   <div class="question-header">
-                    <div class="question-header-title col-md-5">
+                    <div class="question-header-title col5">
                       <div class="flex items-center justify-between">
                         <div class="overflow-hidden text-ellipsis">题目</div>
                         <span>
@@ -107,7 +106,7 @@
                     <div class="question-header-title col-md-1">
                       <div class="flex items-center justify-between">
                         <div class="overflow-hidden text-ellipsis">题解</div><span
-                          class="ml-2 h-3.5 w-3.5 text-gray-5 dark:text-dark-gray-5 group-hover:text-gray-7 dark:group-hover:text-dark-gray-7"><svg
+                          class=""><svg
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
                             fill="currentColor">
                             <path
@@ -116,10 +115,10 @@
                           </svg></span>
                       </div>
                     </div>
-                    <div class="question-header-title col-md-2">
+                    <div class="question-header-title col-md-2 padding-lefte">
                       <div class="flex items-center justify-between">
                         <div class="overflow-hidden text-ellipsis">通过率</div><span
-                          class="ml-2 h-3.5 w-3.5 text-gray-5 dark:text-dark-gray-5 group-hover:text-gray-7 dark:group-hover:text-dark-gray-7"><svg
+                          class=""><svg
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" width="1em" height="1em"
                             fill="currentColor">
                             <path
@@ -147,7 +146,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+      
                 <div class="row qustion-list">
                   <div class="qustion-list-item" v-for="item in list" :key="item.id">
                     <div role="cell" class="qustion-title col-md-5">
@@ -281,7 +280,7 @@ export default {
   display: flex;
   flex: 1 0 auto;
   min-width: 0px;
-  margin-left: 15px;
+  margin-left: 5px;
 }
 
 .job-question-list .question-header .question-header-title {
@@ -289,7 +288,18 @@ export default {
   padding: 0px;
   font-size: 14px;
   color: #666;
+  padding-left: 0px;
 }
+
+.job-question-list .question-header .question-header-title.col5 {
+  padding-left: 10px;
+  width: 120px;
+}
+
+.job-question-list .question-header .question-header-title.col-md-2.padding-lefte {
+  padding-left: 35px;
+}
+
 
 .job-question-list .qustion-list {
   margin-top: 10px;
@@ -298,7 +308,6 @@ export default {
   display: flex;
   flex: 1 0 auto;
   min-width: 0px;
-  margin-left: 15px;
 }
 .job-question-list .qustion-list-item .qustion-title .item-title  {
   display: inline-block;
@@ -313,11 +322,15 @@ export default {
 .job-question-list .qustion-list-item .qustion-title {
   box-sizing: border-box;
   min-width: 0px;
-  padding-left: 0px;
+  padding-left: 15px;
   padding-right: 0px;
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 14px;
+}
+
+.job-question-list .qustion-list-item .qustion-title.col-md-5 {
+  padding-left: 20px;
 }
 
 .job-question-list .qustion-list-item:nth-child(even) {

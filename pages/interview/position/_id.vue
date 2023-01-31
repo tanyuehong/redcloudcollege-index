@@ -90,7 +90,7 @@
               <div class="job-question-list">
                   <div class="question-header">
                     <div class="question-header-title col5">
-                      <div class="flex items-center justify-between">
+                      <div class="flex">
                         <div class="overflow-hidden text-ellipsis">题目</div>
                         <span>
                           <svg
@@ -103,10 +103,11 @@
                         </span>
                       </div>
                     </div>
-                    <div class="question-header-title col-md-1">
-                      <div class="flex items-center justify-between">
+                    <div class="question-header-title col2 marginl">
+                      <div class="flex">
                         <div class="overflow-hidden text-ellipsis">题解</div><span
-                          class=""><svg
+                          class="">
+                          <svg
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
                             fill="currentColor">
                             <path
@@ -115,22 +116,24 @@
                           </svg></span>
                       </div>
                     </div>
-                    <div class="question-header-title col-md-2 padding-lefte">
-                      <div class="flex items-center justify-between">
+                    <div class="question-header-title col2 ">
+                      <div class="flex">
                         <div class="overflow-hidden text-ellipsis">通过率</div><span
-                          class=""><svg
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" width="1em" height="1em"
+                          class="">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
                             fill="currentColor">
                             <path
-                              d="M10.9052 5.47044L7.48504 2.19872C7.47354 2.18772 7.46161 2.1771 7.44926 2.16687C7.16479 1.93123 6.72125 1.94709 6.45859 2.20229L3.09299 5.47222C3.0332 5.53031 3 5.60648 3 5.68555C3 5.85922 3.15694 6.00001 3.35053 6.00001H10.6495C10.7385 6.00001 10.8243 5.96959 10.8893 5.91493C11.0305 5.79613 11.0376 5.59712 10.9052 5.47044Z">
+                              d="M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z">
                             </path>
                           </svg></span>
                       </div>
                     </div>
-                    <div class="question-header-title col-md-2">
-                      <div class="flex items-center justify-between">
-                        <div class="overflow-hidden text-ellipsis">难度</div><span
-                          class="ml-2 h-3.5 w-3.5 text-gray-5 dark:text-dark-gray-5 group-hover:text-gray-7 dark:group-hover:text-dark-gray-7"><svg
+                    <div class="question-header-title col2">
+                      <div class="flex">
+                        <div class="overflow-hidden text-ellipsis">难度</div>
+                        <span class="">
+                          <svg
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
                             fill="currentColor">
                             <path
@@ -141,7 +144,7 @@
                     </div>
                     <div colspan="1" role="columnheader" class="question-header-title col-md-2"
                       style="box-sizing: border-box; flex: 88 0 auto; min-width: 0px; width: 88px;">
-                      <div class="flex items-center justify-between">
+                      <div class="flex  ">
                         <div class="overflow-hidden text-ellipsis">出现频率</div>
                       </div>
                     </div>
@@ -149,25 +152,25 @@
       
                 <div class="row qustion-list">
                   <div class="qustion-list-item" v-for="item in list" :key="item.id">
-                    <div role="cell" class="qustion-title col-md-5">
+                    <div role="cell" class="qustion-title col5">
                         <span class="truncate">
                           <a href="/problems/sentence-similarity-iii/"
                             class="item-title">{{ item.title }}</a></span>
                     </div>
-                    <div role="cell" class="qustion-title pl10 col-md-1">
+                    <div role="cell" class="qustion-title col2 marginl">
                       <span class="q-item-title">
                         <a href="/problems/sentence-similarity-iii/solution" class="truncate" aria-label="solution">
                           {{ item.reply}}
                         </a>
                       </span>
                     </div>
-                    <div role="cell" class="qustion-title col-md-2">
+                    <div role="cell" class="qustion-title col2">
                       <span>42.5%</span>
                     </div>
-                    <div role="cell" class="qustion-title col-md-2"><span class="text-yellow dark:text-dark-yellow">{{
+                    <div role="cell" class="qustion-title col2"><span class="text-yellow dark:text-dark-yellow">{{
                       item.deep
                     }}</span></div>
-                    <div role="cell" class="qustion-title col-md-2">
+                    <div role="cell" class="qustion-title col2">
                       <div class="w-fill flex h-full flex-row items-center">
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                             width="1em" height="1em" fill="currentColor"
@@ -276,11 +279,16 @@ export default {
 </script>
 
 <style scoped>
+
+.job-question-list {
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+} 
 .job-question-list .question-header {
   display: flex;
   flex: 1 0 auto;
   min-width: 0px;
-  margin-left: 5px;
 }
 
 .job-question-list .question-header .question-header-title {
@@ -288,18 +296,21 @@ export default {
   padding: 0px;
   font-size: 14px;
   color: #666;
-  padding-left: 0px;
+  margin-left: 8px;
 }
 
-.job-question-list .question-header .question-header-title.col5 {
-  padding-left: 10px;
-  width: 120px;
+.job-question-list .question-header .question-header-title svg {
+  margin-top: 2px;
+  margin-left: 6px;
 }
 
-.job-question-list .question-header .question-header-title.col-md-2.padding-lefte {
-  padding-left: 35px;
+.job-question-list .col5 {
+  width: 300px;
 }
 
+.job-question-list .col2 {
+  width: 100px;
+}
 
 .job-question-list .qustion-list {
   margin-top: 10px;
@@ -308,7 +319,9 @@ export default {
   display: flex;
   flex: 1 0 auto;
   min-width: 0px;
+  padding-left: 15px;
 }
+
 .job-question-list .qustion-list-item .qustion-title .item-title  {
   display: inline-block;
   white-space: nowrap; 
@@ -322,16 +335,17 @@ export default {
 .job-question-list .qustion-list-item .qustion-title {
   box-sizing: border-box;
   min-width: 0px;
-  padding-left: 15px;
-  padding-right: 0px;
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 14px;
+  margin-left: 8px;
+  padding-left: 1px;
 }
 
-.job-question-list .qustion-list-item .qustion-title.col-md-5 {
-  padding-left: 20px;
+.job-question-list .question-header question-header-title.col2.marginl, .job-question-list .qustion-list-item .qustion-title.marginl {
+  margin-left: 12px;
 }
+
 
 .job-question-list .qustion-list-item:nth-child(even) {
   background: rgba(247, 248, 250, 1);
@@ -385,13 +399,6 @@ export default {
   font-size: 14px;
   color: #666;
 }
-
-.job-question-list {
-  margin-top: 15px;
-  margin-left: 15px;
-  margin-right: 15px;
-}
-
 .question-content {
   margin-top: 20px;
 }

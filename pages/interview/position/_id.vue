@@ -154,14 +154,16 @@
                   <div class="qustion-list-item" v-for="item in list" :key="item.id">
                     <div role="cell" class="qustion-title col5">
                         <span class="truncate">
-                          <a href="/problems/sentence-similarity-iii/"
-                            class="item-title">{{ item.title }}</a></span>
+                          <nuxt-link :to="'/interview/detail/' + item.qid" target="_blank" class="item-title">
+                            {{ item.title }}
+                          </nuxt-link>
+                        </span>
                     </div>
                     <div role="cell" class="qustion-title col2 marginl">
                       <span class="q-item-title">
-                        <a href="/problems/sentence-similarity-iii/solution" class="truncate" aria-label="solution">
+                        <nuxt-link :to="'/interview/detail/' + item.qid" target="_blank">
                           {{ item.reply}}
-                        </a>
+                        </nuxt-link>
                       </span>
                     </div>
                     <div role="cell" class="qustion-title col2">
@@ -171,14 +173,9 @@
                       item.deep
                     }}</span></div>
                     <div role="cell" class="qustion-title col2">
-                      <div class="w-fill flex h-full flex-row items-center">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                            width="1em" height="1em" fill="currentColor"
-                            class="flex-0 -mt-1.5 h-5 w-5 text-gray-5 dark:text-gray-7">
-                            <path fill-rule="evenodd"
-                              d="M7 8v2H6a3 3 0 00-3 3v6a3 3 0 003 3h12a3 3 0 003-3v-6a3 3 0 00-3-3h-1V8A5 5 0 007 8zm8 0v2H9V8a3 3 0 116 0zm-3 6a2 2 0 100 4 2 2 0 000-4z"
-                              clip-rule="evenodd"></path>
-                          </svg>
+                      <div class="showtimes-rate">
+                        <span class="vale-rate"></span>
+                        <span class="gray-all"></span>
                       </div>
                     </div>
                   </div>
@@ -200,11 +197,12 @@
                         <path fill-rule="evenodd"
                           d="M16.091 4.929l-7.057 7.078 7.057 7.064a1 1 0 01-1.414 1.414l-7.764-7.77a1 1 0 010-1.415l7.764-7.785a1 1 0 111.415 1.414z"
                           clip-rule="evenodd"></path>
-                      </svg></button><button class="flex items-center page-button">1</button><button
-                      class="flex page-button">2</button><button class="flex page-button">3</button><button
-                      class="flex page-button">4</button><button class="flex page-button">5</button><button
-                      class="flex page-button">6</button><button class="flex page-button" aria-label="gap"
-                      disabled=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
+                      </svg></button>
+                      <button class="flex page-button">1</button>
+                      <button class="flex page-button">2</button>
+                      <button class="flex page-button">3</button>
+                      <button class="flex page-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
                         fill="currentColor" class="text-label-2 dark:text-dark-label-2">
                         <path fill-rule="evenodd"
                           d="M4.4 14a2 2 0 100-4 2 2 0 000 4zm9.6-2a2 2 0 11-4 0 2 2 0 014 0zm7.6 0a2 2 0 11-4 0 2 2 0 014 0z"
@@ -232,6 +230,13 @@
         </div>
       </div>
     </div>
+    <div class="foot-menu">
+
+<!---导航具体内容-->
+
+</div>
+
+
   </div>
 </template>
 
@@ -279,6 +284,8 @@ export default {
 </script>
 
 <style scoped>
+
+.foot-menu{width:100%;height:60px;background:#000;position:fixed;bottom:0;/**距离底部为0*/left:0;z-index:1;}
 
 .job-question-list {
   margin-top: 20px;
@@ -346,6 +353,30 @@ export default {
   margin-left: 12px;
 }
 
+.job-question-list .qustion-list-item .qustion-title .showtimes-rate {
+  display: flex;
+  padding-top: 8px;
+}
+
+.job-question-list .qustion-list-item .qustion-title .showtimes-rate .vale-rate {
+  background:rgba(0, 122, 255, 0.6);
+  width: 35px;
+  display: block;
+  height: 8px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.job-question-list .qustion-list-item .qustion-title .showtimes-rate .gray-all {
+  background: rgba(0,10,32,.05);
+  width: 35px;
+  display: block;
+  height: 8px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  margin-left: 0px;
+}
+
 
 .job-question-list .qustion-list-item:nth-child(even) {
   background: rgba(247, 248, 250, 1);
@@ -361,10 +392,11 @@ export default {
 
 .job-question-list .qustion-list-item .qustion-title a {
   color: #333;
+  text-decoration: none;
 }
 
 .job-question-list .qustion-list-item .qustion-title a:hover {
-  color: red;
+  color: rgba(0, 122, 255, 1);
 }
 .page-content {
   margin-top: 15px;

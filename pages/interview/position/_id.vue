@@ -88,81 +88,75 @@
                 </div>
               </div>
               <div class="job-question-list">
-                  <div class="question-header">
-                    <div class="question-header-title col5">
-                      <div class="flex">
-                        <div class="overflow-hidden text-ellipsis">题目</div>
-                        <span>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
-                            fill="currentColor">
-                            <path
-                              d="M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z">
-                            </path>
-                          </svg>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="question-header-title col2 marginl">
-                      <div class="flex">
-                        <div class="overflow-hidden text-ellipsis">题解</div><span
-                          class="">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
-                            fill="currentColor">
-                            <path
-                              d="M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z">
-                            </path>
-                          </svg></span>
-                      </div>
-                    </div>
-                    <div class="question-header-title col2 ">
-                      <div class="flex">
-                        <div class="overflow-hidden text-ellipsis">通过率</div><span
-                          class="">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
-                            fill="currentColor">
-                            <path
-                              d="M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z">
-                            </path>
-                          </svg></span>
-                      </div>
-                    </div>
-                    <div class="question-header-title col2">
-                      <div class="flex">
-                        <div class="overflow-hidden text-ellipsis">难度</div>
-                        <span class="">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
-                            fill="currentColor">
-                            <path
-                              d="M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z">
-                            </path>
-                          </svg></span>
-                      </div>
-                    </div>
-                    <div colspan="1" role="columnheader" class="question-header-title col-md-2"
-                      style="box-sizing: border-box; flex: 88 0 auto; min-width: 0px; width: 88px;">
-                      <div class="flex  ">
-                        <div class="overflow-hidden text-ellipsis">出现频率</div>
-                      </div>
+                <div class="question-header">
+                  <div class="question-header-title col5">
+                    <div class="flex">
+                      <div class="overflow-hidden text-ellipsis">题目</div>
+                      <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
+                          fill="currentColor">
+                          <path
+                            d="M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z">
+                          </path>
+                        </svg>
+                      </span>
                     </div>
                   </div>
-      
+                  <div class="question-header-title col2 marginl">
+                    <div class="flex">
+                      <div class="overflow-hidden text-ellipsis">题解</div><span class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
+                          fill="currentColor">
+                          <path
+                            d="M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z">
+                          </path>
+                        </svg></span>
+                    </div>
+                  </div>
+                  <div class="question-header-title col2 ">
+                    <div class="flex">
+                      <div class="overflow-hidden text-ellipsis">通过率</div><span class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
+                          fill="currentColor">
+                          <path
+                            d="M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z">
+                          </path>
+                        </svg></span>
+                    </div>
+                  </div>
+                  <div class="question-header-title col2">
+                    <div class="flex">
+                      <div class="overflow-hidden text-ellipsis">难度</div>
+                      <span class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
+                          fill="currentColor">
+                          <path
+                            d="M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z">
+                          </path>
+                        </svg></span>
+                    </div>
+                  </div>
+                  <div colspan="1" role="columnheader" class="question-header-title col-md-2"
+                    style="box-sizing: border-box; flex: 88 0 auto; min-width: 0px; width: 88px;">
+                    <div class="flex  ">
+                      <div class="overflow-hidden text-ellipsis">出现频率</div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="row qustion-list">
                   <div class="qustion-list-item" v-for="item in list" :key="item.id">
                     <div role="cell" class="qustion-title col5">
-                        <span class="truncate">
-                          <nuxt-link :to="'/interview/detail/' + item.qid" target="_blank" class="item-title">
-                            {{ item.title }}
-                          </nuxt-link>
-                        </span>
+                      <span class="truncate">
+                        <nuxt-link :to="'/interview/detail/' + item.qid" target="_blank" class="item-title">
+                          {{ item.title }}
+                        </nuxt-link>
+                      </span>
                     </div>
                     <div role="cell" class="qustion-title col2 marginl">
                       <span class="q-item-title">
                         <nuxt-link :to="'/interview/detail/' + item.qid" target="_blank">
-                          {{ item.reply}}
+                          {{ item.reply }}
                         </nuxt-link>
                       </span>
                     </div>
@@ -198,11 +192,11 @@
                           d="M16.091 4.929l-7.057 7.078 7.057 7.064a1 1 0 01-1.414 1.414l-7.764-7.77a1 1 0 010-1.415l7.764-7.785a1 1 0 111.415 1.414z"
                           clip-rule="evenodd"></path>
                       </svg></button>
-                      <button class="flex page-button">1</button>
-                      <button class="flex page-button">2</button>
-                      <button class="flex page-button">3</button>
-                      <button class="flex page-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
+                    <button class="flex page-button">1</button>
+                    <button class="flex page-button">2</button>
+                    <button class="flex page-button">3</button>
+                    <button class="flex page-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
                         fill="currentColor" class="text-label-2 dark:text-dark-label-2">
                         <path fill-rule="evenodd"
                           d="M4.4 14a2 2 0 100-4 2 2 0 000 4zm9.6-2a2 2 0 11-4 0 2 2 0 014 0zm7.6 0a2 2 0 11-4 0 2 2 0 014 0z"
@@ -226,17 +220,16 @@
           <div class="user-sign">
             <Calendar ref="Calendar" :markDateMore="arr" :markDate="arr2" v-on:isToday="clickToday"
               agoDayHide="1530115221" v-on:choseDay="clickDay" v-on:changeMonth="changeDate"></Calendar>
+            <div class="sign-btn">
+              <el-button type="success">学习签到</el-button>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="foot-menu">
-
-<!---导航具体内容-->
-
-</div>
-
-
+      <!---导航具体内容-->
+    </div>
   </div>
 </template>
 
@@ -284,14 +277,23 @@ export default {
 </script>
 
 <style scoped>
-
-.foot-menu{width:100%;height:60px;background:#000;position:fixed;bottom:0;/**距离底部为0*/left:0;z-index:1;}
+.foot-menu {
+  width: 100%;
+  height: 60px;
+  background: #000;
+  position: fixed;
+  bottom: 0;
+  /**距离底部为0*/
+  left: 0;
+  z-index: 1;
+}
 
 .job-question-list {
   margin-top: 20px;
   margin-left: 15px;
   margin-right: 15px;
-} 
+}
+
 .job-question-list .question-header {
   display: flex;
   flex: 1 0 auto;
@@ -322,6 +324,7 @@ export default {
 .job-question-list .qustion-list {
   margin-top: 10px;
 }
+
 .job-question-list .qustion-list-item {
   display: flex;
   flex: 1 0 auto;
@@ -329,12 +332,12 @@ export default {
   padding-left: 15px;
 }
 
-.job-question-list .qustion-list-item .qustion-title .item-title  {
+.job-question-list .qustion-list-item .qustion-title .item-title {
   display: inline-block;
-  white-space: nowrap; 
-  width: 100%; 
+  white-space: nowrap;
+  width: 100%;
   overflow: hidden;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   font-size: 14px;
   color: #333;
 }
@@ -342,14 +345,15 @@ export default {
 .job-question-list .qustion-list-item .qustion-title {
   box-sizing: border-box;
   min-width: 0px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 9px;
+  padding-bottom: 8px;
   font-size: 14px;
   margin-left: 8px;
   padding-left: 1px;
 }
 
-.job-question-list .question-header question-header-title.col2.marginl, .job-question-list .qustion-list-item .qustion-title.marginl {
+.job-question-list .question-header question-header-title.col2.marginl,
+.job-question-list .qustion-list-item .qustion-title.marginl {
   margin-left: 12px;
 }
 
@@ -359,7 +363,7 @@ export default {
 }
 
 .job-question-list .qustion-list-item .qustion-title .showtimes-rate .vale-rate {
-  background:rgba(0, 122, 255, 0.6);
+  background: rgba(0, 122, 255, 0.6);
   width: 35px;
   display: block;
   height: 8px;
@@ -368,7 +372,7 @@ export default {
 }
 
 .job-question-list .qustion-list-item .qustion-title .showtimes-rate .gray-all {
-  background: rgba(0,10,32,.05);
+  background: rgba(0, 10, 32, .05);
   width: 35px;
   display: block;
   height: 8px;
@@ -382,11 +386,11 @@ export default {
   background: rgba(247, 248, 250, 1);
 }
 
-.job-question-list .qustion-list-item .qustion-title  .q-item-title {
+.job-question-list .qustion-list-item .qustion-title .q-item-title {
   text-align: center;
 }
 
-.job-question-list .qustion-list-item .qustion-title  .q-item-title  a {
+.job-question-list .qustion-list-item .qustion-title .q-item-title a {
   text-align: center;
 }
 
@@ -398,6 +402,7 @@ export default {
 .job-question-list .qustion-list-item .qustion-title a:hover {
   color: rgba(0, 122, 255, 1);
 }
+
 .page-content {
   margin-top: 15px;
   padding-bottom: 15px;
@@ -431,6 +436,7 @@ export default {
   font-size: 14px;
   color: #666;
 }
+
 .question-content {
   margin-top: 20px;
 }
@@ -491,6 +497,12 @@ export default {
 .user-sign {
   margin-top: 10px;
   background: #fff;
+  padding-bottom: 15px;
+}
+
+.user-sign .sign-btn {
+  margin: 0 auto;
+  text-align: center
 }
 
 .user-sign .wh_container {

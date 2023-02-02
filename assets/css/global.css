@@ -1198,11 +1198,13 @@ a.current-2 .lh-p-icon {
 .nav {
   padding: 10px 0 0 30px;
 }
+
 .nav,
 .nav li,
 .nav li a {
   float: left;
 }
+
 .nav li a {
   border-bottom: 2px solid transparent;
   color: #666;

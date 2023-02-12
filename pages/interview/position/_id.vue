@@ -175,7 +175,7 @@
                   </div>
                 </div>
 
-                <div class="page-content">
+                <div class="page-content" v-if="page">
                   <div class="relative"><button class="flex page-numbers" type="button" aria-haspopup="true"
                       aria-expanded="false" data-headlessui-state="">50 条/页<svg xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"
@@ -218,10 +218,10 @@
 
         <div class="col-md-4">
           <div class="user-sign">
-            <Calendar ref="Calendar" :markDateMore="arr" :markDate="arr2" v-on:isToday="clickToday"
+            <Calendar ref="Calendar" :markDateMore="signArr" v-on:isToday="clickToday"
               agoDayHide="1530115221" v-on:choseDay="clickDay" v-on:changeMonth="changeDate"></Calendar>
             <div class="sign-btn">
-              <el-button type="success">学习签到</el-button>
+              <el-button type="success" size="medium">学习签到</el-button>
             </div>
           </div>
         </div>
@@ -241,7 +241,8 @@ export default {
   data() {
     return {
       activeIndex: "1",
-      tagList: []
+      tagList: [],
+      signArr:[{date:'2023/2/8',className:"mark1"}, {date:'2023/2/5',className:"mark1"}]
     };
   },
 
@@ -263,7 +264,8 @@ export default {
           sort: (params.tag == "latest" || params.tag == "hot") ? params.tag : (params.sort ? params.sort : "recommand"),
 
           tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
-            ? params.tag : "all"
+            ? params.tag : "all",
+          page:false
         };
       });
   },
@@ -272,9 +274,24 @@ export default {
 
   computed: {},
 
-  methods: {}
+  methods: {
+    clickToday() {
+
+    },
+    clickDay() {
+
+    },
+    changeDate() {
+
+    }
+  }
 };
 </script>
+<style>
+.mark1 {
+  background: red;
+}
+</style>
 
 <style scoped>
 .foot-menu {
@@ -439,6 +456,7 @@ export default {
 
 .question-content {
   margin-top: 20px;
+  max-width: 773px;
 }
 
 .filter-btns {
@@ -498,6 +516,7 @@ export default {
   margin-top: 10px;
   background: #fff;
   padding-bottom: 15px;
+  max-width: 620px;
 }
 
 .user-sign .sign-btn {

@@ -21,6 +21,12 @@ body {
   background-color: #fff;
 }
 
+.calendar_date {
+  background: #67c23a;
+  color: white;
+  border-radius: 24px;
+}
+
 .user-sign .wh_container .wh_content_all .wh_content .wh_content_item {
   color: #999;
 }

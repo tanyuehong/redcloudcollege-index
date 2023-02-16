@@ -242,7 +242,7 @@ export default {
     return {
       activeIndex: "1",
       tagList: [],
-      signArr:[{date:'2023/2/8',className:"mark1"}, {date:'2023/2/5',className:"mark1"}]
+      signArr:[{date:'2023/2/8',className:"calendar_date"}, {date:'2023/2/5',className:"calendar_date"}]
     };
   },
 
@@ -287,11 +287,6 @@ export default {
   }
 };
 </script>
-<style>
-.mark1 {
-  background: red;
-}
-</style>
 
 <style scoped>
 .foot-menu {

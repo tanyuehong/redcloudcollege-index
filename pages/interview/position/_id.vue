@@ -220,14 +220,16 @@
           <div class="user-sign">
             <Calendar ref="Calendar" :markDateMore="signArr" v-on:isToday="clickToday"
               agoDayHide="1530115221" v-on:choseDay="clickDay" v-on:changeMonth="changeDate"></Calendar>
-            <div class="sign-btn">
-              <el-button type="success" size="medium">学习签到</el-button>
+          
+            <div class="sin-desc">
+              <span class="des-notice">注:</span>
+              <span class="date-style cb-green"></span><span class="des-lable">已学习</span>
+              <span class="date-style cb-blue"></span><span class="des-lable">补签</span>
+              <span class="date-style cb-yellow"></span><span class="des-lable">今天</span>
             </div>
 
-            <div class="sin-desc">
-              <span>注:</span>
-              <span class="date-style d-green"></span><span>学习</span>
-              <span></span><span>当天</span>
+            <div class="sign-btn">
+              <el-button type="success" size="medium">学习签到</el-button>
             </div>
           </div>
 
@@ -298,16 +300,32 @@ export default {
 <style scoped>
 
 .sin-desc {
-  margin-top: 15px;
-  margin-left: 15px;
+  margin-top: 0px;
+  margin-left: 38px;
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.sin-desc .des-lable {
+  display: inline-block;
+  line-height: 20px;
+  color: #666;
+  margin-left: 6px;
+}
+
+.sin-desc .des-notice {
+  display: inline-block;
+  line-height: 20px;
+  color: #333;
+  font-weight: 600;
 }
 
 .sin-desc .date-style {
   display: inline-block;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 12px;
-  background: red;
+  margin-left: 15px;
 }
 
 .foot-menu {
@@ -520,8 +538,6 @@ export default {
   color: #666;
 
 }
-
-.command .recommand-content .recommand-item {}
 
 .command .recommand-content .recommand-item img {
   width: 270px;

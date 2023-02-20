@@ -8,6 +8,17 @@ html {
 body {
   height: 100%;
 }
+
+/* 自定义颜色 */
+.cb-green {
+  background: #67c23a;
+}
+.cb-blue {
+  background: #409EFF;
+}
+.cb-yellow {
+  background: #ff0;
+}
 /* 自己添加的样式 */
 .golobal_content {
   background-color: #f6f6f6;
@@ -271,7 +282,8 @@ td {
 body {
   font-size: 12px;
   line-height: 160%;
-  font-family: "Helvetica Neue", \5fae\8f6f\96c5\9ed1, "SimHei", Tohoma;
+  -webkit-font-smoothing: unset!important;
+  font-family: -apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial!important;
   word-break: break-all;
   word-wrap: break-word;
   position: relative;
@@ -374,6 +386,7 @@ section {
 .fw900 {
   font-weight: 900;
 }
+
 .clearfloat {
   clear: both;
 }

@@ -223,7 +223,14 @@
             <div class="sign-btn">
               <el-button type="success" size="medium">学习签到</el-button>
             </div>
+
+            <div class="sin-desc">
+              <span>注:</span>
+              <span class="date-style d-green"></span><span>学习</span>
+              <span></span><span>当天</span>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -289,6 +296,20 @@ export default {
 </script>
 
 <style scoped>
+
+.sin-desc {
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.sin-desc .date-style {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background: red;
+}
+
 .foot-menu {
   width: 100%;
   height: 60px;
@@ -299,6 +320,7 @@ export default {
   left: 0;
   z-index: 1;
 }
+
 
 .job-question-list {
   margin-top: 20px;

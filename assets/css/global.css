@@ -27,6 +27,11 @@ body {
   border-radius: 24px;
 }
 
+.wh_content_item .wh_chose_day {
+  background: #409EFF !important;
+  color: white;
+}
+
 .wh_item_date {
   color: #666;
 }

@@ -229,7 +229,7 @@
             </div>
 
             <div class="sign-btn">
-              <el-button type="success" size="medium">学习签到</el-button>
+              <el-button type="success" size="medium" @click="signBtnClick">{{ signTitle }}</el-button>
             </div>
           </div>
 
@@ -250,6 +250,8 @@ export default {
   data() {
     return {
       activeIndex: "1",
+      isLogin:false,
+      signTitle:"登录",
       tagList: [],
       signArr:[{date:'2023/2/8',className:"calendar_date"}, {date:'2023/2/5',className:"calendar_date"}]
     };
@@ -279,7 +281,17 @@ export default {
       });
   },
 
-  mounted() { },
+  mounted() { 
+    var token = localStorage.getItem("redclass_token");
+    var userStr = localStorage.getItem("redclass_user");
+    if (!(token && token != "undefined") || !(userStr && userStr != "undefined")) {
+      this.isLogin = false;
+    } else {
+      this.signTitle = "学习签到";
+      this.loginInfo = JSON.parse(userStr)
+      this.isLogin = true;
+    };
+  },
 
   computed: {},
 
@@ -291,7 +303,15 @@ export default {
 
     },
     changeDate() {
+    },
+    signBtnClick() {
+      if(!this.isLogin) {
+        $nuxt.$router.push({
+              name: "user-login",
+            });
+      } else {
 
+      }
     }
   }
 };
@@ -303,13 +323,14 @@ export default {
   margin-top: 0px;
   margin-left: 38px;
   display: flex;
+  margin-top: 10px;
   margin-bottom: 15px;
 }
 
 .sin-desc .des-lable {
   display: inline-block;
   line-height: 20px;
-  color: #666;
+  color: #333;
   margin-left: 6px;
 }
 

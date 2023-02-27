@@ -1,9 +1,9 @@
 import request from '@/utils/request'
 
 export default {
-  getInterviewTagList(typeId) {
+  getSignDateList() {
     return request({
-      url: `/home/interview/tagList/${typeId}`,
+      url: `/interview/getSignDateList`,
       method: 'get',
     })
   },
@@ -11,7 +11,7 @@ export default {
   // 提交签到的接口
   submitInterviewSign(signData) {
     return request({
-      url: `/interview/submit`,
+      url: `/interview/commitSign`,
       method: 'post',
       data: signData,
     })

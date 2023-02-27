@@ -217,6 +217,7 @@
         </div>
 
         <div class="col-md-4">
+          <client-only>
           <div class="user-sign">
             <Calendar ref="Calendar" :markDateMore="signArr" v-on:isToday="clickToday"
               agoDayHide="1530115221" v-on:choseDay="clickDay" v-on:changeMonth="changeDate"></Calendar>
@@ -232,7 +233,7 @@
               <el-button type="success" size="medium" @click="signBtnClick">{{ signTitle }}</el-button>
             </div>
           </div>
-
+          </client-only>
         </div>
       </div>
     </div>
@@ -244,6 +245,7 @@
 
 <script>
 
+import interviewSudyApi from "@/api/interviewStudyReq";
 import interviewServerApi from "@/api/interviewServerReq";
 
 export default {
@@ -252,8 +254,9 @@ export default {
       activeIndex: "1",
       isLogin:false,
       signTitle:"登录",
+      signDate:"",
       tagList: [],
-      signArr:[{date:'2023/2/8',className:"calendar_date"}, {date:'2023/2/5',className:"calendar_date"}]
+      signArr: []
     };
   },
 
@@ -287,20 +290,37 @@ export default {
     if (!(token && token != "undefined") || !(userStr && userStr != "undefined")) {
       this.isLogin = false;
     } else {
-      this.signTitle = "学习签到";
+      this.signTitle = "今日签到";
       this.loginInfo = JSON.parse(userStr)
       this.isLogin = true;
+
+      interviewSudyApi.getSignDateList()
+          .then((response) => {
+             window.console.log(response.data.dateList);
+             var dateList = response.data.dateList;
+             var list = [];
+             for (var j = 0; j < dateList.length; j++) {
+                list.push({date:dateList[j],className:"calendar_date"});
+             }
+             this.signArr = list;
+             window.console.log(this.signArr);
+           });
     };
   },
 
   computed: {},
 
   methods: {
-    clickToday() {
-
+    clickToday(data) {
+      this.signTitle = "今日签到";
+      if(this.signDate.length ==0){
+        this.signDate = data;
+        window.console.log(this.signDate+"111")
+      }
     },
-    clickDay() {
-
+    clickDay(data) {
+      this.signDate = data;
+      console.log(this.signDate+"222"); // 跳到了本月
     },
     changeDate() {
     },
@@ -310,7 +330,12 @@ export default {
               name: "user-login",
             });
       } else {
-
+      var params = {date:this.signDate};
+      window.console.log(params);
+      interviewSudyApi.submitInterviewSign(params)
+          .then((response) => {
+           
+           });
       }
     }
   }

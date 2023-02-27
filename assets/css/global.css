@@ -32,6 +32,10 @@ body {
   background-color: #fff;
 }
 
+.wh_content_all .wh_top_changge li {
+  height: 36px !important;
+}
+
 .wh_item_date.calendar_date {
   background: #67c23a;
   color: white;
@@ -47,6 +51,16 @@ body {
   color: #666;
 }
 
+.wh_item_date, .wh_top_tag {
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 32px !important;
+}
+
+.wh_content_item {
+  height: 36px !important;
+}
+
 .wh_item_date:hover {
   background: #409EFF !important;
   color: #fff;
@@ -55,20 +69,26 @@ body {
 
 .user-sign .wh_container .wh_content_all .wh_content .wh_content_item {
   color: #999;
+  font-size: 14px;
 }
 
 .user-sign .wh_container .wh_content_all .wh_top_changge .wh_content_li {
   color: #333;
+  font-size: 16px;
 }
 
 .user-sign .wh_container .wh_content_all .wh_top_changge li .wh_jiantou1 {
   border-top: 2px solid #666;
   border-left: 2px solid #666;
+  height: 10px;
+  width: 10px;
 }
 
 .user-sign .wh_container .wh_content_all .wh_top_changge li .wh_jiantou2 {
   border-top: 2px solid #666;
   border-right: 2px solid #666;
+  height: 10px;
+  width: 10px;
 }
 
 .message-spreate {

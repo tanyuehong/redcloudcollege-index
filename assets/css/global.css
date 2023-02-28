@@ -61,6 +61,10 @@ body {
   height: 36px !important;
 }
 
+.wh_content {
+  margin-left: 10px !important;
+}
+
 .wh_item_date:hover {
   background: #409EFF !important;
   color: #fff;

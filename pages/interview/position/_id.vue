@@ -90,34 +90,34 @@
               <div class="job-question-list">
                 <div class="question-header">
                   <div class="question-header-title col5">
-                    <div class="flex">
+                    <div class="flex fbselect" @click="sortTypeClick(0)">
                       <div class="overflow-hidden text-ellipsis">题目</div>
-                      <span v-html="sort0"></span>
+                      <span v-html="sortArr[0].htmlContent"></span>
                     </div>
                   </div>
                   <div class="question-header-title col2 marginl">
-                    <div class="flex">
+                    <div class="flex fbselect" @click="sortTypeClick(1)">
                       <div class="overflow-hidden text-ellipsis">题解</div>
-                      <span v-html="sort1"></span>
+                      <span v-html="sortArr[1].htmlContent"></span>
                     </div>
                   </div>
                   <div class="question-header-title col2 ">
-                    <div class="flex">
+                    <div class="flex fbselect" @click="sortTypeClick(2)">
                       <div class="overflow-hidden text-ellipsis">通过率</div>
-                      <span v-html="sort2"></span>
+                      <span v-html="sortArr[2].htmlContent"></span>
                     </div>
                   </div>
                   <div class="question-header-title col2">
-                    <div class="flex">
+                    <div class="flex fbselect" @click="sortTypeClick(3)">
                       <div class="overflow-hidden text-ellipsis">难度</div>
-                      <span v-html="sort3"></span>
+                      <span v-html="sortArr[3].htmlContent"></span>
                     </div>
                   </div>
                   <div colspan="1" role="columnheader" class="question-header-title col-md-2"
                     style="box-sizing: border-box; flex: 88 0 auto; min-width: 0px; width: 88px;">
-                    <div class="flex  ">
+                    <div class="flex fbselect" @click="sortTypeClick(4)">
                       <div class="overflow-hidden text-ellipsis">出现频率</div>
-                      <span v-html="sort4"></span>
+                      <span v-html="sortArr[4].htmlContent"></span>
                     </div>
                   </div>
                 </div>
@@ -235,10 +235,8 @@ export default {
       signDate:"",
       tagList: [],
       signArr: [],
-      sort0:"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z\"></path></svg>",
-      sort1:"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M7.44926 11.8332C7.46161 11.8229 7.47354 11.8123 7.48504 11.8013L10.9052 8.52958C11.0376 8.4029 11.0305 8.20389 10.8893 8.08509C10.8243 8.03043 10.7385 8.00001 10.6495 8.00001H3.35053C3.15694 8.00001 3 8.1408 3 8.31447C3 8.39354 3.0332 8.46971 3.09299 8.5278L6.45859 11.7977C6.72125 12.0529 7.16479 12.0688 7.44926 11.8332Z\"></path></svg>",
-      sort2:"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M10.9052 5.47044L7.48504 2.19872C7.47354 2.18772 7.46161 2.1771 7.44926 2.16687C7.16479 1.93123 6.72125 1.94709 6.45859 2.20229L3.09299 5.47222C3.0332 5.53031 3 5.60648 3 5.68555C3 5.85922 3.15694 6.00001 3.35053 6.00001H10.6495C10.7385 6.00001 10.8243 5.96959 10.8893 5.91493C11.0305 5.79613 11.0376 5.59712 10.9052 5.47044Z\"></path></svg>"
-    };
+      sortArr:[],
+    }
   },
 
   head() { },
@@ -264,6 +262,14 @@ export default {
         };
       });
   },
+
+  created() {
+    var list = [];
+    for (var j = 0; j < 5; j++) {
+      list.push({type:1,htmlContent:this.getHtmlContent(1)});
+    }
+    this.sortArr = list;
+},
 
   mounted() { 
     var token = localStorage.getItem("redclass_token");
@@ -317,6 +323,28 @@ export default {
           .then((response) => {
            
            });
+      }
+    },
+    sortTypeClick(index) {
+      var sortParm = this.sortArr[index];
+      if(sortParm.type == 1) {
+        sortParm.type = 2;
+        sortParm.htmlContent = this.getHtmlContent(2);
+      } else if(sortParm.type == 2) {
+        sortParm.type = 3;
+        sortParm.htmlContent = this.getHtmlContent(3);
+      } else {
+        sortParm.type = 1;
+        sortParm.htmlContent = this.getHtmlContent(1);
+      }
+    },
+    getHtmlContent(type) {
+      if(type == 1) {
+        return "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z\"></path></svg>";
+      } else if(type == 2) {
+        return "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M7.44926 11.8332C7.46161 11.8229 7.47354 11.8123 7.48504 11.8013L10.9052 8.52958C11.0376 8.4029 11.0305 8.20389 10.8893 8.08509C10.8243 8.03043 10.7385 8.00001 10.6495 8.00001H3.35053C3.15694 8.00001 3 8.1408 3 8.31447C3 8.39354 3.0332 8.46971 3.09299 8.5278L6.45859 11.7977C6.72125 12.0529 7.16479 12.0688 7.44926 11.8332Z\"></path></svg>";
+      } else {
+        return "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M10.9052 5.47044L7.48504 2.19872C7.47354 2.18772 7.46161 2.1771 7.44926 2.16687C7.16479 1.93123 6.72125 1.94709 6.45859 2.20229L3.09299 5.47222C3.0332 5.53031 3 5.60648 3 5.68555C3 5.85922 3.15694 6.00001 3.35053 6.00001H10.6495C10.7385 6.00001 10.8243 5.96959 10.8893 5.91493C11.0305 5.79613 11.0376 5.59712 10.9052 5.47044Z\"></path></svg>";
       }
     }
   }
@@ -385,7 +413,7 @@ export default {
   margin-left: 8px;
 }
 
-.job-question-list .question-header .question-header-title svg {
+.job-question-list .question-header .question-header-title .flex span svg {
   margin-top: 2px;
   margin-left: 6px;
 }

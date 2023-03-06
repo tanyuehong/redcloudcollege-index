@@ -99,7 +99,7 @@
                   </div>
                   <div class="question-header-title col2 ">
                     <div class="flex fbselect" @click="sortTypeClick(2)">
-                      <div class="overflow-hidden text-ellipsis">通过率</div>
+                      <div class="overflow-hidden text-ellipsis">状态</div>
                       <span v-html="sortArr[2].htmlContent"></span>
                     </div>
                   </div>
@@ -109,8 +109,7 @@
                       <span v-html="sortArr[3].htmlContent"></span>
                     </div>
                   </div>
-                  <div colspan="1" role="columnheader" class="question-header-title col-md-2"
-                    style="box-sizing: border-box; flex: 88 0 auto; min-width: 0px; width: 88px;">
+                  <div class="question-header-title col2">
                     <div class="flex fbselect" @click="sortTypeClick(4)">
                       <div class="overflow-hidden text-ellipsis">出现频率</div>
                       <span v-html="sortArr[4].htmlContent"></span>
@@ -135,15 +134,15 @@
                       </span>
                     </div>
                     <div role="cell" class="qustion-title col2">
-                      <span>42.5%</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" class="flex-0 -mt-1.5 h-5 w-5 text-gray-5 dark:text-gray-7"><path fill-rule="evenodd" d="M7 8v2H6a3 3 0 00-3 3v6a3 3 0 003 3h12a3 3 0 003-3v-6a3 3 0 00-3-3h-1V8A5 5 0 007 8zm8 0v2H9V8a3 3 0 116 0zm-3 6a2 2 0 100 4 2 2 0 000-4z" clip-rule="evenodd"></path></svg>
                     </div>
                     <div role="cell" class="qustion-title col2"><span class="text-yellow dark:text-dark-yellow">{{
                       item.deep
                     }}</span></div>
                     <div role="cell" class="qustion-title col2">
                       <div class="showtimes-rate">
-                        <span class="vale-rate"></span>
-                        <span class="gray-all"></span>
+                        <span class="vale-rate" :style="frequency(item)"></span>
+                        <span class="gray-all" :style="frequencyBack(item)"></span>
                       </div>
                     </div>
                   </div>
@@ -276,7 +275,6 @@ export default {
       this.signTitle = "今日签到";
       this.loginInfo = JSON.parse(userStr)
       this.isLogin = true;
-
       interviewSudyApi.getSignDateList()
           .then((response) => {
              window.console.log(response.data.dateList);
@@ -291,7 +289,19 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+    frequency () {
+      return function (item) {
+        return "width:" + 70*0.9 + "px";
+      }
+    },
+
+    frequencyBack (item) {
+      return function (item) {
+        return "width:" + (70-70*0.9) + "px";
+      }
+    },
+  },
 
   methods: {
     clickToday(data) {
@@ -399,7 +409,6 @@ export default {
   left: 0;
   z-index: 1;
 }
-
 
 .job-question-list {
   margin-top: 20px;

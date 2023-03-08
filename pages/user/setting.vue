@@ -1,4 +1,4 @@
- <template>
+<template>
   <div class="golobal_content">
     <div class="container">
       <div class="ucenter-setting-header">
@@ -28,6 +28,11 @@
                 class="close-path"></path>
             </svg>
             账号设置
+          </div>
+        </div>
+        <div @click="authoritySettingClick" class="setting-menu-item" v-if="userInfo.authority == 100">
+          <div class="nav-item authority-mode" v-bind:class="{ active: settingtype == 3 }">
+            功能管理
           </div>
         </div>
       </div>
@@ -110,8 +115,7 @@
                     style="width: 56px;">个人签名</label>
                   <div class="byte-form-item__content">
                     <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <el-input type="text" placeholder="填写你的个人签名" v-model="userInfo.sign" maxlength="30"
-                        show-word-limit>
+                      <el-input type="text" placeholder="填写你的个人签名" v-model="userInfo.sign" maxlength="30" show-word-limit>
                       </el-input>
                     </div>
                   </div>
@@ -224,8 +228,8 @@
                       </el-form>
                       <span slot="footer" class="dialog-footer">
                         <span class="pwd-confim-errtiops" v-if="resultTips.length > 0">{{ resultTips }}</span>
-                        <el-button type="primary" :loading="submitChangePwd" class="chang-pwd-btn"
-                          @click="changePwdClick" center>修 改</el-button>
+                        <el-button type="primary" :loading="submitChangePwd" class="chang-pwd-btn" @click="changePwdClick"
+                          center>修 改</el-button>
                       </span>
                     </el-dialog>
                   </div>
@@ -257,9 +261,103 @@
           </div>
         </div>
       </div>
+
+      <div v-if="settingtype === 3">
+        <div class="person-setting shadow">
+          <div class="nav-text">功能管理</div>
+          <div class="user-infos">
+            <div class="info-input zhanghu-setting">
+              <form class="form byte-form byte-form--label-right">
+                <div class="divide"></div>
+                <div class="zhanghu-form-item">
+                  <label for="phone" class="byte-form-item__label" style="width: 86px;">面试职位管理</label>
+                  <div class="zhanghu-setting-chang">
+                    <el-button type="text" @click="changephine = true">换绑</el-button>
+                    <el-dialog title="温馨提示" :visible.sync="changephine" center>
+                      <span>尊贵的用户您好，目前PC端暂不支持手机换绑功能，如您确实需要修改手机号，建议您扫描二维码前往App端我-设置-账号注销进行注销操作，然后重新注册新手机。给您带来的不便，我们深感抱歉。如果您有任何建议和反馈，可以发送邮箱到
+                        16623170187@163.com 联系我们。</span>
+                      <div class="app-download-wapma">
+                        <div class="app-download-ma"></div>
+                      </div>
+                      <span slot="footer" class="dialog-footer">
+                        <el-button @click="changephine = false">取 消</el-button>
+                        <el-button type="primary" @click="changephine = false">确 定</el-button>
+                      </span>
+                    </el-dialog>
+                  </div>
+                </div>
+                <div class="divide"></div>
+
+                <div class="zhanghu-form-item">
+                  <label for="phone" class="byte-form-item__label" style="width: 56px;">密码</label>
+                  <div class="zhanghu-setting-chang">
+                    <el-button type="text" @click="pwdChange = true">重置</el-button>
+
+                    <el-dialog title="密码重置" :visible.sync="pwdChange" :close-on-click-modal="false"
+                      :before-close="changePwdClose" width="450px">
+                      <el-form class="pwchang-form">
+                        <el-form-item label="旧密码">
+                          <span class="pwd-change-errtiops" v-if="oldPwdTips.length > 0">{{ oldPwdTips }}</span>
+                          <el-input placeholder="请输入密码" v-model="oldPwd" @input="inputChange('oldPwd')" show-password>
+                          </el-input>
+                        </el-form-item>
+
+                        <el-form-item label="新密码">
+                          <span class="pwd-change-errtiops" v-if="newPwd.length > 0">{{ newPwdTips }}</span>
+                          <el-input placeholder="请输入密码" v-model="newPwd" @input="inputChange('newPwd')" show-password>
+                          </el-input>
+                        </el-form-item>
+                        <el-form-item label="确认密码">
+                          <span class="pwd-change-errtiops" v-if="confirmPwd.length > 0">{{ confirmPwdTips }}</span>
+                          <el-input placeholder="请输入密码" v-model="confirmPwd" @input="inputChange('confirmPwd')"
+                            show-password></el-input>
+                        </el-form-item>
+                      </el-form>
+                      <span slot="footer" class="dialog-footer">
+                        <span class="pwd-confim-errtiops" v-if="resultTips.length > 0">{{ resultTips }}</span>
+                        <el-button type="primary" :loading="submitChangePwd" class="chang-pwd-btn" @click="changePwdClick"
+                          center>修 改</el-button>
+                      </span>
+                    </el-dialog>
+                  </div>
+
+                  <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
+                    <el-table :data="gridData">
+                      <el-table-column property="date" label="日期" width="150"></el-table-column>
+                      <el-table-column property="name" label="姓名" width="200"></el-table-column>
+                      <el-table-column property="address" label="地址"></el-table-column>
+                    </el-table>
+                  </el-dialog>
+                </div>
+
+                <div class="divide"></div>
+                <div class="zhanghu-form-item">
+                  <label for="phone" class="byte-form-item__label" style="width: 56px;">账户注销</label>
+                  <div class="zhanghu-setting-chang">
+
+                    <el-button type="text" @click="zhuxiaodlog = true">注销</el-button>
+
+                    <el-dialog title="温馨提示" :visible.sync="zhuxiaodlog" center>
+                      <span>尊贵的用户您好，目前PC端暂不支持注销功能，如您申请账号注销，需要扫描二维码前往App端我-设置-账号注销进行注销操作，给您带来的不便，我们深感抱歉。如果您有任何建议和反馈，可以发送邮箱到
+                        16623170187@163.com 联系我们。</span>
+                      <div class="app-download-wapma">
+                        <div class="app-download-ma"></div>
+                      </div>
+                      <span slot="footer" class="dialog-footer">
+                        <el-button @click="zhuxiaodlog = false">取 消</el-button>
+                        <el-button type="primary" @click="zhuxiaodlog = false">确 定</el-button>
+                      </span>
+                    </el-dialog>
+                  </div>
+                </div>
+                <div class="divide"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -267,7 +365,7 @@ import userApi from '@/api/user';
 
 export default {
 
-  data () {
+  data() {
     return {
       userInfo: {}, // 查询表单对象
       settingtype: 1,
@@ -289,33 +387,33 @@ export default {
     };
   },
 
-  mounted () {
+  mounted() {
     this.getLoginUserInfo();
     this.loginToken = this.$route.params.loginToken;
   },
   methods: {
     //分页切换的方法
     //参数是页码数
-    getLoginUserInfo () {
+    getLoginUserInfo() {
       userApi.getLoginUserInfo().then((response) => {
         this.userInfo = response.data.userInfo
         this.touxiang = this.userInfo.avatar;
         window.localStorage.setItem("redclass_user", JSON.stringify(this.userInfo));
       })
     },
-    mouseOver () {
+    mouseOver() {
       this.isUploadHiden = false;
     },
     // 移出
-    mouseLeave () {
+    mouseLeave() {
       this.isUploadHiden = true;
     },
-    handleAvatarSuccess (res, file) {
+    handleAvatarSuccess(res, file) {
       this.userInfo.avatar = res.data.imageUrl;
       this.touxiang = this.userInfo.avatar;
     },
 
-    beforeAvatarUpload (file) {
+    beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg';
       const isPng = file.type === 'image/png';
       const isLt2M = file.size / 1024 / 1024 < 2;
@@ -328,7 +426,7 @@ export default {
       }
       return (isJPG || isPng) && isLt2M;
     },
-    saveUserInfo () {
+    saveUserInfo() {
       this.submitUserInfo = true;
       userApi.updateUserInfo(this.userInfo).then((response) => {
         this.submitUserInfo = false;
@@ -350,13 +448,16 @@ export default {
         this.getLoginUserInfo();
       })
     },
-    zhanghuSettingClick () {
+    zhanghuSettingClick() {
       this.settingtype = 2;
     },
-    personSettingClick () {
+    personSettingClick() {
       this.settingtype = 1;
     },
-    changePwdClick () {
+    authoritySettingClick() {
+      this.settingtype = 3;
+    },
+    changePwdClick() {
       if (this.oldPwd.length < 6) {
         this.oldPwdTips = "密码长度小于6位";
       }
@@ -393,7 +494,7 @@ export default {
         }
       }
     },
-    inputChange (type) {
+    inputChange(type) {
       this.resultTips = '';
       if (type == 'oldPwd') {
         this.oldPwdTips = '';
@@ -405,7 +506,7 @@ export default {
         this.confirmPwdTips = '';
       }
     },
-    changePwdClose () {
+    changePwdClose() {
       this.submitChangePwd = false;
       this.pwdChange = false;
       this.oldPwd = '';
@@ -451,6 +552,10 @@ export default {
   background: #e8f3ff;
   color: #409eff;
   cursor: pointer;
+}
+
+.setting-menu-item .nav-item.authority-mode {
+  margin-left: 50px;
 }
 
 .setting-menu-item .nav-item {
@@ -880,5 +985,4 @@ input[type='file' i] {
 .el-textarea__inner {
   resize: none;
 }
-
 </style>

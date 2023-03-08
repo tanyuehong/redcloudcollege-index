@@ -32,9 +32,9 @@
             </div>
 
             <div class="question-content">
-              <div class="filter-btns row">
-
+              <div class="filter-btns">
                 <div class="filter-btn">
+                  <div class="svg-img">
                   <svg t="1673596319193" class="icon" viewBox="0 0 1024 1024" version="1.1"
                     xmlns="http://www.w3.org/2000/svg" p-id="2936">
                     <path d="M0 0h1024v1024H0V0z" fill="#202425" opacity=".01" p-id="2937"></path>
@@ -44,7 +44,9 @@
                     <path
                       d="M546.133333 238.933333a136.533333 136.533333 0 0 1 136.533334-136.533333h102.4a136.533333 136.533333 0 0 1 136.533333 136.533333v102.4a136.533333 136.533333 0 0 1-136.533333 136.533334h-102.4a136.533333 136.533333 0 0 1-136.533334-136.533334V238.933333z"
                       fill="#FFAA44" p-id="2939"></path>
-                  </svg>全部题目
+                  </svg>
+                  </div>
+                  全部题目
                 </div>
                 <div class="filter-btn">
                   <svg t="1673605999758" class="icon" viewBox="0 0 1024 1024" version="1.1"

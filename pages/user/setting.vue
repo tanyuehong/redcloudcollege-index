@@ -271,17 +271,32 @@
                 <div class="divide"></div>
                 <div class="zhanghu-form-item">
                   <label for="phone" class="byte-form-item__label" style="width: 86px;">面试职位管理</label>
-                  <div class="zhanghu-setting-chang">
-                    <el-button type="text" @click="changephine = true">换绑</el-button>
-                    <el-dialog title="温馨提示" :visible.sync="changephine" center>
-                      <span>尊贵的用户您好，目前PC端暂不支持手机换绑功能，如您确实需要修改手机号，建议您扫描二维码前往App端我-设置-账号注销进行注销操作，然后重新注册新手机。给您带来的不便，我们深感抱歉。如果您有任何建议和反馈，可以发送邮箱到
-                        16623170187@163.com 联系我们。</span>
-                      <div class="app-download-wapma">
-                        <div class="app-download-ma"></div>
-                      </div>
+                  <div class="zhanghu-setting-chang admin-setting-chang">
+                    <el-button type="text" @click="checkPositionClick">查看职位列表</el-button>
+                    <el-dialog title="职位列表" width="140" :close-on-click-modal="false" :close-on-press-escape="false" :show-close="false" :visible.sync="changephine" center>
+                        <el-table :data="positionList">
+                          <el-table-column property="name" label="职位名" width="120"></el-table-column>
+                          <el-table-column property="img"  label="职位图片" width="280"></el-table-column>
+                          <el-table-column property="sort" label="序号" width="60"></el-table-column>
+   
+                         <el-table-column property="gmtCreate" label="创建日期" width="160"></el-table-column>
+                         <el-table-column property="gmtModified" label="创建日期" width="160"></el-table-column>
+                          <el-table-column label="操作"
+      width="180">
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+      </template>
+    </el-table-column>
+                        </el-table>
+                  
                       <span slot="footer" class="dialog-footer">
-                        <el-button @click="changephine = false">取 消</el-button>
-                        <el-button type="primary" @click="changephine = false">确 定</el-button>
+                        <el-button @click="changephine = false">返 回</el-button>
                       </span>
                     </el-dialog>
                   </div>
@@ -362,11 +377,14 @@
 
 <script>
 import userApi from '@/api/user';
+import interviewAdmin from '@/api/interviewAdminReq';
 
 export default {
 
   data() {
     return {
+      positionList:[],
+
       userInfo: {}, // 查询表单对象
       settingtype: 1,
       submitUserInfo: false,
@@ -392,6 +410,13 @@ export default {
     this.loginToken = this.$route.params.loginToken;
   },
   methods: {
+
+    checkPositionClick() {
+      this.changephine = true;
+      interviewAdmin.getPositionList().then((response) => {
+        this.positionList = response.data.positionList;
+      })
+    },
     //分页切换的方法
     //参数是页码数
     getLoginUserInfo() {
@@ -522,6 +547,10 @@ export default {
 </script>
 
 <style>
+
+.admin-setting-chang .el-dialog__wrapper .el-dialog {
+  width: 960px;
+}
 .ucenter-setting-header {
   height: 45.98px;
   background: #fff;
@@ -944,7 +973,7 @@ input[type='file' i] {
 
 .pwchang-form .el-form-item .el-form-item__content {
   float: right;
-  margin-right: 105px;
+  margin-right: 102px;
   position: relative;
 }
 

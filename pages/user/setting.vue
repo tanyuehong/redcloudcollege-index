@@ -273,28 +273,43 @@
                   <label for="phone" class="byte-form-item__label" style="width: 86px;">面试职位管理</label>
                   <div class="zhanghu-setting-chang admin-setting-chang">
                     <el-button type="text" @click="checkPositionClick">查看职位列表</el-button>
-                    <el-dialog title="职位列表" width="140" :close-on-click-modal="false" :close-on-press-escape="false" :show-close="false" :visible.sync="changephine" center>
-                        <el-table :data="positionList">
-                          <el-table-column property="name" label="职位名" width="120"></el-table-column>
-                          <el-table-column property="img"  label="职位图片" width="280"></el-table-column>
-                          <el-table-column property="sort" label="序号" width="60"></el-table-column>
-   
-                         <el-table-column property="gmtCreate" label="创建日期" width="160"></el-table-column>
-                         <el-table-column property="gmtModified" label="创建日期" width="160"></el-table-column>
-                          <el-table-column label="操作"
-      width="180">
-      <template slot-scope="scope">
-        <el-button
-          size="mini"
-          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-      </template>
-    </el-table-column>
-                        </el-table>
-                  
+                    <el-dialog title="职位列表" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
+                      :show-close="false" :visible.sync="changephine" center>
+                      <el-table :data="positionList" height="360" v-if="positionType == 1">
+                        <el-table-column property="name" label="职位名" width="120"></el-table-column>
+                        <el-table-column property="img" label="职位图标" width="280"></el-table-column>
+                        <el-table-column property="sort" label="序号" width="60"></el-table-column>
+
+                        <el-table-column property="gmtCreate" label="创建日期" width="160"></el-table-column>
+                        <el-table-column property="gmtModified" label="创建日期" width="160"></el-table-column>
+                        <el-table-column label="操作" width="180">
+                          <template slot-scope="scope">
+                            <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">编辑</el-button>
+                            <el-button size="mini" type="danger"
+                              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                          </template>
+                        </el-table-column>
+                      </el-table>
+
+                      <el-form ref="form" :model="editPosition" label-width="80px" v-if="positionType == 2">
+                        <el-form-item label="职位名">
+                          <el-input v-model="editPosition.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="职位图标">
+                          <el-input v-model="editPosition.img"></el-input>
+                        </el-form-item>
+                        <el-form-item label="序号">
+                          <el-input v-model="editPosition.sort"></el-input>
+                        </el-form-item>
+                       
+                        <el-form-item>
+                          <el-button type="primary" @click="onSubmit">提交修改</el-button>
+                          <el-button>取消</el-button>
+                        </el-form-item>
+                      </el-form>
+
+
+
                       <span slot="footer" class="dialog-footer">
                         <el-button @click="changephine = false">返 回</el-button>
                       </span>
@@ -383,7 +398,9 @@ export default {
 
   data() {
     return {
-      positionList:[],
+      positionList: [],
+      editPosition:{},
+      positionType: 1,       // 当前职位管理显示的页面  1，职位列表  2. 职位编辑 
 
       userInfo: {}, // 查询表单对象
       settingtype: 1,
@@ -410,6 +427,12 @@ export default {
     this.loginToken = this.$route.params.loginToken;
   },
   methods: {
+
+    editPositionClick(index,row) {
+      window.console.log("======index:" + index +"==row:"+row);
+      this.editPosition = this.positionList[index];
+      this.positionType = 2;
+    },
 
     checkPositionClick() {
       this.changephine = true;
@@ -547,10 +570,10 @@ export default {
 </script>
 
 <style>
-
 .admin-setting-chang .el-dialog__wrapper .el-dialog {
   width: 960px;
 }
+
 .ucenter-setting-header {
   height: 45.98px;
   background: #fff;

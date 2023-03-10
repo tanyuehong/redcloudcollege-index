@@ -9,11 +9,10 @@ export default {
   },
 
   // 提交签到的接口
-  submitInterviewSign(signData) {
+  getPositionClassifyList(pId) {
     return request({
-      url: `/interview/commitSign`,
-      method: 'post',
-      data: signData,
+      url: `/interview/admin/positionClassifyList/${pId}`,
+      method: 'get'
     })
   },
   

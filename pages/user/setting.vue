@@ -308,10 +308,24 @@
                         </el-form-item>
                       </el-form>
 
+                      <el-table :data="positionClassifyList " height="160" v-if="positionType == 2">
+                        <el-table-column property="name" label="名称" width="120" height="60"></el-table-column>
+                        <el-table-column property="img" label="图标" width="480" show-overflow-tooltip="true"></el-table-column>
+                        <el-table-column property="img" label="图标" width="480" show-overflow-tooltip="true"></el-table-column>
+                
+                        <el-table-column label="操作" width="180">
+                          <template slot-scope="scope">
+                            <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">编辑</el-button>
+                            <el-button size="mini" type="danger"
+                              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                          </template>
+                        </el-table-column>
+                      </el-table>
+
 
 
                       <span slot="footer" class="dialog-footer">
-                        <el-button @click="changephine = false">返 回</el-button>
+                        <el-button @click="positionBackClick">返 回</el-button>
                       </span>
                     </el-dialog>
                   </div>
@@ -399,6 +413,7 @@ export default {
   data() {
     return {
       positionList: [],
+      positionClassifyList:[],
       editPosition:{},
       positionType: 1,       // 当前职位管理显示的页面  1，职位列表  2. 职位编辑 
 
@@ -428,10 +443,19 @@ export default {
   },
   methods: {
 
+    positionBackClick() {
+      this.changephine = false
+      this.positionType = 1;
+
+    },
+
     editPositionClick(index,row) {
       window.console.log("======index:" + index +"==row:"+row);
       this.editPosition = this.positionList[index];
       this.positionType = 2;
+      interviewAdmin.getPositionClassifyList(this.editPosition.id).then((response) => {
+        this.positionClassifyList = response.data.positionClassifyList;
+      })
     },
 
     checkPositionClick() {

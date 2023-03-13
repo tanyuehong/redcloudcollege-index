@@ -1,6 +1,14 @@
 import request from '@/utils/request'
 
 export default {
+
+  getQuestionList() {
+    return request({
+      url: `/interview/admin/questionList`,
+      method: 'get',
+    })
+  },
+
   getPositionList() {
     return request({
       url: `/interview/admin/positionList`,

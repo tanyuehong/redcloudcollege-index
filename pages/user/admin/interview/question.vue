@@ -17,7 +17,7 @@
                 d="M15.3331 14.1052V14.3207C15.3331 14.5048 15.1839 14.654 14.9998 14.654H14.3204C14.1413 14.654 13.9967 14.5122 13.9801 14.3339C13.9778 14.3097 13.9754 14.2872 13.9728 14.2679C13.8008 12.9838 12.8312 12 11.7742 12H9.88471C8.82066 12 7.8512 12.997 7.68991 14.2937C7.68842 14.3056 7.68699 14.3189 7.68563 14.333C7.66842 14.5116 7.52439 14.654 7.34498 14.654H6.66643C6.48233 14.654 6.33309 14.5048 6.33309 14.3207V14.1052C6.33309 12.5335 7.41668 11.2082 8.82833 10.7979C8.3268 10.2875 8.01744 9.58768 8.01744 8.81561C8.01744 7.25359 9.2837 5.98733 10.8457 5.98733C12.4077 5.98733 13.674 7.25359 13.674 8.81561C13.674 9.59004 13.3627 10.2918 12.8585 10.8025C14.2611 11.2181 15.3331 12.5395 15.3331 14.1052ZM1.99984 2.66665V12.6666H4.9165V14H1.33317C0.964981 14 0.666504 13.7015 0.666504 13.3333V1.99998C0.666504 1.63179 0.964981 1.33331 1.33317 1.33331H13.3332C13.7014 1.33331 13.9998 1.63179 13.9998 1.99998V5.82955C13.5945 5.49574 13.1466 5.21989 12.6665 5.01331V2.66665H1.99984ZM3.33309 5.99994C3.33309 5.81584 3.48233 5.66661 3.66642 5.66661H6.66642C6.85052 5.66661 6.99976 5.81584 6.99976 5.99994V6.6666C6.99976 6.8507 6.85052 6.99994 6.66642 6.99994H3.66642C3.48233 6.99994 3.33309 6.8507 3.33309 6.66661V5.99994ZM3.33309 8.66661C3.33309 8.48251 3.48233 8.33327 3.66642 8.33327H4.99976C5.18385 8.33327 5.33309 8.48251 5.33309 8.66661V9.33327C5.33309 9.51737 5.18385 9.66661 4.99976 9.66661H3.66642C3.48233 9.66661 3.33309 9.51737 3.33309 9.33327V8.66661ZM10.8457 7.32066C10.0201 7.32066 9.35075 7.98997 9.35075 8.81561C9.35075 9.64125 10.0201 10.3106 10.8457 10.3106C11.6713 10.3106 12.3406 9.64125 12.3406 8.81561C12.3406 7.98997 11.6713 7.32066 10.8457 7.32066Z"
                 class="close-path"></path>
             </svg>
-            个人资料
+            面试题管理
           </div>
         </div>
         <div @click="zhanghuSettingClick" class="setting-menu-item">
@@ -38,139 +38,100 @@
       </div>
       <div v-if="settingtype === 1">
         <div class="person-setting shadow">
-          <div class="nav-text">个人资料</div>
-          <div class="user-infos">
-            <div class="info-input">
-              <form class="form byte-form byte-form--label-right">
-                <div class="divide"></div>
-                <div class="byte-form-item byte-form-item--success"><label for="username" class="byte-form-item__label"
-                    style="width: 56px;">用户名</label>
-                  <div class="byte-form-item__content">
-                    <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <el-input type="text" placeholder="填写你的用户名" v-model="userInfo.nickname" maxlength="20"
-                        show-word-limit>
-                      </el-input>
-                    </div>
-                    <!---->
-                    <!---->
-                  </div>
-                </div>
-                <div class="divide"></div>
+          <div class="nav-text">面试题列表</div>
+          <div class="admin-content">
+            <el-table :data="questionList" height="560">
+              <el-table-column property="title" label="题目名称" width="260"></el-table-column>
+              <el-table-column property="type" label="题目类型" width="120"></el-table-column>
+              <el-table-column label="操作" width="290">
+                <template slot-scope="scope">
+                  <el-button size="mini" @click="editQuestionClick(scope.$index, scope.row)">编辑</el-button>
+                  <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">职位</el-button>
+                  <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
 
-                <div class="byte-form-item byte-form-item--success"><label for="username" class="byte-form-item__label"
-                    style="width: 56px;">性别</label>
-                  <div class="byte-form-item__content">
-                    <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <el-radio-group v-model="userInfo.sex">
-                        <el-radio :label="1">男</el-radio>
-                        <el-radio :label="2">女</el-radio>
-                        <el-radio :label="0">保密</el-radio>
-                      </el-radio-group>
-                    </div>
-                    <!---->
-                    <!---->
-                  </div>
-                </div>
-                <div class="divide"></div>
-                <div class="byte-form-item byte-form-item--success"><label for="job_title" class="byte-form-item__label"
-                    style="width: 56px;">职位</label>
-                  <div class="byte-form-item__content">
-                    <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <el-input type="text" placeholder="填写你的职位" v-model="userInfo.position" maxlength="20"
-                        show-word-limit>
-                      </el-input>
-                    </div>
-                    <!---->
-                    <!---->
-                  </div>
-                </div>
-                <div class="divide"></div>
-                <div class="byte-form-item"><label for="company" class="byte-form-item__label"
-                    style="width: 56px;">公司</label>
-                  <div class="byte-form-item__content">
-                    <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <el-input type="text" placeholder="填写你的公司" v-model="userInfo.company" maxlength="30"
-                        show-word-limit>
-                      </el-input>
-                    </div>
-                    <!---->
-                    <!---->
-                  </div>
-                </div>
-                <div class="divide"></div>
-                <div class="byte-form-item"><label for="blog_address" class="byte-form-item__label"
-                    style="width: 56px;">个人主页</label>
-                  <div class="byte-form-item__content">
-                    <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <el-input type="text" placeholder="填写你的个人主页" v-model="userInfo.perpage" maxlength="30"
-                        show-word-limit>
-                      </el-input>
-                    </div>
-                    <!---->
-                    <!---->
-                  </div>
-                </div>
-                <div class="divide"></div>
-                <div class="byte-form-item"><label for="blog_address" class="byte-form-item__label"
-                    style="width: 56px;">个人签名</label>
-                  <div class="byte-form-item__content">
-                    <div class="input byte-input byte-input--normal byte-input--suffixed">
-                      <el-input type="text" placeholder="填写你的个人签名" v-model="userInfo.sign" maxlength="30" show-word-limit>
-                      </el-input>
-                    </div>
-                  </div>
-                </div>
-                <div class="divide"></div>
-                <div class="byte-form-item"><label for="description" class="byte-form-item__label"
-                    style="width: 56px;">个人介绍</label>
-                  <div class="byte-form-item__content">
-                    <div class="textarea-input">
-                      <div class="input textarea byte-input byte-input--normal">
+            <el-dialog :title="functionTitle" width="140" :close-on-click-modal="false"
+                      :close-on-press-escape="false" :show-close="false" :visible.sync="changephine" center>
+                      <el-table :data="positionList" height="360" v-if="positionType == 1">
+                        <el-table-column property="name" label="职位名" width="120"></el-table-column>
+                        <el-table-column property="img" label="职位图标" width="260"></el-table-column>
+                        <el-table-column property="sort" label="序号" width="60"></el-table-column>
 
-                        <el-input type="textarea" placeholder="填写职业技能、擅长的事情、喜欢的事情等" v-model="userInfo.perintroduction"
-                          maxlength="100" :rows="8" show-word-limit>
-                        </el-input>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-              <div class="divide"></div>
-              <el-button type="primary" plain :loading="submitUserInfo" @click="saveUserInfo">保存修改</el-button>
-            </div>
-            <div class="avatar-input">
-              <div class="avatar-info">
-                <div class="avatar-uploader uploader" :style="{ backgroundImage: 'url(' + touxiang + ')' }"
-                  @mouseover="mouseOver" @mouseleave="mouseLeave">
+                        <el-table-column property="gmtCreate" label="创建日期" width="160"></el-table-column>
+                        <el-table-column property="gmtModified" label="创建日期" width="160"></el-table-column>
+                        <el-table-column label="操作" width="150">
+                          <template slot-scope="scope">
+                            <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">编辑</el-button>
+                            <el-button size="mini" type="danger"
+                              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                          </template>
+                        </el-table-column>
+                      </el-table>
 
-                  <el-upload class="avatar-uploader" action="https://www.redskt.com/api/ucenter/uploadUserImage"
-                    :headers="{ token: loginToken }" :show-file-list="false" :on-success="handleAvatarSuccess"
-                    :before-upload="beforeAvatarUpload">
-                    <i class="el-icon-plus avatar-uploader-icon"></i>
-                  </el-upload>
+                      <el-form ref="form" :model="editPosition" label-width="80px" v-if="positionType == 2">
+                        <el-form-item label="职位名">
+                          <el-input v-model="editPosition.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="职位图标">
+                          <el-input v-model="editPosition.img"></el-input>
+                        </el-form-item>
+                        <el-form-item label="序号">
+                          <el-input v-model="editPosition.sort"></el-input>
+                        </el-form-item>
+                      </el-form>
 
-                  <div class="click-cover" v-bind:class="{ isShow: isUploadHiden }"><i
-                      class="add-icon byte-icon byte-icon--plus-circle"><svg t="1561635709826" class="icon"
-                        viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="375017"
-                        xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <path
-                          d="M464.883436 464.883436V302.244035A23.732788 23.732788 0 0 1 488.616224 279.209271h46.069529a23.732788 23.732788 0 0 1 23.732788 23.034764v162.639401h162.6394a23.732788 23.732788 0 0 1 23.034765 23.732788v46.069529a23.732788 23.732788 0 0 1-23.034765 23.732788H558.418541v162.6394a23.732788 23.732788 0 0 1-23.732788 23.034765H488.616224a23.732788 23.732788 0 0 1-23.732788-23.034765V558.418541H302.244035A23.732788 23.732788 0 0 1 279.209271 534.685753V488.616224a23.732788 23.732788 0 0 1 23.034764-23.732788z m46.767552 465.581458a418.813906 418.813906 0 1 0-418.813906-418.813906 418.813906 418.813906 0 0 0 418.813906 418.813906z m0 92.837083a511.650988 511.650988 0 1 1 511.650989-511.650989 511.650988 511.650988 0 0 1-511.650989 511.650989z"
-                          p-id="375018"></path>
-                      </svg></i>
-                    <div class="click-text">点击修改头像</div>
-                    <!---->
-                  </div>
-                </div>
-                <div class="title web-only">
-                  我的头像
-                </div>
-                <!---->
-                <!---->
-                <div class="description">
-                  支持 jpg、png、jpeg 格式大小 3M 以内的图片
-                </div>
-              </div>
-            </div>
+                      <el-table :data="positionClassifyList" height="160" v-if="positionType == 2">
+                        <el-table-column property="name" label="名称" width="100" height="60"></el-table-column>
+                        <el-table-column property="img" label="图标" width="380"
+                          show-overflow-tooltip="true"></el-table-column>
+                        <el-table-column property="type" label="图标类型" width="100"
+                          show-overflow-tooltip="true"></el-table-column>
+                        <el-table-column property="sort" label="排序" width="80"
+                          show-overflow-tooltip="true"></el-table-column>
+
+                        <el-table-column label="操作" width="220">
+                          <template slot-scope="scope">
+                            <el-button size="mini" @click="addClassify(scope.$index, scope.row)">添加</el-button>
+                            <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">编辑</el-button>
+                            <el-popconfirm confirm-button-text='好的' cancel-button-text='不用了' icon="el-icon-info"
+                              icon-color="red" title="您确定要删除该分类吗，该操作不可撤回？"
+                              @confirm="deleteClassify(scope.$index, scope.row)">
+                              <el-button type="danger" size="mini" slot="reference">删除</el-button>
+                            </el-popconfirm>
+
+                          </template>
+
+                        </el-table-column>
+                      </el-table>
+
+                      <el-form ref="form" :model="editClassify" label-width="80px" v-if="positionType == 3">
+                        <el-form-item label="分类名">
+                          <el-input v-model="editClassify.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="图标">
+                          <el-input type="textarea" v-model="editClassify.img" maxlength="3000" :rows="5"
+                            show-word-limit></el-input>
+                        </el-form-item>
+
+                        <el-form-item label="图标类型">
+                          <el-select v-model="editClassify.type" placeholder="请选择图标类型">
+                            <el-option label="图标src" value="1"></el-option>
+                            <el-option label="图标svg" value="2"></el-option>
+                            <el-option label="无图标" value="3"></el-option>
+                          </el-select>
+                        </el-form-item>
+                        <el-form-item label="序号">
+                          <el-input type="number" v-model="editClassify.sort"></el-input>
+                        </el-form-item>
+                      </el-form>
+                      <span slot="footer" class="dialog-footer">
+                        <el-button @click="positionBackClick" size="small">返 回</el-button>
+                        <el-button type="primary" @click="onSubmitClick" size="small" v-if="submitTitle.length > 0">{{
+                          submitTitle }}</el-button>
+                      </span>
+                    </el-dialog>
           </div>
         </div>
 
@@ -204,7 +165,7 @@
                 <div class="zhanghu-form-item">
                   <label for="phone" class="byte-form-item__label" style="width: 56px;">密码</label>
                   <div class="zhanghu-setting-chang">
-                    <el-button type="text" @click="pwdChange = true">进入</el-button>
+                    <el-button type="text" @click="pwdChange = true">重置</el-button>
 
                     <el-dialog title="密码重置" :visible.sync="pwdChange" :close-on-click-modal="false"
                       :before-close="changePwdClose" width="450px">
@@ -358,9 +319,9 @@
                 <div class="divide"></div>
 
                 <div class="zhanghu-form-item">
-                  <label for="phone" class="byte-form-item__label" style="width: 86px;">面试题管理</label>
+                  <label for="phone" class="byte-form-item__label" style="width: 56px;">密码</label>
                   <div class="zhanghu-setting-chang">
-                    <el-button type="text" @click="adminInterviewQuestionClick">进入</el-button>
+                    <el-button type="text" @click="pwdChange = true">重置</el-button>
 
                     <el-dialog title="密码重置" :visible.sync="pwdChange" :close-on-click-modal="false"
                       :before-close="changePwdClose" width="450px">
@@ -429,13 +390,7 @@ export default {
 
   data() {
     return {
-      positionList: [],
-      positionClassifyList: [],
-      editPosition: {},
-      editClassify: {},
-      submitTitle: "",
-      functionTitle: "职位列表",
-      positionType: 1,       // 当前职位管理显示的页面  1，职位列表  2. 职位编辑 
+      questionList: [],
 
       userInfo: {}, // 查询表单对象
       settingtype: 1,
@@ -458,14 +413,22 @@ export default {
   },
 
   mounted() {
-    this.getLoginUserInfo();
-    this.loginToken = this.$route.params.loginToken;
+    this.getQuestionList();
   },
   methods: {
-    adminInterviewQuestionClick() {
-      this.$router.push({
-				name: "user-admin-interview-question"});
+    getQuestionList () {
+      interviewAdmin.getQuestionList().then((response) => {
+        this.questionList = response.data.questionList;
+      });
     },
+
+    checkPositionClick() {
+      this.changephine = true;
+      interviewAdmin.getPositionList().then((response) => {
+        this.positionList = response.data.positionList;
+      })
+    },
+
     onSubmitClick() {
       if (this.positionType == 3) {
         if (this.editClassify.name == undefined || this.editClassify.name.length == 0) {
@@ -515,7 +478,6 @@ export default {
 
     },
     editPositionClick(index, row) {
-      window.console.log("======index:" + index + "==row:" + row);
       this.editPosition = this.positionList[index];
       this.positionType = 2;
       interviewAdmin.getPositionClassifyList(this.editPosition.id).then((response) => {
@@ -523,12 +485,7 @@ export default {
       })
     },
 
-    checkPositionClick() {
-      this.changephine = true;
-      interviewAdmin.getPositionList().then((response) => {
-        this.positionList = response.data.positionList;
-      })
-    },
+    
     //分页切换的方法
     //参数是页码数
     getLoginUserInfo() {

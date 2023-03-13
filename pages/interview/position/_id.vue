@@ -563,7 +563,6 @@ export default {
 .command .positionTitle {
   font-weight: 500;
   color: #666;
-
 }
 
 .command .recommand-content .recommand-item img {

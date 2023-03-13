@@ -273,16 +273,16 @@
                   <label for="phone" class="byte-form-item__label" style="width: 86px;">面试职位管理</label>
                   <div class="zhanghu-setting-chang admin-setting-chang">
                     <el-button type="text" @click="checkPositionClick">查看职位列表</el-button>
-                    <el-dialog title="职位列表" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
+                    <el-dialog :title="functionTitle" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
                       :show-close="false" :visible.sync="changephine" center>
                       <el-table :data="positionList" height="360" v-if="positionType == 1">
                         <el-table-column property="name" label="职位名" width="120"></el-table-column>
-                        <el-table-column property="img" label="职位图标" width="280"></el-table-column>
+                        <el-table-column property="img" label="职位图标" width="260"></el-table-column>
                         <el-table-column property="sort" label="序号" width="60"></el-table-column>
 
                         <el-table-column property="gmtCreate" label="创建日期" width="160"></el-table-column>
                         <el-table-column property="gmtModified" label="创建日期" width="160"></el-table-column>
-                        <el-table-column label="操作" width="180">
+                        <el-table-column label="操作" width="150">
                           <template slot-scope="scope">
                             <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">编辑</el-button>
                             <el-button size="mini" type="danger"
@@ -301,31 +301,57 @@
                         <el-form-item label="序号">
                           <el-input v-model="editPosition.sort"></el-input>
                         </el-form-item>
-                       
-                        <el-form-item>
-                          <el-button type="primary" @click="onSubmit">提交修改</el-button>
-                          <el-button>取消</el-button>
-                        </el-form-item>
                       </el-form>
 
                       <el-table :data="positionClassifyList " height="160" v-if="positionType == 2">
-                        <el-table-column property="name" label="名称" width="120" height="60"></el-table-column>
-                        <el-table-column property="img" label="图标" width="480" show-overflow-tooltip="true"></el-table-column>
-                        <el-table-column property="img" label="图标" width="480" show-overflow-tooltip="true"></el-table-column>
+                        <el-table-column property="name" label="名称" width="100" height="60"></el-table-column>
+                        <el-table-column property="img" label="图标" width="380" show-overflow-tooltip="true"></el-table-column>
+                        <el-table-column property="type" label="图标类型" width="100" show-overflow-tooltip="true"></el-table-column>
+                        <el-table-column property="sort" label="排序" width="80" show-overflow-tooltip="true"></el-table-column>
                 
-                        <el-table-column label="操作" width="180">
+                        <el-table-column label="操作" width="220">
                           <template slot-scope="scope">
+                            <el-button size="mini"
+                              @click="addClassify(scope.$index, scope.row)">添加</el-button>
                             <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">编辑</el-button>
-                            <el-button size="mini" type="danger"
-                              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                            <el-popconfirm
+  confirm-button-text='好的'
+  cancel-button-text='不用了'
+  icon="el-icon-info"
+  icon-color="red"
+  title="您确定要删除该分类吗，该操作不可撤回？"
+  @confirm="deleteClassify(scope.$index, scope.row)"
+>
+  <el-button  type="danger"  size="mini"  slot="reference">删除</el-button>
+</el-popconfirm>
+                           
                           </template>
+                          
                         </el-table-column>
                       </el-table>
 
+                       <el-form ref="form" :model="editClassify" label-width="80px" v-if="positionType == 3">
+                        <el-form-item label="分类名">
+                          <el-input v-model="editClassify.name"></el-input>
+                        </el-form-item>
+                         <el-form-item label="图标">
+                            <el-input type="textarea" v-model="editClassify.img" maxlength="3000" :rows="5" show-word-limit></el-input>
+                        </el-form-item>
 
-
+                        <el-form-item label="图标类型">
+                          <el-select v-model="editClassify.type" placeholder="请选择图标类型">
+                              <el-option label="图标src" value="1"></el-option>
+                              <el-option label="图标svg" value="2"></el-option>
+                              <el-option label="无图标" value="3"></el-option>
+                          </el-select>
+                       </el-form-item>
+                        <el-form-item label="序号">
+                          <el-input type="number" v-model="editClassify.sort"></el-input>
+                        </el-form-item>
+                      </el-form>
                       <span slot="footer" class="dialog-footer">
-                        <el-button @click="positionBackClick">返 回</el-button>
+                        <el-button @click="positionBackClick" size="small">返 回</el-button>
+                        <el-button type="primary" @click="onSubmitClick" size="small" v-if="submitTitle.length>0">{{ submitTitle }}</el-button>
                       </span>
                     </el-dialog>
                   </div>
@@ -364,14 +390,6 @@
                       </span>
                     </el-dialog>
                   </div>
-
-                  <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
-                    <el-table :data="gridData">
-                      <el-table-column property="date" label="日期" width="150"></el-table-column>
-                      <el-table-column property="name" label="姓名" width="200"></el-table-column>
-                      <el-table-column property="address" label="地址"></el-table-column>
-                    </el-table>
-                  </el-dialog>
                 </div>
 
                 <div class="divide"></div>
@@ -415,6 +433,9 @@ export default {
       positionList: [],
       positionClassifyList:[],
       editPosition:{},
+      editClassify:{},
+      submitTitle:"",
+      functionTitle:"职位列表",
       positionType: 1,       // 当前职位管理显示的页面  1，职位列表  2. 职位编辑 
 
       userInfo: {}, // 查询表单对象
@@ -442,13 +463,54 @@ export default {
     this.loginToken = this.$route.params.loginToken;
   },
   methods: {
+    onSubmitClick() {
+      if(this.positionType == 3) {
+        if(this.editClassify.name == undefined || this.editClassify.name.length == 0 ) {
+          this.$message.error('名称参数错误哦~');
+          return; 
+        }
+        if(this.editClassify.type == undefined  ) {
+          this.$message.error('图标类型参数未指定哦~');
+          return; 
+        }
+        if(this.editClassify.sort == undefined || this.editClassify.sort>100) {
+          this.$message.error('排序参数不符合规范哦~');
+          return; 
+        }
+        if(this.editPosition.id == undefined || this.editPosition.id.length == 0) {
+          this.$message.error('当前编辑职位参数没有哦~');
+        } else {
+          this.editClassify.pid = this.editPosition.id;
+        }
+        interviewAdmin.submitInterviewClassify(this.editClassify).then((response) => {
+          this.positionType = 2;
+          interviewAdmin.getPositionClassifyList(this.editPosition.id).then((response) => {
+            this.positionClassifyList = response.data.positionClassifyList;
+           })
+        })
+        
+        window.console.log("====="+this.editClassify);
+      }
+    },
 
+    deleteClassify(index,row) {
+      interviewAdmin.deleteClassify(this.positionClassifyList[index].id).then((response) => {
+          interviewAdmin.getPositionClassifyList(this.editPosition.id).then((response) => {
+            this.positionClassifyList = response.data.positionClassifyList;
+          });
+      });
+    },
+    addClassify() {
+      this.editClassify = {};
+      this.positionType = 3;
+      this.functionTitle = "新建分类"
+      this.submitTitle = "创建";
+    },
     positionBackClick() {
       this.changephine = false
       this.positionType = 1;
 
     },
-
     editPositionClick(index,row) {
       window.console.log("======index:" + index +"==row:"+row);
       this.editPosition = this.positionList[index];

@@ -18,6 +18,14 @@ export default {
     })
   },
 
+  getPositionQuestionList(parm) {
+    return request({
+      url: '/home/interview/pindex',
+      method: 'post',
+      data: parm,
+    })
+  },
+
   getInterviewTypeList() {
     return request({
       url: '/home/interview/typelist',

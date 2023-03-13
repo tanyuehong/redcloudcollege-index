@@ -33,20 +33,9 @@
 
             <div class="question-content">
               <div class="filter-btns">
-                <div class="filter-btn">
-                  <div class="svg-img">
-                  <svg t="1673596319193" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                    xmlns="http://www.w3.org/2000/svg" p-id="2936">
-                    <path d="M0 0h1024v1024H0V0z" fill="#202425" opacity=".01" p-id="2937"></path>
-                    <path
-                      d="M102.4 238.933333a136.533333 136.533333 0 0 1 136.533333-136.533333h102.4a136.533333 136.533333 0 0 1 136.533334 136.533333v102.4a136.533333 136.533333 0 0 1-136.533334 136.533334H238.933333a136.533333 136.533333 0 0 1-136.533333-136.533334V238.933333z m0 443.733334a136.533333 136.533333 0 0 1 136.533333-136.533334h102.4a136.533333 136.533333 0 0 1 136.533334 136.533334v102.4a136.533333 136.533333 0 0 1-136.533334 136.533333H238.933333a136.533333 136.533333 0 0 1-136.533333-136.533333v-102.4z m580.266667-136.533334a136.533333 136.533333 0 0 0-136.533334 136.533334v102.4a136.533333 136.533333 0 0 0 136.533334 136.533333h102.4a136.533333 136.533333 0 0 0 136.533333-136.533333v-102.4a136.533333 136.533333 0 0 0-136.533333-136.533334h-102.4z"
-                      fill="#FF7744" p-id="2938"></path>
-                    <path
-                      d="M546.133333 238.933333a136.533333 136.533333 0 0 1 136.533334-136.533333h102.4a136.533333 136.533333 0 0 1 136.533333 136.533333v102.4a136.533333 136.533333 0 0 1-136.533333 136.533334h-102.4a136.533333 136.533333 0 0 1-136.533334-136.533334V238.933333z"
-                      fill="#FFAA44" p-id="2939"></path>
-                  </svg>
-                  </div>
-                  全部题目
+                <div class="filter-btn"  v-for="item in classifyList" :key="item.id">
+                  <div class="svg-img" v-html="item.img" v-if="item.type==2"></div>
+                  {{ item.name }}
                 </div>         
               </div>
               <div class="job-question-list">
@@ -197,6 +186,7 @@ export default {
       tagList: [],
       signArr: [],
       sortArr:[],
+      classifyList:[]
     }
   },
 
@@ -214,9 +204,8 @@ export default {
         return {
           list: response.data.list ? response.data.list : [],
           typeList: response.data.typeList,
-          tagList: response.data.tagList,
+          classifyList:response.data.classifyList,
           sort: (params.tag == "latest" || params.tag == "hot") ? params.tag : (params.sort ? params.sort : "recommand"),
-
           tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
             ? params.tag : "all",
           page:false
@@ -553,10 +542,10 @@ export default {
   background-color: rgba(0, 10, 32, .1);
 }
 
-.filter-btns .filter-btn svg {
+.filter-btns .filter-btn >>> svg {
   height: 23px;
   width: 23px;
-  margin-top: 6px;
+  margin-top: -3px;
   margin-right: 3px;
 }
 

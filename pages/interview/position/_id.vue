@@ -205,7 +205,7 @@ export default {
   asyncData({ params, error }) {
     return interviewServerApi
       .getPositionQuestionList({
-        type: params.type ? params.type : "",
+        pId: params.id,
         sort: 3,
         tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
           ? params.tag : "",

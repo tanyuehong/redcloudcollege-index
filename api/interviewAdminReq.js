@@ -23,12 +23,21 @@ export default {
     })
   },
 
-   // 问题提交的接口
-   submitInterviewClassify(classify) {
+   // 提交职位子分类
+  submitInterviewClassify(classify) {
     return request({
       url: `/interview/admin/submitClassify`,
       method: 'post',
       data: classify,
+    })
+  },
+
+   // 提交问题的职位
+  submitQuestionPosition(position) {
+    return request({
+      url: `/interview/admin/submitQuestionPosition`,
+      method: 'post',
+      data: position,
     })
   },
 

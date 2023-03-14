@@ -70,8 +70,11 @@
               </el-table>
 
               <el-form ref="form" :model="editClassify" label-width="80px" v-if="classifyType == 2">
+                <el-form-item label="面试题Title">
+                  <span>{{ editQuestion.title }}</span>
+                </el-form-item>
                 <el-form-item label="职位名称">
-                  <el-select v-model="selectPosition"  placeholder="请选择" @change="selectPositionChanged">
+                  <el-select v-model="selectPosition" placeholder="请选择" @change="selectPositionChanged">
                     <el-option v-for="position in positionList" :key="position.id" :label="position.name"
                       :value="position.id">
                     </el-option>
@@ -86,7 +89,7 @@
                 </el-form-item>
               </el-form>
               <span slot="footer" class="dialog-footer">
-                <el-button @click="addPositionClick" size="small">添 加</el-button>
+                <el-button @click="positionBackClick" size="small">返 回</el-button>
                 <el-button type="primary" @click="onSubmitClick" size="small" v-if="submitTitle.length > 0">{{ submitTitle
                 }}</el-button>
               </span>
@@ -105,19 +108,19 @@ import interviewAdmin from "@/api/interviewAdminReq";
 export default {
   data() {
     return {
-      editQuestion:{},
+      editQuestion: {},
       questionList: [],
       positionList: [],
       classifyList: [],
-      positionClassifyList:[],
+      positionClassifyList: [],
       submitTitle: "",
       classifyType: 1,
-      selectPosition:"",
-      selectClassify:"",
+      selectPosition: "",
+      selectClassify: "",
       showQustionPositionPage: false,
 
 
-      functionTitle:"",
+      functionTitle: "",
 
       userInfo: {}, // 查询表单对象
       settingtype: 1,
@@ -150,69 +153,14 @@ export default {
     },
 
     onSubmitClick() {
-      if (this.positionType == 3) {
-        if (
-          this.editClassify.name == undefined ||
-          this.editClassify.name.length == 0
-        ) {
-          this.$message.error("名称参数错误哦~");
-          return;
-        }
-        if (this.editClassify.type == undefined) {
-          this.$message.error("图标类型参数未指定哦~");
-          return;
-        }
-        if (
-          this.editClassify.sort == undefined ||
-          this.editClassify.sort > 100
-        ) {
-          this.$message.error("排序参数不符合规范哦~");
-          return;
-        }
-        if (
-          this.editPosition.id == undefined ||
-          this.editPosition.id.length == 0
-        ) {
-          this.$message.error("当前编辑职位参数没有哦~");
-        } else {
-          this.editClassify.pid = this.editPosition.id;
-        }
-        interviewAdmin
-          .submitInterviewClassify(this.editClassify)
-          .then(response => {
-            this.positionType = 2;
-            interviewAdmin
-              .getPositionClassifyList(this.editPosition.id)
-              .then(response => {
-                this.positionClassifyList = response.data.positionClassifyList;
-              });
-          });
-      }
-    },
-    positionBackClick() {
-      this.changephine = false;
-      this.positionType = 1;
-    },
-
-    editPositionClick(index, row) {
-      this.editQuestion = this.questionList[index];
-      this.showQustionPositionPage = true;
-      this.classifyType = 1;
-      interviewAdmin
-        .getPositionClassifyList(this.editQuestion.id)
-        .then(response => {
-          this.positionClassifyList = response.data.positionClassifyList;
-        });
-    },
-    addPositionClick() {
-      if(this.classifyType == 1) {
+      if (this.classifyType == 1) {
         this.classifyType = 2;
         interviewAdmin.getPositionList().then((response) => {
-        this.positionList = response.data.positionList;
+          this.positionList = response.data.positionList;
         })
-        return 
+        return
       }
-      if(this.classifyType == 2) {
+      if (this.classifyType == 2) {
         if (this.selectPosition == undefined || this.selectPosition.length == 0) {
           this.$message.error("没有选择绑定的职位哦~");
           return;
@@ -225,26 +173,51 @@ export default {
           this.$message.error("该职位已经被绑定过了哦，请在列表页面修改吧");
           return;
         }
-        interviewAdmin.submitQuestionPosition({pid:this.selectPosition,qid:this.editQuestion.id,sid:this.selectClassify}).then(response => {
+        interviewAdmin.submitQuestionPosition({ pid: this.selectPosition, qid: this.editQuestion.id, sid: this.selectClassify }).then(response => {
         });
       }
     },
 
+    positionBackClick() {
+      if (this.classifyType == 1) {
+        this.showQustionPositionPage = false;
+      } else if (this.classifyType == 2) {
+        this.classifyType = 1;
+        this.submitTitle = "新 建"
+        interviewAdmin
+          .getPositionClassifyList(this.editQuestion.id)
+          .then(response => {
+            this.positionClassifyList = response.data.positionClassifyList;
+          });
+      }
+    },
+
+    editPositionClick(index, row) {
+      this.editQuestion = this.questionList[index];
+      this.submitTitle = "新 建"
+      this.showQustionPositionPage = true;
+      this.classifyType = 1;
+      interviewAdmin
+        .getPositionClassifyList(this.editQuestion.id)
+        .then(response => {
+          this.positionClassifyList = response.data.positionClassifyList;
+        });
+    },
     checkHavePositionClassify(item) {
       for (var j = 0; j < this.positionClassifyList.length; j++) {
-          if(item == this.positionClassifyList[j].id) {
-            return true;
-          }
+        if (item == this.positionClassifyList[j].id) {
+          return true;
+        }
       }
       return false;
     },
 
     selectPositionChanged(item) {
       interviewAdmin
-              .getPositionClassifyList(item)
-              .then(response => {
-                this.classifyList = response.data.positionClassifyList;
-              });
+        .getPositionClassifyList(item)
+        .then(response => {
+          this.classifyList = response.data.positionClassifyList;
+        });
 
     },
     zhanghuSettingClick() {

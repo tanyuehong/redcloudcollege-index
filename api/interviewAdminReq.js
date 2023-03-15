@@ -16,6 +16,13 @@ export default {
     })
   },
 
+  getQuestionClassifyList(qId) {
+    return request({
+      url: `/interview/admin/questionClassifyList/${qId}`,
+      method: 'get'
+    })
+  },
+
   getPositionClassifyList(pId) {
     return request({
       url: `/interview/admin/positionClassifyList/${pId}`,

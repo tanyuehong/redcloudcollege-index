@@ -46,7 +46,7 @@
               <el-table-column label="操作" width="290">
                 <template slot-scope="scope">
                   <el-button size="mini" @click="editQuestionClick(scope.$index, scope.row)">编辑</el-button>
-                  <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">职位</el-button>
+                  <el-button size="mini" @click="editQuestionClassifyClick(scope.$index, scope.row)">职位</el-button>
                   <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                 </template>
               </el-table-column>
@@ -54,13 +54,13 @@
 
             <el-dialog :title="functionTitle" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
               :show-close="true" :visible.sync="showQustionPositionPage" center>
-
-              <el-table :data="positionClassifyList" height="160" v-if="classifyType == 1">
-                <el-table-column property="name" label="职位名称" width="100" height="60"></el-table-column>
-
+              <el-table :data="questionClassifyList" height="160" v-if="classifyType == 1">
+                <el-table-column property="" label="面试题Title" width="160" height="60"><span>{{ editQuestion.title }}</span></el-table-column>
+                <el-table-column property="pname" label="面试职位" width="100" height="60"></el-table-column>
+                <el-table-column property="sname" label="子分类" width="100" height="60"></el-table-column>
                 <el-table-column label="操作" width="220">
                   <template slot-scope="scope">
-                    <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">编辑</el-button>
+                    <el-button size="mini" @click="editPositionClassifyClick(scope.$index, scope.row)">编辑</el-button>
                     <el-popconfirm confirm-button-text="好的" cancel-button-text="不用了" icon="el-icon-info" icon-color="red"
                       title="您确定要删除该分类吗，该操作不可撤回？" @confirm="deleteClassify(scope.$index, scope.row)">
                       <el-button type="danger" size="mini" slot="reference">删除</el-button>
@@ -69,19 +69,19 @@
                 </el-table-column>
               </el-table>
 
-              <el-form ref="form" :model="editClassify" label-width="80px" v-if="classifyType == 2">
+              <el-form ref="form" label-width="80px" v-if="classifyType == 2">
                 <el-form-item label="面试题Title">
                   <span>{{ editQuestion.title }}</span>
                 </el-form-item>
                 <el-form-item label="职位名称">
-                  <el-select v-model="selectPosition" placeholder="请选择" @change="selectPositionChanged">
+                  <el-select v-model="editQuestionClassify.pid" placeholder="请选择" @change="selectPositionChanged">
                     <el-option v-for="position in positionList" :key="position.id" :label="position.name"
                       :value="position.id">
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item label="职位子分类">
-                  <el-select v-model="selectClassify" clearable placeholder="请选择">
+                <el-form-item label="子分类">
+                  <el-select v-model="editQuestionClassify.sid" clearable placeholder="请选择">
                     <el-option v-for="classify in classifyList" :key="classify.id" :label="classify.name"
                       :value="classify.id">
                     </el-option>
@@ -109,10 +109,12 @@ export default {
   data() {
     return {
       editQuestion: {},
+      editQuestionClassify: {},
       questionList: [],
       positionList: [],
       classifyList: [],
       positionClassifyList: [],
+      questionClassifyList:[],
       submitTitle: "",
       classifyType: 1,
       selectPosition: "",
@@ -155,17 +157,19 @@ export default {
     onSubmitClick() {
       if (this.classifyType == 1) {
         this.classifyType = 2;
+        this.editQuestionClassify = {};
         interviewAdmin.getPositionList().then((response) => {
           this.positionList = response.data.positionList;
         })
         return
       }
       if (this.classifyType == 2) {
-        if (this.selectPosition == undefined || this.selectPosition.length == 0) {
+        window.console.log(this.editQuestionClassify.pid)
+        if (this.editQuestionClassify.pid == undefined|| this.editQuestionClassify.pid.length == 0) {
           this.$message.error("没有选择绑定的职位哦~");
           return;
         }
-        if (this.selectClassify == undefined || this.selectClassify.length == 0) {
+        if (this.editQuestionClassify.sid == undefined || this.editQuestionClassify.sid.length == 0) {
           this.$message.error("没有选择绑定的职位的子分类哦~");
           return;
         }
@@ -173,9 +177,22 @@ export default {
           this.$message.error("该职位已经被绑定过了哦，请在列表页面修改吧");
           return;
         }
-        interviewAdmin.submitQuestionPosition({ pid: this.selectPosition, qid: this.editQuestion.id, sid: this.selectClassify }).then(response => {
+        interviewAdmin.submitQuestionPosition({ pid: this.editQuestionClassify.pid, qid: this.editQuestion.id, sid: this.editQuestionClassify.sid }).then(response => {
         });
       }
+    },
+
+    editPositionClassifyClick(index, row) {
+      this.editQuestionClassify = this.questionClassifyList[index];
+      interviewAdmin.getPositionList().then((response) => {
+          this.positionList = response.data.positionList;
+        });
+      interviewAdmin
+        .getPositionClassifyList(this.editQuestionClassify.pid)
+        .then(response => {
+          this.classifyList = response.data.positionClassifyList;
+        });
+        this.classifyType = 2;
     },
 
     positionBackClick() {
@@ -185,24 +202,25 @@ export default {
         this.classifyType = 1;
         this.submitTitle = "新 建"
         interviewAdmin
-          .getPositionClassifyList(this.editQuestion.id)
+          .getQuestionClassifyList(this.editQuestion.id)
           .then(response => {
-            this.positionClassifyList = response.data.positionClassifyList;
+            this.questionClassifyList = response.data.questionClassifyList;
           });
       }
     },
 
-    editPositionClick(index, row) {
+    editQuestionClassifyClick(index, row) {
       this.editQuestion = this.questionList[index];
       this.submitTitle = "新 建"
       this.showQustionPositionPage = true;
       this.classifyType = 1;
       interviewAdmin
-        .getPositionClassifyList(this.editQuestion.id)
+        .getQuestionClassifyList(this.editQuestion.id)
         .then(response => {
-          this.positionClassifyList = response.data.positionClassifyList;
+          this.questionClassifyList = response.data.questionClassifyList;
         });
     },
+
     checkHavePositionClassify(item) {
       for (var j = 0; j < this.positionClassifyList.length; j++) {
         if (item == this.positionClassifyList[j].id) {
@@ -218,7 +236,6 @@ export default {
         .then(response => {
           this.classifyList = response.data.positionClassifyList;
         });
-
     },
     zhanghuSettingClick() {
       this.settingtype = 2;

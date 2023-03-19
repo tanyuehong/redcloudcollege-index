@@ -77,7 +77,7 @@
                     <div role="cell" class="qustion-title col5">
                       <span class="truncate">
                         <nuxt-link :to="'/interview/detail/' + item.qid" target="_blank" class="item-title">
-                          {{ item.title }}
+                         {{ item.snum }}. {{ item.title }}
                         </nuxt-link>
                       </span>
                     </div>
@@ -196,18 +196,14 @@ export default {
     return interviewServerApi
       .getPositionQuestionList({
         pId: params.id,
-        sort: 3,
-        tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
-          ? params.tag : "",
+        orderType: 1,
+        sort: 1
       })
       .then((response) => {
         return {
           list: response.data.list ? response.data.list : [],
-          typeList: response.data.typeList,
           classifyList:response.data.classifyList,
-          sort: (params.tag == "latest" || params.tag == "hot") ? params.tag : (params.sort ? params.sort : "recommand"),
-          tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
-            ? params.tag : "all",
+          pId: params.id,
           page:false
         };
       });
@@ -247,13 +243,13 @@ export default {
   computed: {
     frequency () {
       return function (item) {
-        return "width:" + 70*0.9 + "px";
+        return "width:" + 70*item.frequency + "px";
       }
     },
 
-    frequencyBack (item) {
+    frequencyBack () {
       return function (item) {
-        return "width:" + (70-70*0.9) + "px";
+        return "width:" + (70-70*item.frequency) + "px";
       }
     },
   },
@@ -310,6 +306,18 @@ export default {
         sortParm.type = 1;
         sortParm.htmlContent = this.getHtmlContent(1);
       }
+      
+      interviewServerApi.getPositionQuestionList({
+        pId: this.pId,
+        orderType: sortParm.type == 2 ? 2:1,
+        sort: sortParm.type == 1 ? 1:index+1,
+      }).then((response) => {
+        this.list =  response.data.list ? response.data.list : [];
+        this.classifyList =  response.data.classifyList;
+        this.page = false;
+      });
+
+
     },
     getHtmlContent(type) {
       if(type == 1) {
@@ -444,8 +452,8 @@ export default {
   width: 35px;
   display: block;
   height: 8px;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-top-left-radius: 1px;
+  border-bottom-left-radius: 1px;
 }
 
 .job-question-list .qustion-list-item .qustion-title .showtimes-rate .gray-all {

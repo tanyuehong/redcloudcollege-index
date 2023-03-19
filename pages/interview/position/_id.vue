@@ -192,7 +192,8 @@ export default {
 
   head() { },
 
-  asyncData({ params, error }) {
+  asyncData({ params, error , app}) {
+    var token = app.$cookies.get("token");
     return interviewServerApi
       .getPositionQuestionList({
         pId: params.id,

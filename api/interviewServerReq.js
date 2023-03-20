@@ -26,9 +26,9 @@ export default {
     })
   },
 
-  getInterviewTypeList() {
+  getInterviewPositionList() {
     return request({
-      url: '/home/interview/typelist',
+      url: '/home/interview/positionList',
       method: 'get',
     })
   },

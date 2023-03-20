@@ -41,9 +41,9 @@
           <div class="nav-text">面试题列表</div>
           <div class="admin-content">
             <el-table :data="questionList" height="560">
-              <el-table-column property="title" label="题目名称" width="260"></el-table-column>
+              <el-table-column property="title" label="题目" width="360"></el-table-column>
               <el-table-column property="type" label="题目类型" width="120"></el-table-column>
-              <el-table-column label="操作" width="290">
+              <el-table-column label="操作" width="260">
                 <template slot-scope="scope">
                   <el-button size="mini" @click="editQuestionClick(scope.$index, scope.row)">编辑</el-button>
                   <el-button size="mini" @click="editQuestionClassifyClick(scope.$index, scope.row)">职位</el-button>
@@ -55,7 +55,7 @@
             <el-dialog :title="functionTitle" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
               :show-close="true" :visible.sync="showQustionPositionPage" center>
               <el-table :data="questionClassifyList" height="160" v-if="classifyType == 1">
-                <el-table-column property="" label="面试题Title" width="160" height="60"><span>{{ editQuestion.title }}</span></el-table-column>
+                <el-table-column property="" label="题目" width="160" height="60"><span>{{ editQuestion.title }}</span></el-table-column>
                 <el-table-column property="pname" label="面试职位" width="100" height="60"></el-table-column>
                 <el-table-column property="sname" label="子分类" width="100" height="60"></el-table-column>
                 <el-table-column label="操作" width="220">
@@ -70,7 +70,7 @@
               </el-table>
 
               <el-form ref="form" label-width="80px" v-if="classifyType == 2">
-                <el-form-item label="面试题Title">
+                <el-form-item label="题目">
                   <span>{{ editQuestion.title }}</span>
                 </el-form-item>
                 <el-form-item label="职位名称">

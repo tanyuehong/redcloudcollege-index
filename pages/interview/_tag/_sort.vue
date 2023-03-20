@@ -58,7 +58,7 @@
               </div>
               <div class="module-body">
                 <div class="mock-jobs-list">
-                  <nuxt-link :to="'/interview/position/' + item.id" class="mock-jobs-item" v-for="item in typeList" :key="item.id">
+                  <nuxt-link :to="'/interview/position/' + item.id" class="mock-jobs-item" v-for="item in positionList" :key="item.id">
                     <div class="mock-jobs-info">
                       <p class="mock-jobs-name">{{  item.name  }}</p>
                       <!-- 0人已参加 -->
@@ -250,7 +250,7 @@ export default {
     return {
       activeIndex: "1",
       tagList: [],
-      typeList: [],
+      positionList: [],
       tagList: [],
       sort: "recommand",
       tag: "all",
@@ -295,7 +295,7 @@ export default {
       .then((response) => {
         return {
           list: response.data.list ? response.data.list : [],
-          typeList: response.data.typeList,
+          positionList: response.data.positionList,
           tagList: response.data.tagList,
           sort: (params.tag =="latest" || params.tag =="hot") ?  params.tag : ( params.sort ? params.sort : "recommand") ,
 

@@ -126,10 +126,10 @@ export default {
   },
 
   asyncData ({ params, error }) {
-    return interviewServerApi.getInterviewTypeList(params.id).then((response) => {
+    return interviewServerApi.getInterviewPositionList(params.id).then((response) => {
       return {
-        typeList: response.data.typeList,
-        selectType: response.data.typeList[0].id,
+        positionList: response.data.positionList,
+        selectType: response.data.positionList[0].id,
       }
     })
   },

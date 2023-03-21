@@ -20,7 +20,7 @@
             面试题管理
           </div>
         </div>
-        <div @click="zhanghuSettingClick" class="setting-menu-item">
+        <div @click="everyDayQuestionClick" class="setting-menu-item">
           <div class="nav-item" v-bind:class="{ active: settingtype == 2 }">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg">
               <path fill-rule="evenodd" clip-rule="evenodd"
@@ -55,7 +55,8 @@
             <el-dialog :title="functionTitle" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
               :show-close="true" :visible.sync="showQustionPositionPage" center>
               <el-table :data="questionClassifyList" height="160" v-if="classifyType == 1">
-                <el-table-column property="" label="题目" width="160" height="60"><span>{{ editQuestion.title }}</span></el-table-column>
+                <el-table-column property="" label="题目" width="160" height="60"><span>{{ editQuestion.title
+                }}</span></el-table-column>
                 <el-table-column property="pname" label="面试职位" width="100" height="60"></el-table-column>
                 <el-table-column property="sname" label="子分类" width="100" height="60"></el-table-column>
                 <el-table-column label="操作" width="220">
@@ -102,12 +103,9 @@
         <div class="person-setting shadow">
           <div class="nav-text">每日一题管理</div>
           <div class="admin-content">
-            <el-date-picker
-      v-model="value1"
-      type="date"
-      placeholder="选择日期">
-    </el-date-picker>
-            <el-table :data="questionList" height="560">
+            <el-date-picker v-model="slectDate" type="date" value-format="yyyy-MM-dd" @change="selectDateDidChange" placeholder="选择日期">
+            </el-date-picker>
+            <el-table :data="everyDayquestionList" height="460">
               <el-table-column property="title" label="题目名称" width="260"></el-table-column>
               <el-table-column property="type" label="题目类型" width="120"></el-table-column>
               <el-table-column label="操作" width="290">
@@ -118,11 +116,15 @@
                 </template>
               </el-table-column>
             </el-table>
+            <div class="add-every-day-quesion">
+              <el-button @click="onSubmitClick" size="small">添 加</el-button>
+            </div>
 
             <el-dialog :title="functionTitle" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
               :show-close="true" :visible.sync="showQustionPositionPage" center>
               <el-table :data="questionClassifyList" height="160" v-if="classifyType == 1">
-                <el-table-column property="" label="面试题Title" width="160" height="60"><span>{{ editQuestion.title }}</span></el-table-column>
+                <el-table-column property="" label="面试题Title" width="160" height="60"><span>{{ editQuestion.title
+                }}</span></el-table-column>
                 <el-table-column property="pname" label="面试职位" width="100" height="60"></el-table-column>
                 <el-table-column property="sname" label="子分类" width="100" height="60"></el-table-column>
                 <el-table-column label="操作" width="220">
@@ -169,7 +171,7 @@
 </template>
 
 <script>
-import userApi from "@/api/user";
+
 import interviewAdmin from "@/api/interviewAdminReq";
 
 export default {
@@ -181,16 +183,16 @@ export default {
       positionList: [],
       classifyList: [],
       positionClassifyList: [],
-      questionClassifyList:[],
+      questionClassifyList: [],
       submitTitle: "",
       classifyType: 1,
       selectPosition: "",
       selectClassify: "",
       showQustionPositionPage: false,
 
-
+      slectDate: '',                // 当前显示的日期
+      everyDayquestionList: [],     // 每日一题的列表
       functionTitle: "",
-
       userInfo: {}, // 查询表单对象
       settingtype: 1,
     };
@@ -200,6 +202,10 @@ export default {
     this.getQuestionList();
   },
   methods: {
+    selectDateDidChange(date) {
+      window.console.log('====='+date);
+    },
+
     getQuestionList() {
       interviewAdmin.getQuestionList().then(response => {
         this.questionList = response.data.questionList;
@@ -217,7 +223,7 @@ export default {
       }
       if (this.classifyType == 2) {
         window.console.log(this.editQuestionClassify.pid)
-        if (this.editQuestionClassify.pid == undefined|| this.editQuestionClassify.pid.length == 0) {
+        if (this.editQuestionClassify.pid == undefined || this.editQuestionClassify.pid.length == 0) {
           this.$message.error("没有选择绑定的职位哦~");
           return;
         }
@@ -237,14 +243,14 @@ export default {
     editPositionClassifyClick(index, row) {
       this.editQuestionClassify = this.questionClassifyList[index];
       interviewAdmin.getPositionList().then((response) => {
-          this.positionList = response.data.positionList;
-        });
+        this.positionList = response.data.positionList;
+      });
       interviewAdmin
         .getPositionClassifyList(this.editQuestionClassify.pid)
         .then(response => {
           this.classifyList = response.data.positionClassifyList;
         });
-        this.classifyType = 2;
+      this.classifyType = 2;
     },
 
     positionBackClick() {
@@ -289,8 +295,17 @@ export default {
           this.classifyList = response.data.positionClassifyList;
         });
     },
-    zhanghuSettingClick() {
+    everyDayQuestionClick() {
       this.settingtype = 2;
+      if(this.slectDate.length == 0) {
+        var date = new Date();
+        this.slectDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate());
+      }
+      interviewAdmin
+        .getEveryDayQuestionList(this.slectDate)
+        .then(response => {
+          this.everyDayquestionList = response.data.everydayList;
+        });
     },
     personSettingClick() {
       this.settingtype = 1;
@@ -302,7 +317,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+.add-every-day-quesion {
+  margin: 0 auto;
+}
 .admin-setting-chang .el-dialog__wrapper .el-dialog {
   width: 960px;
 }

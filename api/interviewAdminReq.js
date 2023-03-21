@@ -2,6 +2,13 @@ import request from '@/utils/request'
 
 export default {
 
+  getEveryDayQuestionList(date) {
+    return request({
+      url: `/interview/admin/getEveryDayQuestionList/${date}`,
+      method: 'get',
+    })
+  },
+
   getQuestionList() {
     return request({
       url: `/interview/admin/questionList`,

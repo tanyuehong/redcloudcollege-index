@@ -117,28 +117,12 @@
               </el-table-column>
             </el-table>
             <div class="add-every-day-quesion">
-              <el-button @click="onSubmitClick" size="small">添 加</el-button>
+              <el-button @click="addEveryQuestionClick" size="small">添 加</el-button>
             </div>
 
-            <el-dialog :title="functionTitle" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
-              :show-close="true" :visible.sync="showQustionPositionPage" center>
-              <el-table :data="questionClassifyList" height="160" v-if="classifyType == 1">
-                <el-table-column property="" label="面试题Title" width="160" height="60"><span>{{ editQuestion.title
-                }}</span></el-table-column>
-                <el-table-column property="pname" label="面试职位" width="100" height="60"></el-table-column>
-                <el-table-column property="sname" label="子分类" width="100" height="60"></el-table-column>
-                <el-table-column label="操作" width="220">
-                  <template slot-scope="scope">
-                    <el-button size="mini" @click="editPositionClassifyClick(scope.$index, scope.row)">编辑</el-button>
-                    <el-popconfirm confirm-button-text="好的" cancel-button-text="不用了" icon="el-icon-info" icon-color="red"
-                      title="您确定要删除该分类吗，该操作不可撤回？" @confirm="deleteClassify(scope.$index, scope.row)">
-                      <el-button type="danger" size="mini" slot="reference">删除</el-button>
-                    </el-popconfirm>
-                  </template>
-                </el-table-column>
-              </el-table>
-
-              <el-form ref="form" label-width="80px" v-if="classifyType == 2">
+            <el-dialog title="创建每日一题" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
+              :show-close="true" :visible.sync="showEveryQuestionPage" center>
+              <el-form ref="form" label-width="80px">
                 <el-form-item label="面试题Title">
                   <span>{{ editQuestion.title }}</span>
                 </el-form-item>
@@ -192,6 +176,7 @@ export default {
 
       slectDate: '',                // 当前显示的日期
       everyDayquestionList: [],     // 每日一题的列表
+      showEveryQuestionPage:false,
       functionTitle: "",
       userInfo: {}, // 查询表单对象
       settingtype: 1,
@@ -202,7 +187,12 @@ export default {
     this.getQuestionList();
   },
   methods: {
+    addEveryQuestionClick() {
+      this.showEveryQuestionPage = true;
+
+    },
     selectDateDidChange(date) {
+      this.slectDate = date;
       window.console.log('====='+date);
     },
 
@@ -320,7 +310,11 @@ export default {
 <style scoped>
 
 .add-every-day-quesion {
+  display: flex;
+}
+.add-every-day-quesion button {
   margin: 0 auto;
+  margin-top: 10px;
 }
 .admin-setting-chang .el-dialog__wrapper .el-dialog {
   width: 960px;

@@ -116,37 +116,6 @@
                 </template>
               </el-table-column>
             </el-table>
-            <div class="add-every-day-quesion">
-              <el-button @click="addEveryQuestionClick" size="small">添 加</el-button>
-            </div>
-
-            <el-dialog title="创建每日一题" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
-              :show-close="true" :visible.sync="showEveryQuestionPage" center>
-              <el-form ref="form" label-width="80px">
-                <el-form-item label="面试题Title">
-                  <span>{{ editQuestion.title }}</span>
-                </el-form-item>
-                <el-form-item label="职位名称">
-                  <el-select v-model="editQuestionClassify.pid" placeholder="请选择" @change="selectPositionChanged">
-                    <el-option v-for="position in positionList" :key="position.id" :label="position.name"
-                      :value="position.id">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="子分类">
-                  <el-select v-model="editQuestionClassify.sid" clearable placeholder="请选择">
-                    <el-option v-for="classify in classifyList" :key="classify.id" :label="classify.name"
-                      :value="classify.id">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-              </el-form>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="positionBackClick" size="small">返 回</el-button>
-                <el-button type="primary" @click="onSubmitClick" size="small" v-if="submitTitle.length > 0">{{ submitTitle
-                }}</el-button>
-              </span>
-            </el-dialog>
           </div>
         </div>
       </div>

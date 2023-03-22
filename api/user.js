@@ -2,6 +2,13 @@ import request from '@/utils/request'
 
 export default {
 
+  getUserAdminState() {
+    return request({
+      url: `/ucenter/getUserAdminState`,
+      method: 'post'
+    })
+  },
+
   getUserFocusState(fIds) {
     return request({
       url: `/home/ucenter/getUserFocusState`,

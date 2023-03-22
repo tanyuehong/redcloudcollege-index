@@ -192,18 +192,42 @@
                     <span class="anser-lable">解答</span>
                   </nuxt-link>
                   <span class="descrip-more">
-                    <el-dropdown>
+                    <el-dropdown @command="handleQuestionEdit">
                       <el-button type="primary" size="mini" plain>更多操作<i class="el-icon-arrow-down el-icon--right"></i>
                       </el-button>
-
                       <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>收藏</el-dropdown-item>
-                        <el-dropdown-item>添加题库</el-dropdown-item>
-                        <el-dropdown-item>设为必掌握</el-dropdown-item>
+                        <el-dropdown-item :command="beforeHandleCommand(item,'a')">收藏</el-dropdown-item>
+                        <el-dropdown-item :command="beforeHandleCommand(item,'b')">添加题库</el-dropdown-item>
+                        <el-dropdown-item :command="beforeHandleCommand(item,'c')">设为必掌握</el-dropdown-item>
+                        <el-dropdown-item :command="beforeHandleCommand(item,'d')" v-if="isAdmin">设为每日一题</el-dropdown-item>
                       </el-dropdown-menu>
                     </el-dropdown>
+                    <el-dialog title="设置每日一题" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
+              :show-close="true" :visible.sync="showEveryQustionPage" center>
+              <el-form ref="form" label-width="80px">
+                <el-form-item label="题目: ">
+                  <span>{{ everyQuestionTitle }}</span>
+                </el-form-item>
+                <el-form-item label="职位名称: ">
+                  <el-select v-model="everyQuestion.pid" placeholder="请选择">
+                    <el-option v-for="position in positionList" :key="position.id" :label="position.name"
+                      :value="position.id">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+
+                <el-form-item label="日期: ">
+                 <el-date-picker v-model="everyQuestion.date" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
+                </el-form-item>
+              </el-form>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="addEverQuestionBackClick" size="small">返 回</el-button>
+                <el-button type="primary" @click="addEverQuestionSubmit" size="small"> 添 加 </el-button>
+              </span>
+            </el-dialog>
                   </span>
                 </div>
+                
               </div>
               <div class="clearnfloat"></div>
             </div>
@@ -243,11 +267,16 @@
 <script>
 import "~/assets/css/appdown.css";
 import "~/assets/css/askindex.css";
+import userApi from '@/api/user'
 import interviewServerApi from "@/api/interviewServerReq";
 
 export default {
   data() {
     return {
+      isAdmin:false,
+      everyQuestion:{},
+      everyQuestionTitle:'',
+      showEveryQustionPage:false,  
       activeIndex: "1",
       tagList: [],
       positionList: [],
@@ -306,9 +335,9 @@ export default {
   },
 
   mounted() {
-    interviewServerApi
-      .getInterviewIndex({ sort: "", tag: "" })
-      .then((response) => { });
+    userApi.getUserAdminState().then((response) => {
+        this.isAdmin = response.data.isAdmin
+      })
   },
 
   computed: {
@@ -334,6 +363,22 @@ export default {
   },
 
   methods: {
+    beforeHandleCommand(qItem,cItem) {
+      return {'qItem':qItem,'cItem':cItem};
+    },
+    addEverQuestionSubmit() {
+
+    },
+    addEverQuestionBackClick() {
+
+    },
+    handleQuestionEdit(command) {
+      if(command.cItem == 'd') {
+        this.everyQuestionTitle = command.qItem.title;
+        this.everyQuestion.qid  = command.qItem.id;
+        this.showEveryQustionPage = true;
+      }
+    },
     sortParmString(tag,sort) {
       if(tag == "recommand" ||tag == "latest" || tag == "hot" ) {
         return tag;

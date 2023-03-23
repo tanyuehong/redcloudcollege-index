@@ -202,8 +202,11 @@
                         <el-dropdown-item :command="beforeHandleCommand(item,'d')" v-if="isAdmin">设为每日一题</el-dropdown-item>
                       </el-dropdown-menu>
                     </el-dropdown>
-                    <el-dialog title="设置每日一题" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
-              :show-close="true" :visible.sync="showEveryQustionPage" center>
+                  </span>
+                </div>
+
+                <el-dialog title="设置每日一题" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
+              :show-close="false" :visible.sync="showEveryQustionPage" center>
               <el-form ref="form" label-width="80px">
                 <el-form-item label="题目: ">
                   <span>{{ everyQuestionTitle }}</span>
@@ -225,8 +228,6 @@
                 <el-button type="primary" @click="addEverQuestionSubmit" size="small"> 添 加 </el-button>
               </span>
             </el-dialog>
-                  </span>
-                </div>
                 
               </div>
               <div class="clearnfloat"></div>
@@ -370,6 +371,7 @@ export default {
 
     },
     addEverQuestionBackClick() {
+      this.showEveryQustionPage = false;
 
     },
     handleQuestionEdit(command) {
@@ -377,6 +379,8 @@ export default {
         this.everyQuestionTitle = command.qItem.title;
         this.everyQuestion.qid  = command.qItem.id;
         this.showEveryQustionPage = true;
+        var date = new Date();
+        this.everyQuestion.date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate());
       }
     },
     sortParmString(tag,sort) {

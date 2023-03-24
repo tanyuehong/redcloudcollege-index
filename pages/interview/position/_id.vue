@@ -162,6 +162,17 @@
             </div>
           </div>
           </client-only>
+
+          <div class="every-question">
+            <a class="question-warper">
+              <img src="//static.nowcoder.com/acm/images-acm/img/home/mod4.png" alt="">
+              <div class="question-detail">
+                <div class="q-title">代扣代缴爱上了附近打扫房间鲁大师就发了的空间啊</div>
+                <div class="q-content">代扣代缴爱上了附近打扫房间鲁大师就发了的空间啊</div>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7.913 19.071l7.057-7.078-7.057-7.064a1 1 0 011.414-1.414l7.764 7.77a1 1 0 010 1.415l-7.764 7.785a1 1 0 01-1.414-1.414z" clip-rule="evenodd"></path></svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -334,6 +345,53 @@ export default {
 </script>
 
 <style scoped>
+
+.every-question {
+  margin-top: 15px;
+  background-color: #fff;
+  border-radius: 20px;
+  align-items: center;
+}
+
+.every-question a:hover {
+  background-color: #000a201a;
+}
+
+.question-warper {
+  border-radius: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.question-warper .question-detail {
+  margin-left: 6px;
+  width: 245px;
+}
+
+.question-warper .question-detail .q-title {
+  color: #333;
+  font-size: 14px;
+}
+
+.question-warper .question-detail .q-content {
+  color: #666;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.question-warper img {
+  width: 50px;
+  height: 50px;
+}
+
+.question-warper svg {
+  width: 16px;
+  height: 16px;
+  margin-left: 6px;
+}
 
 .sin-desc {
   width: 225px;

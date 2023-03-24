@@ -11,14 +11,14 @@
     <div class="golobal_content">
       <!-- 网校课程 开始 -->
       <section class="container">
-        <div class="every_qustion">
+        <nuxt-link :to="'/interview/detail/' + everyDayQuestion.qid" class="every_qustion" title="每日一题">
           <div class="left_title fl">
             <img src="~/assets/img/erery_qustion.png" alt="每日一题" />
           </div>
           <div class="right_content fl">
-            面向对象设计的准则？
+            {{ everyDayQuestion.qtitle }}
           </div>
-        </div>
+        </nuxt-link>
 
         <div class="home_function">
           <a class="function_btn ml180 mt20 fl">
@@ -305,6 +305,7 @@ export default {
         bannerList: response.data.banerList,
         eduList: response.data.eduList,
         gusslikeList: response.data.gusslikeList,
+        everyDayQuestion:response.data.everyDayQuestion,
       }
     })
   },
@@ -328,6 +329,8 @@ export default {
   height: 80px;
   background: white;
   border-radius: 20px;
+  display: block;
+  text-decoration: none;
 }
 
 .home_function {

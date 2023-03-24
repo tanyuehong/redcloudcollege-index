@@ -220,7 +220,7 @@
                 </el-form-item>
 
                 <el-form-item label="日期: ">
-                 <el-date-picker v-model="everyQuestion.date" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
+                 <el-date-picker v-model="qDate" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
                 </el-form-item>
               </el-form>
               <span slot="footer" class="dialog-footer">
@@ -277,6 +277,7 @@ export default {
     return {
       isAdmin:false,
       everyQuestion:{},
+      qDate:'',
       everyQuestionTitle:'',
       showEveryQustionPage:false,  
       activeIndex: "1",
@@ -369,6 +370,7 @@ export default {
       return {'qItem':qItem,'cItem':cItem};
     },
     addEverQuestionSubmit() {
+      this.everyQuestion.date = this.qDate;
       interviewAdmin.submitEveryQuestion(this.everyQuestion).then(response => {
         this.showEveryQustionPage = false;
       });
@@ -384,7 +386,8 @@ export default {
         window.console.log(this.everyQuestion);
         this.showEveryQustionPage = true;
         var date = new Date();
-        this.everyQuestion.date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate());
+        this.qDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate());
+        window.console.log("========"+this.everyQuestion.date);
       }
     },
     sortParmString(tag,sort) {

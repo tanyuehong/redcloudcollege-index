@@ -106,14 +106,12 @@
             <el-date-picker v-model="slectDate" type="date" value-format="yyyy-MM-dd" @change="selectDateDidChange" placeholder="选择日期">
             </el-date-picker>
             <el-table :data="everyDayquestionList" height="460">
-              <el-table-column property="qtitle" label="题目名称" width="260"></el-table-column>
+              <el-table-column property="qtitle" label="题目名称" width="350"></el-table-column>
               <el-table-column property="qtype" label="题目类型" width="120"></el-table-column>
               <el-table-column property="position" label="职位" width="120"></el-table-column>
               <el-table-column property="opName" label="创建用户" width="120"></el-table-column>
-              <el-table-column label="操作" width="290">
+              <el-table-column label="操作" width="120">
                 <template slot-scope="scope">
-                  <el-button size="mini" @click="editQuestionClick(scope.$index, scope.row)">编辑</el-button>
-                  <el-button size="mini" @click="editQuestionClassifyClick(scope.$index, scope.row)">职位</el-button>
                   <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                 </template>
               </el-table-column>

@@ -164,14 +164,13 @@
           </client-only>
 
           <div class="every-question">
-            <a class="question-warper">
+            <nuxt-link :to="'/interview/detail/' + everyDayQuestion.qid" class="question-warper" title="每日一题">
               <img src="//static.nowcoder.com/acm/images-acm/img/home/mod4.png" alt="">
               <div class="question-detail">
-                <div class="q-title">代扣代缴爱上了附近打扫房间鲁大师就发了的空间啊</div>
-                <div class="q-content">代扣代缴爱上了附近打扫房间鲁大师就发了的空间啊</div>
+                <div class="q-title">{{ everyDayQuestion.qtitle }}</div>
               </div>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7.913 19.071l7.057-7.078-7.057-7.064a1 1 0 011.414-1.414l7.764 7.77a1 1 0 010 1.415l-7.764 7.785a1 1 0 01-1.414-1.414z" clip-rule="evenodd"></path></svg>
-            </a>
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -194,6 +193,7 @@ export default {
       isLogin:false,
       signTitle:"登录",
       signDate:"",
+      everyDayQuestion:{},
       tagList: [],
       signArr: [],
       sortArr:[],
@@ -215,6 +215,7 @@ export default {
         return {
           list: response.data.list ? response.data.list : [],
           classifyList:response.data.classifyList,
+          everyDayQuestion:response.data.everyDayQuestion,
           pId: params.id,
           page:false
         };
@@ -250,6 +251,15 @@ export default {
              window.console.log(this.signArr);
            });
     };
+
+    interviewServerApi
+      .getPositionQuestionList({
+        pId: this.pId,
+        orderType: 1,
+        sort: 1
+      })
+      .then((response) => {
+      });
   },
 
   computed: {
@@ -349,7 +359,7 @@ export default {
 .every-question {
   margin-top: 15px;
   background-color: #fff;
-  border-radius: 20px;
+  border-radius: 10px;
   align-items: center;
 }
 
@@ -358,12 +368,13 @@ export default {
 }
 
 .question-warper {
-  border-radius: 20px;
+  border-radius: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 15px;
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 .question-warper .question-detail {

@@ -269,6 +269,7 @@
 import "~/assets/css/appdown.css";
 import "~/assets/css/askindex.css";
 import userApi from '@/api/user'
+import interviewAdmin from '@/api/interviewAdminReq'
 import interviewServerApi from "@/api/interviewServerReq";
 
 export default {
@@ -368,7 +369,9 @@ export default {
       return {'qItem':qItem,'cItem':cItem};
     },
     addEverQuestionSubmit() {
-
+      interviewAdmin.submitEveryQuestion(this.everyQuestion).then(response => {
+        this.showEveryQustionPage = false;
+      });
     },
     addEverQuestionBackClick() {
       this.showEveryQustionPage = false;
@@ -377,7 +380,8 @@ export default {
     handleQuestionEdit(command) {
       if(command.cItem == 'd') {
         this.everyQuestionTitle = command.qItem.title;
-        this.everyQuestion.qid  = command.qItem.id;
+        this.everyQuestion.qid  = command.qItem.qid;
+        window.console.log(this.everyQuestion);
         this.showEveryQustionPage = true;
         var date = new Date();
         this.everyQuestion.date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate());

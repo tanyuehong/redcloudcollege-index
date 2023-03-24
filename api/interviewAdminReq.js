@@ -55,6 +55,14 @@ export default {
     })
   },
 
+  submitEveryQuestion(dayQuestion) {
+    return request({
+      url: `/interview/admin/submitEveryQuestion`,
+      method: 'post',
+      data: dayQuestion,
+    })
+  },
+
   deleteClassify(cId) {
     return request({
       url: `/interview/admin/deleteClassify/${cId}`,

@@ -11,7 +11,7 @@
     <div class="golobal_content">
       <!-- 网校课程 开始 -->
       <section class="container">
-        <nuxt-link :to="'/interview/detail/' + everyDayQuestion.qid" class="every_qustion" title="每日一题">
+        <nuxt-link :to="'/interview/detail/' + everyDayQuestion.qid" class="every_qustion" title="每日一题" v-if="everyDayQuestion">
           <div class="left_title fl">
             <img src="~/assets/img/erery_qustion.png" alt="每日一题" />
           </div>

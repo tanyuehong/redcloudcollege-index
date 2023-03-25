@@ -7,7 +7,7 @@
             <div class="breadcrumb red_breadcrumb">
               <a class="section" href="/faquestion">开源实践面试</a>
               <span class="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-              <div class="askactive section">面试题提交</div>
+              <div class="askactive section">创建面试题</div>
             </div>
 
             <div class="visible-sm">
@@ -33,12 +33,12 @@
             </div>
             <form class="ui new-question form">
               <div class="field">
-                <label>选择岗位</label>
+                <label>面试岗位</label>
                 <input type="hidden" name="catalog" value="1" />
                 <div class="module-body">
                   <div class="mock-jobs-list">
                     <div href="/interview/ai/cover?jobTagId=639" class="mock-jobs-item"
-                      v-bind:class="{ active: selectType == item.id }" v-for="item in typeList" :key="item.id"
+                      v-bind:class="{ active: selectPosition == item.id }" v-for="item in positionList" :key="item.id"
                       @click="professionClick(item)">
                       <div class="mock-jobs-info active">
                         <p class="mock-jobs-name">{{ item.name }}</p>
@@ -53,6 +53,16 @@
                 <label>面试题目</label>
                 <div class="interview-input">
                   <el-input v-model="asktitle" placeholder="请在此输入面试题目" v-on:focus="inputfocuse"></el-input>
+                </div>
+              </div>
+              <div class="field">
+                <label>面试题分类</label>
+                <div class="interview-input">
+                  <el-select v-model="sId" clearable placeholder="请选择">
+                    <el-option v-for="classify in classifyList" :key="classify.id" :label="classify.name"
+                      :value="classify.id">
+                    </el-option>
+                  </el-select>
                 </div>
               </div>
               <div class="required field mb20">
@@ -78,7 +88,6 @@
                 </label>
                 <div id="askQustion_content">
                 </div>
-
               </div>
               <div class="publish_ask">
                 <div class="interview-tips">
@@ -101,6 +110,7 @@
 
 import userApi from '@/api/user'
 import interviewApi from '@/api/interviewReq.js'
+import interviewAdmin from "@/api/interviewAdminReq";
 import interviewServerApi from "@/api/interviewServerReq";
 const qiniu = require('qiniu-js')
 
@@ -119,9 +129,12 @@ export default {
       tagsVisible: false,
       selectTags: [],
       tagList: [],
+      classifyList:[],
       groupTagList: [],
       checked: false,
       tagLoading: true,
+
+      sId:"",   // 面试题分类
     }
   },
 
@@ -129,7 +142,7 @@ export default {
     return interviewServerApi.getInterviewPositionList(params.id).then((response) => {
       return {
         positionList: response.data.positionList,
-        selectType: response.data.positionList[0].id,
+        selectPosition: response.data.positionList[0].id,
       }
     })
   },
@@ -164,7 +177,12 @@ export default {
 
   methods: {
     professionClick (item) {
-      this.selectType = item.id;
+      this.selectPosition = item.id;
+      interviewAdmin
+        .getPositionClassifyList(this.selectPosition)
+        .then(response => {
+          this.classifyList = response.data.positionClassifyList;
+        });
       this.tagLoading = true;
     },
     groupTagClick (tag) {
@@ -187,7 +205,7 @@ export default {
         this.errtips = '';
       }
       if (this.tagLoading) {
-        interviewApi.getInterviewTagList(this.selectType).then((response) => {
+        interviewApi.getInterviewTagList(this.selectPosition).then((response) => {
           this.tagList = response.data.tagList;
           this.tagLoading = false;
         });
@@ -232,10 +250,7 @@ export default {
       }
       return (isJPG || isPng) && isLt2M;
     },
-
-    askTypeClick (type) {
-      this.askType = type;
-    },
+    
     publishAsk () {
       if (this.asktitle.length < 6) {
         this.errtips = '标题必须六个字符以上哈！'
@@ -257,7 +272,8 @@ export default {
             uid: userInfo.id,
             title: this.asktitle,
             content: this.askcontent,
-            qustype: this.typeList[this.askType].id,
+            position: this.selectPosition,
+            classify:this.sId,
             tagList: this.selectTags
           })
           .then((response) => {

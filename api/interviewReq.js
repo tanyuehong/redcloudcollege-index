@@ -1,9 +1,9 @@
 import request from '@/utils/request'
 
 export default {
-  getInterviewTagList(typeId) {
+  getInterviewTagList(pId) {
     return request({
-      url: `/home/interview/tagList/${typeId}`,
+      url: `/home/interview/tagList/${pId}`,
       method: 'get',
     })
   },

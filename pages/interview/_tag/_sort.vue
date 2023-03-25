@@ -225,7 +225,7 @@
               </el-form>
               <span slot="footer" class="dialog-footer">
                 <el-button @click="addEverQuestionBackClick" size="small">返 回</el-button>
-                <el-button type="primary" @click="addEverQuestionSubmit" size="small"> 添 加 </el-button>
+                <el-button type="primary" @click="addEverQuestionSubmit" size="small" :disabled="everyQuestion.pid.length==0"> 添 加 </el-button>
               </span>
             </el-dialog>
                 
@@ -276,7 +276,7 @@ export default {
   data() {
     return {
       isAdmin:false,
-      everyQuestion:{},
+      everyQuestion:{pid:""},
       qDate:'',
       everyQuestionTitle:'',
       showEveryQustionPage:false,  
@@ -373,6 +373,7 @@ export default {
       this.everyQuestion.date = this.qDate;
       interviewAdmin.submitEveryQuestion(this.everyQuestion).then(response => {
         this.showEveryQustionPage = false;
+        this.everyQuestion.pid    = "";
       });
     },
     addEverQuestionBackClick() {

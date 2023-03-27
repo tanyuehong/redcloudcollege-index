@@ -58,13 +58,14 @@
               </div>
               <div class="module-body">
                 <div class="mock-jobs-list">
-                  <nuxt-link :to="'/interview/position/' + item.id" class="mock-jobs-item" v-for="item in positionList" :key="item.id">
+                  <nuxt-link :to="'/interview/position/' + item.id" class="mock-jobs-item" v-for="item in positionList"
+                    :key="item.id">
                     <div class="mock-jobs-info">
-                      <p class="mock-jobs-name">{{  item.name  }}</p>
+                      <p class="mock-jobs-name">{{ item.name }}</p>
                       <!-- 0人已参加 -->
                       <p class="item-mock-tips">功能开发中</p>
                     </div>
-                    <img class="mock-jobs-img" :src="item.img" alt="图标"/>
+                    <img class="mock-jobs-img" :src="item.img" alt="图标" />
                   </nuxt-link>
                 </div>
               </div>
@@ -75,7 +76,7 @@
                   <ul class="tag-warper">
                     <li class="tag-item" v-for="item in tagList" :key="item.id">
                       <nuxt-link :to="tagPath(item)" class="tag-link" v-bind:class="{ active: tag == item.path }">{{
-                         item.name  }}
+                        item.name }}
                       </nuxt-link>
                     </li>
                   </ul>
@@ -83,7 +84,7 @@
               </div>
               <div class="interview_detail_con">
                 <div class="nodata-warper" v-if="list.length == 0">
-                  <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
+                  <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示" />
                   <div>
                     <span>暂时没有数据哦，赶紧抢沙发吧</span>
                   </div>
@@ -92,15 +93,15 @@
                   <ul class="nav-list">
                     <li class="blog-item right">
                       <nuxt-link :to="sortPath('recommand')" class="content-type-item"
-                        v-bind:class="{ active: sort == 'recommand'}">推荐</nuxt-link>
+                        v-bind:class="{ active: sort == 'recommand' }">推荐</nuxt-link>
                     </li>
                     <li class="blog-item right">
                       <nuxt-link :to="sortPath('latest')" class="content-type-item"
-                        v-bind:class="{ active: sort == 'latest' ||  tag == 'latest' }">最新</nuxt-link>
+                        v-bind:class="{ active: sort == 'latest' || tag == 'latest' }">最新</nuxt-link>
                     </li>
                     <li class="blog-item">
                       <nuxt-link :to="sortPath('hot')" class="content-type-item"
-                        v-bind:class="{ active: sort == 'hot'||  tag == 'hot' }">
+                        v-bind:class="{ active: sort == 'hot' || tag == 'hot' }">
                         热榜
                       </nuxt-link>
                     </li>
@@ -109,7 +110,7 @@
                 <div v-for="item in list" :key="item.qid" class="interview_list">
                   <div class="answer_title">
                     <nuxt-link :to="'/interview/detail/' + item.qid" class="header">
-                      {{  item.title  }}
+                      {{ item.title }}
                     </nuxt-link>
                   </div>
                   <div class="description" v-html="item.content"></div>
@@ -120,20 +121,20 @@
                     </div>
                     <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" target="_blank"
                       v-for="tag in item.tags" :key="tag.id">
-                      <img :src="tag.img" v-if="tag.img" alt="标签图标"/>{{  tag.name  }}
+                      <img :src="tag.img" v-if="tag.img" alt="标签图标" />{{ tag.name }}
                     </nuxt-link>
                   </div>
 
                   <div class="interview-descrip">
-                    <span class="descrip-item right">{{  item.type  }}</span>
-                    <span class="descrip-item right">{{  item.deep  }}</span>
-                    <span class="descrip-item">{{  item.gmtCreate  }}来自</span>
+                    <span class="descrip-item right">{{ item.type }}</span>
+                    <span class="descrip-item right">{{ item.deep }}</span>
+                    <span class="descrip-item">{{ item.gmtCreate }}来自</span>
                     <nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name" target="_blank">
-                      {{  item.nickname  }}
+                      {{ item.nickname }}
                     </nuxt-link>
                     <b v-if="item.price > 0">
                       悬赏
-                      <a href="javascript:;" title="个人悬赏">¥{{  item.price  }}</a>
+                      <a href="javascript:;" title="个人悬赏">¥{{ item.price }}</a>
                     </b>
                   </div>
                   <div class="interview-qustion-info">
@@ -146,7 +147,7 @@
                               <path
                                 d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 000 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z">
                               </path>
-                            </svg></span><span>{{  item.readcount  }}</span>
+                            </svg></span><span>{{ item.readcount }}</span>
                         </button>
                       </nuxt-link>
                     </div>
@@ -158,7 +159,7 @@
                             <path
                               d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3zM664.8 561.6l36.1 210.3L512 672.7 323.1 772l36.1-210.3-152.8-149L417.6 382 512 190.7 606.4 382l211.2 30.7-152.8 148.9z">
                             </path>
-                          </svg></span><span>{{  item.collect  }}</span>
+                          </svg></span><span>{{ item.collect }}</span>
                       </button>
                     </div>
                     <div class="interview-item">
@@ -170,25 +171,25 @@
                               <path
                                 d="M464 512a48 48 0 1096 0 48 48 0 10-96 0zm200 0a48 48 0 1096 0 48 48 0 10-96 0zm-400 0a48 48 0 1096 0 48 48 0 10-96 0zm661.2-173.6c-22.6-53.7-55-101.9-96.3-143.3a444.35 444.35 0 00-143.3-96.3C630.6 75.7 572.2 64 512 64h-2c-60.6.3-119.3 12.3-174.5 35.9a445.35 445.35 0 00-142 96.5c-40.9 41.3-73 89.3-95.2 142.8-23 55.4-34.6 114.3-34.3 174.9A449.4 449.4 0 00112 714v152a46 46 0 0046 46h152.1A449.4 449.4 0 00510 960h2.1c59.9 0 118-11.6 172.7-34.3a444.48 444.48 0 00142.8-95.2c41.3-40.9 73.8-88.7 96.5-142 23.6-55.2 35.6-113.9 35.9-174.5.3-60.9-11.5-120-34.8-175.6zm-151.1 438C704 845.8 611 884 512 884h-1.7c-60.3-.3-120.2-15.3-173.1-43.5l-8.4-4.5H188V695.2l-4.5-8.4C155.3 633.9 140.3 574 140 513.7c-.4-99.7 37.7-193.3 107.6-263.8 69.8-70.5 163.1-109.5 262.8-109.9h1.7c50 0 98.5 9.7 144.2 28.9 44.6 18.7 84.6 45.6 119 80 34.3 34.3 61.3 74.4 80 119 19.4 46.2 29.1 95.2 28.9 145.8-.6 99.6-39.7 192.9-110.1 262.7z">
                               </path>
-                            </svg></span><span>{{  item.reply  }}</span>
+                            </svg></span><span>{{ item.reply }}</span>
                         </button>
                       </nuxt-link>
                     </div>
                     <div class="interview-item">
                       <button type="button" class="interview-btn-sm">
-                        <span role="img" aria-label="history" class="anticon anticon-history"><svg
-                            viewBox="64 64 896 896" focusable="false" data-icon="history" width="1em" height="1em"
-                            fill="currentColor" aria-hidden="true">
+                        <span role="img" aria-label="history" class="anticon anticon-history"><svg viewBox="64 64 896 896"
+                            focusable="false" data-icon="history" width="1em" height="1em" fill="currentColor"
+                            aria-hidden="true">
                             <path
                               d="M536.1 273H488c-4.4 0-8 3.6-8 8v275.3c0 2.6 1.2 5 3.3 6.5l165.3 120.7c3.6 2.6 8.6 1.9 11.2-1.7l28.6-39c2.7-3.7 1.9-8.7-1.7-11.2L544.1 528.5V281c0-4.4-3.6-8-8-8zm219.8 75.2l156.8 38.3c5 1.2 9.9-2.6 9.9-7.7l.8-161.5c0-6.7-7.7-10.5-12.9-6.3L752.9 334.1a8 8 0 003 14.1zm167.7 301.1l-56.7-19.5a8 8 0 00-10.1 4.8c-1.9 5.1-3.9 10.1-6 15.1-17.8 42.1-43.3 80-75.9 112.5a353 353 0 01-112.5 75.9 352.18 352.18 0 01-137.7 27.8c-47.8 0-94.1-9.3-137.7-27.8a353 353 0 01-112.5-75.9c-32.5-32.5-58-70.4-75.9-112.5A353.44 353.44 0 01171 512c0-47.8 9.3-94.2 27.8-137.8 17.8-42.1 43.3-80 75.9-112.5a353 353 0 01112.5-75.9C430.6 167.3 477 158 524.8 158s94.1 9.3 137.7 27.8A353 353 0 01775 261.7c10.2 10.3 19.8 21 28.6 32.3l59.8-46.8C784.7 146.6 662.2 81.9 524.6 82 285 82.1 92.6 276.7 95 516.4 97.4 751.9 288.9 942 524.8 942c185.5 0 343.5-117.6 403.7-282.3 1.5-4.2-.7-8.9-4.9-10.4z">
                             </path>
-                          </svg></span><span>{{  item.meet  }}</span>
+                          </svg></span><span>{{ item.meet }}</span>
                       </button>
                     </div>
                   </div>
                   <nuxt-link :to="'/interview/detail/' + item.qid" class="answer_num" title="问题回答数量">
-                    <img src="https://img.redskt.com/interview/questionlist/interview-tags.png" alt="图标"/>
-                    <span>{{  item.reply  }}</span>
+                    <img src="https://img.redskt.com/interview/questionlist/interview-tags.png" alt="图标" />
+                    <span>{{ item.reply }}</span>
                     <span class="anser-lable">解答</span>
                   </nuxt-link>
                   <span class="descrip-more">
@@ -196,39 +197,42 @@
                       <el-button type="primary" size="mini" plain>更多操作<i class="el-icon-arrow-down el-icon--right"></i>
                       </el-button>
                       <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item :command="beforeHandleCommand(item,'a')">收藏</el-dropdown-item>
-                        <el-dropdown-item :command="beforeHandleCommand(item,'b')">添加题库</el-dropdown-item>
-                        <el-dropdown-item :command="beforeHandleCommand(item,'c')">设为必掌握</el-dropdown-item>
-                        <el-dropdown-item :command="beforeHandleCommand(item,'d')" v-if="isAdmin">设为每日一题</el-dropdown-item>
+                        <el-dropdown-item :command="beforeHandleCommand(item, 'a')">收藏</el-dropdown-item>
+                        <el-dropdown-item :command="beforeHandleCommand(item, 'b')">添加题库</el-dropdown-item>
+                        <el-dropdown-item :command="beforeHandleCommand(item, 'c')">设为必掌握</el-dropdown-item>
+                        <el-dropdown-item :command="beforeHandleCommand(item, 'd')"
+                          v-if="isAdmin">设为每日一题</el-dropdown-item>
                       </el-dropdown-menu>
                     </el-dropdown>
                   </span>
                 </div>
 
                 <el-dialog title="设置每日一题" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
-              :show-close="false" :visible.sync="showEveryQustionPage" center>
-              <el-form ref="form" label-width="80px">
-                <el-form-item label="题目: ">
-                  <span>{{ everyQuestionTitle }}</span>
-                </el-form-item>
-                <el-form-item label="职位名称: ">
-                  <el-select v-model="everyQuestion.pid" placeholder="请选择">
-                    <el-option v-for="position in positionList" :key="position.id" :label="position.name"
-                      :value="position.id">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
+                  :show-close="false" :visible.sync="showEveryQustionPage" center>
+                  <el-form ref="form" label-width="80px">
+                    <el-form-item label="题目: ">
+                      <span>{{ everyQuestionTitle }}</span>
+                    </el-form-item>
+                    <el-form-item label="职位名称: ">
+                      <el-select v-model="everyQuestion.pid" placeholder="请选择">
+                        <el-option v-for="position in positionList" :key="position.id" :label="position.name"
+                          :value="position.id">
+                        </el-option>
+                      </el-select>
+                    </el-form-item>
 
-                <el-form-item label="日期: ">
-                 <el-date-picker v-model="qDate" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
-                </el-form-item>
-              </el-form>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="addEverQuestionBackClick" size="small">返 回</el-button>
-                <el-button type="primary" @click="addEverQuestionSubmit" size="small" :disabled="everyQuestion.pid.length==0"> 添 加 </el-button>
-              </span>
-            </el-dialog>
-                
+                    <el-form-item label="日期: ">
+                      <el-date-picker v-model="qDate" type="date" value-format="yyyy-MM-dd"
+                        placeholder="选择日期"></el-date-picker>
+                    </el-form-item>
+                  </el-form>
+                  <span slot="footer" class="dialog-footer">
+                    <el-button @click="addEverQuestionBackClick" size="small">返 回</el-button>
+                    <el-button type="primary" @click="addEverQuestionSubmit" size="small"
+                      :disabled="everyQuestion.pid.length == 0"> 添 加 </el-button>
+                  </span>
+                </el-dialog>
+
               </div>
               <div class="clearnfloat"></div>
             </div>
@@ -275,11 +279,11 @@ import interviewServerApi from "@/api/interviewServerReq";
 export default {
   data() {
     return {
-      isAdmin:false,
-      everyQuestion:{pid:""},
-      qDate:'',
-      everyQuestionTitle:'',
-      showEveryQustionPage:false,  
+      isAdmin: false,
+      everyQuestion: { pid: "" },
+      qDate: '',
+      everyQuestionTitle: '',
+      showEveryQustionPage: false,
       activeIndex: "1",
       tagList: [],
       positionList: [],
@@ -320,34 +324,34 @@ export default {
     return interviewServerApi
       .getInterviewIndex({
         type: params.type ? params.type : "",
-        sort: (params.tag =="latest" || params.tag =="hot") ?  params.tag : ( params.sort ? params.sort : "recommand"),
+        sort: (params.tag == "latest" || params.tag == "hot") ? params.tag : (params.sort ? params.sort : "recommand"),
         tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
-            ? params.tag: "",
+          ? params.tag : "",
       })
       .then((response) => {
         return {
           list: response.data.list ? response.data.list : [],
           positionList: response.data.positionList,
           tagList: response.data.tagList,
-          sort: (params.tag =="latest" || params.tag =="hot") ?  params.tag : ( params.sort ? params.sort : "recommand") ,
+          sort: (params.tag == "latest" || params.tag == "hot") ? params.tag : (params.sort ? params.sort : "recommand"),
 
           tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
-            ? params.tag: "all"
+            ? params.tag : "all"
         };
       });
   },
 
   mounted() {
     userApi.getUserAdminState().then((response) => {
-        this.isAdmin = response.data.isAdmin
-      })
+      this.isAdmin = response.data.isAdmin
+    })
   },
 
   computed: {
     sortPath() {
       return function (sortString) {
         if (this.tag == 'all') {
-          if(sortString == 'recommand') {
+          if (sortString == 'recommand') {
             return "/interview";
           }
           return "/interview/" + sortString;
@@ -366,14 +370,14 @@ export default {
   },
 
   methods: {
-    beforeHandleCommand(qItem,cItem) {
-      return {'qItem':qItem,'cItem':cItem};
+    beforeHandleCommand(qItem, cItem) {
+      return { 'qItem': qItem, 'cItem': cItem };
     },
     addEverQuestionSubmit() {
       this.everyQuestion.date = this.qDate;
       interviewAdmin.submitEveryQuestion(this.everyQuestion).then(response => {
         this.showEveryQustionPage = false;
-        this.everyQuestion.pid    = "";
+        this.everyQuestion.pid = "";
       });
     },
     addEverQuestionBackClick() {
@@ -381,18 +385,21 @@ export default {
 
     },
     handleQuestionEdit(command) {
-      if(command.cItem == 'd') {
+      if (command.cItem == 'd') {
         this.everyQuestionTitle = command.qItem.title;
-        this.everyQuestion.qid  = command.qItem.qid;
+        this.everyQuestion.qid = command.qItem.qid;
         window.console.log(this.everyQuestion);
         this.showEveryQustionPage = true;
         var date = new Date();
-        this.qDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate());
-        window.console.log("========"+this.everyQuestion.date);
+        // 获取年、月、日
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1; // 注意要加1，因为getMonth()返回值从0开始
+        var day = date.getDate();
+        this.qDate = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
       }
     },
-    sortParmString(tag,sort) {
-      if(tag == "recommand" ||tag == "latest" || tag == "hot" ) {
+    sortParmString(tag, sort) {
+      if (tag == "recommand" || tag == "latest" || tag == "hot") {
         return tag;
       }
       return sort;
@@ -432,10 +439,10 @@ export default {
 </script>
 
 <style scoped>
-
 .answer_title {
   margin-right: 60px;
 }
+
 .descrip-more {
   position: absolute;
   bottom: 10px;
@@ -443,9 +450,9 @@ export default {
 }
 
 .interview_list .description {
-   margin-top: 15px;
-   font-size: 12px;
-   color: #333;
+  margin-top: 15px;
+  font-size: 12px;
+  color: #333;
 }
 
 .interview-qustion-info .interview-item {
@@ -810,5 +817,4 @@ export default {
   margin-top: -4px;
   height: 86px;
   box-shadow: 0 6px 20px 0 rgb(0 0 0 / 16%);
-}
-</style>
+}</style>

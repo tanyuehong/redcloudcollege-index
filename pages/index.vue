@@ -324,15 +324,6 @@ export default {
   background-image: url(https://static.redskt.com/banner/redskt_banner_1.png);
 }
 
-.every_qustion {
-  margin-bottom: 20px;
-  height: 80px;
-  background: white;
-  border-radius: 20px;
-  display: block;
-  text-decoration: none;
-}
-
 .home_function {
   margin-bottom: 10px;
   height: 155px;
@@ -359,15 +350,34 @@ export default {
   padding-top: 5px;
 }
 
+.every_qustion {
+  margin-bottom: 20px;
+  height: 80px;
+  background: white;
+  border-radius: 20px;
+  display: block;
+  text-decoration: none;
+  align-items: center;
+  display: flex;
+}
+
 .every_qustion .left_title img {
   margin-left: 10px;
 }
 
 .every_qustion .right_content {
-  line-height: 80px;
+  line-height: 30px;
   font-size: 20px;
   font-weight: 600;
-  margin-left: 20px;
+  margin-left: 10px;
+  width: 820px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  max-height: 60px;
 }
 
 .comm-course-list ul {

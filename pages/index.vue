@@ -123,9 +123,7 @@
                       <div class="clearfloat"></div>
 
                       <nuxt-link title="老师详情" :to="'/teacher/' + item.auid" class="author-box">
-                        <div class="author-img"
-                          style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
-                        </div>
+                        <img :src="item.avatar" class="author-img">
                         <span class="author-name">{{ item.author }}</span>
                         <span>/</span>
                         <span class="author-title">{{ item.authorPositon }}</span>
@@ -195,9 +193,7 @@
                       </div>
                       <div class="clearfix"> </div>
                       <nuxt-link title="老师详情" :to="'/teacher/' + item.auid" class="author-box">
-                        <div class="author-img"
-                          style="background-image:url('//img1.sycdn.imooc.com/5458620000018a2602200220-100-100.jpg');">
-                        </div>
+                        <img :src="item.avatar" class="author-img">
                         <span class="author-name">{{ item.author }}</span>
                         <span>/</span>
                         <span class="author-title">{{ item.authorPositon }}</span>
@@ -315,6 +311,8 @@ export default {
 </script>
 
 <style>
+
+
 .el-carousel__item a {
   display: block;
   width: 100%;

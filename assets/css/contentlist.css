@@ -221,8 +221,9 @@
 
 .book_item li .text_con .author-box {
   display: inline-block;
-  font-size: 0;
+  text-decoration: none;
 }
+
 .book_item li .text_con .author-box .author-img {
   width: 36px;
   height: 36px;

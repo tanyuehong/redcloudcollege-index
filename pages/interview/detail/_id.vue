@@ -901,6 +901,9 @@ export default {
         var addOtherArr = new Array();
         for (var i = 0; i < this.companyArr.length; i++) {
           var item = this.companyArr[i];
+          if(item.title == undefined) {  // 兼容面试职位字段
+            item.title = item.name;
+          }
           if (item.title.indexOf(query) != -1) {
             optionsArr.push(item);
           } else {
@@ -989,6 +992,7 @@ export default {
     },
 
     submitBtnClick() {
+      window.console.log("ddddddd");
       var isAdd = true;
       var cItem = {};
       for (var i = 0; i < this.companyArr.length; i++) {
@@ -1026,6 +1030,16 @@ export default {
           this.infoStep = 4;
         }
       } else {
+        this.submitBtnDisable = true;
+        interviewApi
+          .addQuestionCompanyMeet(this.qdetail.qid, item.key)
+          .then((response) => { });
+        this.companyName = "";
+        this.meetingTitle = "请问您应聘的岗位类型？";
+        this.inputPlaceholder = "请输入职位名称";
+        this.submitTitle = "选择职位";
+        this.infoStep = 3;
+        this.requstCompanyList("", 3);
       }
     },
 
@@ -1051,11 +1065,12 @@ export default {
       for (var i = 0; i < this.companyArr.length; i++) {
         if (i < 5) {
           var item = this.companyArr[i];
-          qustionInfos.push({ name: item.title, key: item.id });
+          qustionInfos.push({ name: item.name, key: item.id });
         } else {
           break;
         }
       }
+      window.console.log(qustionInfos);
       this.qustionInfos = qustionInfos;
     },
 

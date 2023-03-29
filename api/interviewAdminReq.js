@@ -18,7 +18,7 @@ export default {
 
   getPositionList() {
     return request({
-      url: `/interview/admin/positionList`,
+      url: `/home/interview/positionList`,
       method: 'get',
     })
   },

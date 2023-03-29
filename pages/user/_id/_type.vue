@@ -491,6 +491,7 @@ export default {
 		}
 	},
 	mounted () {
+		window.console.log(this.parmType);
 		var token = localStorage.getItem("redclass_token");
 		var userStr = localStorage.getItem("redclass_user");
 		if (

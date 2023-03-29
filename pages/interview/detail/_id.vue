@@ -992,26 +992,21 @@ export default {
     },
 
     submitBtnClick() {
-      window.console.log("ddddddd");
       var isAdd = true;
-      var cItem = {};
       for (var i = 0; i < this.companyArr.length; i++) {
         var item = this.companyArr[i];
         if (item.id === this.companyName) {
           isAdd = false;
-          cItem = item;
           break;
         }
       }
       if (isAdd) {
         if (this.infoStep == 2) {
           this.submitBtnDisable = true;
-          interviewApi
-            .addAndSubmitCompany({
+          interviewApi.addAndSubmitCompany({
               title: this.companyName,
               qId: this.qdetail.qid,
-            })
-            .then((response) => { });
+            }).then((response) => { });
           this.companyName = "";
           this.meetingTitle = "请问您应聘的岗位类型？";
           this.inputPlaceholder = "请输入职位名称";
@@ -1030,7 +1025,8 @@ export default {
           this.infoStep = 4;
         }
       } else {
-        this.submitBtnDisable = true;
+        if(this.infoStep == 2) {
+          this.submitBtnDisable = true;
         interviewApi
           .addQuestionCompanyMeet(this.qdetail.qid, item.key)
           .then((response) => { });
@@ -1040,6 +1036,14 @@ export default {
         this.submitTitle = "选择职位";
         this.infoStep = 3;
         this.requstCompanyList("", 3);
+        }  else if(this.infoStep == 3) {
+          interviewApi
+          .addQuestionCompanyMeet(this.qdetail.qid, item.key)
+          .then((response) => { });
+
+
+        }
+        
       }
     },
 

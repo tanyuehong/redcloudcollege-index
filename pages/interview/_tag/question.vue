@@ -280,11 +280,8 @@ export default {
             this.$message({
               type: 'success',
               message: '问题提交成功！',
-            })
-            this.$router.push({
-              path: 'interview',
-              query: {},
-            })
+            });
+            this.$router.push({name: "interview",query: {}});
           })
       } else {
         this.$router.push({

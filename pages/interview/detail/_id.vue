@@ -39,8 +39,8 @@
                 <div class="interview_center_button">
                   <button v-bind:class="{ checkstyle: showAnswerDetail }" @click="checkAnswerClick">
                     查看解题思路
-                    <svg v-if="showAnswerDetail" focusable="false" viewBox="0 0 1024 1024" fill="currentColor"
-                      width="16" height="16" aria-hidden="true">
+                    <svg v-if="showAnswerDetail" focusable="false" viewBox="0 0 1024 1024" fill="currentColor" width="16"
+                      height="16" aria-hidden="true">
                       <path fill="currentColor" fill-rule="nonzero"
                         d="M195.9553 726.4976c-17.5625 19.8576-47.8974 21.718-67.755 4.1556-19.659-17.3868-21.679-47.292-4.6766-67.156l.521-.5989L452.0745 292.001c29.2708-33.096 79.829-36.1969 112.925-6.9261a80 80 0 0 1 6.1988 6.115l.7272.811 328.0298 370.8974c17.5624 19.8576 15.7019 50.1925-4.1557 67.755-19.659 17.3868-49.5868 15.7371-67.2242-3.5654l-.5307-.5903L512.001 369.1529 195.9553 726.4976z">
                       </path>
@@ -53,7 +53,7 @@
                     <span class="vote_span disLike" @click="goodQustionClick"
                       v-bind:class="{ like: userState.goodslect }">
                       <i class="icon icon_vote_up"></i>好问题<em class="qustion-good-num" v-if="qdetail.good > 0">{{
-                          qdetail.good
+                        qdetail.good
                       }}</em>
                       <!---->
                     </span>
@@ -93,10 +93,9 @@
                       </div>
                     </el-dialog>
                   </li>
-                  <li class="ask-info-item" @click="collectBtnClick()"
-                    v-bind:class="{ collected: userState.isCollect }">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
-                      fill="currentColor" class="faversvg-item">
+                  <li class="ask-info-item" @click="collectBtnClick()" v-bind:class="{ collected: userState.isCollect }">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"
+                      class="faversvg-item">
                       <path fill-rule="evenodd"
                         d="M15.392 8.23l5.695.832a.942.942 0 01.521 1.607l-4.12 4.013.972 5.67a.942.942 0 01-1.367.993L12 18.667l-5.093 2.678a.942.942 0 01-1.367-.993l.972-5.67-4.12-4.013a.942.942 0 01.52-1.607l5.696-.833 2.547-5.16a.942.942 0 011.69 0l2.547 5.16zm-1.329 1.826L12 5.876l-2.063 4.18-4.615.675 3.34 3.252-.789 4.594L12 16.407l4.127 2.17-.788-4.594 3.34-3.252-4.616-.675z"
                         clip-rule="evenodd"></path>
@@ -370,17 +369,17 @@
                           <span class="ml5"> {{ comment.name }}</span>
                           <span class="comment-replyment" v-if="comment.toname">回复</span>
                           <span v-if="comment.toname">{{
-                              comment.toname
+                            comment.toname
                           }}</span>
                           <span class="qustion-top-item">{{
-                              comment.gmtCreate
+                            comment.gmtCreate
                           }}</span>
                         </div>
                         <div class="answer-item-content" v-html="comment.content"></div>
                         <div class="comment-tool-bar fbselect">
                           <span class="mr15" v-bind:class="{ goodcomment: comment.goodreply }"
                             @click="goodCommentClick(comment)"><i class="icon icon_vote_up"></i>{{
-                                commentGood(comment.good)
+                              commentGood(comment.good)
                             }}</span>
                           <span class="mr15" @click="commentbtnclinck(comment, cindex)">回复</span>
                           <span class="mr15" @click="jubaoBtnClick(comment.id, '面试题题解')">
@@ -436,8 +435,7 @@
                 </div>
                 <div class="commet-editor-content">
                   <div id="comment-editor"></div>
-                  <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:leave="cleave"
-                    v-bind:css="false">
+                  <transition v-on:before-enter="cbeforeEnter" v-on:enter="center" v-on:leave="cleave" v-bind:css="false">
                     <div class="interview-submit-tool" v-if="showComment">
                       <el-button type="primary" round size="small" @click="commentBtnSubmit">发表评论</el-button>
                       <el-button round size="small" @click="cancleCommentClick">取消</el-button>
@@ -478,7 +476,7 @@
                         <div class="tool-item">
                           <span v-bind:class="{ like: item.goodreply }" @click="goodCommentClick(item)">
                             <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{
-                                commentGood(item.good)
+                              commentGood(item.good)
                             }}</em></span>
                         </div>
                         <div class="tool-item fbselect" @click="replybtnclinck(item, index)">
@@ -534,10 +532,10 @@
                             <span class="ml5"> {{ comment.name }}</span>
                             <span class="comment-replyment" v-if="comment.toname">回复</span>
                             <span v-if="comment.toname">{{
-                                comment.toname
+                              comment.toname
                             }}</span>
                             <span class="qustion-top-item">{{
-                                comment.gmtCreate
+                              comment.gmtCreate
                             }}</span>
                           </div>
                           <div class="answer-item-content" v-html="comment.content"></div>
@@ -546,7 +544,7 @@
                               <span class="comment-reply" v-bind:class="{ like: comment.goodreply }"
                                 @click="goodCommentReplyClick(comment)">
                                 <i class="icon icon_vote_up"></i><em class="qustion-good-num">{{
-                                    commentGood(comment.good)
+                                  commentGood(comment.good)
                                 }}</em></span>
                             </div>
                             <div class="tool-item fbselect" @click="rreplyCommentBtnClick(comment, cindex)">
@@ -786,8 +784,8 @@ export default {
         return {
           qdetail: response.data.qdetail,
           dataList: response.data.dataList,
-          hotList:response.data.hotList,
-          currentPosition:response.data.currentPosition,
+          hotList: response.data.hotList,
+          currentPosition: response.data.currentPosition,
           positionList: response.data.positionList,
           subType: type,
           descrb:
@@ -868,7 +866,6 @@ export default {
 
   methods: {
     requstCompanyList(text, next) {
-      window.console.log(this.infoStep);
       if (this.infoStep == 2) {
         interviewApi.getComPanyList().then((response) => {
           this.companyArr = response.data.companyList;
@@ -901,7 +898,7 @@ export default {
         var addOtherArr = new Array();
         for (var i = 0; i < this.companyArr.length; i++) {
           var item = this.companyArr[i];
-          if(item.title == undefined) {  // 兼容面试职位字段
+          if (item.title == undefined) {  // 兼容面试职位字段
             item.title = item.name;
           }
           if (item.title.indexOf(query) != -1) {
@@ -956,7 +953,6 @@ export default {
     },
 
     meetingTypeClick(item) {
-      console.log(item);
       if (this.infoStep == 1) {
         this.submitBtnDisable = true;
         interviewApi
@@ -993,57 +989,48 @@ export default {
 
     submitBtnClick() {
       var isAdd = true;
-      for (var i = 0; i < this.companyArr.length; i++) {
+      for (var i = 0; i < this.companyArr.length; i++) {  // 判定是否是新增 逻辑
         var item = this.companyArr[i];
         if (item.id === this.companyName) {
           isAdd = false;
           break;
         }
       }
-      if (isAdd) {
-        if (this.infoStep == 2) {
-          this.submitBtnDisable = true;
+      if (this.infoStep == 2) { 
+        this.submitBtnDisable = true;
+        if(isAdd) {
           interviewApi.addAndSubmitCompany({
-              title: this.companyName,
-              qId: this.qdetail.qid,
-            }).then((response) => { });
+            title: this.companyName,
+            qId: this.qdetail.qid,
+          }).then((response) => { });
+        } else {
+          interviewApi
+            .addQuestionCompanyMeet(this.qdetail.qid, item.key)
+            .then((response) => { });
+        }
+          
           this.companyName = "";
           this.meetingTitle = "请问您应聘的岗位类型？";
           this.inputPlaceholder = "请输入职位名称";
           this.submitTitle = "选择职位";
           this.infoStep = 3;
           this.requstCompanyList("", 2);
-        } else if (this.infoStep == 3) {
-          this.submitBtnDisable = true;
+      } else if(this.infoStep == 3) {
+        this.submitBtnDisable = true;
+        if(isAdd) {
           interviewApi
             .addAndSubmitPosition({
               title: this.companyName,
               qId: this.qdetail.qid,
             })
             .then((response) => { });
-          this.companyName = "";
-          this.infoStep = 4;
-        }
-      } else {
-        if(this.infoStep == 2) {
-          this.submitBtnDisable = true;
-        interviewApi
-          .addQuestionCompanyMeet(this.qdetail.qid, item.key)
-          .then((response) => { });
-        this.companyName = "";
-        this.meetingTitle = "请问您应聘的岗位类型？";
-        this.inputPlaceholder = "请输入职位名称";
-        this.submitTitle = "选择职位";
-        this.infoStep = 3;
-        this.requstCompanyList("", 3);
-        }  else if(this.infoStep == 3) {
+        } else {
           interviewApi
-          .addQuestionCompanyMeet(this.qdetail.qid, item.key)
+          .addQuestionPosition(this.qdetail.qid, item.id)
           .then((response) => { });
-
-
         }
-        
+        this.companyName = "";
+        this.infoStep = 4;
       }
     },
 

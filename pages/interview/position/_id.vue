@@ -163,7 +163,7 @@
           </div>
           </client-only>
 
-          <div class="every-question">
+          <div class="every-question" v-if="everyDayQuestion">
             <nuxt-link :to="'/interview/detail/' + everyDayQuestion.qid" class="question-warper" title="每日一题">
               <img src="//static.nowcoder.com/acm/images-acm/img/home/mod4.png" alt="">
               <div class="question-detail">

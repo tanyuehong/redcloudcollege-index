@@ -1,10 +1,9 @@
 import request from '@/utils/request'
 
 export default {
-
   getUserAdminState() {
     return request({
-      url: `/ucenter/getUserAdminState`,
+      url: `/ucenter/commonRq/getUserAdminState`,
       method: 'post'
     })
   },

@@ -629,7 +629,7 @@
             </div>
 
             <div class="info-item">
-              遇到人数: <span>{{ qdetail.meet }}</span>
+              遇到人数: <span>{{ qdetail.allMeet }}</span>
             </div>
           </div>
         </div>
@@ -674,7 +674,7 @@
                     <div class="entry-meta">&nbsp;·&nbsp;</div>
                     <div class="entry-meta">{{ item.readCount }} 阅读</div>
                     <div class="entry-meta">&nbsp;·&nbsp;</div>
-                    <div class="entry-meta">{{ item.meet }} 遇到</div>
+                    <div class="entry-meta">{{ item.allMeet }} 遇到</div>
                   </div>
                 </nuxt-link>
               </div>
@@ -821,10 +821,6 @@ export default {
       this.initCommentEditor();
       setTimeout(function () { }, 10);
     }
-
-    interviewServerApi
-      .getQuestionDetail({ qId: this.qdetail.qid, type: 1, token: '' })
-      .then((response) => { });
   },
 
   computed: {

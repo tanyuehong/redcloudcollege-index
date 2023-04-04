@@ -48,7 +48,7 @@ service.interceptors.response.use(
       }
       Message.closeAll()
       if (res.code == 999 || res.code == 998) {
-        if (window) {
+        if (window != undefined) {
           window.localStorage.setItem('redclass_token', '')
           window.localStorage.setItem('redclass_user', '')
           window.$nuxt.$cookies.set('token', '')

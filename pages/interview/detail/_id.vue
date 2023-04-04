@@ -615,7 +615,7 @@
           </div>
           <div class="question-info-list">
             <div class="info-item">
-              浏览: <span>{{ qdetail.readcount }}</span>
+              浏览: <span>{{ qdetail.readCount }}</span>
             </div>
             <div class="info-item">
               发布时间: <span>{{ qdetail.gmtCreate }}</span>
@@ -672,7 +672,7 @@
                     <div class="entry-meta">&nbsp;·&nbsp;</div>
                     <div class="entry-meta">{{ item.reply }} 作答</div>
                     <div class="entry-meta">&nbsp;·&nbsp;</div>
-                    <div class="entry-meta">{{ item.readcount }} 阅读</div>
+                    <div class="entry-meta">{{ item.readCount }} 阅读</div>
                     <div class="entry-meta">&nbsp;·&nbsp;</div>
                     <div class="entry-meta">{{ item.meet }} 遇到</div>
                   </div>

@@ -6,7 +6,7 @@
 					<div class="user-info">
 						<div class="user-pic">
 							<div class="user-pic-bg">
-								<img class="user-header-img" :src="userInfo.avatar" alt="用户头像"/>
+								<img class="user-header-img" :src="userInfo.avatar" alt="用户头像" />
 							</div>
 						</div>
 					</div>
@@ -21,9 +21,10 @@
 							</div>
 						</div>
 						<div class="user-info-setting">
-							<el-button type="primary" plain icon="el-icon-plus" @click="focusUserClick" v-if="isSetting == false">{{
+							<el-button type="primary" plain icon="el-icon-plus" @click="focusUserClick"
+								v-if="isSetting == false">{{
 									focusString
-							}}</el-button>
+								}}</el-button>
 							<el-button @click="personSetting" v-if="isSetting == true" round>个人设置</el-button>
 						</div>
 
@@ -60,7 +61,8 @@
 					<div class="list-body">
 						<div class="user_article_content book_item" v-if="parmType == 'blog' || parmType == ''">
 							<div class="nodata-warper" v-if="dataList.length == 0">
-								<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
+								<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png"
+									alt="空数据提示" />
 								<div>
 									<span>该用户暂时还没有发表文章哦</span>
 								</div>
@@ -84,13 +86,14 @@
 									<div class="op_message_content" v-else>
 										<div class="push-lf">
 											<nuxt-link :to="'/about/detail/' + bitem.id">
-												<img :src="bitem.cover" alt="封面图片"/>
+												<img :src="bitem.cover" alt="封面图片" />
 											</nuxt-link>
 										</div>
 
 										<div class="push-rt">
 											<p class="message-title">
-												<nuxt-link :to="'/about/detail/' + bitem.id" target="_blank">{{ bitem.title }}</nuxt-link>
+												<nuxt-link :to="'/about/detail/' + bitem.id" target="_blank">{{ bitem.title
+												}}</nuxt-link>
 											</p>
 											<div class="message-info">
 												<div class="info-item">
@@ -121,7 +124,8 @@
 							</div>
 							<div class="collect-content-list book_item" v-if="parmType.substring(8, 12) == 'blog'">
 								<div class="nodata-warper" v-if="dataList.length == 0">
-									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
+									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png"
+										alt="空数据提示" />
 									<div>
 										<span>该用户暂时还没有收藏文章哦</span>
 									</div>
@@ -145,13 +149,14 @@
 										<div class="op_message_content" v-else>
 											<div class="push-lf">
 												<nuxt-link :to="'/about/detail/' + bitem.id">
-													<img :src="bitem.cover" alt="封面图片"/>
+													<img :src="bitem.cover" alt="封面图片" />
 												</nuxt-link>
 											</div>
 
 											<div class="push-rt">
 												<p class="message-title">
-													<nuxt-link :to="'/about/detail/' + bitem.id" target="_blank">{{ bitem.title }}</nuxt-link>
+													<nuxt-link :to="'/about/detail/' + bitem.id" target="_blank">{{
+														bitem.title }}</nuxt-link>
 												</p>
 												<div class="message-info">
 													<div class="info-item">
@@ -169,7 +174,8 @@
 
 							<div class="collect-content-list ask-item" v-if="parmType.substring(8, 11) == 'ask'">
 								<div class="nodata-warper" v-if="dataList.length == 0">
-									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
+									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png"
+										alt="空数据提示" />
 									<div>
 										<span>该用户暂时还没有收藏问题哦</span>
 									</div>
@@ -188,15 +194,19 @@
 											<p class="line-clamp" v-html="item.content"></p>
 										</div>
 										<div class="extra question-tags mt10" v-if="item.tags">
-                <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
-                  target="_blank" v-for="tag in item.tags" :key="tag.id">
-                  <img :src="tag.img" v-if="tag.img" alt="标签图片"/>{{ tag.name }}</a>
-              </div>
-								
+											<nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag"
+												target="_blank" v-for="tag in item.tags" :key="tag.id">
+												<img :src="tag.img" v-if="tag.img" alt="标签图标" />{{ tag.name }}
+											</nuxt-link>
+
+
+										</div>
+
 
 										<div class="q_time">
 											<span>{{ item.gmtCreate }}来自</span>
-											<nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name" target="_blank">
+											<nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name"
+												target="_blank">
 												{{ item.nickname }}
 											</nuxt-link>
 											<b>
@@ -236,10 +246,11 @@
 											<meta itemprop="name" :content="item.nickname">
 											<!---->
 											<!---->
-											<div blank="true" class="link"><img :src="item.avatar" :alt="item.nickname + '的头像'"
-													class="lazy avatar avatar" loading="lazy">
+											<div blank="true" class="link"><img :src="item.avatar"
+													:alt="item.nickname + '的头像'" class="lazy avatar avatar" loading="lazy">
 												<div class="info-box">
-													<nuxt-link :to="'/user/' + item.id + '/blog'" target="_blank" class="username">
+													<nuxt-link :to="'/user/' + item.id + '/blog'" target="_blank"
+														class="username">
 														<span class="name" style="max-width: 128px;">
 															{{ item.nickname }}
 														</span> <span blank="true" class="rank">
@@ -275,7 +286,8 @@
 							</div>
 							<div class="good-content-list book_item" v-if="parmType.substring(5, 9) == 'blog'">
 								<div class="nodata-warper" v-if="dataList.length == 0">
-									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
+									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png"
+										alt="空数据提示" />
 									<div>
 										<span>该用户暂时还没有点赞文章哦</span>
 									</div>
@@ -299,13 +311,14 @@
 										<div class="op_message_content" v-else>
 											<div class="push-lf">
 												<nuxt-link :to="'/about/detail/' + bitem.id">
-													<img :src="bitem.cover" alt="封面图片"/>
+													<img :src="bitem.cover" alt="封面图片" />
 												</nuxt-link>
 											</div>
 
 											<div class="push-rt">
 												<p class="message-title">
-													<nuxt-link :to="'/about/detail/' + bitem.id" target="_blank">{{ bitem.title }}</nuxt-link>
+													<nuxt-link :to="'/about/detail/' + bitem.id" target="_blank">{{
+														bitem.title }}</nuxt-link>
 												</p>
 												<div class="message-info">
 													<div class="info-item">
@@ -322,7 +335,8 @@
 							</div>
 							<div class="collect-content-list ask-item" v-if="parmType.substring(5, 8) == 'ask'">
 								<div class="nodata-warper" v-if="dataList.length == 0">
-									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
+									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png"
+										alt="空数据提示" />
 									<div>
 										<span>该用户暂时还没有点赞问题哦</span>
 									</div>
@@ -341,15 +355,17 @@
 											<p class="line-clamp" v-html="item.content"></p>
 										</div>
 										<div class="extra question-tags mt10" v-if="item.tags">
-                <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
-                  target="_blank" v-for="tag in item.tags" :key="tag.id">
-                  <img :src="tag.img" v-if="tag.img" alt="标签图标"/>{{ tag.name }}</a>
-              </div>
+											<nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag"
+												target="_blank" v-for="tag in qdetail.tags" :key="tag.id">
+												<img :src="tag.img" v-if="tag.img" alt="标签图片" />{{ tag.name }}
+											</nuxt-link>
+										</div>
 
 										<div class="q_time">
 											<span>{{ item.gmtCreate }}来自</span>
-											<nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name" target="_blank">{{ item.nickname
-											}}</nuxt-link>
+											<nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name"
+												target="_blank">{{ item.nickname
+												}}</nuxt-link>
 											<b>
 												悬赏
 												<a href="javascript:;" title="个人悬赏">{{ item.price }}C</a>
@@ -375,15 +391,17 @@
 						<!---->
 						<!---->
 						<!---->
-						<div class="stat-item"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="26" viewBox="0 0 25 26"
-								class="icon">
+						<div class="stat-item"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="26"
+								viewBox="0 0 25 26" class="icon">
 								<g fill="none" fill-rule="evenodd" transform="translate(0 .57)">
-									<ellipse cx="12.5" cy="12.57" fill="#E1EFFF" rx="12.5" ry="12.57" data-v-4fa4e5da=""></ellipse>
+									<ellipse cx="12.5" cy="12.57" fill="#E1EFFF" rx="12.5" ry="12.57" data-v-4fa4e5da="">
+									</ellipse>
 									<path fill="#7BB9FF"
 										d="M8.596 11.238V19H7.033C6.463 19 6 18.465 6 17.807v-5.282c0-.685.483-1.287 1.033-1.287h1.563zm4.275-4.156A1.284 1.284 0 0 1 14.156 6c.885.016 1.412.722 1.595 1.07.334.638.343 1.687.114 2.361-.207.61-.687 1.412-.687 1.412h3.596c.38 0 .733.178.969.488.239.317.318.728.21 1.102l-1.628 5.645a1.245 1.245 0 0 1-1.192.922h-7.068v-7.889c1.624-.336 2.623-2.866 2.806-4.029z">
 									</path>
 								</g>
-							</svg> <span class="content">文章被点赞<span class="count">{{ userInfo.bgoodsum }}</span></span></div>
+							</svg> <span class="content">文章被点赞<span class="count">{{ userInfo.bgoodsum }}</span></span>
+						</div>
 						<div class="stat-item"><svg width="25" height="25" viewBox="0 0 25 25" class="icon stat-view-icon">
 								<g fill="none" fill-rule="evenodd">
 									<circle cx="12.5" cy="12.5" r="12.5" fill="#E1EFFF"></circle>
@@ -394,14 +412,16 @@
 							</svg> <span class="content">文章被阅读<span class="count">{{ userInfo.viewsum }}</span></span></div>
 
 						<nuxt-link :to="'/about/detail/1523552231247499264'" target="_blank" class="stat-item"><svg
-								xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" class="icon stat-jp-icon">
+								xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25"
+								class="icon stat-jp-icon">
 								<g fill="none" fill-rule="evenodd">
 									<circle cx="12.5" cy="12.5" r="12.5" fill="#E1EFFF"></circle>
 									<path fill="#7BB9FF"
 										d="M16.694 13.516l-3.719 3.055a1.1 1.1 0 0 1-1.412-.013l-2.77-2.362-3.597 2.437a.693.693 0 0 1-.895-.101.649.649 0 0 1-.008-.876l3.68-4.096a1.1 1.1 0 0 1 1.507-.122l2.653 2.135 2.248-2.4-1.34-1.358a.5.5 0 0 1 .327-.85l5.438-.313a.5.5 0 0 1 .528.533l-.368 5.449a.5.5 0 0 1-.855.317l-1.417-1.435z">
 									</path>
 								</g>
-							</svg> <span class="content">源力值<span class="count">{{ userInfo.practice }}</span></span></nuxt-link>
+							</svg> <span class="content">源力值<span class="count">{{ userInfo.practice
+							}}</span></span></nuxt-link>
 						<!---->
 					</div>
 				</div>
@@ -446,7 +466,7 @@ import userServerApi from "@/api/userServerReq";
 
 export default {
 
-	data () {
+	data() {
 		return {
 			isLogin: false,
 			loginInfo: {},
@@ -455,7 +475,7 @@ export default {
 		};
 	},
 
-	asyncData ({ params, error, query }) {
+	asyncData({ params, error, query }) {
 		return userServerApi.getShowUserInfo(params.id, params.type).then(response => {
 			return {
 				dataList: response.data.dataList,
@@ -466,7 +486,7 @@ export default {
 		});
 	},
 
-	head () {
+	head() {
 		return {
 			script: [
 				{ src: 'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/velocity/1.5.2/velocity.js', async: true, defer: true }
@@ -490,7 +510,7 @@ export default {
 			],
 		}
 	},
-	mounted () {
+	mounted() {
 		window.console.log(this.parmType);
 		var token = localStorage.getItem("redclass_token");
 		var userStr = localStorage.getItem("redclass_user");
@@ -511,7 +531,7 @@ export default {
 	},
 
 	methods: {
-		clickFocusBtnClick (item) {
+		clickFocusBtnClick(item) {
 			if (this.isLogin) {
 				if (item.bfocus) {
 					userApi.cancleUserFocus(item.id).then((response) => {
@@ -541,7 +561,7 @@ export default {
 			}
 
 		},
-		getTypeName () {
+		getTypeName() {
 			if (this.focusUserClickparmType == "blog") {
 				return "文章"
 			}
@@ -565,7 +585,7 @@ export default {
 			}
 			return "文章";
 		},
-		getUserFocusState () {
+		getUserFocusState() {
 			if (this.isLogin && this.loginInfo.id == this.parmUid && this.parmType == "focus-mine") {
 				for (var j = 0; j < this.dataList.length; j++) {
 					var fItem = this.dataList[j];
@@ -606,7 +626,7 @@ export default {
 				}
 			})
 		},
-		focusUserClick () {
+		focusUserClick() {
 			if (this.isLogin) {
 				if (this.isFocus) {
 					userApi.cancleUserFocus(this.parmUid).then((response) => {
@@ -635,14 +655,14 @@ export default {
 				});
 			}
 		},
-		personSetting () {
+		personSetting() {
 			var loginToken = window.localStorage.getItem('redclass_token');
 			this.$router.push({
 				name: "user-setting",
 				params: { "loginToken": loginToken },
 			});
 		},
-		getCheckType (type) {
+		getCheckType(type) {
 			if (type.substring(0, 7) == 'collect') {
 				return true;
 			}
@@ -781,15 +801,15 @@ export default {
 
 .questions_collect_con .description {
 	font-size: 14px;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
-    max-height: 40px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	vertical-align: middle;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+	max-height: 40px;
 }
 
 .questions_collect_con .header {

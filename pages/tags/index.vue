@@ -40,9 +40,6 @@
 import tagServerApi from "@/api/tagServerReq";
 
 export default {
-	data () {
-		return {}
-	},
 
 	asyncData ({ params, error }) {
 		return tagServerApi.getAllTagList().then((response) => {
@@ -80,6 +77,7 @@ export default {
 	methods: {
 	},
 }
+
 </script>
 
 <style scoped>

@@ -23,10 +23,9 @@
                   <div class="ui orange label horizontal" data-tooltip="热门">
                     热
                   </div>
-                  <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
-                    target="_blank" v-for="tag in qdetail.tags" :key="tag.id">
-                    <img :src="tag.img" v-if="tag.img" alt="标签图标" />{{ tag.name }}
-                  </a>
+                  <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" target="_blank" v-for="tag in qdetail.tags" :key="tag.id">
+                  <img :src="tag.img" v-if="tag.img" alt="标签图片"/>{{ tag.name }}
+                </nuxt-link>
                 </div>
               </div>
               <div class="qustion-content">

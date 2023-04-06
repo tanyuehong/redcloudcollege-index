@@ -393,22 +393,9 @@
 
                 <div class="divide"></div>
                 <div class="zhanghu-form-item">
-                  <label for="phone" class="byte-form-item__label" style="width: 56px;">账户注销</label>
+                  <label for="phone" class="byte-form-item__label" style="width: 56px;">标签管理</label>
                   <div class="zhanghu-setting-chang">
-
-                    <el-button type="text" @click="zhuxiaodlog = true">注销</el-button>
-
-                    <el-dialog title="温馨提示" :visible.sync="zhuxiaodlog" center>
-                      <span>尊贵的用户您好，目前PC端暂不支持注销功能，如您申请账号注销，需要扫描二维码前往App端我-设置-账号注销进行注销操作，给您带来的不便，我们深感抱歉。如果您有任何建议和反馈，可以发送邮箱到
-                        16623170187@163.com 联系我们。</span>
-                      <div class="app-download-wapma">
-                        <div class="app-download-ma"></div>
-                      </div>
-                      <span slot="footer" class="dialog-footer">
-                        <el-button @click="zhuxiaodlog = false">取 消</el-button>
-                        <el-button type="primary" @click="zhuxiaodlog = false">确 定</el-button>
-                      </span>
-                    </el-dialog>
+                    <el-button type="text" @click="gotoTagSetting">进入</el-button>
                   </div>
                 </div>
                 <div class="divide"></div>
@@ -462,9 +449,12 @@ export default {
     this.loginToken = this.$route.params.loginToken;
   },
   methods: {
+    gotoTagSetting() {
+      this.$router.push({name: "admin-tag"});
+    },
     adminInterviewQuestionClick() {
       this.$router.push({
-				name: "user-admin-interview-question"});
+				name: "admin-interview-question"});
     },
     onSubmitClick() {
       if (this.positionType == 3) {

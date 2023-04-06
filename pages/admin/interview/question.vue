@@ -3,8 +3,8 @@
     <div class="container">
       <div class="ucenter-setting-header">
         <li class="ucenter-back-item">
-          <nuxt-link :to="'/user/' + userInfo.id + '/blog'">
-            <span>返回个人主页</span>
+          <nuxt-link :to="'/user/' + 'setting'">
+            <span>返回个人设置</span>
             <i class="el-icon-arrow-right back_item"></i>
           </nuxt-link>
         </li>
@@ -28,11 +28,6 @@
                 class="close-path"></path>
             </svg>
             每日一题
-          </div>
-        </div>
-        <div @click="authoritySettingClick" class="setting-menu-item" v-if="userInfo.authority == 100">
-          <div class="nav-item authority-mode" v-bind:class="{ active: settingtype == 3 }">
-            功能管理
           </div>
         </div>
       </div>

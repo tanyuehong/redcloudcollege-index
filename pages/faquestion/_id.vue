@@ -38,10 +38,9 @@
               </div>
 
               <div class="extra question-tags mt10" v-if="qdetail.tags">
-                <a class="ui horizontal basic label popup-tag" href="https://www.oschina.net/question/tag/ruby"
-                  target="_blank" v-for="tag in qdetail.tags" :key="tag.id">
+                <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" target="_blank" v-for="tag in qdetail.tags" :key="tag.id">
                   <img :src="tag.img" v-if="tag.img" alt="标签图片"/>{{ tag.name }}
-                </a>
+                </nuxt-link>
               </div>
 
               <div class="qustion_content" v-html="qdetail.content"></div>

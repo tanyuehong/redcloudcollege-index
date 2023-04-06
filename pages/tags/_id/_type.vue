@@ -10,7 +10,6 @@
           <div class="active section">{{ tag.name }}</div>
         </div>
       </div>
-      <div class="message-spreate"></div>
       <div class="tags-content">
         <div class="ui basic segment tag-card">
           <div class="ui items">
@@ -143,6 +142,11 @@ export default {
 </script>
 
 <style>
+
+.content-list {
+  margin-top: 15px;
+}
+
 .tag-list-container {
   min-height: 440px;
   margin-bottom: 15px;
@@ -187,7 +191,7 @@ export default {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 1em 0;
+  margin:0px;
   width: 100%;
   min-height: 0;
   background: 0 0;
@@ -234,9 +238,8 @@ export default {
 }
 
 .tags-content {
-  margin-top: 15px;
   background: #fff;
-  padding-top: 20px;
+  padding-top: 10px;
   padding-left: 20px;
 }
 

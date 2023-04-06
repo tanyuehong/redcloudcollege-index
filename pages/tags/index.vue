@@ -10,11 +10,44 @@
 					<div class="active section">所有标签</div>
 				</div>
 			</div>
-			<div class="message-spreate"></div>
-			<div class="tags-content">
+			<div class="tags-all-content">
 				<h2>
 					标签是 开源实践网用来标识一个问题的关键字，使用标签可以快速定位同类知识。
 				</h2>
+				<div class="search-input">
+					<el-input placeholder="请输入关键词" v-model="searchKey" class="search-btn">
+						<el-button slot="append" icon="el-icon-search"></el-button>
+					</el-input>
+
+
+					<span class="tips_tag" @click="addTagClick">
+						<span class="span_add" style="color: rgb(39, 124, 204);">
+							<i class="icon icon_add icon_add_pos"></i>
+						</span> 没有找到标签，添加新标签？</span>
+					<el-dialog title="添加技术标签" :visible.sync="addTagPageShow" :close-on-click-modal="false"
+						:before-close="changePwdClose" width="650px" :show-close="false" center>
+						<el-form ref="form" label-width="80px">
+							<el-form-item label="标签名">
+								<el-input v-model="editClassify"></el-input>
+							</el-form-item>
+							<el-form-item label="标签详细描述">
+							<el-input type="textarea" placeholder="填写该标签的由来,优点，缺点等等" v-model="userInfo"
+                          maxlength="100" :rows="8" show-word-limit>
+						</el-input>
+						</el-form-item>
+                        </el-input>
+							<el-form-item label="子分类">
+								<el-input v-model="editClassify"></el-input>
+							</el-form-item>
+							
+						</el-form>
+						<span slot="footer" class="dialog-footer">
+							<span class="pwd-confim-errtiops" v-if="resultTips">{{ resultTips }}</span>
+							<el-button type="primary" :loading="submitChangePwd" class="chang-pwd-btn"
+								@click="changePwdClick" center>修 改</el-button>
+						</span>
+					</el-dialog>
+				</div>
 
 				<div class="tags-warper">
 					<div class="cards">
@@ -41,15 +74,17 @@ import tagServerApi from "@/api/tagServerReq";
 
 export default {
 
-	asyncData ({ params, error }) {
+	asyncData({ params, error }) {
 		return tagServerApi.getAllTagList().then((response) => {
 			return {
 				tagsList: response.data.tagList,
+				addTagPageShow: false,
+				searchKey: '',
 			}
 		})
 	},
 
-	head () {
+	head() {
 		return {
 			title: "所有标签列表 - 开源实践网",
 			meta: [
@@ -71,28 +106,76 @@ export default {
 		}
 	},
 
-	mounted () {
+	mounted() {
 	},
 
 	methods: {
+		addTagClick() {
+			this.addTagPageShow = true;
+		}
 	},
 }
 
 </script>
 
 <style scoped>
-.tags-content {
-	margin-top: 15px;
+.search-input .tips_tag {
+	margin-left: 20px;
+	font-size: 14px;
+	color: #507999;
+	cursor: pointer;
+}
+
+.search-input .icon {
+	display: inline-block;
+	background-position: 50%;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	vertical-align: middle;
+}
+
+.search-input .span_add {
+	display: inline-block !important;
+	width: 24px;
+	height: 24px;
+	text-align: center;
+	line-height: 24px;
+	background-color: #ebf2f7;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.search-input .icon_add {
+	width: 12px;
+	height: 12px;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAXElEQVRIS2NkoDFgpLH5DERbEFA58z+yYza0pxOllyhFIINHLSAY16NBRPsgQg9jgjYSUADLJ/B8MGoBeohhBBGhMB/NB4RCaLQ0JRhCwyCICPsRuwqi62RyLQAAilhQGRoPkngAAAAASUVORK5CYII=);
+	cursor: pointer;
+}
+
+.tags-all-content {
 	background: #fff;
-	padding-top: 20px;
+	padding-top: 0px;
 	padding-left: 20px;
 }
 
-.tags-content h2 {
-	font-size: 14px;
-	font-weight: 550;
-	margin-top: 0px;
+.tags-all-content .search-input {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 
+.tags-all-content .search-input .add-tag {
+	margin-right: 10px;
+	float: right;
+}
+
+.tags-all-content .search-input .search-btn {
+	width: 360px
+}
+
+.tags-all-content h2 {
+	font-size: 14px;
+	font-weight: 510;
+	margin-top: 0px;
 }
 
 .message-top-rumb .breadcrumb {
@@ -184,5 +267,4 @@ export default {
 	padding-left: 20px;
 	background: #fff;
 	padding-bottom: 15px;
-}
-</style>
+}</style>

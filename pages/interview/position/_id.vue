@@ -72,7 +72,7 @@
                   </div>
                 </div>
 
-                <div class="row qustion-list">
+                <div class="qustion-list">
                   <div class="qustion-list-item" v-for="item in list" :key="item.id">
                     <div role="cell" class="qustion-title col5">
                       <span class="truncate">
@@ -343,11 +343,11 @@ export default {
     },
     getHtmlContent(type) {
       if(type == 1) {
-        return "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"margin-left:8px;margin-top:3px;\" viewBox=\"0 0 24 24\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z\"></path></svg>";
+        return "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"margin-left:8px;margin-top:2px;\" viewBox=\"0 0 24 24\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z\"></path></svg>";
       } else if(type == 2) {
-        return "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"margin-left:8px;margin-top:3px;\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M7.44926 11.8332C7.46161 11.8229 7.47354 11.8123 7.48504 11.8013L10.9052 8.52958C11.0376 8.4029 11.0305 8.20389 10.8893 8.08509C10.8243 8.03043 10.7385 8.00001 10.6495 8.00001H3.35053C3.15694 8.00001 3 8.1408 3 8.31447C3 8.39354 3.0332 8.46971 3.09299 8.5278L6.45859 11.7977C6.72125 12.0529 7.16479 12.0688 7.44926 11.8332Z\"></path></svg>";
+        return "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"margin-left:8px;margin-top:2px;\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M7.44926 11.8332C7.46161 11.8229 7.47354 11.8123 7.48504 11.8013L10.9052 8.52958C11.0376 8.4029 11.0305 8.20389 10.8893 8.08509C10.8243 8.03043 10.7385 8.00001 10.6495 8.00001H3.35053C3.15694 8.00001 3 8.1408 3 8.31447C3 8.39354 3.0332 8.46971 3.09299 8.5278L6.45859 11.7977C6.72125 12.0529 7.16479 12.0688 7.44926 11.8332Z\"></path></svg>";
       } else {
-        return "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"margin-left:8px;margin-top:3px;\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M10.9052 5.47044L7.48504 2.19872C7.47354 2.18772 7.46161 2.1771 7.44926 2.16687C7.16479 1.93123 6.72125 1.94709 6.45859 2.20229L3.09299 5.47222C3.0332 5.53031 3 5.60648 3 5.68555C3 5.85922 3.15694 6.00001 3.35053 6.00001H10.6495C10.7385 6.00001 10.8243 5.96959 10.8893 5.91493C11.0305 5.79613 11.0376 5.59712 10.9052 5.47044Z\"></path></svg>";
+        return "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"margin-left:8px;margin-top:2px;\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M10.9052 5.47044L7.48504 2.19872C7.47354 2.18772 7.46161 2.1771 7.44926 2.16687C7.16479 1.93123 6.72125 1.94709 6.45859 2.20229L3.09299 5.47222C3.0332 5.53031 3 5.60648 3 5.68555C3 5.85922 3.15694 6.00001 3.35053 6.00001H10.6495C10.7385 6.00001 10.8243 5.96959 10.8893 5.91493C11.0305 5.79613 11.0376 5.59712 10.9052 5.47044Z\"></path></svg>";
       }
     }
   }
@@ -453,6 +453,8 @@ export default {
   display: flex;
   flex: 1 0 auto;
   min-width: 0px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #E2E8F0;
 }
 
 .job-question-list .question-header .question-header-title {
@@ -477,7 +479,7 @@ export default {
 }
 
 .job-question-list .qustion-list {
-  margin-top: 10px;
+  margin-top: 6px;
 }
 
 .job-question-list .qustion-list-item {
@@ -500,8 +502,8 @@ export default {
 .job-question-list .qustion-list-item .qustion-title {
   box-sizing: border-box;
   min-width: 0px;
-  padding-top: 9px;
-  padding-bottom: 8px;
+  padding-top: 12px;
+  padding-bottom: 7px;
   font-size: 14px;
   margin-left: 8px;
   padding-left: 1px;

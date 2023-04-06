@@ -693,6 +693,14 @@ export default {
   margin: 0 15px 0 15px;
 }
 
+
+.content___3CUOk .container___1me7f:hover {
+  margin-top: -4px;
+  height: 86px;
+  text-decoration: none;
+  box-shadow: 0 6px 20px 0 rgb(0 0 0 / 16%);
+}
+
 .content___3CUOk .container___1me7f .card___JWlTD .cardContent___24wEe .desc___3Su17 {
   white-space: nowrap;
   overflow: hidden;
@@ -799,6 +807,8 @@ export default {
   border-radius: 4px;
   margin-bottom: 14px;
   margin-left: 23px;
+  color: #666;
+  font-weight: 520;
 }
 
 .mock-jobs-item .mock-jobs-info {
@@ -816,5 +826,7 @@ export default {
 .mock-jobs-item:hover {
   margin-top: -4px;
   height: 86px;
+  text-decoration: none;
   box-shadow: 0 6px 20px 0 rgb(0 0 0 / 16%);
-}</style>
+}
+</style>

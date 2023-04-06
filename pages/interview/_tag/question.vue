@@ -281,7 +281,7 @@ export default {
               type: 'success',
               message: '问题提交成功！',
             });
-            this.$router.push({name: "interview",query: {}});
+            this.$router.push({name: "interview-tag-sort",query: {}});
           })
       } else {
         this.$router.push({
@@ -422,6 +422,7 @@ export default {
 .mock-jobs-item:hover {
   margin-top: -4px;
   height: 86px;
+  text-decoration: none;
   box-shadow: 0 6px 20px 0 rgb(0 0 0 / 16%);
 }
 

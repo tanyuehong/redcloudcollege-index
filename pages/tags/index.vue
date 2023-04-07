@@ -19,7 +19,6 @@
 						<el-button slot="append" icon="el-icon-search"></el-button>
 					</el-input>
 
-
 					<span class="tips_tag" @click="addTagClick">
 						<span class="span_add" style="color: rgb(39, 124, 204);">
 							<i class="icon icon_add icon_add_pos"></i>
@@ -31,14 +30,14 @@
 								<el-input v-model="editClassify"></el-input>
 							</el-form-item>
 							<el-form-item label="标签描述">
-							<el-input type="textarea" placeholder="填写该标签的由来,优点，缺点等等" v-model="userInfo"
-                          maxlength="200" :rows="6" show-word-limit resize="none">
-						</el-input>
-						</el-form-item>
-						<el-form-item label="图片src">
-							<el-input v-model="editClassify"></el-input>
-						</el-form-item>
-							
+								<el-input type="textarea" placeholder="填写该标签的由来,优点，缺点等等" v-model="userInfo" maxlength="200"
+									:rows="6" show-word-limit resize="none">
+								</el-input>
+							</el-form-item>
+							<el-form-item label="图片src">
+								<el-input v-model="editClassify"></el-input>
+							</el-form-item>
+
 						</el-form>
 						<span slot="footer" class="dialog-footer">
 							<el-button size="small" @click="addTagPageShow = false">取 消</el-button>
@@ -266,4 +265,5 @@ export default {
 	padding-left: 20px;
 	background: #fff;
 	padding-bottom: 15px;
-}</style>
+}
+</style>

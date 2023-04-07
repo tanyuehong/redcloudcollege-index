@@ -24,27 +24,26 @@
 						<span class="span_add" style="color: rgb(39, 124, 204);">
 							<i class="icon icon_add icon_add_pos"></i>
 						</span> 没有找到标签，添加新标签？</span>
-					<el-dialog title="添加技术标签" :visible.sync="addTagPageShow" :close-on-click-modal="false"
+					<el-dialog title="添加标签" :visible.sync="addTagPageShow" :close-on-click-modal="false"
 						:before-close="changePwdClose" width="650px" :show-close="false" center>
 						<el-form ref="form" label-width="80px">
 							<el-form-item label="标签名">
 								<el-input v-model="editClassify"></el-input>
 							</el-form-item>
-							<el-form-item label="标签详细描述">
+							<el-form-item label="标签描述">
 							<el-input type="textarea" placeholder="填写该标签的由来,优点，缺点等等" v-model="userInfo"
-                          maxlength="100" :rows="8" show-word-limit>
+                          maxlength="200" :rows="6" show-word-limit resize="none">
 						</el-input>
 						</el-form-item>
-                        </el-input>
-							<el-form-item label="子分类">
-								<el-input v-model="editClassify"></el-input>
-							</el-form-item>
+						<el-form-item label="图片src">
+							<el-input v-model="editClassify"></el-input>
+						</el-form-item>
 							
 						</el-form>
 						<span slot="footer" class="dialog-footer">
-							<span class="pwd-confim-errtiops" v-if="resultTips">{{ resultTips }}</span>
-							<el-button type="primary" :loading="submitChangePwd" class="chang-pwd-btn"
-								@click="changePwdClick" center>修 改</el-button>
+							<el-button size="small" @click="addTagPageShow = false">取 消</el-button>
+							<el-button type="primary" size="small" :loading="submitChangePwd" class="chang-pwd-btn"
+								@click="changePwdClick" center>创 建</el-button>
 						</span>
 					</el-dialog>
 				</div>

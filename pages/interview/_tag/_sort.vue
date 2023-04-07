@@ -364,7 +364,7 @@ export default {
         if (item.id == "all") {
           return "/interview";
         }
-        return "/interview/" + item.path;
+        return "/interview/" + item.id;
       };
     },
   },

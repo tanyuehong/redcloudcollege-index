@@ -37,7 +37,10 @@
 							<el-form-item label="图片src">
 								<el-upload
   class="upload-tagicon"
-  action="https://jsonplaceholder.typicode.com/posts/"
+  action="https://www.redskt.com/api/ucenter/uploadImage"
+  :headers="uploadToken"
+  :on-success="uploadImageSucess"
+  :on-error="uploadImageError"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList"
@@ -94,6 +97,7 @@ export default {
 	head() {
 		return {
 			title: "所有标签列表 - 开源实践网",
+			uploadToken:{ 'token':"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI"},
 			meta: [
 				{
 					hid: 'keywords',
@@ -114,11 +118,22 @@ export default {
 	},
 
 	mounted() {
+	var token = window.localStorage.getItem('redclass_token');
+	if (token!=undefined) {
+		this.uploadToken = {"token":token};
+		window.console.log(this.uploadToken);
+    }
 	},
 
 	methods: {
 		addTagClick() {
 			this.addTagPageShow = true;
+		},
+		uploadImageSucess(response, file, fileList) {
+			window.console.log(response);
+		},
+		uploadImageError(err, file, fileList) {
+			window.console.log(err);
 		}
 	},
 }

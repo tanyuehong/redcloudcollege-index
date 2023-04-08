@@ -27,6 +27,10 @@ body {
   display: flex;
 }
 
+.el-upload__input {
+  display: none !important;
+}
+
 /* 日历组件的样式 */
 .user-sign .wh_container .wh_content_all {
   background-color: #fff;

@@ -27,34 +27,28 @@
 						:before-close="changePwdClose" width="650px" :show-close="false" center>
 						<el-form ref="form" label-width="80px">
 							<el-form-item label="标签名">
-								<el-input v-model="editClassify"></el-input>
+								<el-input v-model="editTag.name"></el-input>
 							</el-form-item>
 							<el-form-item label="标签描述">
-								<el-input type="textarea" placeholder="填写该标签的由来,优点，缺点等等" v-model="userInfo" maxlength="200"
-									:rows="6" show-word-limit resize="none">
+								<el-input type="textarea" placeholder="填写该标签的由来,优点，缺点等等" v-model="editTag.describ"
+									maxlength="200" :rows="6" show-word-limit resize="none">
 								</el-input>
 							</el-form-item>
 							<el-form-item label="图片src">
-								<el-upload
-  class="upload-tagicon"
-  action="https://www.redskt.com/api/ucenter/uploadImage"
-  :headers="uploadToken"
-  :on-success="uploadImageSucess"
-  :on-error="uploadImageError"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :file-list="fileList"
-  list-type="picture">
-  <el-button size="small" type="primary">点击上传</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-</el-upload>
+								<el-upload class="upload-tagicon" action="https://www.redskt.com/api/ucenter/uploadImage"
+									:headers="uploadToken" :on-success="uploadImageSucess" :on-error="uploadImageError"
+									:on-preview="handlePreview" :on-remove="handleRemove" :file-list="fileList"
+									list-type="picture">
+									<el-button size="small" type="primary">点击上传</el-button>
+									<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+								</el-upload>
 							</el-form-item>
 
 						</el-form>
 						<span slot="footer" class="dialog-footer">
 							<el-button size="small" @click="addTagPageShow = false">取 消</el-button>
-							<el-button type="primary" size="small" :loading="submitChangePwd" class="chang-pwd-btn"
-								@click="changePwdClick" center>创 建</el-button>
+							<el-button type="primary" size="small" :loading="submitLoading" class="chang-pwd-btn"
+								@click="submitTag" center>创 建</el-button>
 						</span>
 					</el-dialog>
 				</div>
@@ -80,6 +74,7 @@
 
 <script>
 
+import tagApi from "@/api/tag";
 import tagServerApi from "@/api/tagServerReq";
 
 export default {
@@ -89,7 +84,9 @@ export default {
 			return {
 				tagsList: response.data.tagList,
 				addTagPageShow: false,
+				fileList: [],
 				searchKey: '',
+				editTag: {},
 			}
 		})
 	},
@@ -97,7 +94,7 @@ export default {
 	head() {
 		return {
 			title: "所有标签列表 - 开源实践网",
-			uploadToken:{ 'token':"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI"},
+			uploadToken: { 'token': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI" },
 			meta: [
 				{
 					hid: 'keywords',
@@ -118,11 +115,11 @@ export default {
 	},
 
 	mounted() {
-	var token = window.localStorage.getItem('redclass_token');
-	if (token!=undefined) {
-		this.uploadToken = {"token":token};
-		window.console.log(this.uploadToken);
-    }
+		var token = window.localStorage.getItem('redclass_token');
+		if (token != undefined) {
+			this.uploadToken = { "token": token };
+			window.console.log(this.uploadToken);
+		}
 	},
 
 	methods: {
@@ -130,10 +127,42 @@ export default {
 			this.addTagPageShow = true;
 		},
 		uploadImageSucess(response, file, fileList) {
+			if (response.code == 200) {
+				this.fileList = [{ "name": file.name, "url": response.data.imageUrl }];
+				this.editTag.img = response.data.imageUrl;
+			} else {
+				this.editTag.img = "";
+			}
 			window.console.log(response);
 		},
 		uploadImageError(err, file, fileList) {
-			window.console.log(err);
+			this.editTag.img = "";
+			this.$message({
+				message: "图片上传失败，请重新尝试！",
+				type: "error",
+				duration: 2000,
+			});
+		},
+		submitTag() {
+			if (this.editTag.name == undefined && this.editTag.name == 0) {
+				this.$message({
+					message: "标签名不能为空哦~",
+					type: "error",
+					duration: 2000,
+				});
+				return
+			}
+			if (this.editTag.describ.length <= 0) {
+				this.$message({
+					message: "标签描述不能为空哦~",
+					type: "error",
+					duration: 2000,
+				});
+				return
+			}
+			tagApi.addTag(this.editTag).then((response) => {
+
+			});
 		}
 	},
 }
@@ -141,9 +170,8 @@ export default {
 </script>
 
 <style scoped>
-
 .el-upload__tip {
-	margin-top: 0px; 
+	margin-top: 0px;
 
 }
 

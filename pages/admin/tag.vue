@@ -39,10 +39,9 @@
 
             <el-dialog :title="functionTitle" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
               :show-close="true" :visible.sync="showTagPositionPage" center>
-              <el-table :data="tagPositionList" height="160" v-if="classifyType == 1">
-                <el-table-column property="" label="标签名" width="160" height="60"><span>{{ editTag.title
-                }}</span></el-table-column>
-                <el-table-column property="pname" label="职位" width="100" height="60"></el-table-column>
+              <el-table :data="tagPositionList" height="360" v-if="classifyType == 1">
+                <el-table-column property="name" label="标签名" width="130" height="60"></el-table-column>
+                <el-table-column property="pname" label="职位" width="130" height="60"></el-table-column>
                 <el-table-column label="操作" width="220">
                   <template slot-scope="scope">
                     <el-button size="mini" @click="editPositionClassifyClick(scope.$index, scope.row)">编辑</el-button>

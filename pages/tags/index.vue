@@ -182,14 +182,6 @@ export default {
 	cursor: pointer;
 }
 
-.search-input .icon {
-	display: inline-block;
-	background-position: 50%;
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	vertical-align: middle;
-}
-
 .search-input .span_add {
 	display: inline-block !important;
 	width: 24px;

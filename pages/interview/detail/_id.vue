@@ -3023,14 +3023,6 @@ li.up_down_wrap {
   margin-right: 4px;
 }
 
-.icon {
-  display: inline-block;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  vertical-align: middle;
-}
-
 .answer_span {
   width: 94px;
   height: 32px;

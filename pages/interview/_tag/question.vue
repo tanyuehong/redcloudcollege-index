@@ -456,14 +456,6 @@ export default {
   top: -1px;
 }
 
-.icon {
-  display: inline-block;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  vertical-align: middle;
-}
-
 .icon_add {
   width: 12px;
   height: 12px;

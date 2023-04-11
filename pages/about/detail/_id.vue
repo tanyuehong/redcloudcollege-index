@@ -535,14 +535,6 @@
   margin-left: 28px;
 }
 
-.icon {
-  display: inline-block;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  vertical-align: middle;
-}
-
 .reply_content_tool {
   display: -webkit-box;
   display: -ms-flexbox;

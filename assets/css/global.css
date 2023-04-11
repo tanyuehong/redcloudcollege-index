@@ -31,6 +31,14 @@ body {
   display: none !important;
 }
 
+.icon {
+  display: inline-block;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  vertical-align: middle;
+}
+
 /* 日历组件的样式 */
 .user-sign .wh_container .wh_content_all {
   background-color: #fff;
@@ -137,6 +145,7 @@ body {
 .nodata-warper {
   text-align: center;
   margin: 0 auto;
+  padding-bottom: 30px;
 }
 
 .app-download-ma {

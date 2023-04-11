@@ -33,10 +33,10 @@
 
             <div class="question-content">
               <div class="filter-btns">
-                <div class="filter-btn"  v-for="item in classifyList" :key="item.id">
+                <nuxt-link :to="typePath(item)" class="filter-btn" v-bind:class="{ active: type == item.id }"  v-for="item in classifyList" :key="item.id">
                   <div class="svg-img" v-html="item.img" v-if="item.type==2"></div>
                   {{ item.name }}
-                </div>         
+                </nuxt-link >     
               </div>
               <div class="job-question-list">
                 <div class="question-header">
@@ -72,7 +72,7 @@
                   </div>
                 </div>
 
-                <div class="qustion-list">
+                <div class="qustion-list" v-if="list.length>0">
                   <div class="qustion-list-item" v-for="item in list" :key="item.id">
                     <div role="cell" class="qustion-title col5">
                       <span class="truncate">
@@ -102,6 +102,13 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="nodata-warper" v-if="list.length == 0">
+            <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
+            <div>
+              <span class="nodata-title">该分类下暂时没有文章哦！</span>
+            </div>
+          </div>
 
                 <div class="page-content" v-if="page">
                   <div class="relative"><button class="flex page-numbers" type="button" aria-haspopup="true"
@@ -185,6 +192,7 @@
 
 import interviewSudyApi from "@/api/interviewStudyReq";
 import interviewServerApi from "@/api/interviewServerReq";
+import { pid } from "process";
 
 export default {
   data() {
@@ -218,6 +226,7 @@ export default {
           classifyList:response.data.classifyList,
           everyDayQuestion:response.data.everyDayQuestion,
           pId: params.id,
+          type:params.type ? params.type:response.data.classifyList[0].id,
           page:false
         };
       });
@@ -249,10 +258,10 @@ export default {
                 list.push({date:dateList[j],className:"calendar_date"});
              }
              this.signArr = list;
-             window.console.log(this.signArr);
            });
+   
+        
     };
-
     interviewServerApi
       .getPositionQuestionList({
         pId: this.pId,
@@ -274,6 +283,15 @@ export default {
       return function (item) {
         return "width:" + (70-70*item.frequency) + "px";
       }
+    },
+
+    typePath() {
+      return function (item) {
+        if (item.name == "全部题目") {
+          return "/interview/position/" + this.pId;
+        }
+        return "/interview/position/"  + this.pId + "/" + item.id;
+      };
     },
   },
 
@@ -481,6 +499,7 @@ export default {
 
 .job-question-list .qustion-list {
   margin-top: 6px;
+  padding-bottom: 15px;
 }
 
 .job-question-list .qustion-list-item {
@@ -598,6 +617,7 @@ export default {
 .question-content {
   margin-top: 20px;
   max-width: 773px;
+  margin-bottom: 15px;
 }
 
 .filter-btns {
@@ -615,8 +635,13 @@ export default {
   line-height: 36px;
   padding-left: 12px;
   padding-right: 12px;
-  cursor: pointer;
   display: flex;
+  text-decoration: none;
+}
+
+.filter-btns .filter-btn.active {
+  background-color: #ddd;
+  color: #409EFF;
 }
 
 .filter-btns .filter-btn:hover {

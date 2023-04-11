@@ -208,6 +208,7 @@ export default {
     return interviewServerApi
       .getPositionQuestionList({
         pId: params.id,
+        type: params.type,
         orderType: 1,
         sort: 1
       })

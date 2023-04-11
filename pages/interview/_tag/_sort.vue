@@ -75,7 +75,7 @@
                 <div class="interview-tag-list" v-if="tagList.length > 0">
                   <ul class="tag-warper">
                     <li class="tag-item" v-for="item in tagList" :key="item.id">
-                      <nuxt-link :to="tagPath(item)" class="tag-link" v-bind:class="{ active: tag == item.path }">{{
+                      <nuxt-link :to="tagPath(item)" class="tag-link" v-bind:class="{ active: tag == item.id }">{{
                         item.name }}
                       </nuxt-link>
                     </li>
@@ -287,7 +287,6 @@ export default {
       activeIndex: "1",
       tagList: [],
       positionList: [],
-      tagList: [],
       sort: "recommand",
       tag: "all",
       typeIndex: 0,
@@ -334,7 +333,6 @@ export default {
           positionList: response.data.positionList,
           tagList: response.data.tagList,
           sort: (params.tag == "latest" || params.tag == "hot") ? params.tag : (params.sort ? params.sort : "recommand"),
-
           tag: (params.tag && params.tag != 'recommand' && params.tag != 'latest' && params.tag != 'hot')
             ? params.tag : "all"
         };

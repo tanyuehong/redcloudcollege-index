@@ -23,9 +23,10 @@
                   <div class="ui orange label horizontal" data-tooltip="热门">
                     热
                   </div>
-                  <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" target="_blank" v-for="tag in qdetail.tags" :key="tag.id">
-                  <img :src="tag.img" v-if="tag.img" alt="标签图片"/>{{ tag.name }}
-                </nuxt-link>
+                  <nuxt-link :to="'/tags/' + tag.id" class="ui horizontal basic label popup-tag" target="_blank"
+                    v-for="tag in qdetail.tags" :key="tag.id">
+                    <img :src="tag.img" v-if="tag.img" alt="标签图片" />{{ tag.name }}
+                  </nuxt-link>
                 </div>
               </div>
               <div class="qustion-content">
@@ -754,12 +755,12 @@ export default {
           defer: true,
         },
       ],
-      title: this.qdetail.title + "-开源实践问答",
+      title: this.qdetail.title + "-开源实践面试",
       meta: [
         {
           hid: "keywords",
           name: "keywords",
-          content: "技术问答,技术答疑,生活问题,我问你答，开源实践问答",
+          content: this.keywords,
         },
         {
           hid: "description",
@@ -780,6 +781,15 @@ export default {
     return interviewServerApi
       .getQuestionDetail({ qId: params.id, type: type, token: token })
       .then((response) => {
+        function getKeyWords(qdetail) {  //定义函数
+          var keyString = "开源实践面试," + qdetail.title + "详情"
+          if (qdetail.tags != undefined) {
+            for (var i = 0; i < qdetail.tags.length; i++) {
+              keyString += ("," + qdetail.tags[i].name);
+            }
+          }
+          return keyString;
+        }
         return {
           qdetail: response.data.qdetail,
           dataList: response.data.dataList,
@@ -787,12 +797,13 @@ export default {
           currentPosition: response.data.currentPosition,
           positionList: response.data.positionList,
           subType: type,
+          keywords: getKeyWords(response.data.qdetail),
           descrb:
-            "开源实践问答为您找到 " +
+            "开源实践面试为您找到 " +
             response.data.qdetail.title +
-            " 等相关问题答案，如果想了解更多关于 " +
+            " 等面试题，如果想了解更多关于 " +
             response.data.qdetail.title +
-            " 问题等相关问答，请访问开源实践问答。",
+            "的面试题，请访问开源实践面试首页。",
         };
       });
   },
@@ -991,9 +1002,9 @@ export default {
           break;
         }
       }
-      if (this.infoStep == 2) { 
+      if (this.infoStep == 2) {
         this.submitBtnDisable = true;
-        if(isAdd) {
+        if (isAdd) {
           interviewApi.addAndSubmitCompany({
             title: this.companyName,
             qId: this.qdetail.qid,
@@ -1003,16 +1014,16 @@ export default {
             .addQuestionCompanyMeet(this.qdetail.qid, item.key)
             .then((response) => { });
         }
-          
-          this.companyName = "";
-          this.meetingTitle = "请问您应聘的岗位类型？";
-          this.inputPlaceholder = "请输入职位名称";
-          this.submitTitle = "选择职位";
-          this.infoStep = 3;
-          this.requstCompanyList("", 2);
-      } else if(this.infoStep == 3) {
+
+        this.companyName = "";
+        this.meetingTitle = "请问您应聘的岗位类型？";
+        this.inputPlaceholder = "请输入职位名称";
+        this.submitTitle = "选择职位";
+        this.infoStep = 3;
+        this.requstCompanyList("", 2);
+      } else if (this.infoStep == 3) {
         this.submitBtnDisable = true;
-        if(isAdd) {
+        if (isAdd) {
           interviewApi
             .addAndSubmitPosition({
               title: this.companyName,
@@ -1021,8 +1032,8 @@ export default {
             .then((response) => { });
         } else {
           interviewApi
-          .addQuestionPosition(this.qdetail.qid, item.id)
-          .then((response) => { });
+            .addQuestionPosition(this.qdetail.qid, item.id)
+            .then((response) => { });
         }
         this.companyName = "";
         this.infoStep = 4;

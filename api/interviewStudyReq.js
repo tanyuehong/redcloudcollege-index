@@ -3,7 +3,7 @@ import request from '@/utils/request'
 export default {
   getSignDateList() {
     return request({
-      url: `/interview/getSignDateList`,
+      url: `/interview/commonRq/getSignDateList`,
       method: 'get',
     })
   },

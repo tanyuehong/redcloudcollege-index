@@ -17,7 +17,7 @@
               <h3 class="positionTitle">推荐</h3>
               <div class="recommand-content">
                 <a class="recommand-item">
-                  <img src="https://pic.leetcode.cn/1671096669-dBFLhZ-题库.png"
+                  <img src="https://static.redskt.com/assets/img/ios_position.jpg"
                     class="object-cover md:h-full md:w-full h-[100px] w-[200px]" alt="动态规划基础模型">
                 </a>
               </div>
@@ -33,10 +33,11 @@
 
             <div class="question-content">
               <div class="filter-btns">
-                <nuxt-link :to="typePath(item)" class="filter-btn" v-bind:class="{ active: type == item.id }"  v-for="item in classifyList" :key="item.id">
-                  <div class="svg-img" v-html="item.img" v-if="item.type==2"></div>
+                <nuxt-link :to="typePath(item)" class="filter-btn" v-bind:class="{ active: type == item.id }"
+                  v-for="item in classifyList" :key="item.id">
+                  <div class="svg-img" v-html="item.img" v-if="item.type == 2"></div>
                   {{ item.name }}
-                </nuxt-link >     
+                </nuxt-link>
               </div>
               <div class="job-question-list">
                 <div class="question-header">
@@ -72,12 +73,12 @@
                   </div>
                 </div>
 
-                <div class="qustion-list" v-if="list.length>0">
+                <div class="qustion-list" v-if="list.length > 0">
                   <div class="qustion-list-item" v-for="item in list" :key="item.id">
                     <div role="cell" class="qustion-title col5">
                       <span class="truncate">
                         <nuxt-link :to="'/interview/detail/' + item.qid" target="_blank" class="item-title">
-                         {{ item.snum }}. {{ item.title }}
+                          {{ item.snum }}. {{ item.title }}
                         </nuxt-link>
                       </span>
                     </div>
@@ -89,7 +90,12 @@
                       </span>
                     </div>
                     <div role="cell" class="qustion-title col2">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" class="flex-0 -mt-1.5 h-5 w-5 text-gray-5 dark:text-gray-7"><path fill-rule="evenodd" d="M7 8v2H6a3 3 0 00-3 3v6a3 3 0 003 3h12a3 3 0 003-3v-6a3 3 0 00-3-3h-1V8A5 5 0 007 8zm8 0v2H9V8a3 3 0 116 0zm-3 6a2 2 0 100 4 2 2 0 000-4z" clip-rule="evenodd"></path></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
+                        fill="currentColor" class="flex-0 -mt-1.5 h-5 w-5 text-gray-5 dark:text-gray-7">
+                        <path fill-rule="evenodd"
+                          d="M7 8v2H6a3 3 0 00-3 3v6a3 3 0 003 3h12a3 3 0 003-3v-6a3 3 0 00-3-3h-1V8A5 5 0 007 8zm8 0v2H9V8a3 3 0 116 0zm-3 6a2 2 0 100 4 2 2 0 000-4z"
+                          clip-rule="evenodd"></path>
+                      </svg>
                     </div>
                     <div role="cell" class="qustion-title col2"><span class="text-yellow dark:text-dark-yellow">{{
                       item.deep
@@ -104,17 +110,17 @@
                 </div>
 
                 <div class="nodata-warper" v-if="list.length == 0">
-            <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示"/>
-            <div>
-              <span class="nodata-title">该分类下暂时没有文章哦！</span>
-            </div>
-          </div>
+                  <img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png" alt="空数据提示" />
+                  <div>
+                    <span class="nodata-title">该分类下暂时没有文章哦！</span>
+                  </div>
+                </div>
 
                 <div class="page-content" v-if="page">
                   <div class="relative"><button class="flex page-numbers" type="button" aria-haspopup="true"
                       aria-expanded="false" data-headlessui-state="">50 条/页<svg xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"
-                        class="pointer-events-none ml-3" aria-hidden="true">
+                        viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" class="pointer-events-none ml-3"
+                        aria-hidden="true">
                         <path fill-rule="evenodd"
                           d="M4.929 7.913l7.078 7.057 7.064-7.057a1 1 0 111.414 1.414l-7.77 7.764a1 1 0 01-1.415 0L3.515 9.328a1 1 0 011.414-1.414z"
                           clip-rule="evenodd"></path>
@@ -153,21 +159,21 @@
 
         <div class="col-md-4">
           <client-only>
-          <div class="user-sign">
-            <Calendar ref="Calendar" :markDateMore="signArr" v-on:isToday="clickToday"
-              agoDayHide="1530115221" v-on:choseDay="clickDay" v-on:changeMonth="changeDate"></Calendar>
-          
-            <div class="sin-desc">
-              <span class="des-notice">注:</span>
-              <span class="date-style cb-green"></span><span class="des-lable">已学习</span>
-              <span class="date-style cb-blue"></span><span class="des-lable">补签</span>
-              <span class="date-style cb-yellow"></span><span class="des-lable">今天</span>
-            </div>
+            <div class="user-sign">
+              <Calendar ref="Calendar" :markDateMore="signArr" v-on:isToday="clickToday" agoDayHide="1530115221"
+                v-on:choseDay="clickDay" v-on:changeMonth="changeDate"></Calendar>
 
-            <div class="sign-btn">
-              <el-button type="success" size="medium" @click="signBtnClick">{{ signTitle }}</el-button>
+              <div class="sin-desc">
+                <span class="des-notice">注:</span>
+                <span class="date-style cb-green"></span><span class="des-lable">已学习</span>
+                <span class="date-style cb-blue"></span><span class="des-lable">补签</span>
+                <span class="date-style cb-yellow"></span><span class="des-lable">今天</span>
+              </div>
+
+              <div class="sign-btn">
+                <el-button type="success" size="medium" @click="signBtnClick">{{ signTitle }}</el-button>
+              </div>
             </div>
-          </div>
           </client-only>
 
           <div class="every-question" v-if="everyDayQuestion">
@@ -176,7 +182,11 @@
               <div class="question-detail">
                 <div class="q-title">{{ everyDayQuestion.qtitle }}</div>
               </div>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7.913 19.071l7.057-7.078-7.057-7.064a1 1 0 011.414-1.414l7.764 7.77a1 1 0 010 1.415l-7.764 7.785a1 1 0 01-1.414-1.414z" clip-rule="evenodd"></path></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path fill-rule="evenodd"
+                  d="M7.913 19.071l7.057-7.078-7.057-7.064a1 1 0 011.414-1.414l7.764 7.77a1 1 0 010 1.415l-7.764 7.785a1 1 0 01-1.414-1.414z"
+                  clip-rule="evenodd"></path>
+              </svg>
             </nuxt-link>
           </div>
         </div>
@@ -192,26 +202,25 @@
 
 import interviewSudyApi from "@/api/interviewStudyReq";
 import interviewServerApi from "@/api/interviewServerReq";
-import { pid } from "process";
 
 export default {
   data() {
     return {
       activeIndex: "1",
-      isLogin:false,
-      signTitle:"登录",
-      signDate:"",
-      everyDayQuestion:{},
+      isLogin: false,
+      signTitle: "登录",
+      signDate: "",
+      everyDayQuestion: {},
       tagList: [],
       signArr: [],
-      sortArr:[],
-      classifyList:[]
+      sortArr: [],
+      classifyList: []
     }
   },
 
   head() { },
 
-  asyncData({ params, error , app}) {
+  asyncData({ params, error, app }) {
     var token = app.$cookies.get("token");
     return interviewServerApi
       .getPositionQuestionList({
@@ -223,11 +232,11 @@ export default {
       .then((response) => {
         return {
           list: response.data.list ? response.data.list : [],
-          classifyList:response.data.classifyList,
-          everyDayQuestion:response.data.everyDayQuestion,
+          classifyList: response.data.classifyList,
+          everyDayQuestion: response.data.everyDayQuestion,
           pId: params.id,
-          type:params.type ? params.type:response.data.classifyList[0].id,
-          page:false
+          type: params.type ? params.type : response.data.classifyList[0].id,
+          page: false
         };
       });
   },
@@ -235,12 +244,12 @@ export default {
   created() {
     var list = [];
     for (var j = 0; j < 5; j++) {
-      list.push({type:1,htmlContent:this.getHtmlContent(1)});
+      list.push({ type: 1, htmlContent: this.getHtmlContent(1) });
     }
     this.sortArr = list;
-},
+  },
 
-  mounted() { 
+  mounted() {
     var token = localStorage.getItem("redclass_token");
     var userStr = localStorage.getItem("redclass_user");
     if (!(token && token != "undefined") || !(userStr && userStr != "undefined")) {
@@ -250,17 +259,17 @@ export default {
       this.loginInfo = JSON.parse(userStr)
       this.isLogin = true;
       interviewSudyApi.getSignDateList()
-          .then((response) => {
-             window.console.log(response.data.dateList);
-             var dateList = response.data.dateList;
-             var list = [];
-             for (var j = 0; j < dateList.length; j++) {
-                list.push({date:dateList[j],className:"calendar_date"});
-             }
-             this.signArr = list;
-           });
-   
-        
+        .then((response) => {
+          window.console.log(response.data.dateList);
+          var dateList = response.data.dateList;
+          var list = [];
+          for (var j = 0; j < dateList.length; j++) {
+            list.push({ date: dateList[j], className: "calendar_date" });
+          }
+          this.signArr = list;
+        });
+
+
     };
     interviewServerApi
       .getPositionQuestionList({
@@ -273,15 +282,15 @@ export default {
   },
 
   computed: {
-    frequency () {
+    frequency() {
       return function (item) {
-        return "width:" + 70*item.frequency + "px";
+        return "width:" + 70 * item.frequency + "px";
       }
     },
 
-    frequencyBack () {
+    frequencyBack() {
       return function (item) {
-        return "width:" + (70-70*item.frequency) + "px";
+        return "width:" + (70 - 70 * item.frequency) + "px";
       }
     },
 
@@ -290,7 +299,7 @@ export default {
         if (item.name == "全部题目") {
           return "/interview/position/" + this.pId;
         }
-        return "/interview/position/"  + this.pId + "/" + item.id;
+        return "/interview/position/" + this.pId + "/" + item.id;
       };
     },
   },
@@ -298,38 +307,38 @@ export default {
   methods: {
     clickToday(data) {
       this.signTitle = "今日签到";
-      if(this.signDate.length ==0){
+      if (this.signDate.length == 0) {
         this.signDate = data;
-        window.console.log(this.signDate+"111")
+        window.console.log(this.signDate + "111")
       }
     },
     clickDay(data) {
       this.signDate = data;
-      console.log(this.signDate+"222"); // 跳到了本月
+      console.log(this.signDate + "222"); // 跳到了本月
     },
     changeDate() {
     },
     signBtnClick() {
-      if(!this.isLogin) {
+      if (!this.isLogin) {
         $nuxt.$router.push({
-              name: "user-login",
-            });
+          name: "user-login",
+        });
       } else {
-      var params = {date:this.signDate};
-      window.console.log(params);
-      interviewSudyApi.submitInterviewSign(params)
+        var params = { date: this.signDate };
+        window.console.log(params);
+        interviewSudyApi.submitInterviewSign(params)
           .then((response) => {
-           
-           });
+
+          });
       }
     },
     sortTypeClick(index) {
       for (var i = 0; i < this.sortArr.length; i++) {
-        if(i == index) {
+        if (i == index) {
           continue;
         }
         var otherParm = this.sortArr[i];
-        if(otherParm.type == 1) {
+        if (otherParm.type == 1) {
           continue;
         } else {
           otherParm.type == 1
@@ -337,33 +346,33 @@ export default {
         }
       }
       var sortParm = this.sortArr[index];
-      if(sortParm.type == 1) {
+      if (sortParm.type == 1) {
         sortParm.type = 2;
         sortParm.htmlContent = this.getHtmlContent(2);
-      } else if(sortParm.type == 2) {
+      } else if (sortParm.type == 2) {
         sortParm.type = 3;
         sortParm.htmlContent = this.getHtmlContent(3);
       } else {
         sortParm.type = 1;
         sortParm.htmlContent = this.getHtmlContent(1);
       }
-      
+
       interviewServerApi.getPositionQuestionList({
         pId: this.pId,
-        orderType: sortParm.type == 2 ? 2:1,
-        sort: sortParm.type == 1 ? 1:index+1,
+        orderType: sortParm.type == 2 ? 2 : 1,
+        sort: sortParm.type == 1 ? 1 : index + 1,
       }).then((response) => {
-        this.list =  response.data.list ? response.data.list : [];
-        this.classifyList =  response.data.classifyList;
+        this.list = response.data.list ? response.data.list : [];
+        this.classifyList = response.data.classifyList;
         this.page = false;
       });
 
 
     },
     getHtmlContent(type) {
-      if(type == 1) {
+      if (type == 1) {
         return "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"margin-left:8px;margin-top:2px;\" viewBox=\"0 0 24 24\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M18.695 9.378L12.83 3.769a1.137 1.137 0 00-.06-.054c-.489-.404-1.249-.377-1.7.06L5.303 9.381a.51.51 0 00-.16.366c0 .297.27.539.602.539h12.512a.64.64 0 00.411-.146.501.501 0 00.028-.762zM12.77 20.285c.021-.017.042-.035.062-.054l5.863-5.609a.5.5 0 00-.028-.762.64.64 0 00-.41-.146H5.743c-.332 0-.601.242-.601.54a.51.51 0 00.16.365l5.769 5.606c.45.437 1.21.464 1.698.06z\"></path></svg>";
-      } else if(type == 2) {
+      } else if (type == 2) {
         return "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"margin-left:8px;margin-top:2px;\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M7.44926 11.8332C7.46161 11.8229 7.47354 11.8123 7.48504 11.8013L10.9052 8.52958C11.0376 8.4029 11.0305 8.20389 10.8893 8.08509C10.8243 8.03043 10.7385 8.00001 10.6495 8.00001H3.35053C3.15694 8.00001 3 8.1408 3 8.31447C3 8.39354 3.0332 8.46971 3.09299 8.5278L6.45859 11.7977C6.72125 12.0529 7.16479 12.0688 7.44926 11.8332Z\"></path></svg>";
       } else {
         return "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"margin-left:8px;margin-top:2px;\" viewBox=\"0 0 14 14\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M10.9052 5.47044L7.48504 2.19872C7.47354 2.18772 7.46161 2.1771 7.44926 2.16687C7.16479 1.93123 6.72125 1.94709 6.45859 2.20229L3.09299 5.47222C3.0332 5.53031 3 5.60648 3 5.68555C3 5.85922 3.15694 6.00001 3.35053 6.00001H10.6495C10.7385 6.00001 10.8243 5.96959 10.8893 5.91493C11.0305 5.79613 11.0376 5.59712 10.9052 5.47044Z\"></path></svg>";
@@ -374,7 +383,6 @@ export default {
 </script>
 
 <style scoped>
-
 .every-question {
   margin-top: 15px;
   background-color: #fff;
@@ -648,7 +656,7 @@ export default {
   background-color: rgba(0, 10, 32, .1);
 }
 
-.filter-btns .filter-btn >>> svg {
+.filter-btns .filter-btn>>>svg {
   height: 23px;
   width: 23px;
   margin-top: -3px;

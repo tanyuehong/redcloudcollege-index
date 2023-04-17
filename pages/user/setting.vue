@@ -9,6 +9,7 @@
           </nuxt-link>
         </li>
       </div>
+      <div class="setting-content">
       <div class="setting-lefte-menu">
         <div @click="personSettingClick" class="setting-menu-item">
           <div class="nav-item" v-bind:class="{ active: settingtype == 1 }"><svg width="16" height="16"
@@ -36,8 +37,8 @@
           </div>
         </div>
       </div>
-      <div v-if="settingtype === 1">
-        <div class="person-setting shadow">
+      <div class="right-content">
+        <div class="person-setting shadow" v-if="settingtype === 1">
           <div class="nav-text">个人资料</div>
           <div class="user-infos">
             <div class="info-input">
@@ -174,9 +175,7 @@
           </div>
         </div>
 
-      </div>
-      <div v-if="settingtype === 2">
-        <div class="person-setting shadow">
+        <div class="person-setting shadow" v-if="settingtype === 2">
           <div class="nav-text">账号设置</div>
           <div class="user-infos">
             <div class="info-input zhanghu-setting">
@@ -260,10 +259,8 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <div v-if="settingtype === 3">
-        <div class="person-setting shadow">
+        <div class="person-setting shadow" v-if="settingtype === 3">
           <div class="nav-text">功能管理</div>
           <div class="user-infos">
             <div class="info-input zhanghu-setting">
@@ -272,24 +269,9 @@
                 <div class="zhanghu-form-item">
                   <label for="phone" class="byte-form-item__label" style="width: 86px;">面试职位管理</label>
                   <div class="zhanghu-setting-chang admin-setting-chang">
-                    <el-button type="text" @click="checkPositionClick">查看职位列表</el-button>
+                    <el-button type="text" @click="adminInterviewPositionClick">进入</el-button>
                     <el-dialog :title="functionTitle" width="140" :close-on-click-modal="false"
                       :close-on-press-escape="false" :show-close="false" :visible.sync="changephine" center>
-                      <el-table :data="positionList" height="360" v-if="positionType == 1">
-                        <el-table-column property="name" label="职位名" width="120"></el-table-column>
-                        <el-table-column property="img" label="职位图标" width="260"></el-table-column>
-                        <el-table-column property="sort" label="序号" width="60"></el-table-column>
-
-                        <el-table-column property="gmtCreate" label="创建日期" width="160"></el-table-column>
-                        <el-table-column property="gmtModified" label="创建日期" width="160"></el-table-column>
-                        <el-table-column label="操作" width="150">
-                          <template slot-scope="scope">
-                            <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">编辑</el-button>
-                            <el-button size="mini" type="danger"
-                              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                          </template>
-                        </el-table-column>
-                      </el-table>
 
                       <el-form ref="form" :model="editPosition" label-width="80px" v-if="positionType == 2">
                         <el-form-item label="职位名">
@@ -403,12 +385,14 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
+    </div>
+  </div>
   </div>
 </template>
 
 <script>
+import '~/assets/css/setting.css'
 import userApi from '@/api/user';
 import interviewAdmin from '@/api/interviewAdminReq';
 
@@ -451,6 +435,10 @@ export default {
   methods: {
     gotoTagSetting() {
       this.$router.push({name: "admin-tag"});
+    },
+    adminInterviewPositionClick() {
+      this.$router.push({
+				name: "admin-interview-position"});
     },
     adminInterviewQuestionClick() {
       this.$router.push({
@@ -656,8 +644,8 @@ export default {
 .ucenter-setting-header {
   height: 45.98px;
   background: #fff;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .ucenter-back-item {
@@ -670,15 +658,6 @@ export default {
   color: #666;
 }
 
-.setting-lefte-menu {
-  float: left;
-  box-sizing: border-box;
-  background: #fff;
-  width: 230px;
-  height: 672.09px;
-  padding: 8px;
-}
-
 .setting-menu-item .nav-item.active {
   background: #e8f3ff;
   color: #409eff;
@@ -687,17 +666,6 @@ export default {
 
 .setting-menu-item .nav-item.authority-mode {
   margin-left: 50px;
-}
-
-.setting-menu-item .nav-item {
-  display: flex;
-  align-items: center;
-  font-weight: 400;
-  height: 48px;
-  width: 214px;
-  font-size: 16px;
-  color: #4e5969;
-  cursor: pointer;
 }
 
 .nav-item .svg {
@@ -713,85 +681,6 @@ export default {
   fill: #86909c;
 }
 
-.person-setting {
-  float: right;
-  position: relative;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-sizing: border-box;
-  background: #fff;
-  width: calc(100% - 254px);
-  min-height: 626px;
-  margin-bottom: 20px;
-}
-
-.person-setting .nav-text {
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 18px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.person-setting .user-infos {
-  display: flex;
-}
-
-.person-setting .user-infos .info-input {
-  min-width: 240px;
-  width: calc(100% - 340px);
-}
-
-.person-setting .user-infos .info-input .divide {
-  margin-left: 12px;
-  margin-top: 13px;
-  margin-bottom: 13px;
-  width: 100%;
-  border-top: 1px solid #eaeaea;
-}
-
-.person-setting.user-infos .info-input .form .byte-form-item {
-  margin-bottom: 13px;
-  white-space: nowrap;
-}
-
-.person-setting .user-infos .info-input .form .byte-form-item__label {
-  font-weight: 500;
-  font-size: 14px;
-  color: #333;
-  margin-left: 20px;
-  margin-right: 30px;
-  display: inline-block;
-  text-align: left;
-  padding-right: 0;
-  float: left;
-  line-height: 32px;
-}
-
-.person-setting .user-infos .info-input .input .byte-input__suffix {
-  width: 50px;
-  right: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.person-setting .user-infos .info-input .input .suffix {
-  font-size: 12px;
-  color: #86909c;
-}
 
 .byte-form-item__content {
   zoom: 1;
@@ -799,12 +688,6 @@ export default {
   font-size: 14px;
   line-height: 32px;
 }
-
-.person-setting .user-infos .info-input .input {
-  max-width: 380px;
-  min-width: 100px;
-}
-
 .byte-input,
 .byte-input__input {
   position: relative;
@@ -945,23 +828,6 @@ textarea {
   resize: vertical;
 }
 
-.person-setting .user-infos .info-input .byte-input__textarea {
-  height: 140px;
-  min-height: 30px;
-  color: #666;
-  background: #fafafa;
-  font-size: 12px;
-}
-
-.person-setting .user-infos .info-input .textarea-suffix {
-  position: absolute;
-  right: 15px;
-  bottom: -3px;
-  color: #86909c;
-  font-size: 12px;
-  white-space: nowrap;
-}
-
 .avatar-uploader .avatar {
   width: 100%;
   height: 100%;
@@ -1033,11 +899,6 @@ input[type='file' i] {
 
 .person-setting .user-infos .avatar-input {
   padding-left: 74px;
-}
-
-.person-setting .user-infos .info-input.zhanghu-setting {
-  min-width: 240px;
-  width: calc(100% - 100px);
 }
 
 .zhanghu-form-item {

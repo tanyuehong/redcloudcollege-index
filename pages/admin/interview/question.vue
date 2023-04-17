@@ -300,31 +300,10 @@ export default {
 .ucenter-back-item a {
   color: #666;
 }
-
-
-.setting-menu-item .nav-item.active {
-  background: #e8f3ff;
-  color: #409eff;
-  cursor: pointer;
-}
-
-.setting-menu-item .nav-item.authority-mode {
-  margin-left: 50px;
-}
-
 .nav-item .svg {
   margin-right: 12px;
   margin-left: 24px;
 }
-
-.nav-item.active .svg .close-path {
-  fill: #409eff;
-}
-
-.nav-item .svg .close-path {
-  fill: #86909c;
-}
-
 .byte-form-item__content {
   zoom: 1;
   position: relative;

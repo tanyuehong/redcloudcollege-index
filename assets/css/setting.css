@@ -2,22 +2,53 @@
 
 .setting-content {
     display: table;
+    margin-bottom: 20px;
   }
 
 .right-content {
     display: table-cell;
+    background: #fff;
   }
 
-.setting-lefte-menu {
+.lefte_content {
     display: table-cell;
-    box-sizing: border-box;
     background: #fff;
+}
+
+.middle_content {
+    display: table-cell;
+    background:#f6f6f6;
+}
+
+.middle_content .sprate {
+    width: 10px;
+}
+
+.setting-lefte-menu {
+    box-sizing: border-box;
     width: 220px;
     min-height: 600px;
     padding-left: 8px;
     padding-right: 8px;
-    padding-top: 4px;
-    margin-bottom: 20px;
+    padding-top: 15px;
+}
+
+.setting-menu-item {
+    color: #4e5969;
+    cursor: pointer;
+}
+
+.setting-menu-item.active .nav-item .svg .close-path {
+    fill: #409eff;
+}
+  
+.setting-menu-item.active {
+    background: #e8f3ff;
+    color: #409eff;
+}
+
+.setting-menu-item .nav-item .svg .close-path {
+    fill: #86909c;
 }
 
 .setting-menu-item .nav-item {
@@ -26,20 +57,21 @@
     font-weight: 400;
     height: 48px;
     font-size: 16px;
-    color: #4e5969;
-    cursor: pointer;
+  }
+
+  .setting-menu-item .nav-item.authority-mode {
+    margin-left: 50px;
   }
 
 .person-setting {
     position: relative;
-    padding: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
     border-radius: 2px;
     box-sizing: border-box;
     background: #fff;
     width: 900px;
-    min-height: 626px;
-    margin-bottom: 20px;
-    margin-left: 10px;
+    min-height: 686px;
 }
 
 .person-setting .nav-text {
@@ -73,6 +105,7 @@
 }
 
 .person-setting .user-infos .info-input .form .byte-form-item__label {
+    display: block;
     font-weight: 500;
     font-size: 14px;
     color: #333;
@@ -81,6 +114,7 @@
     display: inline-block;
     text-align: left;
     padding-right: 0;
+    float: left;
     line-height: 32px;
 }
 

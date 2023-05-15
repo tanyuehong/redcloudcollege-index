@@ -185,11 +185,14 @@ export default {
       //判断路径是否有token值
       this.wxLogin()
     }
+  },
 
+  mounted() {
+    window.loginInfo = this;
     this.showInfo()
   },
-  methods: {
 
+  methods: {
     serchBtnClick () {
       this.$message({
         message: "搜索功能正在开发过程中，敬请期待！",
@@ -244,6 +247,8 @@ export default {
         var userStr = localStorage.getItem('redclass_user')
         if (userStr && userStr != 'undefined') {
           this.loginInfo = JSON.parse(userStr)
+        } else {
+          this.loginInfo = {};
         }
       }
     },

@@ -47,13 +47,18 @@ service.interceptors.response.use(
         errorMsg = res.message
       }
       Message.closeAll()
-      if (res.code == 999 || res.code == 998) {
+      if(res.code == 996|| res.code == 999 || res.code == 998) {
         if (window != undefined) {
           window.localStorage.setItem('redclass_token', '')
           window.localStorage.setItem('redclass_user', '')
           window.$nuxt.$cookies.set('token', '')
         }
-        window.$nuxt.$router.push({ name: 'user-login' });
+        if (res.code == 999 || res.code == 998) {
+          window.$nuxt.$router.push({ name: 'user-login' });
+        } else {
+           window.loginInfo.showInfo();
+           window.console.log(window.loginInfo);
+        }
       }
       Message({ message: errorMsg, type: 'error', duration: tipsShowTime })
       return Promise.reject(new Error(errorMsg))

@@ -63,6 +63,7 @@ export default {
     { src: '@/plugins/element-ui' },
     { src: '@/plugins/wangEditor', ssr: false },
     { src: '@/plugins/vue-calendar', ssr: false },
+    { src: '@/plugins/vue-mavon-editor', ssr: false },
   ],
 
   /*

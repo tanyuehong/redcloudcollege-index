@@ -10,7 +10,8 @@
         </li>
       </div>
       <div class="setting-content">
-      <div class="setting-lefte-menu">
+      <div class="lefte_content">
+        <div class="setting-lefte-menu">
         <div @click="personSettingClick" class="setting-menu-item" v-bind:class="{ active: settingtype == 1 }">
           <div class="nav-item"><svg width="16" height="16"
               viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg">
@@ -36,9 +37,14 @@
             功能管理
           </div>
         </div>
+        </div>
       </div>
+      <div class="middle_content">
+          <div class="sprate">
+          </div>
+        </div>
       <div class="right-content">
-        <div class="person-setting shadow" v-if="settingtype === 1">
+        <div class="person-setting" v-if="settingtype === 1">
           <div class="nav-text">个人资料</div>
           <div class="user-infos">
             <div class="info-input">
@@ -175,7 +181,7 @@
           </div>
         </div>
 
-        <div class="person-setting shadow" v-if="settingtype === 2">
+        <div class="person-setting" v-if="settingtype === 2">
           <div class="nav-text">账号设置</div>
           <div class="user-infos">
             <div class="info-input zhanghu-setting">
@@ -260,7 +266,7 @@
           </div>
         </div>
 
-        <div class="person-setting shadow" v-if="settingtype === 3">
+        <div class="person-setting" v-if="settingtype === 3">
           <div class="nav-text">功能管理</div>
           <div class="user-infos">
             <div class="info-input zhanghu-setting">

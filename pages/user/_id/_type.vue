@@ -64,7 +64,7 @@
 								<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png"
 									alt="空数据提示" />
 								<div>
-									<span>该用户暂时还没有发表文章哦</span>
+									<span class="nodata-title">该用户暂时还没有发表文章哦</span>
 								</div>
 							</div>
 							<ul class="article_list">
@@ -127,7 +127,7 @@
 									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png"
 										alt="空数据提示" />
 									<div>
-										<span>该用户暂时还没有收藏文章哦</span>
+										<span class="nodata-title">该用户暂时还没有收藏文章哦</span>
 									</div>
 								</div>
 								<ul class="article_list">
@@ -177,7 +177,7 @@
 									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png"
 										alt="空数据提示" />
 									<div>
-										<span>该用户暂时还没有收藏问题哦</span>
+										<span class="nodata-title">该用户暂时还没有收藏问题哦</span>
 									</div>
 								</div>
 								<div class="questions_collect_con">
@@ -237,6 +237,13 @@
 									</nuxt-link>
 								</div>
 							</div>
+							<div class="nodata-warper" v-if="dataList.length == 0">
+								<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png"
+									alt="空数据提示" />
+								<div>
+									<span class="nodata-title">该用户暂时还没有关注用户哦！</span>
+								</div>
+							</div>
 							<div class="user-focus-list">
 								<ul class="tag-list">
 									<li class="item" v-for="item in dataList" :key="item.id">
@@ -289,7 +296,7 @@
 									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png"
 										alt="空数据提示" />
 									<div>
-										<span>该用户暂时还没有点赞文章哦</span>
+										<span class="nodata-title">该用户暂时还没有点赞文章哦</span>
 									</div>
 								</div>
 								<ul class="article_list">
@@ -338,7 +345,7 @@
 									<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png"
 										alt="空数据提示" />
 									<div>
-										<span>该用户暂时还没有点赞问题哦</span>
+										<span class="nodata-title">该用户暂时还没有点赞问题哦</span>
 									</div>
 								</div>
 								<div class="questions_collect_con">
@@ -672,6 +679,9 @@ export default {
 
 	computed: {
 		userCreateTime: function () {
+			if(this.userInfo.gmtCreate==undefined) {
+				return "";
+			}
 			return this.userInfo.gmtCreate.substring(0, 10);
 		},
 		focusString: function () {

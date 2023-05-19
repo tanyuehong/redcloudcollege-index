@@ -386,6 +386,14 @@
                     <el-button type="text" @click="gotoTagSetting">进入</el-button>
                   </div>
                 </div>
+
+                <div class="divide"></div>
+                <div class="zhanghu-form-item">
+                  <label for="phone" class="byte-form-item__label" style="width: 86px;">实践文章管理</label>
+                  <div class="zhanghu-setting-chang">
+                    <el-button type="text" @click="gotoEditBlog">进入</el-button>
+                  </div>
+                </div>
                 <div class="divide"></div>
               </form>
             </div>
@@ -441,6 +449,9 @@ export default {
   methods: {
     gotoTagSetting() {
       this.$router.push({name: "admin-tag"});
+    },
+    gotoEditBlog() {
+      this.$router.push({name: "admin-practice-blog"});
     },
     adminInterviewPositionClick() {
       this.$router.push({

@@ -392,7 +392,10 @@
 			</div>
 			<div class="col-md-4 ucenter-rightinfo">
 				<div class="info-honor">
-					<div class="block-title">个人成就</div>
+					<div class="info-honor-header">
+						<div class="block-title">个人成就</div>
+						<el-button class="header-btn">写文章</el-button>
+				    </div>
 					<div class="block-body">
 						<!---->
 						<!---->
@@ -701,6 +704,7 @@ export default {
 </script>
 
 <style>
+
 .user-focus-list .follow-btn.active {
 	color: #fff;
 	background-color: #92c452;
@@ -1061,12 +1065,25 @@ export default {
 
 .info-honor .block-title {
 	font-size: 16px;
-	margin-top: 5px;
-	padding-bottom: 20px;
+	margin-top: 8px;
 	font-weight: 600;
 	color: #333;
-	border-bottom: 1px solid rgba(230, 230, 231, .5);
+	height: 30px;
+	line-height: 30px;
+	display: inline-block;
+}
+
+.info-honor  .info-honor-header {
 	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(230, 230, 231, .5);
+}
+
+.info-honor  .header-btn {
+	float: right;
+	background-color: #1e80ff;
+	padding: 12px 40px;
+	color:#fff;
 }
 
 .info-honor .stat-item {

@@ -394,7 +394,7 @@
 				<div class="info-honor">
 					<div class="info-honor-header">
 						<div class="block-title">个人成就</div>
-						<el-button class="header-btn">写文章</el-button>
+						<el-button class="header-btn" @click="jumpToNewblog">写文章</el-button>
 				    </div>
 					<div class="block-body">
 						<!---->
@@ -541,6 +541,9 @@ export default {
 	},
 
 	methods: {
+		jumpToNewblog() {
+			this.$router.push({name: "practice-newblog"});
+		},
 		clickFocusBtnClick(item) {
 			if (this.isLogin) {
 				if (item.bfocus) {

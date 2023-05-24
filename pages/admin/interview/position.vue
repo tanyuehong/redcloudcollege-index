@@ -40,7 +40,12 @@
       </div>
         <div class="right-content">
           <div class="person-setting" v-if="settingtype === 1">
-            <div class="nav-text">职位管理</div>
+            <div class="nav-header">
+              <div class="nav-text">职位管理</div>
+              <div class="add-item">
+                <el-button type="primary" size="small" plain @click="addInterviewPosition">新建职位</el-button>
+              </div>
+            </div>
             <div class="admin-content">
               <el-table :data="positionList" height="600">
                 <el-table-column property="name" label="职位名" width="120"></el-table-column>
@@ -56,6 +61,27 @@
                   </template>
                 </el-table-column>
               </el-table>
+
+              <el-dialog title="新建职位" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
+                :show-close="true" :visible.sync="showNewPosition" center>
+                <el-form ref="form" label-width="80px">
+                        <el-form-item label="职位名">
+                          <el-input v-model="editPosition.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="职位图标">
+                          <el-input v-model="editPosition.img"></el-input>
+                        </el-form-item>
+                        <el-form-item label="序号">
+                          <el-input v-model="editPosition.sort"></el-input>
+                        </el-form-item>
+                </el-form>
+                <span slot="footer" class="dialog-footer">
+                  <el-button @click="positionBackClick" size="small">返 回</el-button>
+                  <el-button type="primary" @click="onSubmitClick" size="small" v-if="submitTitle.length > 0">{{
+                    submitTitle
+                  }}</el-button>
+                </span>
+              </el-dialog>
 
               <el-dialog :title="functionTitle" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
                 :show-close="true" :visible.sync="showQustionPositionPage" center>
@@ -137,6 +163,7 @@ import interviewAdmin from "@/api/interviewAdminReq";
 export default {
   data() {
     return {
+      editPosition: {},
       editQuestion: {},
       editQuestionClassify: {},
       questionList: [],
@@ -149,7 +176,7 @@ export default {
       selectPosition: "",
       selectClassify: "",
       showQustionPositionPage: false,
-
+      showNewPosition:false,
       slectDate: '',                // 当前显示的日期
       everyDayquestionList: [],     // 每日一题的列表
       showEveryQuestionPage: false,
@@ -163,9 +190,13 @@ export default {
     this.getQuestionList();
   },
   methods: {
+    addInterviewPosition() {
+      this.submitTitle = "新建";
+      this.showNewPosition = true;
+    },
+
     addEveryQuestionClick() {
       this.showEveryQuestionPage = true;
-
     },
     selectDateDidChange(date) {
       this.slectDate = date;
@@ -284,6 +315,12 @@ export default {
 </script>
   
 <style scoped>
+
+.nav-header .add-item {
+  float: right;
+  margin-right: 36px;
+  margin-top: 15px;
+}
 
 .lefte-content {
    display: table-cell;

@@ -278,19 +278,6 @@
                     <el-button type="text" @click="adminInterviewPositionClick">进入</el-button>
                     <el-dialog :title="functionTitle" width="140" :close-on-click-modal="false"
                       :close-on-press-escape="false" :show-close="false" :visible.sync="changephine" center>
-
-                      <el-form ref="form" :model="editPosition" label-width="80px" v-if="positionType == 2">
-                        <el-form-item label="职位名">
-                          <el-input v-model="editPosition.name"></el-input>
-                        </el-form-item>
-                        <el-form-item label="职位图标">
-                          <el-input v-model="editPosition.img"></el-input>
-                        </el-form-item>
-                        <el-form-item label="序号">
-                          <el-input v-model="editPosition.sort"></el-input>
-                        </el-form-item>
-                      </el-form>
-
                       <el-table :data="positionClassifyList" height="160" v-if="positionType == 2">
                         <el-table-column property="name" label="名称" width="100" height="60"></el-table-column>
                         <el-table-column property="img" label="图标" width="380"

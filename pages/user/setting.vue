@@ -296,9 +296,7 @@
                               @confirm="deleteClassify(scope.$index, scope.row)">
                               <el-button type="danger" size="mini" slot="reference">删除</el-button>
                             </el-popconfirm>
-
                           </template>
-
                         </el-table-column>
                       </el-table>
 

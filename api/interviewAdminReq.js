@@ -69,5 +69,13 @@ export default {
       method: 'get'
     })
   },
+
+  addInterviewPostion(position) {
+    return request({
+      url: `/interview/admin/addInterviewPostion`,
+      method: 'post',
+      data: position,
+    })
+  },
   
 }

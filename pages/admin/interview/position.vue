@@ -76,8 +76,8 @@
                         </el-form-item>
                 </el-form>
                 <span slot="footer" class="dialog-footer">
-                  <el-button @click="positionBackClick" size="small">返 回</el-button>
-                  <el-button type="primary" @click="onSubmitClick" size="small" v-if="submitTitle.length > 0">{{
+                  <el-button @click="addPositionBackClick" size="small">返 回</el-button>
+                  <el-button type="primary" @click="submitPositon" size="small" v-if="submitTitle.length > 0">{{
                     submitTitle
                   }}</el-button>
                 </span>
@@ -187,9 +187,24 @@ export default {
   },
 
   mounted() {
-    this.getQuestionList();
+    this.getInterviewPositionList();
   },
   methods: {
+    editPositionClick(index, row) {
+      this.editPosition = this.positionList[index];
+      this.submitTitle = "修改";
+      this.showNewPosition = true;
+    },
+    submitPositon() {
+      interviewAdmin
+        .addInterviewPostion(this.editPosition)
+        .then(response => {});
+    },
+    addPositionBackClick() {
+      this.showNewPosition = false;
+      this.submitTitle = "";
+    },
+
     addInterviewPosition() {
       this.submitTitle = "新建";
       this.showNewPosition = true;
@@ -203,7 +218,7 @@ export default {
       window.console.log('=====' + date);
     },
 
-    getQuestionList() {
+    getInterviewPositionList() {
       interviewAdmin.getPositionList().then((response) => {
         this.positionList = response.data.positionList;
       })

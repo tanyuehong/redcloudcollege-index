@@ -9,7 +9,99 @@
       <div class="funtion">
         <span class="saveInfo">{{ tipsmessage }}</span>
         <el-button type="primary" size="medium" plain>草稿箱</el-button>
-        <el-button @click="submitBtnClick" size="medium" type="primary">发布</el-button>
+
+        <el-popover placement="right" width="580" trigger="manual" v-model="submitVisible">
+          <div class="submit-content">
+              <div  class="title">发布文章</div>
+              <div  class="form-item">
+                <div  class="label required category-label"> 分类： </div>
+                <div  class="form-item-content category-list">
+                  <div  class="item"> 后端 </div>
+                  <div  class="item"> 前端 </div>
+                  <div  class="item"> Android </div>
+                  <div  class="item"> iOS </div>
+                  <div  class="item"> 人工智能 </div>
+                  <div  class="item"> 开发工具 </div>
+                  <div  class="item"> 代码人生 </div>
+                  <div  class="item"> 阅读 </div>
+               
+               </div>
+              </div>
+              <div  class="form-item">
+                <div  class="label required"> 添加标签： </div>
+                <div  class="form-item-content">
+                  <el-select v-model="value1" multiple placeholder="请搜索添加标签">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+                
+                </div>
+              </div>
+              <div  class="form-item">
+                <div  class="label">文章封面：</div>
+                <div  class="form-item-content">
+                  <div data-v-cfaa5564=""  class="coverselector_container">
+                    <div data-v-cfaa5564=""><button data-v-cfaa5564="" class="select-btn">
+                        <div data-v-cfaa5564="" class="button-slot"><img data-v-cfaa5564=""
+                            src="//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web_editor/img/add.0e2d17b6.svg"
+                            height="20" alt="add_cover">
+                          <div data-v-cfaa5564="" class="upload">上传封面</div>
+                        </div>
+                      </button>
+                      <div data-v-cfaa5564="" class="addvice">建议尺寸：1303*734px</div>
+                    </div><input data-v-cfaa5564="" type="file" style="display: none;">
+                  </div>
+                </div>
+              </div>
+              <div  class="form-item column-line">
+                <div  class="label"> 收录至专栏： </div>
+                <div  class="form-item-content">
+                  <el-select v-model="value1" multiple placeholder="请搜索添加专栏，同一篇文章最多添加三个专栏">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+                </div>
+              </div>
+              <div  class="form-item column-line">
+                <div  class="label"> 创作话题： </div>
+                <div  class="form-item-content">
+                  <el-select v-model="value1" multiple placeholder="请搜索添加话题，最多添加1个话题">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+                </div>
+              </div>
+              <div  class="summary-box form-item">
+                <div  class="label required">编辑摘要：</div>
+                <div  class="summary form-item-content">
+                  <el-input type="textarea" v-model="jubaoContent" placeholder=""
+                            maxlength="100" :rows="4" show-word-limit resize="none">
+                  </el-input>
+                </div>
+              </div>
+              <div  class="footer"><!---->
+                <div  class="btn-container">
+                    <el-button size="medium" @click="submitVisible = !submitVisible">取消</el-button>
+                    <el-button type="primary" size="medium">确定并发布</el-button>
+                  </div>
+              </div>
+          
+          </div>
+          <el-button slot="reference" size="medium" type="primary" @click="submitVisible = !submitVisible">发布</el-button>
+        </el-popover>
+
 
         <div data-v-151232ea="" class="toggle-btn"><svg data-v-151232ea="" width="24" height="24" viewBox="0 0 24 24"
             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +116,8 @@
     </div>
     <div class="mavonEditor">
       <no-ssr>
-        <mavon-editor ref=md :toolbars="toolbars" @save="clcikSaveBtn" @imgAdd="$imgAdd" @imgDel="$imgDel" v-model="editblog.content" placeholder="开始创作吧!" />
+        <mavon-editor ref=md :toolbars="toolbars" @save="clcikSaveBtn" @imgAdd="$imgAdd" @imgDel="$imgDel"
+          v-model="editblog.content" placeholder="开始创作吧!" />
       </no-ssr>
     </div>
   </div>
@@ -39,7 +132,8 @@ export default {
   layout: "content",
   data() {
     return {
-      tipsmessage:"",
+      tipsmessage: "",
+      submitVisible:false,
       handbook: "#### how to use mavonEditor in nuxt.js",
       toolbars: {
         bold: true, // 粗体
@@ -82,17 +176,17 @@ export default {
     return {
       loginInfo: {},
       blogId: params.id,
-      editblog:{}
+      editblog: {}
     }
   },
   mounted() {
-    if(this.blogId != undefined && this.blogId.length>0) {
-      blogApi.getBlogDetail(this.blogId).then((response) => {  
+    if (this.blogId != undefined && this.blogId.length > 0) {
+      blogApi.getBlogDetail(this.blogId).then((response) => {
         this.editblog = response.data.blog;
       });
-    } 
-		var userStr = localStorage.getItem("redclass_user");
-		if (userStr != "undefined" && userStr.length>0) {
+    }
+    var userStr = localStorage.getItem("redclass_user");
+    if (userStr != "undefined" && userStr.length > 0) {
       this.loginInfo = JSON.parse(userStr);
     }
     window.console.log(this.loginInfo.avatar);
@@ -104,15 +198,15 @@ export default {
     clcikSaveBtn() {
       this.tipsmessage = "保存中...";
       blogApi.addNewblog(this.editblog).then((response) => {
-         this.editblog.id = response.data.blog.id; 
-         this.setBrowserUrl(response.data.blog.id);
-         this.tipsmessage = "保存成功";
+        this.editblog.id = response.data.blog.id;
+        this.setBrowserUrl(response.data.blog.id);
+        this.tipsmessage = "保存成功";
       })
     },
-    setBrowserUrl(blogId){
-      var origin   = window.location.origin;   // 返回基础 URL (https://www.runoob.com/)
+    setBrowserUrl(blogId) {
+      var origin = window.location.origin;   // 返回基础 URL (https://www.runoob.com/)
       var url = origin + "/practice/newblog/" + blogId;
-      history.pushState({url: url}, '', url)
+      history.pushState({ url: url }, '', url)
     },
 
     $imgAdd(pos, $file) {
@@ -143,11 +237,138 @@ export default {
 
 <style>
 
+.footer {
+    border-top: 1px solid #e5e6eb;
+    height: 72px;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.footer .btn-container {
+    -webkit-box-flex: 1;
+    -ms-flex: auto;
+    flex: auto;
+    text-align: right;
+    padding-top:15px;
+}
+
+.form-item-content .el-select {
+  width: 420px;
+}
+.form-item-content .el-textarea {
+  width: 420px;
+}
+
+.coverselector_container .select-btn {
+    width: 160px;
+    height: 86px;
+    background-color: #fafafa;
+    border: 1px dashed #e5e6eb;
+    margin-bottom: 16px;
+}
+
+.coverselector_container .select-btn .button-slot {
+    cursor: pointer;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+}
+
+.coverselector_container .select-btn .button-slot .upload {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #86909c;
+    margin-top: 10px;
+}
+
+.submit-content  {
+    width: 560px;
+    font-size: 14px;
+    white-space: nowrap;
+    color: #909090;
+    background-color: #fff;
+    cursor: default;
+}
+
+.submit-content .title {
+    padding: 14px 20px 16px 20px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #1d2129;
+    border-bottom: 1px solid #e5e6eb;
+}
+
+.submit-content .form-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 15px 20px 22px;
+}
+
+.submit-content .form-item .label.category-label {
+    line-height: 28px;
+}
+
+.submit-content .form-item .form-item-content {
+  display: flex;
+    flex-direction: row;
+    align-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.submit-content .category-list {
+    white-space: normal;
+}
+.submit-content .form-item .label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 32px;
+    text-align: right;
+    color: #1d2129;
+    width: 85px;
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+}
+
+.submit-content .category-list .item {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    padding: 0 6px;
+    font-size: 14px;
+    line-height: 28px;
+    width: 88px;
+    height: 28px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    border-radius: 2px;
+    cursor: pointer;
+    color: #86909c;
+    background-color: #f4f5f5;
+}
+
+.red-select__suffix {
+  color: #c2c6cc;
+  transition: transform .3s,-webkit-transform .3s;
+  display: inline-block;
+}
 .saveInfo {
   color: #999;
   font-size: 14px;
   margin-right: 8px;
 }
+
 .mavonEditor {
   width: 100%;
   height: 100%;
@@ -181,5 +402,4 @@ export default {
   cursor: pointer;
   border-radius: 2px;
   display: inline-block;
-}
-</style>
+}</style>

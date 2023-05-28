@@ -542,7 +542,7 @@ export default {
 
 	methods: {
 		jumpToNewblog() {
-			this.$router.push({name: "practice-newblog"});
+			this.$router.push({name: "practice-newblog-id"});
 		},
 		clickFocusBtnClick(item) {
 			if (this.isLogin) {

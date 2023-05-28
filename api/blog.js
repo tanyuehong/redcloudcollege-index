@@ -9,6 +9,21 @@ export default {
     })
   },
 
+  getBlogDetail(id) {
+    return request({
+      url: `/home/pratice/getBlog/${id}`,
+      method: 'get',
+    })
+  },
+
+  addNewblog(blog) {
+    return request({
+      url: `/blog/addNewblog`,
+      method: 'post',
+      data: blog,
+    })
+  },
+
   getUserBlogStatus(praticeId) {
     return request({
       url: `/home/pratice/status/${praticeId}`,

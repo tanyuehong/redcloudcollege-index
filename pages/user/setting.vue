@@ -433,7 +433,7 @@ export default {
   },
   methods: {
     gotoTagSetting() {
-      this.$router.push({name: "admin-tag",params: { "avatar": this.userInfo.avatar}});
+      this.$router.push({name: "admin-tag"});
     },
     gotoEditBlog() {
       this.$router.push({name: "admin-practice-blog"});

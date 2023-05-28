@@ -207,6 +207,7 @@ export default {
 
     addInterviewPosition() {
       this.submitTitle = "新建";
+      this.editPosition = {};
       this.showNewPosition = true;
     },
 

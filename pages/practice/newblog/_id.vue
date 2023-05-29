@@ -99,7 +99,7 @@
               </div>
           
           </div>
-          <el-button slot="reference" size="medium" type="primary" @click="submitVisible = !submitVisible">发布</el-button>
+          <el-button slot="reference" size="medium" type="primary" @click="clickSubmitBtn">发布</el-button>
         </el-popover>
 
 
@@ -132,6 +132,7 @@ export default {
   layout: "content",
   data() {
     return {
+      blogTypeList:[],
       tipsmessage: "",
       submitVisible:false,
       handbook: "#### how to use mavonEditor in nuxt.js",
@@ -192,7 +193,12 @@ export default {
     window.console.log(this.loginInfo.avatar);
   },
   methods: {
-    submitBtnClick() {
+    clickSubmitBtn() {
+      this.submitVisible = !submitVisible;
+      if(this.submitVisible && ) {
+
+      }
+      clickSubmitBtn
     },
 
     clcikSaveBtn() {
@@ -236,6 +242,12 @@ export default {
 </script>
 
 <style>
+
+.submit-content  .form-item .label.required:before {
+    content: "*";
+    color: #f53f3f;
+    vertical-align: -2px;
+}
 
 .footer {
     border-top: 1px solid #e5e6eb;

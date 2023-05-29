@@ -16,6 +16,13 @@ export default {
     })
   },
 
+  getBlogTypeList() {
+    return request({
+      url: `/home/pratice/getBlogTypeList`,
+      method: 'get',
+    })
+  },
+
   addNewblog(blog) {
     return request({
       url: `/blog/addNewblog`,

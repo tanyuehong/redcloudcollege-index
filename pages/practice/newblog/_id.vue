@@ -12,92 +12,72 @@
 
         <el-popover placement="right" width="580" trigger="manual" v-model="submitVisible">
           <div class="submit-content">
-              <div  class="title">发布文章</div>
-              <div  class="form-item">
-                <div  class="label required category-label"> 分类： </div>
-                <div  class="form-item-content category-list">
-                  <div  class="item"> 后端 </div>
-                  <div  class="item"> 前端 </div>
-                  <div  class="item"> Android </div>
-                  <div  class="item"> iOS </div>
-                  <div  class="item"> 人工智能 </div>
-                  <div  class="item"> 开发工具 </div>
-                  <div  class="item"> 代码人生 </div>
-                  <div  class="item"> 阅读 </div>
-               
-               </div>
+            <div class="title">发布文章</div>
+            <div class="form-item">
+              <div class="label required category-label"> 分类： </div>
+              <div class="form-item-content category-list">
+                <div class="item" v-for="btype in blogTypeList" :key="btype.id"> {{ btype.name }} </div>
               </div>
-              <div  class="form-item">
-                <div  class="label required"> 添加标签： </div>
-                <div  class="form-item-content">
-                  <el-select v-model="value1" multiple placeholder="请搜索添加标签">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-                
+            </div>
+            <div class="form-item">
+              <div class="label required"> 添加标签： </div>
+              <div class="form-item-content">
+                <el-select v-model="tags" multiple placeholder="请搜索添加标签">
+                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
+
+              </div>
+            </div>
+            <div class="form-item">
+              <div class="label">文章封面：</div>
+              <div class="form-item-content">
+                <div data-v-cfaa5564="" class="coverselector_container">
+                  <div data-v-cfaa5564=""><button data-v-cfaa5564="" class="select-btn">
+                      <div data-v-cfaa5564="" class="button-slot"><img data-v-cfaa5564=""
+                          src="//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web_editor/img/add.0e2d17b6.svg"
+                          height="20" alt="add_cover">
+                        <div data-v-cfaa5564="" class="upload">上传封面</div>
+                      </div>
+                    </button>
+                    <div data-v-cfaa5564="" class="addvice">建议尺寸：1303*734px</div>
+                  </div><input data-v-cfaa5564="" type="file" style="display: none;">
                 </div>
               </div>
-              <div  class="form-item">
-                <div  class="label">文章封面：</div>
-                <div  class="form-item-content">
-                  <div data-v-cfaa5564=""  class="coverselector_container">
-                    <div data-v-cfaa5564=""><button data-v-cfaa5564="" class="select-btn">
-                        <div data-v-cfaa5564="" class="button-slot"><img data-v-cfaa5564=""
-                            src="//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web_editor/img/add.0e2d17b6.svg"
-                            height="20" alt="add_cover">
-                          <div data-v-cfaa5564="" class="upload">上传封面</div>
-                        </div>
-                      </button>
-                      <div data-v-cfaa5564="" class="addvice">建议尺寸：1303*734px</div>
-                    </div><input data-v-cfaa5564="" type="file" style="display: none;">
-                  </div>
-                </div>
+            </div>
+            <div class="form-item column-line">
+              <div class="label"> 收录至专栏： </div>
+              <div class="form-item-content">
+                <el-select v-model="zhanlan" multiple placeholder="请搜索添加专栏，同一篇文章最多添加三个专栏">
+                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
               </div>
-              <div  class="form-item column-line">
-                <div  class="label"> 收录至专栏： </div>
-                <div  class="form-item-content">
-                  <el-select v-model="value1" multiple placeholder="请搜索添加专栏，同一篇文章最多添加三个专栏">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-                </div>
+            </div>
+            <div class="form-item column-line">
+              <div class="label"> 创作话题： </div>
+              <div class="form-item-content">
+                <el-select v-model="huati" multiple placeholder="请搜索添加话题，最多添加1个话题">
+                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
               </div>
-              <div  class="form-item column-line">
-                <div  class="label"> 创作话题： </div>
-                <div  class="form-item-content">
-                  <el-select v-model="value1" multiple placeholder="请搜索添加话题，最多添加1个话题">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-                </div>
+            </div>
+            <div class="summary-box form-item">
+              <div class="label required">编辑摘要：</div>
+              <div class="summary form-item-content">
+                <el-input type="textarea" v-model="editblog.descrb" placeholder="" maxlength="100" :rows="4"
+                  show-word-limit resize="none">
+                </el-input>
               </div>
-              <div  class="summary-box form-item">
-                <div  class="label required">编辑摘要：</div>
-                <div  class="summary form-item-content">
-                  <el-input type="textarea" v-model="jubaoContent" placeholder=""
-                            maxlength="100" :rows="4" show-word-limit resize="none">
-                  </el-input>
-                </div>
+            </div>
+            <div class="footer"><!---->
+              <div class="btn-container">
+                <el-button size="medium" @click="submitVisible = !submitVisible">取消</el-button>
+                <el-button type="primary" size="medium">确定并发布</el-button>
               </div>
-              <div  class="footer"><!---->
-                <div  class="btn-container">
-                    <el-button size="medium" @click="submitVisible = !submitVisible">取消</el-button>
-                    <el-button type="primary" size="medium">确定并发布</el-button>
-                  </div>
-              </div>
-          
+            </div>
+
           </div>
           <el-button slot="reference" size="medium" type="primary" @click="clickSubmitBtn">发布</el-button>
         </el-popover>
@@ -132,9 +112,13 @@ export default {
   layout: "content",
   data() {
     return {
-      blogTypeList:[],
+      huati:"", 
+      zhanlan:"",
+      tags:"",
+      options:[],
+      blogTypeList: [],
       tipsmessage: "",
-      submitVisible:false,
+      submitVisible: false,
       handbook: "#### how to use mavonEditor in nuxt.js",
       toolbars: {
         bold: true, // 粗体
@@ -194,11 +178,12 @@ export default {
   },
   methods: {
     clickSubmitBtn() {
-      this.submitVisible = !submitVisible;
-      if(this.submitVisible && ) {
-
+      this.submitVisible = !this.submitVisible;
+      if (this.submitVisible && this.blogTypeList.length <= 0) {
+        blogApi.getBlogTypeList().then((response) => {
+          this.blogTypeList = response.data.typeList;
+        })
       }
-      clickSubmitBtn
     },
 
     clcikSaveBtn() {
@@ -242,139 +227,137 @@ export default {
 </script>
 
 <style>
-
-.submit-content  .form-item .label.required:before {
-    content: "*";
-    color: #f53f3f;
-    vertical-align: -2px;
+.submit-content .form-item .label.required:before {
+  content: "*";
+  color: #f53f3f;
+  vertical-align: -2px;
 }
 
 .footer {
-    border-top: 1px solid #e5e6eb;
-    height: 72px;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    padding: 0 20px;
+  border-top: 1px solid #e5e6eb;
+  height: 72px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0 20px;
 }
 
 .footer .btn-container {
-    -webkit-box-flex: 1;
-    -ms-flex: auto;
-    flex: auto;
-    text-align: right;
-    padding-top:15px;
+  -webkit-box-flex: 1;
+  -ms-flex: auto;
+  flex: auto;
+  text-align: right;
+  padding-top: 15px;
 }
 
 .form-item-content .el-select {
   width: 420px;
 }
+
 .form-item-content .el-textarea {
   width: 420px;
 }
 
 .coverselector_container .select-btn {
-    width: 160px;
-    height: 86px;
-    background-color: #fafafa;
-    border: 1px dashed #e5e6eb;
-    margin-bottom: 16px;
+  width: 160px;
+  height: 86px;
+  background-color: #fafafa;
+  border: 1px dashed #e5e6eb;
+  margin-bottom: 16px;
 }
 
 .coverselector_container .select-btn .button-slot {
-    cursor: pointer;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-flow: column nowrap;
-    flex-flow: column nowrap;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
 }
 
 .coverselector_container .select-btn .button-slot .upload {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 22px;
-    color: #86909c;
-    margin-top: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #86909c;
+  margin-top: 10px;
 }
 
-.submit-content  {
-    width: 560px;
-    font-size: 14px;
-    white-space: nowrap;
-    color: #909090;
-    background-color: #fff;
-    cursor: default;
+.submit-content {
+  width: 560px;
+  font-size: 14px;
+  white-space: nowrap;
+  color: #909090;
+  background-color: #fff;
+  cursor: default;
 }
 
 .submit-content .title {
-    padding: 14px 20px 16px 20px;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 24px;
-    color: #1d2129;
-    border-bottom: 1px solid #e5e6eb;
+  padding: 14px 20px 16px 20px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1d2129;
+  border-bottom: 1px solid #e5e6eb;
 }
 
 .submit-content .form-item {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    margin: 15px 20px 22px;
-}
-
-.submit-content .form-item .label.category-label {
-    line-height: 28px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 15px 20px 22px;
 }
 
 .submit-content .form-item .form-item-content {
   display: flex;
-    flex-direction: row;
-    align-content: flex-end;
-    flex-wrap: wrap;
+  flex-direction: row;
+  align-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .submit-content .category-list {
-    white-space: normal;
+  white-space: normal;
 }
+
 .submit-content .form-item .label {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 32px;
-    text-align: right;
-    color: #1d2129;
-    width: 85px;
-    -webkit-box-flex: 0;
-    -ms-flex: none;
-    flex: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 28px;
+  text-align: right;
+  color: #1d2129;
+  width: 85px;
+  -webkit-box-flex: 0;
+  -ms-flex: none;
+  flex: none;
 }
 
 .submit-content .category-list .item {
-    display: inline-block;
-    margin-right: 5px;
-    margin-bottom: 10px;
-    padding: 0 6px;
-    font-size: 14px;
-    line-height: 28px;
-    width: 88px;
-    height: 28px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-align: center;
-    text-overflow: ellipsis;
-    border-radius: 2px;
-    cursor: pointer;
-    color: #86909c;
-    background-color: #f4f5f5;
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  padding: 0 6px;
+  font-size: 14px;
+  line-height: 28px;
+  width: 88px;
+  height: 28px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  border-radius: 2px;
+  cursor: pointer;
+  color: #86909c;
+  background-color: #f4f5f5;
 }
 
 .red-select__suffix {
   color: #c2c6cc;
-  transition: transform .3s,-webkit-transform .3s;
+  transition: transform .3s, -webkit-transform .3s;
   display: inline-block;
 }
+
 .saveInfo {
   color: #999;
   font-size: 14px;
@@ -414,4 +397,5 @@ export default {
   cursor: pointer;
   border-radius: 2px;
   display: inline-block;
-}</style>
+}
+</style>

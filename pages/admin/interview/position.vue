@@ -48,15 +48,16 @@
             </div>
             <div class="admin-content">
               <el-table :data="positionList" height="600">
-                <el-table-column property="name" label="职位名" width="120"></el-table-column>
-                <el-table-column property="img" label="职位图标" width="260"></el-table-column>
+                <el-table-column property="name" label="职位名" width="110"></el-table-column>
+                <el-table-column property="img" label="职位图标" width="220"></el-table-column>
                 <el-table-column property="sort" label="序号" width="60"></el-table-column>
 
-                <el-table-column property="gmtCreate" label="创建日期" width="120"></el-table-column>
-                <el-table-column property="gmtModified" label="创建日期" width="120"></el-table-column>
-                <el-table-column label="操作" width="150">
+                <el-table-column property="gmtCreate" label="创建日期" width="115"></el-table-column>
+                <el-table-column property="gmtModified" label="创建日期" width="115"></el-table-column>
+                <el-table-column label="操作" width="210">
                   <template slot-scope="scope">
                     <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">编辑</el-button>
+                    <el-button size="mini" @click="editPositionClassifyClick(scope.$index, scope.row)">子分类</el-button>
                     <el-popconfirm confirm-button-text="好的" cancel-button-text="不用了" icon="el-icon-info"
                         icon-color="red" title="确定要删除该职位吗，该操作不可撤回哦？" @confirm="handlePositionDelete(scope.$index, scope.row)">
                         <el-button type="danger" size="mini" slot="reference">删除</el-button>
@@ -92,7 +93,8 @@
             <div class="nav-header">
               <div class="nav-text">职位面试题分类管理</div>
               <div class="add-item">
-                <el-button type="primary" size="small" plain @click="addQuestionClassify">新建职位面试题分类</el-button>
+                <span class="item-position">{{ editPosition.name }}</span>
+                <el-button type="primary" size="small" plain @click="addPositionClassify">新建面试题分类</el-button>
               </div>
             </div>
             <div class="admin-content">
@@ -115,21 +117,30 @@
                 </el-table-column>
               </el-table>
 
-              <el-dialog title="新建职位面试题分类" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
-                :show-close="true" :visible.sync="showNewPosition" :before-close="positionWillClose" center>
-                <el-form ref="form" label-width="80px">
-                        <el-form-item label="职位名">
-                          <el-input v-model="editPosition.name"></el-input>
+              <el-dialog title="新建面试题分类" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
+                :show-close="true" :visible.sync="showNewPositionClassify" :before-close="positionClassifyBackClick" center>
+                <el-form ref="form" :model="editPositionClassify" label-width="80px">
+                        <el-form-item label="分类名">
+                          <el-input v-model="editPositionClassify.name"></el-input>
                         </el-form-item>
-                        <el-form-item label="职位图标">
-                          <el-input v-model="editPosition.img"></el-input>
+                        <el-form-item label="图标">
+                          <el-input type="textarea" v-model="editPositionClassify.img" maxlength="3000" :rows="5"
+                            show-word-limit></el-input>
+                        </el-form-item>
+
+                        <el-form-item label="图标类型">
+                          <el-select v-model="editPositionClassify.type" placeholder="请选择图标类型">
+                            <el-option label="图标src" value="1"></el-option>
+                            <el-option label="图标svg" value="2"></el-option>
+                            <el-option label="无图标" value="3"></el-option>
+                          </el-select>
                         </el-form-item>
                         <el-form-item label="序号">
-                          <el-input v-model="editPosition.sort"></el-input>
+                          <el-input type="number" v-model="editPositionClassify.sort"></el-input>
                         </el-form-item>
-                </el-form>
+                      </el-form>
                 <span slot="footer" class="dialog-footer">
-                  <el-button @click="addPositionBackClick" size="small">返 回</el-button>
+                  <el-button @click="positionClassifyBackClick" size="small">返 回</el-button>
                   <el-button type="primary" @click="submitPositon" size="small" v-if="submitTitle.length > 0">{{
                     submitTitle
                   }}</el-button>
@@ -151,9 +162,10 @@ import interviewAdmin from "@/api/interviewAdminReq";
 export default {
   data() {
     return {
-      editClassify:{},
-      positionClassifyList: [],
-
+      editPid:"",
+      editPositionClassify:{},
+      positionClassifyList:[],
+      showNewPositionClassify:false,
 
 
       editPosition: {},
@@ -180,13 +192,33 @@ export default {
     this.getInterviewPositionList();
   },
   methods: {
-    addQuestionClassify() {
+    editPositionClassifyClick(index,row) {
+      this.editPosition = this.positionList[index];
+      this.settingtype = 2;
+      interviewAdmin
+        .getPositionClassifyList(this.editPosition.id)
+        .then(response => {
+          this.positionClassifyList = response.data.classifyList;
+        });
+    },
+    addPositionClassify() {
       this.submitTitle = "新建";
       this.editClassify = {};
-      this.showNewClassify = true;
+      this.showNewPositionClassify = true;
+    },
+    positionClassifyBackClick() {
+      this.showNewPositionClassify = false;
+      interviewAdmin
+        .getPositionClassifyList(this.editPosition.id)
+        .then(response => {
+          this.positionClassifyList = response.data.classifyList;
+        });
     },
 
-
+    positionClasssifyClick() {
+     
+    },
+   
     positionWillClose() {
       this.getInterviewPositionList();
       this.showNewPosition = false;
@@ -236,47 +268,6 @@ export default {
       })
     },
 
-    onSubmitClick() {
-      if (this.classifyType == 1) {
-        this.classifyType = 2;
-        this.editQuestionClassify = {};
-        interviewAdmin.getPositionList().then((response) => {
-          this.positionList = response.data.positionList;
-        })
-        return
-      }
-      if (this.classifyType == 2) {
-        window.console.log(this.editQuestionClassify.pid)
-        if (this.editQuestionClassify.pid == undefined || this.editQuestionClassify.pid.length == 0) {
-          this.$message.error("没有选择绑定的职位哦~");
-          return;
-        }
-        if (this.editQuestionClassify.sid == undefined || this.editQuestionClassify.sid.length == 0) {
-          this.$message.error("没有选择绑定的职位的子分类哦~");
-          return;
-        }
-        if (this.checkHavePositionClassify(this.selectPosition)) {
-          this.$message.error("该职位已经被绑定过了哦，请在列表页面修改吧");
-          return;
-        }
-        interviewAdmin.submitQuestionPosition({ pid: this.editQuestionClassify.pid, qid: this.editQuestion.id, sid: this.editQuestionClassify.sid }).then(response => {
-        });
-      }
-    },
-
-    editPositionClassifyClick(index, row) {
-      this.editQuestionClassify = this.questionClassifyList[index];
-      interviewAdmin.getPositionList().then((response) => {
-        this.positionList = response.data.positionList;
-      });
-      interviewAdmin
-        .getPositionClassifyList(this.editQuestionClassify.pid)
-        .then(response => {
-          this.classifyList = response.data.positionClassifyList;
-        });
-      this.classifyType = 2;
-    },
-
     positionBackClick() {
       if (this.classifyType == 1) {
         this.showQustionPositionPage = false;
@@ -320,14 +311,7 @@ export default {
         });
     },
 
-    positionClasssifyClick() {
-      this.settingtype = 2;
-      interviewAdmin
-        .getPositionClassifyList()
-        .then(response => {
-          this.positionClassifyList = response.data.classifyList;
-        });
-    },
+   
     personSettingClick() {
       this.settingtype = 1;
     },
@@ -340,6 +324,15 @@ export default {
   
 <style scoped>
 
+.nav-header .add-item .item-position {
+   margin-right: 20px;
+   color: #666;
+   font-weight: 500;
+   font-size: 14px;
+}
+.admin-content .el-button {
+  margin-left: 0px;
+}
 .nav-header .add-item {
   float: right;
   margin-right: 36px;

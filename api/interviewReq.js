@@ -197,5 +197,13 @@ export default {
         url: `/interview/comPanyList`,
         method: 'get',
       })
+    },
+    
+    // 这里是管理接口
+    getPositionClassifyList() {
+      return request({
+        url: `/interview/admin/positionClassify`,
+        method: 'get',
+      })
     }
 }

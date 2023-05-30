@@ -70,12 +70,18 @@ export default {
     })
   },
 
-  addInterviewPostion(position) {
+  addInterviewPosition(position) {
     return request({
-      url: `/interview/admin/addInterviewPostion`,
+      url: `/interview/admin/addInterviewPosition`,
       method: 'post',
       data: position,
     })
   },
-  
+
+  deletePosition(pId) {
+    return request({
+      url: `/interview/admin/deletePosition/${pId}`,
+      method: 'get'
+    })
+  }
 }

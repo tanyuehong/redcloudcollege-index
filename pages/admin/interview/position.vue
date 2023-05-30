@@ -57,13 +57,16 @@
                 <el-table-column label="操作" width="150">
                   <template slot-scope="scope">
                     <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">编辑</el-button>
-                    <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                    <el-popconfirm confirm-button-text="好的" cancel-button-text="不用了" icon="el-icon-info"
+                        icon-color="red" title="确定要删除该职位吗，该操作不可撤回哦？" @confirm="handlePositionDelete(scope.$index, scope.row)">
+                        <el-button type="danger" size="mini" slot="reference">删除</el-button>
+                    </el-popconfirm>
                   </template>
                 </el-table-column>
               </el-table>
 
               <el-dialog title="新建职位" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
-                :show-close="true" :visible.sync="showNewPosition" center>
+                :show-close="true" :visible.sync="showNewPosition" :before-close="positionWillClose" center>
                 <el-form ref="form" label-width="80px">
                         <el-form-item label="职位名">
                           <el-input v-model="editPosition.name"></el-input>
@@ -190,6 +193,20 @@ export default {
     this.getInterviewPositionList();
   },
   methods: {
+    positionWillClose() {
+      this.getInterviewPositionList();
+    },
+    handlePositionDelete(index,row) {
+      var pId = this.positionList[index].id;
+      if(pId != undefined && pId.length>0) {
+        interviewAdmin
+        .deletePosition(pId)
+        .then(response => {
+          this.getInterviewPositionList();
+        });
+      }
+    },
+
     editPositionClick(index, row) {
       this.editPosition = this.positionList[index];
       this.submitTitle = "修改";
@@ -197,12 +214,13 @@ export default {
     },
     submitPositon() {
       interviewAdmin
-        .addInterviewPostion(this.editPosition)
+        .addInterviewPosition(this.editPosition)
         .then(response => {});
     },
     addPositionBackClick() {
       this.showNewPosition = false;
       this.submitTitle = "";
+      this.getInterviewPositionList();
     },
 
     addInterviewPosition() {

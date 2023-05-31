@@ -110,7 +110,7 @@
                   <template slot-scope="scope">
                     <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">编辑</el-button>
                     <el-popconfirm confirm-button-text="好的" cancel-button-text="不用了" icon="el-icon-info"
-                        icon-color="red" title="确定要删除该职位吗，该操作不可撤回哦？" @confirm="handlePositionDelete(scope.$index, scope.row)">
+                        icon-color="red" title="确定要删除该职位吗，该操作不可撤回哦？" @confirm="deletePositionClassify(scope.$index, scope.row)">
                         <el-button type="danger" size="mini" slot="reference">删除</el-button>
                     </el-popconfirm>
                   </template>
@@ -141,7 +141,7 @@
                       </el-form>
                 <span slot="footer" class="dialog-footer">
                   <el-button @click="positionClassifyBackClick" size="small">返 回</el-button>
-                  <el-button type="primary" @click="submitPositon" size="small" v-if="submitTitle.length > 0">{{
+                  <el-button type="primary" @click="submitPositonClassify" size="small" v-if="submitTitle.length > 0">{{
                     submitTitle
                   }}</el-button>
                 </span>
@@ -213,6 +213,30 @@ export default {
         .then(response => {
           this.positionClassifyList = response.data.classifyList;
         });
+    },
+    submitPositonClassify() {
+      if (this.editPositionClassify.name == undefined || this.editPositionClassify.name.length == 0) {
+          this.$message.error('名称参数错误哦~');
+          return;
+        }
+        if (this.editPositionClassify.type == undefined) {
+          this.$message.error('图标类型参数未指定哦~');
+          return;
+        }
+        if (this.editPositionClassify.sort == undefined || this.editPositionClassify.sort > 100) {
+          this.$message.error('排序参数不符合规范哦~');
+          return;
+        }
+        this.editPositionClassify.pid = this.editPosition.id;
+        interviewAdmin.submitInterviewClassify(this.editClassify).then((response) => {})
+    },
+
+    deletePositionClassify(index, row) {
+      interviewAdmin.deleteClassify(this.positionClassifyList[index].id).then((response) => {
+        interviewAdmin.getPositionClassifyList(this.editPosition.id).then((response) => {
+          this.positionClassifyList = response.data.positionClassifyList;
+        });
+      });
     },
 
     positionClasssifyClick() {

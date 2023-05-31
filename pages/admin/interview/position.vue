@@ -99,16 +99,15 @@
             </div>
             <div class="admin-content">
               <el-table :data="positionClassifyList" height="600">
-                <el-table-column property="name" label="分类名" width="120"></el-table-column>
-                <el-table-column property="name" label="职位名" width="120"></el-table-column>
-                <el-table-column property="img" label="分类图标" width="260"></el-table-column>
+                <el-table-column property="name" label="职位面试题分类" width="140"></el-table-column>
+                <el-table-column property="img" label="分类图标" width="240" show-overflow-tooltip="true"></el-table-column>
                 <el-table-column property="sort" label="序号" width="60"></el-table-column>
 
                 <el-table-column property="gmtCreate" label="创建日期" width="120"></el-table-column>
-                <el-table-column property="gmtModified" label="创建日期" width="120"></el-table-column>
+                <el-table-column property="gmtModified" label="更新日期" width="120"></el-table-column>
                 <el-table-column label="操作" width="150">
                   <template slot-scope="scope">
-                    <el-button size="mini" @click="editPositionClick(scope.$index, scope.row)">编辑</el-button>
+                    <el-button size="mini" @click="editClassifyClick(scope.$index, scope.row)">编辑</el-button>
                     <el-popconfirm confirm-button-text="好的" cancel-button-text="不用了" icon="el-icon-info"
                         icon-color="red" title="确定要删除该职位吗，该操作不可撤回哦？" @confirm="deletePositionClassify(scope.$index, scope.row)">
                         <el-button type="danger" size="mini" slot="reference">删除</el-button>
@@ -117,7 +116,7 @@
                 </el-table-column>
               </el-table>
 
-              <el-dialog title="新建面试题分类" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
+              <el-dialog :title="editPositionClassifyTitle" width="140" :close-on-click-modal="false" :close-on-press-escape="false"
                 :show-close="true" :visible.sync="showNewPositionClassify" :before-close="positionClassifyBackClick" center>
                 <el-form ref="form" :model="editPositionClassify" label-width="80px">
                         <el-form-item label="分类名">
@@ -163,6 +162,7 @@ export default {
   data() {
     return {
       editPid:"",
+      editPositionClassifyTitle:"",
       editPositionClassify:{},
       positionClassifyList:[],
       showNewPositionClassify:false,
@@ -192,18 +192,25 @@ export default {
     this.getInterviewPositionList();
   },
   methods: {
-    editPositionClassifyClick(index,row) {
+    editPositionClassifyClick(index,row) {  
       this.editPosition = this.positionList[index];
       this.settingtype = 2;
       interviewAdmin
         .getPositionClassifyList(this.editPosition.id)
         .then(response => {
-          this.positionClassifyList = response.data.classifyList;
+          this.positionClassifyList = response.data.positionClassifyList;
         });
     },
-    addPositionClassify() {
+    addPositionClassify() {   //  新建职位面试题分类
       this.submitTitle = "新建";
-      this.editClassify = {};
+      this.editPositionClassifyTitle = "新建职位面试题分类"
+      this.editPositionClassify = {};
+      this.showNewPositionClassify = true;
+    },
+    editClassifyClick(index,row) {  //  修改职位面试题分类
+      this.submitTitle = "修改";
+      this.editPositionClassifyTitle = "修改职位面试题分类"
+      this.editPositionClassify = this.positionClassifyList[index];
       this.showNewPositionClassify = true;
     },
     positionClassifyBackClick() {
@@ -211,7 +218,7 @@ export default {
       interviewAdmin
         .getPositionClassifyList(this.editPosition.id)
         .then(response => {
-          this.positionClassifyList = response.data.classifyList;
+          this.positionClassifyList = response.data.positionClassifyList;
         });
     },
     submitPositonClassify() {
@@ -228,7 +235,7 @@ export default {
           return;
         }
         this.editPositionClassify.pid = this.editPosition.id;
-        interviewAdmin.submitInterviewClassify(this.editClassify).then((response) => {})
+        interviewAdmin.submitInterviewClassify(this.editPositionClassify).then((response) => {})
     },
 
     deletePositionClassify(index, row) {

@@ -36,6 +36,7 @@
                 <nuxt-link :to="typePath(item)" class="filter-btn" v-bind:class="{ active: type == item.id }"
                   v-for="item in classifyList" :key="item.id">
                   <div class="svg-img" v-html="item.img" v-if="item.type == 2"></div>
+                  <img class="src-img" :src="item.img" v-if="item.type == 1"/>
                   {{ item.name }}
                 </nuxt-link>
               </div>
@@ -383,6 +384,15 @@ export default {
 </script>
 
 <style scoped>
+
+.filter-btns .src-img  {
+  border-radius: 4px;
+    clear: both;
+    display: block;
+    margin: auto;
+    width: 26px;
+    margin-right: 6px;
+}
 .every-question {
   margin-top: 15px;
   background-color: #fff;

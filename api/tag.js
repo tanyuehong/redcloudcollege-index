@@ -10,6 +10,13 @@ export default {
     })
   },
 
+  deleteTag(tId) {
+    return request({
+      url: `/tags/deleteTag/${tId}`,
+      method: 'get',
+    })
+  },
+
   addTagPosition(tItem) {
     return request({
       url: `/tags/addTagPosition`,

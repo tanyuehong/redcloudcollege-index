@@ -26,22 +26,25 @@
                   <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
-
+                <span class="tips_tag" @click="addNewTagClick">
+                  <span class="span_add" style="color: rgb(39, 124, 204);">
+                    <i class="icon icon_add icon_add_pos"></i>
+                  </span> 没有合适的标签，添加新标签？</span>
               </div>
             </div>
             <div class="form-item">
               <div class="label">文章封面：</div>
               <div class="form-item-content">
-                <div data-v-cfaa5564="" class="coverselector_container">
-                  <div data-v-cfaa5564=""><button data-v-cfaa5564="" class="select-btn">
-                      <div data-v-cfaa5564="" class="button-slot"><img data-v-cfaa5564=""
+                <div class="coverselector_container">
+                    <button class="select-btn">
+                      <div class="button-slot"><img
                           src="//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web_editor/img/add.0e2d17b6.svg"
                           height="20" alt="add_cover">
-                        <div data-v-cfaa5564="" class="upload">上传封面</div>
+                        <div class="upload">上传封面</div>
                       </div>
+                      <input type="file" style="display: none;">
                     </button>
-                    <div data-v-cfaa5564="" class="addvice">建议尺寸：1303*734px</div>
-                  </div><input data-v-cfaa5564="" type="file" style="display: none;">
+                    <div class="addvice">建议尺寸：1303*734px</div>
                 </div>
               </div>
             </div>
@@ -112,10 +115,10 @@ export default {
   layout: "content",
   data() {
     return {
-      huati:"", 
-      zhanlan:"",
-      tags:"",
-      options:[],
+      huati: "",
+      zhanlan: "",
+      tags: "",
+      options: [],
       blogTypeList: [],
       tipsmessage: "",
       submitVisible: false,
@@ -177,6 +180,9 @@ export default {
     window.console.log(this.loginInfo.avatar);
   },
   methods: {
+    addNewTagClick() {
+
+    },
     clickSubmitBtn() {
       this.submitVisible = !this.submitVisible;
       if (this.submitVisible && this.blogTypeList.length <= 0) {
@@ -258,12 +264,58 @@ export default {
   width: 420px;
 }
 
+.form-item-content .tips_tag {
+  height: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #507999;
+  line-height: 24px;
+  cursor: pointer;
+  margin-left: 0px;
+  margin-top: 5px;
+}
+
+.form-item-content .icon_add_pos {
+  margin-left: 0;
+  position: relative;
+  top: -1px;
+}
+
+.form-item-content .icon_add {
+  width: 12px;
+  height: 12px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAXElEQVRIS2NkoDFgpLH5DERbEFA58z+yYza0pxOllyhFIINHLSAY16NBRPsgQg9jgjYSUADLJ/B8MGoBeohhBBGhMB/NB4RCaLQ0JRhCwyCICPsRuwqi62RyLQAAilhQGRoPkngAAAAASUVORK5CYII=);
+  cursor: pointer;
+}
+
+.form-item-content .span_add {
+  display: inline-block !important;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 24px;
+  background-color: #ebf2f7;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.coverselector_container {
+  display: flex;
+}
+
 .coverselector_container .select-btn {
   width: 160px;
   height: 86px;
   background-color: #fafafa;
   border: 1px dashed #e5e6eb;
-  margin-bottom: 16px;
+  margin-bottom: 2px;
+  display: inline-block;
+}
+
+.coverselector_container .addvice {
+  padding-top: 30px;
+  margin-left: 15px;
+  display: inline-block;
 }
 
 .coverselector_container .select-btn .button-slot {

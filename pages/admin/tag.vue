@@ -9,9 +9,11 @@
           </nuxt-link>
         </li>
       </div>
-      <div class="setting-lefte-menu">
-        <div @click="personSettingClick" class="setting-menu-item">
-          <div class="nav-item" v-bind:class="{ active: settingtype == 1 }">
+      <div class="setting-content">
+        <div class="lefte_content">
+          <div class="setting-lefte-menu">
+        <div @click="personSettingClick" class="setting-menu-item" v-bind:class="{ active: settingtype == 1 }">
+          <div class="nav-item">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg">
               <path fill-rule="evenodd" clip-rule="evenodd"
                 d="M15.3331 14.1052V14.3207C15.3331 14.5048 15.1839 14.654 14.9998 14.654H14.3204C14.1413 14.654 13.9967 14.5122 13.9801 14.3339C13.9778 14.3097 13.9754 14.2872 13.9728 14.2679C13.8008 12.9838 12.8312 12 11.7742 12H9.88471C8.82066 12 7.8512 12.997 7.68991 14.2937C7.68842 14.3056 7.68699 14.3189 7.68563 14.333C7.66842 14.5116 7.52439 14.654 7.34498 14.654H6.66643C6.48233 14.654 6.33309 14.5048 6.33309 14.3207V14.1052C6.33309 12.5335 7.41668 11.2082 8.82833 10.7979C8.3268 10.2875 8.01744 9.58768 8.01744 8.81561C8.01744 7.25359 9.2837 5.98733 10.8457 5.98733C12.4077 5.98733 13.674 7.25359 13.674 8.81561C13.674 9.59004 13.3627 10.2918 12.8585 10.8025C14.2611 11.2181 15.3331 12.5395 15.3331 14.1052ZM1.99984 2.66665V12.6666H4.9165V14H1.33317C0.964981 14 0.666504 13.7015 0.666504 13.3333V1.99998C0.666504 1.63179 0.964981 1.33331 1.33317 1.33331H13.3332C13.7014 1.33331 13.9998 1.63179 13.9998 1.99998V5.82955C13.5945 5.49574 13.1466 5.21989 12.6665 5.01331V2.66665H1.99984ZM3.33309 5.99994C3.33309 5.81584 3.48233 5.66661 3.66642 5.66661H6.66642C6.85052 5.66661 6.99976 5.81584 6.99976 5.99994V6.6666C6.99976 6.8507 6.85052 6.99994 6.66642 6.99994H3.66642C3.48233 6.99994 3.33309 6.8507 3.33309 6.66661V5.99994ZM3.33309 8.66661C3.33309 8.48251 3.48233 8.33327 3.66642 8.33327H4.99976C5.18385 8.33327 5.33309 8.48251 5.33309 8.66661V9.33327C5.33309 9.51737 5.18385 9.66661 4.99976 9.66661H3.66642C3.48233 9.66661 3.33309 9.51737 3.33309 9.33327V8.66661ZM10.8457 7.32066C10.0201 7.32066 9.35075 7.98997 9.35075 8.81561C9.35075 9.64125 10.0201 10.3106 10.8457 10.3106C11.6713 10.3106 12.3406 9.64125 12.3406 8.81561C12.3406 7.98997 11.6713 7.32066 10.8457 7.32066Z"
@@ -21,18 +23,28 @@
           </div>
         </div>
       </div>
+      </div>
+      <div class="middle_content">
+        <div class="sprate">
+        </div>
+      </div>
+      <div class="right-content">
       <div v-if="settingtype === 1">
-        <div class="person-setting shadow">
+        <div class="person-setting">
+          <div class="nav-header">
           <div class="nav-text">标签列表</div>
+          <div class="add-item">
+                <el-button type="primary" size="small" plain @click="addNewTagClick">新建标签</el-button>
+          </div>
+        </div>
           <div class="admin-content">
             <el-table :data="tagList" height="860">
               <el-table-column property="name" label="标签名" width="80"></el-table-column>
               <el-table-column property="img" label="图标" width="420"></el-table-column>
               <el-table-column label="操作" width="260">
                 <template slot-scope="scope">
-                  <el-button size="mini" @click="editQuestionClick(scope.$index, scope.row)">编辑</el-button>
-                  <el-button size="mini" @click="editTagPositionClick(scope.$index, scope.row)">职位</el-button>
-                  <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                  <el-button size="mini" @click="editTagClick(scope.$index, scope.row)">编辑</el-button>
+                  <el-button size="mini" type="danger" @click="deleteTagClick(scope.$index, scope.row)">删除</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -74,10 +86,11 @@
           </div>
         </div>
       </div>
-
+    </div>
 
     </div>
-  </div>
+    </div>
+</div>
 </template>
   
 <script>
@@ -90,12 +103,18 @@ export default {
   data() {
     return {
       editTag: {},
+      functionTitle: "",
       showTagPositionPage: false,
+
       tagPositionList: [],
       positionList: [],
       editTagPostion: {},
 
+
       editQuestion: {},
+
+
+
       
       tagList: [],
  
@@ -108,7 +127,7 @@ export default {
       slectDate: '',                // 当前显示的日期
       everyDayquestionList: [],     // 每日一题的列表
       showEveryQuestionPage: false,
-      functionTitle: "",
+      
       settingtype: 1,
     };
   },
@@ -117,10 +136,22 @@ export default {
     this.getTagList();
   },
   methods: {
-    addEveryQuestionClick() {
-      this.showEveryQuestionPage = true;
+    addNewTagClick() {
+      this.functionTitle = "新建标签";
+      this.showTagPositionPage = true;
+    },
+    
+    editTagClick(index,row) {
 
     },
+    deleteTagClick(index,row) {
+
+    },
+
+    addEveryQuestionClick() {
+      this.showEveryQuestionPage = true;
+    },
+
     selectDateDidChange(date) {
       this.slectDate = date;
       window.console.log('=====' + date);
@@ -162,32 +193,6 @@ export default {
           this.classifyList = response.data.positionClassifyList;
         });
       this.classifyType = 2;
-    },
-
-    positionBackClick() {
-      if (this.classifyType == 1) {
-        this.showTagPositionPage = false;
-      } else if (this.classifyType == 2) {
-        this.classifyType = 1;
-        this.submitTitle = "新 建"
-        tagApi
-          .getTagPositionList(this.editQuestion.id)
-          .then(response => {
-            this.tagPositionList = response.data.tagPositionList;
-          });
-      }
-    },
-
-    editTagPositionClick(index, row) {
-      this.editTag = this.tagList[index];
-      this.submitTitle = "新 建"
-      this.showTagPositionPage = true;
-      this.classifyType = 1;
-      tagApi
-        .getTagPositionList(this.editTag.id)
-        .then(response => {
-          this.tagPositionList = response.data.tagPositionList;
-        });
     },
 
     selectPositionChanged(item) {

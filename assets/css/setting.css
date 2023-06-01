@@ -1,5 +1,11 @@
 @charset "utf-8";
 
+.nav-header .add-item {
+    float: right;
+    margin-right: 36px;
+    margin-top: 15px;
+ }
+
 .setting-content {
     display: table;
     margin-bottom: 20px;

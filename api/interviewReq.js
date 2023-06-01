@@ -1,12 +1,6 @@
 import request from '@/utils/request'
 
 export default {
-  getInterviewTagList(pId) {
-    return request({
-      url: `/home/interview/tagList/${pId}`,
-      method: 'get',
-    })
-  },
 
   // 问题提交的接口
   submitInterviewQuestion(qData) {

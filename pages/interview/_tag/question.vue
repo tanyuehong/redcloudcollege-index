@@ -109,6 +109,7 @@
 <script>
 
 import userApi from '@/api/user'
+import tagApi from '@/api/tag'
 import interviewApi from '@/api/interviewReq.js'
 import interviewAdmin from "@/api/interviewAdminReq";
 import interviewServerApi from "@/api/interviewServerReq";
@@ -205,7 +206,7 @@ export default {
         this.errtips = '';
       }
       if (this.tagLoading) {
-        interviewApi.getInterviewTagList(this.selectPosition).then((response) => {
+        tagApi.getTagList(this.selectPosition).then((response) => {
           this.tagList = response.data.tagList;
           this.tagLoading = false;
         });
@@ -226,7 +227,7 @@ export default {
 
     handleTagClick (tab, event) {
       this.selectType = tab.name;
-      interviewApi.getInterviewTagList(this.selectType).then((response) => {
+      tagApi.getTagList().then((response) => {
         this.groupTagList = response.data.tagList;
       });
     },

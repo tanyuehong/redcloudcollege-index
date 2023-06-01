@@ -364,11 +364,6 @@ export default {
 .admin-content .el-button {
   margin-left: 0px;
 }
-.nav-header .add-item {
-  float: right;
-  margin-right: 36px;
-  margin-top: 15px;
-}
 
 .lefte-content {
    display: table-cell;

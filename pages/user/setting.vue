@@ -153,7 +153,7 @@
                   <el-upload class="avatar-uploader" action="https://www.redskt.com/api/ucenter/uploadUserImage"
                     :headers="{ token: loginToken }" :show-file-list="false" :on-success="handleAvatarSuccess"
                     :before-upload="beforeAvatarUpload">
-                    <i class="el-icon-plus avatar-uploader-icon"></i>
+                    <i class="uploadRegin"></i>
                   </el-upload>
 
                   <div class="click-cover" v-bind:class="{ isShow: isUploadHiden }"><i
@@ -492,6 +492,12 @@ export default {
 </script>
 
 <style scoped>
+
+.uploadRegin {
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+}
 .admin-setting-chang .el-dialog__wrapper .el-dialog {
   width: 960px;
 }

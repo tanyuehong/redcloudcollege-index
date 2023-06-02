@@ -26,8 +26,7 @@
           </div>
         </div>
         <div class="middle_content">
-          <div class="sprate">
-          </div>
+          <div class="sprate"></div>
         </div>
         <div class="right-content">
           <div v-if="settingtype === 1">
@@ -43,15 +42,16 @@
                   <el-table-column property="name" label="标签名" width="110"></el-table-column>
                   <el-table-column property="sort" label="排序" width="70"></el-table-column>
                   <el-table-column property="img" label="图标" width="240"></el-table-column>
-                  <el-table-column property="describ" label="描述" width="280" :show-overflow-tooltip="true"></el-table-column>
+                  <el-table-column property="describ" label="描述" width="280"
+                    :show-overflow-tooltip="true"></el-table-column>
                   <el-table-column label="操作" width="260">
                     <template slot-scope="scope">
                       <el-button size="mini" @click="editTagClick(scope.$index, scope.row)">编辑</el-button>
 
-                      <el-popconfirm cancel-button-text="取消" confirm-button-text="确定"  icon="el-icon-info"
-                        icon-color="red" title="确定要删除该标签吗，该操作不可撤回哦？" @confirm="deleteTagClick(scope.$index, scope.row)">
+                      <el-popconfirm cancel-button-text="取消" confirm-button-text="确定" icon="el-icon-info" icon-color="red"
+                        title="确定要删除该标签吗，该操作不可撤回哦？" @confirm="deleteTagClick(scope.$index, scope.row)">
                         <el-button type="danger" size="mini" slot="reference">删除</el-button>
-                    </el-popconfirm>
+                      </el-popconfirm>
                     </template>
                   </el-table-column>
                 </el-table>
@@ -62,8 +62,14 @@
                     <el-form-item label="标签名">
                       <el-input v-model="editTag.name"></el-input>
                     </el-form-item>
-                    <el-form-item label="标签图标">
-                      <el-input v-model="editTag.img"></el-input>
+                    <el-form-item label="图标">
+                      <el-input v-model="editTag.img" class="img-input"></el-input>
+                      <el-upload class="img-uploader" action="https://www.redskt.com/api/ucenter/uploadFuctionImage"
+                         :headers="{ token: loginToken,fucPath:'tag' }"
+                        :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                        <img v-if="editTag.img" :src="editTag.img" class="img-icon" />
+                        <i v-else class="el-icon-plus uploader-img"></i>
+                      </el-upload>
                     </el-form-item>
 
                     <el-form-item label="序号">
@@ -73,13 +79,11 @@
                       <el-input type="textarea" v-model="editTag.describ" maxlength="3000" :rows="5"
                         show-word-limit></el-input>
                     </el-form-item>
-
                   </el-form>
                   <span slot="footer" class="dialog-footer">
                     <el-button @click="backClick" size="small">返 回</el-button>
                     <el-button type="primary" @click="onSubmitClick" size="small" v-if="submitTitle.length > 0">{{
-                      submitTitle
-                    }}</el-button>
+                      submitTitle }}</el-button>
                   </span>
                 </el-dialog>
               </div>
@@ -90,26 +94,27 @@
     </div>
   </div>
 </template>
-  
-<script>
 
-import '~/assets/css/setting.css'
+<script>
+import "~/assets/css/setting.css";
 import tagApi from "@/api/tag";
 
 export default {
   data() {
     return {
       tagList: [],
-      submitTitle:"",
+      loginToken:"",
+      submitTitle: "",
       editTag: {},
       functionTitle: "",
       showTagPositionPage: false,
-      settingtype: 1,
+      settingtype: 1
     };
   },
 
   mounted() {
     this.getTagList();
+    this.loginToken = window.localStorage.getItem('redclass_token');
   },
   methods: {
     backClick() {
@@ -124,7 +129,7 @@ export default {
     },
 
     onSubmitClick() {
-      tagApi.addTag(this.editTag).then((response) => {})
+      tagApi.addTag(this.editTag).then(response => { });
     },
 
     editTagClick(index, row) {
@@ -135,9 +140,9 @@ export default {
     },
 
     deleteTagClick(index, row) {
-      tagApi.deleteTag(this.tagList[index].id).then((response) => {
+      tagApi.deleteTag(this.tagList[index].id).then(response => {
         this.getTagList();
-      })
+      });
     },
 
     addEveryQuestionClick() {
@@ -146,33 +151,61 @@ export default {
 
     selectDateDidChange(date) {
       this.slectDate = date;
-      window.console.log('=====' + date);
+      window.console.log("=====" + date);
     },
-
     getTagList() {
       tagApi.getTagList().then(response => {
         this.tagList = response.data.tagList;
       });
     },
+    handleAvatarSuccess(res, file) {
+      this.editTag.img = res.data.imageUrl;
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isPng = file.type === 'image/png';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!(isJPG || isPng)) {
+        this.$message.error('上传头像图片只能是 JPG 和 PNG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return (isJPG || isPng) && isLt2M;
+    },
     personSettingClick() {
       this.settingtype = 1;
-    },
+    }
   }
 };
 </script>
-  
+
 <style scoped>
-.add-every-day-quesion {
-  display: flex;
+
+.img-input {
+  display: inline-block;
+  width: 360px;
 }
 
-.add-every-day-quesion button {
-  margin: 0 auto;
-  margin-top: 10px;
+.img-uploader {
+  display: inline-block;
+  height: 40px;
 }
 
-.admin-setting-chang .el-dialog__wrapper .el-dialog {
-  width: 960px;
+.img-uploader .img-icon {
+
+}
+
+.uploader-img {
+  font-size: 15px;
+  color: #8c939d;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin-left: 3px;
+  border: 1px dashed #d9d9d9;
 }
 
 .ucenter-setting-header {
@@ -197,297 +230,4 @@ export default {
   margin-left: 24px;
 }
 
-.byte-form-item__content {
-  zoom: 1;
-  position: relative;
-  font-size: 14px;
-  line-height: 32px;
-}
-
-
-.byte-input,
-.byte-input__input {
-  position: relative;
-  width: 100%;
-  display: inline-block;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.byte-input {
-  vertical-align: middle;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-.setting-profile-view .user-infos .avatar-input {
-  padding-left: 74px;
-}
-
-.setting-profile-view .user-infos .info-input .input {
-  max-width: 440px;
-  min-width: 100px;
-}
-
-.avatar-info {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  width: 112px;
-}
-
-.avatar-info .uploader {
-  width: 90px;
-  height: 90px;
-  position: relative;
-  border-radius: 50%;
-  width: 90px;
-  height: 90px;
-  background-size: 100% 100%;
-}
-
-.avatar-info .title {
-  color: #1d2129;
-  font-weight: 500;
-  font-size: 14px;
-  margin-top: 10px;
-  margin-bottom: 8px;
-}
-
-.avatar-info .description {
-  color: #86909c;
-  font-size: 12px;
-  line-height: 17px;
-  font-weight: 400;
-}
-
-.avatar-uploader .click-cover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background-color: rgba(29, 33, 41, 0.5);
-  z-index: 2;
-  pointer-events: none;
-}
-
-.byte-icon {
-  width: 19px;
-  height: 19px;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 1;
-}
-
-.editable,
-input[type="password"],
-input[type="text"],
-input[type="url"],
-textarea {
-  resize: none;
-  outline: none;
-  width: 100%;
-  display: block;
-  box-shadow: none;
-  border: 1px solid #ddd;
-  border-radius: 2px;
-  transition: border 0.3s;
-  background-color: #fff;
-  box-sizing: border-box;
-}
-
-.byte-input__input {
-  border: 1px solid #e6e8eb;
-  border-radius: 2px;
-  color: #282f38;
-  background-color: #fff;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  outline: 0;
-  height: 32px;
-  padding: 0 12px;
-  font-size: 12px;
-}
-
-.byte-input__textarea {
-  border: 1px solid #e6e8eb;
-  border-radius: 2px;
-  position: relative;
-  width: 100%;
-  display: inline-block;
-  color: #282f38;
-  line-height: 1.5;
-  background-color: #fff;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  outline: 0;
-  height: 32px;
-  padding: 0 12px;
-  font-size: 14px;
-  height: auto;
-  padding: 6px 10px;
-  vertical-align: top;
-  -webkit-transition: all 0.3s, height 0s;
-  transition: all 0.3s, height 0s;
-  resize: vertical;
-}
-
-.avatar-uploader .avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-}
-
-input[type="file" i] {
-  appearance: none;
-  background-color: initial;
-  cursor: default;
-  align-items: baseline;
-  color: inherit;
-  text-overflow: ellipsis;
-  white-space: pre;
-  text-align: start !important;
-  padding: initial;
-  border: initial;
-  overflow: hidden !important;
-}
-
-.avatar-uploader .input {
-  /* display: none; */
-  /* opacity: 0; */
-  height: 90px;
-  background: red;
-  margin-top: -95px;
-  width: 95px;
-}
-
-.avatar-uploader .el-upload {
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  border-radius: 50%;
-  width: 90px;
-  height: 90px;
-  background-size: 100% 100%;
-}
-
-.avatar-uploader .click-cover:hover {
-  visibility: visible;
-}
-
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 178px;
-  height: 178px;
-  line-height: 178px;
-  text-align: center;
-}
-
-.avatar {
-  width: 178px;
-  height: 178px;
-  display: block;
-}
-
-.byte-icon svg {
-  width: 100%;
-  height: 100%;
-  fill: currentColor;
-  pointer-events: none;
-}
-
-.isShow {
-  visibility: hidden !important;
-}
-
-.zhanghu-form-item {
-  height: 30px;
-}
-
-.setting-btn {
-  padding: 0;
-  font-size: 1.2rem;
-  color: #007fff;
-  background-color: transparent;
-  white-space: nowrap;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-radius: 2px;
-  border: none;
-  padding: 0.5rem 1.3rem;
-  outline: none;
-  transition: background-color 0.3s, color 0.3s;
-  cursor: pointer;
-}
-
-.zhanghu-form-item .zhanghu-setting-chang {
-  float: right;
-}
-
-.el-dialog__footer {
-  text-align: center;
-}
-
-.el-dialog__title {
-  font-weight: 600;
-}
-
-.pwchang-form .el-form-item .el-form-item__content {
-  float: right;
-  margin-right: 102px;
-  position: relative;
-}
-
-.el-form-item__label {
-  font-size: 12px;
-}
-
-.pwchang-form {
-  margin-left: 45px;
-}
-
-.el-dialog__footer {
-  position: relative;
-  padding: 0px 20px 40px;
-}
-
-.chang-pwd-btn {
-  width: 120px;
-}
-
-.pwd-change-errtiops {
-  position: absolute;
-  color: #f56c6c;
-  left: 208px;
-  width: 96px;
-  font-size: 12px;
-}
-
-.pwd-confim-errtiops {
-  position: absolute;
-  color: #f56c6c;
-  left: 130px;
-  width: 186px;
-  font-size: 14px;
-  top: -45px;
-}
-
-.el-textarea__inner {
-  resize: none;
-}</style>
-  
+</style>

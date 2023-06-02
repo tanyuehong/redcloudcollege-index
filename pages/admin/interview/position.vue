@@ -100,7 +100,7 @@
             <div class="admin-content">
               <el-table :data="positionClassifyList" height="600">
                 <el-table-column property="name" label="职位面试题分类" width="140"></el-table-column>
-                <el-table-column property="img" label="分类图标" width="240" show-overflow-tooltip="true"></el-table-column>
+                <el-table-column property="img" label="分类图标" width="240" :show-overflow-tooltip="true"></el-table-column>
                 <el-table-column property="sort" label="序号" width="60"></el-table-column>
 
                 <el-table-column property="gmtCreate" label="创建日期" width="120"></el-table-column>

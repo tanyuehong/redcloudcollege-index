@@ -316,7 +316,6 @@
 <script>
 import '~/assets/css/setting.css'
 import userApi from '@/api/user';
-import interviewAdmin from '@/api/interviewAdminReq';
 
 export default {
 

@@ -18,7 +18,7 @@
                 </div>
                 <div class="title-tag-item">
                   <div class="ui orange label horizontal" data-tooltip="热门">
-                    {{ qdetail.deep }}
+                    {{ deepString }}
                   </div>
                   <div class="ui orange label horizontal" data-tooltip="热门">
                     热
@@ -834,6 +834,21 @@ export default {
   },
 
   computed: {
+    deepString() { // 面试题难度
+      if(this.qdetail.deep<20) {
+        return "简单";
+      } 
+      if(this.qdetail.deep<40) {
+        return "一般";
+      }
+      if(this.qdetail.deep<60) {
+        return "中等";
+      }
+      if(this.qdetail.deep<80) {
+        return "困难";
+      }
+      return "疑难";
+    },
     // 计算属性的 getter
     commentGood() {
       return function (goodCount) {

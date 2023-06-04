@@ -164,9 +164,11 @@ export default {
     this.getPositionList();
   },
   methods: {
+    editQuestionClick() { // 编辑面试题点击
+
+    },
     addEveryQuestionClick() {
       this.showEveryQuestionPage = true;
-
     },
     selectDateDidChange(date) {
       this.slectDate = date;

@@ -31,6 +31,21 @@ export default {
     })
   },
 
+  addNewBlogDraft(blog) {
+    return request({
+      url: `/blog/addNewBlogDraft`,
+      method: 'post',
+      data: blog,
+    })
+  },
+
+  getBlogDraftDetail(id) {
+    return request({
+      url: `/blog/getBlogDraft/${id}`,
+      method: 'get',
+    })
+  },
+
   getUserBlogStatus(praticeId) {
     return request({
       url: `/home/pratice/status/${praticeId}`,

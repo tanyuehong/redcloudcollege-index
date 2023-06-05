@@ -80,7 +80,7 @@
             <div class="footer"><!---->
               <div class="btn-container">
                 <el-button size="medium" @click="submitVisible = !submitVisible">取消</el-button>
-                <el-button type="primary" size="medium" @="submitBlog">确定并发布</el-button>
+                <el-button type="primary" size="medium" @click="submitBlog">确定并发布</el-button>
               </div>
             </div>
 
@@ -168,6 +168,7 @@ export default {
   },
   asyncData({ params }) {
     return {
+      loginToken:"",
       loginInfo: {},
       blogId: params.id,
       editBlog: {}
@@ -175,18 +176,21 @@ export default {
   },
   mounted() {
     if (this.blogId != undefined && this.blogId.length > 0) {
-      blogApi.getBlogDetail(this.blogId).then((response) => {
+      blogApi.getBlogDraftDetail(this.blogId).then((response) => {
         this.editBlog = response.data.blog;
       });
     }
     var userStr = localStorage.getItem("redclass_user");
+    this.loginToken = window.localStorage.getItem('redclass_token');
     if (userStr != "undefined" && userStr.length > 0) {
       this.loginInfo = JSON.parse(userStr);
     }
-    window.console.log(this.loginInfo.avatar);
   },
   methods: {
     submitBlog() {
+      this.editBlog.id = undefined;
+      blogApi.addNewBlog(this.editBlog).then((response) => {
+      })
     },
     
     handleAvatarSuccess(res, file) {
@@ -207,10 +211,11 @@ export default {
     },
     bTypeItemClick(item) {
       this.selectBtype = item.id;
+      this.editBlog.type = item.type;
     },
 
     addNewTagClick() {
-
+     
     },
     clickSubmitBtn() {
       this.submitVisible = !this.submitVisible;
@@ -229,7 +234,7 @@ export default {
 
     clcikSaveBtn() {
       this.tipsmessage = "保存中...";
-      blogApi.addNewBlog(this.editBlog).then((response) => {
+      blogApi.addNewBlogDraft(this.editBlog).then((response) => {
         this.editBlog.id = response.data.blog.id;
         this.setBrowserUrl(response.data.blog.id);
         this.tipsmessage = "保存成功";

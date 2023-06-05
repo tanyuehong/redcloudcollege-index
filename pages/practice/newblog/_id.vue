@@ -211,7 +211,7 @@ export default {
     },
     bTypeItemClick(item) {
       this.selectBtype = item.id;
-      this.editBlog.type = item.type;
+      this.editBlog.tyid = item.id;
     },
 
     addNewTagClick() {

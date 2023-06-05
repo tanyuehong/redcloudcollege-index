@@ -23,9 +23,9 @@ export default {
     })
   },
 
-  addNewblog(blog) {
+  addNewBlog(blog) {
     return request({
-      url: `/blog/addNewblog`,
+      url: `/blog/addNewBlog`,
       method: 'post',
       data: blog,
     })

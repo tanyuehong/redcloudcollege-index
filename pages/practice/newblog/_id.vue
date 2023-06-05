@@ -2,7 +2,7 @@
   <div>
     <div class="blogInfo">
       <div class="blogTitle">
-        <el-input placeholder="请输入文章标题" v-model="editblog.title" maxlength="100" show-word-limit>
+        <el-input placeholder="请输入文章标题" v-model="editBlog.title" maxlength="100" show-word-limit>
         </el-input>
       </div>
 
@@ -16,14 +16,14 @@
             <div class="form-item">
               <div class="label required category-label"> 分类： </div>
               <div class="form-item-content category-list">
-                <div class="item" v-for="btype in blogTypeList" :key="btype.id"> {{ btype.name }} </div>
+                <div class="item"  v-bind:class="{ active: selectBtype == btype.id }" @click="bTypeItemClick(btype)"  v-for="btype in blogTypeList" :key="btype.id"> {{ btype.name }} </div>
               </div>
             </div>
             <div class="form-item">
               <div class="label required"> 添加标签： </div>
               <div class="form-item-content">
-                <el-select v-model="tags" multiple placeholder="请搜索添加标签">
-                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                <el-select v-model="tags" multiple placeholder="请搜索添加标签(最多2个)" :multiple-limit="2">
+                  <el-option v-for="item in tagList" :key="item.id" :label="item.name" :value="item.id">
                   </el-option>
                 </el-select>
                 <span class="tips_tag" @click="addNewTagClick">
@@ -36,13 +36,16 @@
               <div class="label">文章封面：</div>
               <div class="form-item-content">
                 <div class="coverselector_container">
+                    <img class="blog-cover" :src="editBlog.img" v-if="editBlog.img" />
                     <button class="select-btn">
-                      <div class="button-slot"><img
-                          src="//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web_editor/img/add.0e2d17b6.svg"
-                          height="20" alt="add_cover">
+                      <div class="button-slot">
+                        <el-upload class="avatar-uploader" action="https://www.redskt.com/api/ucenter/uploadFuctionImage"
+                        :headers="{ token: loginToken,fucPath:'tag' }" :show-file-list="false" :on-success="handleAvatarSuccess"
+                    :before-upload="beforeAvatarUpload">
+                    <i class="el-icon-plus"></i>
                         <div class="upload">上传封面</div>
+                  </el-upload>
                       </div>
-                      <input type="file" style="display: none;">
                     </button>
                     <div class="addvice">建议尺寸：1303*734px</div>
                 </div>
@@ -69,7 +72,7 @@
             <div class="summary-box form-item">
               <div class="label required">编辑摘要：</div>
               <div class="summary form-item-content">
-                <el-input type="textarea" v-model="editblog.descrb" placeholder="" maxlength="100" :rows="4"
+                <el-input type="textarea" v-model="editBlog.descrb" placeholder="" maxlength="100" :rows="4"
                   show-word-limit resize="none">
                 </el-input>
               </div>
@@ -77,7 +80,7 @@
             <div class="footer"><!---->
               <div class="btn-container">
                 <el-button size="medium" @click="submitVisible = !submitVisible">取消</el-button>
-                <el-button type="primary" size="medium">确定并发布</el-button>
+                <el-button type="primary" size="medium" @="submitBlog">确定并发布</el-button>
               </div>
             </div>
 
@@ -100,7 +103,7 @@
     <div class="mavonEditor">
       <no-ssr>
         <mavon-editor ref=md :toolbars="toolbars" @save="clcikSaveBtn" @imgAdd="$imgAdd" @imgDel="$imgDel"
-          v-model="editblog.content" placeholder="开始创作吧!" />
+          v-model="editBlog.content" placeholder="开始创作吧!" />
       </no-ssr>
     </div>
   </div>
@@ -110,6 +113,7 @@
 
 import request from '@/utils/request'
 import blogApi from "@/api/blog";
+import tagApi from "@/api/tag";
 
 export default {
   layout: "content",
@@ -118,7 +122,9 @@ export default {
       huati: "",
       zhanlan: "",
       tags: "",
+      selectBtype: "",
       options: [],
+      tagList: [],
       blogTypeList: [],
       tipsmessage: "",
       submitVisible: false,
@@ -164,13 +170,13 @@ export default {
     return {
       loginInfo: {},
       blogId: params.id,
-      editblog: {}
+      editBlog: {}
     }
   },
   mounted() {
     if (this.blogId != undefined && this.blogId.length > 0) {
       blogApi.getBlogDetail(this.blogId).then((response) => {
-        this.editblog = response.data.blog;
+        this.editBlog = response.data.blog;
       });
     }
     var userStr = localStorage.getItem("redclass_user");
@@ -180,22 +186,51 @@ export default {
     window.console.log(this.loginInfo.avatar);
   },
   methods: {
+    submitBlog() {
+    },
+    
+    handleAvatarSuccess(res, file) {
+      this.editBlog.img = res.data.imageUrl;
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isPng = file.type === 'image/png';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!(isJPG || isPng)) {
+        this.$message.error('上传头像图片只能是 JPG 和 PNG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return (isJPG || isPng) && isLt2M;
+    },
+    bTypeItemClick(item) {
+      this.selectBtype = item.id;
+    },
+
     addNewTagClick() {
 
     },
     clickSubmitBtn() {
       this.submitVisible = !this.submitVisible;
-      if (this.submitVisible && this.blogTypeList.length <= 0) {
-        blogApi.getBlogTypeList().then((response) => {
+      if (this.submitVisible && this.blogTypeList.length <= 0) { 
+        blogApi.getBlogTypeList().then((response) => { //请求blog类型
           this.blogTypeList = response.data.typeList;
-        })
+        });
+      }
+
+      if (this.submitVisible && this.tagList.length <= 0) { 
+        tagApi.getTagList().then((response) => { //请求tag列表
+          this.tagList = response.data.tagList;
+        });
       }
     },
 
     clcikSaveBtn() {
       this.tipsmessage = "保存中...";
-      blogApi.addNewblog(this.editblog).then((response) => {
-        this.editblog.id = response.data.blog.id;
+      blogApi.addNewBlog(this.editBlog).then((response) => {
+        this.editBlog.id = response.data.blog.id;
         this.setBrowserUrl(response.data.blog.id);
         this.tipsmessage = "保存成功";
       })
@@ -225,7 +260,6 @@ export default {
       });
     },
     $imgDel() {
-
     }
   }
 };
@@ -233,6 +267,31 @@ export default {
 </script>
 
 <style>
+
+.coverselector_container .blog-cover {
+  display: inline-block;
+  width: 135px;
+  height: 75px;
+  margin-right: 10px;
+  background: red;
+}
+
+.submit-content .category-list .item.active {
+    color: #1d7dfa;
+    background-color: #e8f3ff;
+}
+
+.submit-content .category-list {
+  white-space: normal;
+}
+
+.form-item-content .el-tag.el-tag--info {
+  background-color: #ecf5ff;
+    border-color: #d9ecff;
+    display: inline-block;
+    font-size: 12px;
+    color: #409eff;
+}
 .submit-content .form-item .label.required:before {
   content: "*";
   color: #f53f3f;
@@ -304,8 +363,8 @@ export default {
 }
 
 .coverselector_container .select-btn {
-  width: 160px;
-  height: 86px;
+  width: 135px;
+  height: 75px;
   background-color: #fafafa;
   border: 1px dashed #e5e6eb;
   margin-bottom: 2px;
@@ -314,7 +373,7 @@ export default {
 
 .coverselector_container .addvice {
   padding-top: 30px;
-  margin-left: 15px;
+  margin-left: 10px;
   display: inline-block;
 }
 
@@ -369,9 +428,7 @@ export default {
   flex-wrap: wrap;
 }
 
-.submit-content .category-list {
-  white-space: normal;
-}
+
 
 .submit-content .form-item .label {
   font-weight: 400;

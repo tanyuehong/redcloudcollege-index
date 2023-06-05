@@ -89,11 +89,11 @@
         </el-popover>
 
 
-        <div data-v-151232ea="" class="toggle-btn"><svg data-v-151232ea="" width="24" height="24" viewBox="0 0 24 24"
+        <div  class="toggle-btn"><svg  width="24" height="24" viewBox="0 0 24 24"
             fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path data-v-151232ea="" d="M4.7998 9.6001L19.1998 9.6001L15.1998 5.6001" stroke="#86909C" stroke-width="1.5"
+            <path  d="M4.7998 9.6001L19.1998 9.6001L15.1998 5.6001" stroke="#86909C" stroke-width="1.5"
               stroke-linecap="round" stroke-linejoin="round"></path>
-            <path data-v-151232ea="" d="M19.1997 14.3999L4.79971 14.3999L8.79971 18.3999" stroke="#86909C"
+            <path  d="M19.1997 14.3999L4.79971 14.3999L8.79971 18.3999" stroke="#86909C"
               stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg></div>
         <img class="vam user-head-image" :src="this.loginInfo.avatar" width="30" height="30" alt="用户头像" />
@@ -259,7 +259,7 @@ export default {
         // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
         // $vm.$img2Url 详情见本页末尾
         window.console.log(response);
-        $vm.$img2Url(pos, response.imageUrl);
+        this.$refs.md.$img2Url(pos, response.imageUrl);
       }).catch(function (error) {
         console.log(error);
       });

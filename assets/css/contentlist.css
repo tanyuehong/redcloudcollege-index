@@ -4,7 +4,7 @@
   padding-left: 20px !important;
 }
 
-.book_item li {
+.book_item .book-item-li {
   width: 100%;
   box-sizing: border-box;
   border-bottom: 1px solid rgba(28, 31, 33, 0.1);
@@ -12,6 +12,10 @@
 }
 
 /* 这里是blog list的样式*/
+
+.article_list li {
+  margin-top: 18px;
+}
 
 .home_guesslike_list {
   margin: 0px !important;
@@ -34,6 +38,7 @@
 .op_artie_content .article_title {
   color: #333;
   font-weight: 600;
+  display: inline-block;
 }
 
 .op_pratice_describ {

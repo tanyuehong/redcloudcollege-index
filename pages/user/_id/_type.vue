@@ -68,11 +68,12 @@
 								</div>
 							</div>
 							<ul class="article_list">
-								<li v-for="bitem in dataList" :key="bitem.id">
+								<li class="book-item-li" v-for="bitem in dataList" :key="bitem.id">
 									<div class="op_artie_content" v-if="bitem.ctype === 1">
 										<nuxt-link class="article_title" :to="'/practice/' + bitem.id">
 											{{ bitem.title }}
 										</nuxt-link>
+
 										<p class="op_pratice_describ">{{ bitem.descrb }}</p>
 										<ul>
 											<i class="pratice_icon_view"></i>
@@ -131,7 +132,7 @@
 									</div>
 								</div>
 								<ul class="article_list">
-									<li v-for="bitem in dataList" :key="bitem.id">
+									<li class="book-item-li" v-for="bitem in dataList" :key="bitem.id">
 										<div class="op_artie_content" v-if="bitem.ctype === 1">
 											<nuxt-link class="article_title" :to="'/practice/' + bitem.id">
 												{{ bitem.title }}
@@ -300,7 +301,7 @@
 									</div>
 								</div>
 								<ul class="article_list">
-									<li v-for="bitem in dataList" :key="bitem.id">
+									<li class="book-item-li" v-for="bitem in dataList" :key="bitem.id">
 										<div class="op_artie_content" v-if="bitem.ctype === 1">
 											<nuxt-link class="article_title" :to="'/practice/' + bitem.id">
 												{{ bitem.title }}
@@ -395,7 +396,7 @@
 					<div class="info-honor-header">
 						<div class="block-title">个人成就</div>
 						<el-button class="header-btn" @click="jumpToNewblog">写文章</el-button>
-				    </div>
+					</div>
 					<div class="block-body">
 						<!---->
 						<!---->
@@ -541,8 +542,19 @@ export default {
 	},
 
 	methods: {
+		beforeHandleCommand(commd, item) {
+			return {
+				'command': commd,
+				'item': item
+			}
+		},
+		questionClickCommend(command) {
+			if (command.command == "d") {
+				this.questionDialogVisible = true;
+			}
+		},
 		jumpToNewblog() {
-			this.$router.push({name: "practice-newblog-id"});
+			this.$router.push({ name: "practice-newblog-id" });
 		},
 		clickFocusBtnClick(item) {
 			if (this.isLogin) {
@@ -685,7 +697,7 @@ export default {
 
 	computed: {
 		userCreateTime: function () {
-			if(this.userInfo.gmtCreate==undefined) {
+			if (this.userInfo.gmtCreate == undefined) {
 				return "";
 			}
 			return this.userInfo.gmtCreate.substring(0, 10);
@@ -707,6 +719,19 @@ export default {
 </script>
 
 <style>
+.blog-edit {
+	display: inline-block;
+	width: 60px;
+	margin-right: 20px;
+	float: right;
+}
+
+.icon_more {
+	width: 16px;
+	height: 16px;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAcUlEQVRYR2NkGGDAOMD2M4w6YDQERkNgNARGQ2A0BDBCoLyqw5PxP+NMUCX1n/F/emdbxXZsFRa11GE4oKKy89H///9lQZYyMjI+7mgvl8PmAGqpG3wOoFbQwkKNkHmjuWA0BEZDYDQERkNgNARGQwAAtIpgIVBMgJ0AAAAASUVORK5CYII=);
+}
+
 
 .user-focus-list .follow-btn.active {
 	color: #fff;
@@ -1076,17 +1101,17 @@ export default {
 	display: inline-block;
 }
 
-.info-honor  .info-honor-header {
+.info-honor .info-honor-header {
 	margin-bottom: 20px;
 	padding-bottom: 20px;
 	border-bottom: 1px solid rgba(230, 230, 231, .5);
 }
 
-.info-honor  .header-btn {
+.info-honor .header-btn {
 	float: right;
 	background-color: #1e80ff;
 	padding: 12px 40px;
-	color:#fff;
+	color: #fff;
 }
 
 .info-honor .stat-item {

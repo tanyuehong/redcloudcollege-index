@@ -101,7 +101,7 @@
             </header>
             <div class="home_guesslike_list book_item">
               <ul class="content_list">
-                <li v-for="item in gusslikeList" :key="item.id">
+                <li class="book-item-li" v-for="item in gusslikeList" :key="item.id">
                   <div v-if="item.type === 0">
                     <div class="course_list">
                       <nuxt-link :to="{ name: 'course-id', params: { id: item.id } }">

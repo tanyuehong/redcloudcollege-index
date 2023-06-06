@@ -191,10 +191,6 @@ export default {
   border-bottom: 1px solid #e5e6eb;
 }
 
-.article_list li {
-  margin-top: 18px;
-}
-
 .blog-list-header {
   padding-left: 0px;
   padding-top: 4px;

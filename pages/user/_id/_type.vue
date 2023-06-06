@@ -69,6 +69,19 @@
 							</div>
 							<ul class="article_list">
 								<li class="book-item-li" v-for="bitem in dataList" :key="bitem.id">
+
+									<div class="blog-edit">
+                    <el-dropdown @command="questionClickCommend">
+                      <span class="el-dropdown-link drop-menu">
+                        <i class="icon icon_more"></i>
+                      </span>
+                      <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item :command="beforeHandleCommand('e', bitem)">编辑</el-dropdown-item>
+                        <el-dropdown-item :command="beforeHandleCommand('d', bitem)">删除</el-dropdown-item>
+                      </el-dropdown-menu>
+                    </el-dropdown>
+				</div>
+
 									<div class="op_artie_content" v-if="bitem.ctype === 1">
 										<nuxt-link class="article_title" :to="'/practice/' + bitem.id">
 											{{ bitem.title }}
@@ -199,11 +212,7 @@
 												target="_blank" v-for="tag in item.tags" :key="tag.id">
 												<img :src="tag.img" v-if="tag.img" alt="标签图标" />{{ tag.name }}
 											</nuxt-link>
-
-
 										</div>
-
-
 										<div class="q_time">
 											<span>{{ item.gmtCreate }}来自</span>
 											<nuxt-link :to="'/user/' + item.uid + '/blog'" class="user_name"
@@ -720,9 +729,8 @@ export default {
 
 <style>
 .blog-edit {
-	display: inline-block;
-	width: 60px;
-	margin-right: 20px;
+	width: 30px;
+	margin-right: 15px;
 	float: right;
 }
 

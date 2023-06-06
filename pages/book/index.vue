@@ -26,7 +26,7 @@
                 <span class="c-666 fsize14">专题类别</span>
               </div>
               <ul class="zhuanti-group-detail">
-                <li>
+                <li class="book-item-li">
                   <a title="全部"
                      href="#">iOS</a>
                 </li>

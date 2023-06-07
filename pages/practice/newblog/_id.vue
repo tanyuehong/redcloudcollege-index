@@ -114,7 +114,6 @@
 import request from '@/utils/request'
 import blogApi from "@/api/blog";
 import tagApi from "@/api/tag";
-import blogServerApi from '@/api/blogServerReq'
 
 export default {
   layout: "content",
@@ -197,6 +196,7 @@ export default {
     submitBlog() {
       this.editBlog.id = undefined;
       blogApi.addNewBlog(this.editBlog).then((response) => {
+        this.$router.push({ name: "user-id-type",params:{id:this.loginInfo.id,type:"blog"}});
       })
     },
     

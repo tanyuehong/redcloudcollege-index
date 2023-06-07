@@ -71,7 +71,7 @@
 								<li class="book-item-li" v-for="bitem in dataList" :key="bitem.id">
 
 									<div class="blog-edit">
-                    <el-dropdown @command="questionClickCommend">
+                    <el-dropdown @command="blogClickCommend">
                       <span class="el-dropdown-link drop-menu">
                         <i class="icon icon_more"></i>
                       </span>
@@ -81,6 +81,16 @@
                       </el-dropdown-menu>
                     </el-dropdown>
 				</div>
+
+				<el-dialog title="确认删除该文章吗？" :visible.sync="dblogDialogVisible" width="30%" center>
+                    <div class="tac">
+                      <span>删除内容后不可恢复，确定删除吗？</span>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
+                      <el-button @click="deleteBlogClick(bitem)">删 除</el-button>
+                      <el-button type="primary" @click="dblogDialogVisible = false">再等等</el-button>
+                    </span>
+                </el-dialog>
 
 									<div class="op_artie_content" v-if="bitem.ctype === 1">
 										<nuxt-link class="article_title" :to="'/practice/' + bitem.id">
@@ -492,6 +502,7 @@ export default {
 			loginInfo: {},
 			isFocus: false,
 			isSetting: false,
+			dblogDialogVisible:false
 		};
 	},
 
@@ -557,9 +568,9 @@ export default {
 				'item': item
 			}
 		},
-		questionClickCommend(command) {
+		blogClickCommend(command) {
 			if (command.command == "d") {
-				this.questionDialogVisible = true;
+				this.dblogDialogVisible = true;
 			}
 		},
 		jumpToNewblog() {

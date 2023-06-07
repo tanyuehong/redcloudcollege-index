@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 export default {
-
+  
   getRealPraticeDetail(id) {
     return request({
       url: `/home/pratice/getDetail/${id}`,
@@ -31,6 +31,13 @@ export default {
     })
   },
 
+  deleteBlog(bId) {
+    return request({
+      url: `/blog/deleteBlog/${bId}`,
+      method: 'get'
+    })
+  },
+
   addNewBlogDraft(blog) {
     return request({
       url: `/blog/addNewBlogDraft`,
@@ -38,14 +45,6 @@ export default {
       data: blog,
     })
   },
-
-  getBlogDraftDetail(id) {
-    return request({
-      url: `/blog/getBlogDraft/${id}`,
-      method: 'get',
-    })
-  },
-
   getUserBlogStatus(praticeId) {
     return request({
       url: `/home/pratice/status/${praticeId}`,

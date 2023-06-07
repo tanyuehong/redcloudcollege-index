@@ -492,6 +492,7 @@ import '~/assets/css/appdown.css'
 import '~/assets/css/contentlist.css'
 
 import userApi from "@/api/user";
+import blogApi from "@/api/blog";
 import userServerApi from "@/api/userServerReq";
 
 export default {
@@ -562,6 +563,15 @@ export default {
 	},
 
 	methods: {
+		deleteBlogClick(bItem) {
+			this.dblogDialogVisible = false;
+			blogApi.deleteBlog(bItem.id).then((response) => {
+				userServerApi.getShowUserInfo(this.parmUid, this.parmType).then(response => {
+					this.dataList =  response.data.dataList;
+					this.userInfo =  response.data.userInfo;
+		        });
+			});
+		},
 		beforeHandleCommand(commd, item) {
 			return {
 				'command': commd,
@@ -571,6 +581,9 @@ export default {
 		blogClickCommend(command) {
 			if (command.command == "d") {
 				this.dblogDialogVisible = true;
+			}
+			if (command.command == "e") {
+				this.$router.push({ name: "practice-newblog-id",params:{id:command.item.id,isEdit:1} });
 			}
 		},
 		jumpToNewblog() {

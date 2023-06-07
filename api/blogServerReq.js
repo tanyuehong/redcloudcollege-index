@@ -1,7 +1,18 @@
 import request from '@/utils/serverRq'
 
 export default {
-  //分页讲师查询的方法
+  getBlogDraftDetail(id) {
+    return request({
+      url: `/blog/getBlogDraft/${id}`,
+      method: 'get',
+    })
+  },
+  getEditBlog(id) {
+    return request({
+      url: `/blog/editBlog/${id}`,
+      method: 'get',
+    })
+  },
   getHomeRealPratice(parm) {
     return request({
       url: `/home/pratice/index`,
@@ -10,7 +21,6 @@ export default {
     })
   },
 
-  //讲师详情的方法
   getRealPraticeDetail(id) {
     return request({
       url: `/home/pratice/getDetail/${id}`,

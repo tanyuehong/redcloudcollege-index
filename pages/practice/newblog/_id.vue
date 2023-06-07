@@ -114,11 +114,15 @@
 import request from '@/utils/request'
 import blogApi from "@/api/blog";
 import tagApi from "@/api/tag";
+import blogServerApi from '@/api/blogServerReq'
 
 export default {
   layout: "content",
   data() {
     return {
+      loginToken:"",
+      loginInfo: {},
+      blogId: params.id,
       huati: "",
       zhanlan: "",
       tags: "",
@@ -167,12 +171,23 @@ export default {
     };
   },
   asyncData({ params }) {
-    return {
-      loginToken:"",
-      loginInfo: {},
-      blogId: params.id,
-      editBlog: {}
+    if(params.id != undefined && params.id.length>0) {
+      if(params.isEdit == 1) {
+        return blogServerApi.getEditBlog.then(response => {
+            return {
+                       editBlog: response.data.blog
+                    };
+        });
+      } else {
+        return blogServerApi.getBlogDraftDetail.then(response => {
+            return {
+                       editBlog: response.data.blog
+                    };
+        });
+
+      }
     }
+    return { editBlog: {} }
   },
   mounted() {
     if (this.blogId != undefined && this.blogId.length > 0) {

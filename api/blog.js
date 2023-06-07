@@ -1,6 +1,19 @@
 import request from '@/utils/request'
 
 export default {
+
+  getBlogDraftDetail(id) {
+    return request({
+      url: `/blog/getBlogDraft/${id}`,
+      method: 'get',
+    })
+  },
+  getEditBlog(id) {
+    return request({
+      url: `/blog/editBlog/${id}`,
+      method: 'get',
+    })
+  },
   
   getRealPraticeDetail(id) {
     return request({

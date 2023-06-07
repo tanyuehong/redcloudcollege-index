@@ -120,9 +120,9 @@ export default {
   layout: "content",
   data() {
     return {
+      editBlog:{},
       loginToken:"",
       loginInfo: {},
-      blogId: params.id,
       huati: "",
       zhanlan: "",
       tags: "",
@@ -171,29 +171,21 @@ export default {
     };
   },
   asyncData({ params }) {
-    if(params.id != undefined && params.id.length>0) {
-      if(params.isEdit == 1) {
-        return blogServerApi.getEditBlog.then(response => {
-            return {
-                       editBlog: response.data.blog
-                    };
-        });
-      } else {
-        return blogServerApi.getBlogDraftDetail.then(response => {
-            return {
-                       editBlog: response.data.blog
-                    };
-        });
-
-      }
-    }
-    return { editBlog: {} }
+    return { blogId: params.id,isEdit:params.isEdit }
   },
   mounted() {
     if (this.blogId != undefined && this.blogId.length > 0) {
-      blogApi.getBlogDraftDetail(this.blogId).then((response) => {
+      if(this.isEdit == 1) {
+        blogApi.getEditBlog(this.blogId).then((response) => {
         this.editBlog = response.data.blog;
       });
+
+      } else {
+        blogApi.getBlogDraftDetail(this.blogId).then((response) => {
+        this.editBlog = response.data.blog;
+      });
+
+      }
     }
     var userStr = localStorage.getItem("redclass_user");
     this.loginToken = window.localStorage.getItem('redclass_token');

@@ -1,18 +1,6 @@
 import request from '@/utils/serverRq'
 
 export default {
-  getBlogDraftDetail(id) {
-    return request({
-      url: `/blog/getBlogDraft/${id}`,
-      method: 'get',
-    })
-  },
-  getEditBlog(id) {
-    return request({
-      url: `/blog/editBlog/${id}`,
-      method: 'get',
-    })
-  },
   getHomeRealPratice(parm) {
     return request({
       url: `/home/pratice/index`,

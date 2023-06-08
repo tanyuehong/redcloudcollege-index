@@ -8,7 +8,7 @@
 
       <div class="funtion">
         <span class="saveInfo">{{ tipsmessage }}</span>
-        <el-button type="primary" size="medium" plain>草稿箱</el-button>
+        <el-button type="primary" size="medium" @click="draftClick" plain>草稿箱</el-button>
 
         <el-popover placement="right" width="580" trigger="manual" v-model="submitVisible">
           <div class="submit-content">
@@ -155,7 +155,7 @@ export default {
         /* 1.3.5 */
         undo: true, // 上一步
         redo: true, // 下一步
-        trash: true, // 清空
+        // trash: true, // 清空
         save: true, // 保存（触发events中的save事件）
         /* 1.4.2 */
         navigation: true, // 导航目录
@@ -193,6 +193,9 @@ export default {
     }
   },
   methods: {
+    draftClick() {
+      this.$router.push({ name: "user-id-type",params:{selfId:this.loginInfo.id,type:"draft"}});
+    },
     submitBlog() {
       this.editBlog.id = undefined;
       blogApi.addNewBlog(this.editBlog).then((response) => {

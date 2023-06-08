@@ -38,7 +38,7 @@
 				<div class="ucenter-home-content">
 					<div class="list-header">
 						<div class="header-content">
-							<nuxt-link :to="'/user/' + userInfo.id + '/blog'" class="nav-item"
+							<nuxt-link :to="'/user/' + isSelf ? "blog" : (userInfo.id + '/blog')" class="nav-item"
 								v-bind:class="{ active: parmType == 'blog' }">
 								<div class="item-title">文章</div>
 							</nuxt-link>
@@ -94,7 +94,7 @@
 											<span>删除内容后不可恢复，确定删除吗？</span>
 										</div>
 										<span slot="footer" class="dialog-footer">
-											<el-button @click="deleteBlogClick(bitem)">删 除</el-button>
+											<el-button @click="deleteBlogClick()">删 除</el-button>
 											<el-button type="primary" @click="dblogDialogVisible = false">再等等</el-button>
 										</span>
 									</el-dialog>
@@ -432,24 +432,24 @@
 											</span>
 											<el-dropdown-menu slot="dropdown">
 												<el-dropdown-item
-													:command="beforeHandleCommand('e', bitem)">编辑</el-dropdown-item>
+													:command="beforeHandleCommand('ed', bitem)">编辑</el-dropdown-item>
 												<el-dropdown-item
-													:command="beforeHandleCommand('d', bitem)">删除</el-dropdown-item>
+													:command="beforeHandleCommand('dd', bitem)">删除</el-dropdown-item>
 											</el-dropdown-menu>
 										</el-dropdown>
 									</div>
 
-									<el-dialog title="确认删除该文章吗？" :visible.sync="dblogDialogVisible" width="30%" center>
+									<el-dialog title="确认删除该篇草稿吗？" :visible.sync="dDraftDialogVisible" width="30%" center>
 										<div class="tac">
 											<span>删除内容后不可恢复，确定删除吗？</span>
 										</div>
 										<span slot="footer" class="dialog-footer">
-											<el-button @click="deleteBlogClick(bitem)">删 除</el-button>
-											<el-button type="primary" @click="dblogDialogVisible = false">再等等</el-button>
+											<el-button @click="deleteDraftBlogClick()">删 除</el-button>
+											<el-button type="primary" @click="dDraftDialogVisible = false">再等等</el-button>
 										</span>
 									</el-dialog>
 
-									<div class="op_artie_content" v-if="bitem.ctype === 1">
+									<div class="op_artie_content" v-if="bitem.ctype === 1 || bitem.ctype == undefined">
 										<nuxt-link class="article_title" :to="'/practice/' + bitem.id">
 											{{ bitem.title }}
 										</nuxt-link>
@@ -581,21 +581,25 @@ export default {
 
 	data() {
 		return {
+			token:"",
+			dItem:{},
 			isLogin: false,
 			loginInfo: {},
 			isFocus: false,
 			isSetting: false,
+			dDraftDialogVisible:false,
 			dblogDialogVisible: false
 		};
 	},
 
-	asyncData({ params, error, query }) {
-		return userServerApi.getShowUserInfo(params.id, params.type).then(response => {
+	asyncData({ params, error, app }) {
+        var getToken = app.$cookies.get("token");
+		return userServerApi.getShowUserInfo({id:params.id,type:params.type,token:getToken}).then(response => {
 			return {
 				dataList: response.data.dataList,
 				userInfo: response.data.userInfo,
-				parmUid: params.id,
-				parmType: params.type
+				parmType: params.type ? params.type:params.id,
+				isSelf: params.type? false:true
 			};
 		});
 	},
@@ -625,11 +629,9 @@ export default {
 		}
 	},
 	mounted() {
-		window.console.log(this.parmType);
-		var token = localStorage.getItem("redclass_token");
+		this.token = localStorage.getItem("redclass_token");
 		var userStr = localStorage.getItem("redclass_user");
-		if (
-			!(token && token != "undefined") ||
+		if ( !(this.token && this.token != "undefined") ||
 			!(userStr && userStr != "undefined")
 		) {
 			this.isLogin = false;
@@ -637,7 +639,7 @@ export default {
 		} else {
 			this.loginInfo = JSON.parse(userStr);
 			this.isLogin = true;
-			if (this.loginInfo.id === this.parmUid) {
+			if (this.loginInfo.id === this.userInfo.id) {
 				this.isSetting = true;
 			}
 		}
@@ -645,10 +647,19 @@ export default {
 	},
 
 	methods: {
-		deleteBlogClick(bItem) {
+		deleteBlogClick() {
 			this.dblogDialogVisible = false;
-			blogApi.deleteBlog(bItem.id).then((response) => {
-				userServerApi.getShowUserInfo(this.parmUid, this.parmType).then(response => {
+			blogApi.deleteBlog(this.dItem.id).then((response) => {
+				userServerApi.getShowUserInfo({id:this.userInfo.id,type:this.parmType,token:this.token}).then(response => {
+					this.dataList = response.data.dataList;
+					this.userInfo = response.data.userInfo;
+				});
+			});
+		},
+		deleteDraftBlogClick() {
+			this.dDraftDialogVisible = false;
+			blogApi.deleteDraftBlog(this.dItem.id).then((response) => {
+				userServerApi.getShowUserInfo({id:this.userInfo.id,type:this.parmType,token:this.token}).then(response => {
 					this.dataList = response.data.dataList;
 					this.userInfo = response.data.userInfo;
 				});
@@ -662,10 +673,18 @@ export default {
 		},
 		blogClickCommend(command) {
 			if (command.command == "d") {
+				this.dItem = command.item;
 				this.dblogDialogVisible = true;
+			}
+			if (command.command == "dd") {
+				this.dItem = command.item;
+				this.dDraftDialogVisible = true;
 			}
 			if (command.command == "e") {
 				this.$router.push({ name: "practice-newblog-id", params: { id: command.item.id, isEdit: 1 } });
+			}
+			if (command.command == "ee") {
+				this.$router.push({ name: "practice-newblog-id", params: { id: command.item.id, isEdit: 2 } });
 			}
 		},
 		jumpToNewblog() {
@@ -726,7 +745,7 @@ export default {
 			return "文章";
 		},
 		getUserFocusState() {
-			if (this.isLogin && this.loginInfo.id == this.parmUid && this.parmType == "focus-mine") {
+			if (this.isLogin && this.loginInfo.id == this.userInfo.id && this.parmType == "focus-mine") {
 				for (var j = 0; j < this.dataList.length; j++) {
 					var fItem = this.dataList[j];
 					fItem.bfocus = true;
@@ -734,7 +753,7 @@ export default {
 				return;
 			}
 			var list = [];
-			list.push(this.parmUid);
+			list.push(this.userInfo.id);
 			if ((this.parmType == "focus-mine" || this.parmType == "focus-fans") && this.dataList) {
 				for (var j = 0; j < this.dataList.length; j++) {
 					list.push(this.dataList[j].id);
@@ -747,7 +766,7 @@ export default {
 					return;
 				}
 				for (var i = 0; i < focusList.length; i++) {
-					if (focusList[i].fid == this.parmUid) {
+					if (focusList[i].fid == this.userInfo.id) {
 						this.isFocus = true;
 						break;
 					}
@@ -769,7 +788,7 @@ export default {
 		focusUserClick() {
 			if (this.isLogin) {
 				if (this.isFocus) {
-					userApi.cancleUserFocus(this.parmUid).then((response) => {
+					userApi.cancleUserFocus(this.userInfo.id).then((response) => {
 						this.isFocus = response.data.focus;
 						this.$message({
 							message: "取消关注成功哈~",
@@ -778,7 +797,7 @@ export default {
 						});
 					});
 				} else {
-					userApi.addUserFocus(this.parmUid).then((response) => {
+					userApi.addUserFocus(this.userInfo.id).then((response) => {
 						this.isFocus = response.data.focus;
 						this.$message({
 							message: "关注成功哈~",

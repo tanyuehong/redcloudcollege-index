@@ -51,6 +51,13 @@ export default {
     })
   },
 
+  deleteDraftBlog(bId) {
+    return request({
+      url: `/blog/deleteDraftBlog/${bId}`,
+      method: 'get'
+    })
+  },
+
   addNewBlogDraft(blog) {
     return request({
       url: `/blog/addNewBlogDraft`,

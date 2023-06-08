@@ -55,6 +55,11 @@
 								<div class="item-title">赞</div>
 							</nuxt-link>
 
+							<nuxt-link :to="'/user/' + userInfo.id + '/draft'" class="nav-item"
+								v-bind:class="{ active: parmType == 'draft' }">
+								<div class="item-title">草稿箱</div>
+							</nuxt-link>
+
 						</div>
 
 					</div>
@@ -71,26 +76,28 @@
 								<li class="book-item-li" v-for="bitem in dataList" :key="bitem.id">
 
 									<div class="blog-edit">
-                    <el-dropdown @command="blogClickCommend">
-                      <span class="el-dropdown-link drop-menu">
-                        <i class="icon icon_more"></i>
-                      </span>
-                      <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item :command="beforeHandleCommand('e', bitem)">编辑</el-dropdown-item>
-                        <el-dropdown-item :command="beforeHandleCommand('d', bitem)">删除</el-dropdown-item>
-                      </el-dropdown-menu>
-                    </el-dropdown>
-				</div>
+										<el-dropdown @command="blogClickCommend">
+											<span class="el-dropdown-link drop-menu">
+												<i class="icon icon_more"></i>
+											</span>
+											<el-dropdown-menu slot="dropdown">
+												<el-dropdown-item
+													:command="beforeHandleCommand('e', bitem)">编辑</el-dropdown-item>
+												<el-dropdown-item
+													:command="beforeHandleCommand('d', bitem)">删除</el-dropdown-item>
+											</el-dropdown-menu>
+										</el-dropdown>
+									</div>
 
-				<el-dialog title="确认删除该文章吗？" :visible.sync="dblogDialogVisible" width="30%" center>
-                    <div class="tac">
-                      <span>删除内容后不可恢复，确定删除吗？</span>
-                    </div>
-                    <span slot="footer" class="dialog-footer">
-                      <el-button @click="deleteBlogClick(bitem)">删 除</el-button>
-                      <el-button type="primary" @click="dblogDialogVisible = false">再等等</el-button>
-                    </span>
-                </el-dialog>
+									<el-dialog title="确认删除该文章吗？" :visible.sync="dblogDialogVisible" width="30%" center>
+										<div class="tac">
+											<span>删除内容后不可恢复，确定删除吗？</span>
+										</div>
+										<span slot="footer" class="dialog-footer">
+											<el-button @click="deleteBlogClick(bitem)">删 除</el-button>
+											<el-button type="primary" @click="dblogDialogVisible = false">再等等</el-button>
+										</span>
+									</el-dialog>
 
 									<div class="op_artie_content" v-if="bitem.ctype === 1">
 										<nuxt-link class="article_title" :to="'/practice/' + bitem.id">
@@ -407,6 +414,81 @@
 
 							</div>
 						</div>
+
+						<div class="user_article_content book_item" v-if="parmType == 'draft'">
+							<div class="nodata-warper" v-if="dataList.length == 0">
+								<img class="nodata-image-tips" src="https://img.redskt.com/asset/img/nodata.png"
+									alt="空数据提示" />
+								<div>
+									<span class="nodata-title">该用户暂时还没有保存草稿哦</span>
+								</div>
+							</div>
+							<ul class="article_list">
+								<li class="book-item-li" v-for="bitem in dataList" :key="bitem.id">
+									<div class="blog-edit">
+										<el-dropdown @command="blogClickCommend">
+											<span class="el-dropdown-link drop-menu">
+												<i class="icon icon_more"></i>
+											</span>
+											<el-dropdown-menu slot="dropdown">
+												<el-dropdown-item
+													:command="beforeHandleCommand('e', bitem)">编辑</el-dropdown-item>
+												<el-dropdown-item
+													:command="beforeHandleCommand('d', bitem)">删除</el-dropdown-item>
+											</el-dropdown-menu>
+										</el-dropdown>
+									</div>
+
+									<el-dialog title="确认删除该文章吗？" :visible.sync="dblogDialogVisible" width="30%" center>
+										<div class="tac">
+											<span>删除内容后不可恢复，确定删除吗？</span>
+										</div>
+										<span slot="footer" class="dialog-footer">
+											<el-button @click="deleteBlogClick(bitem)">删 除</el-button>
+											<el-button type="primary" @click="dblogDialogVisible = false">再等等</el-button>
+										</span>
+									</el-dialog>
+
+									<div class="op_artie_content" v-if="bitem.ctype === 1">
+										<nuxt-link class="article_title" :to="'/practice/' + bitem.id">
+											{{ bitem.title }}
+										</nuxt-link>
+
+										<p class="op_pratice_describ">{{ bitem.descrb }}</p>
+										<ul>
+											<i class="pratice_icon_view"></i>
+											<span class="icon_des">{{ bitem.viewCount }}</span>
+											<i class="pratice_icon_zhan"></i>
+											<span class="icon_des">{{ bitem.good }}</span>
+											<i class="pratice_icon_comment"></i>
+											<span class="icon_des">{{ bitem.ccount }}</span>
+										</ul>
+									</div>
+									<div class="op_message_content" v-else>
+										<div class="push-lf">
+											<nuxt-link :to="'/about/detail/' + bitem.id">
+												<img :src="bitem.cover" alt="封面图片" />
+											</nuxt-link>
+										</div>
+
+										<div class="push-rt">
+											<p class="message-title">
+												<nuxt-link :to="'/about/detail/' + bitem.id" target="_blank">{{ bitem.title
+												}}</nuxt-link>
+											</p>
+											<div class="message-info">
+												<div class="info-item">
+													<i class="el-icon-view"></i>
+													<span class="read-tx">{{ bitem.viewCount }} 阅读</span>
+												</div>
+											</div>
+										</div>
+										<div class="clearfix">
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -503,7 +585,7 @@ export default {
 			loginInfo: {},
 			isFocus: false,
 			isSetting: false,
-			dblogDialogVisible:false
+			dblogDialogVisible: false
 		};
 	},
 
@@ -567,9 +649,9 @@ export default {
 			this.dblogDialogVisible = false;
 			blogApi.deleteBlog(bItem.id).then((response) => {
 				userServerApi.getShowUserInfo(this.parmUid, this.parmType).then(response => {
-					this.dataList =  response.data.dataList;
-					this.userInfo =  response.data.userInfo;
-		        });
+					this.dataList = response.data.dataList;
+					this.userInfo = response.data.userInfo;
+				});
 			});
 		},
 		beforeHandleCommand(commd, item) {
@@ -583,7 +665,7 @@ export default {
 				this.dblogDialogVisible = true;
 			}
 			if (command.command == "e") {
-				this.$router.push({ name: "practice-newblog-id",params:{id:command.item.id,isEdit:1} });
+				this.$router.push({ name: "practice-newblog-id", params: { id: command.item.id, isEdit: 1 } });
 			}
 		},
 		jumpToNewblog() {
@@ -752,6 +834,11 @@ export default {
 </script>
 
 <style>
+
+.user_article_content {
+	min-height: 440px;
+}
+
 .blog-edit {
 	width: 30px;
 	margin-right: 15px;
@@ -1269,5 +1356,4 @@ export default {
 .user-info-right .user-info-setting {
 	float: right;
 	margin-top: 15px;
-}
-</style>
+}</style>

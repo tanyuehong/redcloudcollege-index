@@ -174,6 +174,7 @@ export default {
     return { blogId: params.id,isEdit:params.isEdit }
   },
   mounted() {
+    this.editBlog.submitImgList = [];
     if (this.blogId != undefined && this.blogId.length > 0) {
       if(this.isEdit == 1) {
         blogApi.getEditBlog(this.blogId).then((response) => {
@@ -184,7 +185,6 @@ export default {
         blogApi.getBlogDraftDetail(this.blogId).then((response) => {
         this.editBlog = response.data.blog;
       });
-
       }
     }
     var userStr = localStorage.getItem("redclass_user");
@@ -209,6 +209,7 @@ export default {
     },
     submitBlog() {
       this.editBlog.id = undefined;
+      this.editBlog.submitImgList = ["https://static.redskt.com/blogimge/2023-06-06/8041231-image2.png", "https://static.redskt.com/blogimge/2023-06-06/8041231-image3.png", "https://static.redskt.com/blogimge/2023-06-06/8041231-image4.png"];
       blogApi.addNewBlog(this.editBlog).then((response) => {
         this.$router.push({ name: "user-id-type",params:{id:this.loginInfo.id,type:"blog"}});
       })
@@ -281,6 +282,7 @@ export default {
         // $vm.$img2Url 详情见本页末尾
         window.console.log(response);
         this.$refs.md.$img2Url(pos, response.data.imageUrl);
+        this.editBlog.submitImgList.push(response.data.imageUrl);
       }).catch(function (error) {
         console.log(error);
       });

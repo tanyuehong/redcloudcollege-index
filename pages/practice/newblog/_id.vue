@@ -2,7 +2,7 @@
   <div>
     <div class="blogInfo">
       <div class="blogTitle">
-        <el-input placeholder="请输入文章标题" v-model="editBlog.title" maxlength="100" show-word-limit>
+        <el-input @input="inputChange" placeholder="请输入文章标题" v-model="editBlog.title" maxlength="100" show-word-limit>
         </el-input>
       </div>
 
@@ -102,7 +102,7 @@
     </div>
     <div class="mavonEditor">
       <no-ssr>
-        <mavon-editor ref=md :toolbars="toolbars" @save="clcikSaveBtn" @imgAdd="$imgAdd" @imgDel="$imgDel"
+        <mavon-editor ref=md @change="inputChange" :toolbars="toolbars" @save="clcikSaveBtn('')" @imgAdd="$imgAdd" @imgDel="$imgDel"
           v-model="editBlog.content" placeholder="开始创作吧!" />
       </no-ssr>
     </div>
@@ -119,6 +119,7 @@ export default {
   layout: "content",
   data() {
     return {
+      autoSavetimer:null,
       editBlog:{},
       loginToken:"",
       loginInfo: {},
@@ -193,6 +194,16 @@ export default {
     }
   },
   methods: {
+    inputChange(value) {
+    if(this.autoSavetimer) {
+      return ;
+    }
+    window.myVueComm = this;
+    this.autoSavetimer = setTimeout(function () {
+      myVueComm.clcikSaveBtn('自动');
+      myVueComm.autoSavetimer = null;
+    }, 3000);
+    },
     draftClick() {
       this.$router.push({ name: "user-id-type",params:{selfId:this.loginInfo.id,type:"draft"}});
     },
@@ -242,12 +253,12 @@ export default {
       }
     },
 
-    clcikSaveBtn() {
-      this.tipsmessage = "保存中...";
+    clcikSaveBtn(tips) {
+      this.tipsmessage = tips + "保存中...";
       blogApi.addNewBlogDraft(this.editBlog).then((response) => {
         this.editBlog.id = response.data.blog.id;
         this.setBrowserUrl(response.data.blog.id);
-        this.tipsmessage = "保存成功";
+        this.tipsmessage = tips + "保存成功";
       })
     },
     setBrowserUrl(blogId) {

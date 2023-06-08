@@ -38,26 +38,26 @@
 				<div class="ucenter-home-content">
 					<div class="list-header">
 						<div class="header-content">
-							<nuxt-link :to="'/user/' + isSelf ? "blog" : (userInfo.id + '/blog')" class="nav-item"
+							<nuxt-link :to="'/user/' + isSelf?'blog':( userInfo.id + '/blog')" class="nav-item"
 								v-bind:class="{ active: parmType == 'blog' }">
 								<div class="item-title">文章</div>
 							</nuxt-link>
-							<nuxt-link :to="'/user/' + userInfo.id + '/collect-blog'" class="nav-item"
+							<nuxt-link :to="'/user/' + isSelf?'collect-blog':(userInfo.id + '/collect-blog')" class="nav-item"
 								v-bind:class="{ active: parmType.substring(0, 7) == 'collect' }">
 								<div class="item-title">收藏</div>
 							</nuxt-link>
-							<nuxt-link :to="'/user/' + userInfo.id + '/focus-mine'" class="nav-item"
+							<nuxt-link :to="'/user/' + isSelf?'focus-mine':(userInfo.id + '/focus-mine')" class="nav-item"
 								v-bind:class="{ active: parmType.substring(0, 5) == 'focus' }">
 								<div class="item-title">关注</div>
 							</nuxt-link>
-							<nuxt-link :to="'/user/' + userInfo.id + '/good-blog'" class="nav-item"
+							<nuxt-link :to="'/user/' + isSelf?'good-blog':(userInfo.id + '/good-blog')" class="nav-item"
 								v-bind:class="{ active: parmType.substring(0, 4) == 'good' }">
 								<div class="item-title">赞</div>
 							</nuxt-link>
 
-							<nuxt-link :to="'/user/' + userInfo.id + '/draft'" class="nav-item"
+							<nuxt-link :to="'/user/' + isSelf?'draft':(userInfo.id + '/draft')" class="nav-item"
 								v-bind:class="{ active: parmType == 'draft' }">
-								<div class="item-title">草稿箱</div>
+								<div class="item-title">草稿</div>
 							</nuxt-link>
 
 						</div>

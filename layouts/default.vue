@@ -50,7 +50,7 @@
                 <q class="red-point" style="display: none;">&nbsp;</q>
               </li>
               <li v-if="loginInfo.id" id="is-login-two" class="h-r-user">
-                <nuxt-link :to="{ name: 'user-id-type', params: { id: this.loginInfo.id, type: 'blog' } }">
+                <nuxt-link :to="{ name: 'user-id-type', params: {type: 'blog' } }">
                   <el-dropdown @command="handleCommand">
                     <span class="el-dropdown-link">
                       <img class="vam user-head-image" :src="loginInfo.avatar" width="30" height="30" alt="用户头像"/>
@@ -207,17 +207,17 @@ export default {
       } else if (command == 'userHome') {
         this.$router.push({
           name: "user-id-type",
-          params: { id: this.loginInfo.id, type: "blog" }
+          params: {type: "blog" }
         });
       } else if (command == 'userStar') {
         this.$router.push({
           name: "user-id-type",
-          params: { id: this.loginInfo.id, type: "focus" }
+          params: {type: "focus" }
         });
       } else if (command == 'userCollect') {
         this.$router.push({
           name: "user-id-type",
-          params: { id: this.loginInfo.id, type: "collect" }
+          params: {type: "collect" }
         });
       } else if (command == 'userSetting') {
         var loginToken = window.localStorage.getItem('redclass_token');

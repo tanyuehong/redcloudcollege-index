@@ -129,7 +129,7 @@ export default {
           }
           loginApi.submitLoginUser(this.user).then(response => {
             window.localStorage.setItem("redclass_token", response.data.token)
-            this.$cookies.set('token', response.data.token)
+            this.$cookies.set('token', response.data.token,{expires: 7})
             //第四步 调用接口 根据token获取用户信息，为了首页面显示
             loginApi.getLoginUserInfo().then(response => {
               this.loginInfo = response.data.userInfo;

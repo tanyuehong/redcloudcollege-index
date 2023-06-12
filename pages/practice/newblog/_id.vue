@@ -209,7 +209,6 @@ export default {
     },
     submitBlog() {
       this.editBlog.id = undefined;
-      this.editBlog.submitImgList = ["https://static.redskt.com/blogimge/2023-06-06/8041231-image2.png", "https://static.redskt.com/blogimge/2023-06-06/8041231-image3.png", "https://static.redskt.com/blogimge/2023-06-06/8041231-image4.png"];
       blogApi.addNewBlog(this.editBlog).then((response) => {
         this.$router.push({ name: "user-id-type",params:{id:this.loginInfo.id,type:"blog"}});
       })
